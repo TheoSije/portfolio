@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Incipit — theo.design</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  background: #2a2828;
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: 48px;
+  background: #2a2828;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  gap: 20px;
+}
+
+.nav-back {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(255,255,255,.4);
+  font-size: 12px;
+  letter-spacing: .06em;
+  transition: color .2s;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  padding: 0;
+  text-decoration: none;
+}
+.nav-back:hover { color: rgba(255,255,255,.85); }
+
+.nav-sep { width: 1px; height: 14px; background: rgba(255,255,255,.1); }
+.nav-logo { font-size: 14px; font-weight: 500; color: rgba(255,255,255,.9); }
+
+.nav-right {
+  margin-left: auto;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.18);
+}
+
+main {
+  height: 100vh;
+  padding-top: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: clamp(24px, 5vw, 72px);
+  padding-right: clamp(24px, 5vw, 72px);
+  padding-bottom: 36px;
+}
+
+.quote-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 900px;
+}
+
+.quote-mark {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(52px, 9vw, 100px);
+  line-height: .9;
+  background: linear-gradient(135deg, #c084fc, #fb923c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 12px;
+  display: block;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+.quote-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 4.2vw, 62px);
+  font-weight: 800;
+  line-height: 1.13;
+  background: linear-gradient(135deg, #c084fc 0%, #f97316 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .35s ease .06s, transform .35s ease .06s;
+}
+
+.quote-author {
+  margin-top: 36px;
+  font-size: clamp(13px, 1.4vw, 16px);
+  font-weight: 500;
+  color: rgba(255,255,255,.85);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .35s ease .12s, transform .35s ease .12s;
+}
+
+.quote-block.visible .quote-mark,
+.quote-block.visible .quote-text,
+.quote-block.visible .quote-author {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.07);
+}
+
+.counter {
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.18);
+}
+
+.controls { display: flex; gap: 10px; }
+
+.btn {
+  height: 38px;
+  padding: 0 22px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: none;
+  color: rgba(255,255,255,.6);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all .18s;
+}
+.btn:hover { background: rgba(255,255,255,.05); color: #fff; border-color: rgba(255,255,255,.25); }
+
+.btn-next {
+  background: linear-gradient(135deg, rgba(192,132,252,.12), rgba(249,115,22,.12));
+  border-color: rgba(192,132,252,.25);
+  color: rgba(255,255,255,.85);
+}
+.btn-next:hover {
+  background: linear-gradient(135deg, rgba(192,132,252,.22), rgba(249,115,22,.22));
+  border-color: rgba(192,132,252,.45);
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  nav { padding: 0 16px; }
+  .nav-right { display: none; }
+  main { padding-left: 20px; padding-right: 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <!-- Dans le portfolio réel, ce bouton appelle window.parent.closeMiniSiteFromFrame() -->
+  <a class="nav-back" href="index.html">← theo.design</a>
+  <div class="nav-sep"></div>
+  <span class="nav-logo">inkpt</span>
+  <span class="nav-right">Incipit · Projet perso</span>
+</nav>
+
+<main>
+  <div class="quote-block" id="quote-block">
+    <span class="quote-mark">"</span>
+    <p class="quote-text" id="quote-text"></p>
+    <p class="quote-author" id="quote-author"></p>
+  </div>
+
+  <div class="bottom-bar">
+    <span class="counter" id="counter"></span>
+    <div class="controls">
+      <button class="btn" onclick="prev()">← Préc.</button>
+      <button class="btn btn-next" onclick="next()">Suivant →</button>
+    </div>
+  </div>
+</main>
+
+<script>
+const quotes = [
+  { text: "Aujourd'hui, maman est morte. Ou peut-être hier, je ne sais pas.", author: "L'Étranger — Albert Camus, 1942" },
+  { text: "Longtemps, je me suis couché de bonne heure.", author: "À la recherche du temps perdu — Marcel Proust, 1913" },
+  { text: "Lolita, lumière de ma vie, feu de mes reins.", author: "Lolita — Vladimir Nabokov, 1955" },
+  { text: "Call me Ishmael.", author: "Moby-Dick — Herman Melville, 1851" },
+  { text: "Je suis né à Reims un 25 décembre — ce qui ne m'a pas porté bonheur jusqu'ici.", author: "La Promesse de l'aube — Romain Gary, 1960" },
+  { text: "C'est à l'heure du commencement qu'il faut tout particulièrement veiller à ce que les équilibres soient précis.", author: "Dune — Frank Herbert, 1965" },
+  { text: "Nous étions à l'étude, quand le Proviseur entra, suivi d'un nouveau habillé en bourgeois.", author: "Madame Bovary — Gustave Flaubert, 1857" },
+  { text: "Il était une fois un pays où les hommes mouraient deux fois.", author: "Le Testament français — Andreï Makine, 1995" },
+  { text: "La nuit est longue qui ne finit point.", author: "Le Grand Meaulnes — Alain-Fournier, 1913" },
+  { text: "Tout commence par quelqu'un qui part.", author: "La Route des Flandres — Claude Simon, 1960" }
+];
+
+let current = 0;
+const block = document.getElementById('quote-block');
+const textEl = document.getElementById('quote-text');
+const authorEl = document.getElementById('quote-author');
+const counterEl = document.getElementById('counter');
+
+function pad(n) { return String(n).padStart(2, '0'); }
+
+function show(idx) {
+  block.classList.remove('visible');
+  setTimeout(() => {
+    textEl.textContent = quotes[idx].text;
+    authorEl.textContent = quotes[idx].author;
+    counterEl.textContent = pad(idx + 1) + ' / ' + pad(quotes.length);
+    block.classList.add('visible');
+  }, 260);
+}
+
+function next() { current = (current + 1) % quotes.length; show(current); }
+function prev() { current = (current - 1 + quotes.length) % quotes.length; show(current); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prev();
+});
+
+show(0);
+</script>
+</body>
+</html>

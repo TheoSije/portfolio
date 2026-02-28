@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Georgia&family=Palatino+Linotype&family=Trebuchet+MS&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{background:#2c1a0e}
+body{background:#f5e6c8;color:#2c1a0e;font-family:'Crimson Text',serif;-webkit-font-smoothing:antialiased;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23f5e6c8'/%3E%3Crect width='1' height='1' fill='%23e8d5a3' opacity='.4'/%3E%3C/svg%3E")}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:52px;background:linear-gradient(to bottom,#4a2c0a,#2c1a0e);border-bottom:3px solid #8b5e1a;display:grid;grid-template-columns:1fr auto auto;align-items:stretch;box-shadow:0 4px 12px rgba(0,0,0,.5)}
+nav::after{content:'';position:absolute;top:1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,220,100,.3),transparent)}
+.nav-logo{padding:0 20px;font-family:'IM Fell English',serif;font-size:16px;font-style:italic;text-decoration:none;color:#f0c060;border-right:1px solid #5a3a10;display:flex;align-items:center;text-shadow:0 1px 3px rgba(0,0,0,.5)}
+.nav-role{padding:0 20px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8a7050;display:flex;align-items:center;border-right:1px solid #5a3a10}
+.nav-contact{padding:0 20px;font-size:11px;color:#c0905a;text-decoration:none;display:flex;align-items:center;font-style:italic;transition:color .2s}
+.nav-contact:hover{color:#f0c060}
+#home{padding-top:52px}
+.hero{border-bottom:3px solid #8b5e1a;padding:56px 40px;background:linear-gradient(135deg,#fdf4e3,#f5e6c8);box-shadow:inset 0 -4px 20px rgba(139,94,26,.1);position:relative}
+.hero::before{content:'';position:absolute;inset:12px;border:1px solid rgba(139,94,26,.2);pointer-events:none;border-radius:2px}
+.hero-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8b5e1a;margin-bottom:20px;font-family:'Crimson Text',serif}
+.hero-title{font-family:'IM Fell English',serif;font-size:clamp(60px,11vw,160px);line-height:.9;color:#2c1a0e;text-shadow:2px 2px 4px rgba(0,0,0,.15)}
+.t1{display:block}.t2{display:block;font-style:italic;color:#8b3a10;margin-left:clamp(10px,3vw,60px)}
+.hero-sub{margin-top:40px;font-size:17px;font-style:italic;line-height:1.75;color:#6a4a2a;max-width:340px}
+.section-header{border-bottom:2px solid #8b5e1a;border-top:2px solid #8b5e1a;margin-top:-1px;display:flex;align-items:center;padding:14px 40px;gap:16px;background:linear-gradient(to bottom,#f0d898,#e8c870)}
+.section-title{font-family:'IM Fell English',serif;font-size:16px;color:#2c1a0e;font-style:italic}
+.section-count{font-size:11px;color:#8b5e1a;margin-left:auto;font-style:italic}
+.project-list{list-style:none}
+.project-item{border-bottom:1px solid #d4b896;display:grid;grid-template-columns:56px 1fr auto auto;align-items:center;cursor:pointer;transition:background .15s;background:linear-gradient(to right,#fdf4e3,#f8edd5);position:relative}
+.project-item:hover{background:linear-gradient(to right,#f0e0c0,#e8d4aa)}
+.project-item::after{content:'';position:absolute;inset:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 -1px 0 rgba(0,0,0,.05);pointer-events:none}
+.item-num{border-right:1px solid #d4b896;display:flex;align-items:center;justify-content:center;height:100%;padding:20px 10px;font-family:'IM Fell English',serif;font-size:14px;font-style:italic;color:#c4a070;min-height:72px}
+.project-item:hover .item-num{color:#8b3a10}
+.item-body{padding:20px 40px;display:flex;flex-direction:column;gap:8px}
+.item-name{font-family:'IM Fell English',serif;font-size:clamp(20px,3vw,32px);line-height:1.1;color:#2c1a0e}
+.item-tags{display:flex;gap:10px;flex-wrap:wrap}
+.tag{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#a07848;font-family:'Crimson Text',serif}
+.item-year{border-left:1px solid #d4b896;padding:0 18px;font-size:11px;font-style:italic;color:#a07848;white-space:nowrap;height:100%;display:flex;align-items:center}
+.item-arrow{border-left:1px solid #d4b896;padding:0 22px;font-size:18px;color:#c4a070;height:100%;display:flex;align-items:center;transition:color .15s}
+.project-item:hover .item-arrow{color:#8b3a10}
+.about{border-top:3px solid #8b5e1a;display:grid;grid-template-columns:1fr 1fr;background:linear-gradient(135deg,#fdf4e3,#f5e6c8)}
+.about-text{border-right:2px solid #d4b896;padding:64px 40px;font-family:'IM Fell English',serif;font-size:clamp(18px,2.5vw,28px);font-style:italic;line-height:1.4;color:#2c1a0e}
+.about-links{padding:64px 40px;display:flex;flex-direction:column;gap:0;justify-content:flex-end}
+.about-links a{display:flex;align-items:center;gap:10px;padding:16px 0;border-bottom:1px solid #d4b896;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8b5e1a;text-decoration:none;transition:color .15s;font-family:'Crimson Text',serif}
+.about-links a:last-child{border-bottom:none}
+.about-links a::before{content:'❧ ';font-size:14px}
+.about-links a:hover{color:#8b3a10}
+footer{border-top:3px solid #8b5e1a;background:linear-gradient(to bottom,#2c1a0e,#1a0e06);display:grid;grid-template-columns:1fr 1fr 1fr}
+footer span{padding:16px 24px;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#6a4a2a;border-right:1px solid #4a2c0a;font-family:'Crimson Text',serif}
+footer span:last-child{border-right:none;text-align:right}
+#project-view{padding-top:52px}
+.proj-header{border-bottom:2px solid #8b5e1a;background:linear-gradient(to bottom,#f0d898,#e8c870);display:grid;grid-template-columns:auto 1fr}
+.back-btn{border-right:1px solid #c4a050;padding:13px 22px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:none;border-top:none;border-bottom:none;border-left:none;cursor:pointer;color:#6a4a1a;font-family:'Crimson Text',serif;font-style:italic;transition:color .15s}
+.back-btn:hover{color:#8b3a10}
+.proj-breadcrumb{padding:13px 22px;font-size:11px;color:#8b6030;display:flex;align-items:center;gap:8px;font-style:italic}
+.proj-breadcrumb strong{color:#2c1a0e;font-weight:600}
+.proj-hero{border-bottom:2px solid #d4b896;padding:56px 40px;background:linear-gradient(135deg,#fdf4e3,#f5e6c8)}
+.proj-tag{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#8b5e1a;margin-bottom:14px}
+.proj-title{font-family:'IM Fell English',serif;font-size:clamp(48px,9vw,130px);line-height:.9;font-style:italic;text-shadow:1px 1px 3px rgba(0,0,0,.1)}
+.proj-meta{margin-top:36px;display:flex;gap:36px;flex-wrap:wrap}
+.meta-item{display:flex;flex-direction:column;gap:4px}
+.meta-label{font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:#a07848}
+.meta-val{font-size:13px;font-style:italic;color:#2c1a0e}
+.proj-problem,.proj-solve{border-bottom:1px solid #d4b896;display:grid;grid-template-columns:150px 1fr;background:#fdf4e3}
+.block-label{border-right:1px solid #d4b896;padding:48px 22px;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#a07848;writing-mode:vertical-rl;transform:rotate(180deg)}
+.solve-label{color:#8b3a10}
+.problem-text{padding:48px 40px;font-family:'IM Fell English',serif;font-size:clamp(18px,2.5vw,26px);font-style:italic;line-height:1.45}
+.solve-text{padding:48px 40px;font-size:16px;line-height:1.8;color:#6a4a2a;font-style:italic}
+.content-block{border-bottom:1px solid #d4b896;display:grid;grid-template-columns:56px 1fr;background:#fdf4e3}
+.block-num{border-right:1px solid #d4b896;display:flex;align-items:flex-start;justify-content:center;padding-top:32px;font-family:'IM Fell English',serif;font-size:16px;font-style:italic;color:#c4a070}
+.block-content{padding:40px}
+.block-img{background:linear-gradient(135deg,#e8d5b0,#d4c090);border:2px solid #c4a050;border-radius:3px;margin-bottom:24px;position:relative;aspect-ratio:16/9;overflow:hidden;box-shadow:inset 0 2px 8px rgba(0,0,0,.15),0 2px 8px rgba(0,0,0,.1)}
+.block-img.half{width:55%;aspect-ratio:4/3}
+.block-duo{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px}
+.block-duo .block-img{margin-bottom:0;aspect-ratio:4/3}
+.block-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#c4a070;font-style:italic}
+.block-caption{font-size:14px;line-height:1.85;color:#6a4a2a;font-style:italic}
+.block-caption strong{font-weight:600;color:#2c1a0e;font-style:normal}
+.proj-nav{display:grid;grid-template-columns:1fr 1fr;border-top:2px solid #8b5e1a}
+.pnav-btn{padding:32px 40px;cursor:pointer;border:none;background:linear-gradient(135deg,#fdf4e3,#f5e6c8);font-family:'Crimson Text',serif;color:#2c1a0e;transition:background .15s;display:flex;flex-direction:column;gap:8px}
+.pnav-btn.prev{border-right:1px solid #d4b896;text-align:left}
+.pnav-btn.next{text-align:right;align-items:flex-end}
+.pnav-btn:hover{background:linear-gradient(135deg,#f0e0c0,#e8d4aa)}
+.pnav-dir{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#a07848}
+.pnav-name{font-family:'IM Fell English',serif;font-size:22px;font-style:italic}
+#mood-wheel{color:#2c1a0e}
+#mood-btn{color:#2c1a0e;background:linear-gradient(to bottom,#f0d898,#e8c870);padding:8px 14px;border:1px solid #8b5e1a;border-radius:3px;box-shadow:0 2px 4px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.4)}

@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap');
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{background:#000}
+body{background:#0a0a00;color:#00ff41;font-family:'Share Tech Mono',monospace;-webkit-font-smoothing:antialiased;background-image:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,65,.015) 2px,rgba(0,255,65,.015) 4px)}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at center,transparent 60%,rgba(0,0,0,.7));pointer-events:none;z-index:9999}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#050500;border-bottom:1px solid #00ff41;display:grid;grid-template-columns:1fr auto auto;align-items:stretch;height:49px}
+.nav-logo{padding:0 20px;font-family:'VT323',monospace;font-size:20px;text-decoration:none;color:#00ff41;border-right:1px solid #00ff41;display:flex;align-items:center;letter-spacing:.1em;text-shadow:0 0 8px #00ff41}
+.nav-role{padding:0 20px;font-size:10px;letter-spacing:.1em;color:#006616;display:flex;align-items:center;border-right:1px solid #006616}
+.nav-contact{padding:0 20px;font-size:10px;letter-spacing:.1em;color:#00ff41;text-decoration:none;display:flex;align-items:center;transition:text-shadow .2s}
+.nav-contact:hover{text-shadow:0 0 10px #00ff41}
+#home{padding-top:49px}
+.hero{border-bottom:1px solid #00ff41;padding:48px 32px;position:relative;overflow:hidden}
+.hero::before{content:'> _';position:absolute;bottom:24px;right:32px;font-family:'VT323',monospace;font-size:24px;color:#006616;animation:blink 1s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero-eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#006616;margin-bottom:16px}
+.hero-eyebrow::before{content:'> '}
+.hero-title{font-family:'VT323',monospace;font-size:clamp(80px,15vw,220px);line-height:.85;letter-spacing:.05em;text-shadow:0 0 20px rgba(0,255,65,.4)}
+.t1,.t2{display:block}
+.t2{color:#00cc33;margin-left:40px}
+.hero-sub{margin-top:40px;font-size:13px;line-height:2;color:#006616;max-width:340px}
+.hero-sub::before{content:'// ';color:#004410}
+.section-header{border-bottom:1px solid #006616;border-top:1px solid #006616;margin-top:-1px;display:flex;align-items:center;padding:12px 32px;gap:16px;background:#050500}
+.section-title{font-family:'VT323',monospace;font-size:20px;letter-spacing:.1em;text-transform:uppercase}
+.section-title::before{content:'[ ';color:#006616}
+.section-title::after{content:' ]';color:#006616}
+.section-count{font-size:10px;color:#006616;margin-left:auto;letter-spacing:.1em}
+.project-list{list-style:none}
+.project-item{border-bottom:1px solid #003310;display:grid;grid-template-columns:56px 1fr auto auto;align-items:center;cursor:pointer;transition:background .1s;position:relative}
+.project-item:hover{background:#001a00}
+.item-num{border-right:1px solid #003310;display:flex;align-items:center;justify-content:center;height:100%;padding:20px 10px;font-family:'VT323',monospace;font-size:18px;color:#004410;min-height:72px}
+.project-item:hover .item-num{color:#00ff41;text-shadow:0 0 8px #00ff41}
+.item-body{padding:18px 32px;display:flex;flex-direction:column;gap:6px}
+.item-name{font-family:'VT323',monospace;font-size:clamp(26px,4vw,44px);letter-spacing:.05em;line-height:1}
+.item-tags{display:flex;gap:10px;flex-wrap:wrap}
+.tag{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#006616}
+.tag::before{content:'#'}
+.item-year{border-left:1px solid #003310;padding:0 16px;font-size:10px;color:#004410;white-space:nowrap;height:100%;display:flex;align-items:center}
+.item-arrow{border-left:1px solid #003310;padding:0 20px;font-size:18px;color:#004410;height:100%;display:flex;align-items:center;transition:color .15s}
+.project-item:hover .item-arrow{color:#00ff41;text-shadow:0 0 8px #00ff41}
+.about{border-top:1px solid #00ff41;display:grid;grid-template-columns:1fr 1fr}
+.about-text{border-right:1px solid #006616;padding:56px 32px;font-family:'VT323',monospace;font-size:clamp(20px,2.8vw,32px);line-height:1.3;letter-spacing:.03em;color:#00cc33}
+.about-links{padding:56px 32px;display:flex;flex-direction:column;gap:0;justify-content:flex-end}
+.about-links a{display:flex;align-items:center;gap:10px;padding:14px 0;border-bottom:1px solid #003310;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#006616;text-decoration:none;transition:color .15s}
+.about-links a:last-child{border-bottom:none}
+.about-links a::before{content:'> ';color:#004410}
+.about-links a:hover{color:#00ff41;text-shadow:0 0 6px #00ff41}
+footer{border-top:1px solid #00ff41;background:#050500;display:grid;grid-template-columns:1fr 1fr 1fr}
+footer span{padding:14px 20px;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#004410;border-right:1px solid #003310}
+footer span:last-child{border-right:none;text-align:right}
+#project-view{padding-top:49px}
+.proj-header{border-bottom:1px solid #00ff41;background:#050500;display:grid;grid-template-columns:auto 1fr}
+.back-btn{border-right:1px solid #006616;padding:12px 20px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;background:none;border-top:none;border-bottom:none;border-left:none;cursor:pointer;color:#006616;font-family:'Share Tech Mono',monospace;transition:color .15s}
+.back-btn:hover{color:#00ff41}
+.proj-breadcrumb{padding:12px 20px;font-size:10px;letter-spacing:.1em;color:#004410;display:flex;align-items:center;gap:8px}
+.proj-breadcrumb strong{color:#00ff41}
+.proj-hero{border-bottom:1px solid #006616;padding:48px 32px}
+.proj-tag{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#006616;margin-bottom:12px}
+.proj-title{font-family:'VT323',monospace;font-size:clamp(56px,10vw,140px);line-height:.85;letter-spacing:.05em;text-shadow:0 0 16px rgba(0,255,65,.3)}
+.proj-meta{margin-top:32px;display:flex;gap:32px;flex-wrap:wrap}
+.meta-item{display:flex;flex-direction:column;gap:4px}
+.meta-label{font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:#004410}
+.meta-val{font-size:12px;color:#00cc33}
+.proj-problem,.proj-solve{border-bottom:1px solid #003310;display:grid;grid-template-columns:140px 1fr}
+.block-label{border-right:1px solid #003310;padding:40px 20px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#004410;writing-mode:vertical-rl;transform:rotate(180deg)}
+.solve-label{color:#00ff41}
+.problem-text{padding:40px 32px;font-family:'VT323',monospace;font-size:clamp(20px,2.8vw,32px);line-height:1.25;letter-spacing:.03em;color:#00cc33}
+.solve-text{padding:40px 32px;font-size:13px;line-height:1.9;color:#006616}
+.content-block{border-bottom:1px solid #003310;display:grid;grid-template-columns:48px 1fr}
+.block-num{border-right:1px solid #003310;display:flex;align-items:flex-start;justify-content:center;padding-top:28px;font-family:'VT323',monospace;font-size:20px;color:#004410}
+.block-content{padding:36px 32px}
+.block-img{background:#001a00;border:1px solid #006616;margin-bottom:20px;position:relative;aspect-ratio:16/9;overflow:hidden}
+.block-img.half{width:55%;aspect-ratio:4/3}
+.block-duo{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#003310;margin-bottom:20px}
+.block-duo .block-img{margin-bottom:0;aspect-ratio:4/3}
+.block-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#003310;font-family:'VT323',monospace}
+.block-caption{font-size:12px;line-height:1.9;color:#006616}
+.block-caption strong{color:#00ff41}
+.proj-nav{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #00ff41}
+.pnav-btn{padding:28px 32px;cursor:pointer;border:none;background:none;font-family:'Share Tech Mono',monospace;color:#00ff41;transition:background .1s;display:flex;flex-direction:column;gap:8px}
+.pnav-btn.prev{border-right:1px solid #003310;text-align:left}
+.pnav-btn.next{text-align:right;align-items:flex-end}
+.pnav-btn:hover{background:#001a00}
+.pnav-dir{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#004410}
+.pnav-name{font-family:'VT323',monospace;font-size:26px;letter-spacing:.05em}
+#mood-wheel{color:#00ff41}
+#mood-btn{color:#00ff41;text-shadow:0 0 8px #00ff41}
