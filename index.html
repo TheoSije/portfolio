@@ -6,39 +6,42 @@
 <title>theo.design</title>
 <link id="theme-css" rel="stylesheet" href="css/brutal.css">
 <style>
-/* MOOD WHEEL — structure fixe, style géré par chaque CSS */
+/* MOOD WHEEL */
 #mood-wheel {
   position: fixed;
   bottom: 32px;
   right: 32px;
   z-index: 9000;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 10px;
   pointer-events: none;
 }
 #mood-btn {
   pointer-events: all;
   cursor: pointer;
-  border: none;
-  background: none;
-  padding: 0;
+  border: var(--r, 1.5px solid #0d0d0d);
+  background: var(--bg, #f2efe8);
+  color: inherit;
+  padding: 10px 14px 10px 16px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 4px;
+  align-items: center;
+  gap: 12px;
+  font-family: inherit;
+  box-shadow: 3px 3px 0 var(--fg, #0d0d0d);
+  transition: box-shadow .12s, transform .12s;
+}
+#mood-btn:hover {
+  box-shadow: 1px 1px 0 var(--fg, #0d0d0d);
+  transform: translate(2px, 2px);
 }
 #mood-label {
-  font-size: 9px;
+  font-size: 8px;
   letter-spacing: .25em;
   text-transform: uppercase;
-  opacity: .5;
+  opacity: .4;
   font-family: inherit;
 }
 #mood-name {
-  font-size: 13px;
-  letter-spacing: .1em;
+  font-size: 11px;
+  letter-spacing: .12em;
   text-transform: uppercase;
   font-family: inherit;
   font-weight: bold;
@@ -46,7 +49,8 @@
 #mood-arrow {
   font-size: 18px;
   display: inline-block;
-  transition: transform .4s cubic-bezier(.34,1.56,.64,1);
+  transition: transform .5s cubic-bezier(.34,1.56,.64,1);
+  margin-left: 2px;
 }
 #mood-btn:hover #mood-arrow { transform: rotate(180deg); }
 
@@ -54,8 +58,135 @@
 body { transition: opacity .18s ease; }
 body.fading { opacity: 0; }
 
+/* APPROACH SECTION */
+.approach-grid{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:var(--r)}
+.approach-item{padding:40px 32px;border-right:var(--r);display:flex;flex-direction:column;gap:14px}
+.approach-item:last-child{border-right:none}
+.approach-num{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#aaa;font-family:'Archivo Black',sans-serif}
+.approach-title{font-family:'Archivo Black',sans-serif;font-size:clamp(14px,1.5vw,18px);text-transform:uppercase;letter-spacing:-.01em;line-height:1.1}
+.approach-text{font-size:13px;font-weight:300;font-style:italic;line-height:1.75;color:#666}
+
+/* SKILLS STRIP */
+.skills-strip{border-bottom:var(--r);display:flex;flex-wrap:wrap;padding:0 32px}
+.skill-pill{font-size:9px;letter-spacing:.2em;text-transform:uppercase;font-weight:300;padding:16px 0;margin-right:24px;color:#888}
+.skill-pill+.skill-pill{border-left:none}
+
+/* HERO BADGE */
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#555;margin-bottom:20px;border:1px solid #bbb;padding:6px 12px}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0}
+
+/* PERSONAL / CLINS D'OEIL */
+.personal-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:var(--r);border-bottom:var(--r)}
+.personal-item{border-right:var(--r);padding:28px 32px;display:flex;flex-direction:column;gap:10px}
+.personal-item:last-child{border-right:none}
+.personal-item.span2{grid-column:span 2}
+.personal-label{font-size:8px;letter-spacing:.25em;text-transform:uppercase;color:#aaa}
+.personal-value{font-family:'Archivo Black',sans-serif;font-size:clamp(16px,2vw,22px);text-transform:uppercase;letter-spacing:-.01em;line-height:1.1}
+.personal-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.personal-tag{font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-weight:300;padding:5px 10px;border:1px solid #ccc;color:#666}
+.personal-sub{font-size:12px;font-weight:300;font-style:italic;color:#888;line-height:1.6}
+
+@media(max-width:700px){
+  .approach-grid{grid-template-columns:1fr}
+  .approach-item{border-right:none;border-bottom:var(--r)}
+  .approach-item:last-child{border-bottom:none}
+  .skills-strip{padding:0 20px}
+  .personal-grid{grid-template-columns:1fr 1fr}
+  .personal-item.span2{grid-column:span 2}
+  .personal-item{padding:20px}
+}
+
+/* HORIZONTAL SCROLL PROJECT CARDS */
+.scroll-btn {
+  margin-left: auto;
+  background: none;
+  border: var(--r, 1.5px solid #0d0d0d);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 15px;
+  color: inherit;
+  width: 32px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .12s, color .12s;
+  flex-shrink: 0;
+}
+.scroll-btn:hover {
+  background: var(--fg, #0d0d0d);
+  color: var(--bg, #f2efe8);
+}
+.projects-scroll {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  border-bottom: var(--r);
+  padding: 32px 32px 40px;
+  gap: 24px;
+}
+.projects-scroll::-webkit-scrollbar { display: none; }
+.proj-card {
+  flex: 0 0 380px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.proj-card-img {
+  background: #e0ddd5;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s;
+  position: relative;
+}
+.proj-card:hover .proj-card-img { background: #d4d1c9; }
+.proj-card-img-label {
+  font-size: 8px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: #b8b5ad;
+  font-weight: 300;
+}
+.proj-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.proj-card-name {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: -.01em;
+  line-height: 1;
+}
+.proj-card-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.proj-card-year {
+  font-size: 10px;
+  color: #aaa;
+  font-weight: 300;
+  letter-spacing: .1em;
+  margin-top: 2px;
+}
+@media(max-width:700px){
+  .projects-scroll { padding: 20px 20px 28px; gap: 16px; }
+  .proj-card { flex: 0 0 260px; }
+}
+
 /* CLOSE BUTTON IN NAV */
 #proj-close-btn {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;
@@ -65,6 +196,7 @@ body.fading { opacity: 0; }
   padding: 0;
   line-height: 1;
   display: none;
+  z-index: 1;
 }
 </style>
 </head>
@@ -72,95 +204,130 @@ body.fading { opacity: 0; }
 
 <nav>
   <a class="nav-logo" href="#" onclick="showHome();return false;">theo.design</a>
-  <span class="nav-role">UI/UX Designer · Paris</span>
+  <span class="nav-role" style="display:none">Senior Product Designer · Paris</span>
   <a class="nav-contact" href="mailto:hello@theo.design">Contact</a>
-  <button id="proj-close-btn" onclick="showHome()">×</button>
+  <button id="proj-close-btn" onclick="closeCurrentView()">×</button>
 </nav>
 
 <!-- ══ HOME ══ -->
 <div id="home">
   <section class="hero">
-    <div class="hero-eyebrow">UI/UX Designer · Paris</div>
     <h1 class="hero-title"><span class="t1">THÉO</span><span class="t2">DESIGN</span></h1>
-    <p class="hero-sub">Interfaces précises.<br>Expériences qui méritent d'être vécues.</p>
+    <p class="hero-sub">Senior Product Designer & Head of Design — Paris<br>7 ans entre startups et scale-ups.</p>
   </section>
 
   <div class="section-header">
-    <h2 class="section-title">Projets Pro</h2>
-    <span class="section-count">06</span>
+    <h2 class="section-title">Clients</h2>
+    <button class="scroll-btn" onclick="scrollCarousel(this)">→</button>
   </div>
-  <ul class="project-list">
-    <li class="project-item" onclick="showProject('gl')">
-      <span class="item-num">01</span>
-      <div class="item-body"><span class="item-name">GL</span><div class="item-tags"><span class="tag">SaaS</span><span class="tag">Dashboard</span><span class="tag">B2B</span></div></div>
-      <span class="item-year">2024</span><span class="item-arrow">↗</span>
-    </li>
-    <li class="project-item" onclick="showProject('deezer')">
-      <span class="item-num">02</span>
-      <div class="item-body"><span class="item-name">Deezer</span><div class="item-tags"><span class="tag">Mobile</span><span class="tag">Audio</span></div></div>
-      <span class="item-year">2023</span><span class="item-arrow">↗</span>
-    </li>
-    <li class="project-item" onclick="showProject('devialet')">
-      <span class="item-num">03</span>
-      <div class="item-body"><span class="item-name">Devialet</span><div class="item-tags"><span class="tag">Luxe</span><span class="tag">Hardware</span></div></div>
-      <span class="item-year">2023</span><span class="item-arrow">↗</span>
-    </li>
-    <li class="project-item" onclick="showProject('simplon')">
-      <span class="item-num">04</span>
-      <div class="item-body"><span class="item-name">Simplon</span><div class="item-tags"><span class="tag">EdTech</span><span class="tag">Accessibilité</span></div></div>
-      <span class="item-year">2022</span><span class="item-arrow">↗</span>
-    </li>
-    <li class="project-item" onclick="showProject('legalmate')">
-      <span class="item-num">05</span>
-      <div class="item-body"><span class="item-name">Legalmate</span><div class="item-tags"><span class="tag">LegalTech</span><span class="tag">IA</span></div></div>
-      <span class="item-year">2024</span><span class="item-arrow">↗</span>
-    </li>
-    <li class="project-item" onclick="showProject('lionel')">
-      <span class="item-num">06</span>
-      <div class="item-body"><span class="item-name">Lionel El Sound</span><div class="item-tags"><span class="tag">Musique</span><span class="tag">Brand</span></div></div>
-      <span class="item-year">2023</span><span class="item-arrow">↗</span>
-    </li>
-  </ul>
+  <div class="projects-scroll">
+    <div class="proj-card" onclick="showProject('gl')">
+      <div class="proj-card-img"><span class="proj-card-img-label">GL</span></div>
+      <div class="proj-card-body">
+        <span class="proj-card-name">GL</span>
+        <div class="proj-card-tags"><span class="tag">SaaS</span><span class="tag">Dashboard</span><span class="tag">B2B</span></div>
+        <span class="proj-card-year">2024</span>
+      </div>
+    </div>
+    <div class="proj-card" onclick="showProject('deezer')">
+      <div class="proj-card-img"><span class="proj-card-img-label">Deezer</span></div>
+      <div class="proj-card-body">
+        <span class="proj-card-name">Deezer</span>
+        <div class="proj-card-tags"><span class="tag">Mobile</span><span class="tag">Audio</span></div>
+        <span class="proj-card-year">2023</span>
+      </div>
+    </div>
+    <div class="proj-card" onclick="showProject('devialet')">
+      <div class="proj-card-img"><span class="proj-card-img-label">Devialet</span></div>
+      <div class="proj-card-body">
+        <span class="proj-card-name">Devialet</span>
+        <div class="proj-card-tags"><span class="tag">Luxe</span><span class="tag">Hardware</span></div>
+        <span class="proj-card-year">2023</span>
+      </div>
+    </div>
+    <div class="proj-card" onclick="showProject('simplon')">
+      <div class="proj-card-img"><span class="proj-card-img-label">Simplon</span></div>
+      <div class="proj-card-body">
+        <span class="proj-card-name">Simplon</span>
+        <div class="proj-card-tags"><span class="tag">EdTech</span><span class="tag">Accessibilité</span></div>
+        <span class="proj-card-year">2022</span>
+      </div>
+    </div>
+    <div class="proj-card" onclick="showProject('legalmate')">
+      <div class="proj-card-img"><span class="proj-card-img-label">Legalmate</span></div>
+      <div class="proj-card-body">
+        <span class="proj-card-name">Legalmate</span>
+        <div class="proj-card-tags"><span class="tag">LegalTech</span><span class="tag">IA</span></div>
+        <span class="proj-card-year">2024</span>
+      </div>
+    </div>
+    <div class="proj-card" onclick="showProject('lionel')">
+      <div class="proj-card-img"><span class="proj-card-img-label">Lionel El Sound</span></div>
+      <div class="proj-card-body">
+        <span class="proj-card-name">Lionel El Sound</span>
+        <div class="proj-card-tags"><span class="tag">Musique</span><span class="tag">Brand</span></div>
+        <span class="proj-card-year">2023</span>
+      </div>
+    </div>
+  </div>
 
   <div class="section-header">
-    <h2 class="section-title">Projets Perso</h2>
-    <span class="section-count">06</span>
+    <h2 class="section-title">Expérimentations</h2>
+    <button class="scroll-btn" onclick="scrollCarousel(this)">→</button>
   </div>
-  <ul class="project-list">
-    <li class="project-item perso" onclick="openMiniSite('vinyle')">
-      <span class="item-num">01</span>
-      <div class="item-body"><span class="item-name">Biblio Vinyle 3D</span><div class="item-tags"><span class="tag">3D</span><span class="tag">Interactive</span></div></div>
-      <span class="item-year">2024</span><span class="item-arrow">↗</span>
-    </li>
-    <li class="project-item perso" onclick="openMiniSite('lucychen')">
-      <span class="item-num">02</span>
-      <div class="item-body"><span class="item-name">Lucychen Gesture</span><div class="item-tags"><span class="tag">Mixcloud</span><span class="tag">Gesture</span></div></div>
-      <span class="item-year">2023</span><span class="item-arrow">↗</span>
-    </li>
-    <li class="project-item perso" onclick="openMiniSite('emojy')">
-      <span class="item-num">03</span>
-      <div class="item-body"><span class="item-name">Emojy Words</span><div class="item-tags"><span class="tag">Game</span><span class="tag">Linguistique</span></div></div>
-      <span class="item-year">2023</span><span class="item-arrow">↗</span>
-    </li>
-    <li class="project-item perso" onclick="openMiniSite('incipit')">
-      <span class="item-num">04</span>
-      <div class="item-body"><span class="item-name">Incipit</span><div class="item-tags"><span class="tag">Littérature</span><span class="tag">Typo</span></div></div>
-      <span class="item-year">2022</span><span class="item-arrow">↗</span>
-    </li>
-    <li class="project-item perso" onclick="openMiniSite('chatbot')">
-      <span class="item-num">05</span>
-      <div class="item-body"><span class="item-name">Chatbot Legalmate</span><div class="item-tags"><span class="tag">IA</span><span class="tag">Scraping</span></div></div>
-      <span class="item-year">2024</span><span class="item-arrow">↗</span>
-    </li>
-    <li class="project-item perso" onclick="openMiniSite('radio')">
-      <span class="item-num">06</span>
-      <div class="item-body"><span class="item-name">Radio Player</span><div class="item-tags"><span class="tag">Audio</span><span class="tag">Web</span></div></div>
-      <span class="item-year">2022</span><span class="item-arrow">↗</span>
-    </li>
-  </ul>
+  <div class="projects-scroll">
+    <div class="proj-card" onclick="openMiniSite('incipit')">
+      <div class="proj-card-img"><span class="proj-card-img-label">Inkipit</span></div>
+      <div class="proj-card-body">
+        <span class="proj-card-name">Inkipit</span>
+        <div class="proj-card-tags"><span class="tag">Littérature</span><span class="tag">Typo</span></div>
+        <span class="proj-card-year">2022</span>
+      </div>
+    </div>
+    <div class="proj-card" onclick="openMiniSite('vinyle')">
+      <div class="proj-card-img"><span class="proj-card-img-label">Biblio Vinyle 3D</span></div>
+      <div class="proj-card-body">
+        <span class="proj-card-name">Biblio Vinyle 3D</span>
+        <div class="proj-card-tags"><span class="tag">3D</span><span class="tag">Interactive</span></div>
+        <span class="proj-card-year">2024</span>
+      </div>
+    </div>
+    <div class="proj-card" onclick="openMiniSite('lucychen')">
+      <div class="proj-card-img"><span class="proj-card-img-label">Lucychen Gesture</span></div>
+      <div class="proj-card-body">
+        <span class="proj-card-name">Lucychen Gesture</span>
+        <div class="proj-card-tags"><span class="tag">Mixcloud</span><span class="tag">Gesture</span></div>
+        <span class="proj-card-year">2023</span>
+      </div>
+    </div>
+    <div class="proj-card" onclick="openMiniSite('emojy')">
+      <div class="proj-card-img"><span class="proj-card-img-label">Emojy Words</span></div>
+      <div class="proj-card-body">
+        <span class="proj-card-name">Emojy Words</span>
+        <div class="proj-card-tags"><span class="tag">Game</span><span class="tag">Linguistique</span></div>
+        <span class="proj-card-year">2023</span>
+      </div>
+    </div>
+    <div class="proj-card" onclick="openMiniSite('chatbot')">
+      <div class="proj-card-img"><span class="proj-card-img-label">Chatbot Legalmate</span></div>
+      <div class="proj-card-body">
+        <span class="proj-card-name">Chatbot Legalmate</span>
+        <div class="proj-card-tags"><span class="tag">IA</span><span class="tag">Scraping</span></div>
+        <span class="proj-card-year">2024</span>
+      </div>
+    </div>
+    <div class="proj-card" onclick="openMiniSite('radio')">
+      <div class="proj-card-img"><span class="proj-card-img-label">Radio Player</span></div>
+      <div class="proj-card-body">
+        <span class="proj-card-name">Radio Player</span>
+        <div class="proj-card-tags"><span class="tag">Audio</span><span class="tag">Web</span></div>
+        <span class="proj-card-year">2022</span>
+      </div>
+    </div>
+  </div>
 
   <section class="about">
-    <div class="about-text">Designer UI/UX basé à Paris. Je conçois des interfaces précises — des produits qui ont du caractère et résolvent de vrais problèmes.</div>
+    <div class="about-text">Senior Product Designer & Head of Design basé à Paris. 7 ans entre startups et scale-ups — à concevoir des interfaces, construire des design systems, et structurer des équipes. Je travaille à l'intersection du craft, de la stratégie produit et des organisations.</div>
     <div class="about-links">
       <a href="mailto:hello@theo.design">hello@theo.design</a>
       <a href="#">LinkedIn</a>
@@ -168,7 +335,7 @@ body.fading { opacity: 0; }
       <a href="#">Figma Community</a>
     </div>
   </section>
-  <footer><span>© 2025 theo.design</span><span>Paris, France</span><span>UI/UX Designer</span></footer>
+  <footer><span>© 2025 theo.design</span><span>Paris, France</span><span>Senior Product Designer</span></footer>
 </div>
 
 <!-- ══ PROJECT PRO VIEW ══ -->
@@ -192,16 +359,9 @@ body.fading { opacity: 0; }
 // ══ MOODS ══
 const moods = [
   { name: 'BRUTAL',      file: 'brutal'      },
-  { name: 'ANARCHIST',   file: 'anarchist'   },
-  { name: 'RETRO',       file: 'retro'       },
-  { name: 'SKEUO',       file: 'skeuomorph'  },
-  { name: 'FLAT BORING', file: 'flat'        },
-  { name: 'FIRE',        file: 'fire'        },
+  { name: 'BORING',      file: 'flat'        },
   { name: 'SOFT',        file: 'soft'        },
   { name: 'UNREADABLE',  file: 'noaccess'    },
-  { name: 'EDITORIAL',   file: 'editorial'   },
-  { name: 'SWISS',       file: 'swiss'       },
-  { name: 'DARK',        file: 'dark'        },
 ];
 
 let currentMood = 0;
@@ -258,13 +418,22 @@ function showProject(id) {
     </div>`;
   document.querySelector('.nav-role').style.display = 'none';
   document.querySelector('.nav-contact').style.display = 'none';
-  document.getElementById('proj-close-btn').style.display = '';
+  document.getElementById('proj-close-btn').style.display = 'block';
   document.getElementById('home').style.display='none';
   document.getElementById('project-view').style.display='block';
   window.scrollTo(0,0);
 }
 
 // ══ MINI SITES ══
+const persoLabels = {
+  vinyle: 'Biblio Vinyle 3D',
+  lucychen: 'Lucychen Gesture',
+  emojy: 'Emojy Words',
+  incipit: 'Inkipit',
+  chatbot: 'Chatbot Legalmate',
+  radio: 'Radio Player',
+};
+
 function openMiniSite(slug) {
   const overlay = document.getElementById('minisite-overlay');
   const frame = document.getElementById('minisite-frame');
@@ -272,6 +441,12 @@ function openMiniSite(slug) {
   overlay.style.display = 'block';
   document.body.style.overflow = 'hidden';
   history.pushState({minisite: slug}, '', '/'+slug);
+  document.querySelector('.nav-role').style.display = 'flex';
+  document.querySelector('.nav-role').style.paddingRight = '48px';
+  document.querySelector('.nav-role').textContent = persoLabels[slug] || slug;
+  document.querySelector('.nav-contact').style.display = 'none';
+  document.getElementById('proj-close-btn').style.display = 'block';
+  document.querySelector('nav').style.zIndex = '9000';
 }
 
 function closeMiniSite() {
@@ -280,6 +455,21 @@ function closeMiniSite() {
   document.getElementById('minisite-frame').src = '';
   document.body.style.overflow = '';
   history.pushState({}, '', '/');
+  document.querySelector('.nav-role').textContent = 'Senior Product Designer · Paris';
+  document.querySelector('.nav-role').style.paddingRight = '';
+  document.querySelector('.nav-role').style.display = 'none';
+  document.querySelector('.nav-contact').style.display = '';
+  document.getElementById('proj-close-btn').style.display = 'none';
+  document.querySelector('nav').style.zIndex = '';
+}
+
+function closeCurrentView() {
+  const overlay = document.getElementById('minisite-overlay');
+  if (overlay.style.display === 'block') {
+    closeMiniSite();
+  } else {
+    showHome();
+  }
 }
 
 window.addEventListener('popstate', (e) => {
@@ -289,8 +479,14 @@ window.addEventListener('popstate', (e) => {
 // allow iframe to close overlay
 window.closeMiniSiteFromFrame = closeMiniSite;
 
+function scrollCarousel(btn) {
+  const scroll = btn.closest('.section-header').nextElementSibling;
+  const atEnd = scroll.scrollLeft + scroll.clientWidth >= scroll.scrollWidth - 8;
+  scroll.scrollTo({ left: atEnd ? 0 : scroll.scrollLeft + 404, behavior: 'smooth' });
+}
+
 function showHome() {
-  document.querySelector('.nav-role').style.display = '';
+  document.querySelector('.nav-role').style.display = 'none';
   document.querySelector('.nav-contact').style.display = '';
   document.getElementById('proj-close-btn').style.display = 'none';
   document.getElementById('home').style.display='block';

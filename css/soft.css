@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;0,900;1,300;1,600&family=Jost:wght@300;400;500&display=swap');
+:root{--bg:#f7f3ec;--fg:#2d2416;--r:1px solid #ddd5c8}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{background:#f7f3ec}
 body{background:#f7f3ec;color:#2d2416;font-family:'Jost',sans-serif;-webkit-font-smoothing:antialiased}

@@ -1,0 +1,118 @@
+/* Windows 2000 Theme */
+:root{--bg:#d4d0c8;--fg:#000000;--r:1px solid #808080}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{background:#008080}
+body{background:#d4d0c8;color:#000;font-family:Tahoma,'MS Sans Serif',Arial,sans-serif;font-size:11px;-webkit-font-smoothing:none}
+
+/* ── NAV — menu bar ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#d4d0c8;border-bottom:1px solid #808080;box-shadow:inset 0 -1px 0 #fff,inset 0 1px 0 #fff;display:grid;grid-template-columns:1fr auto auto;align-items:stretch;height:44px}
+.nav-logo{padding:0 14px;font-family:Tahoma,Arial,sans-serif;font-size:12px;font-weight:bold;text-decoration:none;color:#000;border-right:1px solid #808080;display:flex;align-items:center;gap:8px;letter-spacing:0}
+.nav-logo::before{content:'';width:16px;height:16px;background:linear-gradient(135deg,#1084d0 0%,#000080 100%);border:1px solid #000;flex-shrink:0}
+.nav-role{padding:0 14px;font-size:11px;color:#444;display:flex;align-items:center;border-right:1px solid #808080;letter-spacing:0;text-transform:none}
+.nav-contact{padding:0 14px;font-size:11px;color:#000080;text-decoration:underline;display:flex;align-items:center;letter-spacing:0;text-transform:none;transition:background .05s}
+.nav-contact:hover{background:#000080;color:#fff;text-decoration:none}
+
+/* ── HOME ── */
+#home{padding-top:44px}
+
+/* ── HERO — looks like an open Window ── */
+.hero{background:#fff;margin:6px;padding:0;overflow:hidden;border-top:1px solid #fff;border-left:1px solid #fff;border-right:1px solid #808080;border-bottom:1px solid #808080;outline:1px solid #000;position:relative}
+.hero::before{content:'theo.design \2014  Portfolio';display:block;height:22px;background:linear-gradient(to right,#000080 0%,#1084d0 100%);color:#fff;font-family:Tahoma,Arial,sans-serif;font-size:11px;font-weight:bold;padding:4px 8px;line-height:14px;position:static}
+.hero-eyebrow{display:none}
+.hero-title{font-family:Tahoma,Arial,sans-serif;font-size:clamp(24px,5vw,72px);line-height:1.1;letter-spacing:0;font-weight:bold;color:#000;padding:24px 24px 0}
+.t1{display:block}
+.t2{display:block;color:#000080}
+.hero-sub{font-size:11px;line-height:1.7;color:#444;padding:8px 24px 24px;max-width:none;font-style:normal}
+
+/* ── SECTION HEADER — title bar style ── */
+.section-header{background:linear-gradient(to right,#000080 0%,#1084d0 100%);color:#fff;border:none;margin:8px 6px 0;padding:3px 6px;display:flex;align-items:center;gap:8px}
+.section-title{font-family:Tahoma,Arial,sans-serif;font-size:11px;font-weight:bold;letter-spacing:0;text-transform:none;color:#fff}
+.section-count{font-size:11px;color:rgba(255,255,255,.6);margin-left:auto}
+.scroll-btn{margin-left:4px;background:#d4d0c8;border:1px solid #808080 !important;color:#000;width:20px;height:16px;font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #808080;flex-shrink:0;font-weight:bold;font-family:Tahoma,Arial,sans-serif;transition:none}
+.scroll-btn:hover{background:#000080;color:#fff;box-shadow:none}
+
+/* ── PROJECT CARDS CAROUSEL ── */
+.projects-scroll{display:flex;overflow-x:auto;scrollbar-width:thin;scrollbar-color:#808080 #d4d0c8;-ms-overflow-style:auto;border-bottom:none;padding:4px;gap:4px;margin:0 6px 8px;background:#d4d0c8;border-left:1px solid #fff;border-top:1px solid #fff;border-right:1px solid #808080;border-bottom:1px solid #808080;outline:1px solid #000}
+.projects-scroll::-webkit-scrollbar{height:14px}
+.projects-scroll::-webkit-scrollbar-track{background:#d4d0c8}
+.projects-scroll::-webkit-scrollbar-thumb{background:#808080;border:2px solid #d4d0c8}
+
+.proj-card{flex:0 0 220px;cursor:pointer;display:flex;flex-direction:column;gap:0;background:#d4d0c8;border-top:1px solid #fff;border-left:1px solid #fff;border-right:1px solid #808080;border-bottom:1px solid #808080;outline:1px solid #000}
+.proj-card::before{content:'';display:block;height:18px;background:linear-gradient(to right,#808080,#a0a0a0);flex-shrink:0}
+.proj-card:hover::before,.proj-card:hover{outline-color:#000080}
+.proj-card:hover::before{background:linear-gradient(to right,#000080,#1084d0)}
+.proj-card-img{background:#008080;aspect-ratio:4/3;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;margin:3px;border-top:1px solid #808080;border-left:1px solid #808080;border-right:1px solid #fff;border-bottom:1px solid #fff;transition:none}
+.proj-card-img-label{font-size:9px;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.4);font-family:Tahoma,Arial,sans-serif}
+.proj-card-body{padding:4px 6px 6px;display:flex;flex-direction:column;gap:2px}
+.proj-card-name{font-family:Tahoma,Arial,sans-serif;font-size:11px;font-weight:bold;line-height:1.2;color:#000;text-transform:none;letter-spacing:0;font-size:11px}
+.proj-card-tags{display:flex;gap:2px;flex-wrap:wrap;margin-top:2px}
+.tag{font-size:9px;letter-spacing:0;text-transform:none;color:#000;border:1px solid #808080;padding:1px 4px;background:#fff;border-radius:0}
+.proj-card-year{font-size:9px;color:#808080;letter-spacing:0}
+
+/* ── ABOUT ── */
+.about{border:none;display:grid;grid-template-columns:1fr 1fr;margin:6px;gap:4px}
+.about-text{border-top:1px solid #fff;border-left:1px solid #fff;border-right:1px solid #808080;border-bottom:1px solid #808080;outline:1px solid #000;padding:24px;font-size:12px;line-height:1.6;font-weight:normal;background:#fff;font-style:normal}
+.about-links{border-top:1px solid #fff;border-left:1px solid #fff;border-right:1px solid #808080;border-bottom:1px solid #808080;outline:1px solid #000;padding:24px;display:flex;flex-direction:column;justify-content:flex-end;background:#d4d0c8}
+.about-links a{display:flex;align-items:center;gap:6px;padding:5px 6px;border-bottom:1px solid #808080;font-size:11px;letter-spacing:0;text-transform:none;color:#000080;text-decoration:underline;transition:background .05s}
+.about-links a:last-child{border-bottom:none}
+.about-links a::before{content:'> '}
+.about-links a:hover{color:#fff;background:#000080;text-decoration:none}
+
+/* ── FOOTER — status bar ── */
+footer{border-top:1px solid #808080;box-shadow:inset 0 1px 0 #fff;display:grid;grid-template-columns:1fr 1fr 1fr;background:#d4d0c8}
+footer span{padding:4px 12px;font-size:11px;letter-spacing:0;text-transform:none;color:#000;border-right:1px solid #808080}
+footer span:last-child{border-right:none;text-align:right}
+
+/* ── PROJECT VIEW ── */
+#project-view{padding-top:44px}
+.proj-header{border-bottom:1px solid #808080;box-shadow:inset 0 1px 0 #fff;display:grid;grid-template-columns:auto 1fr;background:#d4d0c8}
+.back-btn{border-right:1px solid #808080;border-top:none;border-bottom:none;border-left:none;padding:8px 16px;font-size:11px;letter-spacing:0;text-transform:none;background:#d4d0c8;color:#000;font-family:Tahoma,Arial,sans-serif;cursor:pointer;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #808080;transition:none}
+.back-btn:hover{background:#000080;color:#fff;box-shadow:none}
+.proj-breadcrumb{padding:8px 16px;font-size:11px;letter-spacing:0;text-transform:none;color:#444;display:flex;align-items:center;gap:6px}
+.proj-breadcrumb strong{color:#000080;font-weight:bold}
+.proj-hero{border-bottom:none;padding:0;margin:6px;background:#fff;border-top:1px solid #fff;border-left:1px solid #fff;border-right:1px solid #808080;border-bottom:1px solid #808080;outline:1px solid #000;overflow:hidden}
+.proj-hero::before{content:'';display:block;height:22px;background:linear-gradient(to right,#000080 0%,#1084d0 100%)}
+.proj-tag{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#000080;margin-bottom:8px;padding:16px 20px 0}
+.proj-title{font-family:Tahoma,Arial,sans-serif;font-size:clamp(24px,5vw,72px);line-height:1.05;letter-spacing:0;font-weight:bold;color:#000;padding:0 20px}
+.proj-meta{margin-top:12px;display:flex;gap:24px;flex-wrap:wrap;padding:0 20px 20px}
+.meta-item{display:flex;flex-direction:column;gap:2px}
+.meta-label{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#808080}
+.meta-val{font-size:11px;color:#000}
+.proj-problem,.proj-solve{display:grid;grid-template-columns:100px 1fr;border-bottom:none;margin:4px 6px;border-top:1px solid #fff;border-left:1px solid #fff;border-right:1px solid #808080;border-bottom:1px solid #808080;outline:1px solid #000;background:#fff}
+.block-label{border-right:1px solid #808080;padding:24px 10px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#808080;writing-mode:vertical-rl;transform:rotate(180deg)}
+.solve-label{color:#000080}
+.problem-text{padding:24px;font-size:13px;font-weight:normal;line-height:1.5;font-style:normal}
+.solve-text{padding:24px;font-size:12px;font-weight:normal;line-height:1.7;font-style:normal;color:#444}
+.content-block{display:grid;grid-template-columns:40px 1fr;border-bottom:none;margin:4px 6px;border-top:1px solid #fff;border-left:1px solid #fff;border-right:1px solid #808080;border-bottom:1px solid #808080;outline:1px solid #000;background:#fff}
+.block-num{border-right:1px solid #808080;display:flex;align-items:flex-start;justify-content:center;padding-top:16px;font-family:Tahoma,Arial,sans-serif;font-size:14px;font-weight:bold;color:#000080}
+.block-content{padding:20px 24px}
+.block-img{background:#d4d0c8;border-top:1px solid #808080;border-left:1px solid #808080;border-right:1px solid #fff;border-bottom:1px solid #fff;margin-bottom:12px;position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:0}
+.block-img.half{width:55%;aspect-ratio:4/3}
+.block-duo{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#d4d0c8;margin-bottom:12px}
+.block-duo .block-img{margin-bottom:0;aspect-ratio:4/3}
+.block-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#808080}
+.block-caption{font-size:11px;font-weight:normal;line-height:1.7;color:#444;font-style:normal}
+.block-caption strong{font-weight:bold;color:#000}
+.proj-nav{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #808080;background:#d4d0c8;margin:0 6px 6px;outline:1px solid #000;border-top:1px solid #fff;border-left:1px solid #fff;border-right:1px solid #808080;border-bottom:1px solid #808080}
+.pnav-btn{padding:16px 20px;cursor:pointer;border:none;background:#d4d0c8;font-family:Tahoma,Arial,sans-serif;color:#000;transition:background .05s;display:flex;flex-direction:column;gap:4px;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #808080}
+.pnav-btn.prev{border-right:1px solid #808080;text-align:left}
+.pnav-btn.next{text-align:right;align-items:flex-end}
+.pnav-btn:hover{background:#000080;color:#fff;box-shadow:none}
+.pnav-dir{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#808080}
+.pnav-btn:hover .pnav-dir{color:rgba(255,255,255,.6)}
+.pnav-name{font-family:Tahoma,Arial,sans-serif;font-size:14px;font-weight:bold;font-style:normal;letter-spacing:0}
+
+/* ── MOOD BUTTON — classic Windows button ── */
+#mood-wheel{color:#000}
+#mood-btn{
+  color:#000;
+  font-family:Tahoma,Arial,sans-serif;
+  box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #808080, 0 0 0 1px #000 !important;
+  border:1px solid #808080 !important;
+  background:#d4d0c8 !important;
+}
+#mood-btn:hover{
+  box-shadow:inset -1px -1px 0 #fff,inset 1px 1px 0 #808080, 0 0 0 1px #000 !important;
+  transform:none !important;
+}
+#mood-label{opacity:.6}

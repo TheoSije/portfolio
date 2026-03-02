@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;700&display=swap');
+:root{--bg:#ccff00;--fg:#aadd00;--r:1px solid #bbee00}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{background:#ccff00}
 body{background:#ccff00;color:#aadd00;font-family:'Lexend',sans-serif;-webkit-font-smoothing:antialiased}
