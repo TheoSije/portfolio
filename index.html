@@ -53,6 +53,19 @@
 /* PAGE TRANSITION */
 body { transition: opacity .18s ease; }
 body.fading { opacity: 0; }
+
+/* CLOSE BUTTON IN NAV */
+#proj-close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1.4em;
+  color: inherit;
+  padding: 0;
+  line-height: 1;
+  display: none;
+}
 </style>
 </head>
 <body>
@@ -61,6 +74,7 @@ body.fading { opacity: 0; }
   <a class="nav-logo" href="#" onclick="showHome();return false;">theo.design</a>
   <span class="nav-role">UI/UX Designer · Paris</span>
   <a class="nav-contact" href="mailto:hello@theo.design">Contact</a>
+  <button id="proj-close-btn" onclick="showHome()">×</button>
 </nav>
 
 <!-- ══ HOME ══ -->
@@ -221,14 +235,7 @@ function renderImg(b) {
 
 function showProject(id) {
   const p = P[id]; if(!p) return;
-  const idx = proKeys.indexOf(id);
-  const prev = idx>0?proKeys[idx-1]:null;
-  const next = idx<proKeys.length-1?proKeys[idx+1]:null;
   document.getElementById('project-view').innerHTML = `
-    <header class="proj-header">
-      <button class="back-btn" onclick="showHome()">← Index</button>
-      <span class="proj-breadcrumb">${p.type} / <strong>${p.title}</strong></span>
-    </header>
     <section class="proj-hero">
       <div class="proj-tag">${p.type}</div>
       <h1 class="proj-title">${p.title}</h1>
@@ -248,11 +255,10 @@ function showProject(id) {
     <div class="proj-solve">
       <span class="block-label solve-label">Résultat</span>
       <p class="solve-text">${p.solve}</p>
-    </div>
-    <nav class="proj-nav">
-      ${prev?`<button class="pnav-btn prev" onclick="showProject('${prev}')"><span class="pnav-dir">← Précédent</span><span class="pnav-name">${P[prev].title}</span></button>`:'<span></span>'}
-      ${next?`<button class="pnav-btn next" onclick="showProject('${next}')"><span class="pnav-dir">Suivant →</span><span class="pnav-name">${P[next].title}</span></button>`:'<span></span>'}
-    </nav>`;
+    </div>`;
+  document.querySelector('.nav-role').style.display = 'none';
+  document.querySelector('.nav-contact').style.display = 'none';
+  document.getElementById('proj-close-btn').style.display = '';
   document.getElementById('home').style.display='none';
   document.getElementById('project-view').style.display='block';
   window.scrollTo(0,0);
@@ -284,6 +290,9 @@ window.addEventListener('popstate', (e) => {
 window.closeMiniSiteFromFrame = closeMiniSite;
 
 function showHome() {
+  document.querySelector('.nav-role').style.display = '';
+  document.querySelector('.nav-contact').style.display = '';
+  document.getElementById('proj-close-btn').style.display = 'none';
   document.getElementById('home').style.display='block';
   document.getElementById('project-view').style.display='none';
   window.scrollTo(0,0);
