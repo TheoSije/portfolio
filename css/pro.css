@@ -108,3 +108,6 @@ footer span:last-child{border-right:none;text-align:right}
 /* ── MOOD BUTTON ── */
 #mood-btn{font-family:-apple-system,BlinkMacSystemFont,sans-serif}
 #mood-label{opacity:.5}
+
+/* ── MOBILE ── */
+@media(max-width:700px){:root{--h-pad:24px}}
