@@ -799,7 +799,7 @@ function showHome() {
   <svg viewBox="0 0 13 17" width="13" height="17" fill="none">
     <path d="M0 0 L0 13 L3.2 9.8 L5.6 15.4 L7.6 14.5 L5.2 8.9 L10 8.9 Z" fill="#0D99FF" stroke="white" stroke-width="1" stroke-linejoin="round"/>
   </svg>
-  <div class="fig-label" id="fig-label-main">Théo</div>
+  <div class="fig-label" id="fig-label-main">anonymous</div>
 </div>
 
 <div id="ghost-cursor" aria-hidden="true">
@@ -842,6 +842,11 @@ function showHome() {
 /* ══ CUSTOM CURSOR ══ */
 @media (hover: hover) and (pointer: fine) {
   body, body * { cursor: none !important; }
+}
+
+/* Hide user cursor on touch/mobile, keep Louisa's ghost cursor */
+@media (hover: none) {
+  #fig-cursor { display: none !important; }
 }
 
 #fig-cursor, #ghost-cursor {
@@ -1093,6 +1098,22 @@ function showHome() {
       }, d);
     }
     scheduleToggle();
+
+    // Ghost label occasionally shows messages
+    var ghostMessages = ['cool no ?', 'you can scroll ↓', 'nice right ?', 'try scrolling', 'hello :)'];
+    var ghostLabel = ghostCursor.querySelector('.fig-label-ghost');
+    function scheduleGhostMessage() {
+      var d = 7000 + Math.random() * 9000;
+      setTimeout(function () {
+        var msg = ghostMessages[Math.floor(Math.random() * ghostMessages.length)];
+        ghostLabel.textContent = msg;
+        setTimeout(function () {
+          ghostLabel.textContent = 'Louisa';
+          scheduleGhostMessage();
+        }, 2800);
+      }, d);
+    }
+    scheduleGhostMessage();
   }, 4000);
 
   /* ─────────────────────────────────────────
