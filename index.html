@@ -366,9 +366,12 @@ nav.minisite-nav #proj-close-btn {
       <span class="stack-pill"><img class="stack-icon" src="img/figma.svg" alt="">Figma</span>
       <span class="stack-pill"><img class="stack-icon" src="img/weavy.svg" alt="">Weavy</span>
       <span class="stack-pill"><img class="stack-icon" src="img/lovable.svg" alt="">Lovable</span>
-      <span class="stack-pill"><img class="stack-icon" src="https://cdn.simpleicons.org/anthropic/CF4B2C" alt="">Claude</span>
+      <span class="stack-pill"><img class="stack-icon" src="img/claude.svg" alt="">Claude</span>
       <span class="stack-pill"><img class="stack-icon" src="img/midjourney.svg" alt="">Midjourney</span>
+      <span class="stack-pill"><img class="stack-icon" src="img/storybook.svg" alt="">Storybook</span>
+      <span class="stack-pill"><img class="stack-icon" src="img/zeroheight.svg" alt="">Zeroheight</span>
       <span class="stack-pill"><img class="stack-icon" src="img/photoshop.svg" alt="">Photoshop</span>
+      <span class="stack-pill"><img class="stack-icon" src="img/terminal.svg" alt="">Terminal</span>
       <span class="stack-pill"><span class="stack-icon-letter" style="background:#FF4A00">Ji</span>Jitter</span>
       <span class="stack-pill"><img class="stack-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/visualstudiocode.svg" alt="" style="filter:invert(37%) sepia(97%) saturate(1097%) hue-rotate(185deg) brightness(95%)">VS Code</span>
       <span class="stack-pill"><img class="stack-icon" src="https://cdn.simpleicons.org/github/181717" alt="">GitHub</span>
@@ -381,11 +384,11 @@ nav.minisite-nav #proj-close-btn {
   </div>
   <div class="projects-scroll">
     <div class="proj-card" onclick="showProject('gl')">
-      <div class="proj-card-img"><span class="proj-card-img-label">GL</span></div>
+      <div class="proj-card-img"><span class="proj-card-img-label">Galeries Lafayette</span></div>
       <div class="proj-card-body">
-        <span class="proj-card-name">GL</span>
-        <div class="proj-card-tags"><span class="tag">SaaS</span><span class="tag">Dashboard</span><span class="tag">B2B</span></div>
-        <span class="proj-card-year">2024</span>
+        <span class="proj-card-name">Galeries Lafayette</span>
+        <div class="proj-card-tags"><span class="tag">Design System</span><span class="tag">IA Gen</span><span class="tag">Product</span></div>
+        <span class="proj-card-year">2022–2025</span>
       </div>
     </div>
     <div class="proj-card" onclick="showProject('deezer')">
@@ -433,6 +436,30 @@ nav.minisite-nav #proj-close-btn {
       <div class="proj-card-body">
         <span class="proj-card-name">Tune My Music</span>
         <div class="proj-card-tags"><span class="tag">SaaS</span><span class="tag">Musique</span><span class="tag">Streaming</span></div>
+        <span class="proj-card-year">2024</span>
+      </div>
+    </div>
+    <div class="proj-card" onclick="showProject('mauboussin')">
+      <div class="proj-card-img"><span class="proj-card-img-label">Mauboussin</span></div>
+      <div class="proj-card-body">
+        <span class="proj-card-name">Mauboussin</span>
+        <div class="proj-card-tags"><span class="tag">Luxe</span><span class="tag">Bijoux</span><span class="tag">IA Gen</span></div>
+        <span class="proj-card-year">2025</span>
+      </div>
+    </div>
+    <div class="proj-card" onclick="showProject('gotaxfree')">
+      <div class="proj-card-img"><span class="proj-card-img-label">Gotaxfree</span></div>
+      <div class="proj-card-body">
+        <span class="proj-card-name">Gotaxfree</span>
+        <div class="proj-card-tags"><span class="tag">FinTech</span><span class="tag">Retail</span><span class="tag">Détaxe</span></div>
+        <span class="proj-card-year">2024</span>
+      </div>
+    </div>
+    <div class="proj-card" onclick="showProject('dsrt')">
+      <div class="proj-card-img"><span class="proj-card-img-label">DSRT</span></div>
+      <div class="proj-card-body">
+        <span class="proj-card-name">DSRT</span>
+        <div class="proj-card-tags"><span class="tag">Audio</span><span class="tag">Branding</span><span class="tag">Logo</span></div>
         <span class="proj-card-year">2024</span>
       </div>
     </div>
@@ -494,7 +521,7 @@ nav.minisite-nav #proj-close-btn {
   </div>
 
   <section class="about">
-    <div class="about-text">Senior Product Designer & Head of Design basé à Paris. 7 ans entre startups et scale-ups — à concevoir des interfaces, construire des design systems, et structurer des équipes. Je travaille à l'intersection du craft, de la stratégie produit et des organisations.</div>
+    <div class="about-text">Senior Product Designer & Head of Design basé à Paris. 10 ans à l'intersection du craft, de la stratégie produit et des organisations — entre startups, scale-ups et aujourd'hui les Galeries Lafayette. Je conçois des interfaces, construis des systèmes, structure des équipes, et explore ce que l'IA change vraiment dans notre métier.</div>
     <div class="about-links">
       <a href="mailto:hello@theo.design">hello@theo.design</a>
       <a href="#">LinkedIn</a>
@@ -502,7 +529,15 @@ nav.minisite-nav #proj-close-btn {
       <a href="#">Figma Community</a>
     </div>
   </section>
-  <footer><span>© 2025 theo.design</span><span>Paris, France</span><span>Senior Product Designer</span></footer>
+  <footer>
+    <span>Paris, France</span>
+    <span>Senior Product Designer</span>
+    <span>Head of Design</span>
+  </footer>
+  <div class="footer-credits">
+    <span>Développé avec ❤️ à Aubervilliers · made with <a href="https://claude.ai" target="_blank">Claude</a> &amp; <a href="https://code.visualstudio.com" target="_blank">VS Code</a></span>
+    <span>© 2026 theo.design</span>
+  </div>
 </div>
 
 <!-- ══ PROJECT PRO VIEW ══ -->
@@ -547,12 +582,28 @@ function nextMood() {
 
 // ══ PROJECT PRO DATA ══
 const P = {
-  gl: { title:'GL', type:'Projet Pro', tags:['SaaS','Dashboard','B2B'], year:'2024', role:'UI/UX Design', problem:"L'interface existante noyait les utilisateurs sous des données redondantes. Trop de clics pour des tâches quotidiennes — taux d'abandon 40% sur les flows critiques.", blocks:[{t:'full',n:'01',c:'<strong>Audit de l\'existant.</strong> 12 écrans pour une action qui devrait en nécessiter 2.'},{t:'duo',n:'02',c:'<strong>Restructuration navigation.</strong> Menu 3 niveaux → barre latérale contextuelle.'},{t:'full',n:'03',c:'<strong>Design system.</strong> 40 composants documentés, variables unifiées.'},{t:'half',n:'04',c:'<strong>Tests utilisateurs.</strong> 5 sessions, itérations rapides.'}], solve:"−60% de clics. Abandon ramené à 8%."},
+  gl: { title:'Galeries Lafayette', type:'Projet Pro', tags:['Design System','IA Gen','Product','Low-Code'], year:'2022–2025', role:'Head of Design · Product Design',
+    problem:"3 ans à la tête du design pour l'un des plus grands retailers français. Pas un projet — un écosystème entier : app, web, design system, IA gen, automatisation, et une équipe de choc.",
+    blocks:[
+      {t:'full',n:'01',c:'<strong>L\'app, refonte totale.</strong> En cohérence avec le design system, l\'application mobile a été entièrement repensée. Indice de satisfaction 150. Big up à Flo, dev iOS de génie — embauche-le, il est freelance et il est brillant.'},
+      {t:'duo',n:'02',c:'<strong>Site web mobile & desktop.</strong> Refonte annuelle en cohérence avec le design system. Indice 120 chaque année — un rituel bien huilé entre design et dev.'},
+      {t:'full',n:'03',c:'<strong>Design System showcase.</strong> Composants vivants, documentation interactive, variables unifiées. La fondation sur laquelle tout le reste repose.'},
+      {t:'duo',n:'04',c:'<strong>Looks IA Gen.</strong> Création de visuels mode avec des produits portés reliés au vrai catalogue. Retouche d\'images en batch via un flow Weavy, puis reconstruction du flow en Python.'},
+      {t:'full',n:'05',c:'<strong>Chatbot Gala.</strong> Création de l\'assistant e-com Gala — onboarding conversationnel, recommandation produit, navigation augmentée.'},
+      {t:'duo',n:'06',c:'<strong>Centaines d\'apps RPA Low Code.</strong> PowerApp Microsoft avec un design system dédié pour générer des pages ultra rapidement. Big up à Patrick Moysan — un type génial.'},
+      {t:'full',n:'07',c:'<strong>Design Thinking, toujours.</strong> Chaque sujet, ultra user testé. Sessions dans une salle à double-sens. Une boucle itérative sans relâche. Shoutout à Camille, Malik, Thuan et Manu — mon équipe de product designers aux Galeries. Talents immenses.'}
+    ],
+    solve:"3 ans. Une app, un site, un design system, des flows IA, un chatbot, des centaines d\'apps Low-Code. Et une équipe qui déchire."
+  },
   deezer: { title:'Deezer', type:'Projet Pro', tags:['Mobile','Audio'], year:'2023', role:'UX Design · Prototypage', problem:"La découverte musicale stagnait. Le moteur de recommandation existait mais personne ne l'utilisait.", blocks:[{t:'full',n:'01',c:'<strong>20 interviews.</strong> Les gens découvrent la musique via leurs amis, pas via les algos.'},{t:'duo',n:'02',c:'<strong>"Flow Social".</strong> Dimension sociale dans le player — subtil, jamais intrusif.'},{t:'full',n:'03',c:'<strong>3 prototypes.</strong> Le gagnant conservait 80% des habitudes existantes.'}], solve:"+34% exploration nouveaux artistes. Beta 10k users."},
   devialet: { title:'Devialet', type:'Projet Pro', tags:['Luxe','Hardware'], year:'2023', role:'UI Design · Brand', problem:"L'app de contrôle en décalage total avec un produit à 3000€.", blocks:[{t:'full',n:'01',c:'<strong>ADN Devialet.</strong> Minimalisme radical. Chaque décision devait l\'honorer.'},{t:'full',n:'02',c:'<strong>Le son comme métaphore.</strong> Ondes, fréquences, visualisations épurées.'},{t:'duo',n:'03',c:'<strong>Micro-interactions.</strong> Même exigence qu\'un bouton physique.'}], solve:"2,8 → 4,6 étoiles App Store. NPS +41."},
   simplon: { title:'Simplon', type:'Projet Pro', tags:['EdTech','Accessibilité'], year:'2022', role:'UX/UI · Accessibilité', problem:"Plateforme inaccessible pour des apprenants débutant avec l'informatique.", blocks:[{t:'full',n:'01',c:'<strong>Tests primo-accédants.</strong> 15min de test > 15h de réflexion solo.'},{t:'full',n:'02',c:'<strong>Simplification radicale.</strong> Une action par écran. Langage naturel.'},{t:'half',n:'03',c:'<strong>WCAG AA.</strong> Contrastes, tailles, clavier.'}], solve:"Complétion +28%."},
   legalmate: { title:'Legalmate', type:'Projet Pro', tags:['LegalTech','IA'], year:'2024', role:'Product Design', problem:"Le droit est opaque par design. Une interface froide aurait reproduit ce qu'ils voulaient combattre.", blocks:[{t:'full',n:'01',c:'<strong>Design de la confiance.</strong> Transparence sources, limites visibles.'},{t:'duo',n:'02',c:'<strong>Chat augmenté.</strong> Certitude visible, références cliquables.'},{t:'full',n:'03',c:'<strong>Onboarding progressif.</strong> Première interaction = poser une question.'}], solve:"Conversion 18% vs 8% benchmark."},
   lionel: { title:'Lionel El Sound', type:'Projet Pro', tags:['Musique','Brand'], year:'2023', role:'UI Design · Web', problem:"Son unique, zéro présence digitale à la hauteur.", blocks:[{t:'full',n:'01',c:'<strong>Direction artistique.</strong> La palette est née du son : grains, textures, vides.'},{t:'duo',n:'02',c:'<strong>One-page immersif.</strong> Chaque section a sa propre atmosphère.'},{t:'full',n:'03',c:'<strong>Player intégré.</strong> Écouter sans quitter la page.'}], solve:"Bookings ×3 en 6 mois."},
+  tunemymusic: { title:'Tune My Music', type:'Projet Pro', tags:['SaaS','Musique','Streaming'], year:'2024', role:'Product Design · Dev', problem:"La galère universelle : changer de service de streaming sans perdre ses playlists soigneusement construites.", blocks:[{t:'full',n:'01',c:'<strong>Le produit.</strong> Importation de playlists entre tous les services de streaming — Spotify, Apple Music, Deezer, YouTube Music et plus encore.'},{t:'duo',n:'02',c:'<strong>Le site.</strong> Design et développement complets. UI propre, onboarding ultra-simple, conversions au cœur du parcours.'},{t:'full',n:'03',c:'<strong>Flow optimisé.</strong> En quelques clics, l\'utilisateur transfert des centaines de titres sans friction.'}], solve:"Des millions de playlists transférées. Un produit qui parle à tous les mélomanes nomades."},
+  mauboussin: { title:'Mauboussin', type:'Projet Pro', tags:['Luxe','Bijoux','IA Gen'], year:'2025', role:'Product Design · Direction Créative', problem:"Repenser le site e-com d'une maison de haute joaillerie en intégrant la génération d'images IA pour sublimer les visuels produit.", blocks:[{t:'full',n:'01',c:'<strong>Direction artistique IA.</strong> Génération et curation de visuels produit IA — bijoux portés, mise en scène, ambiances raffinées.'},{t:'duo',n:'02',c:'<strong>Nouveau site.</strong> Refonte e-commerce pensée pour le luxe : narration, émotion, conversion subtile.'},{t:'full',n:'03',c:'<strong>Cohérence de marque.</strong> Chaque pixel aligné avec l\'ADN centenaire de la maison.'}], solve:"Un site à la hauteur d'une maison iconique. L'IA au service du luxe, pas contre lui."},
+  gotaxfree: { title:'Gotaxfree', type:'Projet Pro', tags:['FinTech','Retail','Détaxe'], year:'2024', role:'Product Design · UX', problem:"La détaxe à Paris reste un parcours du combattant — formulaires papier, files d'attente, délais. Gotaxfree veut changer ça.", blocks:[{t:'full',n:'01',c:'<strong>L\'app.</strong> Faire son shopping à Paris sans payer la TVA. Détaxe immédiate, 100% digital.'},{t:'duo',n:'02',c:'<strong>Parcours zéro friction.</strong> Du scan du ticket à l\'encaissement — en moins de 3 minutes.'},{t:'full',n:'03',c:'<strong>Trust & sécurité.</strong> Design rassurant pour des transactions financières cross-border.'}], solve:"La détaxe enfin simple. Pour les touristes, enfin."},
+  dsrt: { title:'DSRT', type:'Projet Pro', tags:['Audio','Branding','Logo'], year:'2024', role:'Branding · Direction Artistique', problem:"Créer l'identité visuelle d'un logiciel de sound design — de zéro. L'outil est puissant, l'image devait l'être aussi.", blocks:[{t:'full',n:'01',c:'<strong>Création du logo.</strong> Identité sonore traduite en forme : ondes, tension, précision.'},{t:'duo',n:'02',c:'<strong>Branding system.</strong> Typographie, couleurs, motion — un univers cohérent pour une audience pro.'},{t:'full',n:'03',c:'<strong>Application produit.</strong> L\'identité déclinée sur l\'interface du logiciel lui-même.'}], solve:"Une marque qui sonne juste — littéralement."},
 };
 const proKeys = Object.keys(P);
 

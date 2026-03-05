@@ -60,6 +60,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:52px;display:grid;gri
 footer{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:none;padding-top:8px}
 footer span{padding:16px var(--h-pad);font-size:11px;letter-spacing:0;text-transform:none;color:#bbb;border-right:none}
 footer span:last-child{border-right:none;text-align:right}
+.footer-credits{display:flex;justify-content:space-between;align-items:center;padding:10px var(--h-pad) 28px;font-size:10px;color:#ccc;letter-spacing:0;border-top:none}
+.footer-credits a{color:#bbb;text-decoration:none;transition:color .2s}
+.footer-credits a:hover{color:#111}
 
 /* ── PROJECT VIEW ── */
 #project-view{padding-top:52px}
