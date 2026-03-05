@@ -6,51 +6,82 @@
 <title>theo.design</title>
 <link id="theme-css" rel="stylesheet" href="css/pro.css">
 <style>
-/* MOOD WHEEL */
+/* MOOD WHEEL — glass organic — fixed style regardless of mood */
 #mood-wheel {
   position: fixed;
-  bottom: 32px;
-  right: 32px;
+  bottom: 28px;
+  right: 28px;
   z-index: 9000;
   pointer-events: none;
 }
 #mood-btn {
   pointer-events: all;
-  cursor: pointer;
-  border: var(--r, 1.5px solid #0d0d0d);
-  background: var(--bg, #f2efe8);
-  color: inherit;
-  padding: 10px 14px 10px 16px;
+  cursor: none;
+  border: none;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  color: #111;
+  padding: 13px 20px 13px 16px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   font-family: inherit;
-  box-shadow: 3px 3px 0 var(--fg, #0d0d0d);
-  transition: box-shadow .12s, transform .12s;
+  border-radius: 100px;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.07), 0 1px 6px rgba(0,0,0,0.04),
+              inset 0 1px 0 rgba(255,255,255,0.95), 0 0 0 0.5px rgba(0,0,0,0.06);
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  min-width: 128px;
+}
+#mood-btn::before {
+  content: '';
+  position: absolute;
+  inset: -30px;
+  background:
+    radial-gradient(ellipse at 75% 25%, rgba(99,179,237,0.5) 0%, transparent 50%),
+    radial-gradient(ellipse at 25% 75%, rgba(252,129,74,0.35) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 85%, rgba(252,211,77,0.28) 0%, transparent 40%);
+  filter: blur(14px);
+  border-radius: 50%;
+  animation: mood-blob 6s ease-in-out infinite alternate;
+}
+@keyframes mood-blob {
+  0%   { transform: scale(1) rotate(0deg); }
+  50%  { transform: scale(1.12) rotate(9deg); }
+  100% { transform: scale(0.94) rotate(-6deg); }
 }
 #mood-btn:hover {
-  box-shadow: 1px 1px 0 var(--fg, #0d0d0d);
-  transform: translate(2px, 2px);
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.06),
+              inset 0 1px 0 rgba(255,255,255,0.95);
 }
 #mood-label {
   font-size: 8px;
-  letter-spacing: .25em;
+  letter-spacing: .22em;
   text-transform: uppercase;
-  opacity: .4;
+  opacity: .45;
   font-family: inherit;
+  position: relative;
+  z-index: 1;
 }
 #mood-name {
   font-size: 11px;
-  letter-spacing: .12em;
+  letter-spacing: .1em;
   text-transform: uppercase;
   font-family: inherit;
-  font-weight: bold;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
 }
 #mood-arrow {
-  font-size: 18px;
+  font-size: 15px;
   display: inline-block;
   transition: transform .5s cubic-bezier(.34,1.56,.64,1);
   margin-left: 2px;
+  position: relative;
+  z-index: 1;
 }
 #mood-btn:hover #mood-arrow { transform: rotate(180deg); }
 
@@ -765,5 +796,491 @@ function showHome() {
   display: block;
 }
 </style>
+
+<!-- ══ FIGMA CURSORS ══ -->
+<div id="fig-cursor" aria-hidden="true">
+  <svg viewBox="0 0 13 17" width="13" height="17" fill="none">
+    <path d="M0 0 L0 13 L3.2 9.8 L5.6 15.4 L7.6 14.5 L5.2 8.9 L10 8.9 Z" fill="#0D99FF" stroke="white" stroke-width="1" stroke-linejoin="round"/>
+  </svg>
+  <div class="fig-label" id="fig-label-main">Théo</div>
+</div>
+
+<div id="ghost-cursor" aria-hidden="true">
+  <svg viewBox="0 0 13 17" width="13" height="17" fill="none">
+    <path d="M0 0 L0 13 L3.2 9.8 L5.6 15.4 L7.6 14.5 L5.2 8.9 L10 8.9 Z" fill="#9747FF" stroke="white" stroke-width="1" stroke-linejoin="round"/>
+  </svg>
+  <div class="fig-label fig-label-ghost">Louisa</div>
+</div>
+
+<!-- ══ SAY SOMETHING ══ -->
+<div id="fig-say" aria-hidden="true">
+  <svg viewBox="0 0 13 17" width="13" height="17" fill="none" style="flex-shrink:0;margin-top:1px">
+    <path d="M0 0 L0 13 L3.2 9.8 L5.6 15.4 L7.6 14.5 L5.2 8.9 L10 8.9 Z" fill="#0D99FF" stroke="white" stroke-width="1" stroke-linejoin="round"/>
+  </svg>
+  <input id="fig-say-input" type="text" placeholder="Say something" autocomplete="off" spellcheck="false" />
+</div>
+
+<!-- ══ CURSOR MSG BUBBLE ══ -->
+<div id="cursor-msg-bubble" aria-live="polite"></div>
+
+<!-- ══ SHAPE TOOLBAR ══ -->
+<div id="shape-toolbar" aria-label="Outils de dessin">
+  <div class="stool-label">Draw</div>
+  <button class="stool active" data-s="rect" title="Rectangle">
+    <svg viewBox="0 0 14 14" width="13" height="13"><rect x="1.5" y="1.5" width="11" height="11" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+  </button>
+  <button class="stool" data-s="circle" title="Ellipse">
+    <svg viewBox="0 0 14 14" width="13" height="13"><ellipse cx="7" cy="7" rx="5.5" ry="5.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+  </button>
+  <button class="stool" data-s="line" title="Ligne">
+    <svg viewBox="0 0 14 14" width="13" height="13"><line x1="2" y1="12" x2="12" y2="2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <div class="stool-divider"></div>
+  <button class="stool stool-clear" title="Effacer tout (⌫)">
+    <svg viewBox="0 0 14 14" width="13" height="13"><path d="M3 3 L11 11 M11 3 L3 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+</div>
+
+<!-- ══ DRAWING CANVAS ══ -->
+<svg id="draw-canvas" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+
+<style>
+/* ══ CUSTOM CURSOR ══ */
+@media (hover: hover) and (pointer: fine) {
+  body, body * { cursor: none !important; }
+}
+
+#fig-cursor, #ghost-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  display: flex;
+  align-items: flex-start;
+  will-change: transform;
+  gap: 3px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+#fig-cursor.ready, #ghost-cursor.ready {
+  opacity: 1;
+}
+.fig-label {
+  font-size: 11px;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  padding: 3px 9px;
+  border-radius: 100px;
+  white-space: nowrap;
+  margin-top: 13px;
+  margin-left: -1px;
+  letter-spacing: 0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+  color: #fff;
+  background: #0D99FF;
+  position: relative;
+  z-index: 1;
+}
+.fig-label-ghost {
+  background: #9747FF;
+}
+
+/* Cursor message bubble */
+#cursor-msg-bubble {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9996;
+  background: #0D99FF;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 100px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(6px) scale(0.9);
+  transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.34,1.56,0.64,1);
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  box-shadow: 0 2px 10px rgba(13,153,255,0.35);
+  top: 0; left: 0;
+}
+#cursor-msg-bubble.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Say something */
+#fig-say {
+  position: fixed;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  gap: 6px;
+  top: 0; left: 0;
+}
+#fig-say-input {
+  background: #3B4B7C;
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 100px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  width: 200px;
+  caret-color: #fff;
+  letter-spacing: 0;
+  box-shadow: 0 2px 16px rgba(59,75,124,0.4);
+}
+#fig-say-input::placeholder { color: rgba(255,255,255,0.45); }
+
+/* Shape toolbar */
+#shape-toolbar {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 12px;
+  padding: 5px 7px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.05),
+              0 0 0 0.5px rgba(0,0,0,0.07);
+  z-index: 8990;
+}
+.stool-label {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #bbb;
+  padding: 0 8px 0 4px;
+  font-family: -apple-system, sans-serif;
+  user-select: none;
+}
+.stool {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: background 0.13s, color 0.13s;
+  flex-shrink: 0;
+}
+.stool:hover { background: rgba(0,0,0,0.06); color: #111; }
+.stool.active { background: rgba(13,153,255,0.12); color: #0D99FF; }
+.stool-clear { color: #bbb; }
+.stool-clear:hover { background: rgba(255,59,48,0.08); color: #ff3b30; }
+.stool-divider {
+  width: 1px; height: 20px;
+  background: rgba(0,0,0,0.08);
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+
+/* Drawing canvas */
+#draw-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Hide toolbar on touch devices */
+@media (hover: none) {
+  #shape-toolbar { display: none; }
+  #fig-cursor, #ghost-cursor { display: none; }
+}
+</style>
+
+<script>
+(function () {
+  'use strict';
+
+  // Only activate on mouse/desktop
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  /* ─────────────────────────────────────────
+     CUSTOM CURSOR
+  ───────────────────────────────────────── */
+  const figCursor = document.getElementById('fig-cursor');
+  const ghostCursor = document.getElementById('ghost-cursor');
+  const msgBubble = document.getElementById('cursor-msg-bubble');
+  const figSay = document.getElementById('fig-say');
+  const figSayInput = document.getElementById('fig-say-input');
+
+  let mx = -200, my = -200;
+  let sayOpen = false;
+
+  // Instant cursor follow
+  document.addEventListener('mousemove', function (e) {
+    mx = e.clientX; my = e.clientY;
+    figCursor.style.transform = 'translate(' + mx + 'px,' + my + 'px)';
+    figCursor.classList.add('ready');
+    if (sayOpen) {
+      figSay.style.left = (mx + 14) + 'px';
+      figSay.style.top = (my + 14) + 'px';
+    }
+    // Update message bubble position (above cursor)
+    msgBubble.style.left = (mx + 14) + 'px';
+    msgBubble.style.top = (my - 38) + 'px';
+  }, { passive: true });
+
+  /* ─────────────────────────────────────────
+     CURSOR MESSAGES
+  ───────────────────────────────────────── */
+  const shownMsgs = new Set();
+  let msgTimer = null;
+
+  function showMsg(text, duration) {
+    if (shownMsgs.has(text)) return;
+    shownMsgs.add(text);
+    duration = duration || 2800;
+    msgBubble.textContent = text;
+    msgBubble.classList.add('visible');
+    clearTimeout(msgTimer);
+    msgTimer = setTimeout(function () {
+      msgBubble.classList.remove('visible');
+    }, duration);
+  }
+
+  // Timed messages
+  setTimeout(function () { showMsg('hi ! 👋'); }, 1800);
+  setTimeout(function () { showMsg('belle journée ✨', 3200); }, 12000);
+  setTimeout(function () { showMsg('beau portfolio non ? 😄', 3500); }, 35000);
+
+  // Scroll messages
+  var lastScroll = 0;
+  window.addEventListener('scroll', function () {
+    var s = window.scrollY;
+    if (s > 280 && lastScroll <= 280) showMsg('what a scroll ↓');
+    if (s > 900 && lastScroll <= 900) showMsg('tu vas tout en bas ? 👀');
+    lastScroll = s;
+  }, { passive: true });
+
+  /* ─────────────────────────────────────────
+     SAY SOMETHING (press /)
+  ───────────────────────────────────────── */
+  document.addEventListener('keydown', function (e) {
+    // Don't trigger if user is typing in an input
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+    if (e.key === '/' && !sayOpen) {
+      e.preventDefault();
+      sayOpen = true;
+      figSay.style.left = (mx + 14) + 'px';
+      figSay.style.top = (my + 14) + 'px';
+      figSay.style.display = 'flex';
+      setTimeout(function () { figSayInput.focus(); }, 10);
+    }
+    if (e.key === 'Escape' && sayOpen) closeSay();
+  });
+
+  figSayInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+      var msg = figSayInput.value.trim();
+      closeSay();
+      if (msg) {
+        setTimeout(function () { showMsg('✓ message envoyé 💌', 2800); }, 80);
+      }
+    }
+  });
+
+  function closeSay() {
+    sayOpen = false;
+    figSay.style.display = 'none';
+    figSayInput.value = '';
+  }
+
+  /* ─────────────────────────────────────────
+     GHOST CURSOR — LOUISA
+  ───────────────────────────────────────── */
+  var gx = -200, gy = -200;
+  var gtx = -200, gty = -200;
+  var ghostActive = false;
+
+  function rndPos() {
+    var m = 120;
+    return {
+      x: m + Math.random() * (window.innerWidth - m * 2),
+      y: m + Math.random() * Math.min(window.innerHeight, document.body.scrollHeight) * 0.7
+    };
+  }
+
+  function animGhost() {
+    gx += (gtx - gx) * 0.04;
+    gy += (gty - gy) * 0.04;
+    ghostCursor.style.transform = 'translate(' + gx + 'px,' + gy + 'px)';
+    requestAnimationFrame(animGhost);
+  }
+  animGhost();
+
+  // Ghost appears after 4s
+  setTimeout(function () {
+    var p = rndPos();
+    gx = p.x; gy = p.y; gtx = p.x; gty = p.y;
+    ghostCursor.classList.add('ready');
+    ghostActive = true;
+
+    // Ghost moves every 3-6s
+    function scheduleMove() {
+      var d = 3200 + Math.random() * 3200;
+      setTimeout(function () {
+        var np = rndPos();
+        gtx = np.x; gty = np.y;
+        scheduleMove();
+      }, d);
+    }
+    scheduleMove();
+
+    // Ghost occasionally hides/reappears
+    function scheduleToggle() {
+      var d = 14000 + Math.random() * 10000;
+      setTimeout(function () {
+        ghostCursor.style.opacity = '0';
+        setTimeout(function () {
+          var np = rndPos();
+          gx = np.x; gy = np.y; gtx = np.x; gty = np.y;
+          ghostCursor.style.opacity = '1';
+          scheduleToggle();
+        }, 5000);
+      }, d);
+    }
+    scheduleToggle();
+  }, 4000);
+
+  /* ─────────────────────────────────────────
+     SHAPE DRAWING
+  ───────────────────────────────────────── */
+  var toolbar = document.getElementById('shape-toolbar');
+  var canvas = document.getElementById('draw-canvas');
+  var tools = toolbar.querySelectorAll('.stool[data-s]');
+  var clearBtn = toolbar.querySelector('.stool-clear');
+
+  var currentTool = 'rect';
+  var isDrawing = false;
+  var drawStarted = false;
+  var sx, sy;
+  var activeShape = null;
+  var NS = 'http://www.w3.org/2000/svg';
+
+  // Tool selection
+  tools.forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      tools.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      currentTool = btn.dataset.s;
+    });
+  });
+
+  // Clear all
+  clearBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    while (canvas.firstChild) canvas.removeChild(canvas.firstChild);
+  });
+
+  // Keyboard shortcut: Backspace = clear all shapes
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Backspace' && e.target === document.body) {
+      if (canvas.lastChild) canvas.removeChild(canvas.lastChild);
+    }
+  });
+
+  function isBackground(el) {
+    return !el.closest('nav, #mood-wheel, #shape-toolbar, .proj-card, .stack-section, .about, footer, .footer-credits, .section-header, #fig-say, #ghost-cursor, button, a, input, select');
+  }
+
+  var STROKE = 'rgba(13,153,255,0.55)';
+  var FILL = 'rgba(13,153,255,0.04)';
+  var FILL_LINE = 'none';
+
+  function createShapeEl(type, x, y) {
+    var el;
+    if (type === 'circle') {
+      el = document.createElementNS(NS, 'ellipse');
+      el.setAttribute('cx', x); el.setAttribute('cy', y);
+      el.setAttribute('rx', 0); el.setAttribute('ry', 0);
+      el.setAttribute('fill', FILL);
+    } else if (type === 'line') {
+      el = document.createElementNS(NS, 'line');
+      el.setAttribute('x1', x); el.setAttribute('y1', y);
+      el.setAttribute('x2', x); el.setAttribute('y2', y);
+      el.setAttribute('fill', FILL_LINE);
+      el.setAttribute('stroke-linecap', 'round');
+    } else {
+      el = document.createElementNS(NS, 'rect');
+      el.setAttribute('x', x); el.setAttribute('y', y);
+      el.setAttribute('width', 0); el.setAttribute('height', 0);
+      el.setAttribute('rx', 3);
+      el.setAttribute('fill', FILL);
+    }
+    el.setAttribute('stroke', STROKE);
+    el.setAttribute('stroke-width', '1.5');
+    canvas.appendChild(el);
+    return el;
+  }
+
+  function updateShapeEl(el, type, x1, y1, x2, y2) {
+    var w = x2 - x1, h = y2 - y1;
+    if (type === 'circle') {
+      el.setAttribute('cx', (x1 + x2) / 2);
+      el.setAttribute('cy', (y1 + y2) / 2);
+      el.setAttribute('rx', Math.abs(w / 2));
+      el.setAttribute('ry', Math.abs(h / 2));
+    } else if (type === 'line') {
+      el.setAttribute('x2', x2); el.setAttribute('y2', y2);
+    } else {
+      el.setAttribute('x', Math.min(x1, x2));
+      el.setAttribute('y', Math.min(y1, y2));
+      el.setAttribute('width', Math.abs(w));
+      el.setAttribute('height', Math.abs(h));
+    }
+  }
+
+  document.addEventListener('mousedown', function (e) {
+    if (e.button !== 0 || !isBackground(e.target)) return;
+    sx = e.clientX; sy = e.clientY;
+    isDrawing = true;
+    drawStarted = false;
+    activeShape = null;
+  });
+
+  document.addEventListener('mousemove', function (e) {
+    if (!isDrawing) return;
+    var dx = e.clientX - sx, dy = e.clientY - sy;
+    if (!drawStarted && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
+      drawStarted = true;
+      activeShape = createShapeEl(currentTool, sx, sy);
+    }
+    if (drawStarted && activeShape) {
+      updateShapeEl(activeShape, currentTool, sx, sy, e.clientX, e.clientY);
+    }
+  });
+
+  document.addEventListener('mouseup', function (e) {
+    if (!isDrawing) return;
+    isDrawing = false;
+    if (activeShape) {
+      var w = Math.abs(e.clientX - sx);
+      var h = Math.abs(e.clientY - sy);
+      if (w < 5 && h < 5) canvas.removeChild(activeShape);
+    }
+    drawStarted = false;
+    activeShape = null;
+  });
+
+})();
+</script>
 </body>
 </html>
