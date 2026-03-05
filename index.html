@@ -415,11 +415,11 @@ nav.minisite-nav #proj-close-btn {
   </div>
   <div class="projects-scroll">
     <div class="proj-card" onclick="showProject('gl')">
-      <div class="proj-card-img"><span class="proj-card-img-label">Galeries Lafayette</span></div>
+      <div class="proj-card-img"><span class="proj-card-img-label">GL</span></div>
       <div class="proj-card-body">
         <span class="proj-card-name">Galeries Lafayette</span>
-        <div class="proj-card-tags"><span class="tag">Design System</span><span class="tag">IA Gen</span><span class="tag">Product</span></div>
-        <span class="proj-card-year">2022–2025</span>
+        <div class="proj-card-tags"><span class="tag">SaaS</span><span class="tag">Dashboard</span><span class="tag">B2B</span></div>
+        <span class="proj-card-year">2024</span>
       </div>
     </div>
     <div class="proj-card" onclick="showProject('deezer')">
@@ -820,9 +820,6 @@ function showHome() {
   <input id="fig-say-input" type="text" placeholder="Say something" autocomplete="off" spellcheck="false" />
 </div>
 
-<!-- ══ CURSOR MSG BUBBLE ══ -->
-<div id="cursor-msg-bubble" aria-live="polite"></div>
-
 <!-- ══ SHAPE TOOLBAR ══ -->
 <div id="shape-toolbar" aria-label="Outils de dessin">
   <div class="stool-label">Draw</div>
@@ -883,30 +880,6 @@ function showHome() {
 }
 .fig-label-ghost {
   background: #9747FF;
-}
-
-/* Cursor message bubble */
-#cursor-msg-bubble {
-  position: fixed;
-  pointer-events: none;
-  z-index: 9996;
-  background: #0D99FF;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 6px 14px;
-  border-radius: 100px;
-  white-space: nowrap;
-  opacity: 0;
-  transform: translateY(6px) scale(0.9);
-  transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.34,1.56,0.64,1);
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  box-shadow: 0 2px 10px rgba(13,153,255,0.35);
-  top: 0; left: 0;
-}
-#cursor-msg-bubble.visible {
-  opacity: 1;
-  transform: translateY(0) scale(1);
 }
 
 /* Say something */
@@ -1015,7 +988,6 @@ function showHome() {
   ───────────────────────────────────────── */
   const figCursor = document.getElementById('fig-cursor');
   const ghostCursor = document.getElementById('ghost-cursor');
-  const msgBubble = document.getElementById('cursor-msg-bubble');
   const figSay = document.getElementById('fig-say');
   const figSayInput = document.getElementById('fig-say-input');
 
@@ -1031,42 +1003,9 @@ function showHome() {
       figSay.style.left = (mx + 14) + 'px';
       figSay.style.top = (my + 14) + 'px';
     }
-    // Update message bubble position (above cursor)
-    msgBubble.style.left = (mx + 14) + 'px';
-    msgBubble.style.top = (my - 38) + 'px';
   }, { passive: true });
 
-  /* ─────────────────────────────────────────
-     CURSOR MESSAGES
-  ───────────────────────────────────────── */
-  const shownMsgs = new Set();
-  let msgTimer = null;
-
-  function showMsg(text, duration) {
-    if (shownMsgs.has(text)) return;
-    shownMsgs.add(text);
-    duration = duration || 2800;
-    msgBubble.textContent = text;
-    msgBubble.classList.add('visible');
-    clearTimeout(msgTimer);
-    msgTimer = setTimeout(function () {
-      msgBubble.classList.remove('visible');
-    }, duration);
-  }
-
-  // Timed messages
-  setTimeout(function () { showMsg('hi ! 👋'); }, 1800);
-  setTimeout(function () { showMsg('belle journée ✨', 3200); }, 12000);
-  setTimeout(function () { showMsg('beau portfolio non ? 😄', 3500); }, 35000);
-
-  // Scroll messages
-  var lastScroll = 0;
-  window.addEventListener('scroll', function () {
-    var s = window.scrollY;
-    if (s > 280 && lastScroll <= 280) showMsg('what a scroll ↓');
-    if (s > 900 && lastScroll <= 900) showMsg('tu vas tout en bas ? 👀');
-    lastScroll = s;
-  }, { passive: true });
+  /* cursor messages disabled */
 
   /* ─────────────────────────────────────────
      SAY SOMETHING (press /)
