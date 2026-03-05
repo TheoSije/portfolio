@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>theo.design</title>
-<link id="theme-css" rel="stylesheet" href="css/brutal.css">
+<link id="theme-css" rel="stylesheet" href="css/pro.css">
 <style>
 /* MOOD WHEEL */
 #mood-wheel {
@@ -181,6 +181,106 @@ body.fading { opacity: 0; }
   .proj-card { flex: 0 0 260px; }
 }
 
+/* × SPIN */
+.x-spin {
+  display: inline-block;
+  transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: default;
+}
+.x-spin:hover {
+  transform: rotate(360deg);
+}
+
+/* STACK SECTION */
+.stack-section{padding:40px 48px;border-bottom:var(--r)}
+.stack-label{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:#aaa;margin-bottom:20px;font-family:inherit}
+.stack-grid{display:flex;flex-wrap:wrap;gap:8px}
+.stack-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;border:var(--r, 1px solid #e9e6df);border-radius:40px;font-size:13px;color:inherit;background:transparent;cursor:default;transition:border-color .2s,background .2s;user-select:none}
+.stack-pill:hover{background:rgba(0,0,0,0.04)}
+.stack-icon{width:18px;height:18px;display:block;flex-shrink:0;object-fit:contain}
+.stack-icon-letter{width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#fff;border-radius:4px;flex-shrink:0;letter-spacing:0;font-family:inherit}
+.stack-icon-weavy{color:#111}
+
+/* PROFILE CHIP — photo inline, expand on hover/click */
+.profile-chip {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  vertical-align: middle;
+  margin: 0 3px 0 2px;
+}
+.profile-thumb {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.9);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.15);
+  display: block;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.profile-chip:hover .profile-thumb {
+  transform: scale(1.12);
+  box-shadow: 0 2px 14px rgba(0,0,0,0.22);
+}
+.profile-popup {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(10px) scale(0.88);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.32s cubic-bezier(0.16,1,0.3,1),
+              transform 0.32s cubic-bezier(0.16,1,0.3,1);
+  width: 120px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.22), 0 4px 12px rgba(0,0,0,0.08);
+  z-index: 50;
+  background: #111;
+}
+.profile-chip:hover .profile-popup,
+.profile-chip.active .profile-popup {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
+  pointer-events: auto;
+}
+.profile-popup video,
+.profile-popup .profile-popup-img {
+  width: 120px;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+/* COPY EMAIL TOOLTIP */
+#copy-tooltip {
+  position: fixed;
+  top: 60px;
+  right: 24px;
+  background: #111;
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  padding: 7px 13px;
+  border-radius: 7px;
+  opacity: 0;
+  transform: translateY(-6px) scale(0.96);
+  transition: opacity 0.18s ease, transform 0.22s cubic-bezier(0.34,1.56,0.64,1);
+  pointer-events: none;
+  z-index: 9999;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+#copy-tooltip.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+#copy-tooltip .check { color: #4ade80; font-size: 13px; }
+
 /* CLOSE BUTTON IN NAV */
 #proj-close-btn {
   position: absolute;
@@ -198,6 +298,47 @@ body.fading { opacity: 0; }
   display: none;
   z-index: 1;
 }
+
+/* ── NAV EN MODE MINI-SITE ── */
+nav.minisite-nav {
+  background: rgba(252,252,252,0.97) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+  box-shadow: none !important;
+}
+nav.minisite-nav .nav-logo {
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  color: rgba(0,0,0,0.35) !important;
+  border-right: none !important;
+}
+nav.minisite-nav .nav-logo::before { display: none !important; }
+nav.minisite-nav .nav-role {
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  color: #111 !important;
+  border-right: none !important;
+  padding: 0 !important;
+}
+nav.minisite-nav #proj-close-btn {
+  width: 30px !important;
+  height: 30px !important;
+  font-size: 18px !important;
+  border: 1px solid rgba(0,0,0,0.2) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #111 !important;
+  right: 16px !important;
+}
 </style>
 </head>
 <body>
@@ -205,15 +346,33 @@ body.fading { opacity: 0; }
 <nav>
   <a class="nav-logo" href="#" onclick="showHome();return false;">theo.design</a>
   <span class="nav-role" style="display:none">Senior Product Designer · Paris</span>
-  <a class="nav-contact" href="mailto:hello@theo.design">Contact</a>
+  <a class="nav-contact" href="#" onclick="copyEmail(event)">Contact</a>
   <button id="proj-close-btn" onclick="closeCurrentView()">×</button>
 </nav>
+<span id="copy-tooltip"><span class="check">✓</span> Email copié</span>
 
 <!-- ══ HOME ══ -->
 <div id="home">
   <section class="hero">
-    <h1 class="hero-title"><span class="t1">THÉO</span><span class="t2">DESIGN</span></h1>
-    <p class="hero-sub">Senior Product Designer & Head of Design — Paris<br>7 ans entre startups et scale-ups.</p>
+    <h1 class="hero-title"><span class="t1">Product Design</span><span class="t2"><span class="x-spin">×</span> Code <span class="x-spin">×</span> AI</span></h1>
+    <p class="hero-sub">Hello, I'm Théo<span class="profile-chip" onclick="this.classList.toggle('active')"><img class="profile-thumb" src="https://i.pravatar.cc/200?u=theojeg" alt="Théo" /><span class="profile-popup"><!-- remplace par <video autoplay muted loop playsinline src="ta-video.mp4"></video> --><img class="profile-popup-img" src="https://i.pravatar.cc/200?u=theojeg" alt="Théo" /></span></span>. Product designer with 10+ years of experience in digital products. Today I lead a team of designers at Galeries Lafayette.</p>
+    <p class="hero-sub hero-sub-p2">In my spare time, I dig for vinyl records, skateboard, and experiment with creative coding and AI imagery.</p>
+  </section>
+
+  <!-- ══ STACK ══ -->
+  <section class="stack-section">
+    <p class="stack-label">// Ma stack 2026</p>
+    <div class="stack-grid">
+      <span class="stack-pill"><img class="stack-icon" src="img/figma.svg" alt="">Figma</span>
+      <span class="stack-pill"><img class="stack-icon" src="img/weavy.svg" alt="">Weavy</span>
+      <span class="stack-pill"><img class="stack-icon" src="img/lovable.svg" alt="">Lovable</span>
+      <span class="stack-pill"><img class="stack-icon" src="https://cdn.simpleicons.org/anthropic/CF4B2C" alt="">Claude</span>
+      <span class="stack-pill"><img class="stack-icon" src="img/midjourney.svg" alt="">Midjourney</span>
+      <span class="stack-pill"><img class="stack-icon" src="img/photoshop.svg" alt="">Photoshop</span>
+      <span class="stack-pill"><span class="stack-icon-letter" style="background:#FF4A00">Ji</span>Jitter</span>
+      <span class="stack-pill"><img class="stack-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/visualstudiocode.svg" alt="" style="filter:invert(37%) sepia(97%) saturate(1097%) hue-rotate(185deg) brightness(95%)">VS Code</span>
+      <span class="stack-pill"><img class="stack-icon" src="https://cdn.simpleicons.org/github/181717" alt="">GitHub</span>
+    </div>
   </section>
 
   <div class="section-header">
@@ -267,6 +426,14 @@ body.fading { opacity: 0; }
         <span class="proj-card-name">Lionel El Sound</span>
         <div class="proj-card-tags"><span class="tag">Musique</span><span class="tag">Brand</span></div>
         <span class="proj-card-year">2023</span>
+      </div>
+    </div>
+    <div class="proj-card" onclick="showProject('tunemymusic')">
+      <div class="proj-card-img"><span class="proj-card-img-label">Tune My Music</span></div>
+      <div class="proj-card-body">
+        <span class="proj-card-name">Tune My Music</span>
+        <div class="proj-card-tags"><span class="tag">SaaS</span><span class="tag">Musique</span><span class="tag">Streaming</span></div>
+        <span class="proj-card-year">2024</span>
       </div>
     </div>
   </div>
@@ -350,7 +517,7 @@ body.fading { opacity: 0; }
 <div id="mood-wheel">
   <button id="mood-btn" onclick="nextMood()">
     <span id="mood-label">mood</span>
-    <span id="mood-name">BRUTAL</span>
+    <span id="mood-name">PRO</span>
     <span id="mood-arrow">↻</span>
   </button>
 </div>
@@ -358,9 +525,10 @@ body.fading { opacity: 0; }
 <script>
 // ══ MOODS ══
 const moods = [
+  { name: 'PRO',         file: 'pro'         },
   { name: 'BRUTAL',      file: 'brutal'      },
   { name: 'BORING',      file: 'flat'        },
-  { name: 'SOFT',        file: 'soft'        },
+  { name: '2000',        file: 'win2000'     },
   { name: 'UNREADABLE',  file: 'noaccess'    },
 ];
 
@@ -442,11 +610,13 @@ function openMiniSite(slug) {
   document.body.style.overflow = 'hidden';
   history.pushState({minisite: slug}, '', '/'+slug);
   document.querySelector('.nav-role').style.display = 'flex';
-  document.querySelector('.nav-role').style.paddingRight = '48px';
+  document.querySelector('.nav-role').style.padding = '0';
   document.querySelector('.nav-role').textContent = persoLabels[slug] || slug;
   document.querySelector('.nav-contact').style.display = 'none';
-  document.getElementById('proj-close-btn').style.display = 'block';
+  document.getElementById('proj-close-btn').style.display = 'flex';
   document.querySelector('nav').style.zIndex = '9000';
+  document.querySelector('nav').classList.add('minisite-nav');
+  document.getElementById('mood-wheel').style.display = 'none';
 }
 
 function closeMiniSite() {
@@ -456,11 +626,13 @@ function closeMiniSite() {
   document.body.style.overflow = '';
   history.pushState({}, '', '/');
   document.querySelector('.nav-role').textContent = 'Senior Product Designer · Paris';
-  document.querySelector('.nav-role').style.paddingRight = '';
+  document.querySelector('.nav-role').style.padding = '';
   document.querySelector('.nav-role').style.display = 'none';
   document.querySelector('.nav-contact').style.display = '';
   document.getElementById('proj-close-btn').style.display = 'none';
   document.querySelector('nav').style.zIndex = '';
+  document.querySelector('nav').classList.remove('minisite-nav');
+  document.getElementById('mood-wheel').style.display = '';
 }
 
 function closeCurrentView() {
@@ -478,6 +650,39 @@ window.addEventListener('popstate', (e) => {
 
 // allow iframe to close overlay
 window.closeMiniSiteFromFrame = closeMiniSite;
+
+// copy email to clipboard
+function copyEmail(e) {
+  e.preventDefault();
+  const email = 'hello@theo.design';
+  const showTooltip = () => {
+    const t = document.getElementById('copy-tooltip');
+    t.classList.add('visible');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => t.classList.remove('visible'), 2200);
+  };
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(email).then(showTooltip).catch(() => fallbackCopy(email, showTooltip));
+  } else {
+    fallbackCopy(email, showTooltip);
+  }
+}
+function fallbackCopy(text, cb) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px;opacity:0;font-size:16px';
+  document.body.appendChild(ta);
+  ta.focus(); ta.select();
+  try { document.execCommand('copy'); cb(); } catch(err) {}
+  document.body.removeChild(ta);
+}
+
+// close profile chip when clicking outside
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.profile-chip')) {
+    document.querySelectorAll('.profile-chip.active').forEach(el => el.classList.remove('active'));
+  }
+});
 
 function scrollCarousel(btn) {
   const scroll = btn.closest('.section-header').nextElementSibling;

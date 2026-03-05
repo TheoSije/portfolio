@@ -1,0 +1,12 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <!-- Top-left: red -->
+  <path fill="#F24E1E" d="M12 0H8Q4 0 4 4Q4 8 8 8H12Z"/>
+  <!-- Top-right: pink -->
+  <path fill="#FF7262" d="M12 0V8H16Q20 8 20 4Q20 0 16 0Z"/>
+  <!-- Middle-left: purple -->
+  <path fill="#A259FF" d="M12 8H8Q4 8 4 12Q4 16 8 16H12Z"/>
+  <!-- Middle-right: blue circle -->
+  <circle fill="#1ABCFE" cx="16" cy="12" r="4"/>
+  <!-- Bottom-left: green arch -->
+  <path fill="#0ACF83" d="M4 16H12V20Q12 24 8 24Q4 24 4 20Z"/>
+</svg>

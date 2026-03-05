@@ -1,0 +1,107 @@
+/* PRO MODE — Light, clean, premium — no dividers */
+:root{--bg:#f8f7f4;--fg:#111;--r:1px solid transparent;--h-pad:clamp(48px,7vw,140px)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#f8f7f4}
+body{color:#111;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:52px;display:grid;grid-template-columns:1fr auto auto;align-items:stretch;background:rgba(248,247,244,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:none}
+.nav-logo{padding:0 var(--h-pad);font-size:13px;font-weight:600;letter-spacing:0;text-decoration:none;color:#111;text-transform:none;display:flex;align-items:center}
+.nav-role{padding:0 24px;font-size:12px;color:#999;display:flex;align-items:center;letter-spacing:0;text-transform:none;border-right:none}
+.nav-contact{padding:0 var(--h-pad);font-size:12px;letter-spacing:0;text-transform:none;color:#999;text-decoration:none;display:flex;align-items:center;transition:color .2s}
+.nav-contact:hover{color:#111}
+
+/* ── HERO ── */
+#home{padding-top:52px}
+.hero{padding:88px var(--h-pad) 80px;border-bottom:none;position:relative}
+.hero-eyebrow{display:none}
+.hero-title{font-family:'Archivo Black',sans-serif;font-size:clamp(56px,10vw,152px);line-height:0.9;letter-spacing:-0.04em;color:#111}
+.t1{display:block}
+.t2{display:block;color:#111}
+.hero-sub{font-size:14px;line-height:1.75;color:#999;margin-top:36px;max-width:480px;font-style:normal;font-weight:400}
+.hero-sub-p2{margin-top:10px}
+
+/* ── SECTION HEADERS ── */
+.section-header{border-bottom:none;padding:0 var(--h-pad);height:56px;display:flex;align-items:center;background:transparent;margin-top:24px}
+.section-title{font-family:'Archivo Black',sans-serif !important;font-size:22px !important;font-weight:400;letter-spacing:-0.01em;text-transform:uppercase;color:#111}
+.section-count{font-size:10px;color:#ddd;margin-left:auto}
+.scroll-btn{margin-left:auto;background:none;border:1px solid #e9e6df !important;color:#bbb;width:28px;height:28px;font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s,color .2s,background .2s;flex-shrink:0}
+.scroll-btn:hover{border-color:#111 !important;color:#111;background:none}
+
+/* ── CAROUSEL ── */
+.projects-scroll{padding:16px var(--h-pad) 60px !important;gap:28px;border-bottom:none;scrollbar-width:none;-ms-overflow-style:none}
+.projects-scroll::-webkit-scrollbar{display:none}
+.proj-card{flex:0 0 380px;gap:14px;cursor:pointer;transition:transform 0.38s cubic-bezier(0.16,1,0.3,1)}
+.proj-card:hover{transform:translateY(-7px)}
+.proj-card-img{background:#ede9e2;aspect-ratio:16/9;overflow:hidden;display:flex;align-items:center;justify-content:center;transition:background 0.3s;position:relative}
+.proj-card:hover .proj-card-img{background:#e3ddd4}
+.proj-card-img-label{font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:#ccc;font-weight:400}
+.proj-card-body{display:flex;flex-direction:column;gap:6px}
+.proj-card-name{font-family:'Archivo Black',sans-serif;font-size:18px !important;text-transform:uppercase;letter-spacing:-0.01em;line-height:1;color:#111}
+.proj-card-tags{display:flex;gap:12px;flex-wrap:wrap}
+.tag{font-size:9px;letter-spacing:0.13em;text-transform:uppercase;color:#bbb;border:none;padding:0;background:none}
+.proj-card-year{font-size:10px;color:#ccc;letter-spacing:0.05em;margin-top:2px}
+
+/* ── STACK ── */
+.stack-section{padding:48px var(--h-pad) !important;border-bottom:none !important}
+.stack-pill{border:1px solid #e9e6df !important}
+
+/* ── ABOUT ── */
+.about{display:grid;grid-template-columns:1fr 1fr;border-bottom:none;margin-top:16px}
+.about-text{padding:52px var(--h-pad);border-right:none;font-size:15px;line-height:1.8;color:#555;font-weight:400;font-style:normal}
+.about-links{padding:52px var(--h-pad);display:flex;flex-direction:column;justify-content:flex-end}
+.about-links a{display:flex;align-items:center;gap:10px;padding:14px 0;border-bottom:none;font-size:13px;letter-spacing:0;text-transform:none;color:#111;text-decoration:none;transition:gap .25s,color .2s}
+.about-links a:last-child{border-bottom:none}
+.about-links a::before{content:'↗';opacity:0.3;font-size:11px;transition:opacity .2s,transform .2s;flex-shrink:0}
+.about-links a:hover{gap:16px}
+.about-links a:hover::before{opacity:1;transform:translate(2px,-2px)}
+
+/* ── FOOTER ── */
+footer{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:none;padding-top:8px}
+footer span{padding:16px var(--h-pad);font-size:11px;letter-spacing:0;text-transform:none;color:#bbb;border-right:none}
+footer span:last-child{border-right:none;text-align:right}
+
+/* ── PROJECT VIEW ── */
+#project-view{padding-top:52px}
+.proj-header{border-bottom:none;background:rgba(248,247,244,0.95);backdrop-filter:blur(16px);display:grid;grid-template-columns:auto 1fr}
+.back-btn{border:none;padding:0 24px;font-size:12px;letter-spacing:0;text-transform:none;background:transparent;color:#999;cursor:pointer;transition:color .2s;font-family:inherit}
+.back-btn:hover{color:#111;background:transparent}
+.proj-breadcrumb{padding:0 24px;font-size:12px;letter-spacing:0;color:#bbb;display:flex;align-items:center;gap:8px}
+.proj-breadcrumb strong{font-weight:500;color:#111}
+
+.proj-hero{padding:80px var(--h-pad);border-bottom:none}
+.proj-tag{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#bbb;margin-bottom:20px}
+.proj-title{font-family:'Archivo Black',sans-serif;font-size:clamp(36px,7vw,104px);line-height:1;letter-spacing:-0.03em;color:#111}
+.proj-meta{margin-top:36px;display:flex;gap:40px;flex-wrap:wrap}
+.meta-item{display:flex;flex-direction:column;gap:4px}
+.meta-label{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#bbb}
+.meta-val{font-size:13px;color:#111;font-weight:500}
+
+.proj-problem,.proj-solve{display:grid;grid-template-columns:160px 1fr;border-bottom:none}
+.block-label{border-right:none;padding:48px 24px;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:#ccc;writing-mode:vertical-rl;transform:rotate(180deg)}
+.solve-label{color:#bbb}
+.problem-text{padding:48px;font-size:18px;font-weight:500;line-height:1.55;color:#111;font-style:normal}
+.solve-text{padding:48px;font-size:14px;font-weight:400;line-height:1.85;color:#666;font-style:normal}
+
+.content-block{display:grid;grid-template-columns:60px 1fr;border-bottom:none}
+.block-num{border-right:none;display:flex;align-items:flex-start;justify-content:center;padding-top:40px;font-family:'Archivo Black',sans-serif;font-size:11px;color:#ddd}
+.block-content{padding:40px 48px}
+.block-img{background:#ede9e2;border-radius:0;margin-bottom:16px;position:relative;aspect-ratio:16/9;overflow:hidden}
+.block-img.half{width:55%;aspect-ratio:4/3}
+.block-duo{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.block-duo .block-img{margin-bottom:0;aspect-ratio:4/3}
+.block-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:#ccc}
+.block-caption{font-size:13px;font-weight:400;line-height:1.75;color:#888;font-style:normal}
+.block-caption strong{font-weight:600;color:#111}
+
+.proj-nav{display:grid;grid-template-columns:1fr 1fr}
+.pnav-btn{padding:32px 48px;cursor:pointer;border:none;background:transparent;font-family:inherit;color:#111;transition:background .2s;display:flex;flex-direction:column;gap:8px}
+.pnav-btn.prev{border-right:none;text-align:left}
+.pnav-btn.next{text-align:right;align-items:flex-end}
+.pnav-btn:hover{background:#f1ede6}
+.pnav-dir{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#bbb}
+.pnav-name{font-family:'Archivo Black',sans-serif;font-size:20px;font-style:normal;letter-spacing:-0.01em}
+
+/* ── MOOD BUTTON ── */
+#mood-btn{font-family:-apple-system,BlinkMacSystemFont,sans-serif}
+#mood-label{opacity:.5}
