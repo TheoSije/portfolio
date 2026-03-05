@@ -974,13 +974,83 @@ function showHome() {
 /* Hide toolbar on touch devices */
 @media (hover: none) {
   #shape-toolbar { display: none; }
-  #fig-cursor, #ghost-cursor { display: none; }
+  #fig-cursor { display: none; }
 }
 </style>
 
 <script>
 (function () {
   'use strict';
+
+  /* ─────────────────────────────────────────
+     GHOST CURSOR — LOUISA (all devices)
+  ───────────────────────────────────────── */
+  const ghostCursor = document.getElementById('ghost-cursor');
+  var gx = -200, gy = -200;
+  var gtx = -200, gty = -200;
+  var ghostActive = false;
+
+  function rndPos() {
+    var m = 120;
+    return {
+      x: m + Math.random() * (window.innerWidth - m * 2),
+      y: m + Math.random() * Math.min(window.innerHeight, document.body.scrollHeight) * 0.7
+    };
+  }
+
+  function animGhost() {
+    gx += (gtx - gx) * 0.04;
+    gy += (gty - gy) * 0.04;
+    ghostCursor.style.transform = 'translate(' + gx + 'px,' + gy + 'px)';
+    requestAnimationFrame(animGhost);
+  }
+  animGhost();
+
+  setTimeout(function () {
+    var p = rndPos();
+    gx = p.x; gy = p.y; gtx = p.x; gty = p.y;
+    ghostCursor.classList.add('ready');
+    ghostActive = true;
+
+    function scheduleMove() {
+      var d = 3200 + Math.random() * 3200;
+      setTimeout(function () {
+        var np = rndPos();
+        gtx = np.x; gty = np.y;
+        scheduleMove();
+      }, d);
+    }
+    scheduleMove();
+
+    function scheduleToggle() {
+      var d = 14000 + Math.random() * 10000;
+      setTimeout(function () {
+        ghostCursor.style.opacity = '0';
+        setTimeout(function () {
+          var np = rndPos();
+          gx = np.x; gy = np.y; gtx = np.x; gty = np.y;
+          ghostCursor.style.opacity = '1';
+          scheduleToggle();
+        }, 5000);
+      }, d);
+    }
+    scheduleToggle();
+
+    var ghostMessages = ['cool no ?', 'you can scroll ↓', 'nice right ?', 'try scrolling', 'hello :)'];
+    var ghostLabel = ghostCursor.querySelector('.fig-label-ghost');
+    function scheduleGhostMessage() {
+      var d = 7000 + Math.random() * 9000;
+      setTimeout(function () {
+        var msg = ghostMessages[Math.floor(Math.random() * ghostMessages.length)];
+        ghostLabel.textContent = msg;
+        setTimeout(function () {
+          ghostLabel.textContent = 'Louisa';
+          scheduleGhostMessage();
+        }, 2800);
+      }, d);
+    }
+    scheduleGhostMessage();
+  }, 4000);
 
   // Only activate on mouse/desktop
   if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
@@ -989,7 +1059,6 @@ function showHome() {
      CUSTOM CURSOR
   ───────────────────────────────────────── */
   const figCursor = document.getElementById('fig-cursor');
-  const ghostCursor = document.getElementById('ghost-cursor');
   const figSay = document.getElementById('fig-say');
   const figSayInput = document.getElementById('fig-say-input');
 
@@ -1042,79 +1111,6 @@ function showHome() {
     figSay.style.display = 'none';
     figSayInput.value = '';
   }
-
-  /* ─────────────────────────────────────────
-     GHOST CURSOR — LOUISA
-  ───────────────────────────────────────── */
-  var gx = -200, gy = -200;
-  var gtx = -200, gty = -200;
-  var ghostActive = false;
-
-  function rndPos() {
-    var m = 120;
-    return {
-      x: m + Math.random() * (window.innerWidth - m * 2),
-      y: m + Math.random() * Math.min(window.innerHeight, document.body.scrollHeight) * 0.7
-    };
-  }
-
-  function animGhost() {
-    gx += (gtx - gx) * 0.04;
-    gy += (gty - gy) * 0.04;
-    ghostCursor.style.transform = 'translate(' + gx + 'px,' + gy + 'px)';
-    requestAnimationFrame(animGhost);
-  }
-  animGhost();
-
-  // Ghost appears after 4s
-  setTimeout(function () {
-    var p = rndPos();
-    gx = p.x; gy = p.y; gtx = p.x; gty = p.y;
-    ghostCursor.classList.add('ready');
-    ghostActive = true;
-
-    // Ghost moves every 3-6s
-    function scheduleMove() {
-      var d = 3200 + Math.random() * 3200;
-      setTimeout(function () {
-        var np = rndPos();
-        gtx = np.x; gty = np.y;
-        scheduleMove();
-      }, d);
-    }
-    scheduleMove();
-
-    // Ghost occasionally hides/reappears
-    function scheduleToggle() {
-      var d = 14000 + Math.random() * 10000;
-      setTimeout(function () {
-        ghostCursor.style.opacity = '0';
-        setTimeout(function () {
-          var np = rndPos();
-          gx = np.x; gy = np.y; gtx = np.x; gty = np.y;
-          ghostCursor.style.opacity = '1';
-          scheduleToggle();
-        }, 5000);
-      }, d);
-    }
-    scheduleToggle();
-
-    // Ghost label occasionally shows messages
-    var ghostMessages = ['cool no ?', 'you can scroll ↓', 'nice right ?', 'try scrolling', 'hello :)'];
-    var ghostLabel = ghostCursor.querySelector('.fig-label-ghost');
-    function scheduleGhostMessage() {
-      var d = 7000 + Math.random() * 9000;
-      setTimeout(function () {
-        var msg = ghostMessages[Math.floor(Math.random() * ghostMessages.length)];
-        ghostLabel.textContent = msg;
-        setTimeout(function () {
-          ghostLabel.textContent = 'Louisa';
-          scheduleGhostMessage();
-        }, 2800);
-      }, d);
-    }
-    scheduleGhostMessage();
-  }, 4000);
 
   /* ─────────────────────────────────────────
      SHAPE DRAWING
