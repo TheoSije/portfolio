@@ -222,6 +222,7 @@ body.fading { opacity: 0; }
 .proj-card-year { font-size: 8px; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; }
 .proj-card-body { display: none; }
 @media(max-width:700px) {
+  .scroll-btn { display: none; }
   .proj-card { flex: 0 0 200px; }
   .projects-scroll::before, .projects-scroll::after { width: calc(50% - 100px); }
 }
@@ -1308,18 +1309,86 @@ body:not(.on-home) #ghost-cursor { opacity: 0 !important; pointer-events: none; 
 </script>
 
 <script>
-/* ── SNAP CAROUSEL — active card detection ── */
+/* ── SNAP CAROUSEL — infinite loop ── */
 document.querySelectorAll('.projects-scroll').forEach(function(scroll) {
-  function update() {
+  var orig = Array.from(scroll.querySelectorAll('.proj-card:not(.proj-card-clone)'));
+  var N = orig.length;
+  if (N < 2) return;
+
+  // Prepend N clones (reversed so order is preserved)
+  for (var i = N - 1; i >= 0; i--) {
+    var pre = orig[i].cloneNode(true);
+    pre.classList.add('proj-card-clone');
+    pre.setAttribute('aria-hidden', 'true');
+    scroll.insertBefore(pre, orig[0]);
+  }
+  // Append N clones
+  orig.forEach(function(c) {
+    var post = c.cloneNode(true);
+    post.classList.add('proj-card-clone');
+    post.setAttribute('aria-hidden', 'true');
+    scroll.appendChild(post);
+  });
+
+  var all = function() { return Array.from(scroll.querySelectorAll('.proj-card')); };
+
+  // Card center in scroll-space: works regardless of offsetParent
+  function cardScrollCenter(c) {
+    var cr = c.getBoundingClientRect();
+    var sr = scroll.getBoundingClientRect();
+    return (cr.left - sr.left) + scroll.scrollLeft + cr.width / 2;
+  }
+  function centerOn(c) {
+    scroll.scrollLeft = cardScrollCenter(c) - scroll.offsetWidth / 2;
+  }
+
+  // Init: center first real card (index N, after N pre-clones)
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      centerOn(all()[N]);
+      updateActive();
+    });
+  });
+
+  function updateActive() {
     var sr = scroll.getBoundingClientRect();
     var cx = sr.left + sr.width / 2;
-    scroll.querySelectorAll('.proj-card').forEach(function(c) {
+    all().forEach(function(c) {
       var r = c.getBoundingClientRect();
       c.classList.toggle('snap-inactive', Math.abs((r.left + r.width / 2) - cx) > r.width * 0.6);
     });
   }
-  scroll.addEventListener('scroll', update, { passive: true });
-  requestAnimationFrame(update);
+
+  // Infinite loop: when scroll stops in clone zone, silently jump to real equivalent
+  var jumping = false, timer;
+  scroll.addEventListener('scroll', function() {
+    if (jumping) return;
+    updateActive();
+    clearTimeout(timer);
+    timer = setTimeout(function() {
+      var cards = all();
+      var sr = scroll.getBoundingClientRect();
+      var cx = sr.left + sr.width / 2;
+      var closest = 0, minD = Infinity;
+      cards.forEach(function(c, i) {
+        var r = c.getBoundingClientRect();
+        var d = Math.abs(r.left + r.width / 2 - cx);
+        if (d < minD) { minD = d; closest = i; }
+      });
+      var realIdx;
+      if (closest < N) realIdx = closest + N;
+      else if (closest >= 2 * N) realIdx = closest - N;
+      if (realIdx !== undefined) {
+        jumping = true;
+        centerOn(cards[realIdx]);
+        requestAnimationFrame(function() {
+          requestAnimationFrame(function() { jumping = false; });
+        });
+      }
+    }, 80);
+  }, { passive: true });
+
+  requestAnimationFrame(updateActive);
 });
 
 /* ── PYTHON EASTER EGG ── */
