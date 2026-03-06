@@ -1239,14 +1239,17 @@ body:not(.on-home) #ghost-cursor { opacity: 0 !important; pointer-events: none; 
 </script>
 
 <script>
-/* ── SNAP CAROUSEL — active/inactive cards ── */
+/* ── SNAP CAROUSEL — card active/inactive via scroll position ── */
 document.querySelectorAll('.projects-scroll').forEach(function(scroll) {
-  var io = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      e.target.classList.toggle('snap-inactive', e.intersectionRatio < 0.65);
+  function updateActive() {
+    var center = scroll.scrollLeft + scroll.offsetWidth / 2;
+    scroll.querySelectorAll('.proj-card').forEach(function(card) {
+      var cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      card.classList.toggle('snap-inactive', Math.abs(cardCenter - center) > card.offsetWidth * 0.55);
     });
-  }, { root: scroll, threshold: [0, 0.64, 0.65, 1] });
-  scroll.querySelectorAll('.proj-card').forEach(function(c) { io.observe(c); });
+  }
+  scroll.addEventListener('scroll', updateActive, { passive: true });
+  requestAnimationFrame(updateActive);
 });
 
 /* ── PYTHON EASTER EGG ── */
