@@ -148,14 +148,83 @@ body.fading { opacity: 0; }
   background: var(--fg, #0d0d0d);
   color: var(--bg, #f2efe8);
 }
+/* CAROUSEL — base (tous thèmes) */
 .projects-scroll {
   display: flex;
-  overflow-x: auto;
+  overflow-x: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
   border-bottom: var(--r);
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 16px;
+  padding: 24px 0 40px;
 }
 .projects-scroll::-webkit-scrollbar { display: none; }
+.projects-scroll::before, .projects-scroll::after {
+  content: '';
+  flex-shrink: 0;
+  width: calc(50% - 130px);
+}
+.proj-card {
+  flex: 0 0 260px;
+  cursor: pointer;
+  scroll-snap-align: center;
+  transition: transform 0.38s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease, filter 0.3s ease;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.proj-card.snap-inactive { transform: scale(0.87); opacity: 0.5; filter: brightness(0.8); }
+.proj-card-img {
+  aspect-ratio: 9/16;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  background: #e0ddd5;
+  width: 100%;
+}
+.proj-card-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.2) 50%, transparent 78%);
+  pointer-events: none;
+}
+.proj-card-logo-badge {
+  position: absolute;
+  top: 12px; right: 12px;
+  z-index: 2;
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 8px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase;
+  color: #fff;
+  font-family: -apple-system, sans-serif;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.3);
+}
+.proj-card-inner {
+  position: relative; z-index: 1;
+  padding: 16px 18px 20px;
+  width: 100%;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.proj-card-name {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+  color: #fff;
+}
+.proj-card-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.tag { font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); border: none; padding: 0; background: none; }
+.proj-card-year { font-size: 8px; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; }
+.proj-card-body { display: none; }
+@media(max-width:700px) {
+  .proj-card { flex: 0 0 200px; }
+  .projects-scroll::before, .projects-scroll::after { width: calc(50% - 100px); }
+}
 
 /* × SPIN */
 .x-spin {
@@ -1239,17 +1308,18 @@ body:not(.on-home) #ghost-cursor { opacity: 0 !important; pointer-events: none; 
 </script>
 
 <script>
-/* ── SNAP CAROUSEL — card active/inactive via scroll position ── */
+/* ── SNAP CAROUSEL — active card detection ── */
 document.querySelectorAll('.projects-scroll').forEach(function(scroll) {
-  function updateActive() {
-    var center = scroll.scrollLeft + scroll.offsetWidth / 2;
-    scroll.querySelectorAll('.proj-card').forEach(function(card) {
-      var cardCenter = card.offsetLeft + card.offsetWidth / 2;
-      card.classList.toggle('snap-inactive', Math.abs(cardCenter - center) > card.offsetWidth * 0.55);
+  function update() {
+    var sr = scroll.getBoundingClientRect();
+    var cx = sr.left + sr.width / 2;
+    scroll.querySelectorAll('.proj-card').forEach(function(c) {
+      var r = c.getBoundingClientRect();
+      c.classList.toggle('snap-inactive', Math.abs((r.left + r.width / 2) - cx) > r.width * 0.6);
     });
   }
-  scroll.addEventListener('scroll', updateActive, { passive: true });
-  requestAnimationFrame(updateActive);
+  scroll.addEventListener('scroll', update, { passive: true });
+  requestAnimationFrame(update);
 });
 
 /* ── PYTHON EASTER EGG ── */
