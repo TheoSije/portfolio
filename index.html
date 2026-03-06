@@ -538,7 +538,6 @@ nav.minisite-nav #proj-close-btn {
   <div class="projects-scroll">
     <div class="proj-card" onclick="openMiniSite('incipit')">
       <div class="proj-card-img proj-img--incipit">
-        <div class="proj-card-logo-badge" style="background:#DC2626">INC</div>
         <div class="proj-card-inner">
           <span class="proj-card-year">2022</span>
           <span class="proj-card-name">Inkipit</span>
@@ -548,7 +547,6 @@ nav.minisite-nav #proj-close-btn {
     </div>
     <div class="proj-card" onclick="openMiniSite('vinyle')">
       <div class="proj-card-img proj-img--vinyle">
-        <div class="proj-card-logo-badge" style="background:#3F3F46">VNL</div>
         <div class="proj-card-inner">
           <span class="proj-card-year">2024</span>
           <span class="proj-card-name">Biblio Vinyle 3D</span>
@@ -558,7 +556,6 @@ nav.minisite-nav #proj-close-btn {
     </div>
     <div class="proj-card" onclick="openMiniSite('lucychen')">
       <div class="proj-card-img proj-img--lucychen">
-        <div class="proj-card-logo-badge" style="background:#6D28D9">LCG</div>
         <div class="proj-card-inner">
           <span class="proj-card-year">2023</span>
           <span class="proj-card-name">Lucychen Gesture</span>
@@ -568,7 +565,6 @@ nav.minisite-nav #proj-close-btn {
     </div>
     <div class="proj-card" onclick="openMiniSite('emojy')">
       <div class="proj-card-img proj-img--emojy">
-        <div class="proj-card-logo-badge" style="background:#BE185D">EMJ</div>
         <div class="proj-card-inner">
           <span class="proj-card-year">2023</span>
           <span class="proj-card-name">Emojy Words</span>
@@ -578,7 +574,6 @@ nav.minisite-nav #proj-close-btn {
     </div>
     <div class="proj-card" onclick="openMiniSite('chatbot')">
       <div class="proj-card-img proj-img--chatbot">
-        <div class="proj-card-logo-badge" style="background:#1D4ED8">LGM</div>
         <div class="proj-card-inner">
           <span class="proj-card-year">2024</span>
           <span class="proj-card-name">Chatbot Legalmate</span>
@@ -588,7 +583,6 @@ nav.minisite-nav #proj-close-btn {
     </div>
     <div class="proj-card" onclick="openMiniSite('radio')">
       <div class="proj-card-img proj-img--radio">
-        <div class="proj-card-logo-badge" style="background:#C2410C">RDO</div>
         <div class="proj-card-inner">
           <span class="proj-card-year">2022</span>
           <span class="proj-card-name">Radio Player</span>
@@ -1315,12 +1309,13 @@ document.querySelectorAll('.projects-scroll').forEach(function(scroll) {
   var N = orig.length;
   if (N < 2) return;
 
-  // Prepend N clones (reversed so order is preserved)
+  // Prepend clones in correct order [clone[0]…clone[N-1], orig[0]…]
+  // by iterating backward and always inserting before scroll.firstChild
   for (var i = N - 1; i >= 0; i--) {
     var pre = orig[i].cloneNode(true);
     pre.classList.add('proj-card-clone');
     pre.setAttribute('aria-hidden', 'true');
-    scroll.insertBefore(pre, orig[0]);
+    scroll.insertBefore(pre, scroll.firstChild);
   }
   // Append N clones
   orig.forEach(function(c) {
