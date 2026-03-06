@@ -28,19 +28,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:52px;display:grid;gri
 .scroll-btn{margin-left:auto;background:none;border:1px solid #e9e6df !important;color:#bbb;width:28px;height:28px;font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s,color .2s,background .2s;flex-shrink:0}
 .scroll-btn:hover{border-color:#111 !important;color:#111;background:none}
 
-/* ── CAROUSEL ── */
-.projects-scroll{padding:16px var(--h-pad) 60px !important;gap:28px;border-bottom:none;scrollbar-width:none;-ms-overflow-style:none}
-.projects-scroll::-webkit-scrollbar{display:none}
-.proj-card{flex:0 0 380px;gap:14px;cursor:pointer;transition:transform 0.38s cubic-bezier(0.16,1,0.3,1)}
-.proj-card:hover{transform:translateY(-7px)}
-.proj-card-img{background:#ede9e2;aspect-ratio:16/9;overflow:hidden;display:flex;align-items:center;justify-content:center;transition:background 0.3s;position:relative}
-.proj-card:hover .proj-card-img{background:#e3ddd4}
-.proj-card-img-label{font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:#ccc;font-weight:400}
-.proj-card-body{display:flex;flex-direction:column;gap:6px}
-.proj-card-name{font-family:'Archivo Black',sans-serif;font-size:18px !important;text-transform:uppercase;letter-spacing:-0.01em;line-height:1;color:#111}
-.proj-card-tags{display:flex;gap:12px;flex-wrap:wrap}
-.tag{font-size:9px;letter-spacing:0.13em;text-transform:uppercase;color:#bbb;border:none;padding:0;background:none}
-.proj-card-year{font-size:10px;color:#ccc;letter-spacing:0.05em;margin-top:2px}
+/* ── CAROUSEL (pro overrides) ── */
+.projects-scroll{padding:20px 0 64px !important;gap:20px;border-bottom:none}
+.projects-scroll::before,.projects-scroll::after{width:calc(50% - 140px)}
+.proj-card{flex:0 0 280px;border-radius:18px}
+.proj-card:hover:not(.snap-inactive){transform:translateY(-8px) scale(1.015)}
 
 /* ── STACK ── */
 .stack-section{padding:48px var(--h-pad) !important;border-bottom:none !important}
@@ -110,4 +102,12 @@ footer span:last-child{border-right:none;text-align:right}
 #mood-label{opacity:.5}
 
 /* ── MOBILE ── */
-@media(max-width:700px){:root{--h-pad:24px}}
+@media(max-width:700px){
+  :root{--h-pad:20px}
+  .about{grid-template-columns:1fr}
+  .about-text{padding:40px var(--h-pad);font-size:14px}
+  .about-links{padding:0 var(--h-pad) 40px}
+  .proj-card{flex:0 0 calc(100vw - 80px)}
+  .projects-scroll{gap:10px !important}
+  .projects-scroll::before,.projects-scroll::after{width:40px}
+}
