@@ -148,68 +148,84 @@ body.fading { opacity: 0; }
   background: var(--fg, #0d0d0d);
   color: var(--bg, #f2efe8);
 }
+/* CAROUSEL — base (tous thèmes) */
 .projects-scroll {
   display: flex;
-  overflow-x: auto;
+  overflow-x: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
   border-bottom: var(--r);
-  padding: 32px 32px 40px;
-  gap: 24px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 16px;
+  padding: 24px 0 40px;
 }
 .projects-scroll::-webkit-scrollbar { display: none; }
-.proj-card {
-  flex: 0 0 380px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.projects-scroll::before, .projects-scroll::after {
+  content: '';
+  flex-shrink: 0;
+  width: calc(50% - 130px);
 }
+.proj-card {
+  flex: 0 0 260px;
+  cursor: pointer;
+  scroll-snap-align: center;
+  transition: transform 0.38s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease, filter 0.3s ease;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.proj-card.snap-inactive { transform: scale(0.87); opacity: 0.5; filter: brightness(0.8); }
 .proj-card-img {
-  background: #e0ddd5;
-  aspect-ratio: 16/9;
+  aspect-ratio: 9/16;
   overflow: hidden;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background .2s;
+  align-items: flex-end;
   position: relative;
+  background: #e0ddd5;
+  width: 100%;
 }
-.proj-card:hover .proj-card-img { background: #d4d1c9; }
-.proj-card-img-label {
-  font-size: 8px;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: #b8b5ad;
-  font-weight: 300;
+.proj-card-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.2) 50%, transparent 78%);
+  pointer-events: none;
 }
-.proj-card-body {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
+.proj-card-logo-badge {
+  position: absolute;
+  top: 12px; right: 12px;
+  z-index: 2;
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 8px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase;
+  color: #fff;
+  font-family: -apple-system, sans-serif;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.3);
+}
+.proj-card-inner {
+  position: relative; z-index: 1;
+  padding: 16px 18px 20px;
+  width: 100%;
+  display: flex; flex-direction: column; gap: 6px;
 }
 .proj-card-name {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 22px;
+  font-size: 16px;
   text-transform: uppercase;
-  letter-spacing: -.01em;
-  line-height: 1;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+  color: #fff;
 }
-.proj-card-tags {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.proj-card-year {
-  font-size: 10px;
-  color: #aaa;
-  font-weight: 300;
-  letter-spacing: .1em;
-  margin-top: 2px;
-}
-@media(max-width:700px){
-  .projects-scroll { padding: 20px 20px 28px; gap: 16px; }
-  .proj-card { flex: 0 0 260px; }
+.proj-card-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.tag { font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); border: none; padding: 0; background: none; }
+.proj-card-year { font-size: 8px; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; }
+.proj-card-body { display: none; }
+@media(max-width:700px) {
+  .scroll-btn { display: none; }
+  .proj-card { flex: 0 0 200px; }
+  .projects-scroll::before, .projects-scroll::after { width: calc(50% - 100px); }
 }
 
 /* × SPIN */
@@ -372,7 +388,7 @@ nav.minisite-nav #proj-close-btn {
 }
 </style>
 </head>
-<body>
+<body class="on-home">
 
 <nav>
   <a class="nav-logo" href="#" onclick="showHome();return false;">theo.design</a>
@@ -395,12 +411,12 @@ nav.minisite-nav #proj-close-btn {
     <p class="stack-label">// Ma stack 2026</p>
     <div class="stack-grid">
       <span class="stack-pill"><img class="stack-icon" src="img/figma.svg" alt="">Figma</span>
-      <span class="stack-pill"><img class="stack-icon" src="img/weavy.svg" alt="">Weavy</span>
+      <span class="stack-pill"><span class="stack-icon-letter" style="background:#6D28D9">W</span>Weavy</span>
       <span class="stack-pill"><img class="stack-icon" src="img/lovable.svg" alt="">Lovable</span>
       <span class="stack-pill"><img class="stack-icon" src="img/claude.svg" alt="">Claude</span>
       <span class="stack-pill"><img class="stack-icon" src="img/midjourney.svg" alt="">Midjourney</span>
       <span class="stack-pill"><img class="stack-icon" src="img/storybook.svg" alt="">Storybook</span>
-      <span class="stack-pill"><img class="stack-icon" src="img/zeroheight.svg" alt="">Zeroheight</span>
+      <span class="stack-pill" onclick="pythonEgg(this)" style="cursor:pointer"><img class="stack-icon" src="https://cdn.simpleicons.org/python/3776AB" alt="">Python</span>
       <span class="stack-pill"><img class="stack-icon" src="img/photoshop.svg" alt="">Photoshop</span>
       <span class="stack-pill"><img class="stack-icon" src="img/terminal.svg" alt="">Terminal</span>
       <span class="stack-pill"><span class="stack-icon-letter" style="background:#FF4A00">Ji</span>Jitter</span>
@@ -415,83 +431,103 @@ nav.minisite-nav #proj-close-btn {
   </div>
   <div class="projects-scroll">
     <div class="proj-card" onclick="showProject('gl')">
-      <div class="proj-card-img"><span class="proj-card-img-label">GL</span></div>
-      <div class="proj-card-body">
-        <span class="proj-card-name">Galeries Lafayette</span>
-        <div class="proj-card-tags"><span class="tag">SaaS</span><span class="tag">Dashboard</span><span class="tag">B2B</span></div>
-        <span class="proj-card-year">2024</span>
+      <div class="proj-card-img proj-img--gl">
+        <div class="proj-card-logo-badge" style="background:#B8860B"><img src="https://logo.clearbit.com/galerieslafayette.com" alt="" width="44" height="44" style="object-fit:cover;display:block" onerror="this.outerHTML='GL'"></div>
+        <div class="proj-card-inner">
+          <span class="proj-card-year">2024</span>
+          <span class="proj-card-name">Galeries Lafayette</span>
+          <div class="proj-card-tags"><span class="tag">SaaS</span><span class="tag">Dashboard</span><span class="tag">B2B</span></div>
+        </div>
       </div>
     </div>
     <div class="proj-card" onclick="showProject('deezer')">
-      <div class="proj-card-img"><span class="proj-card-img-label">Deezer</span></div>
-      <div class="proj-card-body">
-        <span class="proj-card-name">Deezer</span>
-        <div class="proj-card-tags"><span class="tag">Mobile</span><span class="tag">Audio</span></div>
-        <span class="proj-card-year">2023</span>
+      <div class="proj-card-img proj-img--deezer">
+        <div class="proj-card-logo-badge" style="background:#7C3AED"><img src="https://logo.clearbit.com/deezer.com" alt="" width="44" height="44" style="object-fit:cover;display:block" onerror="this.outerHTML='DZR'"></div>
+        <div class="proj-card-inner">
+          <span class="proj-card-year">2023</span>
+          <span class="proj-card-name">Deezer</span>
+          <div class="proj-card-tags"><span class="tag">Mobile</span><span class="tag">Audio</span></div>
+        </div>
       </div>
     </div>
     <div class="proj-card" onclick="showProject('devialet')">
-      <div class="proj-card-img"><span class="proj-card-img-label">Devialet</span></div>
-      <div class="proj-card-body">
-        <span class="proj-card-name">Devialet</span>
-        <div class="proj-card-tags"><span class="tag">Luxe</span><span class="tag">Hardware</span></div>
-        <span class="proj-card-year">2023</span>
+      <div class="proj-card-img proj-img--devialet">
+        <div class="proj-card-logo-badge" style="background:#3F3F46"><img src="https://logo.clearbit.com/devialet.com" alt="" width="44" height="44" style="object-fit:cover;display:block" onerror="this.outerHTML='DVL'"></div>
+        <div class="proj-card-inner">
+          <span class="proj-card-year">2023</span>
+          <span class="proj-card-name">Devialet</span>
+          <div class="proj-card-tags"><span class="tag">Luxe</span><span class="tag">Hardware</span></div>
+        </div>
       </div>
     </div>
     <div class="proj-card" onclick="showProject('simplon')">
-      <div class="proj-card-img"><span class="proj-card-img-label">Simplon</span></div>
-      <div class="proj-card-body">
-        <span class="proj-card-name">Simplon</span>
-        <div class="proj-card-tags"><span class="tag">EdTech</span><span class="tag">Accessibilité</span></div>
-        <span class="proj-card-year">2022</span>
+      <div class="proj-card-img proj-img--simplon">
+        <div class="proj-card-logo-badge" style="background:#4F46E5"><img src="https://logo.clearbit.com/simplon.co" alt="" width="44" height="44" style="object-fit:cover;display:block" onerror="this.outerHTML='SPL'"></div>
+        <div class="proj-card-inner">
+          <span class="proj-card-year">2022</span>
+          <span class="proj-card-name">Simplon</span>
+          <div class="proj-card-tags"><span class="tag">EdTech</span><span class="tag">Accessibilité</span></div>
+        </div>
       </div>
     </div>
     <div class="proj-card" onclick="showProject('legalmate')">
-      <div class="proj-card-img"><span class="proj-card-img-label">Legalmate</span></div>
-      <div class="proj-card-body">
-        <span class="proj-card-name">Legalmate</span>
-        <div class="proj-card-tags"><span class="tag">LegalTech</span><span class="tag">IA</span></div>
-        <span class="proj-card-year">2024</span>
+      <div class="proj-card-img proj-img--legalmate">
+        <div class="proj-card-logo-badge" style="background:#1D4ED8"><img src="https://logo.clearbit.com/legalmate.fr" alt="" width="44" height="44" style="object-fit:cover;display:block" onerror="this.outerHTML='LGM'"></div>
+        <div class="proj-card-inner">
+          <span class="proj-card-year">2024</span>
+          <span class="proj-card-name">Legalmate</span>
+          <div class="proj-card-tags"><span class="tag">LegalTech</span><span class="tag">IA</span></div>
+        </div>
       </div>
     </div>
     <div class="proj-card" onclick="showProject('lionel')">
-      <div class="proj-card-img"><span class="proj-card-img-label">Lionel El Sound</span></div>
-      <div class="proj-card-body">
-        <span class="proj-card-name">Lionel El Sound</span>
-        <div class="proj-card-tags"><span class="tag">Musique</span><span class="tag">Brand</span></div>
-        <span class="proj-card-year">2023</span>
+      <div class="proj-card-img proj-img--lionel">
+        <div class="proj-card-logo-badge" style="background:#B45309">LES</div>
+        <div class="proj-card-inner">
+          <span class="proj-card-year">2023</span>
+          <span class="proj-card-name">Lionel El Sound</span>
+          <div class="proj-card-tags"><span class="tag">Musique</span><span class="tag">Brand</span></div>
+        </div>
       </div>
     </div>
     <div class="proj-card" onclick="showProject('tunemymusic')">
-      <div class="proj-card-img"><span class="proj-card-img-label">Tune My Music</span></div>
-      <div class="proj-card-body">
-        <span class="proj-card-name">Tune My Music</span>
-        <div class="proj-card-tags"><span class="tag">SaaS</span><span class="tag">Musique</span><span class="tag">Streaming</span></div>
-        <span class="proj-card-year">2024</span>
+      <div class="proj-card-img proj-img--tunemymusic">
+        <div class="proj-card-logo-badge" style="background:#4338CA"><img src="https://logo.clearbit.com/tunemymusic.com" alt="" width="44" height="44" style="object-fit:cover;display:block" onerror="this.outerHTML='TMM'"></div>
+        <div class="proj-card-inner">
+          <span class="proj-card-year">2024</span>
+          <span class="proj-card-name">Tune My Music</span>
+          <div class="proj-card-tags"><span class="tag">SaaS</span><span class="tag">Musique</span><span class="tag">Streaming</span></div>
+        </div>
       </div>
     </div>
     <div class="proj-card" onclick="showProject('mauboussin')">
-      <div class="proj-card-img"><span class="proj-card-img-label">Mauboussin</span></div>
-      <div class="proj-card-body">
-        <span class="proj-card-name">Mauboussin</span>
-        <div class="proj-card-tags"><span class="tag">Luxe</span><span class="tag">Bijoux</span><span class="tag">IA Gen</span></div>
-        <span class="proj-card-year">2025</span>
+      <div class="proj-card-img proj-img--mauboussin">
+        <div class="proj-card-logo-badge" style="background:#7E22CE"><img src="https://logo.clearbit.com/mauboussin.fr" alt="" width="44" height="44" style="object-fit:cover;display:block" onerror="this.outerHTML='MBN'"></div>
+        <div class="proj-card-inner">
+          <span class="proj-card-year">2025</span>
+          <span class="proj-card-name">Mauboussin</span>
+          <div class="proj-card-tags"><span class="tag">Luxe</span><span class="tag">Bijoux</span><span class="tag">IA Gen</span></div>
+        </div>
       </div>
     </div>
     <div class="proj-card" onclick="showProject('gotaxfree')">
-      <div class="proj-card-img"><span class="proj-card-img-label">Gotaxfree</span></div>
-      <div class="proj-card-body">
-        <span class="proj-card-name">Gotaxfree</span>
-        <div class="proj-card-tags"><span class="tag">FinTech</span><span class="tag">Retail</span><span class="tag">Détaxe</span></div>
-        <span class="proj-card-year">2024</span>
+      <div class="proj-card-img proj-img--gotaxfree">
+        <div class="proj-card-logo-badge" style="background:#059669"><img src="https://logo.clearbit.com/gotaxfree.com" alt="" width="44" height="44" style="object-fit:cover;display:block" onerror="this.outerHTML='GTF'"></div>
+        <div class="proj-card-inner">
+          <span class="proj-card-year">2024</span>
+          <span class="proj-card-name">Gotaxfree</span>
+          <div class="proj-card-tags"><span class="tag">FinTech</span><span class="tag">Retail</span><span class="tag">Détaxe</span></div>
+        </div>
       </div>
     </div>
     <div class="proj-card" onclick="showProject('dsrt')">
-      <div class="proj-card-img"><span class="proj-card-img-label">DSRT</span></div>
-      <div class="proj-card-body">
-        <span class="proj-card-name">DSRT</span>
-        <div class="proj-card-tags"><span class="tag">Audio</span><span class="tag">Branding</span><span class="tag">Logo</span></div>
-        <span class="proj-card-year">2024</span>
+      <div class="proj-card-img proj-img--dsrt">
+        <div class="proj-card-logo-badge" style="background:#52525B">DSRT</div>
+        <div class="proj-card-inner">
+          <span class="proj-card-year">2024</span>
+          <span class="proj-card-name">DSRT</span>
+          <div class="proj-card-tags"><span class="tag">Audio</span><span class="tag">Branding</span><span class="tag">Logo</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -502,51 +538,57 @@ nav.minisite-nav #proj-close-btn {
   </div>
   <div class="projects-scroll">
     <div class="proj-card" onclick="openMiniSite('incipit')">
-      <div class="proj-card-img"><span class="proj-card-img-label">Inkipit</span></div>
-      <div class="proj-card-body">
-        <span class="proj-card-name">Inkipit</span>
-        <div class="proj-card-tags"><span class="tag">Littérature</span><span class="tag">Typo</span></div>
-        <span class="proj-card-year">2022</span>
+      <div class="proj-card-img proj-img--incipit">
+        <div class="proj-card-inner">
+          <span class="proj-card-year">2022</span>
+          <span class="proj-card-name">Inkipit</span>
+          <div class="proj-card-tags"><span class="tag">Littérature</span><span class="tag">Typo</span></div>
+        </div>
       </div>
     </div>
     <div class="proj-card" onclick="openMiniSite('vinyle')">
-      <div class="proj-card-img"><span class="proj-card-img-label">Biblio Vinyle 3D</span></div>
-      <div class="proj-card-body">
-        <span class="proj-card-name">Biblio Vinyle 3D</span>
-        <div class="proj-card-tags"><span class="tag">3D</span><span class="tag">Interactive</span></div>
-        <span class="proj-card-year">2024</span>
+      <div class="proj-card-img proj-img--vinyle">
+        <div class="proj-card-inner">
+          <span class="proj-card-year">2024</span>
+          <span class="proj-card-name">Biblio Vinyle 3D</span>
+          <div class="proj-card-tags"><span class="tag">3D</span><span class="tag">Interactive</span></div>
+        </div>
       </div>
     </div>
     <div class="proj-card" onclick="openMiniSite('lucychen')">
-      <div class="proj-card-img"><span class="proj-card-img-label">Lucychen Gesture</span></div>
-      <div class="proj-card-body">
-        <span class="proj-card-name">Lucychen Gesture</span>
-        <div class="proj-card-tags"><span class="tag">Mixcloud</span><span class="tag">Gesture</span></div>
-        <span class="proj-card-year">2023</span>
+      <div class="proj-card-img proj-img--lucychen">
+        <div class="proj-card-inner">
+          <span class="proj-card-year">2023</span>
+          <span class="proj-card-name">Lucychen Gesture</span>
+          <div class="proj-card-tags"><span class="tag">Mixcloud</span><span class="tag">Gesture</span></div>
+        </div>
       </div>
     </div>
     <div class="proj-card" onclick="openMiniSite('emojy')">
-      <div class="proj-card-img"><span class="proj-card-img-label">Emojy Words</span></div>
-      <div class="proj-card-body">
-        <span class="proj-card-name">Emojy Words</span>
-        <div class="proj-card-tags"><span class="tag">Game</span><span class="tag">Linguistique</span></div>
-        <span class="proj-card-year">2023</span>
+      <div class="proj-card-img proj-img--emojy">
+        <div class="proj-card-inner">
+          <span class="proj-card-year">2023</span>
+          <span class="proj-card-name">Emojy Words</span>
+          <div class="proj-card-tags"><span class="tag">Game</span><span class="tag">Linguistique</span></div>
+        </div>
       </div>
     </div>
     <div class="proj-card" onclick="openMiniSite('chatbot')">
-      <div class="proj-card-img"><span class="proj-card-img-label">Chatbot Legalmate</span></div>
-      <div class="proj-card-body">
-        <span class="proj-card-name">Chatbot Legalmate</span>
-        <div class="proj-card-tags"><span class="tag">IA</span><span class="tag">Scraping</span></div>
-        <span class="proj-card-year">2024</span>
+      <div class="proj-card-img proj-img--chatbot">
+        <div class="proj-card-inner">
+          <span class="proj-card-year">2024</span>
+          <span class="proj-card-name">Chatbot Legalmate</span>
+          <div class="proj-card-tags"><span class="tag">IA</span><span class="tag">Scraping</span></div>
+        </div>
       </div>
     </div>
     <div class="proj-card" onclick="openMiniSite('radio')">
-      <div class="proj-card-img"><span class="proj-card-img-label">Radio Player</span></div>
-      <div class="proj-card-body">
-        <span class="proj-card-name">Radio Player</span>
-        <div class="proj-card-tags"><span class="tag">Audio</span><span class="tag">Web</span></div>
-        <span class="proj-card-year">2022</span>
+      <div class="proj-card-img proj-img--radio">
+        <div class="proj-card-inner">
+          <span class="proj-card-year">2022</span>
+          <span class="proj-card-name">Radio Player</span>
+          <div class="proj-card-tags"><span class="tag">Audio</span><span class="tag">Web</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -642,6 +684,7 @@ function renderImg(b) {
 
 function showProject(id) {
   const p = P[id]; if(!p) return;
+  document.body.classList.remove('on-home');
   document.getElementById('project-view').innerHTML = `
     <section class="proj-hero">
       <div class="proj-tag">${p.type}</div>
@@ -682,6 +725,7 @@ const persoLabels = {
 };
 
 function openMiniSite(slug) {
+  document.body.classList.remove('on-home');
   const overlay = document.getElementById('minisite-overlay');
   const frame = document.getElementById('minisite-frame');
   frame.src = 'projects/' + slug + '/index.html';
@@ -699,6 +743,7 @@ function openMiniSite(slug) {
 }
 
 function closeMiniSite() {
+  document.body.classList.add('on-home');
   const overlay = document.getElementById('minisite-overlay');
   overlay.style.display = 'none';
   document.getElementById('minisite-frame').src = '';
@@ -770,6 +815,7 @@ function scrollCarousel(btn) {
 }
 
 function showHome() {
+  document.body.classList.add('on-home');
   document.querySelector('.nav-role').style.display = 'none';
   document.querySelector('.nav-contact').style.display = '';
   document.getElementById('proj-close-btn').style.display = 'none';
@@ -799,7 +845,7 @@ function showHome() {
   <svg viewBox="0 0 13 17" width="13" height="17" fill="none">
     <path d="M0 0 L0 13 L3.2 9.8 L5.6 15.4 L7.6 14.5 L5.2 8.9 L10 8.9 Z" fill="#0D99FF" stroke="white" stroke-width="1" stroke-linejoin="round"/>
   </svg>
-  <div class="fig-label" id="fig-label-main">Théo</div>
+  <div class="fig-label" id="fig-label-main">anonymous</div>
 </div>
 
 <div id="ghost-cursor" aria-hidden="true">
@@ -839,9 +885,35 @@ function showHome() {
 <svg id="draw-canvas" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
 
 <style>
+/* ══ PROJECT CARD GRADIENTS ══ */
+.proj-img--gl       { background: linear-gradient(155deg, #8B6914 0%, #C4934A 45%, #E8C17A 100%); }
+.proj-img--deezer   { background: linear-gradient(155deg, #1a0533 0%, #3b0f6b 45%, #7c3aed 100%); }
+.proj-img--devialet { background: linear-gradient(155deg, #0d0d0d 0%, #1c1c1e 55%, #2e2e30 100%); }
+.proj-img--simplon  { background: linear-gradient(155deg, #1e1b4b 0%, #3730a3 50%, #6366f1 100%); }
+.proj-img--legalmate{ background: linear-gradient(155deg, #0c1e40 0%, #1e3a6e 50%, #2563eb 100%); }
+.proj-img--lionel   { background: linear-gradient(155deg, #3b1a00 0%, #92400e 50%, #d97706 100%); }
+.proj-img--tunemymusic{ background: linear-gradient(155deg, #0f0c29 0%, #302b63 45%, #24243e 100%); }
+.proj-img--mauboussin{ background: linear-gradient(155deg, #2d0a3e 0%, #6b21a8 45%, #c4a882 100%); }
+.proj-img--gotaxfree{ background: linear-gradient(155deg, #022c22 0%, #064e3b 50%, #059669 100%); }
+.proj-img--dsrt     { background: linear-gradient(155deg, #050505 0%, #111 50%, #2a2a2a 100%); }
+.proj-img--incipit  { background: linear-gradient(155deg, #450a0a 0%, #991b1b 50%, #ef4444 100%); }
+.proj-img--vinyle   { background: linear-gradient(155deg, #09090b 0%, #18181b 50%, #3f3f46 100%); }
+.proj-img--lucychen { background: linear-gradient(155deg, #2e1065 0%, #6d28d9 50%, #a78bfa 100%); }
+.proj-img--emojy    { background: linear-gradient(155deg, #7c1d6f 0%, #db2777 45%, #f97316 100%); }
+.proj-img--chatbot  { background: linear-gradient(155deg, #020617 0%, #0f172a 50%, #1e3a5f 100%); }
+.proj-img--radio    { background: linear-gradient(155deg, #431407 0%, #9a3412 50%, #ea580c 100%); }
+
+/* ══ GHOST CURSOR — HOME ONLY ══ */
+body:not(.on-home) #ghost-cursor { opacity: 0 !important; pointer-events: none; }
+
 /* ══ CUSTOM CURSOR ══ */
 @media (hover: hover) and (pointer: fine) {
   body, body * { cursor: none !important; }
+}
+
+/* Hide user cursor on touch/mobile, keep Louisa's ghost cursor */
+@media (hover: none) {
+  #fig-cursor { display: none !important; }
 }
 
 #fig-cursor, #ghost-cursor {
@@ -969,13 +1041,83 @@ function showHome() {
 /* Hide toolbar on touch devices */
 @media (hover: none) {
   #shape-toolbar { display: none; }
-  #fig-cursor, #ghost-cursor { display: none; }
+  #fig-cursor { display: none; }
 }
 </style>
 
 <script>
 (function () {
   'use strict';
+
+  /* ─────────────────────────────────────────
+     GHOST CURSOR — LOUISA (all devices)
+  ───────────────────────────────────────── */
+  const ghostCursor = document.getElementById('ghost-cursor');
+  var gx = -200, gy = -200;
+  var gtx = -200, gty = -200;
+  var ghostActive = false;
+
+  function rndPos() {
+    var m = 120;
+    return {
+      x: m + Math.random() * (window.innerWidth - m * 2),
+      y: m + Math.random() * Math.min(window.innerHeight, document.body.scrollHeight) * 0.7
+    };
+  }
+
+  function animGhost() {
+    gx += (gtx - gx) * 0.04;
+    gy += (gty - gy) * 0.04;
+    ghostCursor.style.transform = 'translate(' + gx + 'px,' + gy + 'px)';
+    requestAnimationFrame(animGhost);
+  }
+  animGhost();
+
+  setTimeout(function () {
+    var p = rndPos();
+    gx = p.x; gy = p.y; gtx = p.x; gty = p.y;
+    ghostCursor.classList.add('ready');
+    ghostActive = true;
+
+    function scheduleMove() {
+      var d = 3200 + Math.random() * 3200;
+      setTimeout(function () {
+        var np = rndPos();
+        gtx = np.x; gty = np.y;
+        scheduleMove();
+      }, d);
+    }
+    scheduleMove();
+
+    function scheduleToggle() {
+      var d = 14000 + Math.random() * 10000;
+      setTimeout(function () {
+        ghostCursor.style.opacity = '0';
+        setTimeout(function () {
+          var np = rndPos();
+          gx = np.x; gy = np.y; gtx = np.x; gty = np.y;
+          ghostCursor.style.opacity = '1';
+          scheduleToggle();
+        }, 5000);
+      }, d);
+    }
+    scheduleToggle();
+
+    var ghostMessages = ['cool no ?', 'you can scroll ↓', 'nice right ?', 'try scrolling', 'hello :)'];
+    var ghostLabel = ghostCursor.querySelector('.fig-label-ghost');
+    function scheduleGhostMessage() {
+      var d = 7000 + Math.random() * 9000;
+      setTimeout(function () {
+        var msg = ghostMessages[Math.floor(Math.random() * ghostMessages.length)];
+        ghostLabel.textContent = msg;
+        setTimeout(function () {
+          ghostLabel.textContent = 'Louisa';
+          scheduleGhostMessage();
+        }, 2800);
+      }, d);
+    }
+    scheduleGhostMessage();
+  }, 4000);
 
   // Only activate on mouse/desktop
   if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
@@ -984,7 +1126,6 @@ function showHome() {
      CUSTOM CURSOR
   ───────────────────────────────────────── */
   const figCursor = document.getElementById('fig-cursor');
-  const ghostCursor = document.getElementById('ghost-cursor');
   const figSay = document.getElementById('fig-say');
   const figSayInput = document.getElementById('fig-say-input');
 
@@ -1037,63 +1178,6 @@ function showHome() {
     figSay.style.display = 'none';
     figSayInput.value = '';
   }
-
-  /* ─────────────────────────────────────────
-     GHOST CURSOR — LOUISA
-  ───────────────────────────────────────── */
-  var gx = -200, gy = -200;
-  var gtx = -200, gty = -200;
-  var ghostActive = false;
-
-  function rndPos() {
-    var m = 120;
-    return {
-      x: m + Math.random() * (window.innerWidth - m * 2),
-      y: m + Math.random() * Math.min(window.innerHeight, document.body.scrollHeight) * 0.7
-    };
-  }
-
-  function animGhost() {
-    gx += (gtx - gx) * 0.04;
-    gy += (gty - gy) * 0.04;
-    ghostCursor.style.transform = 'translate(' + gx + 'px,' + gy + 'px)';
-    requestAnimationFrame(animGhost);
-  }
-  animGhost();
-
-  // Ghost appears after 4s
-  setTimeout(function () {
-    var p = rndPos();
-    gx = p.x; gy = p.y; gtx = p.x; gty = p.y;
-    ghostCursor.classList.add('ready');
-    ghostActive = true;
-
-    // Ghost moves every 3-6s
-    function scheduleMove() {
-      var d = 3200 + Math.random() * 3200;
-      setTimeout(function () {
-        var np = rndPos();
-        gtx = np.x; gty = np.y;
-        scheduleMove();
-      }, d);
-    }
-    scheduleMove();
-
-    // Ghost occasionally hides/reappears
-    function scheduleToggle() {
-      var d = 14000 + Math.random() * 10000;
-      setTimeout(function () {
-        ghostCursor.style.opacity = '0';
-        setTimeout(function () {
-          var np = rndPos();
-          gx = np.x; gy = np.y; gtx = np.x; gty = np.y;
-          ghostCursor.style.opacity = '1';
-          scheduleToggle();
-        }, 5000);
-      }, d);
-    }
-    scheduleToggle();
-  }, 4000);
 
   /* ─────────────────────────────────────────
      SHAPE DRAWING
@@ -1217,6 +1301,109 @@ function showHome() {
   });
 
 })();
+</script>
+
+<script>
+/* ── SNAP CAROUSEL — infinite loop ── */
+document.querySelectorAll('.projects-scroll').forEach(function(scroll) {
+  var orig = Array.from(scroll.querySelectorAll('.proj-card:not(.proj-card-clone)'));
+  var N = orig.length;
+  if (N < 2) return;
+
+  // Prepend clones in correct order [clone[0]…clone[N-1], orig[0]…]
+  // by iterating backward and always inserting before scroll.firstChild
+  for (var i = N - 1; i >= 0; i--) {
+    var pre = orig[i].cloneNode(true);
+    pre.classList.add('proj-card-clone');
+    pre.setAttribute('aria-hidden', 'true');
+    scroll.insertBefore(pre, scroll.firstChild);
+  }
+  // Append N clones
+  orig.forEach(function(c) {
+    var post = c.cloneNode(true);
+    post.classList.add('proj-card-clone');
+    post.setAttribute('aria-hidden', 'true');
+    scroll.appendChild(post);
+  });
+
+  var all = function() { return Array.from(scroll.querySelectorAll('.proj-card')); };
+
+  // Card center in scroll-space: works regardless of offsetParent
+  function cardScrollCenter(c) {
+    var cr = c.getBoundingClientRect();
+    var sr = scroll.getBoundingClientRect();
+    return (cr.left - sr.left) + scroll.scrollLeft + cr.width / 2;
+  }
+  function centerOn(c) {
+    scroll.scrollLeft = cardScrollCenter(c) - scroll.offsetWidth / 2;
+  }
+
+  // Init: center first real card (index N, after N pre-clones)
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      centerOn(all()[N]);
+      updateActive();
+    });
+  });
+
+  function updateActive() {
+    var sr = scroll.getBoundingClientRect();
+    var cx = sr.left + sr.width / 2;
+    all().forEach(function(c) {
+      var r = c.getBoundingClientRect();
+      c.classList.toggle('snap-inactive', Math.abs((r.left + r.width / 2) - cx) > r.width * 0.6);
+    });
+  }
+
+  // Infinite loop: when scroll stops in clone zone, silently jump to real equivalent
+  var jumping = false, timer;
+  scroll.addEventListener('scroll', function() {
+    if (jumping) return;
+    updateActive();
+    clearTimeout(timer);
+    timer = setTimeout(function() {
+      var cards = all();
+      var sr = scroll.getBoundingClientRect();
+      var cx = sr.left + sr.width / 2;
+      var closest = 0, minD = Infinity;
+      cards.forEach(function(c, i) {
+        var r = c.getBoundingClientRect();
+        var d = Math.abs(r.left + r.width / 2 - cx);
+        if (d < minD) { minD = d; closest = i; }
+      });
+      var realIdx;
+      if (closest < N) realIdx = closest + N;
+      else if (closest >= 2 * N) realIdx = closest - N;
+      if (realIdx !== undefined) {
+        jumping = true;
+        centerOn(cards[realIdx]);
+        requestAnimationFrame(function() {
+          requestAnimationFrame(function() { jumping = false; });
+        });
+      }
+    }, 80);
+  }, { passive: true });
+
+  requestAnimationFrame(updateActive);
+});
+
+/* ── PYTHON EASTER EGG ── */
+function pythonEgg(pill) {
+  pill.style.transition = 'transform 0.2s ease';
+  pill.style.transform = 'scale(1.1)';
+  pill.onclick = null;
+  setTimeout(function() {
+    pill.style.transform = 'scale(1)';
+    pill.innerHTML = '🤫 ok je bluff';
+    pill.style.cursor = 'default';
+    setTimeout(function() {
+      pill.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+      pill.style.opacity = '0';
+      pill.style.transform = 'scale(0.75) translateY(-6px)';
+      setTimeout(function() { pill.remove(); }, 420);
+    }, 1800);
+  }, 180);
+}
 </script>
 </body>
 </html>
