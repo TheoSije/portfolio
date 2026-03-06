@@ -29,10 +29,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:52px;display:grid;gri
 .scroll-btn:hover{border-color:#111 !important;color:#111;background:none}
 
 /* ── CAROUSEL ── */
-.projects-scroll{padding:16px var(--h-pad) 64px !important;gap:20px;border-bottom:none;scrollbar-width:none;-ms-overflow-style:none}
+.projects-scroll{padding:16px calc(50% - 140px) 64px !important;gap:20px;border-bottom:none;scrollbar-width:none;-ms-overflow-style:none;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
 .projects-scroll::-webkit-scrollbar{display:none}
-.proj-card{flex:0 0 280px;gap:0;cursor:pointer;transition:transform 0.42s cubic-bezier(0.16,1,0.3,1);border-radius:18px;overflow:hidden}
-.proj-card:hover{transform:translateY(-8px) scale(1.015)}
+.proj-card{flex:0 0 280px;gap:0;cursor:pointer;transition:transform 0.42s cubic-bezier(0.16,1,0.3,1),opacity 0.35s ease,filter 0.35s ease;border-radius:18px;overflow:hidden;scroll-snap-align:center}
+.proj-card:hover:not(.snap-inactive){transform:translateY(-8px) scale(1.015)}
+.proj-card.snap-inactive{transform:scale(0.86) !important;opacity:0.5;filter:brightness(0.85)}
 .proj-card-img{aspect-ratio:9/16;overflow:hidden;display:flex;align-items:flex-end;position:relative;background:#ede9e2;width:100%}
 .proj-card-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.84) 0%,rgba(0,0,0,0.28) 50%,transparent 78%);pointer-events:none}
 .proj-card:hover .proj-card-img{filter:brightness(1.06)}
@@ -119,5 +120,5 @@ footer span:last-child{border-right:none;text-align:right}
   .about-text{padding:40px var(--h-pad);font-size:14px}
   .about-links{padding:0 var(--h-pad) 40px}
   .proj-card{flex:0 0 200px}
-  .projects-scroll{padding:12px var(--h-pad) 48px !important;gap:14px}
+  .projects-scroll{padding:12px calc(50% - 100px) 48px !important;gap:16px}
 }
