@@ -340,12 +340,12 @@ nav.minisite-nav #proj-close-btn {
     <p class="stack-label">// Ma stack 2026</p>
     <div class="stack-grid">
       <span class="stack-pill"><img class="stack-icon" src="img/figma.svg" alt="">Figma</span>
-      <span class="stack-pill"><img class="stack-icon" src="img/weavy.svg" alt="">Weavy</span>
+      <span class="stack-pill"><span class="stack-icon-letter" style="background:#6D28D9">W</span>Weavy</span>
       <span class="stack-pill"><img class="stack-icon" src="img/lovable.svg" alt="">Lovable</span>
       <span class="stack-pill"><img class="stack-icon" src="img/claude.svg" alt="">Claude</span>
       <span class="stack-pill"><img class="stack-icon" src="img/midjourney.svg" alt="">Midjourney</span>
       <span class="stack-pill"><img class="stack-icon" src="img/storybook.svg" alt="">Storybook</span>
-      <span class="stack-pill"><img class="stack-icon" src="img/zeroheight.svg" alt="">Zeroheight</span>
+      <span class="stack-pill" onclick="pythonEgg(this)" style="cursor:pointer"><img class="stack-icon" src="https://cdn.simpleicons.org/python/3776AB" alt="">Python</span>
       <span class="stack-pill"><img class="stack-icon" src="img/photoshop.svg" alt="">Photoshop</span>
       <span class="stack-pill"><img class="stack-icon" src="img/terminal.svg" alt="">Terminal</span>
       <span class="stack-pill"><span class="stack-icon-letter" style="background:#FF4A00">Ji</span>Jitter</span>
@@ -1236,6 +1236,36 @@ body:not(.on-home) #ghost-cursor { opacity: 0 !important; pointer-events: none; 
   });
 
 })();
+</script>
+
+<script>
+/* ── SNAP CAROUSEL — active/inactive cards ── */
+document.querySelectorAll('.projects-scroll').forEach(function(scroll) {
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      e.target.classList.toggle('snap-inactive', e.intersectionRatio < 0.65);
+    });
+  }, { root: scroll, threshold: [0, 0.64, 0.65, 1] });
+  scroll.querySelectorAll('.proj-card').forEach(function(c) { io.observe(c); });
+});
+
+/* ── PYTHON EASTER EGG ── */
+function pythonEgg(pill) {
+  pill.style.transition = 'transform 0.2s ease';
+  pill.style.transform = 'scale(1.1)';
+  pill.onclick = null;
+  setTimeout(function() {
+    pill.style.transform = 'scale(1)';
+    pill.innerHTML = '🤫 ok je bluff';
+    pill.style.cursor = 'default';
+    setTimeout(function() {
+      pill.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+      pill.style.opacity = '0';
+      pill.style.transform = 'scale(0.75) translateY(-6px)';
+      setTimeout(function() { pill.remove(); }, 420);
+    }, 1800);
+  }, 180);
+}
 </script>
 </body>
 </html>
