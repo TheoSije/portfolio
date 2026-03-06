@@ -110,4 +110,21 @@ footer span:last-child{border-right:none;text-align:right}
   .proj-card{flex:0 0 calc(100vw - 80px)}
   .projects-scroll{gap:10px !important}
   .projects-scroll::before,.projects-scroll::after{width:40px}
+
+  /* ── project detail ── */
+  .proj-hero{padding:40px var(--h-pad) 28px}
+  .proj-meta{gap:16px;margin-top:20px}
+  .proj-problem,.proj-solve{grid-template-columns:1fr}
+  .block-label{writing-mode:horizontal-tb;transform:none;padding:28px var(--h-pad) 0;font-size:9px}
+  .problem-text{padding:12px var(--h-pad) 32px;font-size:16px}
+  .solve-text{padding:12px var(--h-pad) 32px}
+  .content-block{grid-template-columns:1fr}
+  .block-num{display:none}
+  .block-content{padding:0 var(--h-pad) 32px}
+  .block-img{width:100%!important;border-radius:12px}
+  .block-img.half{width:100%!important;aspect-ratio:16/9}
+  .block-duo{grid-template-columns:1fr;gap:10px}
+  .proj-nav{grid-template-columns:1fr}
+  .pnav-btn.prev{border-right:none;border-bottom:1px solid #f0ece5}
+  .pnav-btn{padding:24px var(--h-pad)}
 }
