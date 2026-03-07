@@ -731,6 +731,16 @@ window.addEventListener('popstate', (e) => {
   if (!e.state?.minisite) closeMiniSite();
 });
 
+// Restauration après rechargement sur /slug (GitHub Pages 404 redirect)
+(function() {
+  const redirect = sessionStorage.getItem('gh-redirect');
+  if (!redirect) return;
+  sessionStorage.removeItem('gh-redirect');
+  const slug = redirect.replace(/^\/|\/$/g, '');
+  const known = ['incipit', 'vinyle', 'lucychen', 'emojy', 'chatbot', 'radio'];
+  if (known.includes(slug)) openMiniSite(slug);
+})();
+
 // allow iframe to close overlay
 window.closeMiniSiteFromFrame = closeMiniSite;
 window.addEventListener('message', function(e) {
