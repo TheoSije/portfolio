@@ -49,12 +49,11 @@ nav {
 .nav-logo { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.65); }
 .nav-right { display: none; }
 
-/* ── TIMER BUTTON (circular progress) ── */
+/* ── PLAYER CONTROLS (Spotify-style) ── */
 .timer-btn {
-  margin-left: auto;
   position: relative;
-  width: 34px;
-  height: 34px;
+  width: 64px;
+  height: 64px;
   border: none;
   background: none;
   cursor: pointer;
@@ -78,24 +77,71 @@ nav {
 }
 .timer-ring-fill {
   fill: none;
-  stroke: rgba(255,255,255,.45);
+  stroke: rgba(255,255,255,.5);
   stroke-width: 1.5;
   stroke-linecap: round;
-  stroke-dasharray: 94.25;
+  stroke-dasharray: 175.93;
   stroke-dashoffset: 0;
   transition: stroke .6s ease;
 }
-.timer-icon {
+.play-inner {
   position: relative;
   z-index: 1;
-  color: rgba(255,255,255,.45);
-  transition: color .2s, opacity .2s;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .2s cubic-bezier(0.34,1.56,0.64,1), background .2s;
+}
+.timer-icon {
+  color: #111;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.timer-btn:hover .timer-ring-fill { stroke: rgba(255,255,255,.75); }
-.timer-btn:hover .timer-icon { color: rgba(255,255,255,.9); }
+.timer-btn:hover .play-inner { transform: scale(1.06); background: #f0f0f0; }
+.timer-btn:active .play-inner { transform: scale(0.94); }
+
+.player-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.ctrl-arrow {
+  width: 48px;
+  height: 64px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,.5);
+  transition: color .18s, transform .18s;
+  padding: 0;
+}
+.ctrl-arrow:hover { color: rgba(255,255,255,.9); transform: scale(1.1); }
+.ctrl-arrow:active { transform: scale(0.9); }
+
+.share-icon-btn {
+  position: absolute;
+  right: clamp(28px, 6vw, 88px);
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: rgba(255,255,255,.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  transition: color .18s;
+  padding: 0;
+}
+.share-icon-btn:hover { color: rgba(255,255,255,.85); }
 
 main {
   height: 100vh;
@@ -176,74 +222,12 @@ main {
   z-index: 90;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 16px clamp(28px, 6vw, 88px) 24px;
+  justify-content: center;
+  padding: 10px 0 22px;
   background: #000;
   border-top: 1px solid rgba(255,255,255,.08);
-  gap: 12px;
 }
 
-.bar-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-left: auto;
-}
-
-/* ── SHARE PILL BUTTON ── */
-.share-pill {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  height: 38px;
-  padding: 0 16px;
-  border-radius: 100px;
-  border: 1px solid rgba(255,255,255,.16);
-  background: rgba(255,255,255,.07);
-  backdrop-filter: blur(20px) saturate(1.4);
-  -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  color: rgba(255,255,255,.75);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: .02em;
-  cursor: pointer;
-  transition: background .2s, border-color .2s, color .2s, transform .2s cubic-bezier(0.34,1.56,0.64,1);
-  flex-shrink: 0;
-}
-.share-pill:hover {
-  background: rgba(255,255,255,.13);
-  border-color: rgba(255,255,255,.28);
-  color: #fff;
-  transform: scale(1.04);
-}
-.share-pill:active { transform: scale(0.95); }
-
-/* ── ARROW GROUP ── */
-.arrow-group {
-  display: flex;
-  align-items: center;
-  border: 1px solid rgba(255,255,255,.13);
-  border-radius: 100px;
-  overflow: hidden;
-  background: rgba(255,255,255,.05);
-}
-.arrow-btn {
-  width: 40px;
-  height: 38px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255,255,255,.6);
-  font-size: 16px;
-  transition: background .18s, color .18s;
-}
-.arrow-btn:first-child { border-right: 1px solid rgba(255,255,255,.1); }
-.arrow-btn:hover { background: rgba(255,255,255,.1); color: #fff; }
-.arrow-btn:active { background: rgba(255,255,255,.18); }
 
 
 /* ── SHARE MODAL ── */
@@ -390,8 +374,9 @@ main {
   nav { padding: 0 16px; }
   .nav-right { display: none; }
   main { padding-left: 20px; padding-right: 20px; }
-  .share-pill { font-size: 11px; padding: 0 12px; }
-  .arrow-btn { width: 36px; }
+  .share-icon-btn { right: 16px; }
+  .timer-btn { width: 56px; height: 56px; }
+  .play-inner { width: 46px; height: 46px; }
 }
 
 
@@ -406,15 +391,6 @@ body.in-iframe main { padding-top: 0; }
   <a class="nav-back" href="../" onclick="event.preventDefault();if(window.parent!==window){window.parent.postMessage('close-minisite','*');}else{window.location.href='../';}">← theo.design</a>
   <div class="nav-sep"></div>
   <span class="nav-logo">inkpt</span>
-  <button class="timer-btn" id="timer-btn" onclick="toggleTimer()" title="Pause / Reprendre">
-    <svg class="timer-ring" viewBox="0 0 34 34">
-      <circle class="timer-ring-bg" cx="17" cy="17" r="15"/>
-      <circle class="timer-ring-fill" id="timer-ring-fill" cx="17" cy="17" r="15"/>
-    </svg>
-    <span class="timer-icon" id="timer-icon">
-      <svg width="9" height="10" viewBox="0 0 9 10" fill="currentColor"><rect x="0" y="0" width="3" height="10" rx="1"/><rect x="6" y="0" width="3" height="10" rx="1"/></svg>
-    </span>
-  </button>
 </nav>
 
 <main>
@@ -426,16 +402,28 @@ body.in-iframe main { padding-top: 0; }
   </div>
 
   <div class="bottom-bar">
-    <div class="bar-right">
-      <button class="share-pill" onclick="openShare()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        Partager
+    <div class="player-group">
+      <button class="ctrl-arrow" onclick="prev()" title="Précédent">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       </button>
-      <div class="arrow-group">
-        <button class="arrow-btn" onclick="prev()" title="Précédent">←</button>
-        <button class="arrow-btn" onclick="next()" title="Suivant">→</button>
-      </div>
+      <button class="timer-btn" id="timer-btn" onclick="toggleTimer()" title="Pause / Reprendre">
+        <svg class="timer-ring" viewBox="0 0 64 64">
+          <circle class="timer-ring-bg" cx="32" cy="32" r="28"/>
+          <circle class="timer-ring-fill" id="timer-ring-fill" cx="32" cy="32" r="28"/>
+        </svg>
+        <div class="play-inner">
+          <span class="timer-icon" id="timer-icon">
+            <svg width="10" height="12" viewBox="0 0 9 10" fill="currentColor"><rect x="0" y="0" width="3" height="10" rx="1"/><rect x="6" y="0" width="3" height="10" rx="1"/></svg>
+          </span>
+        </div>
+      </button>
+      <button class="ctrl-arrow" onclick="next()" title="Suivant">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
     </div>
+    <button class="share-icon-btn" onclick="openShare()" title="Partager">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+    </button>
   </div>
 </main>
 
@@ -650,7 +638,7 @@ function prev() { current = (current - 1 + quotes.length) % quotes.length; show(
 // ── AUTO-ADVANCE TIMER (circular ring) ──
 const ringFill  = document.getElementById('timer-ring-fill');
 const timerIcon = document.getElementById('timer-icon');
-const CIRCUMFERENCE = 2 * Math.PI * 15; // r=15 → ~94.25
+const CIRCUMFERENCE = 2 * Math.PI * 28; // r=28 → ~175.93
 const TIMER_MS = 10000;
 let timerRaf = null;
 let timerStart = null;
