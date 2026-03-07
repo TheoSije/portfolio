@@ -336,6 +336,22 @@ main {
   .glass-btn { width: 40px; height: 40px; font-size: 15px; }
 }
 
+/* ── TIMER BAR ── */
+.timer-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: rgba(255,255,255,.06);
+  z-index: 200;
+}
+.timer-fill {
+  height: 100%;
+  width: 100%;
+  transform-origin: left;
+  transform: scaleX(1);
+  transition: background-color 1.8s ease;
+}
+
 /* Dans l'iframe portfolio : le nav portfolio gère déjà la barre du haut */
 body.in-iframe nav { display: none; }
 body.in-iframe main { padding-top: 0; }
@@ -344,7 +360,7 @@ body.in-iframe main { padding-top: 0; }
 <body>
 
 <nav>
-  <a class="nav-back" href="/" onclick="event.preventDefault();if(window.parent!==window){window.parent.postMessage('close-minisite','*');}else{window.location.href='/';}">← theo.design</a>
+  <a class="nav-back" href="../" onclick="event.preventDefault();if(window.parent!==window){window.parent.postMessage('close-minisite','*');}else{window.location.href='../';}">← theo.design</a>
   <div class="nav-sep"></div>
   <span class="nav-logo">inkpt</span>
   <span class="nav-right">Incipit · Projet perso</span>
@@ -369,6 +385,8 @@ body.in-iframe main { padding-top: 0; }
     </div>
   </div>
 </main>
+
+<div class="timer-bar"><div class="timer-fill" id="timer-fill"></div></div>
 
 <!-- SHARE MODAL -->
 <div class="share-overlay" id="share-overlay">
@@ -583,8 +601,34 @@ function show(idx, direction) {
   }, 280);
 }
 
-function next() { current = (current + 1) % quotes.length; show(current, 1); }
-function prev() { current = (current - 1 + quotes.length) % quotes.length; show(current, -1); }
+function next() { current = (current + 1) % quotes.length; show(current, 1); startTimer(); }
+function prev() { current = (current - 1 + quotes.length) % quotes.length; show(current, -1); startTimer(); }
+
+// ── AUTO-ADVANCE TIMER ──
+const timerFill = document.getElementById('timer-fill');
+let timerRaf = null;
+let timerStart = null;
+const TIMER_MS = 10000;
+
+function startTimer() {
+  if (timerRaf) cancelAnimationFrame(timerRaf);
+  timerStart = performance.now();
+  const c = colorPalette[currentColorIdx % colorPalette.length];
+  timerFill.style.background = c.from;
+  function tick(now) {
+    const elapsed = now - timerStart;
+    const progress = Math.max(0, 1 - elapsed / TIMER_MS);
+    timerFill.style.transform = `scaleX(${progress})`;
+    if (progress > 0) {
+      timerRaf = requestAnimationFrame(tick);
+    } else {
+      current = (current + 1) % quotes.length;
+      show(current, 1);
+      startTimer();
+    }
+  }
+  timerRaf = requestAnimationFrame(tick);
+}
 
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next();
@@ -728,6 +772,7 @@ function downloadCard() {
 
 current = Math.floor(Math.random() * quotes.length);
 show(current);
+startTimer();
 
 // Détection iframe : cache le nav inkpt (le portfolio gère déjà la barre du haut)
 if (window.self !== window.top) document.body.classList.add('in-iframe');
