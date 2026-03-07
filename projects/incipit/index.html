@@ -326,7 +326,7 @@ main {
 <body>
 
 <nav>
-  <a class="nav-back" href="/" onclick="event.preventDefault();if(window.parent!==window&&typeof window.parent.closeMiniSiteFromFrame==='function'){window.parent.closeMiniSiteFromFrame();}else{window.location.href='/';}">← theo.design</a>
+  <a class="nav-back" href="/" onclick="event.preventDefault();if(window.parent!==window){window.parent.postMessage('close-minisite','*');}else{window.location.href='/';}">← theo.design</a>
   <div class="nav-sep"></div>
   <span class="nav-logo">inkpt</span>
   <span class="nav-right">Incipit · Projet perso</span>
