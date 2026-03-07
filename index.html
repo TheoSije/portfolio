@@ -690,7 +690,7 @@ function openMiniSite(slug) {
   document.body.classList.add('minisite-open');
   const overlay = document.getElementById('minisite-overlay');
   const frame = document.getElementById('minisite-frame');
-  frame.src = 'projects/' + slug + '/index.html';
+  frame.src = '/' + slug + '/';
   overlay.style.display = 'block';
   document.body.style.overflow = 'hidden';
   history.pushState({minisite: slug}, '', '/'+slug);
@@ -730,16 +730,6 @@ function closeCurrentView() {
 window.addEventListener('popstate', (e) => {
   if (!e.state?.minisite) closeMiniSite();
 });
-
-// Restauration après rechargement sur /slug (GitHub Pages 404 redirect)
-(function() {
-  const redirect = sessionStorage.getItem('gh-redirect');
-  if (!redirect) return;
-  sessionStorage.removeItem('gh-redirect');
-  const slug = redirect.replace(/^\/|\/$/g, '');
-  const known = ['incipit', 'vinyle', 'lucychen', 'emojy', 'chatbot', 'radio'];
-  if (known.includes(slug)) openMiniSite(slug);
-})();
 
 // allow iframe to close overlay
 window.closeMiniSiteFromFrame = closeMiniSite;
