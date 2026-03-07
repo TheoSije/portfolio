@@ -164,13 +164,13 @@ body.fading { opacity: 0; }
 .projects-scroll::before, .projects-scroll::after {
   content: '';
   flex-shrink: 0;
-  width: calc(50% - 130px);
+  width: calc(50% - 160px);
 }
 .proj-card {
-  flex: 0 0 260px;
+  flex: 0 0 320px;
   cursor: pointer;
   scroll-snap-align: center;
-  transition: transform 0.38s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease, filter 0.3s ease;
+  transition: transform 0.55s cubic-bezier(0.25,1,0.35,1), opacity 0.5s ease, filter 0.5s ease;
   border-radius: 14px;
   overflow: hidden;
 }
@@ -224,8 +224,8 @@ body.fading { opacity: 0; }
 .proj-card-body { display: none; }
 @media(max-width:700px) {
   .scroll-btn { display: none; }
-  .proj-card { flex: 0 0 200px; }
-  .projects-scroll::before, .projects-scroll::after { width: calc(50% - 100px); }
+  .proj-card { flex: 0 0 252px; }
+  .projects-scroll::before, .projects-scroll::after { width: calc(50% - 126px); }
 }
 
 /* × SPIN */
