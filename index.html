@@ -39,7 +39,7 @@
   pointer-events: none;
   transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
 }
-body:not(.on-home) #glass-close-btn {
+body:not(.on-home):not(.minisite-open) #glass-close-btn {
   opacity: 1;
   pointer-events: all;
   transform: translateX(-50%) translateY(0);
@@ -681,6 +681,7 @@ const persoLabels = {
 
 function openMiniSite(slug) {
   document.body.classList.remove('on-home');
+  document.body.classList.add('minisite-open');
   const overlay = document.getElementById('minisite-overlay');
   const frame = document.getElementById('minisite-frame');
   frame.src = 'projects/' + slug + '/index.html';
@@ -697,6 +698,7 @@ function openMiniSite(slug) {
 
 function closeMiniSite() {
   document.body.classList.add('on-home');
+  document.body.classList.remove('minisite-open');
   const overlay = document.getElementById('minisite-overlay');
   overlay.style.display = 'none';
   document.getElementById('minisite-frame').src = '';
@@ -725,6 +727,9 @@ window.addEventListener('popstate', (e) => {
 
 // allow iframe to close overlay
 window.closeMiniSiteFromFrame = closeMiniSite;
+window.addEventListener('message', function(e) {
+  if (e.data === 'close-minisite') closeMiniSite();
+});
 
 // copy email to clipboard
 function copyEmail(e) {
