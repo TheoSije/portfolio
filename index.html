@@ -199,9 +199,39 @@ body.fading { opacity: 0; }
 .tag { font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); border: none; padding: 0; background: none; }
 .proj-card-year { font-size: 8px; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; }
 .proj-card-body { display: none; }
+
+/* ── EXPERIMENTATION CARDS : 16:9 thumbnail + texte dessous ── */
+.proj-card--xp {
+  flex: 0 0 300px;
+  border-radius: 0;
+  overflow: visible;
+}
+.proj-card--xp:hover:not(.snap-inactive) {
+  transform: translateY(-5px) scale(1.01);
+}
+.proj-card--xp.snap-inactive {
+  transform: scale(0.9);
+  opacity: 0.45;
+  filter: brightness(0.75);
+}
+.proj-card--xp .proj-card-img {
+  aspect-ratio: 16/9;
+  border-radius: 12px;
+  align-items: stretch;
+}
+.proj-card--xp .proj-card-img::after { display: none; }
+.proj-card--xp .proj-card-inner {
+  position: static;
+  padding: 11px 2px 0;
+  gap: 5px;
+}
+.proj-card--xp .proj-card-name { font-size: 14px; }
+.proj-card--xp .proj-card-year { font-size: 8px; }
+
 @media(max-width:700px) {
   .scroll-btn { display: none; }
   .proj-card { flex: 0 0 252px; }
+  .proj-card--xp { flex: 0 0 240px; }
   .projects-scroll::before, .projects-scroll::after { width: calc(50% - 126px); }
 }
 
@@ -526,58 +556,53 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
     <button class="scroll-btn" onclick="scrollCarousel(this)">→</button>
   </div>
   <div class="projects-scroll">
-    <div class="proj-card" onclick="openMiniSite('incipit')">
-      <div class="proj-card-img proj-img--incipit">
-        <div class="proj-card-inner">
-          <span class="proj-card-year">2022</span>
-          <span class="proj-card-name">Inkipit</span>
-          <div class="proj-card-tags"><span class="tag">Littérature</span><span class="tag">Typo</span></div>
-        </div>
+    <div class="proj-card proj-card--xp" onclick="openMiniSite('incipit')">
+      <div class="proj-card-img proj-img--incipit"></div>
+      <div class="proj-card-inner">
+        <span class="proj-card-year">2022</span>
+        <span class="proj-card-name">Inkipit</span>
+        <div class="proj-card-tags"><span class="tag">Littérature</span><span class="tag">Typo</span></div>
       </div>
     </div>
-    <div class="proj-card" onclick="openMiniSite('vinyle')">
-      <div class="proj-card-img proj-img--vinyle">
-        <div class="proj-card-inner">
-          <span class="proj-card-year">2024</span>
-          <span class="proj-card-name">Biblio Vinyle 3D</span>
-          <div class="proj-card-tags"><span class="tag">3D</span><span class="tag">Interactive</span></div>
-        </div>
+    <div class="proj-card proj-card--xp" onclick="openMiniSite('vinyle')">
+      <div class="proj-card-img proj-img--vinyle"></div>
+      <div class="proj-card-inner">
+        <span class="proj-card-year">2024</span>
+        <span class="proj-card-name">Biblio Vinyle 3D</span>
+        <div class="proj-card-tags"><span class="tag">3D</span><span class="tag">Interactive</span></div>
       </div>
     </div>
-    <div class="proj-card" onclick="openMiniSite('lucychen')">
-      <div class="proj-card-img proj-img--lucychen">
-        <div class="proj-card-inner">
-          <span class="proj-card-year">2023</span>
-          <span class="proj-card-name">Lucychen Gesture</span>
-          <div class="proj-card-tags"><span class="tag">Mixcloud</span><span class="tag">Gesture</span></div>
-        </div>
+    <div class="proj-card proj-card--xp" onclick="openMiniSite('lucychen')">
+      <div class="proj-card-img proj-img--lucychen"></div>
+      <div class="proj-card-inner">
+        <span class="proj-card-year">2023</span>
+        <span class="proj-card-name">Lucychen Gesture</span>
+        <div class="proj-card-tags"><span class="tag">Mixcloud</span><span class="tag">Gesture</span></div>
       </div>
     </div>
-    <div class="proj-card" onclick="openMiniSite('emojy')">
-      <div class="proj-card-img proj-img--emojy">
-        <div class="proj-card-inner">
-          <span class="proj-card-year">2023</span>
-          <span class="proj-card-name">Emojy Words</span>
-          <div class="proj-card-tags"><span class="tag">Game</span><span class="tag">Linguistique</span></div>
-        </div>
+    <div class="proj-card proj-card--xp" onclick="openMiniSite('emojy')">
+      <div class="proj-card-img proj-img--emojy"></div>
+      <div class="proj-card-inner">
+        <span class="proj-card-year">2023</span>
+        <span class="proj-card-name">Emojy Words</span>
+        <div class="proj-card-tags"><span class="tag">Game</span><span class="tag">Linguistique</span></div>
       </div>
     </div>
-    <div class="proj-card" onclick="openMiniSite('chatbot')">
-      <div class="proj-card-img proj-img--chatbot">
-        <div class="proj-card-inner">
-          <span class="proj-card-year">2024</span>
-          <span class="proj-card-name">Chatbot Legalmate</span>
-          <div class="proj-card-tags"><span class="tag">IA</span><span class="tag">Scraping</span></div>
-        </div>
+    <div class="proj-card proj-card--xp" onclick="openMiniSite('chatbot')">
+      <div class="proj-card-img proj-img--chatbot"></div>
+      <div class="proj-card-inner">
+        <span class="proj-card-year">2024</span>
+        <span class="proj-card-name">Chatbot Legalmate</span>
+        <div class="proj-card-tags"><span class="tag">IA</span><span class="tag">Scraping</span></div>
       </div>
     </div>
-    <div class="proj-card" onclick="openMiniSite('radio')">
-      <div class="proj-card-img proj-img--radio">
-        <div class="proj-card-inner">
-          <span class="proj-card-year">2022</span>
-          <span class="proj-card-name">Radio Player</span>
-          <div class="proj-card-tags"><span class="tag">Audio</span><span class="tag">Web</span></div>
-        </div>
+    <div class="proj-card proj-card--xp" onclick="openMiniSite('radio')">
+      <div class="proj-card-img proj-img--radio"></div>
+      <div class="proj-card-inner">
+        <span class="proj-card-year">2022</span>
+        <span class="proj-card-name">Radio Player</span>
+        <div class="proj-card-tags"><span class="tag">Audio</span><span class="tag">Web</span></div>
+      </div>
       </div>
     </div>
   </div>
