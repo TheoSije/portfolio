@@ -47,13 +47,55 @@ nav {
 .nav-back:hover { color: rgba(255,255,255,.7); }
 .nav-sep { width: 1px; height: 13px; background: rgba(255,255,255,.1); }
 .nav-logo { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.65); }
-.nav-right {
+.nav-right { display: none; }
+
+/* ── TIMER BUTTON (circular progress) ── */
+.timer-btn {
   margin-left: auto;
-  font-size: 10px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.14);
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
 }
+.timer-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.timer-ring-bg {
+  fill: none;
+  stroke: rgba(255,255,255,.1);
+  stroke-width: 1.5;
+}
+.timer-ring-fill {
+  fill: none;
+  stroke: rgba(255,255,255,.45);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 94.25;
+  stroke-dashoffset: 0;
+  transition: stroke .6s ease;
+}
+.timer-icon {
+  position: relative;
+  z-index: 1;
+  color: rgba(255,255,255,.45);
+  transition: color .2s, opacity .2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.timer-btn:hover .timer-ring-fill { stroke: rgba(255,255,255,.75); }
+.timer-btn:hover .timer-icon { color: rgba(255,255,255,.9); }
 
 main {
   height: 100vh;
@@ -139,14 +181,6 @@ main {
   background: #000;
   border-top: 1px solid rgba(255,255,255,.08);
   gap: 12px;
-}
-
-.counter {
-  font-size: 10px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.16);
-  flex-shrink: 0;
 }
 
 .bar-right {
@@ -360,21 +394,6 @@ main {
   .arrow-btn { width: 36px; }
 }
 
-/* ── TIMER BAR ── */
-.timer-bar {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  height: 2px;
-  background: rgba(255,255,255,.06);
-  z-index: 200;
-}
-.timer-fill {
-  height: 100%;
-  width: 100%;
-  transform-origin: left;
-  transform: scaleX(1);
-  transition: background-color 1.8s ease;
-}
 
 /* Dans l'iframe portfolio : le nav portfolio gère déjà la barre du haut */
 body.in-iframe nav { display: none; }
@@ -387,7 +406,15 @@ body.in-iframe main { padding-top: 0; }
   <a class="nav-back" href="../" onclick="event.preventDefault();if(window.parent!==window){window.parent.postMessage('close-minisite','*');}else{window.location.href='../';}">← theo.design</a>
   <div class="nav-sep"></div>
   <span class="nav-logo">inkpt</span>
-  <span class="nav-right">Incipit · Projet perso</span>
+  <button class="timer-btn" id="timer-btn" onclick="toggleTimer()" title="Pause / Reprendre">
+    <svg class="timer-ring" viewBox="0 0 34 34">
+      <circle class="timer-ring-bg" cx="17" cy="17" r="15"/>
+      <circle class="timer-ring-fill" id="timer-ring-fill" cx="17" cy="17" r="15"/>
+    </svg>
+    <span class="timer-icon" id="timer-icon">
+      <svg width="9" height="10" viewBox="0 0 9 10" fill="currentColor"><rect x="0" y="0" width="3" height="10" rx="1"/><rect x="6" y="0" width="3" height="10" rx="1"/></svg>
+    </span>
+  </button>
 </nav>
 
 <main>
@@ -399,7 +426,6 @@ body.in-iframe main { padding-top: 0; }
   </div>
 
   <div class="bottom-bar">
-    <span class="counter" id="counter"></span>
     <div class="bar-right">
       <button class="share-pill" onclick="openShare()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
@@ -412,8 +438,6 @@ body.in-iframe main { padding-top: 0; }
     </div>
   </div>
 </main>
-
-<div class="timer-bar"><div class="timer-fill" id="timer-fill"></div></div>
 
 <!-- SHARE MODAL -->
 <div class="share-overlay" id="share-overlay">
@@ -581,7 +605,6 @@ const markEl  = document.getElementById('quote-mark');
 const textEl  = document.getElementById('quote-text');
 const bookEl  = document.getElementById('quote-book');
 const authorEl= document.getElementById('quote-author');
-const counterEl = document.getElementById('counter');
 
 function parseAuthor(str) {
   const sep = str.indexOf(' — ');
@@ -594,8 +617,6 @@ function parseAuthor(str) {
   }
   return { book: '', author: str, year: '' };
 }
-
-function pad(n) { return String(n).padStart(2, '0'); }
 
 function applyColor(idx) {
   const c = colorPalette[idx % colorPalette.length];
@@ -617,7 +638,6 @@ function show(idx, direction) {
     const p = parseAuthor(quotes[idx].author);
     bookEl.textContent = p.book;
     authorEl.textContent = p.year ? p.author + ' · ' + p.year : p.author;
-    counterEl.textContent = pad(idx + 1) + ' / ' + pad(quotes.length);
     currentColorIdx = idx % colorPalette.length;
     applyColor(currentColorIdx);
     block.classList.add('visible');
@@ -627,21 +647,36 @@ function show(idx, direction) {
 function next() { current = (current + 1) % quotes.length; show(current, 1); startTimer(); }
 function prev() { current = (current - 1 + quotes.length) % quotes.length; show(current, -1); startTimer(); }
 
-// ── AUTO-ADVANCE TIMER ──
-const timerFill = document.getElementById('timer-fill');
+// ── AUTO-ADVANCE TIMER (circular ring) ──
+const ringFill  = document.getElementById('timer-ring-fill');
+const timerIcon = document.getElementById('timer-icon');
+const CIRCUMFERENCE = 2 * Math.PI * 15; // r=15 → ~94.25
+const TIMER_MS = 10000;
 let timerRaf = null;
 let timerStart = null;
-const TIMER_MS = 10000;
+let timerElapsedOffset = 0; // ms already elapsed when paused
+let timerPaused = false;
+
+const PAUSE_SVG = `<svg width="9" height="10" viewBox="0 0 9 10" fill="currentColor"><rect x="0" y="0" width="3" height="10" rx="1"/><rect x="6" y="0" width="3" height="10" rx="1"/></svg>`;
+const PLAY_SVG  = `<svg width="9" height="10" viewBox="0 0 10 10" fill="currentColor"><polygon points="1,0 10,5 1,10"/></svg>`;
+
+function setRing(progress) {
+  // progress 1→0: ring drains clockwise
+  ringFill.style.strokeDashoffset = CIRCUMFERENCE * (1 - progress);
+}
 
 function startTimer() {
   if (timerRaf) cancelAnimationFrame(timerRaf);
+  timerPaused = false;
+  timerElapsedOffset = 0;
+  timerIcon.innerHTML = PAUSE_SVG;
   timerStart = performance.now();
   const c = colorPalette[currentColorIdx % colorPalette.length];
-  timerFill.style.background = c.from;
+  ringFill.style.stroke = c.from;
   function tick(now) {
-    const elapsed = now - timerStart;
+    const elapsed = timerElapsedOffset + (now - timerStart);
     const progress = Math.max(0, 1 - elapsed / TIMER_MS);
-    timerFill.style.transform = `scaleX(${progress})`;
+    setRing(progress);
     if (progress > 0) {
       timerRaf = requestAnimationFrame(tick);
     } else {
@@ -651,6 +686,37 @@ function startTimer() {
     }
   }
   timerRaf = requestAnimationFrame(tick);
+}
+
+function toggleTimer() {
+  if (timerPaused) {
+    // Resume
+    timerPaused = false;
+    timerIcon.innerHTML = PAUSE_SVG;
+    timerStart = performance.now();
+    const c = colorPalette[currentColorIdx % colorPalette.length];
+    ringFill.style.stroke = c.from;
+    function tick(now) {
+      const elapsed = timerElapsedOffset + (now - timerStart);
+      const progress = Math.max(0, 1 - elapsed / TIMER_MS);
+      setRing(progress);
+      if (progress > 0) {
+        timerRaf = requestAnimationFrame(tick);
+      } else {
+        current = (current + 1) % quotes.length;
+        show(current, 1);
+        startTimer();
+      }
+    }
+    timerRaf = requestAnimationFrame(tick);
+  } else {
+    // Pause
+    timerPaused = true;
+    timerElapsedOffset += performance.now() - timerStart;
+    if (timerRaf) cancelAnimationFrame(timerRaf);
+    timerRaf = null;
+    timerIcon.innerHTML = PLAY_SVG;
+  }
 }
 
 document.addEventListener('keydown', e => {
