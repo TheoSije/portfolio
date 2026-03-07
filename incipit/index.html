@@ -95,19 +95,33 @@ main {
   transition: opacity .4s ease .07s, transform .4s ease .07s, color 1.8s ease;
 }
 
-.quote-author {
+.quote-book {
   margin-top: 32px;
-  font-size: clamp(12px, 1.3vw, 15px);
-  font-weight: 400;
-  color: rgba(255,255,255,.45);
+  font-size: clamp(13px, 1.4vw, 17px);
+  font-weight: 500;
+  font-style: italic;
+  color: rgba(255,255,255,.65);
   opacity: 0;
   transform: translateY(6px);
   transition: opacity .4s ease .14s, transform .4s ease .14s;
-  letter-spacing: .03em;
+  letter-spacing: .01em;
+}
+
+.quote-author {
+  margin-top: 4px;
+  font-size: clamp(11px, 1.1vw, 13px);
+  font-weight: 400;
+  color: rgba(255,255,255,.32);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .4s ease .18s, transform .4s ease .18s;
+  letter-spacing: .04em;
+  text-transform: uppercase;
 }
 
 .quote-block.visible .quote-mark,
 .quote-block.visible .quote-text,
+.quote-block.visible .quote-book,
 .quote-block.visible .quote-author {
   opacity: 1;
   transform: translateY(0);
@@ -340,6 +354,7 @@ body.in-iframe main { padding-top: 0; }
   <div class="quote-block" id="quote-block">
     <span class="quote-mark" id="quote-mark">"</span>
     <p class="quote-text" id="quote-text"></p>
+    <p class="quote-book" id="quote-book"></p>
     <p class="quote-author" id="quote-author"></p>
   </div>
 
@@ -523,8 +538,21 @@ let currentColorIdx = 0;
 const block   = document.getElementById('quote-block');
 const markEl  = document.getElementById('quote-mark');
 const textEl  = document.getElementById('quote-text');
+const bookEl  = document.getElementById('quote-book');
 const authorEl= document.getElementById('quote-author');
 const counterEl = document.getElementById('counter');
+
+function parseAuthor(str) {
+  const sep = str.indexOf(' — ');
+  if (sep !== -1) {
+    const book = str.slice(0, sep).trim();
+    const rest = str.slice(sep + 3).trim();
+    const comma = rest.lastIndexOf(',');
+    if (comma !== -1) return { book, author: rest.slice(0, comma).trim(), year: rest.slice(comma + 1).trim() };
+    return { book, author: rest, year: '' };
+  }
+  return { book: '', author: str, year: '' };
+}
 
 function pad(n) { return String(n).padStart(2, '0'); }
 
@@ -545,7 +573,9 @@ function show(idx, direction) {
   block.classList.remove('visible');
   setTimeout(() => {
     textEl.textContent = quotes[idx].text;
-    authorEl.textContent = quotes[idx].author;
+    const p = parseAuthor(quotes[idx].author);
+    bookEl.textContent = p.book;
+    authorEl.textContent = p.year ? p.author + ' · ' + p.year : p.author;
     counterEl.textContent = pad(idx + 1) + ' / ' + pad(quotes.length);
     currentColorIdx = idx % colorPalette.length;
     applyColor(currentColorIdx);
