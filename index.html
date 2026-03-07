@@ -18,9 +18,9 @@
   pointer-events: all;
   cursor: none;
   border: none;
-  background: rgba(255,255,255,0.82);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(32px) saturate(1.8);
+  -webkit-backdrop-filter: blur(32px) saturate(1.8);
   color: #111;
   padding: 13px 20px 13px 16px;
   display: flex;
@@ -28,8 +28,13 @@
   gap: 10px;
   font-family: inherit;
   border-radius: 100px;
-  box-shadow: 0 2px 24px rgba(0,0,0,0.07), 0 1px 6px rgba(0,0,0,0.04),
-              inset 0 1px 0 rgba(255,255,255,0.95), 0 0 0 0.5px rgba(0,0,0,0.06);
+  box-shadow:
+    0 0 0 0.5px rgba(255,255,255,0.55),
+    0 0 0 1px rgba(0,0,0,0.06),
+    inset 0 1.5px 0 rgba(255,255,255,0.75),
+    inset 0 -1px 0 rgba(0,0,0,0.04),
+    0 4px 24px rgba(0,0,0,0.10),
+    0 1px 4px rgba(0,0,0,0.06);
   transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -40,10 +45,10 @@
   position: absolute;
   inset: -30px;
   background:
-    radial-gradient(ellipse at 75% 25%, rgba(99,179,237,0.5) 0%, transparent 50%),
-    radial-gradient(ellipse at 25% 75%, rgba(252,129,74,0.35) 0%, transparent 50%),
-    radial-gradient(ellipse at 85% 85%, rgba(252,211,77,0.28) 0%, transparent 40%);
-  filter: blur(14px);
+    radial-gradient(ellipse at 75% 25%, rgba(99,179,237,0.38) 0%, transparent 50%),
+    radial-gradient(ellipse at 25% 75%, rgba(252,129,74,0.26) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 85%, rgba(252,211,77,0.22) 0%, transparent 40%);
+  filter: blur(16px);
   border-radius: 50%;
   animation: mood-blob 6s ease-in-out infinite alternate;
 }
@@ -54,8 +59,14 @@
 }
 #mood-btn:hover {
   transform: scale(1.05) translateY(-2px);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.06),
-              inset 0 1px 0 rgba(255,255,255,0.95);
+  background: rgba(255,255,255,0.26);
+  box-shadow:
+    0 0 0 0.5px rgba(255,255,255,0.65),
+    0 0 0 1px rgba(0,0,0,0.05),
+    inset 0 1.5px 0 rgba(255,255,255,0.85),
+    inset 0 -1px 0 rgba(0,0,0,0.04),
+    0 12px 40px rgba(0,0,0,0.14),
+    0 2px 8px rgba(0,0,0,0.07);
 }
 #mood-label {
   font-size: 8px;
@@ -668,7 +679,7 @@ const P = {
     ],
     solve:"3 ans. Une app, un site, un design system, des flows IA, un chatbot, des centaines d\'apps Low-Code. Et une équipe qui déchire."
   },
-  deezer: { title:'Deezer', type:'Projet Pro', tags:['Mobile','Audio'], year:'2023', role:'UX Design · Prototypage', problem:"La découverte musicale stagnait. Le moteur de recommandation existait mais personne ne l'utilisait.", blocks:[{t:'iphone',n:'01',c:'<strong>"Flow Social".</strong> Dimension sociale dans le player — voir ce que tes amis écoutent, en temps réel, sans quitter le flux.'},{t:'duo',n:'02',c:'<strong>20 interviews.</strong> Les gens découvrent la musique via leurs amis, pas via les algos.'},{t:'full',n:'03',c:'<strong>3 prototypes.</strong> Le gagnant conservait 80% des habitudes existantes.'}], solve:"+34% exploration nouveaux artistes. Beta 10k users."},
+  deezer: { title:'Deezer', type:'Projet Pro', tags:['Mobile','Audio'], year:'2023', role:'UX Design · Prototypage', problem:"La découverte musicale stagnait. Le moteur de recommandation existait mais personne ne l'utilisait.", blocks:[{t:'full',n:'01',c:'<strong>20 interviews.</strong> Les gens découvrent la musique via leurs amis, pas via les algos.'},{t:'duo',n:'02',c:'<strong>"Flow Social".</strong> Dimension sociale dans le player — subtil, jamais intrusif.'},{t:'full',n:'03',c:'<strong>3 prototypes.</strong> Le gagnant conservait 80% des habitudes existantes.'}], solve:"+34% exploration nouveaux artistes. Beta 10k users."},
   devialet: { title:'Devialet', type:'Projet Pro', tags:['Luxe','Hardware'], year:'2023', role:'UI Design · Brand', problem:"L'app de contrôle en décalage total avec un produit à 3000€.", blocks:[{t:'full',n:'01',c:'<strong>ADN Devialet.</strong> Minimalisme radical. Chaque décision devait l\'honorer.'},{t:'full',n:'02',c:'<strong>Le son comme métaphore.</strong> Ondes, fréquences, visualisations épurées.'},{t:'duo',n:'03',c:'<strong>Micro-interactions.</strong> Même exigence qu\'un bouton physique.'}], solve:"2,8 → 4,6 étoiles App Store. NPS +41."},
   simplon: { title:'Simplon', type:'Projet Pro', tags:['EdTech','Accessibilité'], year:'2022', role:'UX/UI · Accessibilité', problem:"Plateforme inaccessible pour des apprenants débutant avec l'informatique.", blocks:[{t:'full',n:'01',c:'<strong>Tests primo-accédants.</strong> 15min de test > 15h de réflexion solo.'},{t:'full',n:'02',c:'<strong>Simplification radicale.</strong> Une action par écran. Langage naturel.'},{t:'half',n:'03',c:'<strong>WCAG AA.</strong> Contrastes, tailles, clavier.'}], solve:"Complétion +28%."},
   legalmate: { title:'Legalmate', type:'Projet Pro', tags:['LegalTech','IA'], year:'2024', role:'Product Design', problem:"Le droit est opaque par design. Une interface froide aurait reproduit ce qu'ils voulaient combattre.", blocks:[{t:'full',n:'01',c:'<strong>Design de la confiance.</strong> Transparence sources, limites visibles.'},{t:'duo',n:'02',c:'<strong>Chat augmenté.</strong> Certitude visible, références cliquables.'},{t:'full',n:'03',c:'<strong>Onboarding progressif.</strong> Première interaction = poser une question.'}], solve:"Conversion 18% vs 8% benchmark."},
@@ -681,7 +692,6 @@ const P = {
 const proKeys = Object.keys(P);
 
 function renderImg(b) {
-  if (b.t==='iphone') return `<div class="iphone-wrap"><div class="iphone-device"><div class="iphone-inner"><div class="iphone-island"></div><div class="dz-screen"><div class="dz-sb"><span>9:41</span><span style="display:flex;gap:4px;align-items:center"><svg width="11" height="8" viewBox="0 0 11 8"><rect x="0" y="3.5" width="2" height="4.5" fill="white" rx=".5"/><rect x="3" y="2" width="2" height="6" fill="white" rx=".5"/><rect x="6" y=".5" width="2" height="7.5" fill="white" rx=".5"/></svg><svg width="17" height="8" viewBox="0 0 17 8"><rect x=".5" y="1.5" width="13" height="5" rx="1.5" fill="none" stroke="white" stroke-width="1"/><rect x="1.5" y="2.5" width="9" height="3" rx=".5" fill="white"/><rect x="14" y="3" width="2" height="2" rx=".5" fill="white"/></svg></span></div><div class="dz-header"><span class="dz-title">Flow Social</span><span class="dz-live">● LIVE</span></div><div class="dz-art"><div class="dz-eq"><span></span><span></span><span></span><span></span><span></span><span></span></div></div><div class="dz-track-name">Levitating</div><div class="dz-track-artist">Dua Lipa · Flow Social Mix</div><div class="dz-social"><div class="dz-av" style="background:#7c3aed">M</div><div class="dz-av" style="background:#db2777">C</div><div class="dz-av" style="background:#0891b2">A</div><div class="dz-av dz-av-more">+9</div><span class="dz-social-txt">12 amis écoutent</span></div><div class="dz-prog"><div class="dz-prog-bar"><div class="dz-prog-fill"></div></div><div class="dz-times"><span>1:24</span><span>3:43</span></div></div><div class="dz-ctrl"><svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(255,255,255,.35)"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg><div class="dz-play-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></div><svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(255,255,255,.35)"><path d="M6 18l8.5-6L6 6v12zm2.5-6 5.5 3.9V8.1L8.5 12zM16 6h2v12h-2z"/></svg></div></div><div class="iphone-bar-wrap"><span></span></div></div></div></div>`;
   if (b.t==='duo') return `<div class="block-duo"><div class="block-img"><div class="block-placeholder">image ${b.n}a</div></div><div class="block-img"><div class="block-placeholder">image ${b.n}b</div></div></div>`;
   return `<div class="block-img ${b.t}"><div class="block-placeholder">image ${b.n}</div></div>`;
 }
@@ -889,43 +899,6 @@ function showHome() {
 <svg id="draw-canvas" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
 
 <style>
-/* ══ IPHONE MOCKUP ══ */
-.iphone-wrap{display:flex;justify-content:center;padding:28px 0 8px}
-.iphone-device{width:186px;background:linear-gradient(160deg,#3a3a3c,#1c1c1e);border-radius:44px;padding:3px;box-shadow:0 0 0 1px #3a3a3a,0 28px 72px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.1)}
-.iphone-inner{background:#000;border-radius:42px;overflow:hidden;display:flex;flex-direction:column}
-.iphone-island{width:76px;height:24px;background:#000;border:2.5px solid #1c1c1e;border-radius:12px;margin:10px auto 0;flex-shrink:0;box-shadow:inset 0 0 0 1px #2a2a2a}
-.dz-screen{flex:1;background:linear-gradient(175deg,#0a0018 0%,#18032e 45%,#2d0654 100%);padding:8px 14px 12px;display:flex;flex-direction:column}
-.dz-sb{display:flex;justify-content:space-between;align-items:center;font-size:7.5px;color:#fff;font-weight:600;padding:2px 0 10px;font-family:-apple-system,sans-serif;letter-spacing:.01em}
-.dz-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.dz-title{font-size:11px;font-weight:700;color:#fff;letter-spacing:-.3px;font-family:-apple-system,sans-serif}
-.dz-live{font-size:6.5px;font-weight:700;color:#c084fc;background:rgba(192,132,252,.15);border:1px solid rgba(192,132,252,.35);padding:2px 6px;border-radius:20px;letter-spacing:.08em}
-.dz-art{width:100%;aspect-ratio:1;border-radius:14px;background:linear-gradient(135deg,#3b0764,#7c3aed,#a855f7 70%,#c084fc);display:flex;align-items:center;justify-content:center;margin-bottom:11px;position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(124,58,237,.5)}
-.dz-art::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 75%,rgba(0,0,0,.45),transparent 60%)}
-.dz-eq{display:flex;align-items:flex-end;gap:3.5px;height:30px;position:relative;z-index:1}
-.dz-eq span{width:3.5px;background:rgba(255,255,255,.75);border-radius:2px;transform-origin:bottom;animation:dz-eq .9s ease-in-out infinite alternate}
-.dz-eq span:nth-child(1){height:10px;animation-delay:0s}
-.dz-eq span:nth-child(2){height:22px;animation-delay:.11s}
-.dz-eq span:nth-child(3){height:30px;animation-delay:.22s}
-.dz-eq span:nth-child(4){height:18px;animation-delay:.33s}
-.dz-eq span:nth-child(5){height:8px;animation-delay:.44s}
-.dz-eq span:nth-child(6){height:25px;animation-delay:.55s}
-@keyframes dz-eq{to{transform:scaleY(.2)}}
-.dz-track-name{font-size:11px;font-weight:700;color:#fff;margin-bottom:1px;font-family:-apple-system,sans-serif}
-.dz-track-artist{font-size:9px;color:rgba(255,255,255,.45);margin-bottom:9px;font-family:-apple-system,sans-serif}
-.dz-social{display:flex;align-items:center;gap:7px;margin-bottom:9px}
-.dz-av{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:6px;font-weight:700;color:#fff;border:1.5px solid #0a0018;flex-shrink:0;font-family:-apple-system,sans-serif}
-.dz-av+.dz-av{margin-left:-7px}
-.dz-av-more{background:rgba(255,255,255,.12);font-size:5.5px}
-.dz-social-txt{font-size:7.5px;color:rgba(255,255,255,.38);font-family:-apple-system,sans-serif}
-.dz-prog{margin-bottom:10px}
-.dz-prog-bar{height:2px;background:rgba(255,255,255,.12);border-radius:1px;margin-bottom:3px}
-.dz-prog-fill{height:100%;width:37%;background:linear-gradient(90deg,#a855f7,#c084fc);border-radius:1px}
-.dz-times{display:flex;justify-content:space-between;font-size:6.5px;color:rgba(255,255,255,.28);font-family:-apple-system,sans-serif}
-.dz-ctrl{display:flex;align-items:center;justify-content:center;gap:14px}
-.dz-play-btn{width:36px;height:36px;background:#a855f7;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(168,85,247,.6)}
-.iphone-bar-wrap{height:20px;display:flex;align-items:center;justify-content:center;background:#000;flex-shrink:0}
-.iphone-bar-wrap span{width:90px;height:4px;background:#2a2a2a;border-radius:2px}
-
 /* ══ PROJECT CARD GRADIENTS ══ */
 .proj-img--gl       { background: linear-gradient(155deg, #8B6914 0%, #C4934A 45%, #E8C17A 100%); }
 .proj-img--deezer   { background: linear-gradient(155deg, #1a0533 0%, #3b0f6b 45%, #7c3aed 100%); }
@@ -1131,7 +1104,7 @@ body:not(.on-home) #ghost-cursor { opacity: 0 !important; pointer-events: none; 
     scheduleMove();
 
     function scheduleToggle() {
-      var d = 14000 + Math.random() * 10000;
+      var d = 8000 + Math.random() * 6000;
       setTimeout(function () {
         ghostCursor.style.opacity = '0';
         setTimeout(function () {
@@ -1139,7 +1112,7 @@ body:not(.on-home) #ghost-cursor { opacity: 0 !important; pointer-events: none; 
           gx = np.x; gy = np.y; gtx = np.x; gty = np.y;
           ghostCursor.style.opacity = '1';
           scheduleToggle();
-        }, 5000);
+        }, 8000);
       }, d);
     }
     scheduleToggle();
@@ -1147,18 +1120,18 @@ body:not(.on-home) #ghost-cursor { opacity: 0 !important; pointer-events: none; 
     var ghostMessages = ['cool no ?', 'you can scroll ↓', 'nice right ?', 'try scrolling', 'hello :)'];
     var ghostLabel = ghostCursor.querySelector('.fig-label-ghost');
     function scheduleGhostMessage() {
-      var d = 7000 + Math.random() * 9000;
+      var d = 9000 + Math.random() * 10000;
       setTimeout(function () {
         var msg = ghostMessages[Math.floor(Math.random() * ghostMessages.length)];
         ghostLabel.textContent = msg;
         setTimeout(function () {
           ghostLabel.textContent = 'Louisa';
           scheduleGhostMessage();
-        }, 2800);
+        }, 2200);
       }, d);
     }
     scheduleGhostMessage();
-  }, 4000);
+  }, 6000);
 
   // Only activate on mouse/desktop
   if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
