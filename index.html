@@ -244,7 +244,9 @@ body.fading { opacity: 0; }
 }
 
 /* ── TESTIMONIALS ── */
-.voice-strip { display: flex; align-items: center; gap: 6px; margin-left: auto; flex-shrink: 0; }
+.section-header--rich { flex-direction: column; align-items: flex-start; height: auto; padding-top: 28px; padding-bottom: 20px; gap: 5px; }
+.section-sub { font-size: 13px; color: #aaa; font-weight: 300; letter-spacing: 0; text-transform: none; font-family: inherit; }
+.voice-strip { display: flex; align-items: center; gap: 6px; flex-shrink: 0; flex-wrap: wrap; margin-top: 10px; }
 .voice-btn { height: 26px; padding: 0 10px; border-radius: 100px; border: 1px solid #e9e6df; background: none; font-family: inherit; font-size: 10px; color: #bbb; cursor: pointer; transition: all .15s; white-space: nowrap; }
 .voice-btn:hover { border-color: #bbb; color: #666; }
 .voice-btn.active { background: #111; color: #fff; border-color: #111; }
@@ -274,7 +276,6 @@ body.fading { opacity: 0; }
   .projects-scroll::before, .projects-scroll::after { width: calc(50% - 126px); }
   .xp-scroll::before, .xp-scroll::after { width: var(--h-pad); }
   .testi-grid { grid-template-columns: 1fr; }
-  .voice-strip { display: none; }
 }
 
 /* × SPIN */
@@ -593,8 +594,9 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
     </div>
   </div>
 
-  <div class="section-header">
+  <div class="section-header section-header--rich">
     <h2 class="section-title">Playground</h2>
+    <p class="section-sub">Small experiments with code, AI images and generative graphics.</p>
   </div>
   <div class="xp-scroll">
     <div class="proj-card proj-card--xp" onclick="openMiniSite('incipit')">
@@ -655,8 +657,9 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
 
   <!-- ── WHAT THEY SAY ── -->
   <section class="testi-section">
-    <div class="section-header">
+    <div class="section-header section-header--rich">
       <h2 class="section-title">What they say</h2>
+      <p class="section-sub">Through my career I met incredible talented people — here they are</p>
       <div class="voice-strip">
         <button class="voice-btn active" onclick="setVoice(0)">🗣️ Neutre</button>
         <button class="voice-btn" onclick="setVoice(1)">😂 Jim C.</button>
