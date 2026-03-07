@@ -321,6 +321,10 @@ main {
   main { padding-left: 20px; padding-right: 20px; }
   .glass-btn { width: 40px; height: 40px; font-size: 15px; }
 }
+
+/* Dans l'iframe portfolio : le nav portfolio gère déjà la barre du haut */
+body.in-iframe nav { display: none; }
+body.in-iframe main { padding-top: 0; }
 </style>
 </head>
 <body>
@@ -586,24 +590,6 @@ let shareColorIdx = 0;
 const canvas = document.getElementById('share-canvas');
 const ctx = canvas.getContext('2d');
 
-function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
-  const words = text.split(' ');
-  let line = '';
-  let lines = [];
-  for (let w of words) {
-    const test = line ? line + ' ' + w : w;
-    if (ctx.measureText(test).width > maxWidth && line) {
-      lines.push(line);
-      line = w;
-    } else {
-      line = test;
-    }
-  }
-  lines.push(line);
-  lines.forEach((l, i) => ctx.fillText(l, x, y + i * lineHeight));
-  return lines.length;
-}
-
 function renderCanvas() {
   const fmt = FORMATS[shareFmt];
   const col = CARD_COLORS[shareColorIdx];
@@ -722,6 +708,9 @@ function downloadCard() {
 }
 
 show(0);
+
+// Détection iframe : cache le nav inkpt (le portfolio gère déjà la barre du haut)
+if (window.self !== window.top) document.body.classList.add('in-iframe');
 </script>
 </body>
 </html>

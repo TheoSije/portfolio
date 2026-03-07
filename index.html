@@ -343,7 +343,13 @@ nav.minisite-nav .nav-logo {
   flex: none !important;
   padding-right: 0 !important;
 }
-nav.minisite-nav .nav-logo::before { display: none !important; }
+nav.minisite-nav .nav-logo::before {
+  content: '←';
+  display: inline !important;
+  margin-right: 8px;
+  font-size: 13px;
+  color: rgba(0,0,0,0.35);
+}
 nav.minisite-nav .nav-logo::after {
   content: '';
   display: inline-block;
@@ -374,7 +380,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
 <body class="on-home">
 
 <nav>
-  <a class="nav-logo" href="#" onclick="showHome();return false;">theo.design</a>
+  <a class="nav-logo" href="#" onclick="document.body.classList.contains('minisite-open')?closeMiniSite():showHome();return false;">theo.design</a>
   <span class="nav-role" style="display:none">Senior Product Designer · Paris</span>
   <a class="nav-contact" href="#" onclick="copyEmail(event)">Contact</a>
   <button id="proj-close-btn" onclick="closeCurrentView()">×</button>
