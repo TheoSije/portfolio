@@ -201,19 +201,27 @@ body.fading { opacity: 0; }
 .proj-card-body { display: none; }
 
 /* ── EXPERIMENTATION CARDS : 16:9 thumbnail + texte dessous ── */
+.xp-scroll {
+  display: flex;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  gap: 16px;
+  padding: 20px 0 64px;
+}
+.xp-scroll::-webkit-scrollbar { display: none; }
+.xp-scroll::before, .xp-scroll::after {
+  content: '';
+  flex-shrink: 0;
+  width: calc(50% - 150px);
+}
 .proj-card--xp {
   flex: 0 0 300px;
   border-radius: 0;
   overflow: visible;
+  transition: transform 0.4s cubic-bezier(0.25,1,0.35,1);
 }
-.proj-card--xp:hover:not(.snap-inactive) {
-  transform: translateY(-5px) scale(1.01);
-}
-.proj-card--xp.snap-inactive {
-  transform: scale(0.9);
-  opacity: 0.45;
-  filter: brightness(0.75);
-}
+.proj-card--xp:hover { transform: translateY(-4px); }
 .proj-card--xp .proj-card-img {
   aspect-ratio: 16/9;
   border-radius: 12px;
@@ -223,16 +231,24 @@ body.fading { opacity: 0; }
 .proj-card--xp .proj-card-inner {
   position: static;
   padding: 11px 2px 0;
-  gap: 5px;
+  gap: 4px;
 }
-.proj-card--xp .proj-card-name { font-size: 14px; }
-.proj-card--xp .proj-card-year { font-size: 8px; }
+.proj-card--xp .proj-card-name { font-size: 14px; color: #111; }
+.proj-card--xp .proj-card-year { font-size: 9px; color: rgba(0,0,0,0.4); }
+.proj-card--xp .tag { color: rgba(0,0,0,0.4); }
+.xp-card-desc {
+  font-size: 12px;
+  color: rgba(0,0,0,0.5);
+  line-height: 1.5;
+  margin: 0;
+}
 
 @media(max-width:700px) {
   .scroll-btn { display: none; }
   .proj-card { flex: 0 0 252px; }
-  .proj-card--xp { flex: 0 0 240px; }
+  .proj-card--xp { flex: 0 0 230px; }
   .projects-scroll::before, .projects-scroll::after { width: calc(50% - 126px); }
+  .xp-scroll::before, .xp-scroll::after { width: 24px; }
 }
 
 /* × SPIN */
@@ -553,15 +569,15 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
 
   <div class="section-header">
     <h2 class="section-title">Expérimentations</h2>
-    <button class="scroll-btn" onclick="scrollCarousel(this)">→</button>
   </div>
-  <div class="projects-scroll">
+  <div class="xp-scroll">
     <div class="proj-card proj-card--xp" onclick="openMiniSite('incipit')">
       <div class="proj-card-img proj-img--incipit"></div>
       <div class="proj-card-inner">
         <span class="proj-card-year">2022</span>
         <span class="proj-card-name">Inkipit</span>
         <div class="proj-card-tags"><span class="tag">Littérature</span><span class="tag">Typo</span></div>
+        <p class="xp-card-desc">Générateur d'incipit littéraires avec effet machine à écrire.</p>
       </div>
     </div>
     <div class="proj-card proj-card--xp" onclick="openMiniSite('vinyle')">
@@ -570,6 +586,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
         <span class="proj-card-year">2024</span>
         <span class="proj-card-name">Biblio Vinyle 3D</span>
         <div class="proj-card-tags"><span class="tag">3D</span><span class="tag">Interactive</span></div>
+        <p class="xp-card-desc">Bibliothèque de vinyles navigable en 3D dans le navigateur.</p>
       </div>
     </div>
     <div class="proj-card proj-card--xp" onclick="openMiniSite('lucychen')">
@@ -578,6 +595,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
         <span class="proj-card-year">2023</span>
         <span class="proj-card-name">Lucychen Gesture</span>
         <div class="proj-card-tags"><span class="tag">Mixcloud</span><span class="tag">Gesture</span></div>
+        <p class="xp-card-desc">Contrôle gestuel d'un player Mixcloud via la webcam.</p>
       </div>
     </div>
     <div class="proj-card proj-card--xp" onclick="openMiniSite('emojy')">
@@ -586,6 +604,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
         <span class="proj-card-year">2023</span>
         <span class="proj-card-name">Emojy Words</span>
         <div class="proj-card-tags"><span class="tag">Game</span><span class="tag">Linguistique</span></div>
+        <p class="xp-card-desc">Jeu de devinettes où chaque mot se cache derrière des emojis.</p>
       </div>
     </div>
     <div class="proj-card proj-card--xp" onclick="openMiniSite('chatbot')">
@@ -594,6 +613,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
         <span class="proj-card-year">2024</span>
         <span class="proj-card-name">Chatbot Legalmate</span>
         <div class="proj-card-tags"><span class="tag">IA</span><span class="tag">Scraping</span></div>
+        <p class="xp-card-desc">Assistant IA qui répond aux questions juridiques à partir de données scrapées.</p>
       </div>
     </div>
     <div class="proj-card proj-card--xp" onclick="openMiniSite('radio')">
@@ -602,7 +622,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
         <span class="proj-card-year">2022</span>
         <span class="proj-card-name">Radio Player</span>
         <div class="proj-card-tags"><span class="tag">Audio</span><span class="tag">Web</span></div>
-      </div>
+        <p class="xp-card-desc">Interface minimaliste pour écouter des webradios en streaming.</p>
       </div>
     </div>
   </div>
