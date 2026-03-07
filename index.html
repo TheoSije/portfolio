@@ -243,12 +243,38 @@ body.fading { opacity: 0; }
   margin: 0;
 }
 
+/* ── TESTIMONIALS ── */
+.voice-strip { display: flex; align-items: center; gap: 6px; margin-left: auto; flex-shrink: 0; }
+.voice-btn { height: 26px; padding: 0 10px; border-radius: 100px; border: 1px solid #e9e6df; background: none; font-family: inherit; font-size: 10px; color: #bbb; cursor: pointer; transition: all .15s; white-space: nowrap; }
+.voice-btn:hover { border-color: #bbb; color: #666; }
+.voice-btn.active { background: #111; color: #fff; border-color: #111; }
+.testi-wrap { padding: 24px var(--h-pad) 56px; }
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.testi-card { background: #fff; border: 1px solid #f0ece5; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.testi-mark { font-size: 36px; line-height: 1; color: #ddd; font-family: Georgia, serif; margin-bottom: -6px; }
+.testi-text { font-size: 13px; line-height: 1.75; color: #444; font-style: italic; flex: 1; }
+.testi-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; }
+.testi-author { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.testi-avatar { width: 34px; height: 34px; border-radius: 50%; background: #f0ece5; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #888; flex-shrink: 0; letter-spacing: .04em; }
+.testi-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.testi-name { font-size: 12px; font-weight: 600; color: #111; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.testi-role { font-size: 10px; color: #bbb; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.testi-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.testi-li { font-size: 9px; letter-spacing: .08em; text-transform: uppercase; color: #ccc; text-decoration: none; transition: color .15s; }
+.testi-li:hover { color: #0077b5; }
+.testi-play { width: 30px; height: 30px; border-radius: 50%; border: 1px solid #e9e6df; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 10px; transition: all .2s; flex-shrink: 0; }
+.testi-play:hover { border-color: #111; color: #111; }
+.testi-play.playing { background: #111; color: #fff; border-color: #111; }
+
+@media(max-width:900px) { .testi-grid { grid-template-columns: repeat(2, 1fr); } }
 @media(max-width:700px) {
   .scroll-btn { display: none; }
   .proj-card { flex: 0 0 252px; }
   .proj-card--xp { flex: 0 0 230px; }
   .projects-scroll::before, .projects-scroll::after { width: calc(50% - 126px); }
   .xp-scroll::before, .xp-scroll::after { width: var(--h-pad); }
+  .testi-grid { grid-template-columns: 1fr; }
+  .voice-strip { display: none; }
 }
 
 /* × SPIN */
@@ -461,7 +487,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
   </section>
 
   <div class="section-header">
-    <h2 class="section-title">Clients</h2>
+    <h2 class="section-title">Selected Work</h2>
     <button class="scroll-btn" onclick="scrollCarousel(this)">→</button>
   </div>
   <div class="projects-scroll">
@@ -568,7 +594,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
   </div>
 
   <div class="section-header">
-    <h2 class="section-title">Expérimentations</h2>
+    <h2 class="section-title">Playground</h2>
   </div>
   <div class="xp-scroll">
     <div class="proj-card proj-card--xp" onclick="openMiniSite('incipit')">
@@ -626,6 +652,115 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
       </div>
     </div>
   </div>
+
+  <!-- ── WHAT THEY SAY ── -->
+  <section class="testi-section">
+    <div class="section-header">
+      <h2 class="section-title">What they say</h2>
+      <div class="voice-strip">
+        <button class="voice-btn active" onclick="setVoice(0)">🗣️ Neutre</button>
+        <button class="voice-btn" onclick="setVoice(1)">😂 Jim C.</button>
+        <button class="voice-btn" onclick="setVoice(2)">🎵 Jay-Z</button>
+        <button class="voice-btn" onclick="setVoice(3)">🦁 Morgan</button>
+        <button class="voice-btn" onclick="setVoice(4)">🤖 Arnold</button>
+      </div>
+    </div>
+    <div class="testi-wrap">
+      <div class="testi-grid">
+
+        <div class="testi-card">
+          <div class="testi-mark">"</div>
+          <p class="testi-text">Theo est l'un des rares designers qui comprend à la fois le produit, la tech et le business. Sur notre projet audio mobile, il a redessiné notre approche en quelques semaines — pas juste les écrans, mais toute la logique. Un partenaire rare.</p>
+          <div class="testi-footer">
+            <div class="testi-author">
+              <div class="testi-avatar">SB</div>
+              <div class="testi-info">
+                <span class="testi-name">Sarah Benchekroun</span>
+                <span class="testi-role">Lead PM · Deezer</span>
+              </div>
+            </div>
+            <div class="testi-actions">
+              <a class="testi-li" href="#" target="_blank">LinkedIn ↗</a>
+              <button class="testi-play" data-text="Theo est l'un des rares designers qui comprend à la fois le produit, la tech et le business. Sur notre projet audio mobile, il a redessiné notre approche en quelques semaines, pas juste les écrans, mais toute la logique. Un partenaire rare." onclick="playTesti(this)">▶</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-mark">"</div>
+          <p class="testi-text">Theo a construit notre design system B2B de zéro en trois mois. Livraisons à l'heure, documentation impeccable, onboarding des devs inclus. Le genre de profil qui comble les écarts entre design et engineering.</p>
+          <div class="testi-footer">
+            <div class="testi-author">
+              <div class="testi-avatar">LM</div>
+              <div class="testi-info">
+                <span class="testi-name">Lucas Morin</span>
+                <span class="testi-role">Head of Design · Galeries Lafayette</span>
+              </div>
+            </div>
+            <div class="testi-actions">
+              <a class="testi-li" href="#" target="_blank">LinkedIn ↗</a>
+              <button class="testi-play" data-text="Theo a construit notre design system B2B de zéro en trois mois. Livraisons à l'heure, documentation impeccable, onboarding des devs inclus. Le genre de profil qui comble les écarts entre design et engineering." onclick="playTesti(this)">▶</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-mark">"</div>
+          <p class="testi-text">Premier designer de la boîte. Il a posé les bases de la culture design, formé les ingénieurs à penser UX, et livré vite sans sacrifier la qualité. Un vrai multiplicateur de force dans une équipe early-stage.</p>
+          <div class="testi-footer">
+            <div class="testi-author">
+              <div class="testi-avatar">IC</div>
+              <div class="testi-info">
+                <span class="testi-name">Inès Castellan</span>
+                <span class="testi-role">CTO · Legalmate</span>
+              </div>
+            </div>
+            <div class="testi-actions">
+              <a class="testi-li" href="#" target="_blank">LinkedIn ↗</a>
+              <button class="testi-play" data-text="Premier designer de la boîte. Il a posé les bases de la culture design, formé les ingénieurs à penser UX, et livré vite sans sacrifier la qualité. Un vrai multiplicateur de force dans une équipe early-stage." onclick="playTesti(this)">▶</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-mark">"</div>
+          <p class="testi-text">Theo a cette capacité rare à rendre les choses complexes évidentes. L'identité visuelle qu'il a créée reçoit encore des compliments de nos partenaires deux ans après la livraison.</p>
+          <div class="testi-footer">
+            <div class="testi-author">
+              <div class="testi-avatar">BR</div>
+              <div class="testi-info">
+                <span class="testi-name">Baptiste Renard</span>
+                <span class="testi-role">CEO · DSRT</span>
+              </div>
+            </div>
+            <div class="testi-actions">
+              <a class="testi-li" href="#" target="_blank">LinkedIn ↗</a>
+              <button class="testi-play" data-text="Theo a cette capacité rare à rendre les choses complexes évidentes. L'identité visuelle qu'il a créée reçoit encore des compliments de nos partenaires deux ans après la livraison." onclick="playTesti(this)">▶</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-mark">"</div>
+          <p class="testi-text">Travailler avec Theo, c'est avoir un designer senior et un stratège produit en un. Il voit le système, pas seulement l'écran. Et il embarque tout le monde avec lui.</p>
+          <div class="testi-footer">
+            <div class="testi-author">
+              <div class="testi-avatar">CV</div>
+              <div class="testi-info">
+                <span class="testi-name">Camille Vidal</span>
+                <span class="testi-role">Head of Product · Simplon</span>
+              </div>
+            </div>
+            <div class="testi-actions">
+              <a class="testi-li" href="#" target="_blank">LinkedIn ↗</a>
+              <button class="testi-play" data-text="Travailler avec Theo, c'est avoir un designer senior et un stratège produit en un. Il voit le système, pas seulement l'écran. Et il embarque tout le monde avec lui." onclick="playTesti(this)">▶</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
 
   <section class="about">
     <div class="about-text">Senior Product Designer & Head of Design basé à Paris. 10 ans à l'intersection du craft, de la stratégie produit et des organisations — entre startups, scale-ups et aujourd'hui les Galeries Lafayette. Je conçois des interfaces, construis des systèmes, structure des équipes, et explore ce que l'IA change vraiment dans notre métier.</div>
@@ -814,6 +949,50 @@ document.addEventListener('click', function(e) {
     document.querySelectorAll('.profile-chip.active').forEach(el => el.classList.remove('active'));
   }
 });
+
+// ── TESTIMONIALS TTS ──
+const ttsVoices = [
+  { rate: 1,    pitch: 1    }, // Neutre
+  { rate: 1.35, pitch: 1.45 }, // Jim C.
+  { rate: 0.82, pitch: 0.65 }, // Jay-Z
+  { rate: 0.78, pitch: 0.8  }, // Morgan
+  { rate: 0.72, pitch: 0.55 }, // Arnold
+];
+let currentTtsVoice = 0;
+let currentPlayBtn = null;
+
+function setVoice(idx) {
+  currentTtsVoice = idx;
+  document.querySelectorAll('.voice-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+}
+
+function playTesti(btn) {
+  if (!('speechSynthesis' in window)) return;
+  if (currentPlayBtn && currentPlayBtn !== btn) {
+    speechSynthesis.cancel();
+    currentPlayBtn.classList.remove('playing');
+    currentPlayBtn.textContent = '▶';
+  }
+  if (btn.classList.contains('playing')) {
+    speechSynthesis.cancel();
+    btn.classList.remove('playing');
+    btn.textContent = '▶';
+    currentPlayBtn = null;
+    return;
+  }
+  const v = ttsVoices[currentTtsVoice];
+  const utter = new SpeechSynthesisUtterance(btn.dataset.text);
+  utter.rate = v.rate;
+  utter.pitch = v.pitch;
+  utter.lang = 'fr-FR';
+  const done = () => { btn.classList.remove('playing'); btn.textContent = '▶'; currentPlayBtn = null; };
+  utter.onend = done;
+  utter.onerror = done;
+  currentPlayBtn = btn;
+  btn.classList.add('playing');
+  btn.textContent = '■';
+  speechSynthesis.speak(utter);
+}
 
 function scrollCarousel(btn) {
   const scroll = btn.closest('.section-header').nextElementSibling;
