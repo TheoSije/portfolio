@@ -207,10 +207,10 @@ body.fading { opacity: 0; }
   scrollbar-width: none;
   -ms-overflow-style: none;
   gap: 16px;
-  padding: 20px 0 64px;
+  padding: 20px 0 64px var(--h-pad);
 }
 .xp-scroll::-webkit-scrollbar { display: none; }
-.xp-scroll::before, .xp-scroll::after {
+.xp-scroll::after {
   content: '';
   flex-shrink: 0;
   width: var(--h-pad);
@@ -274,7 +274,8 @@ body.fading { opacity: 0; }
   .proj-card { flex: 0 0 252px; }
   .proj-card--xp { flex: 0 0 230px; }
   .projects-scroll::before, .projects-scroll::after { width: calc(50% - 126px); }
-  .xp-scroll::before, .xp-scroll::after { width: var(--h-pad); }
+  .xp-scroll { padding-left: 20px; }
+  .xp-scroll::after { width: 20px; }
   .testi-grid { grid-template-columns: 1fr; }
 }
 
