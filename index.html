@@ -325,44 +325,50 @@ body.fading { opacity: 0; }
 
 /* ── NAV EN MODE MINI-SITE ── */
 nav.minisite-nav {
-  background: rgba(252,252,252,0.97) !important;
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: none !important;
   box-shadow: none !important;
-}
-nav.minisite-nav .nav-logo {
-  font-size: 11px !important;
-  font-weight: 400 !important;
-  letter-spacing: 0 !important;
-  text-transform: none !important;
-  color: rgba(0,0,0,0.35) !important;
-  border-right: none !important;
-}
-nav.minisite-nav .nav-logo::before { display: none !important; }
-nav.minisite-nav .nav-role {
-  position: absolute !important;
-  left: 50% !important;
-  top: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  font-size: 13px !important;
-  font-weight: 700 !important;
-  letter-spacing: 0 !important;
-  text-transform: none !important;
-  color: #111 !important;
-  border-right: none !important;
-  padding: 0 !important;
-}
-nav.minisite-nav #proj-close-btn {
-  width: 30px !important;
-  height: 30px !important;
-  font-size: 18px !important;
-  border: 1px solid rgba(0,0,0,0.2) !important;
   display: flex !important;
   align-items: center !important;
-  justify-content: center !important;
-  color: #111 !important;
-  right: 16px !important;
 }
+nav.minisite-nav .nav-logo {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  color: rgba(0,0,0,0.38) !important;
+  border-right: none !important;
+  flex: none !important;
+  padding-right: 0 !important;
+}
+nav.minisite-nav .nav-logo::before { display: none !important; }
+nav.minisite-nav .nav-logo::after {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: 13px;
+  background: rgba(0,0,0,0.18);
+  margin: 0 14px;
+  vertical-align: middle;
+}
+nav.minisite-nav .nav-role {
+  position: static !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  color: rgba(0,0,0,0.62) !important;
+  border-right: none !important;
+  padding: 0 !important;
+  flex: none !important;
+}
+nav.minisite-nav .nav-contact { display: none !important; }
+nav.minisite-nav #proj-close-btn { display: none !important; }
 </style>
 </head>
 <body class="on-home">
@@ -685,7 +691,6 @@ function openMiniSite(slug) {
   document.querySelector('.nav-role').style.padding = '0';
   document.querySelector('.nav-role').textContent = persoLabels[slug] || slug;
   document.querySelector('.nav-contact').style.display = 'none';
-  document.getElementById('proj-close-btn').style.display = 'flex';
   document.querySelector('nav').style.zIndex = '9000';
   document.querySelector('nav').classList.add('minisite-nav');
 }
@@ -701,7 +706,6 @@ function closeMiniSite() {
   document.querySelector('.nav-role').style.padding = '';
   document.querySelector('.nav-role').style.display = 'none';
   document.querySelector('.nav-contact').style.display = '';
-  document.getElementById('proj-close-btn').style.display = 'none';
   document.querySelector('nav').style.zIndex = '';
   document.querySelector('nav').classList.remove('minisite-nav');
 }
