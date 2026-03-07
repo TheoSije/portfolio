@@ -735,10 +735,10 @@ function openMiniSite(slug) {
   document.body.classList.add('minisite-open');
   const overlay = document.getElementById('minisite-overlay');
   const frame = document.getElementById('minisite-frame');
-  frame.src = '/' + slug + '/';
+  frame.src = slug + '/';
   overlay.style.display = 'block';
   document.body.style.overflow = 'hidden';
-  history.pushState({minisite: slug}, '', '/'+slug);
+  history.pushState({minisite: slug}, '', slug);
   document.querySelector('.nav-role').style.display = 'flex';
   document.querySelector('.nav-role').style.padding = '0';
   document.querySelector('.nav-role').textContent = persoLabels[slug] || slug;
