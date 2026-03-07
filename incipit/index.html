@@ -149,44 +149,67 @@ main {
   flex-shrink: 0;
 }
 
-.controls {
+.bar-right {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-left: auto;
 }
 
-/* ── GLASS BUTTONS ── */
-.glass-btn {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
+/* ── SHARE PILL BUTTON ── */
+.share-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.07);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  color: rgba(255,255,255,.75);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .02em;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, color .2s, transform .2s cubic-bezier(0.34,1.56,0.64,1);
+  flex-shrink: 0;
+}
+.share-pill:hover {
+  background: rgba(255,255,255,.13);
+  border-color: rgba(255,255,255,.28);
+  color: #fff;
+  transform: scale(1.04);
+}
+.share-pill:active { transform: scale(0.95); }
+
+/* ── ARROW GROUP ── */
+.arrow-group {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 100px;
+  overflow: hidden;
+  background: rgba(255,255,255,.05);
+}
+.arrow-btn {
+  width: 40px;
+  height: 38px;
   border: none;
+  background: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(20px) saturate(1.4);
-  -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  box-shadow:
-    0 0 0 0.5px rgba(255,255,255,0.14),
-    inset 0 1px 0 rgba(255,255,255,0.18),
-    0 4px 16px rgba(0,0,0,0.28);
-  color: rgba(255,255,255,.7);
-  font-size: 17px;
-  transition: background .22s ease, box-shadow .22s ease, transform .2s cubic-bezier(0.34,1.56,0.64,1);
-  flex-shrink: 0;
+  color: rgba(255,255,255,.6);
+  font-size: 16px;
+  transition: background .18s, color .18s;
 }
-.glass-btn:hover {
-  background: rgba(255,255,255,0.14);
-  box-shadow:
-    0 0 0 0.5px rgba(255,255,255,0.22),
-    inset 0 1px 0 rgba(255,255,255,0.26),
-    0 8px 24px rgba(0,0,0,0.35);
-  color: #fff;
-  transform: scale(1.07);
-}
-.glass-btn:active { transform: scale(0.93); }
+.arrow-btn:first-child { border-right: 1px solid rgba(255,255,255,.1); }
+.arrow-btn:hover { background: rgba(255,255,255,.1); color: #fff; }
+.arrow-btn:active { background: rgba(255,255,255,.18); }
 
 
 /* ── SHARE MODAL ── */
@@ -333,7 +356,8 @@ main {
   nav { padding: 0 16px; }
   .nav-right { display: none; }
   main { padding-left: 20px; padding-right: 20px; }
-  .glass-btn { width: 40px; height: 40px; font-size: 15px; }
+  .share-pill { font-size: 11px; padding: 0 12px; }
+  .arrow-btn { width: 36px; }
 }
 
 /* ── TIMER BAR ── */
@@ -376,12 +400,15 @@ body.in-iframe main { padding-top: 0; }
 
   <div class="bottom-bar">
     <span class="counter" id="counter"></span>
-    <div class="controls">
-      <button class="glass-btn" onclick="prev()" title="Précédent">←</button>
-      <button class="glass-btn" onclick="openShare()" title="Partager">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+    <div class="bar-right">
+      <button class="share-pill" onclick="openShare()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Partager
       </button>
-      <button class="glass-btn" onclick="next()" title="Suivant">→</button>
+      <div class="arrow-group">
+        <button class="arrow-btn" onclick="prev()" title="Précédent">←</button>
+        <button class="arrow-btn" onclick="next()" title="Suivant">→</button>
+      </div>
     </div>
   </div>
 </main>
