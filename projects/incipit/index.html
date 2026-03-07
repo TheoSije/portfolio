@@ -174,17 +174,6 @@ main {
 }
 .glass-btn:active { transform: scale(0.93); }
 
-.glass-btn-share {
-  width: auto;
-  border-radius: 100px;
-  padding: 0 18px;
-  gap: 7px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
 
 /* ── SHARE MODAL ── */
 .share-overlay {
@@ -337,7 +326,7 @@ main {
 <body>
 
 <nav>
-  <a class="nav-back" href="../../index.html" onclick="if(window.parent!==window){window.parent.closeMiniSiteFromFrame();return false;}">← theo.design</a>
+  <a class="nav-back" href="/" onclick="event.preventDefault();if(window.parent!==window&&typeof window.parent.closeMiniSiteFromFrame==='function'){window.parent.closeMiniSiteFromFrame();}else{window.location.href='/';}">← theo.design</a>
   <div class="nav-sep"></div>
   <span class="nav-logo">inkpt</span>
   <span class="nav-right">Incipit · Projet perso</span>
@@ -354,9 +343,8 @@ main {
     <span class="counter" id="counter"></span>
     <div class="controls">
       <button class="glass-btn" onclick="prev()" title="Précédent">←</button>
-      <button class="glass-btn glass-btn-share" onclick="openShare()" title="Partager">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        Share
+      <button class="glass-btn" onclick="openShare()" title="Partager">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
       </button>
       <button class="glass-btn" onclick="next()" title="Suivant">→</button>
     </div>
@@ -383,13 +371,10 @@ main {
     <div class="share-row">
       <span class="share-label">Couleur</span>
       <div class="share-color-opts" id="color-opts">
-        <div class="share-color-swatch active" style="background:#1e1c1c" data-idx="0" onclick="setColor(this)"></div>
+        <div class="share-color-swatch active" style="background:#111" data-idx="0" onclick="setColor(this)"></div>
         <div class="share-color-swatch" style="background:#0f172a" data-idx="1" onclick="setColor(this)"></div>
         <div class="share-color-swatch" style="background:#1a0a2e" data-idx="2" onclick="setColor(this)"></div>
-        <div class="share-color-swatch" style="background:#0d1f12" data-idx="3" onclick="setColor(this)"></div>
-        <div class="share-color-swatch" style="background:#1f1510" data-idx="4" onclick="setColor(this)"></div>
-        <div class="share-color-swatch" style="background:#f5f0e8" data-idx="5" onclick="setColor(this)"></div>
-        <div class="share-color-swatch" style="background:#fffbf0" data-idx="6" onclick="setColor(this)"></div>
+        <div class="share-color-swatch" style="background:#f5f0e8" data-idx="3" onclick="setColor(this)"></div>
       </div>
     </div>
 
@@ -590,13 +575,10 @@ const FORMATS = {
   wide:   { w: 1920, h: 1080, label: 'Paysage' },
 };
 const CARD_COLORS = [
-  { bg: '#1e1c1c', text: '#fff', sub: 'rgba(255,255,255,.45)', brand: 'rgba(255,255,255,.2)' },
-  { bg: '#0f172a', text: '#fff', sub: 'rgba(255,255,255,.45)', brand: 'rgba(255,255,255,.2)' },
-  { bg: '#1a0a2e', text: '#fff', sub: 'rgba(255,255,255,.45)', brand: 'rgba(255,255,255,.2)' },
-  { bg: '#0d1f12', text: '#fff', sub: 'rgba(255,255,255,.45)', brand: 'rgba(255,255,255,.2)' },
-  { bg: '#1f1510', text: '#fff', sub: 'rgba(255,255,255,.45)', brand: 'rgba(255,255,255,.2)' },
-  { bg: '#f5f0e8', text: '#111', sub: 'rgba(0,0,0,.4)',        brand: 'rgba(0,0,0,.18)' },
-  { bg: '#fffbf0', text: '#111', sub: 'rgba(0,0,0,.4)',        brand: 'rgba(0,0,0,.18)' },
+  { bg: '#111',    sub: 'rgba(255,255,255,.42)', brand: 'rgba(255,255,255,.18)' },
+  { bg: '#0f172a', sub: 'rgba(255,255,255,.42)', brand: 'rgba(255,255,255,.18)' },
+  { bg: '#1a0a2e', sub: 'rgba(255,255,255,.42)', brand: 'rgba(255,255,255,.18)' },
+  { bg: '#f5f0e8', sub: 'rgba(0,0,0,.38)',       brand: 'rgba(0,0,0,.16)' },
 ];
 
 let shareFmt = 'square';
@@ -627,62 +609,79 @@ function renderCanvas() {
   const col = CARD_COLORS[shareColorIdx];
   const c = colorPalette[currentColorIdx];
 
-  const scale = 0.36;
+  // Responsive preview: fit inside 440×320 while keeping aspect ratio
+  const maxPW = 440, maxPH = 320;
+  const displayScale = Math.min(maxPW / fmt.w, maxPH / fmt.h);
   canvas.width  = fmt.w;
   canvas.height = fmt.h;
-  canvas.style.width  = Math.round(fmt.w * scale) + 'px';
-  canvas.style.height = Math.round(fmt.h * scale) + 'px';
+  canvas.style.width  = Math.round(fmt.w * displayScale) + 'px';
+  canvas.style.height = Math.round(fmt.h * displayScale) + 'px';
 
   const W = fmt.w, H = fmt.h;
-  const pad = W * 0.1;
+  // Base all sizes on the shorter dimension so square/story/wide are consistent
+  const base = Math.min(W, H);
+  const pad  = base * 0.1;
 
-  // bg
+  // ── BG ──
   ctx.fillStyle = col.bg;
   ctx.fillRect(0, 0, W, H);
 
-  // subtle grain overlay — skip (canvas noise would need extra code)
-
-  // gradient accent (top left blob)
-  const grd = ctx.createRadialGradient(W * 0.2, H * 0.2, 0, W * 0.2, H * 0.2, W * 0.55);
-  grd.addColorStop(0, hexAlpha(c.from, 0.18));
+  // Soft gradient blob top-left
+  const grd = ctx.createRadialGradient(W * 0.18, H * 0.2, 0, W * 0.18, H * 0.2, base * 0.55);
+  grd.addColorStop(0, hexAlpha(c.from, 0.2));
   grd.addColorStop(1, 'transparent');
   ctx.fillStyle = grd;
   ctx.fillRect(0, 0, W, H);
 
-  // quote mark
-  const isStory = shareFmt === 'story';
-  const qMarkSize = isStory ? 160 : W * 0.14;
+  // ── SIZES ──
+  const qMarkSize = base * 0.15;
+  const textSize  = Math.min(base * 0.065, 88);
+  const authorSize= Math.max(base * 0.024, 22);
+  const brandSize = Math.max(base * 0.020, 18);
+  const lineH     = textSize * 1.22;
+  const maxTextW  = W - pad * 2;
+
+  // Pre-measure text wrapping to vertically center the block
+  ctx.font = `800 ${textSize}px 'Georgia', serif`;
+  const words = quotes[current].text.split(' ');
+  let line = '', lines = [];
+  for (const w of words) {
+    const test = line ? line + ' ' + w : w;
+    if (ctx.measureText(test).width > maxTextW && line) { lines.push(line); line = w; }
+    else line = test;
+  }
+  lines.push(line);
+
+  const blockH = qMarkSize * 0.85 + 16 + lines.length * lineH + authorSize * 1.8;
+  const startY = (H - blockH) / 2;
+
+  // ── QUOTE MARK ──
   ctx.font = `800 ${qMarkSize}px 'Georgia', serif`;
   ctx.fillStyle = c.from;
-  ctx.globalAlpha = 0.9;
-  ctx.fillText('"', pad, pad + qMarkSize * 0.82);
+  ctx.globalAlpha = 0.82;
+  ctx.fillText('\u201C', pad, startY + qMarkSize * 0.85);
   ctx.globalAlpha = 1;
 
-  // quote text
-  const textSize = isStory ? 72 : Math.min(W * 0.062, 96);
-  ctx.font = `800 ${textSize}px 'Georgia', serif`;
-
-  // gradient text via fillStyle trick
-  const tGrad = ctx.createLinearGradient(pad, 0, W - pad, 0);
+  // ── QUOTE TEXT (gradient) ──
+  const tGrad = ctx.createLinearGradient(pad, 0, Math.min(W - pad, pad + maxTextW), 0);
   tGrad.addColorStop(0, c.from);
   tGrad.addColorStop(1, c.to);
   ctx.fillStyle = tGrad;
+  ctx.font = `800 ${textSize}px 'Georgia', serif`;
+  const textY = startY + qMarkSize * 0.85 + 16 + textSize;
+  lines.forEach((l, i) => ctx.fillText(l, pad, textY + i * lineH));
 
-  const textY = pad + qMarkSize * 0.9 + textSize * 0.2;
-  const lineH = textSize * 1.22;
-  const linesCount = wrapText(ctx, quotes[current].text, pad, textY, W - pad * 2, lineH);
-
-  // author
-  const authorY = textY + linesCount * lineH + textSize * 0.9;
-  ctx.font = `400 ${isStory ? 36 : W * 0.028}px 'DM Sans', sans-serif`;
+  // ── AUTHOR ──
+  const authorY = textY + lines.length * lineH + authorSize * 0.6;
+  ctx.font = `400 ${authorSize}px 'DM Sans', sans-serif`;
   ctx.fillStyle = col.sub;
   ctx.fillText(quotes[current].author, pad, authorY);
 
-  // brand watermark bottom right
-  ctx.font = `500 ${isStory ? 32 : W * 0.024}px 'DM Sans', sans-serif`;
+  // ── BRAND (bottom right) ──
+  ctx.font = `500 ${brandSize}px 'DM Sans', sans-serif`;
   ctx.fillStyle = col.brand;
   ctx.textAlign = 'right';
-  ctx.fillText('inkpt · theo.design', W - pad * 0.6, H - pad * 0.55);
+  ctx.fillText('inkpt \u00B7 theo.design', W - pad * 0.55, H - pad * 0.5);
   ctx.textAlign = 'left';
 }
 
