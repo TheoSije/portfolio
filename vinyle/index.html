@@ -316,6 +316,7 @@ body.in-iframe main { padding-top: 0; }
     <p class="track-title" id="track-title">Chargement…</p>
     <p class="track-sub"   id="track-sub"></p>
   </div>
+  <button id="retry-btn" onclick="loadTracks()" style="display:none;align-items:center;gap:8px;background:none;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.6);font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.06em;padding:9px 20px;border-radius:100px;cursor:pointer;transition:all .2s;" onmouseover="this.style.borderColor='rgba(255,255,255,.4)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.18)';this.style.color='rgba(255,255,255,.6)'">↺ Réessayer</button>
 </main>
 
 <div class="bottom-bar">
@@ -385,13 +386,24 @@ function shuffle(arr) {
   }
 }
 
+function fetchWithTimeout(url, ms = 7000) {
+  const ctrl = new AbortController();
+  const id = setTimeout(() => ctrl.abort(), ms);
+  return fetch(url, { signal: ctrl.signal })
+    .then(r => r.json())
+    .catch(() => ({ results: [] }))
+    .finally(() => clearTimeout(id));
+}
+
 async function loadTracks() {
-  // Pick 5 random queries and fetch concurrently
-  const selected = [...QUERIES].sort(() => .5 - Math.random()).slice(0, 5);
+  titleEl.textContent = 'Chargement…';
+  titleEl.classList.add('visible');
+  subEl.classList.remove('visible');
+
+  // Pick 4 random queries, no country/explicit filters (more reliable globally)
+  const selected = [...QUERIES].sort(() => .5 - Math.random()).slice(0, 4);
   const promises = selected.map(q =>
-    fetch(`https://itunes.apple.com/search?term=${q}&media=music&limit=15&country=FR&explicit=No`)
-      .then(r => r.json())
-      .catch(() => ({ results: [] }))
+    fetchWithTimeout(`https://itunes.apple.com/search?term=${q}&media=music&limit=15`)
   );
   const results = await Promise.all(promises);
   const seen = new Set();
@@ -402,9 +414,13 @@ async function loadTracks() {
 
   if (!tracks.length) {
     titleEl.textContent = 'Impossible de charger les morceaux.';
-    titleEl.classList.add('visible');
+    subEl.textContent = 'Vérifiez votre connexion.';
+    subEl.classList.add('visible');
+    // Show retry button
+    document.getElementById('retry-btn').style.display = 'flex';
     return;
   }
+  document.getElementById('retry-btn').style.display = 'none';
   current = 0;
   showTrack(0);
 }
