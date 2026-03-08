@@ -289,6 +289,24 @@ main {
 .vinyl { cursor: pointer; }
 .vinyl:active { transform: scale(0.97); transition: transform .15s; }
 
+/* ── TONEARM ── */
+.tonearm-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 5;
+  overflow: visible;
+}
+.tonearm-g {
+  transform-origin: 88px 5px;
+  transform: rotate(-24deg);
+  transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.tonearm-g.on-record {
+  transform: rotate(-50deg);
+}
+
 @media (max-width: 600px) {
   nav { padding: 0 16px; }
   main { gap: 20px; padding-left: 16px; padding-right: 16px; }
@@ -311,6 +329,22 @@ body.in-iframe main { padding-top: 0; }
     <div class="vinyl" id="vinyl" onclick="openCover()" title="Voir la pochette">
       <div class="vinyl-label loading" id="vinyl-label"></div>
     </div>
+    <!-- Tonearm -->
+    <svg class="tonearm-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+      <g class="tonearm-g" id="tonearm-g">
+        <!-- counterweight -->
+        <rect x="84" y="-3" width="8" height="5" rx="2" fill="#666"/>
+        <!-- arm shaft -->
+        <line x1="88" y1="2" x2="38" y2="66" stroke="#999" stroke-width="1.4" stroke-linecap="round"/>
+        <!-- bearing pivot -->
+        <circle cx="88" cy="5" r="3" fill="#777" stroke="#555" stroke-width="0.8"/>
+        <circle cx="88" cy="5" r="1.2" fill="#444"/>
+        <!-- headshell -->
+        <line x1="38" y1="66" x2="32" y2="74" stroke="#888" stroke-width="2.2" stroke-linecap="round"/>
+        <!-- stylus needle -->
+        <circle cx="31.5" cy="75" r="1.4" fill="#e05"/>
+      </g>
+    </svg>
   </div>
   <div class="track-info">
     <p class="track-title" id="track-title">Chargement…</p>
@@ -395,34 +429,46 @@ function getCtx() {
   return audioCtx;
 }
 
-function scratchNoise(type = 'stop') {
+// Son synchronisé avec la durée réelle du ramp (stop=560ms, start=480ms)
+function vinylSound(type) {
   const ctx  = getCtx();
   const now  = ctx.currentTime;
-  const dur  = type === 'stop' ? 0.18 : 0.10;
-  const frames = Math.floor(ctx.sampleRate * dur);
-  const buf  = ctx.createBuffer(1, frames, ctx.sampleRate);
+  const dur  = type === 'stop' ? 0.56 : 0.48;
+  const sr   = ctx.sampleRate;
+  const frames = Math.floor(sr * dur);
+  const buf  = ctx.createBuffer(1, frames, sr);
   const data = buf.getChannelData(0);
+
   for (let i = 0; i < frames; i++) {
+    const p = i / frames;
+    // stop: descend doucement, start: monte vite puis plateau
     const env = type === 'stop'
-      ? Math.pow(1 - i / frames, 0.6)
-      : Math.pow(1 - i / frames, 2.5);
-    data[i] = (Math.random() * 2 - 1) * env;
+      ? Math.pow(1 - p, 1.4) * (1 - Math.exp(-p * 30))
+      : Math.pow(p, 0.25) * Math.exp(-p * 2.8);
+    data[i] = (Math.random() * 2 - 1) * env * 0.18;
   }
+
   const src = ctx.createBufferSource();
   src.buffer = buf;
+
+  // Filtre passe-bande qui simule le frottement du sillon
   const bpf = ctx.createBiquadFilter();
   bpf.type = 'bandpass';
-  bpf.Q.value = 0.7;
+  bpf.Q.value = 1.4;
   if (type === 'stop') {
-    bpf.frequency.setValueAtTime(4200, now);
-    bpf.frequency.linearRampToValueAtTime(600, now + dur);
+    // fréquence descend avec le vinyle qui ralentit
+    bpf.frequency.setValueAtTime(3200, now);
+    bpf.frequency.exponentialRampToValueAtTime(180, now + dur);
   } else {
-    bpf.frequency.setValueAtTime(900, now);
-    bpf.frequency.linearRampToValueAtTime(3800, now + dur);
+    // fréquence monte avec l'accélération
+    bpf.frequency.setValueAtTime(180, now);
+    bpf.frequency.exponentialRampToValueAtTime(3200, now + dur * 0.75);
   }
+
   const gain = ctx.createGain();
-  gain.gain.setValueAtTime(0.28, now);
-  gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
+  gain.gain.setValueAtTime(type === 'stop' ? 0.45 : 0.35, now);
+  gain.gain.linearRampToValueAtTime(0.001, now + dur);
+
   src.connect(bpf); bpf.connect(gain); gain.connect(ctx.destination);
   src.start(now);
 }
@@ -433,7 +479,7 @@ let animRAF, isRamping = false;
 function stopVinyl() {
   if (isRamping) return;
   isRamping = true;
-  scratchNoise('stop');
+  vinylSound('stop');
   const startRate = audio.playbackRate;
   const t0 = performance.now();
   const DURATION = 560;
@@ -454,7 +500,7 @@ function stopVinyl() {
 function startVinyl() {
   if (isRamping) return;
   isRamping = true;
-  scratchNoise('start');
+  vinylSound('start');
   audio.playbackRate = 0.22;
   audio.play().catch(() => { isRamping = false; });
   const t0 = performance.now();
@@ -556,13 +602,17 @@ function showTrack(idx) {
   }, 180);
 }
 
+const tonearmG = document.getElementById('tonearm-g');
+
 function setPlaying(state) {
   if (state) {
     vinyl.classList.add('playing');
     timerIcon.innerHTML = PAUSE_SVG;
+    tonearmG.classList.add('on-record');
   } else {
     vinyl.classList.remove('playing');
     timerIcon.innerHTML = PLAY_SVG;
+    tonearmG.classList.remove('on-record');
   }
 }
 
