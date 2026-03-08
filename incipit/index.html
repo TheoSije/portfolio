@@ -503,17 +503,13 @@ body.in-iframe main { padding-top: 0; }
 
 <script>
 const quotes = [
-  // ── Yohann Elmaleh (toujours dans les 3 premiers) ──
-  { text: "Moi j'suis de la race écrite !", author: "Moi j'suis de la race écrite ! — Yohann Elmaleh, 2020" },
-  { text: "Les mots ne trahissent pas. C'est les silences qu'il faut craindre.", author: "Moi j'suis de la race écrite ! — Yohann Elmaleh, 2020" },
-  { text: "J'écris parce que je viens de quelque part où on n'écrit pas.", author: "Moi j'suis de la race écrite ! — Yohann Elmaleh, 2020" },
-  // ──────────────────────────────────────────────────
   { text: "Aujourd'hui, maman est morte. Ou peut-être hier, je ne sais pas.", author: "L'Étranger — Albert Camus, 1942" },
   { text: "Longtemps, je me suis couché de bonne heure.", author: "À la recherche du temps perdu — Marcel Proust, 1913" },
   { text: "Lolita, lumière de ma vie, feu de mes reins.", author: "Lolita — Vladimir Nabokov, 1955" },
   { text: "Appelez-moi Ismaël.", author: "Moby-Dick — Herman Melville, 1851" },
   { text: "Je suis né à Reims un 25 décembre — ce qui ne m'a pas porté bonheur jusqu'ici.", author: "La Promesse de l'aube — Romain Gary, 1960" },
   { text: "C'est à l'heure du commencement qu'il faut tout particulièrement veiller à ce que les équilibres soient précis.", author: "Dune — Frank Herbert, 1965" },
+  { text: "Au quartier, les choses se déroulent comme elles doivent se dérouler.", author: "Moi j'suis de la race écrite ! — Yohann Elmaleh, 2020" },
   { text: "Nous étions à l'étude, quand le Proviseur entra, suivi d'un nouveau habillé en bourgeois.", author: "Madame Bovary — Gustave Flaubert, 1857" },
   { text: "Il était une fois un pays où les hommes mouraient deux fois.", author: "Le Testament français — Andreï Makine, 1995" },
   { text: "La nuit est longue qui ne finit point.", author: "Le Grand Meaulnes — Alain-Fournier, 1913" },
@@ -999,7 +995,7 @@ async function copyLink() {
   }
 }
 
-current = Math.floor(Math.random() * 3); // démarre toujours sur Yohann Elmaleh (indices 0-2)
+current = 0; // démarre sur L'Étranger
 show(current);
 startTimer();
 
