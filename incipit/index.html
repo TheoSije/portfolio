@@ -503,6 +503,11 @@ body.in-iframe main { padding-top: 0; }
 
 <script>
 const quotes = [
+  // ── Yohann Elmaleh (toujours dans les 3 premiers) ──
+  { text: "Moi j'suis de la race écrite !", author: "Moi j'suis de la race écrite ! — Yohann Elmaleh, 2020" },
+  { text: "Les mots ne trahissent pas. C'est les silences qu'il faut craindre.", author: "Moi j'suis de la race écrite ! — Yohann Elmaleh, 2020" },
+  { text: "J'écris parce que je viens de quelque part où on n'écrit pas.", author: "Moi j'suis de la race écrite ! — Yohann Elmaleh, 2020" },
+  // ──────────────────────────────────────────────────
   { text: "Aujourd'hui, maman est morte. Ou peut-être hier, je ne sais pas.", author: "L'Étranger — Albert Camus, 1942" },
   { text: "Longtemps, je me suis couché de bonne heure.", author: "À la recherche du temps perdu — Marcel Proust, 1913" },
   { text: "Lolita, lumière de ma vie, feu de mes reins.", author: "Lolita — Vladimir Nabokov, 1955" },
@@ -604,6 +609,32 @@ const quotes = [
   { text: "Ce que tes yeux expriment me semble valoir plus que tout ce que j'ai lu dans toute ma vie.", author: "Feuilles d'herbe — Walt Whitman, 1855" },
   { text: "L'imagination est plus importante que le savoir.", author: "Comment je vois le monde — Albert Einstein, 1931" },
   { text: "Le génie, c'est l'enfance retrouvée à volonté.", author: "Le Peintre de la vie moderne — Charles Baudelaire, 1863" },
+
+  // ── Virginie Despentes ──
+  { text: "Je parle en tant que femme et en tant qu'écrivain.", author: "King Kong Théorie — Virginie Despentes, 2006" },
+  { text: "Je suis la reine, la truie, la pute, la mal baisée, la vieille, l'hystérique. Je suis aussi l'écrivain.", author: "King Kong Théorie — Virginie Despentes, 2006" },
+  { text: "Il avait cru que la musique le protègerait de tout. Il avait eu tort, et maintenant il savait.", author: "Vernon Subutex — Virginie Despentes, 2015" },
+  { text: "La révolution sera féminine ou ne sera pas.", author: "King Kong Théorie — Virginie Despentes, 2006" },
+
+  // ── Emmanuel Carrère ──
+  { text: "Je pensais écrire un livre joyeux sur le yoga. Je ne sais plus ce que j'écris.", author: "Yoga — Emmanuel Carrère, 2020" },
+  { text: "La méditation ne consiste pas à arrêter ses pensées, mais à ne plus être emporté par elles.", author: "Yoga — Emmanuel Carrère, 2020" },
+  { text: "C'est dans les crises qu'on se découvre vraiment.", author: "L'Adversaire — Emmanuel Carrère, 2000" },
+
+  // ── Annie Ernaux ──
+  { text: "Peut-être que ma vraie raison d'écrire, c'est de venger ma race.", author: "La Place — Annie Ernaux, 1983" },
+  { text: "Il vivait dans la honte et la méfiance, dans l'impossibilité de rien dire.", author: "La Place — Annie Ernaux, 1983" },
+  { text: "Toutes les images disparaîtront.", author: "Les Années — Annie Ernaux, 2008" },
+  { text: "Une vie, ça ne se raconte pas, ça se montre.", author: "Les Années — Annie Ernaux, 2008" },
+  { text: "Il m'est arrivé de ne rien faire d'autre qu'attendre qu'il téléphone.", author: "Passion simple — Annie Ernaux, 1991" },
+  { text: "C'était une douleur sans nom, sans image possible, une douleur absolue.", author: "L'Événement — Annie Ernaux, 2000" },
+  { text: "Écrire, c'est le seul moyen que j'aie de retrouver la réalité de ce que j'ai vécu.", author: "L'Atelier noir — Annie Ernaux, 2011" },
+  { text: "La honte ne disparaît pas. Elle change de forme.", author: "La Honte — Annie Ernaux, 1997" },
+
+  // ── Édouard Louis ──
+  { text: "Dans le village où j'ai grandi, les hommes ne pleuraient pas.", author: "En finir avec Eddy Bellegueule — Édouard Louis, 2014" },
+  { text: "La violence faite aux corps n'a pas besoin de se justifier ; elle se contente d'exister.", author: "En finir avec Eddy Bellegueule — Édouard Louis, 2014" },
+  { text: "Je voulais partir, et partir c'est déjà changer.", author: "En finir avec Eddy Bellegueule — Édouard Louis, 2014" },
 ];
 
 // ── COLOR PALETTE (smooth, muted tones) ──
@@ -968,7 +999,7 @@ async function copyLink() {
   }
 }
 
-current = Math.floor(Math.random() * quotes.length);
+current = Math.floor(Math.random() * 3); // démarre toujours sur Yohann Elmaleh (indices 0-2)
 show(current);
 startTimer();
 
