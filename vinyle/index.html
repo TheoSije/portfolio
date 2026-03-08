@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vinyle — theo.design</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  background: #0a0a0a;
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: 48px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  gap: 14px;
+}
+.nav-back {
+  display: flex; align-items: center; gap: 7px;
+  color: rgba(255,255,255,.32);
+  font-size: 12px; letter-spacing: .04em;
+  transition: color .2s; cursor: pointer;
+  background: none; border: none;
+  font-family: 'DM Sans', sans-serif;
+  padding: 0; text-decoration: none;
+}
+.nav-back:hover { color: rgba(255,255,255,.7); }
+.nav-sep { width: 1px; height: 13px; background: rgba(255,255,255,.1); }
+.nav-logo { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.65); }
+
+/* ── MAIN ── */
+main {
+  height: 100vh;
+  padding-top: 48px;
+  padding-bottom: 88px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* ── VINYL ── */
+.vinyl-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vinyl {
+  --vs: clamp(200px, min(72vw, calc(100svh - 300px)), 380px);
+  width: var(--vs);
+  height: var(--vs);
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+  background:
+    /* center spindle hole */
+    radial-gradient(circle at 50% 50%, #040404 0 2%, transparent 2%),
+    /* groove rings */
+    repeating-radial-gradient(
+      circle at 50% 50%,
+      transparent 0px,
+      transparent 2px,
+      rgba(255,255,255,0.028) 2px,
+      rgba(255,255,255,0.028) 3px
+    ),
+    #0f0f0f;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.06),
+    0 28px 90px rgba(0,0,0,0.85),
+    inset 0 0 80px rgba(0,0,0,0.4);
+  animation: spin 2.2s linear infinite;
+  animation-play-state: paused;
+}
+.vinyl.playing { animation-play-state: running; }
+
+/* outer edge highlight */
+.vinyl::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 25%,
+    rgba(255,255,255,0.07) 0%,
+    transparent 55%
+  );
+  pointer-events: none;
+}
+
+.vinyl-label {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 38%; height: 38%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #1e1e1e no-repeat center/cover;
+  box-shadow: 0 0 0 1.5px rgba(255,255,255,0.1), 0 4px 20px rgba(0,0,0,0.7);
+  transition: background-image .3s ease;
+}
+
+/* center pin */
+.vinyl-label::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: #050505;
+  z-index: 2;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
+}
+
+/* loading pulse */
+@keyframes pulse { 0%,100% { opacity:.4; } 50% { opacity:.75; } }
+.vinyl-label.loading { animation: pulse 1.5s ease-in-out infinite; }
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── TRACK INFO ── */
+.track-info { text-align: center; max-width: 500px; width: 100%; }
+
+.track-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(18px, 3.5vw, 30px);
+  font-style: italic;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.25;
+  margin-bottom: 7px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .38s ease, transform .38s ease;
+}
+.track-title.visible { opacity: 1; transform: translateY(0); }
+
+.track-sub {
+  font-size: clamp(11px, 1.4vw, 13px);
+  font-weight: 400;
+  color: rgba(255,255,255,.38);
+  letter-spacing: .05em;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity .38s ease .08s, transform .38s ease .08s;
+}
+.track-sub.visible { opacity: 1; transform: translateY(0); }
+
+/* ── PLAYER CONTROLS (Spotify-style — identique à inkipit) ── */
+.timer-btn {
+  position: relative;
+  width: 64px; height: 64px;
+  border: none; background: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0; flex-shrink: 0;
+}
+.timer-ring {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  transform: rotate(-90deg);
+}
+.timer-ring-bg { fill: none; stroke: rgba(255,255,255,.1); stroke-width: 1.5; }
+.timer-ring-fill {
+  fill: none; stroke: rgba(255,255,255,.55); stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 175.93;
+  stroke-dashoffset: 0;
+}
+.play-inner {
+  position: relative; z-index: 1;
+  width: 52px; height: 52px;
+  border-radius: 50%; background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .2s cubic-bezier(0.34,1.56,0.64,1), background .2s;
+}
+.timer-icon { color: #111; display: flex; align-items: center; justify-content: center; }
+.timer-btn:hover .play-inner { transform: scale(1.06); background: #f0f0f0; }
+.timer-btn:active .play-inner { transform: scale(0.94); }
+
+.player-group { display: flex; align-items: center; gap: 2px; }
+.ctrl-arrow {
+  width: 56px; height: 64px;
+  border: none; background: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,.5);
+  transition: color .18s, transform .18s; padding: 0;
+}
+.ctrl-arrow:hover { color: rgba(255,255,255,.9); transform: scale(1.1); }
+.ctrl-arrow:active { transform: scale(0.9); }
+
+.bottom-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 90;
+  display: flex; align-items: center; justify-content: center;
+  padding: 10px 0 22px;
+  background: #000;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+@media (max-width: 600px) {
+  nav { padding: 0 16px; }
+  main { gap: 20px; padding-left: 16px; padding-right: 16px; }
+}
+
+body.in-iframe nav { display: none; }
+body.in-iframe main { padding-top: 0; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-back" href="../" onclick="event.preventDefault();if(window.parent!==window){window.parent.postMessage('close-minisite','*');}else{window.location.href='../';}">← theo.design</a>
+  <div class="nav-sep"></div>
+  <span class="nav-logo">vinyle</span>
+</nav>
+
+<main>
+  <div class="vinyl-wrap">
+    <div class="vinyl" id="vinyl">
+      <div class="vinyl-label loading" id="vinyl-label"></div>
+    </div>
+  </div>
+  <div class="track-info">
+    <p class="track-title" id="track-title">Chargement…</p>
+    <p class="track-sub"   id="track-sub"></p>
+  </div>
+</main>
+
+<div class="bottom-bar">
+  <div class="player-group">
+    <button class="ctrl-arrow" onclick="prev()" title="Précédent">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="timer-btn" id="timer-btn" onclick="togglePlay()" title="Pause / Reprendre">
+      <svg class="timer-ring" viewBox="0 0 64 64">
+        <circle class="timer-ring-bg"   cx="32" cy="32" r="28"/>
+        <circle class="timer-ring-fill" id="timer-ring-fill" cx="32" cy="32" r="28"/>
+      </svg>
+      <div class="play-inner">
+        <span class="timer-icon" id="timer-icon">
+          <svg width="10" height="12" viewBox="0 0 9 10" fill="currentColor"><rect x="0" y="0" width="3" height="10" rx="1"/><rect x="6" y="0" width="3" height="10" rx="1"/></svg>
+        </span>
+      </div>
+    </button>
+    <button class="ctrl-arrow" onclick="next()" title="Suivant">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<audio id="audio" preload="auto"></audio>
+
+<script>
+// ── Curated jazz/soul/bossa queries ──
+const QUERIES = [
+  'miles+davis', 'chet+baker', 'bill+evans+trio',
+  'john+coltrane', 'nina+simone', 'billie+holiday',
+  'joao+gilberto+bossa+nova', 'stan+getz', 'ella+fitzgerald',
+  'charles+mingus', 'thelonious+monk', 'art+blakey',
+];
+
+let tracks  = [];
+let current = 0;
+
+const audio    = document.getElementById('audio');
+const vinyl    = document.getElementById('vinyl');
+const label    = document.getElementById('vinyl-label');
+const titleEl  = document.getElementById('track-title');
+const subEl    = document.getElementById('track-sub');
+const ringFill = document.getElementById('timer-ring-fill');
+const timerIcon= document.getElementById('timer-icon');
+
+const CIRCUMFERENCE = 2 * Math.PI * 28; // r=28 → ~175.93
+const PAUSE_SVG = `<svg width="9" height="10" viewBox="0 0 9 10" fill="currentColor"><rect x="0" y="0" width="3" height="10" rx="1"/><rect x="6" y="0" width="3" height="10" rx="1"/></svg>`;
+const PLAY_SVG  = `<svg width="9" height="10" viewBox="0 0 10 10" fill="currentColor"><polygon points="1,0 10,5 1,10"/></svg>`;
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
+async function loadTracks() {
+  // Pick 5 random queries and fetch concurrently
+  const selected = [...QUERIES].sort(() => .5 - Math.random()).slice(0, 5);
+  const promises = selected.map(q =>
+    fetch(`https://itunes.apple.com/search?term=${q}&media=music&limit=15&country=FR&explicit=No`)
+      .then(r => r.json())
+      .catch(() => ({ results: [] }))
+  );
+  const results = await Promise.all(promises);
+  const seen = new Set();
+  tracks = results
+    .flatMap(d => d.results || [])
+    .filter(t => t.previewUrl && !seen.has(t.trackId) && seen.add(t.trackId));
+  shuffle(tracks);
+
+  if (!tracks.length) {
+    titleEl.textContent = 'Impossible de charger les morceaux.';
+    titleEl.classList.add('visible');
+    return;
+  }
+  current = 0;
+  showTrack(0);
+}
+
+function showTrack(idx) {
+  const t = tracks[idx];
+
+  // Fade out text
+  titleEl.classList.remove('visible');
+  subEl.classList.remove('visible');
+
+  setTimeout(() => {
+    // Album art — upgrade to 600px
+    const art = t.artworkUrl100.replace(/\d+x\d+bb/, '600x600bb');
+    const img = new Image();
+    img.onload = () => {
+      label.classList.remove('loading');
+      label.style.backgroundImage = `url(${art})`;
+    };
+    img.src = art;
+
+    // Text
+    titleEl.textContent = t.trackName;
+    subEl.textContent   = `${t.artistName} · ${t.collectionName}`;
+    titleEl.classList.add('visible');
+    subEl.classList.add('visible');
+
+    // Reset ring
+    ringFill.style.strokeDashoffset = 0;
+
+    // Play
+    audio.src = t.previewUrl;
+    audio.play().catch(() => setPlaying(false));
+  }, 180);
+}
+
+function setPlaying(state) {
+  if (state) {
+    vinyl.classList.add('playing');
+    timerIcon.innerHTML = PAUSE_SVG;
+  } else {
+    vinyl.classList.remove('playing');
+    timerIcon.innerHTML = PLAY_SVG;
+  }
+}
+
+function togglePlay() {
+  if (audio.paused) {
+    audio.play().catch(() => {});
+  } else {
+    audio.pause();
+  }
+}
+
+function next() {
+  current = (current + 1) % tracks.length;
+  showTrack(current);
+}
+
+function prev() {
+  if (audio.currentTime > 3) {
+    audio.currentTime = 0;
+    return;
+  }
+  current = (current - 1 + tracks.length) % tracks.length;
+  showTrack(current);
+}
+
+// ── Audio events ──
+audio.addEventListener('play',  () => setPlaying(true));
+audio.addEventListener('pause', () => setPlaying(false));
+
+audio.addEventListener('timeupdate', () => {
+  if (!audio.duration) return;
+  const progress = 1 - (audio.currentTime / audio.duration);
+  ringFill.style.strokeDashoffset = CIRCUMFERENCE * (1 - progress);
+});
+
+audio.addEventListener('ended', () => next());
+
+// ── Keyboard ──
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next();
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prev();
+  if (e.key === ' ') { e.preventDefault(); togglePlay(); }
+});
+
+// ── Boot ──
+loadTracks();
+if (window.self !== window.top) document.body.classList.add('in-iframe');
+</script>
+</body>
+</html>

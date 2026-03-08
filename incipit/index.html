@@ -339,6 +339,11 @@ main {
 
 .share-actions {
   display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.share-actions-row {
+  display: flex;
   gap: 10px;
 }
 .share-dl-btn {
@@ -369,6 +374,37 @@ main {
   transition: all .15s;
 }
 .share-close-btn:hover { color: #fff; border-color: rgba(255,255,255,.3); }
+.share-copy-btn {
+  width: 100%;
+  height: 38px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: none;
+  color: rgba(255,255,255,.5);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all .2s;
+  letter-spacing: .02em;
+}
+.share-copy-btn:hover { border-color: rgba(255,255,255,.3); color: rgba(255,255,255,.85); }
+.share-copy-btn.copied { border-color: rgba(100,220,130,.5); color: rgba(100,220,130,.95); }
+
+/* Book-page swatch : blanc parchemin avec liseré rouge */
+.share-swatch-book {
+  background: #fffef8;
+  border: 2px solid rgba(200,170,100,.35) !important;
+  position: relative;
+  overflow: hidden;
+}
+.share-swatch-book::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 7px;
+  width: 1.5px;
+  background: rgba(210,80,80,.28);
+}
 
 @media (max-width: 600px) {
   nav { padding: 0 16px; }
@@ -447,16 +483,20 @@ body.in-iframe main { padding-top: 0; }
     <div class="share-row">
       <span class="share-label">Couleur</span>
       <div class="share-color-opts" id="color-opts">
-        <div class="share-color-swatch active" style="background:#111" data-idx="0" onclick="setColor(this)"></div>
-        <div class="share-color-swatch" style="background:#0f172a" data-idx="1" onclick="setColor(this)"></div>
-        <div class="share-color-swatch" style="background:#1a0a2e" data-idx="2" onclick="setColor(this)"></div>
-        <div class="share-color-swatch" style="background:#f5f0e8" data-idx="3" onclick="setColor(this)"></div>
+        <div class="share-color-swatch active" style="background:#222" data-idx="0" onclick="setColor(this)" title="Nuit"></div>
+        <div class="share-color-swatch" style="background:#1a3456" data-idx="1" onclick="setColor(this)" title="Minuit"></div>
+        <div class="share-color-swatch" style="background:#32116e" data-idx="2" onclick="setColor(this)" title="Violet"></div>
+        <div class="share-color-swatch" style="background:#f5f0e8" data-idx="3" onclick="setColor(this)" title="Crème"></div>
+        <div class="share-color-swatch share-swatch-book" data-idx="4" onclick="setColor(this)" title="Page de livre"></div>
       </div>
     </div>
 
     <div class="share-actions">
-      <button class="share-dl-btn" onclick="downloadCard()">↓ Télécharger</button>
-      <button class="share-close-btn" onclick="closeShare()">Annuler</button>
+      <div class="share-actions-row">
+        <button class="share-dl-btn" onclick="downloadCard()">↓ Télécharger</button>
+        <button class="share-close-btn" onclick="closeShare()">Annuler</button>
+      </div>
+      <button class="share-copy-btn" id="share-copy-btn" onclick="copyLink()">⎘ Copier le lien</button>
     </div>
   </div>
 </div>
@@ -719,10 +759,11 @@ const FORMATS = {
   wide:   { w: 1920, h: 1080, label: 'Paysage' },
 };
 const CARD_COLORS = [
-  { bg: '#111',    sub: 'rgba(255,255,255,.42)', brand: 'rgba(255,255,255,.18)' },
-  { bg: '#0f172a', sub: 'rgba(255,255,255,.42)', brand: 'rgba(255,255,255,.18)' },
-  { bg: '#1a0a2e', sub: 'rgba(255,255,255,.42)', brand: 'rgba(255,255,255,.18)' },
-  { bg: '#f5f0e8', sub: 'rgba(0,0,0,.38)',       brand: 'rgba(0,0,0,.16)' },
+  { bg: '#1c1c1e', sub: 'rgba(255,255,255,.42)', brand: 'rgba(255,255,255,.18)' },
+  { bg: '#1a3456', sub: 'rgba(255,255,255,.45)', brand: 'rgba(255,255,255,.2)'  },
+  { bg: '#32116e', sub: 'rgba(255,255,255,.45)', brand: 'rgba(255,255,255,.2)'  },
+  { bg: '#f5f0e8', sub: 'rgba(0,0,0,.38)',       brand: 'rgba(0,0,0,.16)'       },
+  // idx 4 = book page mode (rendered separately)
 ];
 
 let shareFmt = 'square';
@@ -731,11 +772,12 @@ const canvas = document.getElementById('share-canvas');
 const ctx = canvas.getContext('2d');
 
 function renderCanvas() {
-  const fmt = FORMATS[shareFmt];
-  const col = CARD_COLORS[shareColorIdx];
-  const c = colorPalette[currentColorIdx];
+  const fmt    = FORMATS[shareFmt];
+  const isBook = shareColorIdx === 4;
+  const col    = isBook ? null : CARD_COLORS[shareColorIdx];
+  const c      = colorPalette[currentColorIdx];
 
-  // Responsive preview: fit inside 440×320 while keeping aspect ratio
+  // Responsive preview
   const maxPW = 440, maxPH = 320;
   const displayScale = Math.min(maxPW / fmt.w, maxPH / fmt.h);
   canvas.width  = fmt.w;
@@ -744,22 +786,10 @@ function renderCanvas() {
   canvas.style.height = Math.round(fmt.h * displayScale) + 'px';
 
   const W = fmt.w, H = fmt.h;
-  // Base all sizes on the shorter dimension so square/story/wide are consistent
   const base = Math.min(W, H);
   const pad  = base * 0.1;
 
-  // ── BG ──
-  ctx.fillStyle = col.bg;
-  ctx.fillRect(0, 0, W, H);
-
-  // Soft gradient blob top-left
-  const grd = ctx.createRadialGradient(W * 0.18, H * 0.2, 0, W * 0.18, H * 0.2, base * 0.55);
-  grd.addColorStop(0, hexAlpha(c.from, 0.2));
-  grd.addColorStop(1, 'transparent');
-  ctx.fillStyle = grd;
-  ctx.fillRect(0, 0, W, H);
-
-  // ── SIZES ──
+  // ── SIZES (computed before BG so book ruling lines can use them) ──
   const qMarkSize = base * 0.15;
   const textSize  = Math.min(base * 0.065, 88);
   const authorSize= Math.max(base * 0.024, 22);
@@ -767,7 +797,7 @@ function renderCanvas() {
   const lineH     = textSize * 1.22;
   const maxTextW  = W - pad * 2;
 
-  // Pre-measure text wrapping to vertically center the block
+  // Text wrapping
   ctx.font = `800 ${textSize}px 'Georgia', serif`;
   const words = quotes[current].text.split(' ');
   let line = '', lines = [];
@@ -780,35 +810,99 @@ function renderCanvas() {
 
   const blockH = qMarkSize * 0.85 + 16 + lines.length * lineH + authorSize * 1.8;
   const startY = (H - blockH) / 2;
+  const textY  = startY + qMarkSize * 0.85 + 16 + textSize;
+  const authorY= textY + lines.length * lineH + authorSize * 0.6;
 
-  // ── QUOTE MARK ──
-  ctx.font = `800 ${qMarkSize}px 'Georgia', serif`;
-  ctx.fillStyle = c.from;
-  ctx.globalAlpha = 0.82;
-  ctx.fillText('\u201C', pad, startY + qMarkSize * 0.85);
-  ctx.globalAlpha = 1;
+  // ── BG ──
+  if (isBook) {
+    // Subtle page shadow
+    ctx.fillStyle = 'rgba(0,0,0,0.1)';
+    ctx.fillRect(pad * 0.5, pad * 0.5, W, H);
+    // White parchment page
+    ctx.fillStyle = '#fffef8';
+    ctx.fillRect(0, 0, W, H);
+    // Horizontal ruling lines (very subtle)
+    ctx.strokeStyle = 'rgba(0,0,0,0.045)';
+    ctx.lineWidth = Math.max(1, base * 0.0012);
+    for (let y = pad * 1.4; y < H - pad; y += lineH) {
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+    }
+    // Left margin line
+    const marginX = pad * 0.78;
+    ctx.strokeStyle = 'rgba(200,70,70,0.2)';
+    ctx.lineWidth = Math.max(2, base * 0.002);
+    ctx.beginPath(); ctx.moveTo(marginX, 0); ctx.lineTo(marginX, H); ctx.stroke();
+  } else {
+    ctx.fillStyle = col.bg;
+    ctx.fillRect(0, 0, W, H);
+    // Gradient blob
+    const grd = ctx.createRadialGradient(W * 0.18, H * 0.2, 0, W * 0.18, H * 0.2, base * 0.55);
+    grd.addColorStop(0, hexAlpha(c.from, 0.22));
+    grd.addColorStop(1, 'transparent');
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, W, H);
+  }
 
-  // ── QUOTE TEXT (gradient) ──
-  const tGrad = ctx.createLinearGradient(pad, 0, Math.min(W - pad, pad + maxTextW), 0);
-  tGrad.addColorStop(0, c.from);
-  tGrad.addColorStop(1, c.to);
-  ctx.fillStyle = tGrad;
-  ctx.font = `800 ${textSize}px 'Georgia', serif`;
-  const textY = startY + qMarkSize * 0.85 + 16 + textSize;
-  lines.forEach((l, i) => ctx.fillText(l, pad, textY + i * lineH));
+  if (isBook) {
+    // ── BOOK: QUOTE MARK ──
+    ctx.font = `800 ${qMarkSize}px 'Georgia', serif`;
+    ctx.fillStyle = 'rgba(0,0,0,0.10)';
+    ctx.globalAlpha = 1;
+    ctx.fillText('\u201C', pad, startY + qMarkSize * 0.85);
 
-  // ── AUTHOR ──
-  const authorY = textY + lines.length * lineH + authorSize * 0.6;
-  ctx.font = `400 ${authorSize}px 'DM Sans', sans-serif`;
-  ctx.fillStyle = col.sub;
-  ctx.fillText(quotes[current].author, pad, authorY);
+    // ── BOOK: QUOTE TEXT (dark charcoal) ──
+    ctx.font = `800 ${textSize}px 'Georgia', serif`;
+    ctx.fillStyle = '#1a1818';
+    lines.forEach((l, i) => ctx.fillText(l, pad, textY + i * lineH));
 
-  // ── BRAND (bottom right) ──
-  ctx.font = `500 ${brandSize}px 'DM Sans', sans-serif`;
-  ctx.fillStyle = col.brand;
-  ctx.textAlign = 'right';
-  ctx.fillText('inkpt \u00B7 theo.design', W - pad * 0.55, H - pad * 0.5);
-  ctx.textAlign = 'left';
+    // ── BOOK: ornamental separator ──
+    ctx.strokeStyle = 'rgba(0,0,0,0.15)';
+    ctx.lineWidth = Math.max(1, base * 0.001);
+    ctx.beginPath();
+    ctx.moveTo(pad, authorY - authorSize * 0.95);
+    ctx.lineTo(pad + base * 0.22, authorY - authorSize * 0.95);
+    ctx.stroke();
+
+    // ── BOOK: AUTHOR (italic, muted) ──
+    ctx.font = `italic 400 ${authorSize}px 'Georgia', serif`;
+    ctx.fillStyle = 'rgba(0,0,0,0.42)';
+    ctx.fillText(quotes[current].author, pad, authorY);
+
+    // ── BOOK: BRAND ──
+    ctx.font = `500 ${brandSize}px 'DM Sans', sans-serif`;
+    ctx.fillStyle = 'rgba(0,0,0,0.18)';
+    ctx.textAlign = 'right';
+    ctx.fillText('inkpt \u00B7 theo.design', W - pad * 0.55, H - pad * 0.5);
+    ctx.textAlign = 'left';
+
+  } else {
+    // ── NORMAL: QUOTE MARK ──
+    ctx.font = `800 ${qMarkSize}px 'Georgia', serif`;
+    ctx.fillStyle = c.from;
+    ctx.globalAlpha = 0.82;
+    ctx.fillText('\u201C', pad, startY + qMarkSize * 0.85);
+    ctx.globalAlpha = 1;
+
+    // ── NORMAL: QUOTE TEXT (gradient) ──
+    const tGrad = ctx.createLinearGradient(pad, 0, Math.min(W - pad, pad + maxTextW), 0);
+    tGrad.addColorStop(0, c.from);
+    tGrad.addColorStop(1, c.to);
+    ctx.fillStyle = tGrad;
+    ctx.font = `800 ${textSize}px 'Georgia', serif`;
+    lines.forEach((l, i) => ctx.fillText(l, pad, textY + i * lineH));
+
+    // ── NORMAL: AUTHOR ──
+    ctx.font = `400 ${authorSize}px 'DM Sans', sans-serif`;
+    ctx.fillStyle = col.sub;
+    ctx.fillText(quotes[current].author, pad, authorY);
+
+    // ── NORMAL: BRAND ──
+    ctx.font = `500 ${brandSize}px 'DM Sans', sans-serif`;
+    ctx.fillStyle = col.brand;
+    ctx.textAlign = 'right';
+    ctx.fillText('inkpt \u00B7 theo.design', W - pad * 0.55, H - pad * 0.5);
+    ctx.textAlign = 'left';
+  }
 }
 
 function hexAlpha(hex, alpha) {
@@ -845,6 +939,33 @@ function downloadCard() {
   link.download = 'inkpt-' + (current + 1) + '.png';
   link.href = canvas.toDataURL('image/png');
   link.click();
+}
+
+async function copyLink() {
+  const btn = document.getElementById('share-copy-btn');
+  try {
+    await navigator.clipboard.writeText(window.location.href);
+    btn.textContent = '✓ Lien copié !';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '⎘ Copier le lien';
+      btn.classList.remove('copied');
+    }, 2200);
+  } catch {
+    // Fallback for restricted contexts
+    const ta = document.createElement('textarea');
+    ta.value = window.location.href;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = '✓ Lien copié !';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '⎘ Copier le lien';
+      btn.classList.remove('copied');
+    }, 2200);
+  }
 }
 
 current = Math.floor(Math.random() * quotes.length);
