@@ -87,10 +87,7 @@ main {
     0 0 0 1px rgba(255,255,255,0.06),
     0 28px 90px rgba(0,0,0,0.85),
     inset 0 0 80px rgba(0,0,0,0.4);
-  animation: spin 2.2s linear infinite;
-  animation-play-state: paused;
 }
-.vinyl.playing { animation-play-state: running; }
 
 /* outer edge highlight */
 .vinyl::before {
@@ -134,11 +131,6 @@ main {
 /* loading pulse */
 @keyframes pulse { 0%,100% { opacity:.4; } 50% { opacity:.75; } }
 .vinyl-label.loading { animation: pulse 1.5s ease-in-out infinite; }
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
 
 /* ── TRACK INFO ── */
 .track-info { text-align: center; max-width: 500px; width: 100%; }
@@ -287,25 +279,6 @@ main {
 
 /* hint: vinyl is clickable */
 .vinyl { cursor: pointer; }
-.vinyl:active { transform: scale(0.97); transition: transform .15s; }
-
-/* ── TONEARM ── */
-.tonearm-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 5;
-  overflow: visible;
-}
-.tonearm-g {
-  transform-origin: 88px 5px;
-  transform: rotate(-24deg);
-  transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.tonearm-g.on-record {
-  transform: rotate(-50deg);
-}
 
 @media (max-width: 600px) {
   nav { padding: 0 16px; }
@@ -329,22 +302,6 @@ body.in-iframe main { padding-top: 0; }
     <div class="vinyl" id="vinyl" onclick="openCover()" title="Voir la pochette">
       <div class="vinyl-label loading" id="vinyl-label"></div>
     </div>
-    <!-- Tonearm -->
-    <svg class="tonearm-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-      <g class="tonearm-g" id="tonearm-g">
-        <!-- counterweight -->
-        <rect x="84" y="-3" width="8" height="5" rx="2" fill="#666"/>
-        <!-- arm shaft -->
-        <line x1="88" y1="2" x2="38" y2="66" stroke="#999" stroke-width="1.4" stroke-linecap="round"/>
-        <!-- bearing pivot -->
-        <circle cx="88" cy="5" r="3" fill="#777" stroke="#555" stroke-width="0.8"/>
-        <circle cx="88" cy="5" r="1.2" fill="#444"/>
-        <!-- headshell -->
-        <line x1="38" y1="66" x2="32" y2="74" stroke="#888" stroke-width="2.2" stroke-linecap="round"/>
-        <!-- stylus needle -->
-        <circle cx="31.5" cy="75" r="1.4" fill="#e05"/>
-      </g>
-    </svg>
   </div>
   <div class="track-info">
     <p class="track-title" id="track-title">Chargement…</p>
@@ -473,7 +430,28 @@ function vinylSound(type) {
   src.start(now);
 }
 
-// ── Playback-rate ramp (gives real vinyl pitch-shift feel) ──
+// ── Rotation JS — pilotée par audio.playbackRate pour une décélération parfaite ──
+const DEG_PER_MS = 360 * 33.33 / 60000; // 33 RPM → ~0.2 deg/ms
+let currentAngle = 0, lastTs = null, spinRAF = null;
+
+function spinTick(ts) {
+  if (lastTs !== null)
+    currentAngle = (currentAngle + DEG_PER_MS * (ts - lastTs) * audio.playbackRate) % 360;
+  lastTs = ts;
+  vinyl.style.transform = `rotate(${currentAngle}deg)`;
+  spinRAF = requestAnimationFrame(spinTick);
+}
+function startSpin() {
+  if (spinRAF) return;
+  lastTs = null;
+  spinRAF = requestAnimationFrame(spinTick);
+}
+function stopSpin() {
+  cancelAnimationFrame(spinRAF);
+  spinRAF = null; lastTs = null;
+}
+
+// ── Playback-rate ramp ──
 let animRAF, isRamping = false;
 
 function stopVinyl() {
@@ -486,13 +464,11 @@ function stopVinyl() {
   cancelAnimationFrame(animRAF);
   (function ramp() {
     const p = Math.min((performance.now() - t0) / DURATION, 1);
-    const rate = Math.max(startRate * (1 - p * p), 0.01);
-    audio.playbackRate = rate;
-    vinyl.style.animationDuration = Math.min(2.2 / rate, 40) + 's';
+    audio.playbackRate = Math.max(startRate * (1 - p * p), 0.001);
     if (p < 1) { animRAF = requestAnimationFrame(ramp); return; }
+    stopSpin();
     audio.pause();
     audio.playbackRate = 1.0;
-    vinyl.style.animationDuration = '';
     isRamping = false;
   })();
 }
@@ -503,17 +479,15 @@ function startVinyl() {
   vinylSound('start');
   audio.playbackRate = 0.22;
   audio.play().catch(() => { isRamping = false; });
+  startSpin();
   const t0 = performance.now();
   const DURATION = 480;
   cancelAnimationFrame(animRAF);
   (function ramp() {
     const p = Math.min((performance.now() - t0) / DURATION, 1);
-    const rate = 0.22 + 0.78 * (p * (2 - p));   // ease-out
-    audio.playbackRate = rate;
-    vinyl.style.animationDuration = (2.2 / rate) + 's';
+    audio.playbackRate = 0.22 + 0.78 * (p * (2 - p));
     if (p < 1) { animRAF = requestAnimationFrame(ramp); return; }
     audio.playbackRate = 1.0;
-    vinyl.style.animationDuration = '';
     isRamping = false;
   })();
 }
@@ -602,17 +576,14 @@ function showTrack(idx) {
   }, 180);
 }
 
-const tonearmG = document.getElementById('tonearm-g');
-
 function setPlaying(state) {
   if (state) {
     vinyl.classList.add('playing');
     timerIcon.innerHTML = PAUSE_SVG;
-    tonearmG.classList.add('on-record');
+    startSpin();
   } else {
     vinyl.classList.remove('playing');
     timerIcon.innerHTML = PLAY_SVG;
-    tonearmG.classList.remove('on-record');
   }
 }
 
