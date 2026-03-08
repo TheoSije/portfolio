@@ -280,6 +280,75 @@ main {
 /* hint: vinyl is clickable */
 .vinyl { cursor: pointer; }
 
+/* ── SHARE BUTTON ── */
+.share-btn {
+  position: absolute; right: 24px;
+  background: none; border: none;
+  color: rgba(255,255,255,.4);
+  cursor: pointer; padding: 8px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: color .2s;
+}
+.share-btn:hover { color: rgba(255,255,255,.85); }
+
+/* ── SHARE OVERLAY ── */
+.share-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  display: flex; align-items: flex-end; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s ease;
+}
+.share-overlay.open { opacity: 1; pointer-events: all; }
+.share-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.share-sheet {
+  position: relative; z-index: 1;
+  background: rgba(24,24,26,.97);
+  backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255,255,255,.1); border-bottom: none;
+  border-radius: 20px 20px 0 0;
+  padding: 14px 20px 36px;
+  width: 100%; max-width: 480px;
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  transform: translateY(20px);
+  transition: transform .32s cubic-bezier(0.34,1.1,0.64,1);
+}
+.share-overlay.open .share-sheet { transform: translateY(0); }
+.share-handle { width: 36px; height: 4px; background: rgba(255,255,255,.16); border-radius: 2px; flex-shrink: 0; }
+
+#share-canvas { border-radius: 10px; box-shadow: 0 8px 40px rgba(0,0,0,.7); display: block; }
+
+.share-row { display: flex; align-items: center; gap: 12px; width: 100%; }
+.share-label { font-size: 11px; color: rgba(255,255,255,.38); letter-spacing: .07em; text-transform: uppercase; min-width: 52px; }
+#fmt-opts { display: flex; gap: 6px; }
+.share-opt {
+  background: none; border: 1px solid rgba(255,255,255,.18);
+  color: rgba(255,255,255,.5); font-family: 'DM Sans', sans-serif;
+  font-size: 12px; padding: 5px 14px; border-radius: 100px;
+  cursor: pointer; transition: all .18s;
+}
+.share-opt:hover { border-color: rgba(255,255,255,.4); color: #fff; }
+.share-opt.active { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.38); color: #fff; }
+
+.share-actions { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.share-actions-row { display: flex; gap: 8px; }
+.share-dl-btn, .share-copy-btn, .share-close-btn {
+  font-family: 'DM Sans', sans-serif; font-size: 13px;
+  border-radius: 100px; cursor: pointer; padding: 10px 0;
+  transition: all .18s; width: 100%; text-align: center;
+  border: 1px solid rgba(255,255,255,.16);
+}
+.share-dl-btn { background: rgba(255,255,255,.1); color: #fff; flex: 1; }
+.share-dl-btn:hover { background: rgba(255,255,255,.18); }
+.share-close-btn { background: none; color: rgba(255,255,255,.4); flex: 1; }
+.share-close-btn:hover { color: rgba(255,255,255,.75); }
+.share-copy-btn { background: none; color: rgba(255,255,255,.45); }
+.share-copy-btn:hover { color: #fff; border-color: rgba(255,255,255,.4); }
+
 @media (max-width: 600px) {
   nav { padding: 0 16px; }
   main { gap: 20px; padding-left: 16px; padding-right: 16px; }
@@ -311,6 +380,9 @@ body.in-iframe main { padding-top: 0; }
 </main>
 
 <div class="bottom-bar">
+  <button class="share-btn" onclick="openShare()" title="Partager">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+  </button>
   <div class="player-group">
     <button class="ctrl-arrow" onclick="prev()" title="Précédent">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -329,6 +401,29 @@ body.in-iframe main { padding-top: 0; }
     <button class="ctrl-arrow" onclick="next()" title="Suivant">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
+  </div>
+</div>
+
+<!-- SHARE OVERLAY -->
+<div class="share-overlay" id="share-overlay">
+  <div class="share-backdrop" onclick="closeShare()"></div>
+  <div class="share-sheet">
+    <div class="share-handle"></div>
+    <canvas id="share-canvas"></canvas>
+    <div class="share-row">
+      <span class="share-label">Format</span>
+      <div id="fmt-opts">
+        <button class="share-opt active" data-fmt="square" onclick="setShareFmt(this)">Carré</button>
+        <button class="share-opt" data-fmt="story" onclick="setShareFmt(this)">Story</button>
+      </div>
+    </div>
+    <div class="share-actions">
+      <div class="share-actions-row">
+        <button class="share-dl-btn" onclick="downloadCard()">↓ Télécharger</button>
+        <button class="share-close-btn" onclick="closeShare()">Fermer</button>
+      </div>
+      <button class="share-copy-btn" id="share-copy-btn" onclick="copyShareLink()">⎘ Copier le lien</button>
+    </div>
   </div>
 </div>
 
@@ -417,6 +512,179 @@ function stopVinyl() {
 function startVinyl() {
   audio.play().catch(() => {});
   rampSpinTo(1, 500);
+}
+
+// ── Share ──
+const SHARE_FORMATS = {
+  square: { w: 1080, h: 1080 },
+  story:  { w: 1080, h: 1920 },
+};
+let shareFmt = 'square';
+let shareArtImg = null;
+
+function openShare() {
+  if (!tracks.length) return;
+  document.getElementById('share-overlay').classList.add('open');
+  const url = tracks[current].artworkUrl100.replace(/\d+x\d+bb/, '600x600bb');
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload  = () => { shareArtImg = img; renderShareCanvas(); };
+  img.onerror = () => { shareArtImg = null; renderShareCanvas(); };
+  img.src = url;
+  renderShareCanvas(); // render immediately (without art if not cached)
+}
+function closeShare() { document.getElementById('share-overlay').classList.remove('open'); }
+
+function setShareFmt(btn) {
+  shareFmt = btn.dataset.fmt;
+  document.querySelectorAll('#fmt-opts .share-opt').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderShareCanvas();
+}
+
+function renderShareCanvas() {
+  const canvas = document.getElementById('share-canvas');
+  const { w, h } = SHARE_FORMATS[shareFmt];
+  canvas.width  = w;
+  canvas.height = h;
+  // Scale preview to fit sheet
+  const maxW = Math.min(320, window.innerWidth - 80);
+  const s = Math.min(maxW / w, 280 / h);
+  canvas.style.width  = Math.round(w * s) + 'px';
+  canvas.style.height = Math.round(h * s) + 'px';
+
+  const ctx = canvas.getContext('2d');
+
+  // 1. Background: blurred artwork or solid dark
+  ctx.fillStyle = '#0a0a0a';
+  ctx.fillRect(0, 0, w, h);
+  if (shareArtImg) {
+    ctx.save();
+    ctx.filter = 'blur(55px) saturate(1.3)';
+    const sc = Math.max(w / shareArtImg.width, h / shareArtImg.height) * 1.4;
+    const iw = shareArtImg.width * sc, ih = shareArtImg.height * sc;
+    ctx.drawImage(shareArtImg, (w - iw) / 2, (h - ih) / 2, iw, ih);
+    ctx.filter = 'none';
+    ctx.restore();
+  }
+  // Dark vignette
+  ctx.fillStyle = 'rgba(0,0,0,0.58)';
+  ctx.fillRect(0, 0, w, h);
+
+  // 2. Vinyl disc
+  const R   = Math.min(w, h) * 0.33;
+  const cx  = w / 2;
+  const cy  = shareFmt === 'story' ? h * 0.38 : h * 0.46;
+
+  ctx.beginPath();
+  ctx.arc(cx, cy, R, 0, Math.PI * 2);
+  ctx.fillStyle = '#0d0d0d';
+  ctx.fill();
+
+  // Groove rings
+  for (let r = R * 0.40; r < R * 0.96; r += R * 0.028) {
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  }
+  // Disc edge
+  ctx.beginPath();
+  ctx.arc(cx, cy, R, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(255,255,255,0.09)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Album art label
+  if (shareArtImg) {
+    const lr = R * 0.345;
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(cx, cy, lr, 0, Math.PI * 2);
+    ctx.clip();
+    ctx.drawImage(shareArtImg, cx - lr, cy - lr, lr * 2, lr * 2);
+    ctx.restore();
+    ctx.beginPath();
+    ctx.arc(cx, cy, lr, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(255,255,255,0.13)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  }
+  // Spindle hole
+  ctx.beginPath();
+  ctx.arc(cx, cy, R * 0.032, 0, Math.PI * 2);
+  ctx.fillStyle = '#040404';
+  ctx.fill();
+
+  // 3. Track info
+  const t = tracks[current];
+  if (!t) return;
+
+  const textY = shareFmt === 'story' ? h * 0.65 : h * 0.80;
+  const pad   = w * 0.1;
+
+  ctx.textAlign = 'center';
+
+  // Title
+  const titleSize = Math.round(w * 0.05);
+  ctx.font = `700 italic ${titleSize}px 'Playfair Display', Georgia, serif`;
+  ctx.fillStyle = '#fff';
+  const words = t.trackName.split(' ');
+  let line = '', lines = [];
+  for (const word of words) {
+    const test = line ? line + ' ' + word : word;
+    if (ctx.measureText(test).width > w - pad * 2 && line) { lines.push(line); line = word; }
+    else line = test;
+  }
+  lines.push(line);
+  const lh = titleSize * 1.3;
+  lines.forEach((l, i) => ctx.fillText(l, cx, textY + i * lh));
+
+  // Artist · Album
+  const subSize = Math.round(w * 0.027);
+  ctx.font = `400 ${subSize}px 'DM Sans', system-ui, sans-serif`;
+  ctx.fillStyle = 'rgba(255,255,255,0.52)';
+  ctx.fillText(`${t.artistName}  ·  ${t.collectionName}`, cx, textY + lines.length * lh + subSize * 1.4);
+
+  // Branding
+  const brandSize = Math.round(w * 0.021);
+  ctx.font = `400 ${brandSize}px 'DM Sans', system-ui, sans-serif`;
+  ctx.fillStyle = 'rgba(255,255,255,0.22)';
+  ctx.fillText('theo.design/vinyle', cx, h - h * 0.045);
+}
+
+function downloadCard() {
+  const canvas = document.getElementById('share-canvas');
+  const t = tracks[current];
+  const name = t ? t.trackName.replace(/[^a-z0-9]/gi, '-').toLowerCase() : 'vinyle';
+  try {
+    const link = document.createElement('a');
+    link.download = `vinyle-${name}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  } catch(e) {
+    alert('Impossible d\'exporter — problème CORS sur la pochette.');
+  }
+}
+
+async function copyShareLink() {
+  const btn = document.getElementById('share-copy-btn');
+  const url = window.location.href;
+  const t   = tracks[current];
+  try {
+    if (navigator.share && /Mobi|Android/i.test(navigator.userAgent)) {
+      await navigator.share({ title: t ? t.trackName : 'vinyle', url });
+      return;
+    }
+    await navigator.clipboard.writeText(url);
+  } catch {
+    const ta = document.createElement('textarea');
+    ta.value = url; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); ta.remove();
+  }
+  btn.textContent = '✓ Lien copié !';
+  setTimeout(() => { btn.textContent = '⎘ Copier le lien'; }, 2200);
 }
 
 function fetchWithTimeout(url, ms = 7000) {
