@@ -23,23 +23,33 @@ nav {
   top: 0; left: 0; right: 0;
   z-index: 100;
   height: 48px;
-  background: #111;
-  border-bottom: 1px solid rgba(255,255,255,.07);
+  background: #000;
   display: flex;
   align-items: center;
-  padding: 0 24px;
+  padding: 0 28px;
+  gap: 14px;
 }
 .nav-back {
-  display: flex; align-items: center; gap: 7px;
-  color: rgba(255,255,255,.35); font-size: 12px; letter-spacing: .04em;
-  cursor: pointer; background: none; border: none; transition: color .2s;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(255,255,255,.32);
+  font-size: 12px;
+  letter-spacing: .04em;
+  transition: color .2s;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  padding: 0;
+  text-decoration: none;
 }
-.nav-back:hover { color: #fff; }
-.nav-back svg { width: 14px; height: 14px; }
-.nav-title {
-  position: absolute; left: 50%; transform: translateX(-50%);
-  font-size: 13px; font-weight: 500; color: rgba(255,255,255,.4); letter-spacing: .04em;
-}
+.nav-back:hover { color: rgba(255,255,255,.7); }
+.nav-sep { width: 1px; height: 13px; background: rgba(255,255,255,.1); }
+.nav-logo { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.65); }
+
+body.in-iframe nav { display: none; }
+body.in-iframe .main { padding-top: 0; }
 
 /* ── MAIN ── */
 .main {
@@ -173,13 +183,9 @@ nav {
 <body>
 
 <nav>
-  <button class="nav-back" onclick="history.back()">
-    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
-      <path d="M10 3L5 8l5 5"/>
-    </svg>
-    Retour
-  </button>
-  <span class="nav-title">Chess Puzzles</span>
+  <a class="nav-back" href="../" onclick="event.preventDefault();if(window.parent!==window){window.parent.postMessage('close-minisite','*');}else{window.location.href='../';}">← theo.design</a>
+  <div class="nav-sep"></div>
+  <span class="nav-logo">Chess Puzzles</span>
 </nav>
 
 <div class="main">
@@ -428,6 +434,9 @@ function show(id) { document.getElementById(id).classList.remove('hidden'); }
 function hide(id) { document.getElementById(id).classList.add('hidden'); }
 
 setup(0);
+
+// Détection iframe
+if (window.self !== window.top) document.body.classList.add('in-iframe');
 </script>
 </body>
 </html>
