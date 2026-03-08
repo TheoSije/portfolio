@@ -2,7 +2,7 @@ name: Refresh vinyle/tracks.json
 
 on:
   push:
-    branches: ['**']
+    branches: ['claude/dreamy-cannon']
   schedule:
     - cron: '0 3 1 * *'   # 1er de chaque mois à 3h
   workflow_dispatch:
