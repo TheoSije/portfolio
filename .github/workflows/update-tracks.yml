@@ -1,0 +1,75 @@
+name: Refresh vinyle/tracks.json
+
+on:
+  push:
+    branches: ['**']
+  schedule:
+    - cron: '0 3 1 * *'   # 1er de chaque mois à 3h
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.ref_name }}
+
+      - name: Fetch tracks from iTunes
+        run: |
+          node -e "
+          const https = require('https');
+          const queries = [
+            'miles+davis','chet+baker','bill+evans',
+            'john+coltrane','nina+simone','billie+holiday',
+            'joao+gilberto','stan+getz','ella+fitzgerald',
+            'charles+mingus','thelonious+monk','art+blakey',
+            'dave+brubeck','herbie+hancock','sonny+rollins',
+          ];
+          const selected = queries.sort(() => Math.random() - 0.5).slice(0, 8);
+
+          const fetchQuery = (q) => new Promise((resolve) => {
+            const url = 'https://itunes.apple.com/search?term=' + q + '&media=music&limit=20';
+            https.get(url, (res) => {
+              let data = '';
+              res.on('data', d => data += d);
+              res.on('end', () => {
+                try { resolve(JSON.parse(data).results || []); }
+                catch(e) { resolve([]); }
+              });
+            }).on('error', () => resolve([]));
+          });
+
+          Promise.all(selected.map(fetchQuery)).then(results => {
+            const seen = new Set();
+            const tracks = results.flat().filter(t => {
+              if (!t.previewUrl || seen.has(t.trackId)) return false;
+              seen.add(t.trackId);
+              return true;
+            }).map(t => ({
+              trackId:        t.trackId,
+              trackName:      t.trackName,
+              artistName:     t.artistName,
+              collectionName: t.collectionName,
+              previewUrl:     t.previewUrl,
+              artworkUrl100:  t.artworkUrl100,
+            }));
+
+            const fs = require('fs');
+            fs.writeFileSync('vinyle/tracks.json',
+              JSON.stringify({ tracks, updated: new Date().toISOString() }, null, 2));
+            console.log('Saved ' + tracks.length + ' tracks');
+          });
+          "
+
+      - name: Commit tracks.json
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add vinyle/tracks.json
+          git diff --staged --quiet || git commit -m "chore: refresh vinyle/tracks.json [skip ci]"
+          git push
