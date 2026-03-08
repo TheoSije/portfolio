@@ -377,119 +377,46 @@ function shuffle(arr) {
   }
 }
 
-// ── Vinyl scratch / spin sounds ──
-const AudioCtx = window.AudioContext || window.webkitAudioContext;
-let audioCtx;
-function getCtx() {
-  if (!audioCtx) audioCtx = new AudioCtx();
-  if (audioCtx.state === 'suspended') audioCtx.resume();
-  return audioCtx;
-}
-
-// Son synchronisé avec la durée réelle du ramp (stop=560ms, start=480ms)
-function vinylSound(type) {
-  const ctx  = getCtx();
-  const now  = ctx.currentTime;
-  const dur  = type === 'stop' ? 0.56 : 0.48;
-  const sr   = ctx.sampleRate;
-  const frames = Math.floor(sr * dur);
-  const buf  = ctx.createBuffer(1, frames, sr);
-  const data = buf.getChannelData(0);
-
-  for (let i = 0; i < frames; i++) {
-    const p = i / frames;
-    // stop: descend doucement, start: monte vite puis plateau
-    const env = type === 'stop'
-      ? Math.pow(1 - p, 1.4) * (1 - Math.exp(-p * 30))
-      : Math.pow(p, 0.25) * Math.exp(-p * 2.8);
-    data[i] = (Math.random() * 2 - 1) * env * 0.18;
-  }
-
-  const src = ctx.createBufferSource();
-  src.buffer = buf;
-
-  // Filtre passe-bande qui simule le frottement du sillon
-  const bpf = ctx.createBiquadFilter();
-  bpf.type = 'bandpass';
-  bpf.Q.value = 1.4;
-  if (type === 'stop') {
-    // fréquence descend avec le vinyle qui ralentit
-    bpf.frequency.setValueAtTime(3200, now);
-    bpf.frequency.exponentialRampToValueAtTime(180, now + dur);
-  } else {
-    // fréquence monte avec l'accélération
-    bpf.frequency.setValueAtTime(180, now);
-    bpf.frequency.exponentialRampToValueAtTime(3200, now + dur * 0.75);
-  }
-
-  const gain = ctx.createGain();
-  gain.gain.setValueAtTime(type === 'stop' ? 0.45 : 0.35, now);
-  gain.gain.linearRampToValueAtTime(0.001, now + dur);
-
-  src.connect(bpf); bpf.connect(gain); gain.connect(ctx.destination);
-  src.start(now);
-}
-
-// ── Rotation JS — pilotée par audio.playbackRate pour une décélération parfaite ──
+// ── Visual spin loop ──
 const DEG_PER_MS = 360 * 33.33 / 60000; // 33 RPM → ~0.2 deg/ms
 let currentAngle = 0, lastTs = null, spinRAF = null;
+let spinRate = 0; // 0 = arrêté, 1 = vitesse normale
 
 function spinTick(ts) {
   if (lastTs !== null)
-    currentAngle = (currentAngle + DEG_PER_MS * (ts - lastTs) * audio.playbackRate) % 360;
+    currentAngle = (currentAngle + DEG_PER_MS * (ts - lastTs) * spinRate) % 360;
   lastTs = ts;
   vinyl.style.transform = `rotate(${currentAngle}deg)`;
   spinRAF = requestAnimationFrame(spinTick);
 }
-function startSpin() {
-  if (spinRAF) return;
-  lastTs = null;
-  spinRAF = requestAnimationFrame(spinTick);
-}
-function stopSpin() {
-  cancelAnimationFrame(spinRAF);
-  spinRAF = null; lastTs = null;
-}
 
-// ── Playback-rate ramp ──
-let animRAF, isRamping = false;
+let rampRAF, isRamping = false;
+
+function rampSpinTo(target, duration, onDone) {
+  cancelAnimationFrame(rampRAF);
+  isRamping = true;
+  if (!spinRAF) { lastTs = null; spinRAF = requestAnimationFrame(spinTick); }
+  const from = spinRate, t0 = performance.now();
+  (function ramp() {
+    const p = Math.min((performance.now() - t0) / duration, 1);
+    // ease-out pour l'accélération, ease-in pour la décélération
+    const e = target > from ? p * (2 - p) : p * p;
+    spinRate = from + (target - from) * e;
+    if (p < 1) { rampRAF = requestAnimationFrame(ramp); return; }
+    spinRate = target;
+    isRamping = false;
+    if (onDone) onDone();
+  })();
+}
 
 function stopVinyl() {
-  if (isRamping) return;
-  isRamping = true;
-  vinylSound('stop');
-  const startRate = audio.playbackRate;
-  const t0 = performance.now();
-  const DURATION = 560;
-  cancelAnimationFrame(animRAF);
-  (function ramp() {
-    const p = Math.min((performance.now() - t0) / DURATION, 1);
-    audio.playbackRate = Math.max(startRate * (1 - p * p), 0.001);
-    if (p < 1) { animRAF = requestAnimationFrame(ramp); return; }
-    stopSpin();
-    audio.pause();
-    audio.playbackRate = 1.0;
-    isRamping = false;
-  })();
+  audio.pause();
+  rampSpinTo(0, 700, () => { cancelAnimationFrame(spinRAF); spinRAF = null; lastTs = null; });
 }
 
 function startVinyl() {
-  if (isRamping) return;
-  isRamping = true;
-  vinylSound('start');
-  audio.playbackRate = 0.22;
-  audio.play().catch(() => { isRamping = false; });
-  startSpin();
-  const t0 = performance.now();
-  const DURATION = 480;
-  cancelAnimationFrame(animRAF);
-  (function ramp() {
-    const p = Math.min((performance.now() - t0) / DURATION, 1);
-    audio.playbackRate = 0.22 + 0.78 * (p * (2 - p));
-    if (p < 1) { animRAF = requestAnimationFrame(ramp); return; }
-    audio.playbackRate = 1.0;
-    isRamping = false;
-  })();
+  audio.play().catch(() => {});
+  rampSpinTo(1, 500);
 }
 
 function fetchWithTimeout(url, ms = 7000) {
@@ -580,7 +507,7 @@ function setPlaying(state) {
   if (state) {
     vinyl.classList.add('playing');
     timerIcon.innerHTML = PAUSE_SVG;
-    startSpin();
+    if (!isRamping) rampSpinTo(1, 500); // si play déclenché hors startVinyl (ex: showTrack)
   } else {
     vinyl.classList.remove('playing');
     timerIcon.innerHTML = PLAY_SVG;
