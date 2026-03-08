@@ -390,27 +390,94 @@ main {
 .share-copy-btn:hover { border-color: rgba(255,255,255,.3); color: rgba(255,255,255,.85); }
 .share-copy-btn.copied { border-color: rgba(100,220,130,.5); color: rgba(100,220,130,.95); }
 
-/* ── QUIZ BUTTON ── */
-.quiz-icon-btn {
+/* ── QUIZ GAME BUTTON ── */
+.quiz-game-btn {
   position: absolute;
   left: clamp(28px, 6vw, 88px);
-  border: none;
+  border: 1px solid rgba(255,255,255,.14);
   background: none;
   cursor: pointer;
-  color: rgba(255,255,255,.4);
+  color: rgba(255,255,255,.55);
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  transition: color .18s, background .18s;
-  padding: 0;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .03em;
+  transition: color .18s, border-color .18s;
+  white-space: nowrap;
 }
-.quiz-icon-btn:hover { color: rgba(255,255,255,.85); }
-.quiz-icon-btn.active { color: #fff; background: rgba(255,255,255,.1); }
+.quiz-game-btn:hover { color: rgba(255,255,255,.9); border-color: rgba(255,255,255,.35); }
+.quiz-game-btn.quit { border-color: rgba(230,80,80,.35); color: rgba(230,80,80,.75); }
+.quiz-game-btn.quit:hover { border-color: rgba(230,80,80,.65); color: rgba(230,80,80,1); }
+
+/* ── QUIZ HEADER BAR ── */
+.quiz-header {
+  position: fixed;
+  top: 48px; left: 0; right: 0;
+  z-index: 95;
+  background: #000;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  padding: 12px clamp(28px, 6vw, 88px) 11px;
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+}
+body.in-iframe .quiz-header { top: 0; }
+.quiz-header.active { display: flex; }
+.quiz-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.quiz-header-title {
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+  font-weight: 500;
+}
+.quiz-header-count {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255,255,255,.35);
+  letter-spacing: .04em;
+}
+.quiz-q-timer-bar {
+  height: 2px;
+  background: rgba(255,255,255,.07);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.quiz-q-timer-fill {
+  height: 100%;
+  width: 100%;
+  border-radius: 2px;
+  background: rgba(255,255,255,.5);
+}
+.quiz-dots {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.quiz-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.1);
+  transition: background .25s, transform .2s;
+  flex-shrink: 0;
+}
+.quiz-dot.current { background: rgba(255,255,255,.4); transform: scale(1.25); }
+.quiz-dot.correct { background: rgba(80,200,110,.85); transform: scale(1); }
+.quiz-dot.wrong   { background: rgba(230,80,80,.75);  transform: scale(1); }
 
 /* ── QUIZ PANEL ── */
+body.quiz-active main { padding-top: 130px; }
+body.quiz-active.in-iframe main { padding-top: 76px; }
 .quiz-panel {
   margin-top: 28px;
   display: none;
@@ -446,7 +513,7 @@ main {
   font-weight: 500;
   flex-shrink: 0;
 }
-.quiz-opt:hover:not(.correct):not(.wrong):not(.selected) {
+.quiz-opt:hover:not(.correct):not(.wrong):not(.selected):not(:disabled) {
   border-color: rgba(255,255,255,.28);
   color: rgba(255,255,255,.9);
   background: rgba(255,255,255,.06);
@@ -487,11 +554,93 @@ main {
 }
 .quiz-validate:hover:not(:disabled) { opacity: .88; }
 .quiz-validate:disabled { opacity: .35; cursor: default; }
-.quiz-result {
+.quiz-inline-result {
   font-size: 13px;
   font-weight: 500;
   transition: color .2s;
 }
+
+/* ── QUIZ RESULT SCREEN ── */
+.quiz-result-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 210;
+  background: #0a0a0a;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(28px, 8vw, 88px);
+  gap: 28px;
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+.quiz-result-screen.open    { display: flex; }
+.quiz-result-screen.visible { opacity: 1; }
+.quiz-rs-label {
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+  font-weight: 500;
+}
+.quiz-rs-score {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(80px, 15vw, 148px);
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(135deg, #e8d5b7 0%, #c9a87c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.quiz-rs-sub {
+  font-size: clamp(13px, 1.5vw, 16px);
+  color: rgba(255,255,255,.38);
+  margin-top: -12px;
+  text-align: center;
+}
+.quiz-rs-dots {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 280px;
+}
+.quiz-rs-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+}
+.quiz-rs-dot.correct { background: rgba(80,200,110,.85); }
+.quiz-rs-dot.wrong   { background: rgba(230,80,80,.72); }
+.quiz-rs-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.quiz-rs-btn {
+  height: 42px;
+  padding: 0 24px;
+  border-radius: 100px;
+  border: none;
+  background: #fff;
+  color: #111;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.quiz-rs-btn:hover { opacity: .85; }
+.quiz-rs-btn.ghost {
+  background: none;
+  border: 1px solid rgba(255,255,255,.16);
+  color: rgba(255,255,255,.5);
+}
+.quiz-rs-btn.ghost:hover { border-color: rgba(255,255,255,.38); color: rgba(255,255,255,.88); }
 
 /* Book-page swatch : blanc parchemin avec liseré rouge */
 .share-swatch-book {
@@ -514,7 +663,7 @@ main {
   .nav-right { display: none; }
   main { padding-left: 20px; padding-right: 20px; }
   .share-icon-btn { right: 16px; }
-  .quiz-icon-btn { left: 16px; }
+  .quiz-game-btn { left: 16px; }
   .timer-btn { width: 56px; height: 56px; }
   .play-inner { width: 46px; height: 46px; }
 }
@@ -533,6 +682,16 @@ body.in-iframe main { padding-top: 0; }
   <span class="nav-logo">inkpt</span>
 </nav>
 
+<!-- QUIZ HEADER -->
+<div class="quiz-header" id="quiz-header">
+  <div class="quiz-header-top">
+    <span class="quiz-header-title">Quiz</span>
+    <span class="quiz-header-count" id="quiz-hcount">1 / 10</span>
+  </div>
+  <div class="quiz-q-timer-bar"><div class="quiz-q-timer-fill" id="quiz-qtimer"></div></div>
+  <div class="quiz-dots" id="quiz-dots"></div>
+</div>
+
 <main>
   <div class="quote-block" id="quote-block">
     <span class="quote-mark" id="quote-mark">"</span>
@@ -543,15 +702,13 @@ body.in-iframe main { padding-top: 0; }
       <div class="quiz-opts" id="quiz-opts"></div>
       <div class="quiz-footer">
         <button class="quiz-validate" id="quiz-validate">Valider</button>
-        <span class="quiz-result" id="quiz-result"></span>
+        <span class="quiz-inline-result" id="quiz-inline-result"></span>
       </div>
     </div>
   </div>
 
   <div class="bottom-bar">
-    <button class="quiz-icon-btn" id="quiz-mode-btn" onclick="toggleQuizMode()" title="Mode Quiz">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="3" stroke-linecap="round"/></svg>
-    </button>
+    <button class="quiz-game-btn" id="quiz-game-btn" onclick="quizGameBtnClick()">Mode jeu</button>
     <div class="player-group">
       <button class="ctrl-arrow" onclick="prev()" title="Précédent">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -810,7 +967,6 @@ function show(idx, direction) {
     currentColorIdx = idx % colorPalette.length;
     applyColor(currentColorIdx);
     block.classList.add('visible');
-    if (quizMode) buildQuiz(idx);
   }, 280);
 }
 
@@ -822,7 +978,6 @@ const ringFill  = document.getElementById('timer-ring-fill');
 const timerIcon = document.getElementById('timer-icon');
 const CIRCUMFERENCE = 2 * Math.PI * 28; // r=28 → ~175.93
 const TIMER_MS = 10000;
-const QUIZ_TIMER_MS = 15000;
 let timerRaf = null;
 let timerStart = null;
 let timerElapsedOffset = 0; // ms already elapsed when paused
@@ -837,17 +992,17 @@ function setRing(progress) {
 }
 
 function startTimer() {
+  if (quizActive) return;
   if (timerRaf) cancelAnimationFrame(timerRaf);
   timerPaused = false;
   timerElapsedOffset = 0;
   timerIcon.innerHTML = PAUSE_SVG;
   timerStart = performance.now();
-  const duration = quizMode ? QUIZ_TIMER_MS : TIMER_MS;
   const c = colorPalette[currentColorIdx % colorPalette.length];
   ringFill.style.stroke = c.from;
   function tick(now) {
     const elapsed = timerElapsedOffset + (now - timerStart);
-    const progress = Math.max(0, 1 - elapsed / duration);
+    const progress = Math.max(0, 1 - elapsed / TIMER_MS);
     setRing(progress);
     if (progress > 0) {
       timerRaf = requestAnimationFrame(tick);
@@ -861,7 +1016,7 @@ function startTimer() {
 }
 
 function toggleTimer() {
-  if (quizMode) return; // pas de pause en mode quiz
+  if (quizActive) return;
   if (timerPaused) {
     // Resume
     timerPaused = false;
@@ -892,41 +1047,107 @@ function toggleTimer() {
   }
 }
 
-// ── QUIZ MODE ──
-let quizMode = false;
-let quizSelected = null;
+// ── QUIZ GAME ──
+const QUIZ_TOTAL = 10;
+const QUIZ_Q_MS  = 10000;
+let quizActive    = false;
+let quizGame      = null; // { questions, qIdx, answers, score }
+let quizSelected  = null;
 let quizValidated = false;
+let quizTimerRaf  = null;
+let quizTimerStart = null;
 
-function toggleQuizMode() {
-  quizMode = !quizMode;
-  const modeBtn = document.getElementById('quiz-mode-btn');
-  const panel   = document.getElementById('quiz-panel');
-  modeBtn.classList.toggle('active', quizMode);
-  if (quizMode) {
-    bookEl.style.display   = 'none';
-    authorEl.style.display = 'none';
-    panel.style.display    = 'flex';
-    buildQuiz(current);
-  } else {
-    panel.style.display    = 'none';
-    bookEl.style.display   = '';
-    authorEl.style.display = '';
-  }
-  startTimer();
+function quizGameBtnClick() {
+  if (quizActive) { exitQuizGame(); } else { startQuizGame(); }
 }
 
-function buildQuiz(idx) {
+function startQuizGame() {
+  // Close result screen if open
+  const rs = document.getElementById('quiz-result-screen');
+  rs.classList.remove('visible');
+  setTimeout(() => rs.classList.remove('open'), 400);
+
+  // Pick QUIZ_TOTAL random unique quote indices
+  const pool = [...Array(quotes.length).keys()];
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  quizGame     = { questions: pool.slice(0, QUIZ_TOTAL), qIdx: 0, answers: [], score: 0 };
+  quizActive   = true;
+  quizSelected = null;
+  quizValidated= false;
+
+  // Stop normal timer
+  if (timerRaf) { cancelAnimationFrame(timerRaf); timerRaf = null; }
+
+  // UI
+  document.body.classList.add('quiz-active');
+  document.getElementById('quiz-header').classList.add('active');
+  document.getElementById('quiz-panel').style.display = 'flex';
+  document.querySelector('.player-group').style.visibility = 'hidden';
+  document.querySelector('.share-icon-btn').style.visibility = 'hidden';
+  bookEl.style.display   = 'none';
+  authorEl.style.display = 'none';
+
+  const btn = document.getElementById('quiz-game-btn');
+  btn.textContent = 'Quitter';
+  btn.classList.add('quit');
+
+  buildQuizDots();
+  loadQuizQuestion(0);
+}
+
+function buildQuizDots() {
+  const el = document.getElementById('quiz-dots');
+  el.innerHTML = '';
+  for (let i = 0; i < QUIZ_TOTAL; i++) {
+    const d = document.createElement('div');
+    d.className = 'quiz-dot' + (i === 0 ? ' current' : '');
+    el.appendChild(d);
+  }
+}
+
+function updateQuizDots() {
+  const dots = document.querySelectorAll('.quiz-dot');
+  const { qIdx, answers } = quizGame;
+  dots.forEach((d, i) => {
+    d.className = 'quiz-dot';
+    if (i < answers.length) d.classList.add(answers[i] ? 'correct' : 'wrong');
+    else if (i === qIdx)    d.classList.add('current');
+  });
+}
+
+function loadQuizQuestion(qIdx) {
+  quizGame.qIdx = qIdx;
   quizSelected  = null;
   quizValidated = false;
+
+  const idx = quizGame.questions[qIdx];
+  document.getElementById('quiz-hcount').textContent = (qIdx + 1) + ' / ' + QUIZ_TOTAL;
+  updateQuizDots();
+
+  // Animate quote in
+  block.classList.remove('visible');
+  setTimeout(() => {
+    textEl.textContent = quotes[idx].text;
+    currentColorIdx = idx % colorPalette.length;
+    applyColor(currentColorIdx);
+    block.classList.add('visible');
+  }, qIdx === 0 ? 80 : 260);
+
+  buildQuizOptions(idx);
+  startQuizTimer();
+}
+
+function buildQuizOptions(idx) {
   const correctAuthor = parseAuthor(quotes[idx].author).author;
-  // Pool d'auteurs différents
   const seen = new Set([correctAuthor]);
   const pool = [];
   for (let i = 0; i < quotes.length && pool.length < 20; i++) {
     const a = parseAuthor(quotes[i].author).author;
     if (!seen.has(a)) { seen.add(a); pool.push(a); }
   }
-  // Fisher-Yates shuffle du pool
   for (let i = pool.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [pool[i], pool[j]] = [pool[j], pool[i]];
@@ -941,18 +1162,49 @@ function buildQuiz(idx) {
   options.forEach((author, i) => {
     const btn = document.createElement('button');
     btn.className = 'quiz-opt';
-    btn.dataset.author  = author;
     btn.dataset.correct = author === correctAuthor ? '1' : '0';
     btn.innerHTML = `<span class="quiz-opt-letter">${String.fromCharCode(65 + i)}</span>${author}`;
     btn.onclick = () => selectQuizOpt(btn);
     optsEl.appendChild(btn);
   });
-  const valBtn   = document.getElementById('quiz-validate');
-  const resultEl = document.getElementById('quiz-result');
-  valBtn.textContent   = 'Valider';
-  valBtn.disabled      = true;
-  valBtn.onclick       = validateQuiz;
-  resultEl.textContent = '';
+  const valBtn = document.getElementById('quiz-validate');
+  valBtn.textContent = 'Valider';
+  valBtn.disabled    = true;
+  valBtn.onclick     = validateQuiz;
+  document.getElementById('quiz-inline-result').textContent = '';
+}
+
+function startQuizTimer() {
+  stopQuizTimer();
+  quizTimerStart = performance.now();
+  const fill = document.getElementById('quiz-qtimer');
+  fill.style.width = '100%';
+  function tick(now) {
+    const progress = Math.max(0, 1 - (now - quizTimerStart) / QUIZ_Q_MS);
+    fill.style.width = (progress * 100) + '%';
+    fill.style.background = progress < 0.2 ? 'rgba(230,100,80,.85)' : 'rgba(255,255,255,.5)';
+    if (progress > 0) { quizTimerRaf = requestAnimationFrame(tick); }
+    else { onQuizTimeout(); }
+  }
+  quizTimerRaf = requestAnimationFrame(tick);
+}
+
+function stopQuizTimer() {
+  if (quizTimerRaf) { cancelAnimationFrame(quizTimerRaf); quizTimerRaf = null; }
+}
+
+function onQuizTimeout() {
+  if (quizValidated) return;
+  quizValidated = true;
+  document.querySelectorAll('.quiz-opt').forEach(b => {
+    b.disabled = true;
+    if (b.dataset.correct === '1') b.classList.add('correct');
+  });
+  const res = document.getElementById('quiz-inline-result');
+  res.textContent = '⏱ Temps écoulé !';
+  res.style.color = 'rgba(255,255,255,.35)';
+  document.getElementById('quiz-validate').disabled = true;
+  advanceQuiz(false);
 }
 
 function selectQuizOpt(btn) {
@@ -965,19 +1217,96 @@ function selectQuizOpt(btn) {
 
 function validateQuiz() {
   if (!quizSelected || quizValidated) return;
+  stopQuizTimer();
   quizValidated = true;
   const isCorrect = quizSelected.dataset.correct === '1';
   document.querySelectorAll('.quiz-opt').forEach(b => {
+    b.disabled = true;
     if (b.dataset.correct === '1') b.classList.add('correct');
     else if (b === quizSelected)   b.classList.add('wrong');
   });
-  const resultEl = document.getElementById('quiz-result');
-  resultEl.textContent = isCorrect ? '✓ Bonne réponse !' : '✗ Raté…';
-  resultEl.style.color  = isCorrect ? 'rgba(80,200,110,.9)' : 'rgba(230,80,80,.85)';
-  const valBtn = document.getElementById('quiz-validate');
-  valBtn.textContent = 'Suivant →';
-  valBtn.disabled    = false;
-  valBtn.onclick     = () => next();
+  document.getElementById('quiz-validate').disabled = true;
+  const res = document.getElementById('quiz-inline-result');
+  res.textContent = isCorrect ? '✓ Bonne réponse !' : '✗ Raté…';
+  res.style.color  = isCorrect ? 'rgba(80,200,110,.9)' : 'rgba(230,80,80,.85)';
+  advanceQuiz(isCorrect);
+}
+
+function advanceQuiz(isCorrect) {
+  quizGame.answers.push(isCorrect);
+  if (isCorrect) quizGame.score++;
+  updateQuizDots();
+  // Drain timer bar
+  document.getElementById('quiz-qtimer').style.width = '0%';
+  setTimeout(() => {
+    if (quizGame.qIdx + 1 >= QUIZ_TOTAL) { showQuizResults(); }
+    else { loadQuizQuestion(quizGame.qIdx + 1); }
+  }, 1300);
+}
+
+function showQuizResults() {
+  const { score, answers } = quizGame;
+  document.getElementById('quiz-rs-score').textContent = score + '/10';
+  const sub = score <= 3 ? 'Retente ta chance !'
+    : score <= 5 ? 'Pas mal, continue !'
+    : score <= 8 ? 'Bien joué !'
+    : 'Parfait ! 🎉';
+  document.getElementById('quiz-rs-sub').textContent = sub;
+  const dotsEl = document.getElementById('quiz-rs-dots');
+  dotsEl.innerHTML = '';
+  answers.forEach(a => {
+    const d = document.createElement('div');
+    d.className = 'quiz-rs-dot ' + (a ? 'correct' : 'wrong');
+    dotsEl.appendChild(d);
+  });
+  document.getElementById('quiz-rs-share').textContent = 'Partager le score';
+  const rs = document.getElementById('quiz-result-screen');
+  rs.classList.add('open');
+  setTimeout(() => rs.classList.add('visible'), 10);
+}
+
+async function shareQuizResult() {
+  const { score } = quizGame;
+  const text = `J'ai obtenu ${score}/10 au quiz Inkipit ! 📚`;
+  const btn  = document.getElementById('quiz-rs-share');
+  if (navigator.share) {
+    try { await navigator.share({ title: 'Inkipit Quiz', text, url: location.href }); return; } catch {}
+  }
+  try { await navigator.clipboard.writeText(text + ' → ' + location.href); }
+  catch {
+    const ta = document.createElement('textarea');
+    ta.value = text + ' → ' + location.href;
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+  }
+  btn.textContent = '✓ Copié !';
+  setTimeout(() => { btn.textContent = 'Partager le score'; }, 2200);
+}
+
+function exitQuizGame() {
+  stopQuizTimer();
+  quizActive = false;
+  quizGame   = null;
+
+  // Close result screen
+  const rs = document.getElementById('quiz-result-screen');
+  rs.classList.remove('visible');
+  setTimeout(() => rs.classList.remove('open'), 400);
+
+  // Restore UI
+  document.body.classList.remove('quiz-active');
+  document.getElementById('quiz-header').classList.remove('active');
+  document.getElementById('quiz-panel').style.display = 'none';
+  document.querySelector('.player-group').style.visibility = '';
+  document.querySelector('.share-icon-btn').style.visibility = '';
+  bookEl.style.display   = '';
+  authorEl.style.display = '';
+
+  const btn = document.getElementById('quiz-game-btn');
+  btn.textContent = 'Mode jeu';
+  btn.classList.remove('quit');
+
+  show(current);
+  startTimer();
 }
 
 document.addEventListener('keydown', e => {
@@ -1208,5 +1537,19 @@ startTimer();
 // Détection iframe : cache le nav inkpt (le portfolio gère déjà la barre du haut)
 if (window.self !== window.top) document.body.classList.add('in-iframe');
 </script>
+
+<!-- QUIZ RESULT SCREEN -->
+<div class="quiz-result-screen" id="quiz-result-screen">
+  <span class="quiz-rs-label">Résultat</span>
+  <div class="quiz-rs-score" id="quiz-rs-score">—</div>
+  <p class="quiz-rs-sub" id="quiz-rs-sub"></p>
+  <div class="quiz-rs-dots" id="quiz-rs-dots"></div>
+  <div class="quiz-rs-actions">
+    <button class="quiz-rs-btn" onclick="startQuizGame()">↺ Rejouer</button>
+    <button class="quiz-rs-btn ghost" id="quiz-rs-share" onclick="shareQuizResult()">Partager le score</button>
+    <button class="quiz-rs-btn ghost" onclick="exitQuizGame()">Quitter</button>
+  </div>
+</div>
+
 </body>
 </html>
