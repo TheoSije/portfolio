@@ -802,15 +802,19 @@ const persoLabels = {
   radio: 'Radio Player',
 };
 
-function openMiniSite(slug) {
+// Base path robuste — fonctionne en / ou /portfolio/ ou custom domain
+const BASE_PATH = (() => {
+  const p = location.pathname;
+  return p.endsWith('/') ? p : p.slice(0, p.lastIndexOf('/') + 1);
+})();
+
+function _showMiniSite(slug) {
   document.body.classList.remove('on-home');
   document.body.classList.add('minisite-open');
-  const overlay = document.getElementById('minisite-overlay');
   const frame = document.getElementById('minisite-frame');
-  frame.src = slug + '/';
-  overlay.style.display = 'block';
+  frame.src = BASE_PATH + slug + '/'; // absolu : jamais affecté par pushState
+  document.getElementById('minisite-overlay').style.display = 'block';
   document.body.style.overflow = 'hidden';
-  history.pushState({minisite: slug}, '', slug);
   document.querySelector('.nav-role').style.display = 'flex';
   document.querySelector('.nav-role').style.padding = '0';
   document.querySelector('.nav-role').textContent = persoLabels[slug] || slug;
@@ -819,20 +823,28 @@ function openMiniSite(slug) {
   document.querySelector('nav').classList.add('minisite-nav');
 }
 
-function closeMiniSite() {
+function _hideMiniSite() {
   document.body.classList.add('on-home');
   document.body.classList.remove('minisite-open');
-  const overlay = document.getElementById('minisite-overlay');
-  overlay.style.display = 'none';
+  document.getElementById('minisite-overlay').style.display = 'none';
   document.getElementById('minisite-frame').src = '';
   document.body.style.overflow = '';
-  history.pushState({}, '', '/');
   document.querySelector('.nav-role').textContent = 'Senior Product Designer · Paris';
   document.querySelector('.nav-role').style.padding = '';
   document.querySelector('.nav-role').style.display = 'none';
   document.querySelector('.nav-contact').style.display = '';
   document.querySelector('nav').style.zIndex = '';
   document.querySelector('nav').classList.remove('minisite-nav');
+}
+
+function openMiniSite(slug) {
+  _showMiniSite(slug);
+  history.pushState({minisite: slug}, '', BASE_PATH + slug);
+}
+
+function closeMiniSite() {
+  _hideMiniSite();
+  history.pushState({}, '', BASE_PATH);
 }
 
 function closeCurrentView() {
@@ -844,8 +856,13 @@ function closeCurrentView() {
   }
 }
 
+// Popstate : gère retour ET avance dans l'historique du navigateur
 window.addEventListener('popstate', (e) => {
-  if (!e.state?.minisite) closeMiniSite();
+  if (e.state?.minisite) {
+    _showMiniSite(e.state.minisite);
+  } else {
+    _hideMiniSite();
+  }
 });
 
 // allow iframe to close overlay
@@ -853,6 +870,18 @@ window.closeMiniSiteFromFrame = closeMiniSite;
 window.addEventListener('message', function(e) {
   if (e.data === 'close-minisite') closeMiniSite();
 });
+
+// Atterrissage direct sur /<slug> ou redirect depuis 404.html (?from=slug)
+(function() {
+  const fromParam = new URLSearchParams(location.search).get('from');
+  const slug = fromParam
+    ? fromParam.replace(/^\/|\/$/g, '')
+    : location.pathname.slice(BASE_PATH.length).replace(/\/$/, '');
+  if (slug && persoLabels[slug]) {
+    history.replaceState({minisite: slug}, '', BASE_PATH + slug);
+    _showMiniSite(slug);
+  }
+})();
 
 // copy email to clipboard
 function copyEmail(e) {
