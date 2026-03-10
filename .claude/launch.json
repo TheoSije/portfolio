@@ -4,7 +4,7 @@
     {
       "name": "Portfolio",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["serve", "-l", "3000", "."],
+      "runtimeArgs": ["serve", "-l", "3000", "/Users/tjegousse/Downloads/portfolio"],
       "port": 3000
     }
   ]
