@@ -1086,12 +1086,17 @@ body.past-hero #ghost-cursor    { opacity: 0 !important; pointer-events: none; }
 }
 #fig-say-input::placeholder { color: rgba(255,255,255,0.45); }
 
-/* Shape toolbar */
+/* Shape toolbar — home only */
+body:not(.on-home) #shape-toolbar,
+body:not(.on-home) #draw-canvas { display: none !important; }
+
 #shape-toolbar {
   position: fixed;
   bottom: 28px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(6px);
+  opacity: 0;
+  pointer-events: none;
   display: flex;
   align-items: center;
   gap: 2px;
@@ -1103,6 +1108,12 @@ body.past-hero #ghost-cursor    { opacity: 0 !important; pointer-events: none; }
   box-shadow: 0 2px 20px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.05),
               0 0 0 0.5px rgba(0,0,0,0.07);
   z-index: 8990;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+#shape-toolbar.draw-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
 }
 .stool-label {
   font-size: 9px;
@@ -1311,6 +1322,21 @@ body.past-hero #ghost-cursor    { opacity: 0 !important; pointer-events: none; }
   var sx, sy;
   var activeShape = null;
   var NS = 'http://www.w3.org/2000/svg';
+  var hideToolbarTimer = null;
+
+  function showToolbar() {
+    clearTimeout(hideToolbarTimer);
+    toolbar.classList.add('draw-visible');
+  }
+  function scheduleHideToolbar() {
+    clearTimeout(hideToolbarTimer);
+    hideToolbarTimer = setTimeout(function () {
+      toolbar.classList.remove('draw-visible');
+    }, 1500);
+  }
+  // Maintenir le toolbar visible si la souris est dessus
+  toolbar.addEventListener('mouseenter', function () { clearTimeout(hideToolbarTimer); });
+  toolbar.addEventListener('mouseleave', function () { scheduleHideToolbar(); });
 
   // Tool selection
   tools.forEach(function (btn) {
@@ -1392,6 +1418,7 @@ body.past-hero #ghost-cursor    { opacity: 0 !important; pointer-events: none; }
     isDrawing = true;
     drawStarted = false;
     activeShape = null;
+    showToolbar();
   });
 
   document.addEventListener('mousemove', function (e) {
@@ -1416,6 +1443,7 @@ body.past-hero #ghost-cursor    { opacity: 0 !important; pointer-events: none; }
     }
     drawStarted = false;
     activeShape = null;
+    scheduleHideToolbar();
   });
 
 })();
