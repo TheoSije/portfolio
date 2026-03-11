@@ -1920,6 +1920,7 @@ document.querySelectorAll('.projects-scroll').forEach(function(scroll) {
           requestAnimationFrame(function() {
             scroll.style.scrollSnapType = '';
             jumping = false;
+            updateActive();
           });
         });
       }
