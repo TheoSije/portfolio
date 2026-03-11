@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
 /* PRO MODE — Light, clean, premium — no dividers */
 :root{--bg:#f8f7f4;--fg:#111;--r:1px solid transparent;--h-pad:clamp(48px,7vw,140px)}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
