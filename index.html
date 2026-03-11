@@ -200,87 +200,123 @@ body.fading { opacity: 0; }
 /* EXPERIENCE */
 .exp-section { border-bottom: var(--r); }
 
-/* DRAMATIQUE — giant year watermark */
-.exp-v3 { padding: 0 0 72px; }
-.exp-v3-item {
+/* EXPERIENCE PROCESS TIMELINE */
+.exp-proc {
+  position: relative;
+  padding: 48px var(--h-pad) 80px;
+}
+.exp-proc::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: rgba(0,0,0,0.09);
+  transform: translateX(-50%);
+}
+.ep-step {
   display: flex;
-  align-items: center;
-  padding: 0 var(--h-pad);
-  min-height: 80px;
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-  gap: 0;
-  transition: background .18s;
+  align-items: flex-start;
+  margin-bottom: 20px;
 }
-.exp-v3-item:hover { background: rgba(0,0,0,0.02); }
-.exp-v3-yr {
-  font-family: 'Archivo Black', sans-serif;
-  font-size: clamp(64px, 10vw, 140px);
-  letter-spacing: -0.05em;
-  color: var(--fg);
-  opacity: 0.05;
-  line-height: 1;
-  flex-shrink: 0;
-  pointer-events: none;
-  user-select: none;
-  margin-right: 28px;
-}
-.exp-v3-item:first-child .exp-v3-yr { opacity: 0.1; color: var(--acc); }
-.exp-v3-content {
+.ep-side {
   flex: 1;
   display: flex;
-  align-items: center;
-  gap: 16px;
+  position: relative;
 }
-.exp-v3-logo {
-  width: 30px; height: 30px;
-  object-fit: contain;
-  border-radius: 7px;
-  opacity: 0.7;
+.ep-side--left { justify-content: flex-end; padding-right: 28px; }
+.ep-side--left::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 26px;
+  width: 28px; height: 1px;
+  background: rgba(0,0,0,0.1);
+}
+.ep-side--right { justify-content: flex-start; padding-left: 28px; }
+.ep-side--right::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 26px;
+  width: 28px; height: 1px;
+  background: rgba(0,0,0,0.1);
+}
+.ep-empty { flex: 1; }
+.ep-circle {
   flex-shrink: 0;
-}
-.exp-v3-info {
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: var(--bg);
   display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-.exp-v3-co {
+  align-items: center;
+  justify-content: center;
   font-family: 'Archivo Black', sans-serif;
-  font-size: clamp(14px, 1.8vw, 28px);
+  font-size: 11px;
+  letter-spacing: -0.03em;
+  z-index: 2;
+}
+.ep-card {
+  background: white;
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 18px;
+  padding: 16px 20px;
+  width: 260px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+}
+.ep-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.ep-logo { width: 18px; height: 18px; object-fit: contain; border-radius: 4px; flex-shrink: 0; overflow: hidden; }
+.ep-co {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 15px;
   letter-spacing: -0.02em;
   line-height: 1;
+  flex: 1;
 }
-.exp-v3-item:first-child .exp-v3-co { color: var(--acc); }
-.exp-v3-role-txt {
-  font-size: clamp(11px, 0.9vw, 15px);
-  font-weight: 300;
-  color: #888;
-}
-.exp-v3-right {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-shrink: 0;
-}
-.exp-v3-badge {
-  font-size: 9px;
-  letter-spacing: .1em;
+.ep-badge {
+  font-size: 8px;
+  letter-spacing: .09em;
   text-transform: uppercase;
   padding: 3px 9px;
   border-radius: 20px;
-  border: 1px solid rgba(0,0,0,0.1);
-  color: #999;
+  flex-shrink: 0;
 }
-.exp-v3-period {
-  font-size: 9px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: #bbb;
-  min-width: 80px;
-  text-align: right;
+.ep-role {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 300;
+  color: #777;
+  line-height: 1.4;
 }
-@media(max-width:700px) {
-  .exp-v3-yr { font-size: 52px; margin-right: 16px; }
-  .exp-v3-right { display: none; }
+.ep-role::before { content: '⊙'; flex-shrink: 0; font-size: 10px; color: #bbb; margin-top: 1px; }
+.ep-cdi   { background: rgba(190,240,200,0.55); color: #1a6a28; }
+.ep-free  { background: rgba(220,205,255,0.55); color: #5a35a0; }
+.ep-cdd   { background: rgba(255,235,175,0.55); color: #7a5000; }
+.ep-stage { background: rgba(185,220,255,0.55); color: #0a5090; }
+.ep-alt   { background: rgba(255,210,185,0.55); color: #8a3000; }
+.ep-step--current .ep-card {
+  background: linear-gradient(135deg, rgba(255,235,190,0.55), rgba(200,255,210,0.45));
+  border-color: rgba(0,0,0,0.05);
+}
+@media(max-width:600px) {
+  .exp-proc::before { left: var(--h-pad); transform: none; }
+  .ep-step { flex-wrap: wrap; gap: 8px; }
+  .ep-empty { display: none; }
+  .ep-side--left, .ep-side--right {
+    order: 1; flex: 0 0 calc(100% - 62px);
+    padding: 0; justify-content: flex-start;
+  }
+  .ep-side--left::after, .ep-side--right::before { display: none; }
+  .ep-circle { order: 0; }
+  .ep-card { width: 100%; }
 }
 
 
@@ -956,186 +992,183 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
     <div class="section-header">
       <h2 class="section-title">Experience</h2>
     </div>
-    <div class="exp-v3">
+    <div class="exp-proc">
 
-      <div class="exp-v3-item">
-        <span class="exp-v3-yr">2023</span>
-        <div class="exp-v3-content">
-          <img src="https://www.google.com/s2/favicons?domain=galerieslafayette.com&sz=64" alt="" class="exp-v3-logo">
-          <div class="exp-v3-info">
-            <span class="exp-v3-co">Galeries Lafayette</span>
-            <span class="exp-v3-role-txt">Head of Design</span>
+      <!-- 2023 — Galeries Lafayette (LEFT / current) -->
+      <div class="ep-step ep-step--current">
+        <div class="ep-side ep-side--left">
+          <div class="ep-card">
+            <div class="ep-head">
+              <img src="https://www.google.com/s2/favicons?domain=galerieslafayette.com&sz=64" alt="" class="ep-logo">
+              <span class="ep-co">Galeries Lafayette</span>
+              <span class="ep-badge ep-cdi">CDI · Paris</span>
+            </div>
+            <div class="ep-role">Head of Design</div>
           </div>
         </div>
-        <div class="exp-v3-right">
-          <span class="exp-v3-badge">CDI · Paris</span>
-          <span class="exp-v3-period">2023 — Auj.</span>
+        <div class="ep-circle">2023</div>
+        <div class="ep-empty"></div>
+      </div>
+
+      <!-- 2022 — Deezer Lead PD (RIGHT) -->
+      <div class="ep-step">
+        <div class="ep-empty"></div>
+        <div class="ep-circle">2022</div>
+        <div class="ep-side ep-side--right">
+          <div class="ep-card">
+            <div class="ep-head">
+              <img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=64" alt="" class="ep-logo">
+              <span class="ep-co">Deezer</span>
+              <span class="ep-badge ep-cdi">CDI · Paris</span>
+            </div>
+            <div class="ep-role">Lead Product Designer</div>
+          </div>
         </div>
       </div>
 
-      <div class="exp-v3-item">
-        <span class="exp-v3-yr">2022</span>
-        <div class="exp-v3-content">
-          <img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=64" alt="" class="exp-v3-logo">
-          <div class="exp-v3-info">
-            <span class="exp-v3-co">Deezer</span>
-            <span class="exp-v3-role-txt">Lead Product Designer</span>
+      <!-- 2019 — Deezer Senior PD (LEFT) -->
+      <div class="ep-step">
+        <div class="ep-side ep-side--left">
+          <div class="ep-card">
+            <div class="ep-head">
+              <img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=64" alt="" class="ep-logo">
+              <span class="ep-co">Deezer</span>
+              <span class="ep-badge ep-cdi">CDI · Paris</span>
+            </div>
+            <div class="ep-role">Senior Product Designer · Design System Tempo</div>
           </div>
         </div>
-        <div class="exp-v3-right">
-          <span class="exp-v3-badge">CDI · Paris</span>
-          <span class="exp-v3-period">2022 — 2023</span>
+        <div class="ep-circle">2019</div>
+        <div class="ep-empty"></div>
+      </div>
+
+      <!-- 2017 — Hello Work (RIGHT) -->
+      <div class="ep-step">
+        <div class="ep-empty"></div>
+        <div class="ep-circle">2017</div>
+        <div class="ep-side ep-side--right">
+          <div class="ep-card">
+            <div class="ep-head">
+              <svg class="ep-logo" width="18" height="18" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="30" rx="6" fill="white"/><text x="15" y="12.5" text-anchor="middle" font-family="system-ui,-apple-system,Helvetica,Arial,sans-serif" font-weight="900" font-size="7" fill="#111" letter-spacing="-0.3">hello</text><text x="3.5" y="22" font-family="system-ui,-apple-system,Helvetica,Arial,sans-serif" font-weight="900" font-size="7" fill="#111">w</text><circle cx="14.6" cy="19.2" r="2.7" fill="none" stroke="#111" stroke-width="1.5"/><text x="18.2" y="22" font-family="system-ui,-apple-system,Helvetica,Arial,sans-serif" font-weight="900" font-size="7" fill="#111">rk</text></svg>
+              <span class="ep-co">Hello Work</span>
+              <span class="ep-badge ep-cdi">CDI · Paris</span>
+            </div>
+            <div class="ep-role">Lead Product Designer</div>
+          </div>
         </div>
       </div>
 
-      <div class="exp-v3-item">
-        <span class="exp-v3-yr">2019</span>
-        <div class="exp-v3-content">
-          <img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=64" alt="" class="exp-v3-logo">
-          <div class="exp-v3-info">
-            <span class="exp-v3-co">Deezer</span>
-            <span class="exp-v3-role-txt">Senior Product Designer · Design System Tempo</span>
+      <!-- 2015 — Somfy (LEFT) -->
+      <div class="ep-step">
+        <div class="ep-side ep-side--left">
+          <div class="ep-card">
+            <div class="ep-head">
+              <img src="https://www.google.com/s2/favicons?domain=somfy.com&sz=64" alt="" class="ep-logo">
+              <span class="ep-co">Somfy</span>
+              <span class="ep-badge ep-free">Freelance</span>
+            </div>
+            <div class="ep-role">Senior Product Designer</div>
           </div>
         </div>
-        <div class="exp-v3-right">
-          <span class="exp-v3-badge">CDI · Paris</span>
-          <span class="exp-v3-period">2019 — 2022</span>
+        <div class="ep-circle">2015</div>
+        <div class="ep-empty"></div>
+      </div>
+
+      <!-- 2014 — Devialet (RIGHT) -->
+      <div class="ep-step">
+        <div class="ep-empty"></div>
+        <div class="ep-circle">2014</div>
+        <div class="ep-side ep-side--right">
+          <div class="ep-card">
+            <div class="ep-head">
+              <img src="https://www.google.com/s2/favicons?domain=devialet.com&sz=64" alt="" class="ep-logo">
+              <span class="ep-co">Devialet</span>
+              <span class="ep-badge ep-cdi">CDI · Paris</span>
+            </div>
+            <div class="ep-role">Senior Product Designer</div>
+          </div>
         </div>
       </div>
 
-      <div class="exp-v3-item">
-        <span class="exp-v3-yr">2017</span>
-        <div class="exp-v3-content">
-          <svg class="exp-v3-logo" width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-            <rect width="30" height="30" rx="6" fill="white"/>
-            <!-- hello -->
-            <text x="15" y="12.5" text-anchor="middle" font-family="system-ui,-apple-system,Helvetica,Arial,sans-serif" font-weight="900" font-size="7" fill="#111" letter-spacing="-0.3">hello</text>
-            <!-- w -->
-            <text x="3.5" y="22" font-family="system-ui,-apple-system,Helvetica,Arial,sans-serif" font-weight="900" font-size="7" fill="#111">w</text>
-            <!-- O ring -->
-            <circle cx="14.6" cy="19.2" r="2.7" fill="none" stroke="#111" stroke-width="1.5"/>
-            <!-- rk -->
-            <text x="18.2" y="22" font-family="system-ui,-apple-system,Helvetica,Arial,sans-serif" font-weight="900" font-size="7" fill="#111">rk</text>
-          </svg>
-          <div class="exp-v3-info">
-            <span class="exp-v3-co">Hello Work</span>
-            <span class="exp-v3-role-txt">Lead Product Designer</span>
+      <!-- 2012 — Labgency (LEFT) -->
+      <div class="ep-step">
+        <div class="ep-side ep-side--left">
+          <div class="ep-card">
+            <div class="ep-head">
+              <svg class="ep-logo" width="18" height="18" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,2 27,8.5 15,15 3,8.5" fill="#6DCFCB"/><polygon points="3,8.5 15,15 15,28 3,21.5" fill="#45B5B0"/><polygon points="27,8.5 27,21.5 15,28 15,15" fill="#2D9E99"/></svg>
+              <span class="ep-co">Labgency</span>
+              <span class="ep-badge ep-cdi">CDI · Paris</span>
+            </div>
+            <div class="ep-role">Product Designer</div>
           </div>
         </div>
-        <div class="exp-v3-right">
-          <span class="exp-v3-badge">CDI · Paris</span>
-          <span class="exp-v3-period">2017 — 2019</span>
+        <div class="ep-circle">2012</div>
+        <div class="ep-empty"></div>
+      </div>
+
+      <!-- 2010 — Elteg (RIGHT) -->
+      <div class="ep-step">
+        <div class="ep-empty"></div>
+        <div class="ep-circle">2010</div>
+        <div class="ep-side ep-side--right">
+          <div class="ep-card">
+            <div class="ep-head">
+              <span class="ep-co">Elteg</span>
+              <span class="ep-badge ep-cdi">CDI · Paris</span>
+            </div>
+            <div class="ep-role">Développeur front-end</div>
+          </div>
         </div>
       </div>
 
-      <div class="exp-v3-item">
-        <span class="exp-v3-yr">2015</span>
-        <div class="exp-v3-content">
-          <img src="https://www.google.com/s2/favicons?domain=somfy.com&sz=64" alt="" class="exp-v3-logo">
-          <div class="exp-v3-info">
-            <span class="exp-v3-co">Somfy</span>
-            <span class="exp-v3-role-txt">Senior Product Designer</span>
+      <!-- 2009 — FFT (LEFT) -->
+      <div class="ep-step">
+        <div class="ep-side ep-side--left">
+          <div class="ep-card">
+            <div class="ep-head">
+              <img src="https://www.google.com/s2/favicons?domain=fft.fr&sz=64" alt="" class="ep-logo">
+              <span class="ep-co">FFT</span>
+              <span class="ep-badge ep-cdd">CDD · Paris</span>
+            </div>
+            <div class="ep-role">Graphiste</div>
           </div>
         </div>
-        <div class="exp-v3-right">
-          <span class="exp-v3-badge">Freelance · Hybride</span>
-          <span class="exp-v3-period">2015 — 2017</span>
+        <div class="ep-circle">2009</div>
+        <div class="ep-empty"></div>
+      </div>
+
+      <!-- 2008 — ArtList (RIGHT) -->
+      <div class="ep-step">
+        <div class="ep-empty"></div>
+        <div class="ep-circle">2008</div>
+        <div class="ep-side ep-side--right">
+          <div class="ep-card">
+            <div class="ep-head">
+              <span class="ep-co">ArtList</span>
+              <span class="ep-badge ep-alt">Alternance</span>
+            </div>
+            <div class="ep-role">Design Intern · Paris &amp; New York</div>
+          </div>
         </div>
       </div>
 
-      <div class="exp-v3-item">
-        <span class="exp-v3-yr">2014</span>
-        <div class="exp-v3-content">
-          <img src="https://www.google.com/s2/favicons?domain=devialet.com&sz=64" alt="" class="exp-v3-logo">
-          <div class="exp-v3-info">
-            <span class="exp-v3-co">Devialet</span>
-            <span class="exp-v3-role-txt">Senior Product Designer</span>
+      <!-- 2007 — Condé Nast (LEFT) -->
+      <div class="ep-step">
+        <div class="ep-side ep-side--left">
+          <div class="ep-card">
+            <div class="ep-head">
+              <img src="https://www.google.com/s2/favicons?domain=condenast.com&sz=64" alt="" class="ep-logo">
+              <span class="ep-co">Condé Nast</span>
+              <span class="ep-badge ep-stage">Stage · Paris</span>
+            </div>
+            <div class="ep-role">Design Intern</div>
           </div>
         </div>
-        <div class="exp-v3-right">
-          <span class="exp-v3-badge">CDI · Paris</span>
-          <span class="exp-v3-period">2014 — 2015</span>
-        </div>
+        <div class="ep-circle">2007</div>
+        <div class="ep-empty"></div>
       </div>
 
-      <div class="exp-v3-item">
-        <span class="exp-v3-yr">2012</span>
-        <div class="exp-v3-content">
-          <svg class="exp-v3-logo" width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="15,2 27,8.5 15,15 3,8.5" fill="#6DCFCB"/>
-            <polygon points="3,8.5 15,15 15,28 3,21.5" fill="#45B5B0"/>
-            <polygon points="27,8.5 27,21.5 15,28 15,15" fill="#2D9E99"/>
-          </svg>
-          <div class="exp-v3-info">
-            <span class="exp-v3-co">Labgency</span>
-            <span class="exp-v3-role-txt">Product Designer</span>
-          </div>
-        </div>
-        <div class="exp-v3-right">
-          <span class="exp-v3-badge">CDI · Paris</span>
-          <span class="exp-v3-period">2012 — 2014</span>
-        </div>
-      </div>
-
-      <div class="exp-v3-item">
-        <span class="exp-v3-yr">2010</span>
-        <div class="exp-v3-content">
-          <div class="exp-v3-info">
-            <span class="exp-v3-co">Elteg</span>
-            <span class="exp-v3-role-txt">Développeur front-end</span>
-          </div>
-        </div>
-        <div class="exp-v3-right">
-          <span class="exp-v3-badge">CDI · Paris</span>
-          <span class="exp-v3-period">2010 — 2011</span>
-        </div>
-      </div>
-
-      <div class="exp-v3-item">
-        <span class="exp-v3-yr">2009</span>
-        <div class="exp-v3-content">
-          <img src="https://www.google.com/s2/favicons?domain=fft.fr&sz=64" alt="" class="exp-v3-logo">
-          <div class="exp-v3-info">
-            <span class="exp-v3-co">Fédération Française de Tennis</span>
-            <span class="exp-v3-role-txt">Graphiste</span>
-          </div>
-        </div>
-        <div class="exp-v3-right">
-          <span class="exp-v3-badge">CDD · Paris</span>
-          <span class="exp-v3-period">2009</span>
-        </div>
-      </div>
-
-      <div class="exp-v3-item">
-        <span class="exp-v3-yr">2008</span>
-        <div class="exp-v3-content">
-          <div class="exp-v3-info">
-            <span class="exp-v3-co">ArtList Paris · New York</span>
-            <span class="exp-v3-role-txt">Design Intern</span>
-          </div>
-        </div>
-        <div class="exp-v3-right">
-          <span class="exp-v3-badge">Alternance</span>
-          <span class="exp-v3-period">2008</span>
-        </div>
-      </div>
-
-      <div class="exp-v3-item">
-        <span class="exp-v3-yr">2007</span>
-        <div class="exp-v3-content">
-          <img src="https://www.google.com/s2/favicons?domain=condenast.com&sz=64" alt="" class="exp-v3-logo">
-          <div class="exp-v3-info">
-            <span class="exp-v3-co">Condé Nast</span>
-            <span class="exp-v3-role-txt">Design Intern</span>
-          </div>
-        </div>
-        <div class="exp-v3-right">
-          <span class="exp-v3-badge">Stage · Paris</span>
-          <span class="exp-v3-period">2007</span>
-        </div>
-      </div>
-
-    </div><!-- /.exp-v3 -->
+    </div><!-- /.exp-proc -->
   </section>
 
   <section class="about">
