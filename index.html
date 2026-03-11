@@ -1275,6 +1275,8 @@ body.past-hero #ghost-cursor    { opacity: 0 !important; pointer-events: none; }
   body.on-home, body.on-home * { cursor: none !important; }
 }
 body:not(.on-home) #fig-cursor { opacity: 0 !important; pointer-events: none; }
+body.on-home .proj-card { cursor: pointer !important; }
+body.on-home.over-card #fig-cursor { opacity: 0 !important; }
 
 /* Hide user cursor on touch/mobile, keep Louisa's ghost cursor */
 @media (hover: none) {
@@ -1515,6 +1517,12 @@ body:not(.on-home) #draw-canvas { display: none !important; }
 
   let mx = -200, my = -200;
   let sayOpen = false;
+
+  // Hide figma cursor over clickable cards, show native pointer instead
+  document.querySelectorAll('.proj-card').forEach(function(card) {
+    card.addEventListener('mouseenter', function() { document.body.classList.add('over-card'); });
+    card.addEventListener('mouseleave', function() { document.body.classList.remove('over-card'); });
+  });
 
   // Instant cursor follow
   document.addEventListener('mousemove', function (e) {
