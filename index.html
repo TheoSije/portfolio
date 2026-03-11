@@ -583,12 +583,12 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
       <span class="stack-pill"><img class="stack-icon" src="img/claude.svg" alt="">Claude</span>
       <span class="stack-pill"><img class="stack-icon" src="img/midjourney.svg" alt="">Midjourney</span>
       <span class="stack-pill"><img class="stack-icon" src="img/storybook.svg" alt="">Storybook</span>
-      <span class="stack-pill" onclick="pythonEgg(this)" style="cursor:pointer"><img class="stack-icon" src="https://cdn.simpleicons.org/python/3776AB" alt="">Python</span>
+      <span class="stack-pill" onclick="pillEgg(this)" style="cursor:pointer"><img class="stack-icon" src="https://www.google.com/s2/favicons?domain=chess.com&sz=64" alt="">Chess.com</span>
       <span class="stack-pill"><img class="stack-icon" src="img/photoshop.svg" alt="">Photoshop</span>
-      <span class="stack-pill"><img class="stack-icon" src="img/terminal.svg" alt="">Terminal</span>
+      <span class="stack-pill" onclick="window.open('https://youtube.fr','_blank')" style="cursor:pointer"><img class="stack-icon" src="https://www.google.com/s2/favicons?domain=youtube.com&sz=64" alt="">Terminal</span>
       <span class="stack-pill"><span class="stack-icon-letter" style="background:#FF4A00">Ji</span>Jitter</span>
       <span class="stack-pill"><img class="stack-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/visualstudiocode.svg" alt="" style="filter:invert(37%) sepia(97%) saturate(1097%) hue-rotate(185deg) brightness(95%)">VS Code</span>
-      <span class="stack-pill"><img class="stack-icon" src="https://cdn.simpleicons.org/github/181717" alt="">GitHub</span>
+      <span class="stack-pill" onclick="window.open('https://lemonde.fr','_blank')" style="cursor:pointer"><img class="stack-icon" src="https://www.google.com/s2/favicons?domain=lemonde.fr&sz=64" alt="">GitHub</span>
     </div>
   </section>
 
@@ -1260,10 +1260,11 @@ function showHome() {
 body:not(.on-home) #ghost-cursor { opacity: 0 !important; pointer-events: none; }
 body.past-hero #ghost-cursor    { opacity: 0 !important; pointer-events: none; }
 
-/* ══ CUSTOM CURSOR ══ */
+/* ══ CUSTOM CURSOR — homepage only ══ */
 @media (hover: hover) and (pointer: fine) {
-  body, body * { cursor: none !important; }
+  body.on-home, body.on-home * { cursor: none !important; }
 }
+body:not(.on-home) #fig-cursor { opacity: 0 !important; pointer-events: none; }
 
 /* Hide user cursor on touch/mobile, keep Louisa's ghost cursor */
 @media (hover: none) {
@@ -1511,7 +1512,7 @@ body:not(.on-home) #draw-canvas { display: none !important; }
     figCursor.style.transform = 'translate(' + mx + 'px,' + my + 'px)';
     figCursor.classList.add('ready');
     const overDefault = e.target.closest('.proj-card, .exp-item');
-    figCursor.style.opacity = overDefault ? '0' : '';
+    figCursor.style.opacity = overDefault ? '0' : null;
     if (sayOpen) {
       figSay.style.left = (mx + 14) + 'px';
       figSay.style.top = (my + 14) + 'px';
@@ -1779,8 +1780,8 @@ document.querySelectorAll('.projects-scroll').forEach(function(scroll) {
   requestAnimationFrame(updateActive);
 });
 
-/* ── PYTHON EASTER EGG ── */
-function pythonEgg(pill) {
+/* ── CHESS.COM EASTER EGG ── */
+function pillEgg(pill) {
   pill.style.transition = 'transform 0.2s ease';
   pill.style.transform = 'scale(1.1)';
   pill.onclick = null;
