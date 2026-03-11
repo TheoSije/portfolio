@@ -1,156 +1,356 @@
 {
   "tracks": [
     {
-      "trackId": 1469579245,
-      "trackName": "I'll Be Seeing You",
-      "artistName": "Billie Holiday",
-      "collectionName": "Billie Holiday",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/a3/53/9c/a3539c28-cbb2-1aba-8f57-5fbefa13c249/mzaf_328628322467703483.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/69/65/ed/6965ed9b-32bd-6366-a462-d2b6ec83db78/15UMGIM13908.rgb.jpg/100x100bb.jpg"
+      "trackId": 1440866092,
+      "trackName": "I Fall In Love Too Easily",
+      "artistName": "Chet Baker",
+      "collectionName": "Chet Baker Sings",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d4/d7/47/d4d747d8-8d5a-4dc9-a686-1ca91f07ad0c/mzaf_10338145356691636309.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d6/c7/a3/d6c7a3e9-f0b4-bdaf-89d4-5e5cb468f0c2/00602557056563.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1469579573,
-      "trackName": "Strange Fruit",
-      "artistName": "Billie Holiday",
-      "collectionName": "Billie Holiday",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/b8/ad/8a/b8ad8a4e-4e4e-d99c-594d-449c5ee2bb48/mzaf_9840325949956676345.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/69/65/ed/6965ed9b-32bd-6366-a462-d2b6ec83db78/15UMGIM13908.rgb.jpg/100x100bb.jpg"
+      "trackId": 1440865800,
+      "trackName": "My Funny Valentine",
+      "artistName": "Chet Baker",
+      "collectionName": "Chet Baker Sings",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/71/2e/93/712e93b3-c09c-82a5-b58c-4425e950d685/mzaf_582111910534553844.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d6/c7/a3/d6c7a3e9-f0b4-bdaf-89d4-5e5cb468f0c2/00602557056563.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1434874847,
-      "trackName": "Solitude",
-      "artistName": "Billie Holiday",
-      "collectionName": "Billie Holiday's Greatest Hits",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/54/ab/6a/54ab6a37-745c-4c50-8c8f-82e7d7162b67/mzaf_7706963726837651144.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/08/ba/7f/08ba7f3c-5a6f-0a53-79fd-b5bcbaaf5b35/06UMGIM57133.rgb.jpg/100x100bb.jpg"
+      "trackId": 1440865792,
+      "trackName": "Time After Time",
+      "artistName": "Chet Baker",
+      "collectionName": "Chet Baker Sings",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/c0/19/8d/c0198d03-35a7-b358-72b0-3a4f16ff6d2c/mzaf_2345120154985479436.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d6/c7/a3/d6c7a3e9-f0b4-bdaf-89d4-5e5cb468f0c2/00602557056563.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 978571724,
-      "trackName": "All of Me",
-      "artistName": "Billie Holiday",
-      "collectionName": "Lady Day: The Complete Billie Holiday On Columbia 1933-1944, Vol. 7",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/75/02/72/750272cc-e778-5618-9f8e-e005d9dd42a1/mzaf_1501772023822141523.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/1a/a7/22/1aa7222d-f290-2a2f-f8bb-784d7fd71850/886445100075.jpg/100x100bb.jpg"
+      "trackId": 1554008830,
+      "trackName": "It Never Entered My Mind",
+      "artistName": "Chet Baker",
+      "collectionName": "Chet",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/ed/7d/8f/ed7d8f04-701a-fd3d-0a03-d73ebf77df62/mzaf_13427505919378881924.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/62/b2/eb/62b2ebd5-8037-5e00-381a-2ef83c97171a/20CRGIM25372.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1469584036,
-      "trackName": "Blue Moon",
-      "artistName": "Billie Holiday",
-      "collectionName": "Solitude",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/21/78/ed/2178ed1e-a1c0-9e50-8207-8db3ef148339/mzaf_7097726171691415361.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/7e/b3/81/7eb381e7-9bb2-aa3f-c9b9-4491efebdd21/15UMGIM13434.rgb.jpg/100x100bb.jpg"
+      "trackId": 1440865513,
+      "trackName": "It's Always You",
+      "artistName": "Chet Baker",
+      "collectionName": "Chet Baker Sings",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/0c/8b/2d/0c8b2df2-07f8-fa06-9aee-12bcfe746cdb/mzaf_18018930768089597034.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d6/c7/a3/d6c7a3e9-f0b4-bdaf-89d4-5e5cb468f0c2/00602557056563.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 978576810,
-      "trackName": "The Very Thought of You",
-      "artistName": "Billie Holiday and Her Orchestra",
-      "collectionName": "Lady Day: The Complete Billie Holiday on Columbia 1933-1944, Vol. 4",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/3b/e5/62/3be562f1-00ac-d89d-0743-6fd258344f07/mzaf_886732553175274955.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music1/v4/ce/03/60/ce036067-c043-7e61-733f-4a8001a606ab/886445100044.jpg/100x100bb.jpg"
+      "trackId": 1440865794,
+      "trackName": "I Get Along Without You Very Well (Except Sometimes)",
+      "artistName": "Chet Baker",
+      "collectionName": "Chet Baker Sings",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/66/a0/b0/66a0b037-21fc-c9cc-a496-05b69d3a990f/mzaf_15826630703620930305.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d6/c7/a3/d6c7a3e9-f0b4-bdaf-89d4-5e5cb468f0c2/00602557056563.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1469582245,
-      "trackName": "Lady Sings the Blues",
-      "artistName": "Billie Holiday",
-      "collectionName": "Lady Sings the Blues",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/2a/08/1e/2a081ee9-3db8-0829-97a7-44f1a120fa21/mzaf_8640620288947664096.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/eb/61/d1/eb61d15b-6376-0b99-0b87-0bd036c0bec5/07UMGIM12336.rgb.jpg/100x100bb.jpg"
+      "trackId": 159233563,
+      "trackName": "I Waited for You",
+      "artistName": "Chet Baker",
+      "collectionName": "The Touch of Your Lips",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/29/91/3d/29913d35-3980-b50d-cfb0-ee811c750847/mzaf_6030967354356856407.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/48/79/a4/mzi.wencfque.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 978573462,
-      "trackName": "Summertime",
-      "artistName": "Billie Holiday and Her Orchestra",
-      "collectionName": "Lady Day: The Complete Billie Holiday on Columbia 1933-1944, Vol. 1",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/e7/b6/a1/e7b6a1df-e33d-a4dc-53a8-bfcb5171dbef/mzaf_1405376560803922469.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music1/v4/9d/57/61/9d576142-48d0-537d-ea39-1826590e9b91/886445100013.jpg/100x100bb.jpg"
+      "trackId": 1440865789,
+      "trackName": "But Not For Me",
+      "artistName": "Chet Baker",
+      "collectionName": "Chet Baker Sings",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ec/9d/00/ec9d00dc-647d-b129-6f11-eb6d430acb47/mzaf_13716625187426801300.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d6/c7/a3/d6c7a3e9-f0b4-bdaf-89d4-5e5cb468f0c2/00602557056563.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1506910596,
-      "trackName": "Billie Holiday",
-      "artistName": "KITSCHKRIEG & Trettmann",
-      "collectionName": "#DIY",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/7b/08/ff/7b08ffe8-182e-0113-adcf-04308c49e3c3/mzaf_4530186679321241065.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/34/7b/de/347bde09-9c4c-cc8c-0dd5-c5f439d18959/4050486999127.jpg/100x100bb.jpg"
+      "trackId": 1440865537,
+      "trackName": "I've Never Been In Love Before",
+      "artistName": "Chet Baker",
+      "collectionName": "Chet Baker Sings",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/a5/05/dc/a505dcfc-505e-66ac-04b9-89fc62c2aceb/mzaf_14144829835355722503.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d6/c7/a3/d6c7a3e9-f0b4-bdaf-89d4-5e5cb468f0c2/00602557056563.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 398981730,
-      "trackName": "God Bless the Child (78rpm Version)",
-      "artistName": "Billie Holiday and Her Orchestra",
-      "collectionName": "The Essential Billie Holiday",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/c4/7b/c9/c47bc9f1-133f-806f-cb12-02db4c30cda1/mzaf_17865799802496357621.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music127/v4/67/1b/9a/671b9a5f-7fe3-5fa9-9ee6-f851aa080f76/884977797619.jpg/100x100bb.jpg"
+      "trackId": 1440865219,
+      "trackName": "That Old Feeling",
+      "artistName": "Chet Baker",
+      "collectionName": "Chet Baker Sings",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/c4/fc/cc/c4fccc45-d091-b1fd-827b-9a110f0c3ff0/mzaf_16001453637918214147.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d6/c7/a3/d6c7a3e9-f0b4-bdaf-89d4-5e5cb468f0c2/00602557056563.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 582881278,
-      "trackName": "Billie Holiday",
-      "artistName": "Warpaint",
-      "collectionName": "Exquisite Corpse",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/19/57/7b/19577b97-cde2-8498-f0df-465ef5df8907/mzaf_11023415670587883015.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/9e/97/1b/9e971b44-51b4-b445-fbc4-20ad0bc2e252/883870059954.png/100x100bb.jpg"
+      "trackId": 1686558773,
+      "trackName": "Chet Baker (feat. Lana Del Rey) [MTV Unplugged]",
+      "artistName": "Mando Diao",
+      "collectionName": "MTV Unplugged - Above and Beyond",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/f6/02/ea/f602ea79-52ac-49f8-48b7-4d1443399902/mzaf_6013135277788215940.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/1a/70/1d/1a701d24-8293-29ee-c1fa-e7e64779e9b3/cover.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 158596187,
-      "trackName": "Fine and Mellow",
-      "artistName": "Billie Holiday with Mal Waldron & All-Stars",
-      "collectionName": "The Sound of Jazz",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/50/e7/2f/50e72f12-be30-46f9-db98-0d84ac7afb9d/mzaf_6272417422638069256.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/f7/8a/93/f78a9343-3351-5a9c-8e76-dbf6532830c1/mzi.imssvolq.jpg/100x100bb.jpg"
+      "trackId": 726138335,
+      "trackName": "I Fall in Love Too Easily",
+      "artistName": "Chet Baker",
+      "collectionName": "The Best of Chet Baker Sings",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/39/b8/29/39b829b4-2ec8-dc1c-df69-7375b39133fe/mzaf_9525891053567065319.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/27/0d/ab/270dabec-a63f-00f0-b919-7ea01d59a14c/00077779293254.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1798495019,
-      "trackName": "Billie Holiday",
-      "artistName": "Miike Snow",
-      "collectionName": "Miike Snow (Deluxe Edition)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/8a/91/23/8a912374-fcfa-5b3e-6911-378023cab9a7/mzaf_11676700042600616647.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/66/a8/53/66a85363-0171-ab19-3185-bc5bd9bbef8e/8721253952077.png/100x100bb.jpg"
+      "trackId": 726138298,
+      "trackName": "My Funny Valentine",
+      "artistName": "Chet Baker",
+      "collectionName": "The Best of Chet Baker Sings",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/be/a9/26/bea926b9-67ac-d6a4-911a-cf0c2ced4844/mzaf_6877869540710243986.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/27/0d/ab/270dabec-a63f-00f0-b919-7ea01d59a14c/00077779293254.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1499336421,
-      "trackName": "Billie Holiday",
-      "artistName": "Soolking",
-      "collectionName": "Vintage",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/d3/50/4d/d3504dee-d9ed-d4e1-3c40-b62d34fdf55a/mzaf_3642398974178439594.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/28/ef/5c/28ef5cbf-90c8-226c-74c3-32583bfb8981/20UMGIM10682.rgb.jpg/100x100bb.jpg"
+      "trackId": 1666395010,
+      "trackName": "Chet Baker",
+      "artistName": "Esther Rose",
+      "collectionName": "Safe to Run",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/ae/bb/b8/aebbb8e0-43cf-526d-261c-d4432dec0086/mzaf_12962401266168418886.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/4e/fe/a4/4efea4c0-789d-1cc4-e0bd-c9e1bde6ca5f/607396654734.png/100x100bb.jpg"
     },
     {
-      "trackId": 1545424964,
-      "trackName": "Billie Holiday (Live)",
-      "artistName": "Warpaint",
-      "collectionName": "Rough Trade Session",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/73/a0/3e/73a03e65-12c8-3b2d-dd35-dc8014b21306/mzaf_5179134589585650592.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/43/9d/83/439d83be-db0b-36e3-794e-5871d24c661d/883870063555.png/100x100bb.jpg"
+      "trackId": 1717829276,
+      "trackName": "Chet Baker",
+      "artistName": "Esther Rose & Bella White",
+      "collectionName": "Safe 2 Run (Versions) - EP",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/3e/01/3d/3e013d72-4b44-e406-7397-633f7cb88c1f/mzaf_4059283734720126400.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/7e/b2/8d/7eb28d89-c798-27e7-4bee-ed36b9be0384/607396658237.png/100x100bb.jpg"
     },
     {
-      "trackId": 398981903,
-      "trackName": "What a Little Moonlight Can Do (78rpm Version)",
-      "artistName": "Billie Holiday & Teddy Wilson and His Orchestra",
-      "collectionName": "The Essential Billie Holiday",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/16/5e/f6/165ef62e-6f90-087a-b9a7-56b0b6fa12ca/mzaf_15084787612371674639.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music127/v4/67/1b/9a/671b9a5f-7fe3-5fa9-9ee6-f851aa080f76/884977797619.jpg/100x100bb.jpg"
+      "trackId": 1468200423,
+      "trackName": "Almost Blue",
+      "artistName": "Chet Baker",
+      "collectionName": "Chet Baker in Tokyo (The Complete Concert)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e2/4b/cf/e24bcfbf-e45c-9337-82cb-56df713d102b/mzaf_12907001354555209469.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ab/53/28/ab5328ba-0f62-53a6-4f78-c93138e7cc73/859730742748.png/100x100bb.jpg"
     },
     {
-      "trackId": 1550016965,
-      "trackName": "Billie Holiday",
-      "artistName": "Soolking",
-      "collectionName": "Vintage Gearforth",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/5e/4c/a6/5e4ca627-c735-4de5-3681-1dd6649172c4/mzaf_15097484948887218151.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/06/82/18/06821833-b9cf-6fcb-bbb0-2a8dcdc8f223/20UMGIM79250.rgb.jpg/100x100bb.jpg"
+      "trackId": 1440865523,
+      "trackName": "Like Someone In Love",
+      "artistName": "Chet Baker",
+      "collectionName": "Chet Baker Sings",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/2d/31/88/2d31885e-d3cb-71ea-2d03-e5d27a97ae47/mzaf_16596662789748835198.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d6/c7/a3/d6c7a3e9-f0b4-bdaf-89d4-5e5cb468f0c2/00602557056563.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1469578315,
-      "trackName": "Autumn In New York",
-      "artistName": "Billie Holiday",
-      "collectionName": "Recital",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/41/d9/c9/41d9c917-4429-2eb3-ee80-73dc6c36b852/mzaf_9195487393288281834.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/e6/65/b0/e665b009-f33f-36c1-dfd3-af30c48da11e/15UMGIM13873.rgb.jpg/100x100bb.jpg"
+      "trackId": 1450725780,
+      "trackName": "Winter Wonderland (Remastered)",
+      "artistName": "Chet Baker",
+      "collectionName": "Chet Baker Quartet Featuring Russ Freeman",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/29/eb/38/29eb3888-142b-16c1-b2e5-740678f079e6/mzaf_4623266043837511118.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/35/6c/fa/356cfa69-9cc9-8942-9d4c-797d3d53f3e3/00602547920140.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1434875045,
-      "trackName": "Crazy He Calls Me",
-      "artistName": "Billie Holiday",
-      "collectionName": "Billie Holiday's Greatest Hits",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/14/1a/a7/141aa747-04fc-7a5e-65c8-8505aa1ac77d/mzaf_3861532647291897585.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/08/ba/7f/08ba7f3c-5a6f-0a53-79fd-b5bcbaaf5b35/06UMGIM57133.rgb.jpg/100x100bb.jpg"
+      "trackId": 394301195,
+      "trackName": "Autumn Leaves",
+      "artistName": "Chet Baker",
+      "collectionName": "She Was Too Good To Me (CTI Records 40th Anniversary Edition)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/2a/47/63/2a4763a3-8c8c-c27d-e543-a12cc5000ecf/mzaf_16199047327446662305.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/fc/af/dd/fcafdd2a-dc31-9b43-ed47-f61b5305ebe0/mzi.tonaecwy.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 313910412,
+      "trackName": "Silence",
+      "artistName": "Charlie Haden",
+      "collectionName": "Silence",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/44/7e/bf/447ebf2c-b426-4a05-bb70-322621d2dde4/mzaf_2447025507576896579.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Features114/v4/12/59/78/12597852-fff1-6b84-ef33-42709d513842/dj.hfgnbbol.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1467953588,
+      "trackName": "Brilliant Corners",
+      "artistName": "Thelonious Monk",
+      "collectionName": "Brilliant Corners (Remastered)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/7c/a8/e8/7ca8e8d2-fa35-4182-ee04-3817a295c39a/mzaf_14374097514672855854.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/e4/68/9b/e4689b77-3e49-7ade-acb8-876d753db716/06UMGIM35191.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 268557511,
+      "trackName": "Straight, No Chaser",
+      "artistName": "Thelonious Monk",
+      "collectionName": "Straight, No Chaser",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/f7/8a/d7/f78ad77a-a039-cb96-ed73-20cdf5570c34/mzaf_3573502838887194111.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Features124/v4/69/f0/8c/69f08c37-6f6a-970f-f53f-ef3f99642fca/dj.wvzxyszi.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1459444213,
+      "trackName": "'Round Midnight",
+      "artistName": "Thelonious Monk",
+      "collectionName": "Genius of Modern Music, Vol. 1",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/3c/33/40/3c33406a-f32d-fa67-6f9a-ace81aa60be8/mzaf_6228310614182394136.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/97/e1/c1/97e1c140-2264-41d8-ec84-281a0152c5a2/00602577697326.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1412808168,
+      "trackName": "Caravan",
+      "artistName": "Thelonious Monk",
+      "collectionName": "Plays Duke Ellington",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/c1/05/f1/c105f15e-a092-5428-5c30-128d1ba1d1ef/mzaf_1798215300406619027.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/b2/6a/91/b26a91d6-225d-82a2-cdcb-32f18d53dd39/00888072070578.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 207177633,
+      "trackName": "Monk's Dream (Take 8)",
+      "artistName": "Thelonious Monk",
+      "collectionName": "Monk's Dream",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/63/cd/61/63cd6103-869e-0b81-3cb6-62a2996edafe/mzaf_1796021976238430259.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/14/23/94/14239463-9e84-c9fd-2b3b-7c0feb5c930c/074646353622.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 186320804,
+      "trackName": "Ruby, My Dear",
+      "artistName": "Thelonious Monk",
+      "collectionName": "Solo Monk (Expanded Edition)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/a7/16/3d/a7163de5-e828-ae39-fd8f-4128c34f4867/mzaf_14816083976070239754.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/f8/65/e9/f865e942-9d3d-c904-a936-bc8d9efd7dcf/mzi.knkkbqhj.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 207177650,
+      "trackName": "Bright Mississippi (Take 1)",
+      "artistName": "Thelonious Monk",
+      "collectionName": "Monk's Dream",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/b4/9d/04/b49d0402-75d5-f74d-3cc6-da65374fd572/mzaf_16088651510670670214.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/14/23/94/14239463-9e84-c9fd-2b3b-7c0feb5c930c/074646353622.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1440939955,
+      "trackName": "Nutty",
+      "artistName": "Thelonious Monk & John Coltrane",
+      "collectionName": "Thelonious Monk With John Coltrane",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/fa/80/13/fa80130d-6ae5-ec33-eff9-53ce49e01e7a/mzaf_10562140647009055007.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/85/7a/fd/857afd11-d88b-898b-21bf-68cd126638b3/00888072390232.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1459444221,
+      "trackName": "Epistrophy",
+      "artistName": "Thelonious Monk",
+      "collectionName": "Genius of Modern Music, Vol. 1",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/79/c7/14/79c714cd-4866-3f67-0918-1a5eab6a58c9/mzaf_11609297173863200689.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/97/e1/c1/97e1c140-2264-41d8-ec84-281a0152c5a2/00602577697326.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1440942359,
+      "trackName": "Brilliant Corners (feat. Sonny Rollins & Ernie Henry)",
+      "artistName": "Thelonious Monk",
+      "collectionName": "Brilliant Corners",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/08/04/ff/0804ff42-88af-f068-0f43-19056de39163/mzaf_18258528836473089755.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/06/52/05/06520545-6d9e-c568-60cb-24c4b019a1e2/00888072373068.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1440939942,
+      "trackName": "Ruby, My Dear",
+      "artistName": "Thelonious Monk & John Coltrane",
+      "collectionName": "Thelonious Monk With John Coltrane",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/a0/fc/0d/a0fc0ddd-83f3-0983-6c5f-39724a2ab5f3/mzaf_2760006510963505257.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/85/7a/fd/857afd11-d88b-898b-21bf-68cd126638b3/00888072390232.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1440942653,
+      "trackName": "Bemsha Swing (feat. Sonny Rollins & Clark Terry)",
+      "artistName": "Thelonious Monk",
+      "collectionName": "Brilliant Corners",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/bd/ba/b3/bdbab3f5-ba1e-82c6-31db-05359f85f3b7/mzaf_17800477173297067475.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/06/52/05/06520545-6d9e-c568-60cb-24c4b019a1e2/00888072373068.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1443207444,
+      "trackName": "I Want to Be Happy",
+      "artistName": "Thelonious Monk & Sonny Rollins",
+      "collectionName": "Thelonious Monk & Sonny Rollins (Remastered)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/15/e9/17/15e9179a-e787-cbdf-9e86-bdb463ffcc5e/mzaf_970349555436658873.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/a4/29/71/a42971d5-1173-01bc-8994-b2f265178e16/00888072349919.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1443192644,
+      "trackName": "Thelonious (Live)",
+      "artistName": "Thelonious Monk Orchestra",
+      "collectionName": "At Town Hall (Live) [Bonus Track Version]",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/55/7a/73/557a735d-7605-d794-32cb-01cfdad99d94/mzaf_17826337322114807004.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/81/9c/37/819c37bc-28e9-c059-d61a-6f0d3a96bf81/00888072301900.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1440939947,
+      "trackName": "Trinkle, Tinkle",
+      "artistName": "Thelonious Monk & John Coltrane",
+      "collectionName": "Thelonious Monk With John Coltrane",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/49/b3/40/49b340a5-5d77-6870-41d6-e4879a81fe02/mzaf_12877917355667285991.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/85/7a/fd/857afd11-d88b-898b-21bf-68cd126638b3/00888072390232.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1443232348,
+      "trackName": "Hackensack",
+      "artistName": "Thelonious Monk",
+      "collectionName": "Monk (Remastered)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/d0/99/13/d0991315-a281-9828-a479-48d1a3a84026/mzaf_4700156997904019616.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/be/52/fb/be52fbf1-b060-cd79-950b-e6c1bfabef00/00888072318236.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1467953683,
+      "trackName": "Bemsha Swing",
+      "artistName": "Thelonious Monk",
+      "collectionName": "Brilliant Corners (Remastered)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/9e/c8/60/9ec860af-5814-7f18-e676-f189d7a074a5/mzaf_4330280581096452973.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/e4/68/9b/e4689b77-3e49-7ade-acb8-876d753db716/06UMGIM35191.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1459444218,
+      "trackName": "In Walked Bud",
+      "artistName": "Thelonious Monk",
+      "collectionName": "Genius of Modern Music, Vol. 1",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/b7/dc/63/b7dc634e-e88b-a34b-f6e0-e528a00527e0/mzaf_12622861521412458139.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/97/e1/c1/97e1c140-2264-41d8-ec84-281a0152c5a2/00602577697326.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1443872106,
+      "trackName": "Evidence",
+      "artistName": "Thelonious Monk",
+      "collectionName": "’Round Midnight: The Complete Blue Note Singles (1947-1952)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/c2/6d/09/c26d097f-f8cd-44bf-59d4-8141abf25bef/mzaf_7802966776554383082.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/68/86/e3/6886e33e-f192-a025-3766-b13e0a986371/00602537996940.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1440751703,
+      "trackName": "'Round Midnight",
+      "artistName": "Thelonious Monk",
+      "collectionName": "The Best of Thelonious Monk (Remastered)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/51/50/17/5150173b-b056-a3b7-ed2f-e453daa21acb/mzaf_12125896913077830861.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/77/3d/1b/773d1bf4-29e0-f5ed-a0e8-c3772671f325/00025218350624.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1440810227,
+      "trackName": "In a Sentimental Mood",
+      "artistName": "Duke Ellington & John Coltrane",
+      "collectionName": "Duke Ellington & John Coltrane",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ec/10/a3/ec10a360-882f-f524-cd99-c9b47242c511/mzaf_9079424449416004.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/80/ec/70/80ec708b-13ab-a9d7-71cc-31f9c40abf47/12UMGIM11023.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 962193194,
+      "trackName": "My Favorite Things",
+      "artistName": "John Coltrane",
+      "collectionName": "My Favorite Things",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/cd/bb/b5/cdbbb5d4-7b32-a4c9-2f28-a68485b567d7/mzaf_14821042230185024868.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/38/49/44/384944a8-297f-0844-77da-1ae3b976c457/603497893119.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 724748948,
+      "trackName": "Blue Train",
+      "artistName": "John Coltrane",
+      "collectionName": "Blue Train (Expanded Edition)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/8f/4b/9c/8f4b9c96-657b-a514-2c09-5b2e22c4a65f/mzaf_3512575887967194146.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/22/21/96/22219694-4a24-d379-3ab3-82f344b3b8de/00724359692456.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1502751239,
+      "trackName": "Naima (2020 Remaster)",
+      "artistName": "John Coltrane",
+      "collectionName": "Giant Steps (60th Anniversary Super Deluxe Edition) [2020 Remaster]",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d7/4f/8c/d74f8c3d-9540-de31-1acd-6c28c8ff7beb/mzaf_6854434829985308635.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/9a/80/7c/9a807c65-0019-0e89-f423-a396f17df84d/603497847730.jpg/100x100bb.jpg"
     },
     {
       "trackId": 268443097,
@@ -169,6 +369,30 @@
       "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/7f/9f/d6/mzi.vtnaewef.jpg/100x100bb.jpg"
     },
     {
+      "trackId": 1440640288,
+      "trackName": "My One and Only Love",
+      "artistName": "John Coltrane & Johnny Hartman",
+      "collectionName": "John Coltrane and Johnny Hartman",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/35/72/b7/3572b7a0-576b-65d6-201a-6235f1398471/mzaf_3031168036848897065.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/2b/6c/b7/2b6cb70e-8e01-1d96-f8f8-23aa73d5d7c2/06UMGIM09995.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1440713020,
+      "trackName": "A Love Supreme, Pt. 1: Acknowledgement",
+      "artistName": "John Coltrane",
+      "collectionName": "A Love Supreme",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/46/57/ad/4657ad07-9bb1-a8f9-75d3-61a3f1d3dc8b/mzaf_2837170089287274786.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/e5/24/aa/e524aacd-467b-66f3-8931-0fcd6750a4b9/08UMGIM07914.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1531037503,
+      "trackName": "Giant Steps (2020 Remaster)",
+      "artistName": "John Coltrane",
+      "collectionName": "Giant Steps (2020 Remaster)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f1/d1/a1/f1d1a1c0-e639-49d1-02c0-5863655c6cce/mzaf_15497649076894232882.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/4e/2f/8b/4e2f8b1f-7e14-1ce4-1c76-4683b1b9173d/603497847549.jpg/100x100bb.jpg"
+    },
+    {
       "trackId": 268443200,
       "trackName": "All Blues",
       "artistName": "Miles Davis",
@@ -177,12 +401,28 @@
       "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/7f/9f/d6/mzi.vtnaewef.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 159135512,
-      "trackName": "'Round Midnight",
+      "trackId": 268443113,
+      "trackName": "Freddie Freeloader",
       "artistName": "Miles Davis",
-      "collectionName": "'Round About Midnight (Legacy Edition)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/75/10/f9/7510f9cc-ebd3-8b81-b286-9827ccb4fb40/mzaf_17097298630081534149.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Features115/v4/21/89/12/218912fb-200d-a5b5-8e96-4edf7fbf6ea7/dj.khdokxxq.jpg/100x100bb.jpg"
+      "collectionName": "Kind of Blue",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/b8/79/4b/b8794baf-a87c-533b-b284-0da07abfb43f/mzaf_9230646540185842535.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/7f/9f/d6/mzi.vtnaewef.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1440911925,
+      "trackName": "In a Sentimental Mood",
+      "artistName": "Duke Ellington & John Coltrane",
+      "collectionName": "The Very Best of John Coltrane",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/cc/7c/62/cc7c6261-164e-a28f-7a02-efaf04346fb5/mzaf_6202742881995670733.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/ca/7c/8e/ca7c8ee1-d14d-1914-3a1f-89a07ca26c22/06UMGIM00821.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 962484567,
+      "trackName": "My Shining Hour",
+      "artistName": "John Coltrane",
+      "collectionName": "The Atlantic Studio Album Collection",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/b7/c2/75/b7c27569-26f9-f334-1833-8020402e2e0c/mzaf_17282909062177521896.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music5/v4/68/f6/ca/68f6ca33-222f-52e3-0e89-efe650afce10/603497893065.jpg/100x100bb.jpg"
     },
     {
       "trackId": 268443216,
@@ -193,12 +433,220 @@
       "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/7f/9f/d6/mzi.vtnaewef.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 268443113,
-      "trackName": "Freddie Freeloader",
+      "trackId": 272433527,
+      "trackName": "John Coltrane",
+      "artistName": "Peter Sarstedt",
+      "collectionName": "The Lost Album",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/99/3c/53/993c5360-82f7-3ca2-bd24-457e670268fe/mzaf_12080556397056897419.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/50/50/b6/5050b6f7-8a8f-0eb0-7af9-2503d23c70ff/mzi.irjuvtiu.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 416320382,
+      "trackName": "John Coltrane",
+      "artistName": "Dwight Trible",
+      "collectionName": "Living Water",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/05/8f/9a/058f9adb-8dd6-0523-8053-a34cdd9e22bf/mzaf_15518768058374655451.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/16/ea/95/16ea9533-85b9-9958-87ff-4aeb71b5c50f/mzi.gafhqghg.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1468202479,
+      "trackName": "Blue Train (Remastered)",
+      "artistName": "John Coltrane",
+      "collectionName": "Blue Train",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/bc/d1/2f/bcd12f28-0219-7104-b158-d0b6220c1417/mzaf_11071638360347654814.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/6e/1a/13/6e1a134d-8f6f-d90f-b855-ea69436a2e8b/17UM1IM45370.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1440810372,
+      "trackName": "My Little Brown Book",
+      "artistName": "Duke Ellington & John Coltrane",
+      "collectionName": "Duke Ellington & John Coltrane",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/74/31/c4/7431c4cd-aeb6-e29a-86d8-2a610a17ecc4/mzaf_883587018120237134.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/80/ec/70/80ec708b-13ab-a9d7-71cc-31f9c40abf47/12UMGIM11023.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1440640290,
+      "trackName": "Lush Life",
+      "artistName": "John Coltrane & Johnny Hartman",
+      "collectionName": "John Coltrane and Johnny Hartman",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/1f/26/b1/1f26b1ef-aff8-a3ca-a7a4-74110d348e49/mzaf_15160678786740337657.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/2b/6c/b7/2b6cb70e-8e01-1d96-f8f8-23aa73d5d7c2/06UMGIM09995.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 724748959,
+      "trackName": "Moment's Notice",
+      "artistName": "John Coltrane",
+      "collectionName": "Blue Train (Expanded Edition)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/cd/c2/a3/cdc2a315-5fb7-fb4b-2ee7-f6125ac66ae0/mzaf_6800359418882922001.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/22/21/96/22219694-4a24-d379-3ab3-82f344b3b8de/00724359692456.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 282907093,
+      "trackName": "Goodbye Pork Pie Hat",
+      "artistName": "Charles Mingus",
+      "collectionName": "Mingus Ah Um (Bonus Track Version)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/2f/da/d5/2fdad51f-e902-f0c6-25ed-c61c122d380c/mzaf_12877293101458463508.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/56/51/c5/5651c5da-4b5e-f19f-6a55-8f2137be75f5/5099706551225.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 213005327,
+      "trackName": "Moanin'",
+      "artistName": "Charles Mingus",
+      "collectionName": "Blues & Roots (Bonus Track Version)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/e9/0e/b0/e90eb00a-d9a0-8e40-7a06-84c610fd9aa2/mzaf_5055124392757281959.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Features115/v4/2c/7b/db/2c7bdb9b-3c2b-ca28-df6d-17a45c575e95/dj.jpfauufx.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 282907092,
+      "trackName": "Better Git It In Your Soul",
+      "artistName": "Charles Mingus",
+      "collectionName": "Mingus Ah Um (Bonus Track Version)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/2e/af/a8/2eafa8ab-353f-5936-5d33-99235c25db24/mzaf_349111701774221142.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/56/51/c5/5651c5da-4b5e-f19f-6a55-8f2137be75f5/5099706551225.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1880972009,
+      "trackName": "Original Faubus Fables (Remastered)",
+      "artistName": "Charles Mingus",
+      "collectionName": "Charles Mingus Presents Charles Mingus (Remastered)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/99/05/42/99054210-c71d-c61f-b0ca-d93de239322b/mzaf_2921704890671194413.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/13/e2/f0/13e2f057-a779-bf43-b06f-6521ed76917e/109489.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 298682128,
+      "trackName": "Haitian Fight Song",
+      "artistName": "Charles Mingus",
+      "collectionName": "The Clown",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/4e/e6/98/4ee6980d-4d02-8e52-4870-e6eaffbaff49/mzaf_10479429169716073872.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/cc/01/b8/mzi.xxfrxghi.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 724563848,
+      "trackName": "Nostalgia In Times Square (Live)",
+      "artistName": "Charles Mingus",
+      "collectionName": "Jazz Portraits: Mingus In Wonderland (Live)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/aa/06/bb/aa06bbd9-2b99-cfd8-da21-1a163a4fbb23/mzaf_2962109400477977413.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music4/v4/af/44/9e/af449ee8-470d-0d61-1278-11e7573ce518/00724382732556.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 315947008,
+      "trackName": "Fables of Faubus",
+      "artistName": "Charles Mingus",
+      "collectionName": "Mingus Ah Um (Legacy Edition)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/85/50/db/8550dbd6-7f8f-ebb4-6cf9-164796ce398d/mzaf_121850605289274316.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/85/f3/ef/mzi.etlgbitd.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1444105017,
+      "trackName": "Mood Indigo",
+      "artistName": "Charles Mingus",
+      "collectionName": "Mingus, Mingus, Mingus, Mingus, Mingus",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/fd/8a/a9/fd8aa9fa-27ab-b47b-e2c8-763975f0110e/mzaf_7723087627496993307.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/e5/a1/b5/e5a1b58a-6f95-7161-3f54-cd89f1fe5006/06UMGIM04311.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 282907094,
+      "trackName": "Boogie Stop Shuffle",
+      "artistName": "Charles Mingus",
+      "collectionName": "Mingus Ah Um (Bonus Track Version)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/2b/d7/17/2bd717d4-e51d-47a6-9992-2ad0a463a706/mzaf_13543595482565539489.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/56/51/c5/5651c5da-4b5e-f19f-6a55-8f2137be75f5/5099706551225.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1443281264,
+      "trackName": "Track C – Group Dancers",
+      "artistName": "Charles Mingus",
+      "collectionName": "The Black Saint and the Sinner Lady",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/4b/d0/6c/4bd06c56-63df-ca96-a763-76c79201d65d/mzaf_12015319897459809416.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/cb/85/94/cb85949f-5a43-58d5-c866-d9d0292354bd/06UMGIM01616.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 189230024,
+      "trackName": "Moanin'",
+      "artistName": "Charles Mingus",
+      "collectionName": "Passions of a Man: The Complete Atlantic Recordings 1956-1961",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/cc/d1/9b/ccd19b18-5db1-82c6-3ff0-9df979145bf8/mzaf_12551273167002146850.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/a3/2d/52/mzi.rqfseryi.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 315947003,
+      "trackName": "Goodbye Pork Pie Hat",
+      "artistName": "Charles Mingus",
+      "collectionName": "Mingus Ah Um (Legacy Edition)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/00/23/3d/00233dca-a49b-859b-6362-8d39575f6d54/mzaf_4517800060226683422.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/85/f3/ef/mzi.etlgbitd.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 888163287,
+      "trackName": "Moanin' (Mono)",
+      "artistName": "Charles Mingus",
+      "collectionName": "Blues & Roots (Mono)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/d2/44/7d/d2447dce-c4cd-8868-2ca7-6bf80b569c45/mzaf_15289712093361006905.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/57/77/07/57770753-df60-41ab-01b3-ff3db1da1220/603497900206.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1443280914,
+      "trackName": "Track A – Solo Dancer",
+      "artistName": "Charles Mingus",
+      "collectionName": "The Black Saint and the Sinner Lady",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/11/42/ff/1142ffce-0d16-309c-1b0c-e4c64f61d013/mzaf_3848279625134642446.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/cb/85/94/cb85949f-5a43-58d5-c866-d9d0292354bd/06UMGIM01616.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 298682131,
+      "trackName": "Reincarnation of a Lovebird",
+      "artistName": "Charles Mingus",
+      "collectionName": "The Clown",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/1c/6d/7c/1c6d7cbd-0177-3f96-d08d-2336ebb50264/mzaf_2464156540726000568.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/cc/01/b8/mzi.xxfrxghi.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 315947004,
+      "trackName": "Boogie Stop Shuffle",
+      "artistName": "Charles Mingus",
+      "collectionName": "Mingus Ah Um (Legacy Edition)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/cd/c5/ad/cdc5ad44-d596-cb7b-cdf3-ed8278d71ae6/mzaf_12418673100246321911.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/85/f3/ef/mzi.etlgbitd.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 315947006,
+      "trackName": "Open Letter to Duke",
+      "artistName": "Charles Mingus",
+      "collectionName": "Mingus Ah Um (Legacy Edition)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/d6/36/3e/d6363e50-b3ba-808e-8d49-3ca01504efde/mzaf_16746170666716483887.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/85/f3/ef/mzi.etlgbitd.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 1444104805,
+      "trackName": "II B.S.",
+      "artistName": "Charles Mingus",
+      "collectionName": "Mingus, Mingus, Mingus, Mingus, Mingus",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/e9/0d/8a/e90d8a58-6b0b-0eba-659c-fce8f436bb16/mzaf_9160593845506897381.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/e5/a1/b5/e5a1b58a-6f95-7161-3f54-cd89f1fe5006/06UMGIM04311.rgb.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 282907097,
+      "trackName": "Self-Portrait In Three Colors",
+      "artistName": "Charles Mingus",
+      "collectionName": "Mingus Ah Um (Bonus Track Version)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/be/4a/df/be4adf65-9e2f-2d4c-05d0-466758d48a13/mzaf_3041085459522861471.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/56/51/c5/5651c5da-4b5e-f19f-6a55-8f2137be75f5/5099706551225.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 282907100,
+      "trackName": "Fables of Faubus",
+      "artistName": "Charles Mingus",
+      "collectionName": "Mingus Ah Um (Bonus Track Version)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/9a/3f/55/9a3f5516-a28c-d638-c21a-56c3496c4a73/mzaf_17485414518857564.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/56/51/c5/5651c5da-4b5e-f19f-6a55-8f2137be75f5/5099706551225.jpg/100x100bb.jpg"
+    },
+    {
+      "trackId": 159135512,
+      "trackName": "'Round Midnight",
       "artistName": "Miles Davis",
-      "collectionName": "Kind of Blue",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/b8/79/4b/b8794baf-a87c-533b-b284-0da07abfb43f/mzaf_9230646540185842535.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/7f/9f/d6/mzi.vtnaewef.jpg/100x100bb.jpg"
+      "collectionName": "'Round About Midnight (Legacy Edition)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/75/10/f9/7510f9cc-ebd3-8b81-b286-9827ccb4fb40/mzaf_17097298630081534149.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Features115/v4/21/89/12/218912fb-200d-a5b5-8e96-4edf7fbf6ea7/dj.khdokxxq.jpg/100x100bb.jpg"
     },
     {
       "trackId": 209407388,
@@ -481,661 +929,325 @@
       "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/9c/32/22/9c32222d-0faa-90ce-f761-146be72a7bc9/14UMGIM17170.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 404520928,
-      "trackName": "Wave",
-      "artistName": "João Gilberto",
-      "collectionName": "Amoroso",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/c4/9b/e2/c49be225-72c4-8b41-e6c0-41bdae886473/mzaf_827341858985239095.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/63/15/75/mzi.zlcacvwt.jpg/100x100bb.jpg"
+      "trackId": 157473842,
+      "trackName": "Rockit",
+      "artistName": "Herbie Hancock",
+      "collectionName": "Future Shock",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/f1/e9/27/f1e92706-8870-19ac-7cd5-243eab93c22c/mzaf_17116696161517541890.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/80/bc/3f/80bc3fd0-44b9-266a-ad03-088acd54f034/dj.qxuqsbxw.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1473446891,
-      "trackName": "Chega De Saudade",
-      "artistName": "João Gilberto",
-      "collectionName": "João Voz e Violão",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/8c/3a/72/8c3a7255-9c27-e662-701b-2c91d5f40ef3/mzaf_3369502191669965270.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/06/a3/1f/06a31f7a-73a1-2c5a-97d8-e7f0a5dac37e/19UMGIM64044.rgb.jpg/100x100bb.jpg"
+      "trackId": 158571552,
+      "trackName": "Watermelon Man",
+      "artistName": "Herbie Hancock",
+      "collectionName": "Head Hunters",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/38/4c/ad/384cad20-caef-1896-c860-d61ba7563f69/mzaf_2551244958972940205.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/4f/e5/f5/4fe5f511-462e-e87b-0711-d4e42809fb17/dj.goshfswo.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 404520892,
-      "trackName": "'S Wonderful",
-      "artistName": "João Gilberto",
-      "collectionName": "Amoroso",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/c4/e9/ed/c4e9edca-69fd-576f-4971-0a91ddd3de9c/mzaf_14096028866487880420.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/63/15/75/mzi.zlcacvwt.jpg/100x100bb.jpg"
+      "trackId": 1443829786,
+      "trackName": "Cantaloupe Island",
+      "artistName": "Herbie Hancock",
+      "collectionName": "Empyrean Isles",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/42/88/ad/4288ad16-cc04-128c-33a8-a48c94120225/mzaf_14520593512721020701.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/54/49/9d/54499dbd-8b9c-4081-7f53-23e533d8be3d/00602537465316.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 404520905,
-      "trackName": "Tin Tin Por Tin Tin",
-      "artistName": "João Gilberto",
-      "collectionName": "Amoroso",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/e1/94/5f/e1945f30-dcec-ab52-df5f-be72ebeae086/mzaf_10543516371581883303.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/63/15/75/mzi.zlcacvwt.jpg/100x100bb.jpg"
+      "trackId": 158571527,
+      "trackName": "Chameleon",
+      "artistName": "Herbie Hancock",
+      "collectionName": "Head Hunters",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/bf/62/f7/bf62f75b-ad2f-18c9-9315-fd0e2c05c62d/mzaf_12972883682385555360.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/4f/e5/f5/4fe5f511-462e-e87b-0711-d4e42809fb17/dj.goshfswo.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1469581181,
-      "trackName": "Só Danço Samba (feat. Antônio Carlos Jobim)",
-      "artistName": "Stan Getz & João Gilberto",
-      "collectionName": "Getz/Gilberto (Expanded Edition)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/18/fb/ef/18fbef38-fcf2-3a41-cbd0-1db0e8fc257a/mzaf_18157466926533005158.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/14/c5/97/14c597a3-22c8-d2a9-dc49-0f8b1496f776/14UMGIM16822.rgb.jpg/100x100bb.jpg"
+      "trackId": 716076642,
+      "trackName": "Watermelon Man",
+      "artistName": "Herbie Hancock",
+      "collectionName": "Takin' Off (Expanded Edition)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/42/87/2d/42872d89-80fd-b1d5-148f-a30e2169165e/mzaf_1380554354328194348.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ed/2f/fb/ed2ffb05-3056-4490-2c5f-4bd260b74711/13UABIM12129.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 78975042,
-      "trackName": "Bolinha de Papel",
-      "artistName": "Herbie Mann, João Gilberto & Antônio Carlos Jobim",
-      "collectionName": "Recorded In Rio de Janerio",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/b5/f3/ed/b5f3ed4b-53eb-df94-02d5-81bff6e8020f/mzaf_2443991830237860734.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/29/5b/0c/295b0ce1-9ea9-2fc8-ad46-05d1d7002615/mzi.wweynvgj.jpg/100x100bb.jpg"
+      "trackId": 186017693,
+      "trackName": "Hang Up Your Hang Ups",
+      "artistName": "Herbie Hancock",
+      "collectionName": "Man-Child",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/d5/96/40/d596403b-4232-e45c-dc4f-93e91033b942/mzaf_717227438229553162.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Features124/v4/8c/5a/5e/8c5a5e00-99f9-e61e-00a0-3e32f058e03f/dj.irhlelse.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 404520969,
-      "trackName": "Triste",
-      "artistName": "João Gilberto",
-      "collectionName": "Amoroso",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/51/b6/9a/51b69a2e-5785-a341-a4a8-6bdfff9e5595/mzaf_872778095730736229.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/63/15/75/mzi.zlcacvwt.jpg/100x100bb.jpg"
+      "trackId": 1476740045,
+      "trackName": "Maiden Voyage (Remastered)",
+      "artistName": "Herbie Hancock",
+      "collectionName": "Maiden Voyage",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/ba/d2/d2/bad2d286-283d-12ce-400d-25d92a752747/mzaf_6311871688290462203.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/23/49/49/234949c3-db74-f0eb-30f5-d715526e459b/19UMGIM73745.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1440866092,
-      "trackName": "I Fall In Love Too Easily",
-      "artistName": "Chet Baker",
-      "collectionName": "Chet Baker Sings",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d4/d7/47/d4d747d8-8d5a-4dc9-a686-1ca91f07ad0c/mzaf_10338145356691636309.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d6/c7/a3/d6c7a3e9-f0b4-bdaf-89d4-5e5cb468f0c2/00602557056563.rgb.jpg/100x100bb.jpg"
+      "trackId": 186423582,
+      "trackName": "Butterfly",
+      "artistName": "Herbie Hancock",
+      "collectionName": "Thrust",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/4e/f5/b6/4ef5b6b9-2ac9-66c6-5b65-371f67c3a2dd/mzaf_8418138706600135781.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music1/v4/23/86/ec/2386ecc2-07a8-a190-fc0f-67539fb4bee1/dj.kfbtszgl.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1440865800,
-      "trackName": "My Funny Valentine",
-      "artistName": "Chet Baker",
-      "collectionName": "Chet Baker Sings",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/71/2e/93/712e93b3-c09c-82a5-b58c-4425e950d685/mzaf_582111910534553844.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d6/c7/a3/d6c7a3e9-f0b4-bdaf-89d4-5e5cb468f0c2/00602557056563.rgb.jpg/100x100bb.jpg"
+      "trackId": 278866130,
+      "trackName": "I Thought It Was You",
+      "artistName": "Herbie Hancock",
+      "collectionName": "Sunlight",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/82/55/7d/82557d65-3d76-dff2-1f69-8ee8e0eae266/mzaf_1797609823826083151.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music3/v4/e7/41/4c/e7414ccb-3aae-322d-01a3-b58df43daea6/dj.cpycospf.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1440865792,
-      "trackName": "Time After Time",
-      "artistName": "Chet Baker",
-      "collectionName": "Chet Baker Sings",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/c0/19/8d/c0198d03-35a7-b358-72b0-3a4f16ff6d2c/mzaf_2345120154985479436.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d6/c7/a3/d6c7a3e9-f0b4-bdaf-89d4-5e5cb468f0c2/00602557056563.rgb.jpg/100x100bb.jpg"
+      "trackId": 158571892,
+      "trackName": "Sly",
+      "artistName": "Herbie Hancock",
+      "collectionName": "Head Hunters",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/84/5b/f3/845bf3f7-95fa-6b2c-be64-ca709aa2bc31/mzaf_6466903426584031616.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/4f/e5/f5/4fe5f511-462e-e87b-0711-d4e42809fb17/dj.goshfswo.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1554008830,
-      "trackName": "It Never Entered My Mind",
-      "artistName": "Chet Baker",
-      "collectionName": "Chet",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/ed/7d/8f/ed7d8f04-701a-fd3d-0a03-d73ebf77df62/mzaf_13427505919378881924.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/62/b2/eb/62b2ebd5-8037-5e00-381a-2ef83c97171a/20CRGIM25372.rgb.jpg/100x100bb.jpg"
+      "trackId": 394272464,
+      "trackName": "Red Clay",
+      "artistName": "Freddie Hubbard, Herbie Hancock, Ron Carter, Joe Henderson & Lenny White",
+      "collectionName": "Red Clay (CTI Records 40th Anniversary Edition)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/9e/58/f9/9e58f9ab-a68f-0699-732e-1f187543c881/mzaf_5562514158200600212.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music62/v4/2d/b0/b2/2db0b242-4d8f-f240-776b-c70f41cb4ad7/dj.xncuinrp.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1440865513,
-      "trackName": "It's Always You",
-      "artistName": "Chet Baker",
-      "collectionName": "Chet Baker Sings",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/0c/8b/2d/0c8b2df2-07f8-fa06-9aee-12bcfe746cdb/mzaf_18018930768089597034.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d6/c7/a3/d6c7a3e9-f0b4-bdaf-89d4-5e5cb468f0c2/00602557056563.rgb.jpg/100x100bb.jpg"
+      "trackId": 1444110933,
+      "trackName": "Speak Like a Child",
+      "artistName": "Herbie Hancock",
+      "collectionName": "Speak Like a Child",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/de/31/67/de3167e3-1a70-b826-ea4d-32412d14b370/mzaf_6898108295985675457.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/21/b8/21/21b8210f-3539-d2c3-3827-bc4d686d1085/13UMGIM19882.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1440865794,
-      "trackName": "I Get Along Without You Very Well (Except Sometimes)",
-      "artistName": "Chet Baker",
-      "collectionName": "Chet Baker Sings",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/66/a0/b0/66a0b037-21fc-c9cc-a496-05b69d3a990f/mzaf_15826630703620930305.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d6/c7/a3/d6c7a3e9-f0b4-bdaf-89d4-5e5cb468f0c2/00602557056563.rgb.jpg/100x100bb.jpg"
+      "trackId": 724298921,
+      "trackName": "Cantaloupe Island",
+      "artistName": "Herbie Hancock",
+      "collectionName": "Empyrean Isles (Expanded Edition)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/42/a5/db/42a5db38-3993-f800-08af-f252af0dd15d/mzaf_435052868986384193.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/3b/30/51/3b305111-c28a-80ad-1f1d-6e89fb4fa2af/13ULAIM49306.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 159233563,
-      "trackName": "I Waited for You",
-      "artistName": "Chet Baker",
-      "collectionName": "The Touch of Your Lips",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/29/91/3d/29913d35-3980-b50d-cfb0-ee811c750847/mzaf_6030967354356856407.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/48/79/a4/mzi.wencfque.jpg/100x100bb.jpg"
+      "trackId": 1476740230,
+      "trackName": "Dolphin Dance (Remastered)",
+      "artistName": "Herbie Hancock",
+      "collectionName": "Maiden Voyage",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/12/a0/eb/12a0ebef-de7c-a41e-7aa4-a34e8a4bfc75/mzaf_9165760961097426820.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/23/49/49/234949c3-db74-f0eb-30f5-d715526e459b/19UMGIM73745.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1440865789,
-      "trackName": "But Not For Me",
-      "artistName": "Chet Baker",
-      "collectionName": "Chet Baker Sings",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ec/9d/00/ec9d00dc-647d-b129-6f11-eb6d430acb47/mzaf_13716625187426801300.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d6/c7/a3/d6c7a3e9-f0b4-bdaf-89d4-5e5cb468f0c2/00602557056563.rgb.jpg/100x100bb.jpg"
+      "trackId": 1629569587,
+      "trackName": "MOON",
+      "artistName": "DOMi & JD BECK & Herbie Hancock",
+      "collectionName": "NOT TiGHT",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/5f/45/fb/5f45fba3-d5ce-8d9d-5f40-3da9938ba008/mzaf_76244839841709179.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/fa/f7/3e/faf73e42-68e9-ee53-ef7e-145989e89a3f/22UMGIM45496.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1440865537,
-      "trackName": "I've Never Been In Love Before",
-      "artistName": "Chet Baker",
-      "collectionName": "Chet Baker Sings",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/a5/05/dc/a505dcfc-505e-66ac-04b9-89fc62c2aceb/mzaf_14144829835355722503.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d6/c7/a3/d6c7a3e9-f0b4-bdaf-89d4-5e5cb468f0c2/00602557056563.rgb.jpg/100x100bb.jpg"
+      "trackId": 355893651,
+      "trackName": "Rockit (Single Version)",
+      "artistName": "Herbie Hancock",
+      "collectionName": "80s 100 Hits",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/50/60/7b/50607b64-9e1c-7a5a-1858-bd9f1c43ac38/mzaf_14195810376499405732.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/f5/ee/4c/f5ee4c14-c895-8554-bc0b-7d4bd6226fbe/884977504392.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1440865219,
-      "trackName": "That Old Feeling",
-      "artistName": "Chet Baker",
-      "collectionName": "Chet Baker Sings",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/c4/fc/cc/c4fccc45-d091-b1fd-827b-9a110f0c3ff0/mzaf_16001453637918214147.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d6/c7/a3/d6c7a3e9-f0b4-bdaf-89d4-5e5cb468f0c2/00602557056563.rgb.jpg/100x100bb.jpg"
+      "trackId": 158571903,
+      "trackName": "Vein Melter",
+      "artistName": "Herbie Hancock",
+      "collectionName": "Head Hunters",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/dd/97/f5/dd97f5a9-cb03-a5d4-5a74-82fbbd3baac8/mzaf_9394209091273829355.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/4f/e5/f5/4fe5f511-462e-e87b-0711-d4e42809fb17/dj.goshfswo.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1686558773,
-      "trackName": "Chet Baker (feat. Lana Del Rey) [MTV Unplugged]",
-      "artistName": "Mando Diao",
-      "collectionName": "MTV Unplugged - Above and Beyond",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/f6/02/ea/f602ea79-52ac-49f8-48b7-4d1443399902/mzaf_6013135277788215940.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/1a/70/1d/1a701d24-8293-29ee-c1fa-e7e64779e9b3/cover.jpg/100x100bb.jpg"
+      "trackId": 716076691,
+      "trackName": "Driftin'",
+      "artistName": "Herbie Hancock",
+      "collectionName": "Takin' Off (Expanded Edition)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/af/60/c8/af60c8a7-626f-bf8b-2c38-0b6577926073/mzaf_13865391450260179793.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ed/2f/fb/ed2ffb05-3056-4490-2c5f-4bd260b74711/13UABIM12129.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 726138335,
-      "trackName": "I Fall in Love Too Easily",
-      "artistName": "Chet Baker",
-      "collectionName": "The Best of Chet Baker Sings",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/39/b8/29/39b829b4-2ec8-dc1c-df69-7375b39133fe/mzaf_9525891053567065319.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/27/0d/ab/270dabec-a63f-00f0-b919-7ea01d59a14c/00077779293254.rgb.jpg/100x100bb.jpg"
+      "trackId": 1443303115,
+      "trackName": "Watermelon Man",
+      "artistName": "Herbie Hancock",
+      "collectionName": "Takin' Off",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/6d/cf/4c/6dcf4cc9-fb55-0de7-0e2e-fabb77238594/mzaf_7968010586100049508.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/69/a6/20/69a62043-8901-787f-afef-3e310f2deb0c/00602537821594.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 726138298,
-      "trackName": "My Funny Valentine",
-      "artistName": "Chet Baker",
-      "collectionName": "The Best of Chet Baker Sings",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/be/a9/26/bea926b9-67ac-d6a4-911a-cf0c2ced4844/mzaf_6877869540710243986.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/27/0d/ab/270dabec-a63f-00f0-b919-7ea01d59a14c/00077779293254.rgb.jpg/100x100bb.jpg"
+      "trackId": 1444111096,
+      "trackName": "The Sorcerer",
+      "artistName": "Herbie Hancock",
+      "collectionName": "Speak Like a Child",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/46/5d/c0/465dc050-7c40-2ac2-6037-b086c699ddc2/mzaf_1832440709653627233.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/21/b8/21/21b8210f-3539-d2c3-3827-bc4d686d1085/13UMGIM19882.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1666395010,
-      "trackName": "Chet Baker",
-      "artistName": "Esther Rose",
-      "collectionName": "Safe to Run",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/ae/bb/b8/aebbb8e0-43cf-526d-261c-d4432dec0086/mzaf_12962401266168418886.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/4e/fe/a4/4efea4c0-789d-1cc4-e0bd-c9e1bde6ca5f/607396654734.png/100x100bb.jpg"
+      "trackId": 723877768,
+      "trackName": "A Night In Tunisia",
+      "artistName": "Art Blakey",
+      "collectionName": "A Night in Tunisia (The Rudy Van Gelder Edition)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/e3/06/cc/e306cc35-75b3-ab8f-30db-b6a4a90921c6/mzaf_16939760882435686477.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music6/v4/24/77/e6/2477e646-8823-0322-2258-afcaefe88cc6/00724386447456.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1717829276,
-      "trackName": "Chet Baker",
-      "artistName": "Esther Rose & Bella White",
-      "collectionName": "Safe 2 Run (Versions) - EP",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/3e/01/3d/3e013d72-4b44-e406-7397-633f7cb88c1f/mzaf_4059283734720126400.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/7e/b2/8d/7eb28d89-c798-27e7-4bee-ed36b9be0384/607396658237.png/100x100bb.jpg"
-    },
-    {
-      "trackId": 1468200423,
-      "trackName": "Almost Blue",
-      "artistName": "Chet Baker",
-      "collectionName": "Chet Baker in Tokyo (The Complete Concert)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e2/4b/cf/e24bcfbf-e45c-9337-82cb-56df713d102b/mzaf_12907001354555209469.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ab/53/28/ab5328ba-0f62-53a6-4f78-c93138e7cc73/859730742748.png/100x100bb.jpg"
-    },
-    {
-      "trackId": 1440865523,
-      "trackName": "Like Someone In Love",
-      "artistName": "Chet Baker",
-      "collectionName": "Chet Baker Sings",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/2d/31/88/2d31885e-d3cb-71ea-2d03-e5d27a97ae47/mzaf_16596662789748835198.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d6/c7/a3/d6c7a3e9-f0b4-bdaf-89d4-5e5cb468f0c2/00602557056563.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1450725780,
-      "trackName": "Winter Wonderland (Remastered)",
-      "artistName": "Chet Baker",
-      "collectionName": "Chet Baker Quartet Featuring Russ Freeman",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/29/eb/38/29eb3888-142b-16c1-b2e5-740678f079e6/mzaf_4623266043837511118.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/35/6c/fa/356cfa69-9cc9-8942-9d4c-797d3d53f3e3/00602547920140.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 394301195,
-      "trackName": "Autumn Leaves",
-      "artistName": "Chet Baker",
-      "collectionName": "She Was Too Good To Me (CTI Records 40th Anniversary Edition)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/2a/47/63/2a4763a3-8c8c-c27d-e543-a12cc5000ecf/mzaf_16199047327446662305.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/fc/af/dd/fcafdd2a-dc31-9b43-ed47-f61b5305ebe0/mzi.tonaecwy.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 313910412,
-      "trackName": "Silence",
-      "artistName": "Charlie Haden",
-      "collectionName": "Silence",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/44/7e/bf/447ebf2c-b426-4a05-bb70-322621d2dde4/mzaf_2447025507576896579.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Features114/v4/12/59/78/12597852-fff1-6b84-ef33-42709d513842/dj.hfgnbbol.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1440926603,
-      "trackName": "Peace Piece",
-      "artistName": "Bill Evans",
-      "collectionName": "Everybody Digs Bill Evans (Keepnews Collection)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/c7/c0/fd/c7c0fdba-8dfb-73aa-d8b7-9ff2bdea9254/mzaf_4834298594644162342.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/3a/7a/39/3a7a398f-28ab-9038-a372-40131b14256c/07UMGIM05289.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 724268881,
-      "trackName": "Skating in Central Park",
-      "artistName": "Bill Evans & Jim Hall",
-      "collectionName": "Undercurrent",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/18/9a/1d/189a1db4-da78-245c-a74e-a354e3425fdf/mzaf_13428255214432357223.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/dc/0d/ae/dc0daef8-093e-757d-2b09-90a3d0943075/13ULAIM49008.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1418068503,
-      "trackName": "Peace Piece",
-      "artistName": "Igor Levit",
-      "collectionName": "Life",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/e1/e7/9f/e1e79f83-e968-e5ac-79ec-fd162d4473f0/mzaf_8783163820075088704.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/97/91/57/9791574f-b3f3-3ddf-e4ee-817679f21f54/886446370286.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1443810315,
-      "trackName": "Spartacus Love Theme",
-      "artistName": "Bill Evans",
-      "collectionName": "Conversations with Myself (Expanded Edition)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/f2/69/f2/f269f228-629c-e689-e466-a20e3c80c304/mzaf_1972790986549124912.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/ba/05/28/ba052883-ef68-b5e6-26d3-4ae971063ade/06UMGIM09121.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 830638711,
-      "trackName": "Blue in Green (feat. John Coltrane & Bill Evans)",
-      "artistName": "Miles Davis",
-      "collectionName": "The Classic Albums Collection",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/60/00/5b/60005bef-6610-8d3e-d012-c0986b247564/mzaf_13815012656927086166.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/v4/4a/44/f9/4a44f9f6-4831-9a2a-086e-bed81c9001ce/MilesDavis_KindOfBlue_G010001367577U_F_001_RGB.jpeg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1444197013,
-      "trackName": "Santa Claus Is Coming to Town",
-      "artistName": "Bill Evans",
-      "collectionName": "Trio 64",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/a6/f7/60/a6f7602e-d271-7f38-3f3c-03dc518770a4/mzaf_16965042296067347701.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/b7/4f/70/b74f70ba-9f22-bcf3-1f93-11c7b5af9e56/06UMGIM14744.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1443193868,
-      "trackName": "Bill Evans",
-      "artistName": "Chick Corea, Eddie Gomez & Paul Motian",
-      "collectionName": "Further Explorations",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/1f/55/f2/1f55f28d-db09-7b55-f41b-57e5372f6059/mzaf_5176366377480993308.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/b4/6a/aa/b46aaaba-e397-2ca4-953c-d24e8e40fb75/00888072336162.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1426963625,
-      "trackName": "But Beautiful",
-      "artistName": "Stan Getz & Bill Evans",
-      "collectionName": "Stan Getz & Bill Evans (Previously Unreleased Recordings)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/23/ee/5a/23ee5aa4-e808-2d6f-4f7c-1e52bd042183/mzaf_6581153231525875940.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/49/85/75/49857531-2f3b-0cb3-454a-d1fb51361a90/06UMGIM21370.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 203775692,
-      "trackName": "Re: Person I Knew",
-      "artistName": "Bill Evans",
-      "collectionName": "The Bill Evans Album",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/15/36/39/153639a8-ce76-7b0d-d844-2bbf7504ed55/mzaf_11334212806121856269.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/de/83/6c/de836cb8-6316-5118-70b8-74d71e3eee33/074646496329.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1440926595,
-      "trackName": "Lucky to Be Me",
-      "artistName": "Bill Evans",
-      "collectionName": "Everybody Digs Bill Evans (Keepnews Collection)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/08/cd/54/08cd54db-4252-f1d4-02b7-6582480211f0/mzaf_17362317267238847624.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/3a/7a/39/3a7a398f-28ab-9038-a372-40131b14256c/07UMGIM05289.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1708973556,
-      "trackName": "Peace Piece",
-      "artistName": "Bill Evans",
-      "collectionName": "On Riverside: Bill Evans",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/52/a3/8c/52a38cca-26ec-d690-d919-870cfb6bddfd/mzaf_13609187442459797226.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/8d/ee/21/8dee2133-abc6-259d-8e01-247c7f0ad371/23UM1IM08982.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1425249655,
-      "trackName": "Santa Claus Is Coming to Town",
-      "artistName": "Bill Evans",
-      "collectionName": "Have Yourself a Jazzy Little Christmas",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/46/a3/d3/46a3d370-1942-f079-73e8-a9fd94e4ed4f/mzaf_16546073774880023722.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/ee/36/a8/ee36a8d6-fc62-79a0-875b-91aa3e16f997/06UMGIM16571.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 724269087,
-      "trackName": "Stairway to the Stars",
-      "artistName": "Bill Evans & Jim Hall",
-      "collectionName": "Undercurrent",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/31/f1/04/31f1042a-1e42-b22b-f733-3bd6150c9d9c/mzaf_12013616190215805466.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/dc/0d/ae/dc0daef8-093e-757d-2b09-90a3d0943075/13ULAIM49008.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1849450747,
-      "trackName": "Bill Evans",
-      "artistName": "Lyle Mays",
-      "collectionName": "Fictionary",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/31/ad/3c/31ad3c2e-055a-be90-9462-8bbbd78c6e12/mzaf_6403020738988855528.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/c1/c9/88/c1c98819-9a43-d4b8-78a3-f7df865a8db2/093624790662_Cover.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 724268981,
-      "trackName": "Darn That Dream",
-      "artistName": "Bill Evans & Jim Hall",
-      "collectionName": "Undercurrent",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/43/62/52/43625201-d52c-f3d1-f86b-124de6619f39/mzaf_3427250450784799956.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/dc/0d/ae/dc0daef8-093e-757d-2b09-90a3d0943075/13ULAIM49008.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1440791692,
-      "trackName": "Waltz for Debby",
-      "artistName": "Cannonball Adderley & Bill Evans",
-      "collectionName": "The Best of Bill Evans (Remastered)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d5/56/2f/d5562f98-4388-b9a3-aa95-cdb472fbc4d2/mzaf_15482721087936021408.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/b0/b5/b4/b0b5b462-99cf-d15c-e026-e6fabe5816fa/09CMGIM01568.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1440795815,
-      "trackName": "Who Cares? (Take 4)",
-      "artistName": "Cannonball Adderley & Bill Evans",
-      "collectionName": "Know What I Mean? (Remastered)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/5c/8f/58/5c8f58af-0433-bc04-764c-2a8794b8b03d/mzaf_10376752143516814240.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/23/c2/66/23c266bb-267c-a033-f524-a97e5abb5703/00025218610520.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1445755681,
-      "trackName": "Like Someone In Love",
-      "artistName": "Bill Evans",
-      "collectionName": "Time Remembered (Remastered)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/16/fe/6b/16fe6baa-6f9d-45bd-80b3-2333471b7898/mzaf_1758346896014730953.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/8a/d1/d2/8ad1d28f-d283-ec95-35aa-1523d025a484/09CMGIM01593.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1440956361,
-      "trackName": "Some Other Time (feat. Bill Evans)",
-      "artistName": "Tony Bennett",
-      "collectionName": "The Tony Bennett / Bill Evans Album (Bonus Track Version)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/32/ab/66/32ab665d-10b8-b994-f77c-e7601e09b855/mzaf_14801619829456421131.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/62/a7/b6/62a7b6aa-ad48-1dff-ecb3-ef4ccc958e5f/00888072301771.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1444197025,
-      "trackName": "Dancing in the Dark",
-      "artistName": "Bill Evans",
-      "collectionName": "Trio 64",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/65/21/d8/6521d87a-9581-d7b2-3c85-c814c14cef11/mzaf_5852930484362523487.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/b7/4f/70/b74f70ba-9f22-bcf3-1f93-11c7b5af9e56/06UMGIM14744.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 282907093,
-      "trackName": "Goodbye Pork Pie Hat",
-      "artistName": "Charles Mingus",
-      "collectionName": "Mingus Ah Um (Bonus Track Version)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/2f/da/d5/2fdad51f-e902-f0c6-25ed-c61c122d380c/mzaf_12877293101458463508.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/56/51/c5/5651c5da-4b5e-f19f-6a55-8f2137be75f5/5099706551225.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 213005327,
+      "trackId": 1443224504,
       "trackName": "Moanin'",
-      "artistName": "Charles Mingus",
-      "collectionName": "Blues & Roots (Bonus Track Version)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/e9/0e/b0/e90eb00a-d9a0-8e40-7a06-84c610fd9aa2/mzaf_5055124392757281959.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Features115/v4/2c/7b/db/2c7bdb9b-3c2b-ca28-df6d-17a45c575e95/dj.jpfauufx.jpg/100x100bb.jpg"
+      "artistName": "Art Blakey & The Jazz Messengers",
+      "collectionName": "Mission Eternal, Vol. 2",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/61/6b/ec/616becaa-4d2f-9855-0c44-89204efe188f/mzaf_13122216479256042164.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/59/fa/f6/59faf6ac-87ca-0662-fe91-e49d33699b7e/00025218515924.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 282907092,
-      "trackName": "Better Git It In Your Soul",
-      "artistName": "Charles Mingus",
-      "collectionName": "Mingus Ah Um (Bonus Track Version)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/2e/af/a8/2eafa8ab-353f-5936-5d33-99235c25db24/mzaf_349111701774221142.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/56/51/c5/5651c5da-4b5e-f19f-6a55-8f2137be75f5/5099706551225.jpg/100x100bb.jpg"
+      "trackId": 1440927168,
+      "trackName": "Skylark",
+      "artistName": "Art Blakey",
+      "collectionName": "Caravan",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/a8/d3/79/a8d37959-5d65-ddb8-32b2-9a38f1021703/mzaf_2913029484489563365.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/37/3e/d4/373ed48a-c3db-1cfc-308a-853bb5840719/00888072301870.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1880972009,
-      "trackName": "Original Faubus Fables (Remastered)",
-      "artistName": "Charles Mingus",
-      "collectionName": "Charles Mingus Presents Charles Mingus (Remastered)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/99/05/42/99054210-c71d-c61f-b0ca-d93de239322b/mzaf_2921704890671194413.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/13/e2/f0/13e2f057-a779-bf43-b06f-6521ed76917e/109489.jpg/100x100bb.jpg"
+      "trackId": 1440926759,
+      "trackName": "Caravan",
+      "artistName": "Art Blakey",
+      "collectionName": "Caravan",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/2f/5a/da/2f5adaf5-9d1b-022b-1238-aec8ec535ba8/mzaf_351280276257077574.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/37/3e/d4/373ed48a-c3db-1cfc-308a-853bb5840719/00888072301870.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 298682128,
-      "trackName": "Haitian Fight Song",
-      "artistName": "Charles Mingus",
-      "collectionName": "The Clown",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/4e/e6/98/4ee6980d-4d02-8e52-4870-e6eaffbaff49/mzaf_10479429169716073872.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/cc/01/b8/mzi.xxfrxghi.jpg/100x100bb.jpg"
+      "trackId": 1444073678,
+      "trackName": "Minority",
+      "artistName": "Art Blakey",
+      "collectionName": "The Complete Art Blakey On Emarcy",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/4b/8b/b3/4b8bb33e-8321-e0e1-73cd-a1c3dc14980c/mzaf_13059824702558974790.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/7a/d4/78/7ad4787d-8071-9dc4-5113-e0d9a4bd2343/00602498779460.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 724563848,
-      "trackName": "Nostalgia In Times Square (Live)",
-      "artistName": "Charles Mingus",
-      "collectionName": "Jazz Portraits: Mingus In Wonderland (Live)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/aa/06/bb/aa06bbd9-2b99-cfd8-da21-1a163a4fbb23/mzaf_2962109400477977413.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music4/v4/af/44/9e/af449ee8-470d-0d61-1278-11e7573ce518/00724382732556.jpg/100x100bb.jpg"
+      "trackId": 1443267164,
+      "trackName": "I Remember Clifford",
+      "artistName": "Art Blakey",
+      "collectionName": "Olympia Concert",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/04/41/b8/0441b85c-cd5e-fe31-fcb5-33420c408837/mzaf_1019189227366898918.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/50/4a/05/504a0566-2e56-98d3-5900-10224e92678e/00602527666273.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 315947008,
-      "trackName": "Fables of Faubus",
-      "artistName": "Charles Mingus",
-      "collectionName": "Mingus Ah Um (Legacy Edition)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/85/50/db/8550dbd6-7f8f-ebb4-6cf9-164796ce398d/mzaf_121850605289274316.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/85/f3/ef/mzi.etlgbitd.jpg/100x100bb.jpg"
+      "trackId": 157421090,
+      "trackName": "Nica's Dream",
+      "artistName": "Art Blakey",
+      "collectionName": "The Jazz Messengers",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/78/27/f6/7827f656-797f-2d38-8876-20e79c3c4962/mzaf_6086734280161967746.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/3c/a2/21/mzi.ndhjocgf.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1444105017,
-      "trackName": "Mood Indigo",
-      "artistName": "Charles Mingus",
-      "collectionName": "Mingus, Mingus, Mingus, Mingus, Mingus",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/fd/8a/a9/fd8aa9fa-27ab-b47b-e2c8-763975f0110e/mzaf_7723087627496993307.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/e5/a1/b5/e5a1b58a-6f95-7161-3f54-cd89f1fe5006/06UMGIM04311.rgb.jpg/100x100bb.jpg"
+      "trackId": 1440927383,
+      "trackName": "Sweet 'N' Sour (Take 4)",
+      "artistName": "Art Blakey",
+      "collectionName": "Caravan",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/9a/f6/ce/9af6ce12-b4ba-1dc6-d655-e77b874f1d1b/mzaf_14234820555033478569.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/37/3e/d4/373ed48a-c3db-1cfc-308a-853bb5840719/00888072301870.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 282907094,
-      "trackName": "Boogie Stop Shuffle",
-      "artistName": "Charles Mingus",
-      "collectionName": "Mingus Ah Um (Bonus Track Version)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/2b/d7/17/2bd717d4-e51d-47a6-9992-2ad0a463a706/mzaf_13543595482565539489.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/56/51/c5/5651c5da-4b5e-f19f-6a55-8f2137be75f5/5099706551225.jpg/100x100bb.jpg"
+      "trackId": 723472082,
+      "trackName": "Backstage Sally",
+      "artistName": "Art Blakey",
+      "collectionName": "Buhaina's Delight (Rudy Van Gelder Edition)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/5b/91/1c/5b911cb8-c818-3309-5340-7dd894fd238c/mzaf_5529332339111129319.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music6/v4/81/fe/e0/81fee05b-9133-8cb5-6481-aaeba002edfd/00724359242552.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1443281264,
-      "trackName": "Track C – Group Dancers",
-      "artistName": "Charles Mingus",
-      "collectionName": "The Black Saint and the Sinner Lady",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/4b/d0/6c/4bd06c56-63df-ca96-a763-76c79201d65d/mzaf_12015319897459809416.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/cb/85/94/cb85949f-5a43-58d5-c866-d9d0292354bd/06UMGIM01616.rgb.jpg/100x100bb.jpg"
+      "trackId": 318183745,
+      "trackName": "Uranus",
+      "artistName": "Art Blakey, Robin Eubanks, Benny Green, Philip Harper, Javon Jackson & Peter Washington",
+      "collectionName": "Not Yet",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/ff/47/0a/ff470ae9-f169-738b-b47a-d917c4f832cd/mzaf_841732248899835108.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/5d/fb/87/mzi.weabmqeg.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 189230024,
-      "trackName": "Moanin'",
-      "artistName": "Charles Mingus",
-      "collectionName": "Passions of a Man: The Complete Atlantic Recordings 1956-1961",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/cc/d1/9b/ccd19b18-5db1-82c6-3ff0-9df979145bf8/mzaf_12551273167002146850.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/a3/2d/52/mzi.rqfseryi.jpg/100x100bb.jpg"
+      "trackId": 1443904755,
+      "trackName": "In a Sentimental Mood (feat. The Modern Jazz Quartet)",
+      "artistName": "Sonny Rollins",
+      "collectionName": "Sonny Rollins with the Modern Jazz Quartet (feat. The Modern Jazz Quartet, Art Blakey & Kenny Drew)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/30/84/58/30845803-b406-5bc2-c3c9-7e650ccb2d95/mzaf_17663659200391431848.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/4d/ef/a1/4defa1b4-b800-c064-b300-f9917fdbe859/00888072014237.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 315947003,
-      "trackName": "Goodbye Pork Pie Hat",
-      "artistName": "Charles Mingus",
-      "collectionName": "Mingus Ah Um (Legacy Edition)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/00/23/3d/00233dca-a49b-859b-6362-8d39575f6d54/mzaf_4517800060226683422.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/85/f3/ef/mzi.etlgbitd.jpg/100x100bb.jpg"
+      "trackId": 1453156264,
+      "trackName": "Ruby, My Dear (feat. John Coltrane, Coleman Hawkins, Art Blakey & Gigi Gryce)",
+      "artistName": "Thelonious Monk Septet",
+      "collectionName": "The Complete 1957 Riverside Recordings",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/a5/02/bc/a502bc86-3252-3567-6623-56cc299ba5f1/mzaf_6358083946287337338.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/b8/8a/3e/b88a3e85-2159-521c-b1d4-2f12e62293d5/00888072021488.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 888163287,
-      "trackName": "Moanin' (Mono)",
-      "artistName": "Charles Mingus",
-      "collectionName": "Blues & Roots (Mono)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/d2/44/7d/d2447dce-c4cd-8868-2ca7-6bf80b569c45/mzaf_15289712093361006905.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/57/77/07/57770753-df60-41ab-01b3-ff3db1da1220/603497900206.jpg/100x100bb.jpg"
+      "trackId": 157421110,
+      "trackName": "Ecaroh",
+      "artistName": "Art Blakey",
+      "collectionName": "The Jazz Messengers",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/bf/ab/7f/bfab7f44-6cdd-7c53-d126-07fffaa33cc5/mzaf_12838005870960946673.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/3c/a2/21/mzi.ndhjocgf.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1443280914,
-      "trackName": "Track A – Solo Dancer",
-      "artistName": "Charles Mingus",
-      "collectionName": "The Black Saint and the Sinner Lady",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/11/42/ff/1142ffce-0d16-309c-1b0c-e4c64f61d013/mzaf_3848279625134642446.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/cb/85/94/cb85949f-5a43-58d5-c866-d9d0292354bd/06UMGIM01616.rgb.jpg/100x100bb.jpg"
+      "trackId": 157421162,
+      "trackName": "Weird-O",
+      "artistName": "Art Blakey",
+      "collectionName": "The Jazz Messengers",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/d3/f3/7d/d3f37d27-9dd6-04f9-1ea3-b9bdddaf746a/mzaf_3173658430276483263.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/3c/a2/21/mzi.ndhjocgf.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 298682131,
-      "trackName": "Reincarnation of a Lovebird",
-      "artistName": "Charles Mingus",
-      "collectionName": "The Clown",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/1c/6d/7c/1c6d7cbd-0177-3f96-d08d-2336ebb50264/mzaf_2464156540726000568.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/cc/01/b8/mzi.xxfrxghi.jpg/100x100bb.jpg"
+      "trackId": 1598869698,
+      "trackName": "Art Blakey",
+      "artistName": "Charlie Watts & Jim Keltner",
+      "collectionName": "Charlie Watts / Jim Keltner Project",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/a9/9d/ef/a99def7d-57e3-a8b1-0040-622823bf363e/mzaf_9561363972877906603.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/c3/4a/8d/c34a8d3b-e969-536a-e3cc-aea5f29aed6c/4050538762372.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 315947004,
-      "trackName": "Boogie Stop Shuffle",
-      "artistName": "Charles Mingus",
-      "collectionName": "Mingus Ah Um (Legacy Edition)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/cd/c5/ad/cdc5ad44-d596-cb7b-cdf3-ed8278d71ae6/mzaf_12418673100246321911.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/85/f3/ef/mzi.etlgbitd.jpg/100x100bb.jpg"
+      "trackId": 1442961671,
+      "trackName": "One By One (Live)",
+      "artistName": "Art Blakey & The Jazz Messengers",
+      "collectionName": "Ugetsu: Art Blakey's Jazz Messengers At Birdland (Live) [Remastered]",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/65/f5/b9/65f5b9d4-0cd1-6f84-2fde-d94a65808cb9/mzaf_2225725119766334056.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/0c/8b/84/0c8b848e-5cb3-aba6-6df0-3b8c18392c3e/00888072328860.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 315947006,
-      "trackName": "Open Letter to Duke",
-      "artistName": "Charles Mingus",
-      "collectionName": "Mingus Ah Um (Legacy Edition)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/d6/36/3e/d6363e50-b3ba-808e-8d49-3ca01504efde/mzaf_16746170666716483887.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/85/f3/ef/mzi.etlgbitd.jpg/100x100bb.jpg"
+      "trackId": 1453155680,
+      "trackName": "Crepuscule with Nellie (feat. John Coltrane, Coleman Hawkins, Art Blakey & Gigi Gryce) [Retake 6]",
+      "artistName": "Thelonious Monk Septet",
+      "collectionName": "The Complete 1957 Riverside Recordings",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/a2/03/e1/a203e148-d70c-8990-2596-213b82cc24c0/mzaf_10564831709561964186.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/b8/8a/3e/b88a3e85-2159-521c-b1d4-2f12e62293d5/00888072021488.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 1444104805,
-      "trackName": "II B.S.",
-      "artistName": "Charles Mingus",
-      "collectionName": "Mingus, Mingus, Mingus, Mingus, Mingus",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/e9/0d/8a/e90d8a58-6b0b-0eba-659c-fce8f436bb16/mzaf_9160593845506897381.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/e5/a1/b5/e5a1b58a-6f95-7161-3f54-cd89f1fe5006/06UMGIM04311.rgb.jpg/100x100bb.jpg"
+      "trackId": 1440926769,
+      "trackName": "In the Wee Small Hours of the Morning",
+      "artistName": "Art Blakey",
+      "collectionName": "Caravan",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/69/45/e0/6945e0e9-8a06-9dc6-1c66-6d33cfe01be9/mzaf_6616211026168771120.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/37/3e/d4/373ed48a-c3db-1cfc-308a-853bb5840719/00888072301870.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 282907097,
-      "trackName": "Self-Portrait In Three Colors",
-      "artistName": "Charles Mingus",
-      "collectionName": "Mingus Ah Um (Bonus Track Version)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/be/4a/df/be4adf65-9e2f-2d4c-05d0-466758d48a13/mzaf_3041085459522861471.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/56/51/c5/5651c5da-4b5e-f19f-6a55-8f2137be75f5/5099706551225.jpg/100x100bb.jpg"
+      "trackId": 1440927374,
+      "trackName": "Thermo (Take 2)",
+      "artistName": "Art Blakey",
+      "collectionName": "Caravan",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/13/d4/9e/13d49e06-0592-6d8e-1fe9-fee6ce6bcba1/mzaf_10088212533874512017.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/37/3e/d4/373ed48a-c3db-1cfc-308a-853bb5840719/00888072301870.rgb.jpg/100x100bb.jpg"
     },
     {
-      "trackId": 282907100,
-      "trackName": "Fables of Faubus",
-      "artistName": "Charles Mingus",
-      "collectionName": "Mingus Ah Um (Bonus Track Version)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/9a/3f/55/9a3f5516-a28c-d638-c21a-56c3496c4a73/mzaf_17485414518857564.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/56/51/c5/5651c5da-4b5e-f19f-6a55-8f2137be75f5/5099706551225.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1440810227,
-      "trackName": "In a Sentimental Mood",
-      "artistName": "Duke Ellington & John Coltrane",
-      "collectionName": "Duke Ellington & John Coltrane",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ec/10/a3/ec10a360-882f-f524-cd99-c9b47242c511/mzaf_9079424449416004.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/80/ec/70/80ec708b-13ab-a9d7-71cc-31f9c40abf47/12UMGIM11023.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 962193194,
-      "trackName": "My Favorite Things",
-      "artistName": "John Coltrane",
-      "collectionName": "My Favorite Things",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/cd/bb/b5/cdbbb5d4-7b32-a4c9-2f28-a68485b567d7/mzaf_14821042230185024868.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/38/49/44/384944a8-297f-0844-77da-1ae3b976c457/603497893119.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 724748948,
-      "trackName": "Blue Train",
-      "artistName": "John Coltrane",
-      "collectionName": "Blue Train (Expanded Edition)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/8f/4b/9c/8f4b9c96-657b-a514-2c09-5b2e22c4a65f/mzaf_3512575887967194146.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/22/21/96/22219694-4a24-d379-3ab3-82f344b3b8de/00724359692456.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1502751239,
-      "trackName": "Naima (2020 Remaster)",
-      "artistName": "John Coltrane",
-      "collectionName": "Giant Steps (60th Anniversary Super Deluxe Edition) [2020 Remaster]",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d7/4f/8c/d74f8c3d-9540-de31-1acd-6c28c8ff7beb/mzaf_6854434829985308635.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/9a/80/7c/9a807c65-0019-0e89-f423-a396f17df84d/603497847730.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1440640288,
-      "trackName": "My One and Only Love",
-      "artistName": "John Coltrane & Johnny Hartman",
-      "collectionName": "John Coltrane and Johnny Hartman",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/35/72/b7/3572b7a0-576b-65d6-201a-6235f1398471/mzaf_3031168036848897065.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/2b/6c/b7/2b6cb70e-8e01-1d96-f8f8-23aa73d5d7c2/06UMGIM09995.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1440713020,
-      "trackName": "A Love Supreme, Pt. 1: Acknowledgement",
-      "artistName": "John Coltrane",
-      "collectionName": "A Love Supreme",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/46/57/ad/4657ad07-9bb1-a8f9-75d3-61a3f1d3dc8b/mzaf_2837170089287274786.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/e5/24/aa/e524aacd-467b-66f3-8931-0fcd6750a4b9/08UMGIM07914.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1531037503,
-      "trackName": "Giant Steps (2020 Remaster)",
-      "artistName": "John Coltrane",
-      "collectionName": "Giant Steps (2020 Remaster)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f1/d1/a1/f1d1a1c0-e639-49d1-02c0-5863655c6cce/mzaf_15497649076894232882.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/4e/2f/8b/4e2f8b1f-7e14-1ce4-1c76-4683b1b9173d/603497847549.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1440911925,
-      "trackName": "In a Sentimental Mood",
-      "artistName": "Duke Ellington & John Coltrane",
-      "collectionName": "The Very Best of John Coltrane",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/cc/7c/62/cc7c6261-164e-a28f-7a02-efaf04346fb5/mzaf_6202742881995670733.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/ca/7c/8e/ca7c8ee1-d14d-1914-3a1f-89a07ca26c22/06UMGIM00821.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 962484567,
-      "trackName": "My Shining Hour",
-      "artistName": "John Coltrane",
-      "collectionName": "The Atlantic Studio Album Collection",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/b7/c2/75/b7c27569-26f9-f334-1833-8020402e2e0c/mzaf_17282909062177521896.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music5/v4/68/f6/ca/68f6ca33-222f-52e3-0e89-efe650afce10/603497893065.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 272433527,
-      "trackName": "John Coltrane",
-      "artistName": "Peter Sarstedt",
-      "collectionName": "The Lost Album",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/99/3c/53/993c5360-82f7-3ca2-bd24-457e670268fe/mzaf_12080556397056897419.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/50/50/b6/5050b6f7-8a8f-0eb0-7af9-2503d23c70ff/mzi.irjuvtiu.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 416320382,
-      "trackName": "John Coltrane",
-      "artistName": "Dwight Trible",
-      "collectionName": "Living Water",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/05/8f/9a/058f9adb-8dd6-0523-8053-a34cdd9e22bf/mzaf_15518768058374655451.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/16/ea/95/16ea9533-85b9-9958-87ff-4aeb71b5c50f/mzi.gafhqghg.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1468202479,
-      "trackName": "Blue Train (Remastered)",
-      "artistName": "John Coltrane",
-      "collectionName": "Blue Train",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/bc/d1/2f/bcd12f28-0219-7104-b158-d0b6220c1417/mzaf_11071638360347654814.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/6e/1a/13/6e1a134d-8f6f-d90f-b855-ea69436a2e8b/17UM1IM45370.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1440810372,
-      "trackName": "My Little Brown Book",
-      "artistName": "Duke Ellington & John Coltrane",
-      "collectionName": "Duke Ellington & John Coltrane",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/74/31/c4/7431c4cd-aeb6-e29a-86d8-2a610a17ecc4/mzaf_883587018120237134.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/80/ec/70/80ec708b-13ab-a9d7-71cc-31f9c40abf47/12UMGIM11023.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 1440640290,
-      "trackName": "Lush Life",
-      "artistName": "John Coltrane & Johnny Hartman",
-      "collectionName": "John Coltrane and Johnny Hartman",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/1f/26/b1/1f26b1ef-aff8-a3ca-a7a4-74110d348e49/mzaf_15160678786740337657.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/2b/6c/b7/2b6cb70e-8e01-1d96-f8f8-23aa73d5d7c2/06UMGIM09995.rgb.jpg/100x100bb.jpg"
-    },
-    {
-      "trackId": 724748959,
-      "trackName": "Moment's Notice",
-      "artistName": "John Coltrane",
-      "collectionName": "Blue Train (Expanded Edition)",
-      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/cd/c2/a3/cdc2a315-5fb7-fb4b-2ee7-f6125ac66ae0/mzaf_6800359418882922001.plus.aac.p.m4a",
-      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/22/21/96/22219694-4a24-d379-3ab3-82f344b3b8de/00724359692456.rgb.jpg/100x100bb.jpg"
+      "trackId": 1439930947,
+      "trackName": "Midriff (2012 - Remaster)",
+      "artistName": "Art Blakey",
+      "collectionName": "Art Blakey Big Band (2012 - Remaster)",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/57/17/d7/5717d785-a5a3-5da2-8e60-4a3308817719/mzaf_17178842221768937220.plus.aac.p.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/4d/4a/54/4d4a54ab-1e19-70e7-a71e-e1ac157eb147/0689466687118.jpg/100x100bb.jpg"
     }
   ],
-  "updated": "2026-03-11T01:09:42.779Z"
+  "updated": "2026-03-11T09:07:56.874Z"
 }
