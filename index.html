@@ -213,6 +213,10 @@ body.fading { opacity: 0; }
   }
 }
 
+/* DEFAULT CURSOR ZONES */
+.proj-card, .proj-card *,
+.exp-item, .exp-item * { cursor: default !important; }
+
 /* HORIZONTAL SCROLL PROJECT CARDS */
 .scroll-btn {
   margin-left: auto;
@@ -1506,6 +1510,8 @@ body:not(.on-home) #draw-canvas { display: none !important; }
     mx = e.clientX; my = e.clientY;
     figCursor.style.transform = 'translate(' + mx + 'px,' + my + 'px)';
     figCursor.classList.add('ready');
+    const overDefault = e.target.closest('.proj-card, .exp-item');
+    figCursor.style.opacity = overDefault ? '0' : '';
     if (sayOpen) {
       figSay.style.left = (mx + 14) + 'px';
       figSay.style.top = (my + 14) + 'px';
