@@ -6,6 +6,9 @@
 <title>theo.design</title>
 <link id="theme-css" rel="stylesheet" href="css/pro.css">
 <style>
+/* DEFAULT LAYOUT TOKENS — overridden by each theme CSS */
+:root { --h-pad: clamp(32px, 6vw, 140px); }
+
 /* GLASS CLOSE BUTTON — center bottom */
 #glass-close-btn {
   position: fixed;
@@ -407,39 +410,44 @@ body.fading { opacity: 0; }
 .proj-card-body { display: none; }
 
 /* ── EXPERIMENTATION CARDS : 16:9 thumbnail + texte dessous ── */
+.xp-wrap { position: relative; }
 .xp-scroll {
   display: flex;
   overflow-x: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  gap: 16px;
-  padding: 20px 0 64px var(--h-pad);
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: var(--h-pad);
+  -webkit-overflow-scrolling: touch;
+  gap: 20px;
+  padding: 20px 0 48px;
 }
 .xp-scroll::-webkit-scrollbar { display: none; }
-.xp-scroll::after {
+.xp-scroll::before, .xp-scroll::after {
   content: '';
   flex-shrink: 0;
   width: var(--h-pad);
 }
 .proj-card--xp {
-  flex: 0 0 340px;
+  flex: 0 0 calc(45vw);
   border-radius: 0;
   overflow: visible;
+  scroll-snap-align: start;
   transition: transform 0.4s cubic-bezier(0.25,1,0.35,1);
 }
 .proj-card--xp:hover { transform: translateY(-4px); }
 .proj-card--xp .proj-card-img {
   aspect-ratio: 16/9;
-  border-radius: 12px;
+  border-radius: 14px;
   align-items: stretch;
 }
 .proj-card--xp .proj-card-img::after { display: none; }
 .proj-card--xp .proj-card-inner {
   position: static;
-  padding: 11px 2px 0;
+  padding: 12px 2px 0;
   gap: 4px;
 }
-.proj-card--xp .proj-card-name { font-size: 14px; color: #111; }
+.proj-card--xp .proj-card-name { font-size: 15px; color: #111; }
 .proj-card--xp .proj-card-year { font-size: 9px; color: rgba(0,0,0,0.4); }
 .proj-card--xp .tag { color: rgba(0,0,0,0.4); }
 .xp-card-desc {
@@ -447,6 +455,40 @@ body.fading { opacity: 0; }
   color: rgba(0,0,0,0.5);
   line-height: 1.5;
   margin: 0;
+}
+/* XP next button */
+.xp-nav-btn {
+  position: absolute;
+  right: 24px;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #111;
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(32px) saturate(1.8);
+  -webkit-backdrop-filter: blur(32px) saturate(1.8);
+  box-shadow:
+    0 0 0 0.5px rgba(255,255,255,0.55),
+    0 0 0 1px rgba(0,0,0,0.06),
+    inset 0 1.5px 0 rgba(255,255,255,0.75),
+    inset 0 -1px 0 rgba(0,0,0,0.04),
+    0 6px 28px rgba(0,0,0,0.12),
+    0 1px 4px rgba(0,0,0,0.06);
+  z-index: 10;
+  transition: background 0.15s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+}
+.xp-nav-btn:hover  { background: rgba(255,255,255,0.35); transform: translateY(-50%) scale(1.08); }
+.xp-nav-btn:active { transform: translateY(-50%) scale(0.93); }
+@media(max-width:700px) {
+  .proj-card--xp { flex: 0 0 calc(80vw); }
+  .xp-nav-btn { display: none; }
 }
 
 /* ── TESTIMONIALS ── */
@@ -820,6 +862,8 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
     <h2 class="section-title">Playground</h2>
     <p class="section-sub">Small experiments with code, AI images and generative graphics.</p>
   </div>
+  <div class="xp-wrap">
+  <button class="xp-nav-btn" id="xp-btn-next" aria-label="Suivant">&#8594;</button>
   <div class="xp-scroll">
     <div class="proj-card proj-card--xp" onclick="openMiniSite('incipit')">
       <div class="proj-card-img proj-img--incipit"></div>
@@ -864,6 +908,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
       </div>
     </div>
   </div>
+  </div><!-- /.xp-wrap -->
 
   <!-- ── WHAT THEY SAY ── -->
   <section class="testi-section">
@@ -1988,6 +2033,33 @@ document.querySelectorAll('.projects-scroll').forEach(function(scroll) {
     if (e.key === 'ArrowLeft')  { e.preventDefault(); navigateCarousel(-1); }
     if (e.key === 'ArrowRight') { e.preventDefault(); navigateCarousel(+1); }
   });
+
+  // Playground next button — loop back to start at end
+  var xpNext = document.getElementById('xp-btn-next');
+  if (xpNext) xpNext.addEventListener('click', function() {
+    var sc = document.querySelector('.xp-scroll');
+    if (!sc) return;
+    var card = sc.querySelector('.proj-card--xp');
+    if (!card) return;
+    var atEnd = sc.scrollLeft >= sc.scrollWidth - sc.clientWidth - 10;
+    if (atEnd) {
+      sc.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      sc.scrollBy({ left: card.offsetWidth + 20, behavior: 'smooth' });
+    }
+  });
+
+  // Align xp-btn vertically to card image center
+  function updateXpBtnPos() {
+    var wrap = document.querySelector('.xp-wrap');
+    var img  = wrap && wrap.querySelector('.proj-card-img');
+    if (!wrap || !img || !xpNext) return;
+    var imgR  = img.getBoundingClientRect();
+    var wrapR = wrap.getBoundingClientRect();
+    xpNext.style.top = (imgR.top + imgR.height / 2 - wrapR.top) + 'px';
+  }
+  window.addEventListener('resize', updateXpBtnPos, { passive: true });
+  requestAnimationFrame(updateXpBtnPos);
 })();
 
 /* ── PILL EASTER EGG — reveal the truth ── */
