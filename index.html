@@ -1519,10 +1519,13 @@ body:not(.on-home) #draw-canvas { display: none !important; }
   let sayOpen = false;
 
   // Hide figma cursor over clickable cards, show native pointer instead
-  document.querySelectorAll('.proj-card').forEach(function(card) {
-    card.addEventListener('mouseenter', function() { document.body.classList.add('over-card'); });
-    card.addEventListener('mouseleave', function() { document.body.classList.remove('over-card'); });
-  });
+  document.addEventListener('mouseover', function(e) {
+    if (e.target.closest('.proj-card')) {
+      document.body.classList.add('over-card');
+    } else {
+      document.body.classList.remove('over-card');
+    }
+  }, { passive: true });
 
   // Instant cursor follow
   document.addEventListener('mousemove', function (e) {
