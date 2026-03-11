@@ -1650,8 +1650,8 @@ body:not(.on-home) #draw-canvas { display: none !important; }
   }, { passive: true });
 
   // Hide figma cursor when mouse leaves the window
-  document.addEventListener('mouseleave', function() { figCursor.classList.remove('ready'); });
-  document.addEventListener('mouseenter', function() { figCursor.classList.add('ready'); });
+  document.documentElement.addEventListener('mouseleave', function() { figCursor.classList.remove('ready'); });
+  document.documentElement.addEventListener('mouseenter', function() { figCursor.classList.add('ready'); });
 
   // Instant cursor follow
   document.addEventListener('mousemove', function (e) {
