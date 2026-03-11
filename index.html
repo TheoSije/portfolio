@@ -59,6 +59,53 @@ body:not(.on-home):not(.minisite-open) #glass-close-btn {
   transform: scale(0.94);
 }
 
+/* MOOD WHEEL */
+#mood-wheel {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 9000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+body.on-home #mood-wheel { opacity: 1; pointer-events: all; }
+#mood-btn {
+  pointer-events: all;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+#mood-label {
+  font-size: 9px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  opacity: .5;
+  font-family: inherit;
+}
+#mood-name {
+  font-size: 13px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-family: inherit;
+  font-weight: bold;
+}
+#mood-arrow {
+  font-size: 18px;
+  display: inline-block;
+  transition: transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+#mood-btn:hover #mood-arrow { transform: rotate(180deg); }
+
 /* PAGE TRANSITION */
 body { transition: opacity .18s ease; }
 body.fading { opacity: 0; }
@@ -968,7 +1015,44 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
 <!-- ══ GLASS CLOSE BTN ══ -->
 <button id="glass-close-btn" onclick="closeCurrentView()">×</button>
 
+<!-- ══ MOOD WHEEL ══ -->
+<div id="mood-wheel">
+  <button id="mood-btn" onclick="nextMood()">
+    <span id="mood-label">mood</span>
+    <span id="mood-name">PRO</span>
+    <span id="mood-arrow">↻</span>
+  </button>
+</div>
+
 <script>
+// ══ MOOD WHEEL ══
+const moods = [
+  { name: 'PRO',         file: 'pro'         },
+  { name: 'BRUTAL',      file: 'brutal'      },
+  { name: 'ANARCHIST',   file: 'anarchist'   },
+  { name: 'RETRO',       file: 'retro'       },
+  { name: 'SKEUO',       file: 'skeuomorph'  },
+  { name: 'FLAT BORING', file: 'flat'        },
+  { name: 'FIRE',        file: 'fire'        },
+  { name: 'SOFT',        file: 'soft'        },
+  { name: 'UNREADABLE',  file: 'noaccess'    },
+  { name: 'EDITORIAL',   file: 'editorial'   },
+  { name: 'SWISS',       file: 'swiss'       },
+  { name: 'DARK',        file: 'dark'        },
+  { name: 'WIN2000',     file: 'win2000'     },
+];
+let currentMood = 0;
+function nextMood() {
+  currentMood = (currentMood + 1) % moods.length;
+  const mood = moods[currentMood];
+  document.body.classList.add('fading');
+  setTimeout(function() {
+    document.getElementById('theme-css').href = 'css/' + mood.file + '.css';
+    document.getElementById('mood-name').textContent = mood.name;
+    document.body.classList.remove('fading');
+  }, 180);
+}
+
 // ══ PROJECT PRO DATA ══
 const P = {
   gl: { title:'Galeries Lafayette', type:'Projet Pro', tags:['Design System','IA Gen','Product','Low-Code'], year:'2022–2025', role:'Head of Design · Product Design',
