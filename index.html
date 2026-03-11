@@ -473,6 +473,40 @@ body.fading { opacity: 0; }
   .testi-grid { grid-template-columns: 1fr; }
 }
 
+/* CAROUSEL NAV BUTTONS — absolute inside .carousel-wrap */
+.carousel-wrap { position: relative; }
+.carousel-edge-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #111;
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(32px) saturate(1.8);
+  -webkit-backdrop-filter: blur(32px) saturate(1.8);
+  box-shadow:
+    0 0 0 0.5px rgba(255,255,255,0.55),
+    0 0 0 1px rgba(0,0,0,0.06),
+    inset 0 1.5px 0 rgba(255,255,255,0.75),
+    inset 0 -1px 0 rgba(0,0,0,0.04),
+    0 6px 28px rgba(0,0,0,0.12),
+    0 1px 4px rgba(0,0,0,0.06);
+  z-index: 8000;
+}
+#carousel-btn-left  { left: 16px; }
+#carousel-btn-right { right: 16px; }
+.carousel-edge-btn:hover { background: rgba(255,255,255,0.35); transform: translateY(-50%) scale(1.08); }
+.carousel-edge-btn:active { transform: translateY(-50%) scale(0.93); }
+@media(max-width:700px) { .carousel-edge-btn { display: none; } }
+
 /* × SPIN */
 .x-spin {
   display: inline-block;
@@ -684,8 +718,10 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
 
   <div class="section-header">
     <h2 class="section-title">Selected Work</h2>
-    <button class="scroll-btn" onclick="scrollCarousel(this)">→</button>
   </div>
+  <div class="carousel-wrap">
+  <button class="carousel-edge-btn" id="carousel-btn-left"  aria-label="Précédent">&#8592;</button>
+  <button class="carousel-edge-btn" id="carousel-btn-right" aria-label="Suivant">&#8594;</button>
   <div class="projects-scroll">
     <div class="proj-card" onclick="showProject('gl')">
       <div class="proj-card-img proj-img--gl">
@@ -714,16 +750,6 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
           <span class="proj-card-year">2023</span>
           <span class="proj-card-name">Devialet</span>
           <div class="proj-card-tags"><span class="tag">Luxe</span><span class="tag">Hardware</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="proj-card" onclick="showProject('simplon')">
-      <div class="proj-card-img proj-img--simplon">
-        <div class="proj-card-logo-badge"><img src="https://www.google.com/s2/favicons?domain=simplon.co&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='SPL'"></div>
-        <div class="proj-card-inner">
-          <span class="proj-card-year">2022</span>
-          <span class="proj-card-name">Simplon</span>
-          <div class="proj-card-tags"><span class="tag">EdTech</span><span class="tag">Accessibilité</span></div>
         </div>
       </div>
     </div>
@@ -788,6 +814,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
       </div>
     </div>
   </div>
+  </div><!-- /.carousel-wrap -->
 
   <div class="section-header section-header--rich">
     <h2 class="section-title">Playground</h2>
@@ -1929,6 +1956,39 @@ document.querySelectorAll('.projects-scroll').forEach(function(scroll) {
 
   requestAnimationFrame(updateActive);
 });
+
+/* ── CAROUSEL NAV BUTTONS + KEYBOARD ── */
+(function() {
+  function navigateCarousel(dir) {
+    var sc = document.querySelector('.projects-scroll');
+    if (!sc) return;
+    var allCards = Array.from(sc.querySelectorAll('.proj-card'));
+    var sr = sc.getBoundingClientRect();
+    var cx = sr.left + sr.width / 2;
+    var closest = null, minD = Infinity;
+    allCards.forEach(function(c) {
+      var d = Math.abs(c.getBoundingClientRect().left + c.getBoundingClientRect().width / 2 - cx);
+      if (d < minD) { minD = d; closest = c; }
+    });
+    if (!closest) return;
+    var target = allCards[allCards.indexOf(closest) + dir];
+    if (!target) return;
+    var cr = target.getBoundingClientRect();
+    sc.scrollBy({ left: cr.left + cr.width / 2 - cx, behavior: 'smooth' });
+  }
+
+  var btnL = document.getElementById('carousel-btn-left');
+  var btnR = document.getElementById('carousel-btn-right');
+  if (btnL) btnL.addEventListener('click', function() { navigateCarousel(-1); });
+  if (btnR) btnR.addEventListener('click', function() { navigateCarousel(+1); });
+
+  document.addEventListener('keydown', function(e) {
+    if (!document.body.classList.contains('on-home')) return;
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); navigateCarousel(-1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); navigateCarousel(+1); }
+  });
+})();
 
 /* ── PILL EASTER EGG — reveal the truth ── */
 function pillEgg(pill, revealIcon, revealName, msg) {
