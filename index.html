@@ -59,16 +59,12 @@ body:not(.on-home):not(.minisite-open) #glass-close-btn {
   transform: scale(0.94);
 }
 
-/* MOOD WHEEL */
+/* MOOD WHEEL — glass organic — fixed style regardless of mood */
 #mood-wheel {
   position: fixed;
-  bottom: 32px;
-  right: 32px;
+  bottom: 28px;
+  right: 28px;
   z-index: 9000;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 10px;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -76,33 +72,83 @@ body:not(.on-home):not(.minisite-open) #glass-close-btn {
 body.on-home #mood-wheel { opacity: 1; pointer-events: all; }
 #mood-btn {
   pointer-events: all;
-  cursor: pointer;
+  cursor: none;
   border: none;
-  background: none;
-  padding: 0;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(32px) saturate(1.8);
+  -webkit-backdrop-filter: blur(32px) saturate(1.8);
+  color: #111;
+  padding: 13px 20px 13px 16px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 4px;
+  align-items: center;
+  gap: 10px;
+  font-family: inherit;
+  border-radius: 100px;
+  box-shadow:
+    0 0 0 0.5px rgba(255,255,255,0.55),
+    0 0 0 1px rgba(0,0,0,0.06),
+    inset 0 1.5px 0 rgba(255,255,255,0.75),
+    inset 0 -1px 0 rgba(0,0,0,0.04),
+    0 4px 24px rgba(0,0,0,0.10),
+    0 1px 4px rgba(0,0,0,0.06);
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  min-width: 128px;
+}
+#mood-btn::before {
+  content: '';
+  position: absolute;
+  inset: -30px;
+  background:
+    radial-gradient(ellipse at 75% 25%, rgba(99,179,237,0.38) 0%, transparent 50%),
+    radial-gradient(ellipse at 25% 75%, rgba(252,129,74,0.26) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 85%, rgba(252,211,77,0.22) 0%, transparent 40%);
+  filter: blur(16px);
+  border-radius: 50%;
+  animation: mood-blob 6s ease-in-out infinite alternate;
+}
+@keyframes mood-blob {
+  0%   { transform: scale(1) rotate(0deg); }
+  50%  { transform: scale(1.12) rotate(9deg); }
+  100% { transform: scale(0.94) rotate(-6deg); }
+}
+#mood-btn:hover {
+  transform: scale(1.05) translateY(-2px);
+  background: rgba(255,255,255,0.26);
+  box-shadow:
+    0 0 0 0.5px rgba(255,255,255,0.65),
+    0 0 0 1px rgba(0,0,0,0.05),
+    inset 0 1.5px 0 rgba(255,255,255,0.85),
+    inset 0 -1px 0 rgba(0,0,0,0.04),
+    0 12px 40px rgba(0,0,0,0.14),
+    0 2px 8px rgba(0,0,0,0.07);
 }
 #mood-label {
-  font-size: 9px;
-  letter-spacing: .25em;
+  font-size: 8px;
+  letter-spacing: .22em;
   text-transform: uppercase;
-  opacity: .5;
+  opacity: .45;
   font-family: inherit;
+  position: relative;
+  z-index: 1;
 }
 #mood-name {
-  font-size: 13px;
+  font-size: 11px;
   letter-spacing: .1em;
   text-transform: uppercase;
   font-family: inherit;
-  font-weight: bold;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
 }
 #mood-arrow {
-  font-size: 18px;
+  font-size: 15px;
   display: inline-block;
-  transition: transform .4s cubic-bezier(.34,1.56,.64,1);
+  transition: transform .5s cubic-bezier(.34,1.56,.64,1);
+  margin-left: 2px;
+  position: relative;
+  z-index: 1;
 }
 #mood-btn:hover #mood-arrow { transform: rotate(180deg); }
 
@@ -1029,17 +1075,9 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
 const moods = [
   { name: 'PRO',         file: 'pro'         },
   { name: 'BRUTAL',      file: 'brutal'      },
-  { name: 'ANARCHIST',   file: 'anarchist'   },
-  { name: 'RETRO',       file: 'retro'       },
-  { name: 'SKEUO',       file: 'skeuomorph'  },
-  { name: 'FLAT BORING', file: 'flat'        },
-  { name: 'FIRE',        file: 'fire'        },
-  { name: 'SOFT',        file: 'soft'        },
+  { name: 'BORING',      file: 'flat'        },
+  { name: '2000',        file: 'win2000'     },
   { name: 'UNREADABLE',  file: 'noaccess'    },
-  { name: 'EDITORIAL',   file: 'editorial'   },
-  { name: 'SWISS',       file: 'swiss'       },
-  { name: 'DARK',        file: 'dark'        },
-  { name: 'WIN2000',     file: 'win2000'     },
 ];
 let currentMood = 0;
 function nextMood() {
