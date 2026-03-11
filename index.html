@@ -6,12 +6,12 @@
 <title>theo.design</title>
 <link id="theme-css" rel="stylesheet" href="css/pro.css">
 <style>
-/* GLASS CLOSE BUTTON — center bottom */
+/* GLASS CLOSE BUTTON — bottom right */
 #glass-close-btn {
   position: fixed;
   bottom: 28px;
-  left: 50%;
-  transform: translateX(-50%) translateY(12px);
+  right: 28px;
+  transform: translateY(12px) scale(0.9);
   z-index: 9000;
   width: 52px;
   height: 52px;
@@ -42,7 +42,7 @@
 body:not(.on-home):not(.minisite-open) #glass-close-btn {
   opacity: 1;
   pointer-events: all;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0) scale(1);
 }
 #glass-close-btn:hover {
   background: rgba(255,255,255,0.32);
@@ -53,10 +53,10 @@ body:not(.on-home):not(.minisite-open) #glass-close-btn {
     inset 0 -1px 0 rgba(0,0,0,0.04),
     0 12px 40px rgba(0,0,0,0.16),
     0 2px 8px rgba(0,0,0,0.07);
-  transform: translateX(-50%) scale(1.08);
+  transform: scale(1.08);
 }
 #glass-close-btn:active {
-  transform: translateX(-50%) scale(0.94);
+  transform: scale(0.94);
 }
 
 /* PAGE TRANSITION */
