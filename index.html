@@ -213,9 +213,6 @@ body.fading { opacity: 0; }
   }
 }
 
-/* DEFAULT CURSOR ZONES */
-.proj-card, .proj-card *,
-.exp-item, .exp-item * { cursor: default !important; }
 
 /* HORIZONTAL SCROLL PROJECT CARDS */
 .scroll-btn {
@@ -583,12 +580,12 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
       <span class="stack-pill"><img class="stack-icon" src="img/claude.svg" alt="">Claude</span>
       <span class="stack-pill"><img class="stack-icon" src="img/midjourney.svg" alt="">Midjourney</span>
       <span class="stack-pill"><img class="stack-icon" src="img/storybook.svg" alt="">Storybook</span>
-      <span class="stack-pill" onclick="pillEgg(this)" style="cursor:pointer"><img class="stack-icon" src="https://www.google.com/s2/favicons?domain=chess.com&sz=64" alt="">Chess.com</span>
+      <span class="stack-pill" onclick="pillEgg(this,'https://cdn.simpleicons.org/python/3776AB','YouTube','https://youtube.fr')" style="cursor:pointer"><img class="stack-icon" src="https://cdn.simpleicons.org/python/3776AB" alt="">Python</span>
       <span class="stack-pill"><img class="stack-icon" src="img/photoshop.svg" alt="">Photoshop</span>
-      <span class="stack-pill" onclick="window.open('https://youtube.fr','_blank')" style="cursor:pointer"><img class="stack-icon" src="https://www.google.com/s2/favicons?domain=youtube.com&sz=64" alt="">Terminal</span>
+      <span class="stack-pill" onclick="pillEgg(this,'img/terminal.svg','Chess.com','https://chess.com')" style="cursor:pointer"><img class="stack-icon" src="img/terminal.svg" alt="">Terminal</span>
       <span class="stack-pill"><span class="stack-icon-letter" style="background:#FF4A00">Ji</span>Jitter</span>
       <span class="stack-pill"><img class="stack-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/visualstudiocode.svg" alt="" style="filter:invert(37%) sepia(97%) saturate(1097%) hue-rotate(185deg) brightness(95%)">VS Code</span>
-      <span class="stack-pill" onclick="window.open('https://lemonde.fr','_blank')" style="cursor:pointer"><img class="stack-icon" src="https://www.google.com/s2/favicons?domain=lemonde.fr&sz=64" alt="">GitHub</span>
+      <span class="stack-pill" onclick="pillEgg(this,'https://cdn.simpleicons.org/github/181717','Le Monde','https://lemonde.fr')" style="cursor:pointer"><img class="stack-icon" src="https://cdn.simpleicons.org/github/181717" alt="">GitHub</span>
     </div>
   </section>
 
@@ -1511,8 +1508,6 @@ body:not(.on-home) #draw-canvas { display: none !important; }
     mx = e.clientX; my = e.clientY;
     figCursor.style.transform = 'translate(' + mx + 'px,' + my + 'px)';
     figCursor.classList.add('ready');
-    const overDefault = e.target.closest('.proj-card, .exp-item');
-    figCursor.style.opacity = overDefault ? '0' : null;
     if (sayOpen) {
       figSay.style.left = (mx + 14) + 'px';
       figSay.style.top = (my + 14) + 'px';
@@ -1780,21 +1775,27 @@ document.querySelectorAll('.projects-scroll').forEach(function(scroll) {
   requestAnimationFrame(updateActive);
 });
 
-/* ── CHESS.COM EASTER EGG ── */
-function pillEgg(pill) {
+/* ── PILL EASTER EGG — reveal the truth ── */
+function pillEgg(pill, revealIcon, revealName, revealUrl) {
   pill.style.transition = 'transform 0.2s ease';
   pill.style.transform = 'scale(1.1)';
   pill.onclick = null;
   setTimeout(function() {
     pill.style.transform = 'scale(1)';
     pill.innerHTML = '🤫 ok je bluff';
-    pill.style.cursor = 'default';
     setTimeout(function() {
-      pill.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+      pill.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
       pill.style.opacity = '0';
-      pill.style.transform = 'scale(0.75) translateY(-6px)';
-      setTimeout(function() { pill.remove(); }, 420);
-    }, 1800);
+      pill.style.transform = 'scale(0.85)';
+      setTimeout(function() {
+        pill.innerHTML = '<img class="stack-icon" src="' + revealIcon + '" alt="">' + revealName;
+        pill.style.borderColor = 'var(--acc)';
+        pill.style.cursor = 'pointer';
+        pill.style.opacity = '1';
+        pill.style.transform = 'scale(1)';
+        pill.onclick = function() { window.open(revealUrl, '_blank'); };
+      }, 270);
+    }, 1600);
   }, 180);
 }
 </script>
