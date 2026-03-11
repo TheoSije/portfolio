@@ -1914,12 +1914,16 @@ document.querySelectorAll('.projects-scroll').forEach(function(scroll) {
       else if (closest >= 2 * N) realIdx = closest - N;
       if (realIdx !== undefined) {
         jumping = true;
+        scroll.style.scrollSnapType = 'none';
         centerOn(cards[realIdx]);
         requestAnimationFrame(function() {
-          requestAnimationFrame(function() { jumping = false; });
+          requestAnimationFrame(function() {
+            scroll.style.scrollSnapType = '';
+            jumping = false;
+          });
         });
       }
-    }, 80);
+    }, 150);
   }, { passive: true });
 
   requestAnimationFrame(updateActive);
