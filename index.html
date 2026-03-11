@@ -101,98 +101,117 @@ body.fading { opacity: 0; }
   .personal-item{padding:20px}
 }
 
-/* EXPERIENCE TIMELINE */
+/* EXPERIENCE TIMELINE — vertical alternating */
 .exp-section { border-bottom: var(--r); }
-.exp-scroll {
-  display: flex;
-  overflow-x: scroll;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  padding: 0 40px;
+.exp-timeline {
   position: relative;
-  align-items: stretch;
-  gap: 0;
+  padding: 48px 40px 56px;
+  max-width: 860px;
+  margin: 0 auto;
 }
-.exp-scroll::-webkit-scrollbar { display: none; }
-.exp-scroll::after {
+.exp-timeline::before {
   content: '';
   position: absolute;
-  top: 50%;
-  left: 0; right: 0;
-  height: 1px;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 1px;
   background: var(--fg);
   opacity: .12;
-  pointer-events: none;
+  transform: translateX(-50%);
 }
 .exp-item {
-  flex: 0 0 auto;
-  width: 200px;
-  position: relative;
-  padding: 56px 0 40px;
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 44px;
 }
-.exp-item:last-child { width: 220px; }
+.exp-item:last-child { margin-bottom: 0; }
+.exp-date {
+  flex: 1;
+  text-align: right;
+  padding-right: 32px;
+  order: 1;
+  padding-top: 2px;
+}
+.exp-center {
+  flex: 0 0 0px;
+  display: flex;
+  justify-content: center;
+  order: 2;
+  position: relative;
+}
 .exp-dot {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 7px; height: 7px;
+  width: 8px; height: 8px;
   border-radius: 50%;
   background: var(--fg);
-  transform: translateY(-50%);
-  z-index: 2;
-  transition: background .15s;
+  flex-shrink: 0;
+  margin-top: 4px;
+  margin-left: -4px;
+  z-index: 1;
 }
-.exp-item:first-child .exp-dot { background: var(--acc); width: 9px; height: 9px; }
-.exp-top {
-  position: absolute;
-  top: 50%;
-  left: 18px;
-  transform: translateY(calc(-100% - 14px));
+.exp-info {
+  flex: 1;
+  padding-left: 32px;
+  order: 3;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
 }
-.exp-dates {
+.exp-item:nth-child(even) .exp-date {
+  order: 3;
+  text-align: left;
+  padding-right: 0;
+  padding-left: 32px;
+}
+.exp-item:nth-child(even) .exp-info {
+  order: 1;
+  text-align: right;
+  padding-left: 0;
+  padding-right: 32px;
+  align-items: flex-end;
+}
+.exp-period {
   font-size: 9px;
   letter-spacing: .15em;
   text-transform: uppercase;
   color: #aaa;
-  white-space: nowrap;
-}
-.exp-bottom {
-  position: absolute;
-  top: 50%;
-  left: 18px;
-  transform: translateY(18px);
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
+  line-height: 2;
 }
 .exp-company {
   font-family: 'Archivo Black', sans-serif;
-  font-size: clamp(11px, 1vw, 13px);
+  font-size: clamp(12px, 1.2vw, 15px);
   text-transform: uppercase;
   letter-spacing: -.01em;
   line-height: 1.1;
-  color: var(--fg);
 }
 .exp-role {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 300;
   color: #666;
-  line-height: 1.3;
-  max-width: 170px;
+  line-height: 1.4;
 }
 .exp-badge {
   font-size: 8px;
   letter-spacing: .15em;
   text-transform: uppercase;
-  color: #aaa;
+  color: #bbb;
   margin-top: 2px;
 }
+.exp-item:first-child .exp-dot { background: var(--acc); width: 10px; height: 10px; margin-top: 3px; margin-left: -5px; }
 .exp-item:first-child .exp-company { color: var(--acc); }
+@media(max-width:700px) {
+  .exp-timeline::before { left: 16px; }
+  .exp-timeline { padding: 40px 24px 48px; }
+  .exp-item { flex-direction: row !important; }
+  .exp-date, .exp-item:nth-child(even) .exp-date { display: none; }
+  .exp-center { order: 1 !important; margin-left: 12px; }
+  .exp-info, .exp-item:nth-child(even) .exp-info {
+    order: 2 !important;
+    text-align: left !important;
+    padding-left: 20px !important;
+    padding-right: 0 !important;
+    align-items: flex-start !important;
+  }
+}
 
 /* HORIZONTAL SCROLL PROJECT CARDS */
 .scroll-btn {
@@ -796,16 +815,14 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
   <section class="exp-section">
     <div class="section-header">
       <h2 class="section-title">Experience</h2>
-      <button class="scroll-btn" onclick="scrollCarousel(this)">→</button>
     </div>
-    <div class="exp-scroll">
+    <div class="exp-timeline">
 
       <div class="exp-item">
-        <div class="exp-dot"></div>
-        <div class="exp-top">
-          <span class="exp-dates">2023 — aujourd'hui</span>
-        </div>
-        <div class="exp-bottom">
+        <div class="exp-date"><span class="exp-period">Mars 2023 — Aujourd'hui</span></div>
+        <div class="exp-center"><div class="exp-dot"></div></div>
+        <div class="exp-info">
+          <img src="https://www.google.com/s2/favicons?domain=galerieslafayette.com&sz=64" alt="" width="20" height="20" style="object-fit:contain;border-radius:4px;margin-bottom:2px">
           <span class="exp-company">Galeries Lafayette</span>
           <span class="exp-role">Head of Design</span>
           <span class="exp-badge">CDI · Paris</span>
@@ -813,11 +830,10 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
       </div>
 
       <div class="exp-item">
-        <div class="exp-dot"></div>
-        <div class="exp-top">
-          <span class="exp-dates">2022 — 2023</span>
-        </div>
-        <div class="exp-bottom">
+        <div class="exp-date"><span class="exp-period">Jan. 2022 — Mars 2023</span></div>
+        <div class="exp-center"><div class="exp-dot"></div></div>
+        <div class="exp-info">
+          <img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=64" alt="" width="20" height="20" style="object-fit:contain;border-radius:4px;margin-bottom:2px">
           <span class="exp-company">Deezer</span>
           <span class="exp-role">Lead Product Designer</span>
           <span class="exp-badge">CDI · Paris</span>
@@ -825,23 +841,21 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
       </div>
 
       <div class="exp-item">
-        <div class="exp-dot"></div>
-        <div class="exp-top">
-          <span class="exp-dates">2019 — 2022</span>
-        </div>
-        <div class="exp-bottom">
+        <div class="exp-date"><span class="exp-period">Juil. 2019 — Jan. 2022</span></div>
+        <div class="exp-center"><div class="exp-dot"></div></div>
+        <div class="exp-info">
+          <img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=64" alt="" width="20" height="20" style="object-fit:contain;border-radius:4px;margin-bottom:2px">
           <span class="exp-company">Deezer</span>
           <span class="exp-role">Senior Product Designer</span>
-          <span class="exp-badge">CDI · Design System</span>
+          <span class="exp-badge">CDI · Design System Tempo</span>
         </div>
       </div>
 
       <div class="exp-item">
-        <div class="exp-dot"></div>
-        <div class="exp-top">
-          <span class="exp-dates">2017 — 2019</span>
-        </div>
-        <div class="exp-bottom">
+        <div class="exp-date"><span class="exp-period">Nov. 2017 — Juil. 2019</span></div>
+        <div class="exp-center"><div class="exp-dot"></div></div>
+        <div class="exp-info">
+          <img src="https://www.google.com/s2/favicons?domain=seekube.com&sz=64" alt="" width="20" height="20" style="object-fit:contain;border-radius:4px;margin-bottom:2px">
           <span class="exp-company">Seekube</span>
           <span class="exp-role">Lead Product Designer</span>
           <span class="exp-badge">CDI · Paris</span>
@@ -849,11 +863,10 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
       </div>
 
       <div class="exp-item">
-        <div class="exp-dot"></div>
-        <div class="exp-top">
-          <span class="exp-dates">2015 — 2017</span>
-        </div>
-        <div class="exp-bottom">
+        <div class="exp-date"><span class="exp-period">Oct. 2015 — Jan. 2017</span></div>
+        <div class="exp-center"><div class="exp-dot"></div></div>
+        <div class="exp-info">
+          <img src="https://www.google.com/s2/favicons?domain=somfy.com&sz=64" alt="" width="20" height="20" style="object-fit:contain;border-radius:4px;margin-bottom:2px">
           <span class="exp-company">Somfy</span>
           <span class="exp-role">Senior Product Designer</span>
           <span class="exp-badge">Freelance · Hybride</span>
@@ -861,11 +874,10 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
       </div>
 
       <div class="exp-item">
-        <div class="exp-dot"></div>
-        <div class="exp-top">
-          <span class="exp-dates">2014 — 2015</span>
-        </div>
-        <div class="exp-bottom">
+        <div class="exp-date"><span class="exp-period">Mai 2014 — Sept. 2015</span></div>
+        <div class="exp-center"><div class="exp-dot"></div></div>
+        <div class="exp-info">
+          <img src="https://www.google.com/s2/favicons?domain=devialet.com&sz=64" alt="" width="20" height="20" style="object-fit:contain;border-radius:4px;margin-bottom:2px">
           <span class="exp-company">Devialet</span>
           <span class="exp-role">Senior Product Designer</span>
           <span class="exp-badge">CDI · Paris</span>
@@ -873,11 +885,9 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
       </div>
 
       <div class="exp-item">
-        <div class="exp-dot"></div>
-        <div class="exp-top">
-          <span class="exp-dates">2012 — 2014</span>
-        </div>
-        <div class="exp-bottom">
+        <div class="exp-date"><span class="exp-period">Mars 2012 — Mai 2014</span></div>
+        <div class="exp-center"><div class="exp-dot"></div></div>
+        <div class="exp-info">
           <span class="exp-company">Labgency</span>
           <span class="exp-role">Product Designer</span>
           <span class="exp-badge">CDI · Paris</span>
@@ -885,11 +895,9 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
       </div>
 
       <div class="exp-item">
-        <div class="exp-dot"></div>
-        <div class="exp-top">
-          <span class="exp-dates">2010 — 2011</span>
-        </div>
-        <div class="exp-bottom">
+        <div class="exp-date"><span class="exp-period">Févr. 2010 — Juin 2011</span></div>
+        <div class="exp-center"><div class="exp-dot"></div></div>
+        <div class="exp-info">
           <span class="exp-company">Elteg</span>
           <span class="exp-role">Développeur front-end</span>
           <span class="exp-badge">CDI · Paris</span>
@@ -897,35 +905,31 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
       </div>
 
       <div class="exp-item">
-        <div class="exp-dot"></div>
-        <div class="exp-top">
-          <span class="exp-dates">2009</span>
-        </div>
-        <div class="exp-bottom">
-          <span class="exp-company">FFT</span>
+        <div class="exp-date"><span class="exp-period">2009</span></div>
+        <div class="exp-center"><div class="exp-dot"></div></div>
+        <div class="exp-info">
+          <img src="https://www.google.com/s2/favicons?domain=fft.fr&sz=64" alt="" width="20" height="20" style="object-fit:contain;border-radius:4px;margin-bottom:2px">
+          <span class="exp-company">Fédération Française de Tennis</span>
           <span class="exp-role">Graphiste</span>
           <span class="exp-badge">CDD · Paris</span>
         </div>
       </div>
 
       <div class="exp-item">
-        <div class="exp-dot"></div>
-        <div class="exp-top">
-          <span class="exp-dates">2008</span>
-        </div>
-        <div class="exp-bottom">
-          <span class="exp-company">ArtList</span>
+        <div class="exp-date"><span class="exp-period">2008</span></div>
+        <div class="exp-center"><div class="exp-dot"></div></div>
+        <div class="exp-info">
+          <span class="exp-company">ArtList Paris · New York</span>
           <span class="exp-role">Design Intern</span>
-          <span class="exp-badge">Alternance · Paris / NY</span>
+          <span class="exp-badge">Alternance</span>
         </div>
       </div>
 
       <div class="exp-item">
-        <div class="exp-dot"></div>
-        <div class="exp-top">
-          <span class="exp-dates">2007</span>
-        </div>
-        <div class="exp-bottom">
+        <div class="exp-date"><span class="exp-period">2007</span></div>
+        <div class="exp-center"><div class="exp-dot"></div></div>
+        <div class="exp-info">
+          <img src="https://www.google.com/s2/favicons?domain=condenast.com&sz=64" alt="" width="20" height="20" style="object-fit:contain;border-radius:4px;margin-bottom:2px">
           <span class="exp-company">Condé Nast</span>
           <span class="exp-role">Design Intern</span>
           <span class="exp-badge">Stage · Paris</span>
