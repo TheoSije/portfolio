@@ -210,7 +210,7 @@ body.fading { opacity: 0; }
   scrollbar-width: none;
   -ms-overflow-style: none;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 64px;
+  padding-bottom: 40px;
 }
 .ep-chr-track::-webkit-scrollbar { display: none; }
 .ep-chr-track::before { content: ''; flex-shrink: 0; width: var(--h-pad); }
@@ -249,7 +249,20 @@ body.fading { opacity: 0; }
   gap: 10px;
   margin-bottom: 6px;
 }
-.ep-chr-logo { width: 22px; height: 22px; object-fit: contain; border-radius: 5px; flex-shrink: 0; }
+.ep-chr-logo-badge {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 7px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase;
+  color: #111;
+  font-family: -apple-system, sans-serif;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.18);
+  background: #fff;
+  padding: 5px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
 .ep-chr-co {
   font-family: 'Archivo Black', sans-serif;
   font-size: clamp(15px, 1.5vw, 21px);
@@ -280,7 +293,7 @@ body.fading { opacity: 0; }
 .ep-chr-btn {
   position: absolute;
   right: var(--h-pad);
-  bottom: 20px;
+  top: 50%; transform: translateY(-50%);
   width: 48px; height: 48px;
   border-radius: 50%; border: none; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
@@ -294,8 +307,8 @@ body.fading { opacity: 0; }
   transition: background .2s, transform .2s;
   z-index: 10;
 }
-.ep-chr-btn:hover  { background: rgba(255,255,255,0.38); transform: scale(1.08); }
-.ep-chr-btn:active { transform: scale(0.93); }
+.ep-chr-btn:hover  { background: rgba(255,255,255,0.38); transform: translateY(-50%) scale(1.08); }
+.ep-chr-btn:active { transform: translateY(-50%) scale(0.93); }
 @media(max-width:600px) {
   .ep-chr-item { flex: 0 0 88vw; padding-right: 24px; }
   .ep-chr-item + .ep-chr-item { padding-left: 24px; }
@@ -983,7 +996,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
           <div class="ep-chr-yr">2023</div>
           <span class="ep-chr-period">2023 — Aujourd'hui</span>
           <div class="ep-chr-head">
-            <img src="https://www.google.com/s2/favicons?domain=galerieslafayette.com&sz=64" alt="" class="ep-chr-logo">
+            <div class="ep-chr-logo-badge"><img src="https://www.google.com/s2/favicons?domain=galerieslafayette.com&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='GL'"></div>
             <span class="ep-chr-co">Galeries Lafayette</span>
           </div>
           <div class="ep-chr-role">Head of Design</div>
@@ -994,7 +1007,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
           <div class="ep-chr-yr">2022</div>
           <span class="ep-chr-period">2022 — 2023</span>
           <div class="ep-chr-head">
-            <img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=64" alt="" class="ep-chr-logo">
+            <div class="ep-chr-logo-badge"><img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='DZR'"></div>
             <span class="ep-chr-co">Deezer</span>
           </div>
           <div class="ep-chr-role">Lead Product Designer</div>
@@ -1005,7 +1018,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
           <div class="ep-chr-yr">2019</div>
           <span class="ep-chr-period">2019 — 2022</span>
           <div class="ep-chr-head">
-            <img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=64" alt="" class="ep-chr-logo">
+            <div class="ep-chr-logo-badge"><img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='DZR'"></div>
             <span class="ep-chr-co">Deezer</span>
           </div>
           <div class="ep-chr-role">Senior Product Designer · Design System Tempo</div>
@@ -1016,7 +1029,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
           <div class="ep-chr-yr">2017</div>
           <span class="ep-chr-period">2017 — 2019</span>
           <div class="ep-chr-head">
-            <svg class="ep-chr-logo" width="22" height="22" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="30" rx="6" fill="white"/><text x="15" y="12.5" text-anchor="middle" font-family="system-ui,-apple-system,Helvetica,Arial,sans-serif" font-weight="900" font-size="7" fill="#111" letter-spacing="-0.3">hello</text><text x="3.5" y="22" font-family="system-ui,-apple-system,Helvetica,Arial,sans-serif" font-weight="900" font-size="7" fill="#111">w</text><circle cx="14.6" cy="19.2" r="2.7" fill="none" stroke="#111" stroke-width="1.5"/><text x="18.2" y="22" font-family="system-ui,-apple-system,Helvetica,Arial,sans-serif" font-weight="900" font-size="7" fill="#111">rk</text></svg>
+            <div class="ep-chr-logo-badge" style="padding:0"><svg width="36" height="36" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="30" rx="8" fill="white"/><text x="15" y="12.5" text-anchor="middle" font-family="system-ui,-apple-system,Helvetica,Arial,sans-serif" font-weight="900" font-size="7" fill="#111" letter-spacing="-0.3">hello</text><text x="3.5" y="22" font-family="system-ui,-apple-system,Helvetica,Arial,sans-serif" font-weight="900" font-size="7" fill="#111">w</text><circle cx="14.6" cy="19.2" r="2.7" fill="none" stroke="#111" stroke-width="1.5"/><text x="18.2" y="22" font-family="system-ui,-apple-system,Helvetica,Arial,sans-serif" font-weight="900" font-size="7" fill="#111">rk</text></svg></div>
             <span class="ep-chr-co">Hello Work</span>
           </div>
           <div class="ep-chr-role">Lead Product Designer</div>
@@ -1027,7 +1040,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
           <div class="ep-chr-yr">2015</div>
           <span class="ep-chr-period">2015 — 2017</span>
           <div class="ep-chr-head">
-            <img src="https://www.google.com/s2/favicons?domain=somfy.com&sz=64" alt="" class="ep-chr-logo">
+            <div class="ep-chr-logo-badge"><img src="https://www.google.com/s2/favicons?domain=somfy.com&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='SMF'"></div>
             <span class="ep-chr-co">Somfy</span>
           </div>
           <div class="ep-chr-role">Senior Product Designer</div>
@@ -1038,7 +1051,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
           <div class="ep-chr-yr">2014</div>
           <span class="ep-chr-period">2014 — 2015</span>
           <div class="ep-chr-head">
-            <img src="https://www.google.com/s2/favicons?domain=devialet.com&sz=64" alt="" class="ep-chr-logo">
+            <div class="ep-chr-logo-badge"><img src="https://www.google.com/s2/favicons?domain=devialet.com&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='DVL'"></div>
             <span class="ep-chr-co">Devialet</span>
           </div>
           <div class="ep-chr-role">Senior Product Designer</div>
@@ -1049,7 +1062,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
           <div class="ep-chr-yr">2012</div>
           <span class="ep-chr-period">2012 — 2014</span>
           <div class="ep-chr-head">
-            <svg class="ep-chr-logo" width="22" height="22" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,2 27,8.5 15,15 3,8.5" fill="#6DCFCB"/><polygon points="3,8.5 15,15 15,28 3,21.5" fill="#45B5B0"/><polygon points="27,8.5 27,21.5 15,28 15,15" fill="#2D9E99"/></svg>
+            <div class="ep-chr-logo-badge"><svg width="26" height="26" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,2 27,8.5 15,15 3,8.5" fill="#6DCFCB"/><polygon points="3,8.5 15,15 15,28 3,21.5" fill="#45B5B0"/><polygon points="27,8.5 27,21.5 15,28 15,15" fill="#2D9E99"/></svg></div>
             <span class="ep-chr-co">Labgency</span>
           </div>
           <div class="ep-chr-role">Product Designer</div>
@@ -1060,6 +1073,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
           <div class="ep-chr-yr">2010</div>
           <span class="ep-chr-period">2010 — 2011</span>
           <div class="ep-chr-head">
+            <div class="ep-chr-logo-badge">ELT</div>
             <span class="ep-chr-co">Elteg</span>
           </div>
           <div class="ep-chr-role">Développeur front-end</div>
@@ -1070,7 +1084,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
           <div class="ep-chr-yr">2009</div>
           <span class="ep-chr-period">2009</span>
           <div class="ep-chr-head">
-            <img src="https://www.google.com/s2/favicons?domain=fft.fr&sz=64" alt="" class="ep-chr-logo">
+            <div class="ep-chr-logo-badge"><img src="https://www.google.com/s2/favicons?domain=fft.fr&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='FFT'"></div>
             <span class="ep-chr-co">FFT</span>
           </div>
           <div class="ep-chr-role">Graphiste</div>
@@ -1081,6 +1095,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
           <div class="ep-chr-yr">2008</div>
           <span class="ep-chr-period">2008</span>
           <div class="ep-chr-head">
+            <div class="ep-chr-logo-badge">ART</div>
             <span class="ep-chr-co">ArtList</span>
           </div>
           <div class="ep-chr-role">Design Intern · Paris &amp; New York</div>
@@ -1091,7 +1106,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
           <div class="ep-chr-yr">2007</div>
           <span class="ep-chr-period">2007</span>
           <div class="ep-chr-head">
-            <img src="https://www.google.com/s2/favicons?domain=condenast.com&sz=64" alt="" class="ep-chr-logo">
+            <div class="ep-chr-logo-badge"><img src="https://www.google.com/s2/favicons?domain=condenast.com&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='CN'"></div>
             <span class="ep-chr-co">Condé Nast</span>
           </div>
           <div class="ep-chr-role">Design Intern</div>
