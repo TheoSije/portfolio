@@ -200,123 +200,106 @@ body.fading { opacity: 0; }
 /* EXPERIENCE */
 .exp-section { border-bottom: var(--r); }
 
-/* EXPERIENCE PROCESS TIMELINE */
-.exp-proc {
-  position: relative;
-  padding: 48px var(--h-pad) 80px;
-}
-.exp-proc::before {
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0;
-  left: 50%;
-  width: 1px;
-  background: rgba(0,0,0,0.09);
-  transform: translateX(-50%);
-}
-.ep-step {
+/* EXPERIENCE CHRONICLE — horizontal scroll */
+.ep-chronicle { position: relative; }
+.ep-chr-track {
   display: flex;
-  align-items: flex-start;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: var(--h-pad);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 64px;
+}
+.ep-chr-track::-webkit-scrollbar { display: none; }
+.ep-chr-track::before { content: ''; flex-shrink: 0; width: var(--h-pad); }
+.ep-chr-track::after  { content: ''; flex-shrink: 0; width: var(--h-pad); }
+.ep-chr-item {
+  flex: 0 0 clamp(300px, 40vw, 520px);
+  scroll-snap-align: start;
+  padding: 36px 48px 0 0;
+}
+.ep-chr-item + .ep-chr-item {
+  padding-left: 48px;
+  border-left: 1px solid rgba(0,0,0,0.08);
+}
+.ep-chr-yr {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(80px, 11vw, 156px);
+  letter-spacing: -0.045em;
+  line-height: 1;
+  margin-bottom: 16px;
+  color: var(--fg);
+  opacity: 1;
+  transition: opacity .3s;
+}
+.ep-chr-item:not(:first-child) .ep-chr-yr { opacity: 0.13; }
+.ep-chr-period {
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #aaa;
   margin-bottom: 20px;
+  display: block;
 }
-.ep-side {
-  flex: 1;
-  display: flex;
-  position: relative;
-}
-.ep-side--left { justify-content: flex-end; padding-right: 28px; }
-.ep-side--left::after {
-  content: '';
-  position: absolute;
-  right: 0; top: 26px;
-  width: 28px; height: 1px;
-  background: rgba(0,0,0,0.1);
-}
-.ep-side--right { justify-content: flex-start; padding-left: 28px; }
-.ep-side--right::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 26px;
-  width: 28px; height: 1px;
-  background: rgba(0,0,0,0.1);
-}
-.ep-empty { flex: 1; }
-.ep-circle {
-  flex-shrink: 0;
-  width: 54px; height: 54px;
-  border-radius: 50%;
-  border: 1px solid rgba(0,0,0,0.1);
-  background: var(--bg);
+.ep-chr-head {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.ep-chr-logo { width: 22px; height: 22px; object-fit: contain; border-radius: 5px; flex-shrink: 0; }
+.ep-chr-co {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 11px;
-  letter-spacing: -0.03em;
-  z-index: 2;
-}
-.ep-card {
-  background: white;
-  border: 1px solid rgba(0,0,0,0.07);
-  border-radius: 18px;
-  padding: 16px 20px;
-  width: 260px;
-  flex-shrink: 0;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.04);
-}
-.ep-head {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-  flex-wrap: wrap;
-}
-.ep-logo { width: 18px; height: 18px; object-fit: contain; border-radius: 4px; flex-shrink: 0; overflow: hidden; }
-.ep-co {
-  font-family: 'Archivo Black', sans-serif;
-  font-size: 15px;
+  font-size: clamp(15px, 1.5vw, 21px);
   letter-spacing: -0.02em;
   line-height: 1;
-  flex: 1;
 }
-.ep-badge {
-  font-size: 8px;
-  letter-spacing: .09em;
-  text-transform: uppercase;
-  padding: 3px 9px;
-  border-radius: 20px;
-  flex-shrink: 0;
-}
-.ep-role {
-  display: flex;
-  align-items: flex-start;
-  gap: 7px;
-  font-size: 12px;
+.ep-chr-role {
+  font-size: 13px;
   font-weight: 300;
-  color: #777;
-  line-height: 1.4;
+  color: #888;
+  margin-bottom: 10px;
 }
-.ep-role::before { content: '⊙'; flex-shrink: 0; font-size: 10px; color: #bbb; margin-top: 1px; }
+.ep-chr-badge {
+  display: inline-block;
+  font-size: 8px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+/* badge colours */
 .ep-cdi   { background: rgba(190,240,200,0.55); color: #1a6a28; }
 .ep-free  { background: rgba(220,205,255,0.55); color: #5a35a0; }
 .ep-cdd   { background: rgba(255,235,175,0.55); color: #7a5000; }
 .ep-stage { background: rgba(185,220,255,0.55); color: #0a5090; }
 .ep-alt   { background: rgba(255,210,185,0.55); color: #8a3000; }
-.ep-step--current .ep-card {
-  background: linear-gradient(135deg, rgba(255,235,190,0.55), rgba(200,255,210,0.45));
-  border-color: rgba(0,0,0,0.05);
+/* nav arrow */
+.ep-chr-btn {
+  position: absolute;
+  right: var(--h-pad);
+  bottom: 20px;
+  width: 48px; height: 48px;
+  border-radius: 50%; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; color: #111;
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(32px) saturate(1.8);
+  -webkit-backdrop-filter: blur(32px) saturate(1.8);
+  box-shadow: 0 0 0 0.5px rgba(255,255,255,0.55), 0 0 0 1px rgba(0,0,0,0.06),
+    inset 0 1.5px 0 rgba(255,255,255,0.75), inset 0 -1px 0 rgba(0,0,0,0.04),
+    0 6px 28px rgba(0,0,0,0.12);
+  transition: background .2s, transform .2s;
+  z-index: 10;
 }
+.ep-chr-btn:hover  { background: rgba(255,255,255,0.38); transform: scale(1.08); }
+.ep-chr-btn:active { transform: scale(0.93); }
 @media(max-width:600px) {
-  .exp-proc::before { left: var(--h-pad); transform: none; }
-  .ep-step { flex-wrap: wrap; gap: 8px; }
-  .ep-empty { display: none; }
-  .ep-side--left, .ep-side--right {
-    order: 1; flex: 0 0 calc(100% - 62px);
-    padding: 0; justify-content: flex-start;
-  }
-  .ep-side--left::after, .ep-side--right::before { display: none; }
-  .ep-circle { order: 0; }
-  .ep-card { width: 100%; }
+  .ep-chr-item { flex: 0 0 88vw; padding-right: 24px; }
+  .ep-chr-item + .ep-chr-item { padding-left: 24px; }
+  .ep-chr-btn { display: none; }
 }
 
 
@@ -992,183 +975,131 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
     <div class="section-header">
       <h2 class="section-title">Experience</h2>
     </div>
-    <div class="exp-proc">
+    <div class="ep-chronicle">
+      <button class="ep-chr-btn" id="ep-chr-next" aria-label="Suivant">&#8594;</button>
+      <div class="ep-chr-track" id="ep-chr-track">
 
-      <!-- 2023 — Galeries Lafayette (LEFT / current) -->
-      <div class="ep-step ep-step--current">
-        <div class="ep-side ep-side--left">
-          <div class="ep-card">
-            <div class="ep-head">
-              <img src="https://www.google.com/s2/favicons?domain=galerieslafayette.com&sz=64" alt="" class="ep-logo">
-              <span class="ep-co">Galeries Lafayette</span>
-              <span class="ep-badge ep-cdi">CDI · Paris</span>
-            </div>
-            <div class="ep-role">Head of Design</div>
+        <div class="ep-chr-item">
+          <div class="ep-chr-yr">2023</div>
+          <span class="ep-chr-period">2023 — Aujourd'hui</span>
+          <div class="ep-chr-head">
+            <img src="https://www.google.com/s2/favicons?domain=galerieslafayette.com&sz=64" alt="" class="ep-chr-logo">
+            <span class="ep-chr-co">Galeries Lafayette</span>
           </div>
+          <div class="ep-chr-role">Head of Design</div>
+          <span class="ep-chr-badge ep-cdi">CDI · Paris</span>
         </div>
-        <div class="ep-circle">2023</div>
-        <div class="ep-empty"></div>
-      </div>
 
-      <!-- 2022 — Deezer Lead PD (RIGHT) -->
-      <div class="ep-step">
-        <div class="ep-empty"></div>
-        <div class="ep-circle">2022</div>
-        <div class="ep-side ep-side--right">
-          <div class="ep-card">
-            <div class="ep-head">
-              <img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=64" alt="" class="ep-logo">
-              <span class="ep-co">Deezer</span>
-              <span class="ep-badge ep-cdi">CDI · Paris</span>
-            </div>
-            <div class="ep-role">Lead Product Designer</div>
+        <div class="ep-chr-item">
+          <div class="ep-chr-yr">2022</div>
+          <span class="ep-chr-period">2022 — 2023</span>
+          <div class="ep-chr-head">
+            <img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=64" alt="" class="ep-chr-logo">
+            <span class="ep-chr-co">Deezer</span>
           </div>
+          <div class="ep-chr-role">Lead Product Designer</div>
+          <span class="ep-chr-badge ep-cdi">CDI · Paris</span>
         </div>
-      </div>
 
-      <!-- 2019 — Deezer Senior PD (LEFT) -->
-      <div class="ep-step">
-        <div class="ep-side ep-side--left">
-          <div class="ep-card">
-            <div class="ep-head">
-              <img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=64" alt="" class="ep-logo">
-              <span class="ep-co">Deezer</span>
-              <span class="ep-badge ep-cdi">CDI · Paris</span>
-            </div>
-            <div class="ep-role">Senior Product Designer · Design System Tempo</div>
+        <div class="ep-chr-item">
+          <div class="ep-chr-yr">2019</div>
+          <span class="ep-chr-period">2019 — 2022</span>
+          <div class="ep-chr-head">
+            <img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=64" alt="" class="ep-chr-logo">
+            <span class="ep-chr-co">Deezer</span>
           </div>
+          <div class="ep-chr-role">Senior Product Designer · Design System Tempo</div>
+          <span class="ep-chr-badge ep-cdi">CDI · Paris</span>
         </div>
-        <div class="ep-circle">2019</div>
-        <div class="ep-empty"></div>
-      </div>
 
-      <!-- 2017 — Hello Work (RIGHT) -->
-      <div class="ep-step">
-        <div class="ep-empty"></div>
-        <div class="ep-circle">2017</div>
-        <div class="ep-side ep-side--right">
-          <div class="ep-card">
-            <div class="ep-head">
-              <svg class="ep-logo" width="18" height="18" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="30" rx="6" fill="white"/><text x="15" y="12.5" text-anchor="middle" font-family="system-ui,-apple-system,Helvetica,Arial,sans-serif" font-weight="900" font-size="7" fill="#111" letter-spacing="-0.3">hello</text><text x="3.5" y="22" font-family="system-ui,-apple-system,Helvetica,Arial,sans-serif" font-weight="900" font-size="7" fill="#111">w</text><circle cx="14.6" cy="19.2" r="2.7" fill="none" stroke="#111" stroke-width="1.5"/><text x="18.2" y="22" font-family="system-ui,-apple-system,Helvetica,Arial,sans-serif" font-weight="900" font-size="7" fill="#111">rk</text></svg>
-              <span class="ep-co">Hello Work</span>
-              <span class="ep-badge ep-cdi">CDI · Paris</span>
-            </div>
-            <div class="ep-role">Lead Product Designer</div>
+        <div class="ep-chr-item">
+          <div class="ep-chr-yr">2017</div>
+          <span class="ep-chr-period">2017 — 2019</span>
+          <div class="ep-chr-head">
+            <svg class="ep-chr-logo" width="22" height="22" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="30" rx="6" fill="white"/><text x="15" y="12.5" text-anchor="middle" font-family="system-ui,-apple-system,Helvetica,Arial,sans-serif" font-weight="900" font-size="7" fill="#111" letter-spacing="-0.3">hello</text><text x="3.5" y="22" font-family="system-ui,-apple-system,Helvetica,Arial,sans-serif" font-weight="900" font-size="7" fill="#111">w</text><circle cx="14.6" cy="19.2" r="2.7" fill="none" stroke="#111" stroke-width="1.5"/><text x="18.2" y="22" font-family="system-ui,-apple-system,Helvetica,Arial,sans-serif" font-weight="900" font-size="7" fill="#111">rk</text></svg>
+            <span class="ep-chr-co">Hello Work</span>
           </div>
+          <div class="ep-chr-role">Lead Product Designer</div>
+          <span class="ep-chr-badge ep-cdi">CDI · Paris</span>
         </div>
-      </div>
 
-      <!-- 2015 — Somfy (LEFT) -->
-      <div class="ep-step">
-        <div class="ep-side ep-side--left">
-          <div class="ep-card">
-            <div class="ep-head">
-              <img src="https://www.google.com/s2/favicons?domain=somfy.com&sz=64" alt="" class="ep-logo">
-              <span class="ep-co">Somfy</span>
-              <span class="ep-badge ep-free">Freelance</span>
-            </div>
-            <div class="ep-role">Senior Product Designer</div>
+        <div class="ep-chr-item">
+          <div class="ep-chr-yr">2015</div>
+          <span class="ep-chr-period">2015 — 2017</span>
+          <div class="ep-chr-head">
+            <img src="https://www.google.com/s2/favicons?domain=somfy.com&sz=64" alt="" class="ep-chr-logo">
+            <span class="ep-chr-co">Somfy</span>
           </div>
+          <div class="ep-chr-role">Senior Product Designer</div>
+          <span class="ep-chr-badge ep-free">Freelance · Hybride</span>
         </div>
-        <div class="ep-circle">2015</div>
-        <div class="ep-empty"></div>
-      </div>
 
-      <!-- 2014 — Devialet (RIGHT) -->
-      <div class="ep-step">
-        <div class="ep-empty"></div>
-        <div class="ep-circle">2014</div>
-        <div class="ep-side ep-side--right">
-          <div class="ep-card">
-            <div class="ep-head">
-              <img src="https://www.google.com/s2/favicons?domain=devialet.com&sz=64" alt="" class="ep-logo">
-              <span class="ep-co">Devialet</span>
-              <span class="ep-badge ep-cdi">CDI · Paris</span>
-            </div>
-            <div class="ep-role">Senior Product Designer</div>
+        <div class="ep-chr-item">
+          <div class="ep-chr-yr">2014</div>
+          <span class="ep-chr-period">2014 — 2015</span>
+          <div class="ep-chr-head">
+            <img src="https://www.google.com/s2/favicons?domain=devialet.com&sz=64" alt="" class="ep-chr-logo">
+            <span class="ep-chr-co">Devialet</span>
           </div>
+          <div class="ep-chr-role">Senior Product Designer</div>
+          <span class="ep-chr-badge ep-cdi">CDI · Paris</span>
         </div>
-      </div>
 
-      <!-- 2012 — Labgency (LEFT) -->
-      <div class="ep-step">
-        <div class="ep-side ep-side--left">
-          <div class="ep-card">
-            <div class="ep-head">
-              <svg class="ep-logo" width="18" height="18" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,2 27,8.5 15,15 3,8.5" fill="#6DCFCB"/><polygon points="3,8.5 15,15 15,28 3,21.5" fill="#45B5B0"/><polygon points="27,8.5 27,21.5 15,28 15,15" fill="#2D9E99"/></svg>
-              <span class="ep-co">Labgency</span>
-              <span class="ep-badge ep-cdi">CDI · Paris</span>
-            </div>
-            <div class="ep-role">Product Designer</div>
+        <div class="ep-chr-item">
+          <div class="ep-chr-yr">2012</div>
+          <span class="ep-chr-period">2012 — 2014</span>
+          <div class="ep-chr-head">
+            <svg class="ep-chr-logo" width="22" height="22" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><polygon points="15,2 27,8.5 15,15 3,8.5" fill="#6DCFCB"/><polygon points="3,8.5 15,15 15,28 3,21.5" fill="#45B5B0"/><polygon points="27,8.5 27,21.5 15,28 15,15" fill="#2D9E99"/></svg>
+            <span class="ep-chr-co">Labgency</span>
           </div>
+          <div class="ep-chr-role">Product Designer</div>
+          <span class="ep-chr-badge ep-cdi">CDI · Paris</span>
         </div>
-        <div class="ep-circle">2012</div>
-        <div class="ep-empty"></div>
-      </div>
 
-      <!-- 2010 — Elteg (RIGHT) -->
-      <div class="ep-step">
-        <div class="ep-empty"></div>
-        <div class="ep-circle">2010</div>
-        <div class="ep-side ep-side--right">
-          <div class="ep-card">
-            <div class="ep-head">
-              <span class="ep-co">Elteg</span>
-              <span class="ep-badge ep-cdi">CDI · Paris</span>
-            </div>
-            <div class="ep-role">Développeur front-end</div>
+        <div class="ep-chr-item">
+          <div class="ep-chr-yr">2010</div>
+          <span class="ep-chr-period">2010 — 2011</span>
+          <div class="ep-chr-head">
+            <span class="ep-chr-co">Elteg</span>
           </div>
+          <div class="ep-chr-role">Développeur front-end</div>
+          <span class="ep-chr-badge ep-cdi">CDI · Paris</span>
         </div>
-      </div>
 
-      <!-- 2009 — FFT (LEFT) -->
-      <div class="ep-step">
-        <div class="ep-side ep-side--left">
-          <div class="ep-card">
-            <div class="ep-head">
-              <img src="https://www.google.com/s2/favicons?domain=fft.fr&sz=64" alt="" class="ep-logo">
-              <span class="ep-co">FFT</span>
-              <span class="ep-badge ep-cdd">CDD · Paris</span>
-            </div>
-            <div class="ep-role">Graphiste</div>
+        <div class="ep-chr-item">
+          <div class="ep-chr-yr">2009</div>
+          <span class="ep-chr-period">2009</span>
+          <div class="ep-chr-head">
+            <img src="https://www.google.com/s2/favicons?domain=fft.fr&sz=64" alt="" class="ep-chr-logo">
+            <span class="ep-chr-co">FFT</span>
           </div>
+          <div class="ep-chr-role">Graphiste</div>
+          <span class="ep-chr-badge ep-cdd">CDD · Paris</span>
         </div>
-        <div class="ep-circle">2009</div>
-        <div class="ep-empty"></div>
-      </div>
 
-      <!-- 2008 — ArtList (RIGHT) -->
-      <div class="ep-step">
-        <div class="ep-empty"></div>
-        <div class="ep-circle">2008</div>
-        <div class="ep-side ep-side--right">
-          <div class="ep-card">
-            <div class="ep-head">
-              <span class="ep-co">ArtList</span>
-              <span class="ep-badge ep-alt">Alternance</span>
-            </div>
-            <div class="ep-role">Design Intern · Paris &amp; New York</div>
+        <div class="ep-chr-item">
+          <div class="ep-chr-yr">2008</div>
+          <span class="ep-chr-period">2008</span>
+          <div class="ep-chr-head">
+            <span class="ep-chr-co">ArtList</span>
           </div>
+          <div class="ep-chr-role">Design Intern · Paris &amp; New York</div>
+          <span class="ep-chr-badge ep-alt">Alternance</span>
         </div>
-      </div>
 
-      <!-- 2007 — Condé Nast (LEFT) -->
-      <div class="ep-step">
-        <div class="ep-side ep-side--left">
-          <div class="ep-card">
-            <div class="ep-head">
-              <img src="https://www.google.com/s2/favicons?domain=condenast.com&sz=64" alt="" class="ep-logo">
-              <span class="ep-co">Condé Nast</span>
-              <span class="ep-badge ep-stage">Stage · Paris</span>
-            </div>
-            <div class="ep-role">Design Intern</div>
+        <div class="ep-chr-item">
+          <div class="ep-chr-yr">2007</div>
+          <span class="ep-chr-period">2007</span>
+          <div class="ep-chr-head">
+            <img src="https://www.google.com/s2/favicons?domain=condenast.com&sz=64" alt="" class="ep-chr-logo">
+            <span class="ep-chr-co">Condé Nast</span>
           </div>
+          <div class="ep-chr-role">Design Intern</div>
+          <span class="ep-chr-badge ep-stage">Stage · Paris</span>
         </div>
-        <div class="ep-circle">2007</div>
-        <div class="ep-empty"></div>
-      </div>
 
-    </div><!-- /.exp-proc -->
+      </div><!-- /.ep-chr-track -->
+    </div><!-- /.ep-chronicle -->
   </section>
 
   <section class="about">
@@ -2126,6 +2057,38 @@ document.querySelectorAll('.projects-scroll').forEach(function(scroll) {
   }
   window.addEventListener('resize', updateXpBtnPos, { passive: true });
   requestAnimationFrame(updateXpBtnPos);
+})();
+
+/* ── EXPERIENCE CHRONICLE — next button ── */
+(function() {
+  var btn   = document.getElementById('ep-chr-next');
+  var track = document.getElementById('ep-chr-track');
+  if (!btn || !track) return;
+
+  btn.addEventListener('click', function() {
+    var items = Array.from(track.querySelectorAll('.ep-chr-item'));
+    if (!items.length) return;
+    var padL = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--h-pad')) || 40;
+
+    // Build absolute left positions for each item (from track scroll origin)
+    var offsets = items.map(function(it) {
+      return it.offsetLeft;
+    });
+
+    // The current snap position is scrollLeft + padL (snap target)
+    var snapPos = track.scrollLeft + padL;
+
+    // Find the index of the currently snapped item (closest to snapPos)
+    var curIdx = 0, minD = Infinity;
+    offsets.forEach(function(off, i) {
+      var d = Math.abs(off - snapPos);
+      if (d < minD) { minD = d; curIdx = i; }
+    });
+
+    // Go to next; loop back to start at end
+    var nextIdx = (curIdx + 1 >= items.length) ? 0 : curIdx + 1;
+    track.scrollTo({ left: offsets[nextIdx] - padL, behavior: 'smooth' });
+  });
 })();
 
 /* ── PILL EASTER EGG — reveal the truth ── */
