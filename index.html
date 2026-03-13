@@ -783,7 +783,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
     </div>
     <div class="proj-card" onclick="showProject('deezer')">
       <div class="proj-card-img proj-img--deezer">
-        <video class="proj-card-video" src="img/deezer-card.mp4" muted loop playsinline preload="auto"></video>
+        <video class="proj-card-video" src="img/deezer-card.mp4" muted loop playsinline preload="auto" data-start-time="4"></video>
         <div class="proj-card-logo-badge"><img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='DZR'"></div>
         <div class="proj-card-inner">
           <span class="proj-card-year">2023</span>
@@ -1978,7 +1978,15 @@ document.querySelectorAll('.projects-scroll').forEach(function(scroll) {
       c.classList.toggle('snap-inactive', inactive);
       // play/pause any video in this card
       var v = c.querySelector('video');
-      if (v) { inactive ? v.pause() : (v.paused && v.play()); }
+      if (v) {
+        if (inactive) {
+          v.pause();
+        } else if (v.paused) {
+          var t = parseFloat(v.dataset.startTime);
+          if (t && !v.dataset.started) { v.currentTime = t; v.dataset.started = '1'; }
+          v.play();
+        }
+      }
     });
   }
 
