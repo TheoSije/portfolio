@@ -829,7 +829,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
     </div>
     <div class="proj-card" onclick="showProject('mauboussin')">
       <div class="proj-card-img proj-img--mauboussin">
-        <video class="proj-card-video" src="img/mauboussin-card.mp4" muted loop playsinline preload="auto"></video>
+        <video class="proj-card-video mauboussin-video" src="img/mauboussin-card.mp4" muted loop playsinline preload="auto"></video>
         <div class="proj-card-logo-badge"><img src="https://www.google.com/s2/favicons?domain=mauboussin.fr&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='MBN'"></div>
         <div class="proj-card-inner">
           <span class="proj-card-year">2025</span>
@@ -1464,7 +1464,7 @@ function showHome() {
 .proj-img--lionel   { background: linear-gradient(155deg, #3b1a00 0%, #92400e 50%, #d97706 100%); }
 .proj-img--tunemymusic{ background: linear-gradient(155deg, #0f0c29 0%, #302b63 45%, #24243e 100%); }
 .proj-img--mauboussin{ background: #E5E5E5; }
-.proj-img--mauboussin .proj-card-video { width: 86%; height: auto; inset: auto; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.mauboussin-video { width: 100% !important; height: auto !important; inset: auto !important; top: 50% !important; left: 0 !important; transform: translateY(-50%) !important; object-fit: fill !important; }
 .proj-img--gotaxfree{ background: #dce8f5 url('img/gotaxfree-card.jpg') center/cover no-repeat; }
 .proj-img--dsrt     { background: linear-gradient(155deg, #050505 0%, #111 50%, #2a2a2a 100%); }
 .proj-img--incipit  { background: linear-gradient(155deg, #450a0a 0%, #991b1b 50%, #ef4444 100%); }
