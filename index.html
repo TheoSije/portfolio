@@ -773,12 +773,11 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
   <div class="projects-scroll">
     <div class="proj-card" onclick="showProject('gl')">
       <div class="proj-card-img proj-img--gl">
-        <video class="proj-card-video" src="img/gl-card.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <video class="proj-card-video" src="img/gl-card.mp4" muted loop playsinline preload="auto"></video>
         <div class="proj-card-logo-badge"><img src="https://www.google.com/s2/favicons?domain=galerieslafayette.com&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='GL'"></div>
         <div class="proj-card-inner">
           <span class="proj-card-year">2024</span>
           <span class="proj-card-name">Galeries Lafayette</span>
-          <div class="proj-card-tags"><span class="tag">SaaS</span><span class="tag">Dashboard</span><span class="tag">B2B</span></div>
         </div>
       </div>
     </div>
@@ -788,7 +787,6 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
         <div class="proj-card-inner">
           <span class="proj-card-year">2023</span>
           <span class="proj-card-name">Deezer</span>
-          <div class="proj-card-tags"><span class="tag">Mobile</span><span class="tag">Audio</span></div>
         </div>
       </div>
     </div>
@@ -798,7 +796,6 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
         <div class="proj-card-inner">
           <span class="proj-card-year">2023</span>
           <span class="proj-card-name">Devialet</span>
-          <div class="proj-card-tags"><span class="tag">Luxe</span><span class="tag">Hardware</span></div>
         </div>
       </div>
     </div>
@@ -808,7 +805,6 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
         <div class="proj-card-inner">
           <span class="proj-card-year">2024</span>
           <span class="proj-card-name">Legalmate</span>
-          <div class="proj-card-tags"><span class="tag">LegalTech</span><span class="tag">IA</span></div>
         </div>
       </div>
     </div>
@@ -818,7 +814,6 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
         <div class="proj-card-inner">
           <span class="proj-card-year">2023</span>
           <span class="proj-card-name">Lionel El Sound</span>
-          <div class="proj-card-tags"><span class="tag">Musique</span><span class="tag">Brand</span></div>
         </div>
       </div>
     </div>
@@ -828,7 +823,6 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
         <div class="proj-card-inner">
           <span class="proj-card-year">2024</span>
           <span class="proj-card-name">Tune My Music</span>
-          <div class="proj-card-tags"><span class="tag">SaaS</span><span class="tag">Musique</span><span class="tag">Streaming</span></div>
         </div>
       </div>
     </div>
@@ -838,7 +832,6 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
         <div class="proj-card-inner">
           <span class="proj-card-year">2025</span>
           <span class="proj-card-name">Mauboussin</span>
-          <div class="proj-card-tags"><span class="tag">Luxe</span><span class="tag">Bijoux</span><span class="tag">IA Gen</span></div>
         </div>
       </div>
     </div>
@@ -848,7 +841,6 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
         <div class="proj-card-inner">
           <span class="proj-card-year">2024</span>
           <span class="proj-card-name">Gotaxfree</span>
-          <div class="proj-card-tags"><span class="tag">FinTech</span><span class="tag">Retail</span><span class="tag">Détaxe</span></div>
         </div>
       </div>
     </div>
@@ -858,7 +850,6 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
         <div class="proj-card-inner">
           <span class="proj-card-year">2024</span>
           <span class="proj-card-name">DSRT</span>
-          <div class="proj-card-tags"><span class="tag">Audio</span><span class="tag">Branding</span><span class="tag">Logo</span></div>
         </div>
       </div>
     </div>
@@ -1981,7 +1972,11 @@ document.querySelectorAll('.projects-scroll').forEach(function(scroll) {
     var cx = sr.left + sr.width / 2;
     all().forEach(function(c) {
       var r = c.getBoundingClientRect();
-      c.classList.toggle('snap-inactive', Math.abs((r.left + r.width / 2) - cx) > r.width * 0.6);
+      var inactive = Math.abs((r.left + r.width / 2) - cx) > r.width * 0.6;
+      c.classList.toggle('snap-inactive', inactive);
+      // play/pause any video in this card
+      var v = c.querySelector('video');
+      if (v) { inactive ? v.pause() : (v.paused && v.play()); }
     });
   }
 
