@@ -1500,7 +1500,9 @@ function downloadCard() {
   const link = document.createElement('a');
   link.download = 'inkpt-' + (current + 1) + '.png';
   link.href = canvas.toDataURL('image/png');
+  document.body.appendChild(link);
   link.click();
+  document.body.removeChild(link);
 }
 
 async function copyLink() {
