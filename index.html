@@ -773,6 +773,7 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
   <div class="projects-scroll">
     <div class="proj-card" onclick="showProject('gl')">
       <div class="proj-card-img proj-img--gl">
+        <video class="proj-card-video" src="img/gl-card.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="proj-card-logo-badge"><img src="https://www.google.com/s2/favicons?domain=galerieslafayette.com&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='GL'"></div>
         <div class="proj-card-inner">
           <span class="proj-card-year">2024</span>
@@ -1456,6 +1457,13 @@ function showHome() {
 <style>
 /* ══ PROJECT CARD GRADIENTS ══ */
 .proj-img--gl       { background: linear-gradient(155deg, #8B6914 0%, #C4934A 45%, #E8C17A 100%); }
+.proj-card-video {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
 .proj-img--deezer   { background: linear-gradient(155deg, #1a0533 0%, #3b0f6b 45%, #7c3aed 100%); }
 .proj-img--devialet { background: linear-gradient(155deg, #0d0d0d 0%, #1c1c1e 55%, #2e2e30 100%); }
 .proj-img--simplon  { background: linear-gradient(155deg, #1e1b4b 0%, #3730a3 50%, #6366f1 100%); }
