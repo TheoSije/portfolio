@@ -820,6 +820,17 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
     </div>
     <div class="proj-card" onclick="showProject('tunemymusic')">
       <div class="proj-card-img proj-img--tunemymusic">
+        <div class="tmm-platforms" aria-hidden="true">
+          <div class="tmm-icon" style="--x:10%;--y:10%;--r:14px;--d:11s;--del:-1.5s;--s:46px"><img src="https://www.google.com/s2/favicons?domain=spotify.com&sz=64" alt=""></div>
+          <div class="tmm-icon" style="--x:58%;--y:7%;--r:9px;--d:13s;--del:-4s;--s:40px"><img src="https://www.google.com/s2/favicons?domain=music.apple.com&sz=64" alt=""></div>
+          <div class="tmm-icon" style="--x:38%;--y:28%;--r:16px;--d:9s;--del:-6.5s;--s:44px"><img src="https://www.google.com/s2/favicons?domain=music.youtube.com&sz=64" alt=""></div>
+          <div class="tmm-icon" style="--x:65%;--y:32%;--r:11px;--d:12s;--del:-2s;--s:36px"><img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=64" alt=""></div>
+          <div class="tmm-icon" style="--x:18%;--y:38%;--r:13px;--d:10s;--del:-8s;--s:40px"><img src="https://www.google.com/s2/favicons?domain=tidal.com&sz=64" alt=""></div>
+          <div class="tmm-icon" style="--x:50%;--y:14%;--r:10px;--d:14s;--del:-3s;--s:38px"><img src="https://www.google.com/s2/favicons?domain=music.amazon.com&sz=64" alt=""></div>
+          <div class="tmm-icon" style="--x:25%;--y:52%;--r:12px;--d:11s;--del:-7s;--s:38px"><img src="https://www.google.com/s2/favicons?domain=soundcloud.com&sz=64" alt=""></div>
+          <div class="tmm-icon" style="--x:72%;--y:18%;--r:8px;--d:15s;--del:-5s;--s:34px"><img src="https://www.google.com/s2/favicons?domain=last.fm&sz=64" alt=""></div>
+          <div class="tmm-icon" style="--x:42%;--y:46%;--r:14px;--d:9s;--del:-9s;--s:36px"><img src="https://www.google.com/s2/favicons?domain=pandora.com&sz=64" alt=""></div>
+        </div>
         <div class="proj-card-logo-badge" style="padding:0"><img src="https://www.google.com/s2/favicons?domain=tunemymusic.com&sz=128" alt="" width="100%" height="100%" style="object-fit:cover;display:block" onerror="this.style.display='none';this.parentElement.textContent='TMM'"></div>
         <div class="proj-card-inner">
           <span class="proj-card-year">2024</span>
@@ -1463,6 +1474,10 @@ function showHome() {
 .proj-img--legalmate{ background: linear-gradient(155deg, #0c1e40 0%, #1e3a6e 50%, #2563eb 100%); }
 .proj-img--lionel   { background: linear-gradient(155deg, #3b1a00 0%, #92400e 50%, #d97706 100%); }
 .proj-img--tunemymusic{ background: linear-gradient(155deg, #0f0c29 0%, #302b63 45%, #24243e 100%); }
+.tmm-platforms { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
+.tmm-icon { position:absolute; left:var(--x); top:var(--y); width:var(--s); height:var(--s); animation:tmm-orbit var(--d) linear infinite var(--del); }
+.tmm-icon img { width:100%; height:100%; border-radius:11px; box-shadow:0 4px 20px rgba(0,0,0,0.5); display:block; opacity:0.88; }
+@keyframes tmm-orbit { from { transform:rotate(0deg) translateX(var(--r)) rotate(0deg); } to { transform:rotate(360deg) translateX(var(--r)) rotate(-360deg); } }
 .proj-img--mauboussin{ background: #dddddc; }
 .mauboussin-video { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; object-fit: contain !important; transform: none !important; }
 .proj-img--gotaxfree{ background: #dce8f5 url('img/gotaxfree-card.jpg') center/cover no-repeat; }
