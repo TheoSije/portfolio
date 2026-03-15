@@ -908,6 +908,15 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
         <p class="xp-card-desc">Puzzles d'échecs du plus simple au plus complexe.</p>
       </div>
     </div>
+    <div class="proj-card proj-card--xp" onclick="openMiniSite('soundhands')">
+      <div class="proj-card-img proj-img--soundhands">
+        <div class="soundhands-bg-anim"></div>
+      </div>
+      <div class="proj-card-inner">
+        <span class="proj-card-name">Sound Hands</span>
+        <p class="xp-card-desc">Contrôle le mix de Louise Chen avec tes mains grâce à la caméra.</p>
+      </div>
+    </div>
     <div class="proj-card proj-card--xp" onclick="openMiniSite('radio')">
       <div class="proj-card-img proj-img--radio"></div>
       <div class="proj-card-inner">
@@ -1248,6 +1257,7 @@ const persoLabels = {
   emojy: 'Emojy Words',
   incipit: 'Inkipit',
   chess: 'Chess Puzzles',
+  soundhands: 'Sound Hands',
   radio: 'Radio Player',
 };
 
@@ -1487,6 +1497,21 @@ function showHome() {
 .proj-img--lucychen { background: linear-gradient(155deg, #2e1065 0%, #6d28d9 50%, #a78bfa 100%); }
 .proj-img--emojy    { background: linear-gradient(155deg, #7c1d6f 0%, #db2777 45%, #f97316 100%); }
 .proj-img--chess    { background: #0f0f0f url('img/chess-card.jpg') center/cover no-repeat; }
+.proj-img--soundhands {
+  background: #07060f;
+  position: relative; overflow: hidden;
+}
+.soundhands-bg-anim {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 60%, rgba(167,139,250,.35) 0%, transparent 60%),
+              radial-gradient(ellipse at 75% 35%, rgba(236,72,153,.25) 0%, transparent 55%),
+              radial-gradient(ellipse at 55% 80%, rgba(249,115,22,.2) 0%, transparent 50%);
+  animation: soundhands-pulse 4s ease-in-out infinite alternate;
+}
+@keyframes soundhands-pulse {
+  from { opacity: .7; transform: scale(1); }
+  to   { opacity: 1;  transform: scale(1.08); }
+}
 .proj-img--radio    { background: linear-gradient(155deg, #431407 0%, #9a3412 50%, #ea580c 100%); }
 
 /* ══ GHOST CURSOR — HERO ONLY ══ */
