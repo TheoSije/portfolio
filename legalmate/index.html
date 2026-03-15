@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legalmate — theo.design</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  background: #f7f7f5;
+  color: #1a1a1a;
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: 52px;
+  background: #fff;
+  border-bottom: 1px solid rgba(0,0,0,.07);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 12px;
+}
+.nav-back {
+  display: flex; align-items: center; gap: 6px;
+  color: rgba(0,0,0,.3);
+  font-size: 12px; letter-spacing: .04em;
+  transition: color .2s; cursor: pointer;
+  background: none; border: none;
+  font-family: 'DM Sans', sans-serif;
+  padding: 0; text-decoration: none;
+}
+.nav-back:hover { color: rgba(0,0,0,.7); }
+.nav-sep { width: 1px; height: 13px; background: rgba(0,0,0,.1); }
+.nav-brand {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: -.01em;
+}
+.nav-badge {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  color: #e85d4a;
+  background: rgba(232,93,74,.1);
+  padding: 3px 8px;
+  border-radius: 100px;
+  text-transform: uppercase;
+}
+
+/* ── CHAT ── */
+.chat-wrap {
+  position: fixed;
+  inset: 52px 0 72px;
+  overflow-y: auto;
+  padding: 20px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scroll-behavior: smooth;
+}
+.chat-wrap::-webkit-scrollbar { width: 0; }
+
+/* ── BUBBLES ── */
+.msg {
+  display: flex;
+  flex-direction: column;
+  max-width: 82%;
+  animation: msgIn .22s ease-out both;
+}
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.msg.ai  { align-self: flex-start; }
+.msg.usr { align-self: flex-end; }
+
+.bubble {
+  padding: 13px 16px;
+  border-radius: 20px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.msg.ai  .bubble {
+  background: #ebebeb;
+  color: #1a1a1a;
+  border-bottom-left-radius: 6px;
+}
+.msg.usr .bubble {
+  background: #1a1a1a;
+  color: #fff;
+  border-bottom-right-radius: 6px;
+}
+.msg-time {
+  font-size: 10px;
+  color: rgba(0,0,0,.3);
+  margin-top: 4px;
+  padding: 0 4px;
+}
+.msg.usr .msg-time { text-align: right; }
+
+/* ── TYPING ── */
+.typing-bubble {
+  background: #ebebeb;
+  border-radius: 20px;
+  border-bottom-left-radius: 6px;
+  padding: 14px 18px;
+  display: flex; gap: 5px; align-items: center;
+}
+.typing-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(0,0,0,.3);
+  animation: typingBounce 1.2s ease-in-out infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: .18s; }
+.typing-dot:nth-child(3) { animation-delay: .36s; }
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: .4; }
+  30%            { transform: translateY(-5px); opacity: 1; }
+}
+
+/* ── LAWYER CTA ── */
+.cta-wrap {
+  align-self: center;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 6px;
+  animation: msgIn .3s ease-out both;
+}
+.cta-btn {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #f97316 0%, #e85d4a 50%, #ec4899 100%);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity .2s, transform .2s;
+  letter-spacing: -.01em;
+}
+.cta-btn:hover  { opacity: .92; transform: scale(1.01); }
+.cta-btn:active { transform: scale(.98); }
+
+/* ── INPUT BAR ── */
+.input-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 90;
+  background: #fff;
+  border-top: 1px solid rgba(0,0,0,.07);
+  padding: 10px 16px 14px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+.input-field {
+  flex: 1;
+  background: #f0f0ee;
+  border: 1.5px solid transparent;
+  border-radius: 22px;
+  padding: 10px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: #1a1a1a;
+  resize: none;
+  outline: none;
+  max-height: 100px;
+  line-height: 1.45;
+  transition: border-color .18s;
+}
+.input-field:focus { border-color: rgba(232,93,74,.35); }
+.input-field::placeholder { color: rgba(0,0,0,.35); }
+.send-btn {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
+  color: #fff;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: transform .18s, opacity .18s;
+}
+.send-btn:hover  { transform: scale(1.08); }
+.send-btn:active { transform: scale(.92); }
+.send-btn:disabled { opacity: .4; pointer-events: none; }
+
+/* ── LAWYER PANEL ── */
+.panel-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0; pointer-events: none;
+  transition: opacity .28s ease;
+}
+.panel-overlay.open { opacity: 1; pointer-events: all; }
+
+.lawyer-panel {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 201;
+  background: #fff;
+  border-radius: 24px 24px 0 0;
+  padding: 14px 20px 40px;
+  transform: translateY(100%);
+  transition: transform .36s cubic-bezier(0.34,1.1,0.64,1);
+  max-height: 85vh;
+  overflow-y: auto;
+}
+.lawyer-panel::-webkit-scrollbar { width: 0; }
+.panel-overlay.open .lawyer-panel { transform: translateY(0); }
+.panel-handle { width: 36px; height: 4px; background: rgba(0,0,0,.12); border-radius: 2px; margin: 0 auto 20px; }
+.panel-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+.panel-sub { font-size: 13px; color: rgba(0,0,0,.45); margin-bottom: 20px; }
+
+.lawyer-list { display: flex; flex-direction: column; gap: 12px; }
+.lawyer-card {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px;
+  background: #f7f7f5;
+  border-radius: 14px;
+  text-decoration: none;
+  color: inherit;
+  transition: background .18s;
+}
+.lawyer-card:hover { background: #eeecea; }
+.lawyer-avatar {
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f97316, #ec4899);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+.lawyer-info { flex: 1; min-width: 0; }
+.lawyer-name { font-size: 14px; font-weight: 600; }
+.lawyer-spec { font-size: 12px; color: rgba(0,0,0,.45); margin-top: 2px; }
+.lawyer-loc  { font-size: 12px; color: rgba(0,0,0,.35); margin-top: 1px; }
+.lawyer-arrow { color: rgba(0,0,0,.25); font-size: 16px; }
+
+.panel-dir-btn {
+  width: 100%; margin-top: 16px;
+  padding: 14px;
+  background: none;
+  border: 1.5px solid rgba(0,0,0,.12);
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: rgba(0,0,0,.55);
+  cursor: pointer;
+  transition: all .18s;
+}
+.panel-dir-btn:hover { border-color: rgba(0,0,0,.3); color: #1a1a1a; }
+
+/* ── iframe hide ── */
+body.in-iframe nav { display: none; }
+body.in-iframe .chat-wrap { top: 0; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-back" href="../" onclick="event.preventDefault();if(window.parent!==window){window.parent.postMessage('close-minisite','*');}else{window.location.href='../';}">← theo.design</a>
+  <div class="nav-sep"></div>
+  <span class="nav-brand">Legalmate</span>
+  <span class="nav-badge">Bêta</span>
+</nav>
+
+<div class="chat-wrap" id="chat"></div>
+
+<div class="input-bar">
+  <textarea class="input-field" id="input" placeholder="Posez votre question juridique…" rows="1"></textarea>
+  <button class="send-btn" id="send-btn" onclick="send()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+  </button>
+</div>
+
+<!-- LAWYER PANEL -->
+<div class="panel-overlay" id="panel-overlay" onclick="closePanel()">
+  <div class="lawyer-panel" onclick="event.stopPropagation()">
+    <div class="panel-handle"></div>
+    <div class="panel-title">Avocats recommandés</div>
+    <div class="panel-sub">Voici des avocats spécialisés selon votre situation</div>
+    <div class="lawyer-list" id="lawyer-list"></div>
+    <button class="panel-dir-btn" onclick="window.open('https://www.avocats.fr/espace-public/trouver-un-avocat.html','_blank')">
+      Voir tous les avocats sur avocats.fr →
+    </button>
+  </div>
+</div>
+
+<script>
+// ── Config ──
+const HF_MODEL = 'mistralai/Mistral-7B-Instruct-v0.2';
+const SYSTEM_PROMPT = `Tu es Legalmate, un assistant juridique IA spécialisé en droit français. Tu aides les utilisateurs à comprendre leurs droits et situations légales de façon claire, simple et empathique.
+Tu fournis des informations juridiques générales. Quand la situation nécessite impérativement un avocat (divorce conflictuel, licenciement, pénal, succession complexe...), indique-le clairement.
+Sois concis : 2 à 4 phrases maximum par réponse. Réponds uniquement en français.`;
+
+let history = [];  // {role, content}
+let userMsgCount = 0;
+let ctaShown = false;
+let isLoading = false;
+
+// ── Fallback responses ──
+const FALLBACKS = [
+  { keys: ['divorce','sépar','ex-conjoint','conjugal'],
+    text: "Le divorce par consentement mutuel peut se faire sans juge depuis 2017, avec deux avocats. Pour un divorce conflictuel, un juge aux affaires familiales sera saisi. Les délais varient de 3 mois à plus d'un an selon la situation." },
+  { keys: ['licenci','employeur','prud','travail','démission','rupture conventionnelle'],
+    text: "En cas de licenciement, vous disposez d'un droit à l'indemnité (selon ancienneté), et pouvez saisir le Conseil de Prud'hommes dans les 12 mois. La rupture conventionnelle est une alternative amiable qui ouvre droit aux allocations chômage." },
+  { keys: ['loyer','bail','propriétaire','locataire','expulsion','caution','dépôt de garantie'],
+    text: "Le bail de location est encadré par la loi ALUR. Le dépôt de garantie doit être restitué dans le mois suivant l'état des lieux de sortie. En cas de litige, la Commission Départementale de Conciliation est gratuite et obligatoire avant toute procédure." },
+  { keys: ['héritage','succession','testament','notaire','décès','héritier'],
+    text: "La succession s'ouvre au décès. Les enfants sont des héritiers réservataires (part minimale garantie). Un notaire est recommandé pour les successions complexes. Le délai de déclaration fiscale est de 6 mois." },
+  { keys: ['accident','indemnisation','assurance','préjudice','dommage','corporel'],
+    text: "Vous avez 5 ans pour engager une action en responsabilité civile après un accident. Conservez tous les justificatifs (médicaux, matériels). Votre assurance doit être déclarée rapidement, généralement sous 5 jours ouvrés." },
+  { keys: ['contrat','clause','résiliation','rupture de contrat','litige commercial'],
+    text: "Un contrat peut être résilié pour inexécution des obligations. En cas de clause abusive (contrat consommateur), elle peut être déclarée non écrite. La mise en demeure par courrier recommandé est souvent un préalable nécessaire." },
+  { keys: ['pénal','garde à vue','police','infraction','plainte','victime','agression'],
+    text: "Si vous êtes victime d'une infraction, vous pouvez déposer plainte à la police, à la gendarmerie, ou directement auprès du procureur par courrier recommandé. Vous pouvez vous constituer partie civile pour obtenir réparation." },
+  { keys: ['créance','dette','impayé','facture','recouvrement'],
+    text: "Pour recouvrer une créance impayée, la mise en demeure est la première étape. En dessous de 5 000 €, vous pouvez saisir le tribunal de proximité sans avocat. Au-delà, l'injonction de payer est une procédure rapide et peu coûteuse." },
+];
+
+const GENERIC = [
+  "Je comprends votre situation. Pour mieux vous orienter, pouvez-vous préciser les parties impliquées et si une procédure a déjà été engagée ?",
+  "C'est une question juridique importante. La réponse dépend de plusieurs facteurs propres à votre situation. Avez-vous déjà tenté une résolution à l'amiable ?",
+  "En droit français, plusieurs options s'offrent à vous. La médiation est souvent une première étape moins coûteuse avant d'envisager une procédure judiciaire.",
+  "Je note votre situation. Il est important de rassembler tous les documents et échanges écrits pertinents. Ces preuves seront essentielles si la situation évolue.",
+];
+
+function getFallback(msg) {
+  const m = msg.toLowerCase();
+  for (const f of FALLBACKS) {
+    if (f.keys.some(k => m.includes(k))) return f.text;
+  }
+  return GENERIC[userMsgCount % GENERIC.length];
+}
+
+// ── HuggingFace API ──
+async function callHF(userMessage) {
+  history.push({ role: 'user', content: userMessage });
+
+  // Build Mistral prompt
+  let prompt = `<s>[INST] <<SYS>>\n${SYSTEM_PROMPT}\n<</SYS>>\n\n${history[0].content} [/INST]`;
+  for (let i = 1; i < history.length; i++) {
+    const m = history[i];
+    if (m.role === 'assistant') prompt += ` ${m.content} </s>`;
+    else prompt += ` [INST] ${m.content} [/INST]`;
+  }
+
+  try {
+    const resp = await fetch(
+      `https://api-inference.huggingface.co/models/${HF_MODEL}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          inputs: prompt,
+          parameters: { max_new_tokens: 180, temperature: 0.6, return_full_text: false, stop: ['</s>', '[INST]'] }
+        }),
+        signal: AbortSignal.timeout(14000),
+      }
+    );
+
+    if (!resp.ok) throw new Error(`${resp.status}`);
+    const data = await resp.json();
+    if (data.error) throw new Error(data.error);
+
+    let text = (data[0]?.generated_text || '').trim();
+    // Strip stray tokens
+    text = text.replace(/\[INST\][\s\S]*$/g, '').replace(/<\/s>[\s\S]*$/g, '').trim();
+    if (!text) throw new Error('empty');
+
+    history.push({ role: 'assistant', content: text });
+    return text;
+  } catch (e) {
+    const fb = getFallback(userMessage);
+    history.push({ role: 'assistant', content: fb });
+    return fb;
+  }
+}
+
+// ── UI helpers ──
+function now() {
+  return new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+}
+
+function addBubble(text, role) {
+  const chat = document.getElementById('chat');
+  const wrap = document.createElement('div');
+  wrap.className = `msg ${role}`;
+  wrap.innerHTML = `<div class="bubble">${text.replace(/\n/g,'<br>')}</div><span class="msg-time">${now()}</span>`;
+  chat.appendChild(wrap);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+let typingEl = null;
+function showTyping() {
+  const chat = document.getElementById('chat');
+  typingEl = document.createElement('div');
+  typingEl.className = 'msg ai';
+  typingEl.innerHTML = `<div class="typing-bubble"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
+  chat.appendChild(typingEl);
+  chat.scrollTop = chat.scrollHeight;
+}
+function hideTyping() {
+  if (typingEl) { typingEl.remove(); typingEl = null; }
+}
+
+function showCTA() {
+  if (ctaShown) return;
+  ctaShown = true;
+  const chat = document.getElementById('chat');
+  const wrap = document.createElement('div');
+  wrap.className = 'cta-wrap';
+  wrap.innerHTML = `<button class="cta-btn" onclick="openPanel()">Voir les avocats recommandés →</button>`;
+  chat.appendChild(wrap);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+// ── Send ──
+async function send() {
+  const input = document.getElementById('input');
+  const text = input.value.trim();
+  if (!text || isLoading) return;
+
+  isLoading = true;
+  document.getElementById('send-btn').disabled = true;
+  input.value = '';
+  input.style.height = 'auto';
+
+  addBubble(text, 'usr');
+  userMsgCount++;
+
+  showTyping();
+  const reply = await callHF(text);
+  hideTyping();
+  addBubble(reply, 'ai');
+
+  isLoading = false;
+  document.getElementById('send-btn').disabled = false;
+
+  // Show lawyer CTA after 3 user messages
+  if (userMsgCount >= 3) showCTA();
+  input.focus();
+}
+
+// ── Textarea auto-resize + Enter ──
+document.getElementById('input').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+});
+document.getElementById('input').addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+});
+
+// ── Lawyer panel ──
+const LAWYERS = [
+  { initials:'ML', name:'Maître Lecomte', spec:'Droit de la famille · Divorce', loc:'Paris 8e', url:'https://www.avocats.fr' },
+  { initials:'DA', name:'Maître Amrani', spec:'Droit du travail · Prud'hommes', loc:'Paris 11e', url:'https://www.avocats.fr' },
+  { initials:'SB', name:'Maître Bertin', spec:'Droit immobilier · Baux', loc:'Lyon 2e', url:'https://www.avocats.fr' },
+  { initials:'CR', name:'Maître Renaud', spec:'Successions · Patrimoine', loc:'Bordeaux', url:'https://www.avocats.fr' },
+  { initials:'FN', name:'Maître Ndiaye', spec:'Droit pénal · Victimes', loc:'Paris 13e', url:'https://www.avocats.fr' },
+];
+
+function openPanel() {
+  const list = document.getElementById('lawyer-list');
+  list.innerHTML = LAWYERS.map(l => `
+    <a class="lawyer-card" href="${l.url}" target="_blank" rel="noopener">
+      <div class="lawyer-avatar">${l.initials}</div>
+      <div class="lawyer-info">
+        <div class="lawyer-name">${l.name}</div>
+        <div class="lawyer-spec">${l.spec}</div>
+        <div class="lawyer-loc">📍 ${l.loc}</div>
+      </div>
+      <span class="lawyer-arrow">›</span>
+    </a>`).join('');
+  document.getElementById('panel-overlay').classList.add('open');
+}
+function closePanel() {
+  document.getElementById('panel-overlay').classList.remove('open');
+}
+
+// ── Boot ──
+setTimeout(() => {
+  addBubble("Bonjour 👋 Je suis votre assistant juridique IA. Je peux vous aider à comprendre vos droits et votre situation légale.<br><br>Dites-moi ce qui vous préoccupe — divorce, litige, contrat, travail… Tout reste confidentiel.", 'ai');
+}, 300);
+
+if (window.self !== window.top) document.body.classList.add('in-iframe');
+</script>
+</body>
+</html>
