@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sound Hands — theo.design</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+<script src="https://w.soundcloud.com/player/api.js"></script>
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html, body {
+  width:100%; height:100%;
+  background:#030308;
+  overflow:hidden;
+  font-family:'DM Sans', sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  height:48px;
+  display:flex; align-items:center; gap:14px;
+  padding:0 24px;
+  background:rgba(3,3,8,.7);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.nav-back {
+  font-size:12px; letter-spacing:.04em;
+  color:rgba(255,255,255,.3); text-decoration:none;
+  background:none; border:none; cursor:pointer;
+  font-family:inherit; transition:color .2s;
+}
+.nav-back:hover { color:rgba(255,255,255,.75); }
+.nav-sep { width:1px; height:13px; background:rgba(255,255,255,.1); }
+.nav-logo { font-size:13px; font-weight:600; color:rgba(255,255,255,.6); }
+
+/* ── CANVAS ── */
+#c {
+  position:fixed; inset:0;
+  width:100vw; height:100vh;
+  display:block;
+}
+
+/* ── HIDDEN VIDEO ── */
+#v { position:absolute; width:0; height:0; opacity:0; pointer-events:none; }
+
+/* ── SC IFRAME (must not be display:none for widget API) ── */
+#sc {
+  position:absolute; bottom:-2px; left:-2px;
+  width:1px; height:1px;
+  opacity:0; pointer-events:none;
+  border:none;
+}
+
+/* ── INTRO SCREEN ── */
+#intro {
+  position:fixed; inset:0; z-index:100;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  background:#030308;
+  text-align:center;
+  padding:32px;
+  transition:opacity .6s ease, visibility .6s ease;
+}
+#intro.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+
+.intro-label {
+  font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:rgba(255,255,255,.3); margin-bottom:20px;
+}
+.intro-title {
+  font-size:clamp(40px, 8vw, 80px);
+  font-weight:700; line-height:1;
+  color:#fff;
+  letter-spacing:-.02em;
+  margin-bottom:12px;
+}
+.intro-title span {
+  background: linear-gradient(90deg,#a78bfa,#ec4899,#f97316);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.intro-sub {
+  font-size:14px; color:rgba(255,255,255,.35);
+  margin-bottom:48px; line-height:1.5;
+}
+.intro-gestures {
+  display:flex; gap:32px; margin-bottom:48px;
+  flex-wrap:wrap; justify-content:center;
+}
+.gesture-item {
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  width:120px;
+}
+.gesture-icon {
+  font-size:32px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;
+  width:60px; height:60px;
+  display:flex; align-items:center; justify-content:center;
+}
+.gesture-desc {
+  font-size:12px; color:rgba(255,255,255,.4);
+  text-align:center; line-height:1.4;
+}
+.btn-start {
+  padding:14px 40px; border-radius:100px;
+  background:linear-gradient(135deg,#a78bfa,#ec4899);
+  color:#fff; font-family:inherit; font-size:15px; font-weight:600;
+  border:none; cursor:pointer; letter-spacing:.01em;
+  transition:transform .2s, opacity .2s;
+  box-shadow:0 0 40px rgba(167,139,250,.35);
+}
+.btn-start:hover { transform:scale(1.04); opacity:.92; }
+.btn-start:active { transform:scale(.98); }
+
+/* ── ERROR TOAST ── */
+#toast {
+  position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+  background:rgba(239,68,68,.15);
+  border:1px solid rgba(239,68,68,.3);
+  color:#fca5a5; font-size:13px; padding:10px 20px;
+  border-radius:8px; z-index:300;
+  opacity:0; transition:opacity .3s;
+  pointer-events:none;
+  backdrop-filter:blur(8px);
+}
+#toast.show { opacity:1; }
+
+/* ── LIVE STATUS BAR ── */
+#hud {
+  position:fixed; bottom:0; left:0; right:0; z-index:150;
+  height:52px;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 24px;
+  background:rgba(3,3,8,.5);
+  backdrop-filter:blur(16px);
+  border-top:1px solid rgba(255,255,255,.06);
+  opacity:0; transition:opacity .4s;
+  pointer-events:none;
+}
+#hud.show { opacity:1; }
+.hud-gesture { font-size:13px; color:rgba(255,255,255,.4); }
+.hud-gesture strong { color:rgba(255,255,255,.85); }
+.hud-track { font-size:12px; color:rgba(255,255,255,.2); letter-spacing:.04em; text-transform:uppercase; }
+.hud-vol {
+  font-size:12px; font-weight:600; letter-spacing:.08em;
+  color:rgba(255,255,255,.5);
+}
+
+/* ── LOADING RING ── */
+#loading {
+  position:fixed; inset:0; z-index:90;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:16px;
+  opacity:0; pointer-events:none; transition:opacity .3s;
+}
+#loading.show { opacity:1; }
+.load-ring {
+  width:48px; height:48px;
+  border:2px solid rgba(255,255,255,.1);
+  border-top-color:rgba(167,139,250,.8);
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+.load-text { font-size:13px; color:rgba(255,255,255,.3); }
+@keyframes spin { to { transform:rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-back" href="../" onclick="event.preventDefault();if(window.parent!==window){window.parent.postMessage('close-minisite','*');}else{window.location.href='../';}">← theo.design</a>
+  <div class="nav-sep"></div>
+  <span class="nav-logo">Sound Hands</span>
+</nav>
+
+<canvas id="c"></canvas>
+<video id="v" autoplay muted playsinline></video>
+
+<!-- SoundCloud hidden player -->
+<iframe id="sc"
+  src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user-202286394-991268468/louise-chen-031225&color=%23a78bfa&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"
+  allow="autoplay">
+</iframe>
+
+<!-- Intro -->
+<div id="intro">
+  <div class="intro-label">NTS Radio · 03.12.2025</div>
+  <h1 class="intro-title">Sound<br><span>Hands</span></h1>
+  <p class="intro-sub">Louise Chen<br>Contrôle le son avec tes mains.</p>
+  <div class="intro-gestures">
+    <div class="gesture-item">
+      <div class="gesture-icon">✋</div>
+      <div class="gesture-desc">Paume ouverte<br><strong>Play / Pause</strong></div>
+    </div>
+    <div class="gesture-item">
+      <div class="gesture-icon">☝️</div>
+      <div class="gesture-desc">Main vers le haut<br><strong>Volume +</strong></div>
+    </div>
+    <div class="gesture-item">
+      <div class="gesture-icon">👇</div>
+      <div class="gesture-desc">Main vers le bas<br><strong>Volume –</strong></div>
+    </div>
+  </div>
+  <button class="btn-start" id="btn-start">Activer la caméra</button>
+</div>
+
+<!-- Loading -->
+<div id="loading">
+  <div class="load-ring"></div>
+  <div class="load-text" id="load-msg">Chargement du modèle…</div>
+</div>
+
+<!-- HUD -->
+<div id="hud">
+  <div class="hud-gesture" id="hud-gesture">En attente de la main…</div>
+  <div class="hud-track">Louise Chen · NTS</div>
+  <div class="hud-vol" id="hud-vol">— %</div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+//  SOUND HANDS  —  MediaPipe × SoundCloud × Canvas
+// ═══════════════════════════════════════════════════════════
+const TAU = Math.PI * 2;
+const canvas = document.getElementById('c');
+const ctx    = canvas.getContext('2d');
+const vidEl  = document.getElementById('v');
+
+// ── STATE ──
+let W, H;
+let hue          = 260;      // cycling hue
+let displayVol   = 70;       // smoothed display vol (0-100)
+let targetVol    = 70;       // target from hand position
+let isPlaying    = false;
+let handDetected = false;
+let handLandmarks= null;
+let hcx = 0, hcy = 0;       // hand centroid screen coords
+
+let palmHeldFrames = 0;      // frames palm has been open
+const PALM_HOLD    = 18;     // frames to hold palm before trigger (~0.3s at 60fps)
+let palmCooldown   = 0;      // cooldown frames after trigger
+let palmFlash      = 0;      // 0-1, full-screen flash intensity
+let palmWasPlay    = false;
+
+let camStarted   = false;
+let scReady      = false;
+let widget       = null;
+
+// ── PARTICLES ──
+class Particle {
+  constructor(x, y, vx, vy, size, h, life, decay) {
+    this.x=x; this.y=y;
+    this.vx=vx ?? (Math.random()-.5)*2;
+    this.vy=vy ?? (-Math.random()*2-.3);
+    this.size=size ?? 1+Math.random()*2.5;
+    this.hue=h ?? (hue + Math.random()*60-30);
+    this.life=life ?? 1;
+    this.decay=decay ?? .007+Math.random()*.012;
+  }
+  tick() {
+    this.x+=this.vx; this.y+=this.vy;
+    this.vx*=.985; this.vy*=.985;
+    this.life-=this.decay;
+    return this.life>0;
+  }
+  draw() {
+    ctx.save();
+    ctx.globalAlpha=this.life*.8;
+    ctx.fillStyle=`hsl(${this.hue},100%,70%)`;
+    ctx.shadowBlur=8; ctx.shadowColor=`hsl(${this.hue},100%,70%)`;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size*Math.max(this.life,.1), 0, TAU);
+    ctx.fill(); ctx.restore();
+  }
+}
+
+let ambient   = [];
+let handParts = [];
+let bursts    = [];
+
+// fingertip trail buffers (one per finger)
+const trails = [[], [], [], [], []];
+const TIPS   = [4, 8, 12, 16, 20];
+
+// ── MEDIAPIPE HAND CONNECTIONS ──
+const CONN = [
+  [0,1],[1,2],[2,3],[3,4],
+  [0,5],[5,6],[6,7],[7,8],
+  [0,9],[9,10],[10,11],[11,12],
+  [0,13],[13,14],[14,15],[15,16],
+  [0,17],[17,18],[18,19],[19,20],
+  [5,9],[9,13],[13,17],
+];
+
+// ── HELPERS ──
+function lx(lm) { return (1-lm.x)*W; }  // mirrored x
+function ly(lm) { return lm.y*H; }
+
+function isOpenPalm(lm) {
+  return (
+    lm[8].y  < lm[6].y  &&
+    lm[12].y < lm[10].y &&
+    lm[16].y < lm[14].y &&
+    lm[20].y < lm[18].y
+  );
+}
+
+// ── SC WIDGET ──
+function initWidget() {
+  widget = SC.Widget(document.getElementById('sc'));
+  widget.bind(SC.Widget.Events.READY, () => {
+    scReady = true;
+    widget.setVolume(displayVol);
+  });
+}
+
+function scPlay()  { if(scReady){ widget.play();  isPlaying=true; } }
+function scPause() { if(scReady){ widget.pause(); isPlaying=false; } }
+function scSetVol(v) { if(scReady) widget.setVolume(Math.round(v)); }
+
+function togglePlay() {
+  if (isPlaying) scPause(); else scPlay();
+  palmWasPlay = isPlaying;
+}
+
+// ── GESTURE FEEDBACK ──
+function triggerPalm() {
+  togglePlay();
+  palmFlash   = 1.0;
+  palmCooldown = 90; // ~1.5s
+  spawnBurst(hcx, hcy, 80);
+}
+
+function spawnBurst(x, y, n) {
+  for (let i=0; i<n; i++) {
+    const angle = Math.random()*TAU;
+    const speed = 2 + Math.random()*6;
+    bursts.push(new Particle(x, y,
+      Math.cos(angle)*speed, Math.sin(angle)*speed,
+      1.5+Math.random()*3,
+      hue+Math.random()*80-40,
+      1, .015+Math.random()*.02
+    ));
+  }
+}
+
+// ── MEDIAPIPE RESULTS ──
+function onResults(res) {
+  if (res.multiHandLandmarks && res.multiHandLandmarks.length > 0) {
+    const lm = res.multiHandLandmarks[0];
+    handLandmarks = lm;
+    handDetected  = true;
+
+    // centroid = wrist
+    hcx = lx(lm[0]);
+    hcy = ly(lm[0]);
+
+    // volume from vertical position — remap with margins
+    const raw = Math.max(0, Math.min(100, (1 - lm[0].y) * 120 - 10));
+    targetVol = raw;
+
+    // palm detection with hold timer
+    if (palmCooldown > 0) { palmCooldown--; palmHeldFrames = 0; }
+    else if (isOpenPalm(lm)) {
+      palmHeldFrames++;
+      if (palmHeldFrames >= PALM_HOLD) { triggerPalm(); palmHeldFrames = 0; }
+    } else {
+      palmHeldFrames = 0;
+    }
+
+    // update trails
+    TIPS.forEach((ti, fi) => {
+      trails[fi].push({ x: lx(lm[ti]), y: ly(lm[ti]) });
+      if (trails[fi].length > 22) trails[fi].shift();
+    });
+
+    // hand particles (fingertips)
+    if (Math.random() < .6 && isPlaying) {
+      TIPS.forEach((ti, fi) => {
+        handParts.push(new Particle(
+          lx(lm[ti]), ly(lm[ti]),
+          (Math.random()-.5)*.8, -Math.random()*.6-.2,
+          .8+Math.random()*1.5,
+          hue+fi*14, 1, .018+Math.random()*.02
+        ));
+      });
+    }
+
+  } else {
+    handDetected   = false;
+    handLandmarks  = null;
+    palmHeldFrames = 0;
+    trails.forEach(t => t.length = 0);
+  }
+}
+
+// ── DRAW ROUTINES ──
+function drawCamera() {
+  ctx.save();
+  ctx.translate(W, 0); ctx.scale(-1, 1);
+  ctx.globalAlpha = .18;
+  ctx.drawImage(vidEl, 0, 0, W, H);
+  ctx.restore();
+}
+
+function drawSkeleton() {
+  if (!handLandmarks) return;
+  const lm = handLandmarks;
+  ctx.save();
+  ctx.shadowBlur = 14;
+  ctx.shadowColor = `hsl(${hue},100%,70%)`;
+
+  // lines
+  ctx.beginPath();
+  ctx.strokeStyle = `hsla(${hue},100%,80%,.7)`;
+  ctx.lineWidth = 1.8;
+  for (const [a,b] of CONN) {
+    ctx.moveTo(lx(lm[a]), ly(lm[a]));
+    ctx.lineTo(lx(lm[b]), ly(lm[b]));
+  }
+  ctx.stroke();
+
+  // dots
+  for (let i=0; i<21; i++) {
+    const isTip = TIPS.includes(i);
+    ctx.fillStyle = isTip ? `hsl(${hue+50},100%,92%)` : `hsl(${hue},100%,80%)`;
+    ctx.shadowBlur = isTip ? 20 : 10;
+    ctx.beginPath();
+    ctx.arc(lx(lm[i]), ly(lm[i]), isTip ? 5 : 3, 0, TAU);
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+function drawTrails() {
+  trails.forEach((trail, fi) => {
+    if (trail.length < 2) return;
+    ctx.save();
+    for (let i=1; i<trail.length; i++) {
+      const alpha = (i/trail.length) * .55;
+      const w     = (i/trail.length) * 3.5;
+      const h2    = hue + fi*18;
+      ctx.beginPath();
+      ctx.moveTo(trail[i-1].x, trail[i-1].y);
+      ctx.lineTo(trail[i].x,   trail[i].y);
+      ctx.strokeStyle = `hsla(${h2},100%,70%,${alpha})`;
+      ctx.lineWidth   = w;
+      ctx.shadowBlur  = 10;
+      ctx.shadowColor = `hsl(${h2},100%,70%)`;
+      ctx.stroke();
+    }
+    ctx.restore();
+  });
+}
+
+function drawAura() {
+  if (!handDetected) return;
+  const vol  = displayVol / 100;
+  const r    = 70 + vol * 110;
+  const grad = ctx.createRadialGradient(hcx, hcy, 0, hcx, hcy, r);
+  grad.addColorStop(0,   `hsla(${hue},100%,70%,${.3+vol*.2})`);
+  grad.addColorStop(.45, `hsla(${hue+30},100%,60%,.12)`);
+  grad.addColorStop(1,   'transparent');
+  ctx.save();
+  ctx.fillStyle = grad;
+  ctx.beginPath(); ctx.arc(hcx, hcy, r, 0, TAU); ctx.fill();
+  ctx.restore();
+}
+
+function drawVolumeArc() {
+  if (!handDetected) return;
+  const vol  = displayVol / 100;
+  const r    = 58;
+  const end  = -Math.PI/2 + vol * TAU;
+
+  ctx.save();
+  // track ring
+  ctx.beginPath(); ctx.arc(hcx, hcy, r, 0, TAU);
+  ctx.strokeStyle = 'rgba(255,255,255,.07)'; ctx.lineWidth = 3; ctx.stroke();
+
+  // filled arc
+  ctx.beginPath(); ctx.arc(hcx, hcy, r, -Math.PI/2, end);
+  ctx.strokeStyle = `hsl(${hue},100%,70%)`; ctx.lineWidth = 3;
+  ctx.shadowBlur = 18; ctx.shadowColor = `hsl(${hue},100%,70%)`;
+  ctx.stroke();
+
+  // vol % label
+  ctx.fillStyle = `hsla(${hue},60%,95%,.9)`;
+  ctx.font = '600 13px DM Sans'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.shadowBlur = 0;
+  ctx.fillText(`${Math.round(displayVol)}%`, hcx, hcy);
+  ctx.restore();
+}
+
+function drawPalmIndicator() {
+  if (!handDetected || palmCooldown <= 0) return;
+  // show a small ring that shrinks as cooldown runs out
+  const prog  = palmCooldown / 90;
+  const label = isPlaying ? '▶ LECTURE' : '⏸ PAUSE';
+  ctx.save();
+  ctx.font = `600 16px DM Sans`;
+  ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+  ctx.fillStyle = `hsla(${hue},100%,90%,${prog})`;
+  ctx.shadowBlur = 20; ctx.shadowColor = `hsl(${hue},100%,70%)`;
+  ctx.fillText(label, hcx, hcy - 80);
+  ctx.restore();
+}
+
+function drawPalmHoldRing() {
+  // show progress ring while holding palm
+  if (!handDetected || palmHeldFrames === 0 || palmCooldown > 0) return;
+  const prog = palmHeldFrames / PALM_HOLD;
+  const r    = 72;
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(hcx, hcy, r, -Math.PI/2, -Math.PI/2 + prog * TAU);
+  ctx.strokeStyle = `hsl(${hue},100%,80%)`;
+  ctx.lineWidth = 3;
+  ctx.shadowBlur = 20; ctx.shadowColor = `hsl(${hue},100%,70%)`;
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawWaveform() {
+  const vol   = displayVol / 100;
+  const t     = Date.now() / 1000;
+  const amp   = 12 + vol * 36;
+  const yBase = H - 28;
+
+  ctx.save();
+  for (let layer=0; layer<3; layer++) {
+    const freq  = .012 + layer*.004;
+    const phase = t * (1.4 + layer*.35);
+    const alpha = .35 - layer*.08;
+    const h2    = hue + layer*22;
+
+    ctx.beginPath();
+    for (let x=0; x<=W; x+=3) {
+      const y = yBase + Math.sin(x*freq + phase)*amp
+                      + Math.sin(x*freq*2.1 + phase*1.3)*(amp*.3);
+      x===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    }
+    ctx.strokeStyle = `hsla(${h2},100%,70%,${alpha})`;
+    ctx.lineWidth   = 1.4 - layer*.3;
+    ctx.shadowBlur  = 10; ctx.shadowColor = `hsl(${h2},100%,70%)`;
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawNoHandPrompt() {
+  if (handDetected) return;
+  const t     = Date.now() / 1000;
+  const alpha = .35 + Math.sin(t*1.5)*.15;
+  ctx.save();
+  ctx.font = '400 13px DM Sans'; ctx.textAlign = 'center';
+  ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+  ctx.fillText('Montrez votre main devant la caméra ✋', W/2, H/2 + 80);
+  ctx.restore();
+}
+
+function drawAmbient() {
+  // spawn
+  if (Math.random() < .25) {
+    ambient.push(new Particle(
+      Math.random()*W, H + 5,
+      (Math.random()-.5)*.6, -Math.random()*.5-.15,
+      .5+Math.random()*2,
+      hue+Math.random()*120-60, 1, .004+Math.random()*.006
+    ));
+  }
+  ambient = ambient.filter(p => { p.tick(); p.draw(); return p.life>0; });
+}
+
+// ── HUD UPDATE ──
+function updateHUD() {
+  const hudEl = document.getElementById('hud');
+  if (!camStarted) { hudEl.classList.remove('show'); return; }
+  hudEl.classList.add('show');
+
+  const g  = document.getElementById('hud-gesture');
+  const v  = document.getElementById('hud-vol');
+
+  if (!handDetected) {
+    g.innerHTML = 'En attente de la main…';
+  } else if (palmHeldFrames > 0 && palmCooldown === 0) {
+    const pct = Math.round((palmHeldFrames / PALM_HOLD) * 100);
+    g.innerHTML = `✋ Maintiens… <strong>${pct}%</strong>`;
+  } else if (palmCooldown > 0) {
+    g.innerHTML = isPlaying
+      ? '<strong>▶ LECTURE</strong>'
+      : '<strong>⏸ PAUSE</strong>';
+  } else {
+    g.innerHTML = isPlaying
+      ? `Volume <strong>${Math.round(displayVol)}%</strong>`
+      : 'Paume ouverte pour lancer la musique';
+  }
+  v.textContent = `${Math.round(displayVol)} %`;
+}
+
+// ── MAIN LOOP ──
+function loop() {
+  W = canvas.width  = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+
+  // trail fade
+  ctx.fillStyle = 'rgba(3,3,8,.19)';
+  ctx.fillRect(0, 0, W, H);
+
+  if (camStarted) drawCamera();
+
+  // hue: cycles slowly, faster when playing
+  hue = (hue + (isPlaying ? .25 : .08)) % 360;
+
+  drawAmbient();
+  if (handDetected) {
+    drawAura();
+    drawTrails();
+    drawSkeleton();
+    drawVolumeArc();
+    drawPalmHoldRing();
+    drawPalmIndicator();
+  }
+
+  // burst particles
+  handParts = handParts.filter(p => { p.tick(); p.draw(); return p.life>0; });
+  bursts    = bursts.filter(p    => { p.tick(); p.draw(); return p.life>0; });
+
+  if (isPlaying) drawWaveform();
+  drawNoHandPrompt();
+
+  // palm full-screen flash
+  if (palmFlash > 0) {
+    ctx.fillStyle = `hsla(${hue},100%,60%,${palmFlash*.18})`;
+    ctx.fillRect(0, 0, W, H);
+    palmFlash -= .04;
+  }
+
+  // smooth volume & apply
+  displayVol += (targetVol - displayVol) * .12;
+  if (scReady && Math.abs(displayVol - targetVol) > .5) scSetVol(displayVol);
+
+  updateHUD();
+  requestAnimationFrame(loop);
+}
+
+// ── BOOT ──
+document.getElementById('btn-start').addEventListener('click', async () => {
+  const intro   = document.getElementById('intro');
+  const loading = document.getElementById('loading');
+  const loadMsg = document.getElementById('load-msg');
+
+  intro.classList.add('hidden');
+  loading.classList.add('show');
+  loadMsg.textContent = 'Accès caméra…';
+
+  try {
+    // 1. Camera permission
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { width:{ideal:640}, height:{ideal:480}, facingMode:'user' },
+      audio: false,
+    });
+    vidEl.srcObject = stream;
+    await new Promise(r => vidEl.onloadedmetadata = r);
+    await vidEl.play();
+    camStarted = true;
+
+    // 2. MediaPipe Hands
+    loadMsg.textContent = 'Chargement du modèle IA…';
+    const hands = new Hands({
+      locateFile: f => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${f}`,
+    });
+    hands.setOptions({
+      maxNumHands:          1,
+      modelComplexity:      1,
+      minDetectionConfidence: .7,
+      minTrackingConfidence:  .5,
+    });
+    hands.onResults(onResults);
+
+    // Process frames
+    const processFrame = async () => {
+      if (vidEl.readyState >= 2) await hands.send({ image: vidEl });
+      requestAnimationFrame(processFrame);
+    };
+    processFrame();
+
+    // 3. SC Widget
+    try { initWidget(); } catch(e) { console.warn('SC widget:', e); }
+
+    loading.classList.remove('show');
+    loop();
+
+  } catch (err) {
+    console.error(err);
+    loading.classList.remove('show');
+    intro.classList.remove('hidden');
+    showToast('Caméra non disponible. Vérifie les permissions.');
+  }
+});
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 4000);
+}
+
+// Start ambient loop immediately (before camera — just particles on black)
+loop();
+</script>
+</body>
+</html>
