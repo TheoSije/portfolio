@@ -71,7 +71,7 @@ nav {
 /* ── MAIN ── */
 main {
   height: 100vh;
-  padding-top: 48px;
+  padding-top: 102px;
   padding-bottom: 88px;
   display: flex;
   flex-direction: column;
@@ -86,16 +86,21 @@ main {
 
 /* ── GENRE TABS ── */
 .genre-tabs {
+  position: fixed;
+  top: 48px;
+  left: 0; right: 0;
+  z-index: 99;
   display: flex;
   gap: 8px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  max-width: 500px;
-  width: 100%;
-  padding: 2px 0;
+  padding: 10px 24px;
   justify-content: center;
-  flex-wrap: wrap;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,.05);
 }
 .genre-tabs::-webkit-scrollbar { display: none; }
 
@@ -409,15 +414,15 @@ body.in-iframe main { padding-top: 0; }
   <span class="nav-logo">vinyle</span>
 </nav>
 
-<main>
-  <div class="genre-tabs" id="genre-tabs">
-    <button class="genre-tab active" data-genre="favoris"  onclick="setGenre(this)">Favoris</button>
-    <button class="genre-tab"        data-genre="jazz"     onclick="setGenre(this)">Jazz</button>
-    <button class="genre-tab"        data-genre="rai"      onclick="setGenre(this)">Raï</button>
-    <button class="genre-tab"        data-genre="caraibes" onclick="setGenre(this)">Caraïbes</button>
-    <button class="genre-tab"        data-genre="rapfr"    onclick="setGenre(this)">Rap FR</button>
-  </div>
+<div class="genre-tabs" id="genre-tabs">
+  <button class="genre-tab active" data-genre="favoris"  onclick="setGenre(this)">Favoris</button>
+  <button class="genre-tab"        data-genre="jazz"     onclick="setGenre(this)">Jazz</button>
+  <button class="genre-tab"        data-genre="rai"      onclick="setGenre(this)">Raï</button>
+  <button class="genre-tab"        data-genre="caraibes" onclick="setGenre(this)">Caraïbes</button>
+  <button class="genre-tab"        data-genre="rapfr"    onclick="setGenre(this)">Rap FR</button>
+</div>
 
+<main>
   <div class="vinyl-wrap">
     <div class="vinyl" id="vinyl" onclick="openCover()" title="Voir la pochette">
       <div class="vinyl-label loading" id="vinyl-label"></div>
