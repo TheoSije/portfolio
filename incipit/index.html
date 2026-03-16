@@ -1189,8 +1189,7 @@ function advanceQuiz(isCorrect) {
   quizGame.answers.push(isCorrect);
   if (isCorrect) quizGame.score++;
   updateQuizDots();
-  // Drain timer bar
-  document.getElementById('quiz-qtimer').style.width = '0%';
+  setRing(0);
   setTimeout(() => {
     if (quizGame.qIdx + 1 >= QUIZ_TOTAL) { showQuizResults(); }
     else { loadQuizQuestion(quizGame.qIdx + 1); }
