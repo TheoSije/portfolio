@@ -1144,7 +1144,9 @@ function buildQuizOptions(idx) {
   const correctAuthor = parseAuthor(quotes[idx].author).author;
   const seen = new Set([correctAuthor]);
   const pool = [];
-  for (let i = 0; i < quotes.length && pool.length < 20; i++) {
+  const shuffledIdx = [...Array(quotes.length).keys()].sort(() => Math.random() - .5);
+  for (const i of shuffledIdx) {
+    if (pool.length >= 20) break;
     const a = parseAuthor(quotes[i].author).author;
     if (!seen.has(a)) { seen.add(a); pool.push(a); }
   }
@@ -1532,7 +1534,7 @@ async function copyLink() {
   }
 }
 
-current = 0; // démarre sur L'Étranger
+current = Math.floor(Math.random() * quotes.length);
 show(current);
 startTimer();
 
