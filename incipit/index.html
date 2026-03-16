@@ -426,19 +426,11 @@ main {
   flex-direction: column;
   gap: 8px;
 }
-body.in-iframe .quiz-header { top: 0; }
 .quiz-header.active { display: flex; }
 .quiz-header-top {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-.quiz-header-title {
-  font-size: 11px;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.35);
-  font-weight: 500;
+  justify-content: flex-end;
 }
 .quiz-header-count {
   font-size: 11px;
@@ -477,7 +469,6 @@ body.in-iframe .quiz-header { top: 0; }
 
 /* ── QUIZ PANEL ── */
 body.quiz-active main { padding-top: 130px; }
-body.quiz-active.in-iframe main { padding-top: 76px; }
 .quiz-panel {
   margin-top: 28px;
   display: none;
@@ -669,9 +660,6 @@ body.quiz-active.in-iframe main { padding-top: 76px; }
 }
 
 
-/* Dans l'iframe portfolio : le nav portfolio gère déjà la barre du haut */
-body.in-iframe nav { display: none; }
-body.in-iframe main { padding-top: 0; }
 </style>
 </head>
 <body>
@@ -685,7 +673,6 @@ body.in-iframe main { padding-top: 0; }
 <!-- QUIZ HEADER -->
 <div class="quiz-header" id="quiz-header">
   <div class="quiz-header-top">
-    <span class="quiz-header-title">Quiz</span>
     <span class="quiz-header-count" id="quiz-hcount">1 / 10</span>
   </div>
   <div class="quiz-q-timer-bar"><div class="quiz-q-timer-fill" id="quiz-qtimer"></div></div>
@@ -1546,7 +1533,6 @@ show(current);
 startTimer();
 
 // Détection iframe : cache le nav inkpt (le portfolio gère déjà la barre du haut)
-if (window.self !== window.top) document.body.classList.add('in-iframe');
 </script>
 
 <!-- QUIZ RESULT SCREEN -->
