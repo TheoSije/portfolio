@@ -414,46 +414,18 @@ main {
 .quiz-game-btn.quit { border-color: rgba(230,80,80,.35); color: rgba(230,80,80,.75); }
 .quiz-game-btn.quit:hover { border-color: rgba(230,80,80,.65); color: rgba(230,80,80,1); }
 
-/* ── QUIZ HEADER BAR ── */
-.quiz-header {
-  position: fixed;
-  top: 48px; left: 0; right: 0;
-  z-index: 95;
-  background: #000;
-  border-bottom: 1px solid rgba(255,255,255,.07);
-  padding: 12px clamp(28px, 6vw, 88px) 11px;
-  display: none;
-  flex-direction: column;
-  gap: 8px;
-}
-.quiz-header.active { display: flex; }
-.quiz-header-top {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-.quiz-header-count {
-  font-size: 11px;
-  font-weight: 500;
-  color: rgba(255,255,255,.35);
-  letter-spacing: .04em;
-}
-.quiz-q-timer-bar {
-  height: 2px;
-  background: rgba(255,255,255,.07);
-  border-radius: 2px;
-  overflow: hidden;
-}
-.quiz-q-timer-fill {
-  height: 100%;
-  width: 100%;
-  border-radius: 2px;
-  background: rgba(255,255,255,.5);
-}
+/* ── QUIZ PANEL ── */
+/* Timer en mode quiz : on garde seulement le cercle stroke, sans fill ni icône */
+body.quiz-active .play-inner  { display: none; }
+body.quiz-active .timer-btn   { pointer-events: none; cursor: default; }
+body.quiz-active .ctrl-arrow  { visibility: hidden; }
+
 .quiz-dots {
   display: flex;
-  gap: 5px;
+  gap: 6px;
   align-items: center;
+  justify-content: center;
+  padding: 18px 0 4px;
 }
 .quiz-dot {
   width: 7px;
@@ -466,9 +438,6 @@ main {
 .quiz-dot.current { background: rgba(255,255,255,.4); transform: scale(1.25); }
 .quiz-dot.correct { background: rgba(80,200,110,.85); transform: scale(1); }
 .quiz-dot.wrong   { background: rgba(230,80,80,.75);  transform: scale(1); }
-
-/* ── QUIZ PANEL ── */
-body.quiz-active main { padding-top: 130px; }
 .quiz-panel {
   margin-top: 28px;
   display: none;
@@ -670,15 +639,6 @@ body.quiz-active main { padding-top: 130px; }
   <span class="nav-logo">inkpt</span>
 </nav>
 
-<!-- QUIZ HEADER -->
-<div class="quiz-header" id="quiz-header">
-  <div class="quiz-header-top">
-    <span class="quiz-header-count" id="quiz-hcount">1 / 10</span>
-  </div>
-  <div class="quiz-q-timer-bar"><div class="quiz-q-timer-fill" id="quiz-qtimer"></div></div>
-  <div class="quiz-dots" id="quiz-dots"></div>
-</div>
-
 <main>
   <div class="quote-block" id="quote-block">
     <span class="quote-mark" id="quote-mark">"</span>
@@ -691,6 +651,7 @@ body.quiz-active main { padding-top: 130px; }
         <button class="quiz-validate" id="quiz-validate">Valider</button>
         <span class="quiz-inline-result" id="quiz-inline-result"></span>
       </div>
+      <div class="quiz-dots" id="quiz-dots"></div>
     </div>
   </div>
 
@@ -1077,10 +1038,7 @@ function startQuizGame() {
 
   // UI
   document.body.classList.add('quiz-active');
-  document.getElementById('quiz-header').classList.add('active');
   document.getElementById('quiz-panel').style.display = 'flex';
-  document.querySelector('.player-group').style.visibility = 'hidden';
-  document.querySelector('.share-icon-btn').style.visibility = 'hidden';
   bookEl.style.display   = 'none';
   authorEl.style.display = 'none';
 
@@ -1118,7 +1076,6 @@ function loadQuizQuestion(qIdx) {
   quizValidated = false;
 
   const idx = quizGame.questions[qIdx];
-  document.getElementById('quiz-hcount').textContent = (qIdx + 1) + ' / ' + QUIZ_TOTAL;
   updateQuizDots();
 
   // Animate quote in
@@ -1173,12 +1130,12 @@ function buildQuizOptions(idx) {
 function startQuizTimer() {
   stopQuizTimer();
   quizTimerStart = performance.now();
-  const fill = document.getElementById('quiz-qtimer');
-  fill.style.width = '100%';
+  setRing(1);
+  ringFill.style.stroke = 'rgba(255,255,255,.5)';
   function tick(now) {
     const progress = Math.max(0, 1 - (now - quizTimerStart) / QUIZ_Q_MS);
-    fill.style.width = (progress * 100) + '%';
-    fill.style.background = progress < 0.2 ? 'rgba(230,100,80,.85)' : 'rgba(255,255,255,.5)';
+    setRing(progress);
+    ringFill.style.stroke = progress < 0.2 ? 'rgba(230,100,80,.85)' : 'rgba(255,255,255,.5)';
     if (progress > 0) { quizTimerRaf = requestAnimationFrame(tick); }
     else { onQuizTimeout(); }
   }
@@ -1290,10 +1247,7 @@ function exitQuizGame() {
 
   // Restore UI
   document.body.classList.remove('quiz-active');
-  document.getElementById('quiz-header').classList.remove('active');
   document.getElementById('quiz-panel').style.display = 'none';
-  document.querySelector('.player-group').style.visibility = '';
-  document.querySelector('.share-icon-btn').style.visibility = '';
   bookEl.style.display   = '';
   authorEl.style.display = '';
 
