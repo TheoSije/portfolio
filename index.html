@@ -887,13 +887,6 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
         <p class="xp-card-desc">Écoute et explore ta musique autour d'un vinyle interactif.</p>
       </div>
     </div>
-    <div class="proj-card proj-card--xp" onclick="openMiniSite('lucychen')">
-      <div class="proj-card-img proj-img--lucychen"></div>
-      <div class="proj-card-inner">
-        <span class="proj-card-name">Lucychen Gesture</span>
-        <p class="xp-card-desc">Contrôle gestuel d'un player Mixcloud via la webcam.</p>
-      </div>
-    </div>
     <div class="proj-card proj-card--xp" onclick="openMiniSite('emojy')">
       <div class="proj-card-img proj-img--emojy"></div>
       <div class="proj-card-inner">
@@ -915,13 +908,6 @@ nav.minisite-nav #proj-close-btn { display: none !important; }
       <div class="proj-card-inner">
         <span class="proj-card-name">Sound Hands</span>
         <p class="xp-card-desc">Contrôle le mix de Louise Chen avec tes mains grâce à la caméra.</p>
-      </div>
-    </div>
-    <div class="proj-card proj-card--xp" onclick="openMiniSite('radio')">
-      <div class="proj-card-img proj-img--radio"></div>
-      <div class="proj-card-inner">
-        <span class="proj-card-name">Radio Player</span>
-        <p class="xp-card-desc">Interface minimaliste pour écouter des webradios en streaming.</p>
       </div>
     </div>
   </div>
@@ -1253,12 +1239,10 @@ function showProject(id) {
 // ══ MINI SITES ══
 const persoLabels = {
   vinyle: 'Platine',
-  lucychen: 'Lucychen Gesture',
   emojy: 'Emojy Words',
   incipit: 'Inkipit',
   chess: 'Chess Puzzles',
   soundhands: 'Sound Hands',
-  radio: 'Radio Player',
 };
 
 // Base path robuste — fonctionne en / ou /portfolio/ ou custom domain
@@ -1494,7 +1478,6 @@ function showHome() {
 .proj-img--dsrt     { background: linear-gradient(155deg, #050505 0%, #111 50%, #2a2a2a 100%); }
 .proj-img--incipit  { background: #1a1a1a url('img/inkipit-card.jpg') center/cover no-repeat; }
 .proj-img--vinyle   { background: #0a0a0a url('img/vinyle-card.jpg') center/cover no-repeat; }
-.proj-img--lucychen { background: linear-gradient(155deg, #2e1065 0%, #6d28d9 50%, #a78bfa 100%); }
 .proj-img--emojy    { background: linear-gradient(155deg, #7c1d6f 0%, #db2777 45%, #f97316 100%); }
 .proj-img--chess    { background: #0f0f0f url('img/chess-card.jpg') center/cover no-repeat; }
 .proj-img--soundhands {
@@ -1512,7 +1495,6 @@ function showHome() {
   from { opacity: .7; transform: scale(1); }
   to   { opacity: 1;  transform: scale(1.08); }
 }
-.proj-img--radio    { background: linear-gradient(155deg, #431407 0%, #9a3412 50%, #ea580c 100%); }
 
 /* ══ GHOST CURSOR — HERO ONLY ══ */
 body:not(.on-home) #ghost-cursor { opacity: 0 !important; pointer-events: none; }
