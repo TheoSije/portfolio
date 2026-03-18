@@ -724,6 +724,20 @@ nav.minisite-nav .nav-role {
 }
 nav.minisite-nav .nav-contact { display: none !important; }
 nav.minisite-nav #proj-close-btn { display: none !important; }
+
+/* Variante fond clair (legalmate, chess…) */
+nav.minisite-nav.minisite-nav--light .nav-logo {
+  color: rgba(0,0,0,0.38) !important;
+}
+nav.minisite-nav.minisite-nav--light .nav-logo::before {
+  color: rgba(0,0,0,0.35) !important;
+}
+nav.minisite-nav.minisite-nav--light .nav-logo::after {
+  background: rgba(0,0,0,0.15) !important;
+}
+nav.minisite-nav.minisite-nav--light .nav-role {
+  color: rgba(0,0,0,0.60) !important;
+}
 </style>
 </head>
 <body class="on-home">
@@ -1268,6 +1282,9 @@ function _showMiniSite(slug) {
   document.querySelector('.nav-contact').style.display = 'none';
   document.querySelector('nav').style.zIndex = '9000';
   document.querySelector('nav').classList.add('minisite-nav');
+  const LIGHT_BG = ['legalmate', 'chess'];
+  if (LIGHT_BG.includes(slug)) document.querySelector('nav').classList.add('minisite-nav--light');
+  else document.querySelector('nav').classList.remove('minisite-nav--light');
 }
 
 function _hideMiniSite() {
@@ -1282,6 +1299,7 @@ function _hideMiniSite() {
   document.querySelector('.nav-contact').style.display = '';
   document.querySelector('nav').style.zIndex = '';
   document.querySelector('nav').classList.remove('minisite-nav');
+  document.querySelector('nav').classList.remove('minisite-nav--light');
 }
 
 function openMiniSite(slug) {
