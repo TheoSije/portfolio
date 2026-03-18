@@ -49,6 +49,11 @@ nav {
   padding: 3px 8px; border-radius: 100px; text-transform: uppercase;
 }
 
+/* ── IN-IFRAME ── */
+body.in-iframe nav { display: none; }
+body.in-iframe .empty-state { inset: 0 0 72px; }
+body.in-iframe .chat-wrap   { inset: 0 0 72px; }
+
 /* ── EMPTY STATE ── */
 .empty-state {
   position: fixed;
@@ -500,6 +505,8 @@ function openPanel() {
     </a>`).join('');
   document.getElementById('panel-overlay').classList.add('open');
 }
+if (window.self !== window.top) document.body.classList.add('in-iframe');
+
 function closePanel() {
   document.getElementById('panel-overlay').classList.remove('open');
 }

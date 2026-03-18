@@ -48,6 +48,9 @@ nav {
 /* ── HIDDEN VIDEO ── */
 #v { position:absolute; width:0; height:0; opacity:0; pointer-events:none; }
 
+/* ── IN-IFRAME ── */
+body.in-iframe nav { display: none; }
+
 /* ── SC IFRAME (must not be display:none for widget API) ── */
 #sc {
   position:absolute; bottom:-2px; left:-2px;
@@ -714,6 +717,8 @@ function showToast(msg) {
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 4000);
 }
+
+if (window.self !== window.top) document.body.classList.add('in-iframe');
 
 // Start ambient loop immediately (before camera — just particles on black)
 loop();
