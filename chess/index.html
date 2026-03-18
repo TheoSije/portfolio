@@ -41,6 +41,10 @@ nav {
 .nav-sep { width: 1px; height: 13px; background: rgba(255,255,255,.12); }
 .nav-logo { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.6); }
 
+/* ── IN-IFRAME ── */
+body.in-iframe nav { display: none; }
+body.in-iframe .main { padding-top: 0; }
+
 /* ── MAIN ── */
 .main {
   display: flex;
@@ -483,6 +487,7 @@ function setStatus(cls, msg) {
 function show(id) { document.getElementById(id).classList.remove('hidden'); }
 function hide(id) { document.getElementById(id).classList.add('hidden'); }
 
+if (window.self !== window.top) document.body.classList.add('in-iframe');
 setup(0);
 </script>
 </body>

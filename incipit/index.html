@@ -49,6 +49,11 @@ nav {
 .nav-logo { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.65); }
 .nav-right { display: none; }
 
+/* ── IN-IFRAME ── */
+body.in-iframe nav { display: none; }
+body.in-iframe main { padding-top: 0; }
+body.quiz-active.in-iframe main { padding-top: 76px; }
+
 /* ── PLAYER CONTROLS (Spotify-style) ── */
 .timer-btn {
   position: relative;
@@ -1497,7 +1502,7 @@ current = Math.floor(Math.random() * quotes.length);
 show(current);
 startTimer();
 
-// Détection iframe : cache le nav inkpt (le portfolio gère déjà la barre du haut)
+if (window.self !== window.top) document.body.classList.add('in-iframe');
 </script>
 
 <!-- QUIZ RESULT SCREEN -->
