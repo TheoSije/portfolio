@@ -81,3 +81,24 @@ footer span:last-child{border-right:none;text-align:right}
 .pnav-name{font-family:'Oswald',sans-serif;font-size:22px;font-weight:700;text-transform:uppercase}
 #mood-wheel{color:#000}
 #mood-btn{color:#000;background:var(--acc2);padding:8px 14px;border:2px solid #000;transform:rotate(2deg)}
+
+/* ── TESTIMONIALS ── */
+.testi-card{background:#fff;border:2px solid #000;border-radius:0;transform:rotate(-.4deg)}
+.testi-card:nth-child(even){transform:rotate(.3deg)}
+.testi-text{color:#333;font-family:'Special Elite',cursive;font-size:13px;font-style:normal;line-height:1.7;border-left:3px solid var(--acc);padding-left:10px}
+.testi-name{color:#000;font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:12px;letter-spacing:.05em;font-weight:700}
+.testi-role{color:#aaa;font-size:9px;letter-spacing:.12em;text-transform:uppercase}
+.testi-avatar{background:#f0f0f0;border-radius:0;border:2px solid #000}
+/* ── EXPERIENCE ── */
+.ep-chr-yr{font-family:'Permanent Marker',cursive;letter-spacing:0}
+.ep-chr-item+.ep-chr-item{border-left:2px solid #000}
+.ep-chr-period{color:#aaa;letter-spacing:.1em;font-size:9px;text-transform:uppercase}
+.ep-chr-co{font-family:'Oswald',sans-serif;text-transform:uppercase;font-weight:700;letter-spacing:.02em}
+.ep-chr-role{color:#555;font-style:italic;font-weight:400}
+.ep-chr-badge{border-radius:0;background:#000;color:#fff;border:none;font-size:8px;letter-spacing:.1em;text-transform:uppercase}
+.ep-cdi{background:var(--acc);color:#fff}
+.ep-free{background:var(--acc2);color:#000}
+.ep-cdd{background:var(--acc3);color:#000}
+.ep-stage{background:#000;color:#fff}
+.ep-alt{background:#333;color:#fff}
+.ep-chr-logo-badge{background:#f8f8f8;border:1px dashed #aaa;border-radius:0;box-shadow:none}

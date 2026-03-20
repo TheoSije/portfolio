@@ -84,3 +84,23 @@ footer span:last-child{border-right:none;text-align:right}
 .pnav-name{font-family:'VT323',monospace;font-size:26px;letter-spacing:.05em}
 #mood-wheel{color:#00ff41}
 #mood-btn{color:#00ff41;text-shadow:0 0 8px #00ff41}
+
+/* ── TESTIMONIALS ── */
+.testi-card{background:#001a00;border:1px solid #006616;border-radius:0}
+.testi-text{color:#006616;font-family:'Share Tech Mono',monospace;font-size:11px;font-style:normal;line-height:1.9}
+.testi-name{color:#00ff41;font-family:'VT323',monospace;font-size:15px;font-weight:400;text-shadow:0 0 6px #00ff41}
+.testi-role{color:#004410;font-size:9px;letter-spacing:.1em}
+.testi-avatar{background:#002200;border:1px solid #006616;border-radius:0}
+/* ── EXPERIENCE ── */
+.ep-chr-yr{font-family:'VT323',monospace;letter-spacing:.05em;text-shadow:0 0 20px rgba(0,255,65,.3)}
+.ep-chr-item+.ep-chr-item{border-left:1px solid #003310}
+.ep-chr-period{color:#004410;letter-spacing:.12em}
+.ep-chr-co{font-family:'VT323',monospace;letter-spacing:.05em}
+.ep-chr-role{color:#006616;font-weight:400}
+.ep-chr-badge{border-radius:0;background:transparent;border:1px solid #006616;color:#006616}
+.ep-cdi{color:#00ff41;border-color:#006616;text-shadow:0 0 4px #00ff41;background:transparent}
+.ep-free{color:#00cc33;border-color:#005510;background:transparent}
+.ep-cdd{color:#009920;border-color:#004410;background:transparent}
+.ep-stage{color:#007720;border-color:#004410;background:transparent}
+.ep-alt{color:#005510;border-color:#003310;background:transparent}
+.ep-chr-logo-badge{background:#002200;border-radius:0;box-shadow:none;border:1px solid #006616;filter:grayscale(1) brightness(0.6)}

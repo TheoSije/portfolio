@@ -81,3 +81,23 @@ footer span:last-child{border-right:none;text-align:right}
 #mood-wheel{color:var(--fg)}
 #mood-btn{color:var(--fg)}
 @media(max-width:700px){nav{grid-template-columns:1fr auto}.nav-role{display:none}.hero{padding:28px 20px 40px}.section-header{padding:14px 20px}.project-item{grid-template-columns:36px 1fr auto}.item-year{display:none}.item-body{padding:18px 20px}.about{grid-template-columns:1fr}.about-text{border-right:none;border-bottom:var(--r);padding:40px 20px}.about-links{padding:40px 20px}footer{grid-template-columns:1fr}footer span{border-right:none}.proj-problem,.proj-solve{grid-template-columns:1fr}.block-label{writing-mode:horizontal-tb;transform:none;border-right:none;border-bottom:1px solid #ddd;padding:20px}.problem-text,.solve-text{padding:28px 20px}.content-block{grid-template-columns:36px 1fr}.block-content{padding:28px 20px}.block-img.half{width:100%}.block-duo{grid-template-columns:1fr;background:none;gap:8px}.proj-nav .pnav-btn{padding:24px 20px}}
+
+/* ── TESTIMONIALS ── */
+.testi-card{background:var(--bg);border:var(--rule);border-radius:0}
+.testi-text{color:#555;font-style:italic;font-weight:300;font-size:13px;line-height:1.8}
+.testi-name{color:var(--fg);font-family:'Archivo Black',sans-serif;text-transform:uppercase;font-size:10px;letter-spacing:.05em}
+.testi-role{color:#aaa;font-size:8px;letter-spacing:.18em;text-transform:uppercase}
+.testi-avatar{background:#e0ddd5;border-radius:0}
+/* ── EXPERIENCE ── */
+.ep-chr-yr{font-family:'Archivo Black',sans-serif;letter-spacing:-.03em}
+.ep-chr-item+.ep-chr-item{border-left:var(--rule)}
+.ep-chr-period{color:#aaa;letter-spacing:.2em;font-size:8px;text-transform:uppercase}
+.ep-chr-co{font-family:'Archivo Black',sans-serif;text-transform:uppercase;letter-spacing:-.01em}
+.ep-chr-role{color:#555;font-weight:300;font-style:italic}
+.ep-chr-badge{border-radius:0;background:transparent;border:1px solid #ccc;color:#999;font-size:7px;letter-spacing:.18em}
+.ep-cdi{color:var(--acc);border-color:var(--acc);background:transparent}
+.ep-free{color:#444;border-color:#aaa;background:transparent}
+.ep-cdd{color:#666;border-color:#bbb;background:transparent}
+.ep-stage{color:#888;border-color:#ccc;background:transparent}
+.ep-alt{color:#888;border-color:#ccc;background:transparent}
+.ep-chr-logo-badge{background:#e0ddd5;border-radius:0;box-shadow:none;border:var(--rule)}

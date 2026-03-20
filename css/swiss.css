@@ -76,3 +76,23 @@ footer span:last-child{border-right:none;text-align:right}
 .pnav-name{font-size:22px;font-weight:500;letter-spacing:-.01em}
 #mood-wheel{color:#1a1a1a}
 #mood-btn{color:#1a1a1a}
+
+/* ── TESTIMONIALS ── */
+.testi-card{background:#fff;border:none;border-top:2px solid #1a1a1a;border-radius:0}
+.testi-text{color:#777;font-size:13px;font-style:italic;font-weight:300;line-height:1.85}
+.testi-name{color:#1a1a1a;font-weight:500;font-size:12px;letter-spacing:.02em}
+.testi-role{color:#ccc;font-size:9px;letter-spacing:.15em;text-transform:uppercase}
+.testi-avatar{background:#f5f5f5;border-radius:50%}
+/* ── EXPERIENCE ── */
+.ep-chr-yr{font-weight:500;letter-spacing:-.03em}
+.ep-chr-item+.ep-chr-item{border-left:1px solid #e0e0e0}
+.ep-chr-period{color:#ccc;letter-spacing:.12em}
+.ep-chr-co{font-weight:500;letter-spacing:-.01em}
+.ep-chr-role{color:#777;font-weight:300;font-style:italic}
+.ep-chr-badge{border-radius:20px;background:transparent;border:1px solid #e0e0e0;color:#bbb}
+.ep-cdi{color:#e63000;border-color:#e63000;background:rgba(230,48,0,.06)}
+.ep-free{color:#555;border-color:#ccc;background:rgba(0,0,0,.04)}
+.ep-cdd{color:#666;border-color:#ddd;background:rgba(0,0,0,.04)}
+.ep-stage{color:#888;border-color:#ddd;background:rgba(0,0,0,.04)}
+.ep-alt{color:#888;border-color:#ddd;background:rgba(0,0,0,.04)}
+.ep-chr-logo-badge{background:#fafafa;border-radius:2px;box-shadow:0 1px 4px rgba(0,0,0,.1);border:1px solid #e0e0e0}
