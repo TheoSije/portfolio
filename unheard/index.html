@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNHEARD</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a;
+    --text: #f0ece0;
+    --muted: #555;
+    --accent: #f0ece0;
+    --card-bg: #111;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  #bg-art {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    transition: background 1.2s ease;
+    filter: blur(80px) saturate(0.3) brightness(0.25);
+    transform: scale(1.2);
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 480px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 3rem;
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.15em;
+    color: var(--text);
+    opacity: 0.9;
+  }
+
+  .tagline {
+    font-size: 0.62rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  #cover-wrap {
+    width: 100%;
+    aspect-ratio: 1;
+    position: relative;
+    margin-bottom: 2rem;
+    overflow: hidden;
+  }
+
+  #cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+
+  #cover.loaded { opacity: 1; }
+
+  #cover-placeholder {
+    position: absolute;
+    inset: 0;
+    background: #161616;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .vinyl {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #2a2a2a 30%, #1a1a1a 30%, #1a1a1a 35%, #2a2a2a 35%, #2a2a2a 40%, #1a1a1a 40%);
+    border: 2px solid #333;
+    animation: spin 4s linear infinite;
+    animation-play-state: paused;
+  }
+
+  .vinyl.spinning { animation-play-state: running; }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  #play-count-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(10,10,10,0.85);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text);
+    backdrop-filter: blur(8px);
+  }
+
+  #play-count-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.05em;
+    display: block;
+    line-height: 1;
+  }
+
+  .track-info {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  #track-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    letter-spacing: 0.04em;
+    line-height: 1.05;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #track-artist {
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  #track-genre {
+    display: inline-block;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid #333;
+    padding: 2px 8px;
+    margin-top: 0.6rem;
+  }
+
+  .progress-wrap {
+    width: 100%;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    position: relative;
+    height: 2px;
+    background: #222;
+  }
+
+  #progress-bar {
+    height: 100%;
+    background: var(--text);
+    width: 0%;
+    transition: width 0.3s linear;
+    pointer-events: none;
+  }
+
+  .controls {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text);
+    padding: 0;
+    font-family: 'DM Mono', monospace;
+    transition: opacity 0.2s;
+  }
+
+  button:hover { opacity: 0.6; }
+  button:disabled { opacity: 0.2; cursor: not-allowed; }
+
+  #btn-play {
+    width: 52px;
+    height: 52px;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+  }
+
+  #btn-play svg { width: 18px; height: 18px; fill: var(--text); }
+
+  #btn-skip {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid transparent;
+  }
+
+  #btn-skip:hover { color: var(--text); border-color: var(--text); opacity: 1; }
+
+  #btn-sc {
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  #btn-sc:hover { color: var(--text); opacity: 1; }
+
+  .time-info {
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 0.4rem;
+  }
+
+  #status {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 2.5rem;
+    text-align: center;
+    min-height: 1rem;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.6s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  #error-msg {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+  }
+
+  #error-msg a {
+    color: var(--text);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .loading-dots::after {
+    content: '';
+    animation: dots 1.2s steps(4, end) infinite;
+  }
+
+  @keyframes dots {
+    0%, 100% { content: ''; }
+    25% { content: '.'; }
+    50% { content: '..'; }
+    75% { content: '...'; }
+  }
+</style>
+</head>
+<body>
+
+<div id="bg-art"></div>
+
+<div class="container">
+  <header>
+    <span class="logo">UNHEARD</span>
+    <span class="tagline">Songs nobody listened to</span>
+  </header>
+
+  <div id="cover-wrap">
+    <div id="cover-placeholder">
+      <div class="vinyl" id="vinyl"></div>
+    </div>
+    <img id="cover" alt="cover art" crossorigin="anonymous" />
+    <div id="play-count-badge">
+      <span id="play-count-num">—</span>
+      plays
+    </div>
+  </div>
+
+  <div class="track-info fade-in">
+    <div id="track-title">—</div>
+    <div id="track-artist">—</div>
+    <div id="track-genre" style="display:none"></div>
+  </div>
+
+  <div class="progress-wrap" id="progress-wrap">
+    <div id="progress-bar"></div>
+  </div>
+  <div class="time-info">
+    <span id="time-current">0:00</span>
+    <span id="time-total">0:30</span>
+  </div>
+
+  <div class="controls">
+    <button id="btn-sc" title="Open on SoundCloud">↗ soundcloud</button>
+    <button id="btn-play" title="Play / Pause">
+      <svg id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <svg id="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    </button>
+    <button id="btn-skip">skip →</button>
+  </div>
+
+  <div id="status" class="loading-dots">Loading</div>
+  <div id="error-msg"></div>
+</div>
+
+<audio id="audio" crossorigin="anonymous" preload="none"></audio>
+
+<script>
+const CLIENT_ID = 'iZIs9mchVcX5lhVRyQGGAYlNPVldzAoX';
+
+const audio = document.getElementById('audio');
+const cover = document.getElementById('cover');
+const bgArt = document.getElementById('bg-art');
+const trackTitle = document.getElementById('track-title');
+const trackArtist = document.getElementById('track-artist');
+const trackGenre = document.getElementById('track-genre');
+const playCountNum = document.getElementById('play-count-num');
+const progressBar = document.getElementById('progress-bar');
+const progressWrap = document.getElementById('progress-wrap');
+const btnPlay = document.getElementById('btn-play');
+const btnSkip = document.getElementById('btn-skip');
+const btnSc = document.getElementById('btn-sc');
+const iconPlay = document.getElementById('icon-play');
+const iconPause = document.getElementById('icon-pause');
+const timeCurrentEl = document.getElementById('time-current');
+const timeTotalEl = document.getElementById('time-total');
+const status = document.getElementById('status');
+const vinyl = document.getElementById('vinyl');
+const errorMsg = document.getElementById('error-msg');
+const placeholder = document.getElementById('cover-placeholder');
+
+let currentTrack = null;
+let isPlaying = false;
+let searchOffset = Math.floor(Math.random() * 5000);
+
+const SEARCH_TAGS = [
+  'bedroom pop', 'lo-fi', 'indie', 'ambient', 'acoustic',
+  'electronic', 'experimental', 'folk', 'dream pop', 'shoegaze',
+  'post-rock', 'chillwave', 'synth', 'jazz', 'soul'
+];
+
+function fmtTime(s) {
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return `${m}:${sec.toString().padStart(2, '0')}`;
+}
+
+function setStatus(txt, loading = false) {
+  status.textContent = txt;
+  status.className = loading ? 'loading-dots' : '';
+}
+
+async function fetchTrack() {
+  btnPlay.disabled = true;
+  btnSkip.disabled = true;
+  setStatus('Finding something unheard', true);
+  errorMsg.style.display = 'none';
+
+  const tag = SEARCH_TAGS[Math.floor(Math.random() * SEARCH_TAGS.length)];
+  searchOffset = Math.floor(Math.random() * 8000);
+
+  const url = `https://api.soundcloud.com/tracks?client_id=${CLIENT_ID}&tags=${encodeURIComponent(tag)}&limit=50&offset=${searchOffset}&filter=streamable&order=hotness&duration[from]=30000&duration[to]=300000`;
+
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`API error ${res.status}`);
+    const tracks = await res.json();
+
+    if (!tracks || tracks.length === 0) {
+      setStatus('No tracks found, retrying...');
+      setTimeout(fetchTrack, 1000);
+      return;
+    }
+
+    const lowPlay = tracks
+      .filter(t => t.stream_url && t.playback_count !== undefined && t.playback_count <= 500)
+      .sort((a, b) => a.playback_count - b.playback_count);
+
+    const pool = lowPlay.length > 0 ? lowPlay : tracks.filter(t => t.stream_url);
+
+    if (pool.length === 0) {
+      setStatus('Searching deeper...');
+      setTimeout(fetchTrack, 800);
+      return;
+    }
+
+    const track = pool[Math.floor(Math.random() * Math.min(pool.length, 8))];
+    loadTrack(track);
+  } catch (e) {
+    showError(e.message);
+  }
+}
+
+function loadTrack(track) {
+  currentTrack = track;
+  audio.pause();
+  isPlaying = false;
+  updatePlayUI();
+
+  trackTitle.textContent = track.title || 'Unknown title';
+  trackArtist.textContent = track.user?.username || 'Unknown artist';
+
+  const plays = track.playback_count ?? 0;
+  playCountNum.textContent = plays.toLocaleString();
+
+  if (track.genre) {
+    trackGenre.textContent = track.genre;
+    trackGenre.style.display = 'inline-block';
+  } else {
+    trackGenre.style.display = 'none';
+  }
+
+  const artUrl = track.artwork_url
+    ? track.artwork_url.replace('-large', '-t500x500')
+    : (track.user?.avatar_url?.replace('-large', '-t500x500') || null);
+
+  cover.classList.remove('loaded');
+  placeholder.style.opacity = '1';
+
+  if (artUrl) {
+    cover.src = artUrl;
+    cover.onload = () => {
+      cover.classList.add('loaded');
+      placeholder.style.opacity = '0';
+      extractColor(artUrl);
+    };
+    cover.onerror = () => {
+      bgArt.style.background = '#1a1a2e';
+    };
+  } else {
+    bgArt.style.background = '#1a1a2e';
+  }
+
+  const streamUrl = `${track.stream_url}?client_id=${CLIENT_ID}`;
+  audio.src = streamUrl;
+  audio.load();
+
+  progressBar.style.width = '0%';
+  timeCurrentEl.textContent = '0:00';
+  timeTotalEl.textContent = fmtTime((track.duration || 30000) / 1000);
+
+  btnPlay.disabled = false;
+  btnSkip.disabled = false;
+
+  btnSc.onclick = () => window.open(track.permalink_url, '_blank');
+
+  setStatus(plays === 0 ? '◆ zero plays — truly unheard' : plays <= 50 ? `◆ only ${plays} plays` : `◆ ${plays.toLocaleString()} plays`);
+}
+
+function extractColor(imgUrl) {
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = 8;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, 8, 8);
+    const data = ctx.getImageData(0, 0, 8, 8).data;
+    let r = 0, g = 0, b = 0;
+    for (let i = 0; i < data.length; i += 4) {
+      r += data[i]; g += data[i+1]; b += data[i+2];
+    }
+    const px = data.length / 4;
+    r = Math.round(r / px);
+    g = Math.round(g / px);
+    b = Math.round(b / px);
+    bgArt.style.background = `radial-gradient(ellipse at 50% 40%, rgb(${r},${g},${b}) 0%, rgb(${Math.round(r*0.4)},${Math.round(g*0.4)},${Math.round(b*0.4)}) 100%)`;
+  };
+  img.src = imgUrl;
+}
+
+function updatePlayUI() {
+  iconPlay.style.display = isPlaying ? 'none' : 'block';
+  iconPause.style.display = isPlaying ? 'block' : 'none';
+  if (isPlaying) {
+    vinyl.classList.add('spinning');
+  } else {
+    vinyl.classList.remove('spinning');
+  }
+}
+
+btnPlay.addEventListener('click', () => {
+  if (!currentTrack) return;
+  if (isPlaying) {
+    audio.pause();
+    isPlaying = false;
+  } else {
+    audio.play().catch(e => setStatus('playback blocked — try again'));
+    isPlaying = true;
+  }
+  updatePlayUI();
+});
+
+btnSkip.addEventListener('click', () => {
+  audio.pause();
+  isPlaying = false;
+  updatePlayUI();
+  fetchTrack();
+});
+
+audio.addEventListener('timeupdate', () => {
+  if (audio.duration) {
+    const pct = (audio.currentTime / audio.duration) * 100;
+    progressBar.style.width = pct + '%';
+    timeCurrentEl.textContent = fmtTime(audio.currentTime);
+  }
+});
+
+audio.addEventListener('ended', () => {
+  isPlaying = false;
+  updatePlayUI();
+  setTimeout(fetchTrack, 800);
+});
+
+audio.addEventListener('error', () => {
+  setStatus('Stream error — skipping');
+  setTimeout(fetchTrack, 1200);
+});
+
+progressWrap.addEventListener('click', (e) => {
+  if (!audio.duration) return;
+  const rect = progressWrap.getBoundingClientRect();
+  const pct = (e.clientX - rect.left) / rect.width;
+  audio.currentTime = pct * audio.duration;
+});
+
+function showError(msg) {
+  setStatus('');
+  errorMsg.style.display = 'block';
+  errorMsg.innerHTML = `The SoundCloud API requires a registered client ID.<br><br>
+  <a onclick="window.open('https://soundcloud.com/you/apps/new','_blank')">Register one here</a> and replace <code>CLIENT_ID</code> in the source.`;
+}
+
+fetchTrack();
+</script>
+</body>
+</html>
