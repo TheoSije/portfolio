@@ -1437,15 +1437,43 @@ function showHome() {
 </div>
 
 <div id="ghost-cursor" aria-hidden="true">
-  <svg viewBox="0 0 13 17" width="13" height="17" fill="none">
-    <path d="M0 0 L0 13 L3.2 9.8 L5.6 15.4 L7.6 14.5 L5.2 8.9 L10 8.9 Z" fill="#9747FF" stroke="white" stroke-width="1" stroke-linejoin="round"/>
+  <svg width="22" height="24" viewBox="0 0 396 433" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g filter="url(#filter_louisa)">
+      <path d="M39.9744 31.8759C38.2182 23.4825 47.2034 16.9545 54.6432 21.2183L351.11 191.127C358.653 195.45 357.401 206.692 349.09 209.248L205.199 253.511C202.971 254.196 201.054 255.643 199.785 257.599L127.77 368.534C122.94 375.973 111.523 373.84 109.707 365.158L39.9744 31.8759Z" fill="#9747FF"/>
+      <path d="M346.169 199.749L202.277 244.012C197.821 245.383 193.988 248.277 191.449 252.188L119.434 363.121L49.7012 29.8407L346.169 199.749Z" stroke="white" stroke-width="19.8759"/>
+    </g>
+    <defs>
+      <filter id="filter_louisa" x="0" y="0" width="395.86" height="432.694" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+        <feOffset dy="19.8759"/>
+        <feGaussianBlur stdDeviation="19.8759"/>
+        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.28 0"/>
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_louisa"/>
+        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_louisa" result="shape"/>
+      </filter>
+    </defs>
   </svg>
   <div class="fig-label fig-label-ghost">Louisa</div>
 </div>
 
 <div id="ghost-cursor-pablo" aria-hidden="true">
-  <svg viewBox="0 0 13 17" width="13" height="17" fill="none">
-    <path d="M0 0 L0 13 L3.2 9.8 L5.6 15.4 L7.6 14.5 L5.2 8.9 L10 8.9 Z" fill="#F24E1E" stroke="white" stroke-width="1" stroke-linejoin="round"/>
+  <svg width="22" height="24" viewBox="0 0 396 433" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g filter="url(#filter_pablo)">
+      <path d="M39.9744 31.8759C38.2182 23.4825 47.2034 16.9545 54.6432 21.2183L351.11 191.127C358.653 195.45 357.401 206.692 349.09 209.248L205.199 253.511C202.971 254.196 201.054 255.643 199.785 257.599L127.77 368.534C122.94 375.973 111.523 373.84 109.707 365.158L39.9744 31.8759Z" fill="#F24E1E"/>
+      <path d="M346.169 199.749L202.277 244.012C197.821 245.383 193.988 248.277 191.449 252.188L119.434 363.121L49.7012 29.8407L346.169 199.749Z" stroke="white" stroke-width="19.8759"/>
+    </g>
+    <defs>
+      <filter id="filter_pablo" x="0" y="0" width="395.86" height="432.694" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+        <feOffset dy="19.8759"/>
+        <feGaussianBlur stdDeviation="19.8759"/>
+        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.28 0"/>
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_pablo"/>
+        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_pablo" result="shape"/>
+      </filter>
+    </defs>
   </svg>
   <div class="fig-label fig-label-pablo">Pablo S.</div>
 </div>
@@ -1723,83 +1751,62 @@ body:not(.on-home) #draw-canvas { display: none !important; }
 
   /* ─────────────────────────────────────────
      GHOST CURSORS — LOUISA + PABLO S.
-     Spring physics — mouvement humain organique
+     Lerp 0.04 — mouvement fluide d'origine
   ───────────────────────────────────────── */
   const ghostCursor = document.getElementById('ghost-cursor');
   const ghostPablo  = document.getElementById('ghost-cursor-pablo');
   const labelL = ghostCursor.querySelector('.fig-label-ghost');
   const labelP = ghostPablo.querySelector('.fig-label-pablo');
 
-  /* État spring — position, vélocité, cible */
-  var L = { x:-200, y:-200, vx:0, vy:0, tx:-200, ty:-200, el:ghostCursor, vis:false };
-  var Pa= { x:-200, y:-200, vx:0, vy:0, tx:-200, ty:-200, el:ghostPablo,  vis:false };
-
-  /* Paramètres spring : légèrement différents pour chaque curseur → rythmes distincts */
-  var SP_L = 0.072, DMP_L = 0.70;
-  var SP_P = 0.058, DMP_P = 0.74;
+  var lx=-200, ly=-200, ltx=-200, lty=-200;
+  var px=-200, py=-200, ptx=-200, pty=-200;
 
   function rndPos() {
-    var mx = 130, my = 100;
+    var m = 120;
     return {
-      x: mx + Math.random() * (window.innerWidth  - mx * 2),
-      y: my + Math.random() * (Math.min(window.innerHeight, 700) - my * 2)
+      x: m + Math.random() * (window.innerWidth - m * 2),
+      y: m + Math.random() * Math.min(window.innerHeight, document.body.scrollHeight) * 0.7
     };
   }
 
-  /* Petit saut autour de la position courante (micro-ajustement) */
-  function rndNear(c, amp) {
-    return { x: c.tx + (Math.random()-.5)*amp, y: c.ty + (Math.random()-.5)*(amp*.7) };
-  }
-
+  /* Boucle lerp — deux curseurs indépendants */
   function animGhosts() {
-    L.vx  += (L.tx  - L.x)  * SP_L;  L.vy  += (L.ty  - L.y)  * SP_L;
-    L.vx  *= DMP_L;                    L.vy  *= DMP_L;
-    L.x   += L.vx;                     L.y   += L.vy;
-    L.el.style.transform = 'translate(' + L.x + 'px,' + L.y + 'px)';
-
-    Pa.vx += (Pa.tx - Pa.x) * SP_P;  Pa.vy += (Pa.ty - Pa.y) * SP_P;
-    Pa.vx *= DMP_P;                    Pa.vy *= DMP_P;
-    Pa.x  += Pa.vx;                    Pa.y  += Pa.vy;
-    Pa.el.style.transform = 'translate(' + Pa.x + 'px,' + Pa.y + 'px)';
-
+    lx += (ltx - lx) * 0.04;  ly += (lty - ly) * 0.04;
+    ghostCursor.style.transform = 'translate(' + lx + 'px,' + ly + 'px)';
+    px += (ptx - px) * 0.04;  py += (pty - py) * 0.04;
+    ghostPablo.style.transform  = 'translate(' + px + 'px,' + py + 'px)';
     requestAnimationFrame(animGhosts);
   }
   animGhosts();
 
-  /* Mouvement autonome de chaque curseur — timing indépendant */
-  function moveL() {
-    var p = Math.random() < 0.3 ? rndNear(L, 90) : rndPos();
-    L.tx = p.x; L.ty = p.y;
-    setTimeout(moveL, 1800 + Math.random() * 2800);
+  /* Déplacements — timings décalés pour que les deux curseurs bougent de façon indépendante */
+  function moveLouisa() {
+    var np = rndPos(); ltx = np.x; lty = np.y;
+    setTimeout(moveLouisa, 3200 + Math.random() * 3200);
   }
-  function moveP() {
-    var p = Math.random() < 0.3 ? rndNear(Pa, 110) : rndPos();
-    Pa.tx = p.x; Pa.ty = p.y;
-    setTimeout(moveP, 2400 + Math.random() * 3400);
+  function movePablo() {
+    var np = rndPos(); ptx = np.x; pty = np.y;
+    setTimeout(movePablo, 2800 + Math.random() * 3600);
   }
 
-  /* Visibilité : qui est là — Louisa / Pablo / les deux */
+  /* Visibilité — Louisa seule / Pablo seul / les deux */
   var statePool = ['louisa','pablo','both','louisa','pablo','louisa','both'];
 
   function cycle() {
     var s = statePool[Math.floor(Math.random() * statePool.length)];
-    /* Fade out ceux qui doivent disparaître */
     if (s === 'pablo')  ghostCursor.style.opacity = '0';
     if (s === 'louisa') ghostPablo.style.opacity  = '0';
-    /* Après une courte pause, reposition + fade in */
     setTimeout(function () {
-      if (s !== 'pablo')  {
-        var p = rndPos(); L.x = p.x; L.y = p.y; L.tx = p.x; L.ty = p.y;
-        L.vx = 0; L.vy = 0;
+      if (s !== 'pablo') {
+        var p = rndPos(); lx=p.x; ly=p.y; ltx=p.x; lty=p.y;
         ghostCursor.style.opacity = '1';
       }
       if (s !== 'louisa') {
-        var p = rndPos(); Pa.x = p.x; Pa.y = p.y; Pa.tx = p.x; Pa.ty = p.y;
-        Pa.vx = 0; Pa.vy = 0;
+        var p = rndPos(); px=p.x; py=p.y; ptx=p.x; pty=p.y;
         ghostPablo.style.opacity = '1';
       }
-      setTimeout(cycle, 10000 + Math.random() * 10000);
-    }, 900);
+      setTimeout(cycle, 9000 + Math.random() * 9000);
+    }, 800);
   }
 
   /* Messages */
@@ -1813,16 +1820,16 @@ body:not(.on-home) #draw-canvas { display: none !important; }
     }, 9000 + Math.random() * 10000);
   }
 
-  /* Init — Louisa apparaît en premier */
+  /* Init — Louisa en premier, Pablo rejoint au premier cycle */
   setTimeout(function () {
-    var p = rndPos(); L.x = p.x; L.y = p.y; L.tx = p.x; L.ty = p.y;
+    var p = rndPos(); lx=p.x; ly=p.y; ltx=p.x; lty=p.y;
     ghostCursor.classList.add('ready');
     schedMsg(labelL, 'Louisa', louisaMsgs);
     schedMsg(labelP, 'Pablo S.', pabloMsgs);
-    moveL();
-    moveP();
-    setTimeout(cycle, 13000 + Math.random() * 7000);
-  }, 4000);
+    moveLouisa();
+    setTimeout(movePablo, 1400); /* Pablo démarre légèrement décalé */
+    setTimeout(cycle, 12000 + Math.random() * 6000);
+  }, 5000);
 
   // Masquer quand on quitte le hero
   var heroSection = document.querySelector('section.hero');
