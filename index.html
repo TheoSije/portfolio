@@ -894,6 +894,16 @@ nav.minisite-nav.minisite-nav--light .nav-role {
         <p class="xp-card-desc">Obtenez des conseils légaux grâce à notre Intelligence Artificielle.</p>
       </div>
     </div>
+    <div class="proj-card proj-card--xp" onclick="openMiniSite('unheard')">
+      <div class="proj-card-img proj-img--unheard">
+        <div class="unheard-vinyl"></div>
+        <div class="unheard-label">UNHEARD</div>
+      </div>
+      <div class="proj-card-inner">
+        <span class="proj-card-name">Unheard</span>
+        <p class="xp-card-desc">Songs nobody listened to. Un player SoundCloud pour découvrir des tracks à 0 plays.</p>
+      </div>
+    </div>
     <div class="proj-card proj-card--xp" onclick="openMiniSite('incipit')">
       <div class="proj-card-img proj-img--incipit"></div>
       <div class="proj-card-inner">
@@ -1257,6 +1267,7 @@ function showProject(id) {
 
 // ══ MINI SITES ══
 const persoLabels = {
+  unheard: 'Unheard',
   vinyle: 'Platine',
   emojy: 'Emojy Words',
   incipit: 'Inkipit',
@@ -1534,6 +1545,12 @@ function showHome() {
 .mauboussin-video { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; object-fit: contain !important; transform: none !important; }
 .proj-img--gotaxfree{ background: #dce8f5 url('img/gotaxfree-card.jpg') center/cover no-repeat; }
 .proj-img--dsrt     { background: linear-gradient(155deg, #050505 0%, #111 50%, #2a2a2a 100%); }
+.proj-img--unheard  { background: #0a0a0a; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:12px; position:relative; overflow:hidden; }
+.unheard-vinyl { width:90px; height:90px; border-radius:50%; background: repeating-conic-gradient(#1c1c1c 0deg 10deg, #141414 10deg 20deg); border:1px solid #2a2a2a; box-shadow: 0 0 0 8px #0a0a0a, 0 0 0 9px #1a1a1a, 0 0 30px rgba(240,236,224,0.04); animation: unheard-spin 6s linear infinite; animation-play-state:running; }
+.unheard-vinyl::after { content:''; position:absolute; width:12px; height:12px; border-radius:50%; background:#0a0a0a; border:1px solid #222; top:50%; left:50%; transform:translate(-50%,-50%); }
+.proj-img--unheard:hover .unheard-vinyl { box-shadow: 0 0 0 8px #0a0a0a, 0 0 0 9px #1a1a1a, 0 0 40px rgba(240,236,224,0.1); }
+.unheard-label { font-family:'Bebas Neue','DM Mono',monospace; font-size:11px; letter-spacing:0.22em; color:rgba(240,236,224,0.25); text-transform:uppercase; }
+@keyframes unheard-spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
 .proj-img--incipit  { background: #1a1a1a url('img/inkipit-card.jpg') center/cover no-repeat; }
 .proj-img--vinyle   { background: #0a0a0a url('img/vinyle-card.jpg') center/cover no-repeat; }
 .proj-img--emojy    { background: linear-gradient(155deg, #7c1d6f 0%, #db2777 45%, #f97316 100%); }
