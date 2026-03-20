@@ -59,9 +59,9 @@ footer span:last-child{border-right:none;text-align:right}
 .solve-label{color:#c4602a}
 .problem-text{padding:48px 48px;font-family:'Fraunces',serif;font-size:clamp(18px,2.5vw,28px);line-height:1.45;font-style:italic;font-weight:300}
 .solve-text{padding:48px 48px;font-size:clamp(13px,1.8vw,18px);font-weight:300;line-height:1.9;color:#9a8f84;font-style:italic}
-.content-block{border-bottom:1px solid #ddd5c8;display:grid;grid-template-columns:60px 1fr}
-.block-num{border-right:1px solid #ddd5c8;display:flex;align-items:flex-start;justify-content:center;padding-top:32px;font-family:'Fraunces',serif;font-size:14px;font-style:italic;color:#ddd;font-weight:300}
-.block-content{padding:40px 48px}
+.content-block{border-bottom:1px solid #ddd5c8;display:block;padding:0 var(--h-pad);position:relative}
+.block-num{position:absolute;left:0;width:var(--h-pad);border-right:1px solid #ddd5c8;display:flex;align-items:flex-start;justify-content:center;padding-top:32px;font-family:'Fraunces',serif;font-size:14px;font-style:italic;color:#ddd;font-weight:300}
+.block-content{padding:40px 0}
 .block-img{background:#e8dfd3;border:1px solid #ddd5c8;border-radius:4px;margin-bottom:24px;position:relative;aspect-ratio:16/9;overflow:hidden}
 .block-img.half{width:55%;aspect-ratio:4/3}
 .block-duo{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px}

@@ -79,9 +79,9 @@ footer span:last-child{border-right:none;text-align:right}
 .problem-text{padding:48px;font-size:18px;font-weight:500;line-height:1.55;color:#111;font-style:normal}
 .solve-text{padding:48px;font-size:14px;font-weight:400;line-height:1.85;color:#666;font-style:normal}
 
-.content-block{display:grid;grid-template-columns:60px 1fr;border-bottom:none}
-.block-num{border-right:none;display:flex;align-items:flex-start;justify-content:center;padding-top:40px;font-family:'Archivo Black',sans-serif;font-size:11px;color:#ddd}
-.block-content{padding:40px 48px}
+.content-block{display:block;border-bottom:none;padding:0 var(--h-pad);position:relative}
+.block-num{position:absolute;left:0;width:var(--h-pad);border-right:none;display:flex;align-items:flex-start;justify-content:center;padding-top:40px;font-family:'Archivo Black',sans-serif;font-size:11px;color:#ddd}
+.block-content{padding:40px 0}
 .block-img{background:#ede9e2;border-radius:0;margin-bottom:16px;position:relative;aspect-ratio:16/9;overflow:hidden}
 .block-img.half{width:55%;aspect-ratio:4/3}
 .block-duo{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
@@ -107,7 +107,7 @@ footer span:last-child{border-right:none;text-align:right}
   :root{--h-pad:20px}
   .about{grid-template-columns:1fr}
   .about-text{padding:40px var(--h-pad);font-size:14px}
-  .about-links{padding:0 var(--h-pad) 40px}
+  .about-links{padding:0 0 40px}
   .proj-card{flex:0 0 calc(100vw - 80px)}
   .projects-scroll{gap:10px !important}
   .projects-scroll::before,.projects-scroll::after{width:40px}
@@ -119,9 +119,9 @@ footer span:last-child{border-right:none;text-align:right}
   .block-label{writing-mode:horizontal-tb;transform:none;padding:28px var(--h-pad) 0;font-size:9px}
   .problem-text{padding:12px var(--h-pad) 32px;font-size:16px}
   .solve-text{padding:12px var(--h-pad) 32px}
-  .content-block{grid-template-columns:1fr}
-  .block-num{display:none}
-  .block-content{padding:0 var(--h-pad) 32px}
+  .content-block{;padding:0 var(--h-pad);position:relative}
+  .block-num{position:absolute;left:0;width:var(--h-pad);display:none}
+  .block-content{padding:0 0 32px}
   .block-img{width:100%!important;border-radius:12px}
   .block-img.half{width:100%!important;aspect-ratio:16/9}
   .block-duo{grid-template-columns:1fr;gap:10px}

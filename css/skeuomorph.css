@@ -60,9 +60,9 @@ footer span:last-child{border-right:none;text-align:right}
 .solve-label{color:#8b3a10}
 .problem-text{padding:48px 40px;font-family:'IM Fell English',serif;font-size:clamp(18px,2.5vw,26px);font-style:italic;line-height:1.45}
 .solve-text{padding:48px 40px;font-size:16px;line-height:1.8;color:#6a4a2a;font-style:italic}
-.content-block{border-bottom:1px solid #d4b896;display:grid;grid-template-columns:56px 1fr;background:#fdf4e3}
-.block-num{border-right:1px solid #d4b896;display:flex;align-items:flex-start;justify-content:center;padding-top:32px;font-family:'IM Fell English',serif;font-size:16px;font-style:italic;color:#c4a070}
-.block-content{padding:40px}
+.content-block{border-bottom:1px solid #d4b896;display:block;background:#fdf4e3;padding:0 var(--h-pad);position:relative}
+.block-num{position:absolute;left:0;width:var(--h-pad);border-right:1px solid #d4b896;display:flex;align-items:flex-start;justify-content:center;padding-top:32px;font-family:'IM Fell English',serif;font-size:16px;font-style:italic;color:#c4a070}
+.block-content{padding:40px 0}
 .block-img{background:linear-gradient(135deg,#e8d5b0,#d4c090);border:2px solid #c4a050;border-radius:3px;margin-bottom:24px;position:relative;aspect-ratio:16/9;overflow:hidden;box-shadow:inset 0 2px 8px rgba(0,0,0,.15),0 2px 8px rgba(0,0,0,.1)}
 .block-img.half{width:55%;aspect-ratio:4/3}
 .block-duo{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px}
