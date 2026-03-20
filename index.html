@@ -1313,7 +1313,7 @@ function renderImg(b) {
     if (b.srcs && b.srcs.length > 1) {
       const slides = b.srcs.map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="" loading="lazy">`}</div>`).join('');
       const dots = b.srcs.map((_,i)=>`<span class="iphone-dot${i===0?' active':''}"></span>`).join('');
-      return `<div class="block-iphone-wrap"><div class="iphone-outer"><div class="iphone"><div class="iphone-screen" data-slider>${slides}</div><img class="iphone-frame" src="img/center_stage_hw__b7h41ddg1fg2_large_2x.png" alt="" draggable="false"></div><div class="iphone-dots">${dots}</div></div></div>`;
+      return `<div class="block-iphone-wrap"><div class="iphone-outer"><div class="iphone"><div class="iphone-screen" data-slider>${slides}</div><img class="iphone-frame" src="img/iphone.png" alt="" draggable="false"></div><div class="iphone-dots">${dots}</div></div></div>`;
     }
     // single image/video
     const src = b.src || b.srcs?.[0];
@@ -1322,7 +1322,7 @@ function renderImg(b) {
           ? `<video src="${src}" autoplay loop muted playsinline></video>`
           : `<img src="${src}" alt="">`)
       : `<div class="iphone-ph">votre capture ici</div>`;
-    return `<div class="block-iphone-wrap"><div class="iphone"><div class="iphone-screen">${media}</div><img class="iphone-frame" src="img/center_stage_hw__b7h41ddg1fg2_large_2x.png" alt="" draggable="false"></div></div>`;
+    return `<div class="block-iphone-wrap"><div class="iphone-outer"><div class="iphone"><div class="iphone-screen">${media}</div><img class="iphone-frame" src="img/iphone.png" alt="" draggable="false"></div></div></div>`;
   }
   return `<div class="block-img ${b.t}"><div class="block-placeholder">image ${b.n}</div></div>`;
 }
