@@ -739,8 +739,12 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   color: rgba(0,0,0,0.60) !important;
 }
 /* ── PROJECT CONTEXT ── */
-.proj-context { padding: 48px var(--h-pad) 40px; }
-.context-text { font-size: clamp(16px, 2vw, 24px); font-weight: 300; line-height: 1.75; opacity: 0.68; max-width: 820px; }
+.proj-context { padding: 56px var(--h-pad) 64px; }
+.context-text { font-size: clamp(16px, 2vw, 24px); font-weight: 300; line-height: 1.8; opacity: 0.68; max-width: 860px; }
+@media (min-width: 860px) {
+  .proj-context { display: grid; grid-template-columns: 1fr 1fr; gap: 0 64px; max-width: none; }
+  .context-text { max-width: none; }
+}
 </style>
 </head>
 <body class="on-home">
@@ -1195,8 +1199,8 @@ function nextMood() {
 
 // ══ PROJECT PRO DATA ══
 const P = {
-  gl: { title:'Galeries Lafayette', type:'Projet Pro', tags:['Design System','IA Gen','Product','Low-Code'], year:'2026', role:'Head of Design · Product Design',
-    context:"Les Galeries Lafayette, c'est 60 millions de visiteurs par an, un flagship de 70 000 m² sur les Grands Boulevards, et l'un des retailers les plus visités au monde. En 2023, je prends la tête du design — une équipe de 7 product designers, un périmètre qui ne ressemble à aucun autre projet freelance. Le scope couvre tout à la fois : refonte de l'app mobile, du site web responsive, construction d'un design system vivant, intégration d'IA générative pour les visuels mode, création du chatbot e-commerce Gala, et des centaines d'apps Low-Code sur PowerApps. App redesign : satisfaction index 150. Refonte web annuelle : index 120, chaque année, sans faillir.",
+  gl: { title:'Galeries Lafayette', type:'Projet Pro', tags:['Design System','IA Gen','Product','Low-Code'], year:'2026', role:'Head of Design',
+    context:"Les Galeries Lafayette, c'est 60 millions de visiteurs par an, un flagship de 70 000 m² sur les Grands Boulevards, et l'un des retailers les plus visités au monde. En 2023, je prends la tête du design — une équipe de 7 product designers, un périmètre qui ne ressemble à aucun autre projet freelance. Le scope couvre tout à la fois : refonte de l'app mobile, du site web responsive, construction d'un design system vivant, intégration d'IA générative pour les visuels mode, création du chatbot e-commerce Gala, et des centaines d'apps Low-Code sur PowerApps. Chaque lancement a eu ses effets — et l'écosystème tourne encore.",
     problem:"3 ans à la tête du design pour l'un des plus grands retailers français. Pas un projet — un écosystème entier : app, web, design system, IA gen, automatisation, et une équipe de choc.",
     blocks:[
       {t:'full',n:'01',c:'<strong>L\'app, refonte totale.</strong> En cohérence avec le design system, l\'application mobile a été entièrement repensée. Indice de satisfaction 150. Big up à Flo, dev iOS de génie — embauche-le, il est freelance et il est brillant.'},
@@ -1719,25 +1723,84 @@ body:not(.on-home) #draw-canvas { display: none !important; }
 
   /* ─────────────────────────────────────────
      GHOST CURSORS — LOUISA + PABLO S.
+     Spring physics — mouvement humain organique
   ───────────────────────────────────────── */
   const ghostCursor = document.getElementById('ghost-cursor');
   const ghostPablo  = document.getElementById('ghost-cursor-pablo');
   const labelL = ghostCursor.querySelector('.fig-label-ghost');
   const labelP = ghostPablo.querySelector('.fig-label-pablo');
 
+  /* État spring — position, vélocité, cible */
+  var L = { x:-200, y:-200, vx:0, vy:0, tx:-200, ty:-200, el:ghostCursor, vis:false };
+  var Pa= { x:-200, y:-200, vx:0, vy:0, tx:-200, ty:-200, el:ghostPablo,  vis:false };
+
+  /* Paramètres spring : légèrement différents pour chaque curseur → rythmes distincts */
+  var SP_L = 0.072, DMP_L = 0.70;
+  var SP_P = 0.058, DMP_P = 0.74;
+
   function rndPos() {
-    var mx = 140, my = 110;
+    var mx = 130, my = 100;
     return {
       x: mx + Math.random() * (window.innerWidth  - mx * 2),
-      y: my + Math.random() * (Math.min(window.innerHeight, 680) - my * 2)
+      y: my + Math.random() * (Math.min(window.innerHeight, 700) - my * 2)
     };
   }
 
-  function place(el, pos) {
-    el.style.transform = 'translate(' + pos.x + 'px,' + pos.y + 'px)';
+  /* Petit saut autour de la position courante (micro-ajustement) */
+  function rndNear(c, amp) {
+    return { x: c.tx + (Math.random()-.5)*amp, y: c.ty + (Math.random()-.5)*(amp*.7) };
   }
-  function show(el) { el.style.opacity = '1'; }
-  function hide(el) { el.style.opacity = '0'; }
+
+  function animGhosts() {
+    L.vx  += (L.tx  - L.x)  * SP_L;  L.vy  += (L.ty  - L.y)  * SP_L;
+    L.vx  *= DMP_L;                    L.vy  *= DMP_L;
+    L.x   += L.vx;                     L.y   += L.vy;
+    L.el.style.transform = 'translate(' + L.x + 'px,' + L.y + 'px)';
+
+    Pa.vx += (Pa.tx - Pa.x) * SP_P;  Pa.vy += (Pa.ty - Pa.y) * SP_P;
+    Pa.vx *= DMP_P;                    Pa.vy *= DMP_P;
+    Pa.x  += Pa.vx;                    Pa.y  += Pa.vy;
+    Pa.el.style.transform = 'translate(' + Pa.x + 'px,' + Pa.y + 'px)';
+
+    requestAnimationFrame(animGhosts);
+  }
+  animGhosts();
+
+  /* Mouvement autonome de chaque curseur — timing indépendant */
+  function moveL() {
+    var p = Math.random() < 0.3 ? rndNear(L, 90) : rndPos();
+    L.tx = p.x; L.ty = p.y;
+    setTimeout(moveL, 1800 + Math.random() * 2800);
+  }
+  function moveP() {
+    var p = Math.random() < 0.3 ? rndNear(Pa, 110) : rndPos();
+    Pa.tx = p.x; Pa.ty = p.y;
+    setTimeout(moveP, 2400 + Math.random() * 3400);
+  }
+
+  /* Visibilité : qui est là — Louisa / Pablo / les deux */
+  var statePool = ['louisa','pablo','both','louisa','pablo','louisa','both'];
+
+  function cycle() {
+    var s = statePool[Math.floor(Math.random() * statePool.length)];
+    /* Fade out ceux qui doivent disparaître */
+    if (s === 'pablo')  ghostCursor.style.opacity = '0';
+    if (s === 'louisa') ghostPablo.style.opacity  = '0';
+    /* Après une courte pause, reposition + fade in */
+    setTimeout(function () {
+      if (s !== 'pablo')  {
+        var p = rndPos(); L.x = p.x; L.y = p.y; L.tx = p.x; L.ty = p.y;
+        L.vx = 0; L.vy = 0;
+        ghostCursor.style.opacity = '1';
+      }
+      if (s !== 'louisa') {
+        var p = rndPos(); Pa.x = p.x; Pa.y = p.y; Pa.tx = p.x; Pa.ty = p.y;
+        Pa.vx = 0; Pa.vy = 0;
+        ghostPablo.style.opacity = '1';
+      }
+      setTimeout(cycle, 10000 + Math.random() * 10000);
+    }, 900);
+  }
 
   /* Messages */
   var louisaMsgs = ['cool no ?', 'you can scroll ↓', 'nice right ?', 'try scrolling', 'hello :)'];
@@ -1746,33 +1809,19 @@ body:not(.on-home) #draw-canvas { display: none !important; }
   function schedMsg(label, name, msgs) {
     setTimeout(function () {
       label.textContent = msgs[Math.floor(Math.random() * msgs.length)];
-      setTimeout(function () {
-        label.textContent = name;
-        schedMsg(label, name, msgs);
-      }, 2200);
+      setTimeout(function () { label.textContent = name; schedMsg(label, name, msgs); }, 2200);
     }, 9000 + Math.random() * 10000);
   }
 
-  /* Cycle: statique — pas de déplacement, juste apparition/disparition */
-  var statePool = ['louisa', 'pablo', 'both', 'louisa', 'pablo', 'louisa', 'both'];
-
-  function cycle() {
-    var s = statePool[Math.floor(Math.random() * statePool.length)];
-    hide(ghostCursor); hide(ghostPablo);
-    setTimeout(function () {
-      if (s !== 'pablo')  { place(ghostCursor, rndPos()); show(ghostCursor); }
-      if (s !== 'louisa') { place(ghostPablo,  rndPos()); show(ghostPablo); }
-      setTimeout(cycle, 9000 + Math.random() * 9000);
-    }, 700);
-  }
-
-  /* Apparition initiale — Louisa seule */
+  /* Init — Louisa apparaît en premier */
   setTimeout(function () {
-    place(ghostCursor, rndPos());
+    var p = rndPos(); L.x = p.x; L.y = p.y; L.tx = p.x; L.ty = p.y;
     ghostCursor.classList.add('ready');
     schedMsg(labelL, 'Louisa', louisaMsgs);
     schedMsg(labelP, 'Pablo S.', pabloMsgs);
-    setTimeout(cycle, 12000 + Math.random() * 6000);
+    moveL();
+    moveP();
+    setTimeout(cycle, 13000 + Math.random() * 7000);
   }, 4000);
 
   // Masquer quand on quitte le hero
