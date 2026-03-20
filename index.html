@@ -766,12 +766,36 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   position: absolute;
   inset: 12px; z-index: 1;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .iphone-screen img,
 .iphone-screen video {
   width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 20px;
 }
+
+/* ── Slideshow ── */
+.iphone-slide {
+  position: absolute; inset: 0;
+  opacity: 0;
+  transition: opacity .6s ease;
+  pointer-events: none;
+}
+.iphone-slide.active { opacity: 1; pointer-events: auto; }
+.iphone-slide img, .iphone-slide video {
+  width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 20px;
+}
+
+/* dots */
+.iphone-dots {
+  position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+  z-index: 3; display: flex; gap: 6px;
+}
+.iphone-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,.45); transition: background .3s;
+}
+.iphone-dot.active { background: #fff; }
 
 .iphone-screen .iphone-ph {
   width: 100%; height: 100%; background: #f0ede8;
@@ -1256,7 +1280,7 @@ const P = {
     context:"Les Galeries Lafayette, c'est 60 millions de visiteurs par an, un flagship de 70 000 m² sur les Grands Boulevards, et l'un des retailers les plus visités au monde. En 2023, je prends la tête du design — une équipe de 7 product designers, un périmètre qui ne ressemble à aucun autre projet freelance. Le scope couvre tout à la fois : refonte de l'app mobile, du site web responsive, construction d'un design system vivant, intégration d'IA générative pour les visuels mode, création du chatbot e-commerce Gala, et des centaines d'apps Low-Code sur PowerApps. Chaque lancement a eu ses effets — et l'écosystème tourne encore.",
     problem:"3 ans à la tête du design pour l'un des plus grands retailers français. Pas un projet — un écosystème entier : app, web, design system, IA gen, automatisation, et une équipe de choc.",
     blocks:[
-      {t:'iphone',n:'01',src:'img/gl-app-01.jpg',c:'<strong>L\'app, refonte totale.</strong> En cohérence avec le design system, l\'application mobile a été entièrement repensée. Indice de satisfaction 150. Big up à Flo, dev iOS de génie — embauche-le, il est freelance et il est brillant.'},
+      {t:'iphone',n:'01',srcs:['img/gl-app-01.jpg','img/gl-app-02.jpg','img/gl-app-03.jpg','img/gl-app-04.jpg','img/gl-app-05.jpg','img/gl-app-06.jpg'],c:'<strong>L\'app, refonte totale.</strong> En cohérence avec le design system, l\'application mobile a été entièrement repensée. Indice de satisfaction 150. Big up à Flo, dev iOS de génie — embauche-le, il est freelance et il est brillant.'},
       {t:'duo',n:'02',c:'<strong>Site web mobile & desktop.</strong> Refonte annuelle en cohérence avec le design system. Indice 120 chaque année — un rituel bien huilé entre design et dev.'},
       {t:'full',n:'03',c:'<strong>Design System showcase.</strong> Composants vivants, documentation interactive, variables unifiées. La fondation sur laquelle tout le reste repose.'},
       {t:'duo',n:'04',c:'<strong>Looks IA Gen.</strong> Création de visuels mode avec des produits portés reliés au vrai catalogue. Retouche d\'images en batch via un flow Weavy, puis reconstruction du flow en Python.'},
@@ -1281,14 +1305,48 @@ const proKeys = Object.keys(P);
 function renderImg(b) {
   if (b.t==='duo') return `<div class="block-duo"><div class="block-img"><div class="block-placeholder">image ${b.n}a</div></div><div class="block-img"><div class="block-placeholder">image ${b.n}b</div></div></div>`;
   if (b.t==='iphone') {
-    const media = b.src
-      ? (b.src.match(/\.(mp4|webm|mov)$/i)
-          ? `<video src="${b.src}" autoplay loop muted playsinline></video>`
-          : `<img src="${b.src}" alt="">`)
+    // multi-image slideshow
+    if (b.srcs && b.srcs.length > 1) {
+      const slides = b.srcs.map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="" loading="lazy">`}</div>`).join('');
+      const dots = b.srcs.map((_,i)=>`<span class="iphone-dot${i===0?' active':''}"></span>`).join('');
+      return `<div class="block-iphone-wrap"><div class="iphone"><div class="iphone-screen" data-slider>${slides}</div><div class="iphone-dots">${dots}</div><img class="iphone-frame" src="img/center_stage_hw__b7h41ddg1fg2_large_2x.png" alt="" draggable="false"></div></div>`;
+    }
+    // single image/video
+    const src = b.src || b.srcs?.[0];
+    const media = src
+      ? (src.match(/\.(mp4|webm|mov)$/i)
+          ? `<video src="${src}" autoplay loop muted playsinline></video>`
+          : `<img src="${src}" alt="">`)
       : `<div class="iphone-ph">votre capture ici</div>`;
     return `<div class="block-iphone-wrap"><div class="iphone"><div class="iphone-screen">${media}</div><img class="iphone-frame" src="img/center_stage_hw__b7h41ddg1fg2_large_2x.png" alt="" draggable="false"></div></div>`;
   }
   return `<div class="block-img ${b.t}"><div class="block-placeholder">image ${b.n}</div></div>`;
+}
+
+function initSliders() {
+  document.querySelectorAll('[data-slider]').forEach(screen => {
+    const slides = [...screen.querySelectorAll('.iphone-slide')];
+    const iphone = screen.closest('.iphone');
+    const dots = [...(iphone ? iphone.querySelectorAll('.iphone-dot') : [])];
+    let current = 0, timer;
+
+    function goTo(n) {
+      slides[current].classList.remove('active');
+      dots[current]?.classList.remove('active');
+      current = (n + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      dots[current]?.classList.add('active');
+    }
+
+    function next() { goTo(current + 1); }
+
+    function start() { timer = setInterval(next, 5000); }
+    function restart() { clearInterval(timer); start(); }
+
+    screen.addEventListener('click', () => { next(); restart(); });
+    dots.forEach((d, i) => d.addEventListener('click', e => { e.stopPropagation(); goTo(i); restart(); }));
+    start();
+  });
 }
 
 function showProject(id) {
@@ -1308,6 +1366,7 @@ function showProject(id) {
     <div class="proj-blocks">
       ${p.blocks.map(b=>`<div class="content-block"><span class="block-num">${b.n}</span><div class="block-content">${renderImg(b)}<p class="block-caption">${b.c}</p></div></div>`).join('')}
     </div>`;
+  initSliders();
   document.querySelector('.nav-role').style.display = 'none';
   document.querySelector('.nav-contact').style.display = '';
   document.getElementById('proj-close-btn').style.display = 'none';
