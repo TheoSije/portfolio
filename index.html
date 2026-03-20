@@ -738,149 +738,44 @@ nav.minisite-nav.minisite-nav--light .nav-logo::after {
 nav.minisite-nav.minisite-nav--light .nav-role {
   color: rgba(0,0,0,0.60) !important;
 }
-/* ── IPHONE MOCKUP (port of Luke Meyrick / CodePen poVyEdZ) ── */
+/* ── IPHONE MOCKUP — PNG frame (Apple center_stage asset) ── */
 .block-iphone-wrap {
   display: flex; justify-content: center; align-items: center;
-  padding: clamp(56px, 8vw, 100px) 0; margin-bottom: 24px;
+  padding: clamp(48px, 7vw, 88px) 0; margin-bottom: 24px;
   background: linear-gradient(145deg, #f0ede8 0%, #d8d2c8 100%);
-  border-radius: 8px; overflow: visible; position: relative;
+  border-radius: 8px; overflow: hidden;
 }
 
 .iphone {
-  --s: max(4px, 1vmin);        /* base unit: 1vmin@900px≈9px → phone≈333px wide */
-  --r: calc(var(--s) * 6.5);  /* corner radius */
-  --b: calc(var(--s) * 0.55); /* rim thickness */
-
   position: relative;
-  width: calc(var(--s) * 37);
-  aspect-ratio: 37 / 76;
-  border-radius: var(--r);
-
-  /* Space Black body gradient */
-  background: linear-gradient(
-    168deg,
-    #3c3c3e 0%,
-    #2a2a2c 15%,
-    #1c1c1e 50%,
-    #0e0e10 100%
-  );
-
-  /* Metallic layered rim: inner glow → chrome edge → highlight ring → outer edge → drop shadow */
-  box-shadow:
-    inset 0 0 0 calc(var(--b) * 0.5)   rgba(255,255,255,.05),
-    0 0 0 var(--b)                      #3f3f44,
-    0 0 0 calc(var(--b) + 0.5px)        rgba(255,255,255,.26),
-    0 0 0 calc(var(--b) * 2.6)          #202024,
-    0 0 0 calc(var(--b) * 2.8)          rgba(255,255,255,.04),
-    0 calc(var(--s) * 5)   calc(var(--s) * 20) rgba(0,0,0,.65),
-    0 calc(var(--s) * 1.5) calc(var(--s) * 5)  rgba(0,0,0,.4);
+  width: clamp(220px, 26vw, 320px);
+  filter: drop-shadow(0 24px 48px rgba(0,0,0,.28)) drop-shadow(0 4px 12px rgba(0,0,0,.18));
 }
 
-/* ── Left side: mute toggle + vol ↑ + vol ↓ ── */
-/* IMPORTANT: box-shadow spread MUST be 0 to clone at same size */
-.iphone::before {
-  content: '';
-  position: absolute;
-  left: calc(-1 * var(--s) * 0.68);  /* just outside left edge */
-  top: calc(var(--s) * 9);
-  width: calc(var(--s) * 0.68);
-  height: calc(var(--s) * 2.4);      /* mute toggle height */
-  background: #2c2c30;
-  border-radius: calc(var(--s) * 0.3) 0 0 calc(var(--s) * 0.3);
-  box-shadow:
-    inset 0  1px 0 rgba(255,255,255,.14),
-    inset 0 -1px 0 rgba(0,0,0,.5),
-    /* vol up — spread: 0 = exact same size */
-    0 calc(var(--s) * 3.8)  0 0 #2c2c30,
-    0 calc(var(--s) * 3.8)  0 1px rgba(255,255,255,.07),
-    /* vol down — spread: 0 = exact same size */
-    0 calc(var(--s) * 8.2)  0 0 #2c2c30,
-    0 calc(var(--s) * 8.2)  0 1px rgba(255,255,255,.07);
+/* PNG frame on top — transparent screen area lets content show through */
+.iphone-frame {
+  position: relative; z-index: 2;
+  width: 100%; display: block;
+  pointer-events: none;
 }
 
-/* ── Right side: power button ── */
-.iphone::after {
-  content: '';
-  position: absolute;
-  right: calc(-1 * var(--s) * 0.68); /* just outside right edge */
-  top: calc(var(--s) * 16);
-  width: calc(var(--s) * 0.68);
-  height: calc(var(--s) * 7);
-  background: #2c2c30;
-  border-radius: 0 calc(var(--s) * 0.3) calc(var(--s) * 0.3) 0;
-  box-shadow:
-    inset 0  1px 0 rgba(255,255,255,.14),
-    inset 0 -1px 0 rgba(0,0,0,.5);
-}
-
-/* ── Screen area ── */
+/* App content sits behind the frame, fills the phone area */
 .iphone-screen {
   position: absolute;
-  inset: calc(var(--s) * 1.4);
-  border-radius: calc(var(--r) * 0.83);
-  background: #000;
+  inset: 0; z-index: 1;
   overflow: hidden;
+  border-radius: 13%;  /* matches iPhone screen corner radius */
 }
 
-/* ── Dynamic Island ── */
-.iphone-island {
-  position: absolute;
-  top: calc(var(--s) * 1.1);
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(var(--s) * 11);
-  height: calc(var(--s) * 2.5);
-  background: #000;
-  border-radius: calc(var(--s) * 1.35);
-  z-index: 10;
-  box-shadow: 0 0 0 1px rgba(255,255,255,.04);
-}
-
-/* Camera lens dot inside the island */
-.iphone-island::after {
-  content: '';
-  position: absolute;
-  right: calc(var(--s) * 1.3);
-  top: 50%;
-  transform: translateY(-50%);
-  width: calc(var(--s) * 1.35);
-  height: calc(var(--s) * 1.35);
-  border-radius: 50%;
-  background: radial-gradient(
-    circle at 38% 35%,
-    #1e3f6e 0%,
-    #0d1f3a 40%,
-    #040a12 72%,
-    #000 100%
-  );
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.07),
-    inset 0 1px 2px rgba(80,130,255,.22);
-}
-
-/* ── App screenshot / video ── */
 .iphone-screen img,
 .iphone-screen video {
   width: 100%; height: 100%; object-fit: cover; display: block;
 }
 
 .iphone-screen .iphone-ph {
-  width: 100%; height: 100%; background: #f5f4f0;
+  width: 100%; height: 100%; background: #f0ede8;
   display: flex; align-items: center; justify-content: center;
   font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: #bbb;
-}
-
-/* ── Home indicator pill ── */
-.iphone-bar {
-  position: absolute;
-  bottom: calc(var(--s) * 0.75);
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(var(--s) * 13);
-  height: calc(var(--s) * 0.48);
-  background: rgba(255,255,255,.42);
-  border-radius: 999px;
-  z-index: 10;
 }
 /* ── PROJECT CONTEXT ── */
 .proj-context { padding: 56px var(--h-pad) 64px; }
@@ -1390,7 +1285,7 @@ function renderImg(b) {
           ? `<video src="${b.src}" autoplay loop muted playsinline></video>`
           : `<img src="${b.src}" alt="">`)
       : `<div class="iphone-ph">votre capture ici</div>`;
-    return `<div class="block-iphone-wrap"><div class="iphone"><div class="iphone-screen"><div class="iphone-island"></div>${media}<div class="iphone-bar"></div></div></div></div>`;
+    return `<div class="block-iphone-wrap"><div class="iphone"><div class="iphone-screen">${media}</div><img class="iphone-frame" src="img/center_stage_hw__b7h41ddg1fg2_large_2x.png" alt="" draggable="false"></div></div>`;
   }
   return `<div class="block-img ${b.t}"><div class="block-placeholder">image ${b.n}</div></div>`;
 }
