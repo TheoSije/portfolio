@@ -334,7 +334,7 @@
       <svg id="icon-play"  viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       <svg id="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
     </button>
-    <button id="btn-skip">skip →</button>
+    <button id="btn-skip">next →</button>
   </div>
 
   <div id="status" class="loading-dots">Loading</div>
@@ -397,7 +397,7 @@ async function getHost() {
 }
 
 /* ── Fetch a random low-engagement track ── */
-async function fetchTrack() {
+async function fetchTrack(autoPlay = false) {
   btnPlay.disabled = true;
   btnSkip.disabled = true;
   setStatus('Finding something unheard', true);
@@ -427,7 +427,7 @@ async function fetchTrack() {
     const pool  = quiet.length > 0 ? quiet : tracks;
     const track = pool[Math.floor(Math.random() * Math.min(pool.length, 8))];
 
-    loadTrack(track, h);
+    loadTrack(track, h, autoPlay);
   } catch (e) {
     setStatus('Connection issue — retrying...');
     apiHost = null; /* reset on error, try another node */
@@ -436,7 +436,7 @@ async function fetchTrack() {
 }
 
 /* ── Load track into player ── */
-function loadTrack(track, h) {
+function loadTrack(track, h, autoPlay = false) {
   currentTrack = track;
   audio.pause();
   isPlaying = false;
@@ -484,6 +484,13 @@ function loadTrack(track, h) {
 
   btnPlay.disabled = false;
   btnSkip.disabled = false;
+
+  if (autoPlay) {
+    audio.addEventListener('canplay', function onReady() {
+      audio.removeEventListener('canplay', onReady);
+      audio.play().then(() => { isPlaying = true; updatePlayUI(); }).catch(() => {});
+    }, { once: true });
+  }
 
   /* External link */
   const permalink = track.permalink
@@ -538,7 +545,7 @@ btnPlay.addEventListener('click', () => {
 btnSkip.addEventListener('click', () => {
   audio.pause(); isPlaying = false;
   updatePlayUI();
-  fetchTrack();
+  fetchTrack(true);
 });
 
 audio.addEventListener('timeupdate', () => {
