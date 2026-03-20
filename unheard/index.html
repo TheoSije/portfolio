@@ -12,8 +12,6 @@
     --bg: #0a0a0a;
     --text: #f0ece0;
     --muted: #555;
-    --accent: #f0ece0;
-    --card-bg: #111;
   }
 
   body {
@@ -105,17 +103,29 @@
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background: radial-gradient(circle, #2a2a2a 30%, #1a1a1a 30%, #1a1a1a 35%, #2a2a2a 35%, #2a2a2a 40%, #1a1a1a 40%);
+    background: repeating-conic-gradient(#2a2a2a 0deg 10deg, #1a1a1a 10deg 20deg);
     border: 2px solid #333;
+    position: relative;
     animation: spin 4s linear infinite;
     animation-play-state: paused;
+  }
+
+  .vinyl::after {
+    content: '';
+    position: absolute;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: #161616;
+    border: 1px solid #2a2a2a;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .vinyl.spinning { animation-play-state: running; }
 
   @keyframes spin {
     from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    to   { transform: rotate(360deg); }
   }
 
   #play-count-badge {
@@ -220,7 +230,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1rem;
   }
 
   #btn-play svg { width: 18px; height: 18px; fill: var(--text); }
@@ -235,14 +244,14 @@
 
   #btn-skip:hover { color: var(--text); border-color: var(--text); opacity: 1; }
 
-  #btn-sc {
+  #btn-ext {
     font-size: 0.62rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--muted);
   }
 
-  #btn-sc:hover { color: var(--text); opacity: 1; }
+  #btn-ext:hover { color: var(--text); opacity: 1; }
 
   .time-info {
     font-size: 0.6rem;
@@ -264,29 +273,11 @@
     min-height: 1rem;
   }
 
-  .fade-in {
-    animation: fadeIn 0.6s ease forwards;
-  }
+  .fade-in { animation: fadeIn 0.6s ease forwards; }
 
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  #error-msg {
-    display: none;
-    text-align: center;
-    padding: 2rem;
-    color: var(--muted);
-    font-size: 0.75rem;
-    line-height: 1.8;
-    letter-spacing: 0.05em;
-  }
-
-  #error-msg a {
-    color: var(--text);
-    text-decoration: underline;
-    cursor: pointer;
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   .loading-dots::after {
@@ -296,9 +287,9 @@
 
   @keyframes dots {
     0%, 100% { content: ''; }
-    25% { content: '.'; }
-    50% { content: '..'; }
-    75% { content: '...'; }
+    25%  { content: '.'; }
+    50%  { content: '..'; }
+    75%  { content: '...'; }
   }
 </style>
 </head>
@@ -319,7 +310,7 @@
     <img id="cover" alt="cover art" crossorigin="anonymous" />
     <div id="play-count-badge">
       <span id="play-count-num">—</span>
-      plays
+      favorites
     </div>
   </div>
 
@@ -334,56 +325,54 @@
   </div>
   <div class="time-info">
     <span id="time-current">0:00</span>
-    <span id="time-total">0:30</span>
+    <span id="time-total">—:——</span>
   </div>
 
   <div class="controls">
-    <button id="btn-sc" title="Open on SoundCloud">↗ soundcloud</button>
+    <button id="btn-ext" title="Open on Audius">↗ audius</button>
     <button id="btn-play" title="Play / Pause">
-      <svg id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <svg id="icon-play"  viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       <svg id="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
     </button>
     <button id="btn-skip">skip →</button>
   </div>
 
   <div id="status" class="loading-dots">Loading</div>
-  <div id="error-msg"></div>
 </div>
 
 <audio id="audio" crossorigin="anonymous" preload="none"></audio>
 
 <script>
-const CLIENT_ID = 'iZIs9mchVcX5lhVRyQGGAYlNPVldzAoX';
+const APP_NAME = 'UNHEARD_PORTFOLIO';
 
-const audio = document.getElementById('audio');
-const cover = document.getElementById('cover');
-const bgArt = document.getElementById('bg-art');
-const trackTitle = document.getElementById('track-title');
-const trackArtist = document.getElementById('track-artist');
-const trackGenre = document.getElementById('track-genre');
-const playCountNum = document.getElementById('play-count-num');
-const progressBar = document.getElementById('progress-bar');
-const progressWrap = document.getElementById('progress-wrap');
-const btnPlay = document.getElementById('btn-play');
-const btnSkip = document.getElementById('btn-skip');
-const btnSc = document.getElementById('btn-sc');
-const iconPlay = document.getElementById('icon-play');
-const iconPause = document.getElementById('icon-pause');
+const audio         = document.getElementById('audio');
+const cover         = document.getElementById('cover');
+const bgArt         = document.getElementById('bg-art');
+const trackTitle    = document.getElementById('track-title');
+const trackArtist   = document.getElementById('track-artist');
+const trackGenre    = document.getElementById('track-genre');
+const playCountNum  = document.getElementById('play-count-num');
+const progressBar   = document.getElementById('progress-bar');
+const progressWrap  = document.getElementById('progress-wrap');
+const btnPlay       = document.getElementById('btn-play');
+const btnSkip       = document.getElementById('btn-skip');
+const btnExt        = document.getElementById('btn-ext');
+const iconPlay      = document.getElementById('icon-play');
+const iconPause     = document.getElementById('icon-pause');
 const timeCurrentEl = document.getElementById('time-current');
-const timeTotalEl = document.getElementById('time-total');
-const status = document.getElementById('status');
-const vinyl = document.getElementById('vinyl');
-const errorMsg = document.getElementById('error-msg');
-const placeholder = document.getElementById('cover-placeholder');
+const timeTotalEl   = document.getElementById('time-total');
+const statusEl      = document.getElementById('status');
+const vinyl         = document.getElementById('vinyl');
+const placeholder   = document.getElementById('cover-placeholder');
 
+let apiHost      = null;
 let currentTrack = null;
-let isPlaying = false;
-let searchOffset = Math.floor(Math.random() * 5000);
+let isPlaying    = false;
 
-const SEARCH_TAGS = [
-  'bedroom pop', 'lo-fi', 'indie', 'ambient', 'acoustic',
-  'electronic', 'experimental', 'folk', 'dream pop', 'shoegaze',
-  'post-rock', 'chillwave', 'synth', 'jazz', 'soul'
+const GENRES = [
+  'Electronic', 'Ambient', 'Lo-Fi', 'Experimental', 'Indie',
+  'Acoustic', 'Folk', 'Chill', 'Alternative', 'Jazz',
+  'Synth', 'Dream Pop', 'Post-Rock', 'Soul', 'Shoegaze'
 ];
 
 function fmtTime(s) {
@@ -393,162 +382,168 @@ function fmtTime(s) {
 }
 
 function setStatus(txt, loading = false) {
-  status.textContent = txt;
-  status.className = loading ? 'loading-dots' : '';
+  statusEl.textContent = txt;
+  statusEl.className   = loading ? 'loading-dots' : '';
 }
 
+/* ── Discover a working Audius node ── */
+async function getHost() {
+  if (apiHost) return apiHost;
+  const res  = await fetch('https://api.audius.co');
+  const data = await res.json();
+  const hosts = data.data;
+  apiHost = hosts[Math.floor(Math.random() * hosts.length)];
+  return apiHost;
+}
+
+/* ── Fetch a random low-engagement track ── */
 async function fetchTrack() {
   btnPlay.disabled = true;
   btnSkip.disabled = true;
   setStatus('Finding something unheard', true);
-  errorMsg.style.display = 'none';
-
-  const tag = SEARCH_TAGS[Math.floor(Math.random() * SEARCH_TAGS.length)];
-  searchOffset = Math.floor(Math.random() * 8000);
-
-  const url = `https://api.soundcloud.com/tracks?client_id=${CLIENT_ID}&tags=${encodeURIComponent(tag)}&limit=50&offset=${searchOffset}&filter=streamable&order=hotness&duration[from]=30000&duration[to]=300000`;
 
   try {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`API error ${res.status}`);
-    const tracks = await res.json();
+    const h     = await getHost();
+    const genre = GENRES[Math.floor(Math.random() * GENRES.length)];
+    const offset = Math.floor(Math.random() * 800);
 
-    if (!tracks || tracks.length === 0) {
-      setStatus('No tracks found, retrying...');
-      setTimeout(fetchTrack, 1000);
-      return;
-    }
+    const url  = `${h}/v1/tracks/search?query=${encodeURIComponent(genre)}&limit=100&offset=${offset}&app_name=${APP_NAME}`;
+    const res  = await fetch(url);
+    if (!res.ok) throw new Error(`API ${res.status}`);
+    const data   = await res.json();
+    const tracks = data.data || [];
 
-    const lowPlay = tracks
-      .filter(t => t.stream_url && t.playback_count !== undefined && t.playback_count <= 500)
-      .sort((a, b) => a.playback_count - b.playback_count);
-
-    const pool = lowPlay.length > 0 ? lowPlay : tracks.filter(t => t.stream_url);
-
-    if (pool.length === 0) {
+    if (tracks.length === 0) {
       setStatus('Searching deeper...');
-      setTimeout(fetchTrack, 800);
+      setTimeout(fetchTrack, 900);
       return;
     }
 
+    /* Prefer tracks with very few favorites — proxy for "unheard" */
+    const quiet = tracks
+      .filter(t => typeof t.favorite_count === 'number' && t.favorite_count <= 20)
+      .sort((a, b) => a.favorite_count - b.favorite_count);
+
+    const pool  = quiet.length > 0 ? quiet : tracks;
     const track = pool[Math.floor(Math.random() * Math.min(pool.length, 8))];
-    loadTrack(track);
+
+    loadTrack(track, h);
   } catch (e) {
-    showError(e.message);
+    setStatus('Connection issue — retrying...');
+    apiHost = null; /* reset on error, try another node */
+    setTimeout(fetchTrack, 1500);
   }
 }
 
-function loadTrack(track) {
+/* ── Load track into player ── */
+function loadTrack(track, h) {
   currentTrack = track;
   audio.pause();
   isPlaying = false;
   updatePlayUI();
 
-  trackTitle.textContent = track.title || 'Unknown title';
-  trackArtist.textContent = track.user?.username || 'Unknown artist';
+  trackTitle.textContent  = track.title || 'Unknown title';
+  trackArtist.textContent = track.user?.name || track.user?.handle || 'Unknown artist';
 
-  const plays = track.playback_count ?? 0;
-  playCountNum.textContent = plays.toLocaleString();
+  const favs = track.favorite_count ?? 0;
+  playCountNum.textContent = favs.toLocaleString();
 
   if (track.genre) {
-    trackGenre.textContent = track.genre;
+    trackGenre.textContent   = track.genre;
     trackGenre.style.display = 'inline-block';
   } else {
     trackGenre.style.display = 'none';
   }
 
-  const artUrl = track.artwork_url
-    ? track.artwork_url.replace('-large', '-t500x500')
-    : (track.user?.avatar_url?.replace('-large', '-t500x500') || null);
+  /* Artwork */
+  const art    = track.artwork;
+  const artUrl = art?.['_480x480'] || art?.['_150x150'] || art?.['_1000x1000'] || null;
 
   cover.classList.remove('loaded');
   placeholder.style.opacity = '1';
 
   if (artUrl) {
-    cover.src = artUrl;
+    cover.src    = artUrl;
     cover.onload = () => {
       cover.classList.add('loaded');
       placeholder.style.opacity = '0';
       extractColor(artUrl);
     };
-    cover.onerror = () => {
-      bgArt.style.background = '#1a1a2e';
-    };
+    cover.onerror = () => { bgArt.style.background = '#1a1a2e'; };
   } else {
     bgArt.style.background = '#1a1a2e';
   }
 
-  const streamUrl = `${track.stream_url}?client_id=${CLIENT_ID}`;
-  audio.src = streamUrl;
+  /* Stream */
+  audio.src = `${h}/v1/tracks/${track.id}/stream?app_name=${APP_NAME}`;
   audio.load();
 
-  progressBar.style.width = '0%';
+  progressBar.style.width   = '0%';
   timeCurrentEl.textContent = '0:00';
-  timeTotalEl.textContent = fmtTime((track.duration || 30000) / 1000);
+  timeTotalEl.textContent   = track.duration ? fmtTime(track.duration) : '—:——';
 
   btnPlay.disabled = false;
   btnSkip.disabled = false;
 
-  btnSc.onclick = () => window.open(track.permalink_url, '_blank');
+  /* External link */
+  const permalink = track.permalink
+    ? (track.permalink.startsWith('http') ? track.permalink : `https://audius.co${track.permalink}`)
+    : 'https://audius.co';
+  btnExt.onclick = () => window.open(permalink, '_blank');
 
-  setStatus(plays === 0 ? '◆ zero plays — truly unheard' : plays <= 50 ? `◆ only ${plays} plays` : `◆ ${plays.toLocaleString()} plays`);
+  setStatus(
+    favs === 0  ? '◆ zero favorites — truly unheard' :
+    favs <= 10  ? `◆ only ${favs} favorites` :
+                  `◆ ${favs.toLocaleString()} favorites`
+  );
 }
 
+/* ── Extract dominant color from cover art ── */
 function extractColor(imgUrl) {
-  const img = new Image();
-  img.crossOrigin = 'anonymous';
+  const img        = new Image();
+  img.crossOrigin  = 'anonymous';
   img.onload = () => {
     const canvas = document.createElement('canvas');
     canvas.width = canvas.height = 8;
     const ctx = canvas.getContext('2d');
     ctx.drawImage(img, 0, 0, 8, 8);
-    const data = ctx.getImageData(0, 0, 8, 8).data;
+    const d = ctx.getImageData(0, 0, 8, 8).data;
     let r = 0, g = 0, b = 0;
-    for (let i = 0; i < data.length; i += 4) {
-      r += data[i]; g += data[i+1]; b += data[i+2];
-    }
-    const px = data.length / 4;
-    r = Math.round(r / px);
-    g = Math.round(g / px);
-    b = Math.round(b / px);
-    bgArt.style.background = `radial-gradient(ellipse at 50% 40%, rgb(${r},${g},${b}) 0%, rgb(${Math.round(r*0.4)},${Math.round(g*0.4)},${Math.round(b*0.4)}) 100%)`;
+    for (let i = 0; i < d.length; i += 4) { r += d[i]; g += d[i+1]; b += d[i+2]; }
+    const px = d.length / 4;
+    r = Math.round(r / px); g = Math.round(g / px); b = Math.round(b / px);
+    bgArt.style.background = `radial-gradient(ellipse at 50% 40%, rgb(${r},${g},${b}) 0%, rgb(${Math.round(r*.4)},${Math.round(g*.4)},${Math.round(b*.4)}) 100%)`;
   };
   img.src = imgUrl;
 }
 
 function updatePlayUI() {
-  iconPlay.style.display = isPlaying ? 'none' : 'block';
+  iconPlay.style.display  = isPlaying ? 'none'  : 'block';
   iconPause.style.display = isPlaying ? 'block' : 'none';
-  if (isPlaying) {
-    vinyl.classList.add('spinning');
-  } else {
-    vinyl.classList.remove('spinning');
-  }
+  isPlaying ? vinyl.classList.add('spinning') : vinyl.classList.remove('spinning');
 }
 
+/* ── Controls ── */
 btnPlay.addEventListener('click', () => {
   if (!currentTrack) return;
   if (isPlaying) {
-    audio.pause();
-    isPlaying = false;
+    audio.pause(); isPlaying = false;
   } else {
-    audio.play().catch(e => setStatus('playback blocked — try again'));
+    audio.play().catch(() => setStatus('tap play again'));
     isPlaying = true;
   }
   updatePlayUI();
 });
 
 btnSkip.addEventListener('click', () => {
-  audio.pause();
-  isPlaying = false;
+  audio.pause(); isPlaying = false;
   updatePlayUI();
   fetchTrack();
 });
 
 audio.addEventListener('timeupdate', () => {
   if (audio.duration) {
-    const pct = (audio.currentTime / audio.duration) * 100;
-    progressBar.style.width = pct + '%';
+    progressBar.style.width   = (audio.currentTime / audio.duration * 100) + '%';
     timeCurrentEl.textContent = fmtTime(audio.currentTime);
   }
 });
@@ -560,24 +555,17 @@ audio.addEventListener('ended', () => {
 });
 
 audio.addEventListener('error', () => {
-  setStatus('Stream error — skipping');
+  setStatus('stream error — skipping');
   setTimeout(fetchTrack, 1200);
 });
 
-progressWrap.addEventListener('click', (e) => {
+progressWrap.addEventListener('click', e => {
   if (!audio.duration) return;
   const rect = progressWrap.getBoundingClientRect();
-  const pct = (e.clientX - rect.left) / rect.width;
-  audio.currentTime = pct * audio.duration;
+  audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
 });
 
-function showError(msg) {
-  setStatus('');
-  errorMsg.style.display = 'block';
-  errorMsg.innerHTML = `The SoundCloud API requires a registered client ID.<br><br>
-  <a onclick="window.open('https://soundcloud.com/you/apps/new','_blank')">Register one here</a> and replace <code>CLIENT_ID</code> in the source.`;
-}
-
+/* ── Init ── */
 fetchTrack();
 </script>
 </body>
