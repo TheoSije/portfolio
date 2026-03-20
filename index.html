@@ -786,16 +786,20 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 20px;
 }
 
-/* dots */
+/* wrapper iphone + dots */
+.iphone-outer {
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+}
+
+/* dots — sous le téléphone */
 .iphone-dots {
-  position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
-  z-index: 3; display: flex; gap: 6px;
+  display: flex; gap: 8px;
 }
 .iphone-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: rgba(255,255,255,.45); transition: background .3s;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(0,0,0,.18); transition: background .3s; cursor: pointer;
 }
-.iphone-dot.active { background: #fff; }
+.iphone-dot.active { background: rgba(0,0,0,.55); }
 
 .iphone-screen .iphone-ph {
   width: 100%; height: 100%; background: #f0ede8;
@@ -1309,7 +1313,7 @@ function renderImg(b) {
     if (b.srcs && b.srcs.length > 1) {
       const slides = b.srcs.map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="" loading="lazy">`}</div>`).join('');
       const dots = b.srcs.map((_,i)=>`<span class="iphone-dot${i===0?' active':''}"></span>`).join('');
-      return `<div class="block-iphone-wrap"><div class="iphone"><div class="iphone-screen" data-slider>${slides}</div><div class="iphone-dots">${dots}</div><img class="iphone-frame" src="img/center_stage_hw__b7h41ddg1fg2_large_2x.png" alt="" draggable="false"></div></div>`;
+      return `<div class="block-iphone-wrap"><div class="iphone-outer"><div class="iphone"><div class="iphone-screen" data-slider>${slides}</div><img class="iphone-frame" src="img/center_stage_hw__b7h41ddg1fg2_large_2x.png" alt="" draggable="false"></div><div class="iphone-dots">${dots}</div></div></div>`;
     }
     // single image/video
     const src = b.src || b.srcs?.[0];
@@ -1326,8 +1330,8 @@ function renderImg(b) {
 function initSliders() {
   document.querySelectorAll('[data-slider]').forEach(screen => {
     const slides = [...screen.querySelectorAll('.iphone-slide')];
-    const iphone = screen.closest('.iphone');
-    const dots = [...(iphone ? iphone.querySelectorAll('.iphone-dot') : [])];
+    const outer = screen.closest('.iphone-outer');
+    const dots = [...(outer ? outer.querySelectorAll('.iphone-dot') : [])];
     let current = 0, timer;
 
     function goTo(n) {
