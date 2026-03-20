@@ -62,9 +62,9 @@ footer span:last-child{border-right:none;text-align:right}
 .solve-label{color:var(--acc)}
 .problem-text{padding:40px 32px;font-family:'Oswald',sans-serif;font-size:clamp(18px,2.5vw,28px);line-height:1.25;font-weight:700;text-transform:uppercase}
 .solve-text{padding:40px 32px;font-size:14px;line-height:1.85;color:#555;font-style:italic}
-.content-block{border-bottom:2px solid #000;display:grid;grid-template-columns:48px 1fr}
-.block-num{border-right:2px solid #000;display:flex;align-items:flex-start;justify-content:center;padding-top:28px;font-family:'Permanent Marker',cursive;font-size:16px;color:#ccc}
-.block-content{padding:36px 32px}
+.content-block{border-bottom:2px solid #000;display:block;padding:0 var(--h-pad);position:relative}
+.block-num{position:absolute;left:0;width:var(--h-pad);border-right:2px solid #000;display:flex;align-items:flex-start;justify-content:center;padding-top:28px;font-family:'Permanent Marker',cursive;font-size:16px;color:#ccc}
+.block-content{padding:36px 0}
 .block-img{background:#eee;border:2px solid #000;margin-bottom:20px;position:relative;aspect-ratio:16/9;overflow:hidden}
 .block-img.half{width:55%;aspect-ratio:4/3}
 .block-duo{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:#000;margin-bottom:20px}

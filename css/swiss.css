@@ -57,9 +57,9 @@ footer span:last-child{border-right:none;text-align:right}
 .solve-label{color:#e63000}
 .problem-text{padding:48px 48px;font-size:clamp(16px,2.2vw,26px);font-weight:300;line-height:1.55}
 .solve-text{padding:48px 48px;font-size:clamp(13px,1.7vw,18px);font-weight:300;line-height:1.85;color:#777;font-style:italic}
-.content-block{border-bottom:1px solid #e0e0e0;display:grid;grid-template-columns:64px 1fr}
-.block-num{border-right:1px solid #e0e0e0;display:flex;align-items:flex-start;justify-content:center;padding-top:32px;font-size:10px;font-weight:300;color:#ddd}
-.block-content{padding:40px 48px}
+.content-block{border-bottom:1px solid #e0e0e0;display:block;padding:0 var(--h-pad);position:relative}
+.block-num{position:absolute;left:0;width:var(--h-pad);border-right:1px solid #e0e0e0;display:flex;align-items:flex-start;justify-content:center;padding-top:32px;font-size:10px;font-weight:300;color:#ddd}
+.block-content{padding:40px 0}
 .block-img{background:#f5f5f5;border:1px solid #e0e0e0;margin-bottom:24px;position:relative;aspect-ratio:16/9;overflow:hidden}
 .block-img.half{width:55%;aspect-ratio:4/3}
 .block-duo{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:24px;background:#e0e0e0}

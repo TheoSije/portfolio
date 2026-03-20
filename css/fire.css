@@ -63,9 +63,9 @@ footer span:last-child{border-right:none;text-align:right}
 .solve-label{color:#ff4400}
 .problem-text{padding:48px 40px;font-family:'Exo 2',sans-serif;font-size:clamp(16px,2.2vw,26px);font-weight:700;font-style:italic;text-transform:uppercase;line-height:1.2}
 .solve-text{padding:48px 40px;font-size:15px;font-weight:300;line-height:1.8;color:#8a4020}
-.content-block{border-bottom:1px solid #1e0500;display:grid;grid-template-columns:56px 1fr}
-.block-num{border-right:1px solid #1e0500;display:flex;align-items:flex-start;justify-content:center;padding-top:32px;font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:#2a0800}
-.block-content{padding:40px}
+.content-block{border-bottom:1px solid #1e0500;display:block;padding:0 var(--h-pad);position:relative}
+.block-num{position:absolute;left:0;width:var(--h-pad);border-right:1px solid #1e0500;display:flex;align-items:flex-start;justify-content:center;padding-top:32px;font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:#2a0800}
+.block-content{padding:40px 0}
 .block-img{background:#120300;border:1px solid #3a1000;margin-bottom:24px;position:relative;aspect-ratio:16/9;overflow:hidden}
 .block-img.half{width:55%;aspect-ratio:4/3}
 .block-duo{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#ff4400;margin-bottom:24px}
