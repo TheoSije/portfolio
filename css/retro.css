@@ -104,3 +104,4 @@ footer span:last-child{border-right:none;text-align:right}
 .ep-stage{color:#007720;border-color:#004410;background:transparent}
 .ep-alt{color:#005510;border-color:#003310;background:transparent}
 .ep-chr-logo-badge{background:#002200;border-radius:0;box-shadow:none;border:1px solid #006616;filter:grayscale(1) brightness(0.6)}
+.context-text{font-family:'Share Tech Mono',monospace;font-size:13px;line-height:1.9;opacity:.7}

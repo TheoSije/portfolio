@@ -94,3 +94,4 @@ footer span:last-child{border-right:none;text-align:right}
 .ep-stage{background:#bbee44;color:#556600;border-color:#99cc00}
 .ep-alt{background:#ccff44;color:#445500;border-color:#aadd00}
 .ep-chr-logo-badge{background:#bbee00;border-radius:0;box-shadow:none;border:1px solid #aadd00;filter:grayscale(1) brightness(1.2)}
+.context-text{font-weight:700;text-transform:uppercase;font-size:clamp(14px,1.8vw,20px);opacity:.8}
