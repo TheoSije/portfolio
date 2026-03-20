@@ -808,10 +808,9 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 }
 /* ── PROJECT CONTEXT ── */
 .proj-context { padding: 56px var(--h-pad) 64px; }
-.context-text { font-size: clamp(16px, 2vw, 24px); font-weight: 300; line-height: 1.8; opacity: 0.68; max-width: 860px; }
-@media (min-width: 860px) {
-  .proj-context { display: grid; grid-template-columns: 1fr 1fr; gap: 0 64px; max-width: none; }
-  .context-text { max-width: none; }
+.context-text { font-size: clamp(16px, 1.6vw, 22px); font-weight: 300; line-height: 1.85; opacity: 0.68; max-width: 720px; }
+@media (min-width: 1024px) {
+  .context-text { column-count: 2; column-gap: clamp(40px, 5vw, 80px); max-width: none; }
 }
 </style>
 </head>
