@@ -79,3 +79,23 @@ footer span:last-child{border-right:none;text-align:right}
 .pnav-name{font-family:'IM Fell English',serif;font-size:22px;font-style:italic}
 #mood-wheel{color:#2c1a0e}
 #mood-btn{color:#2c1a0e;background:linear-gradient(to bottom,#f0d898,#e8c870);padding:8px 14px;border:1px solid #8b5e1a;border-radius:3px;box-shadow:0 2px 4px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.4)}
+
+/* ── TESTIMONIALS ── */
+.testi-card{background:linear-gradient(135deg,#fdf4e3,#f5e6c8);border:2px solid #c4a050;border-radius:6px;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 3px 8px rgba(0,0,0,.18)}
+.testi-text{color:#6a4a2a;font-family:'Crimson Text',serif;font-size:15px;font-style:italic;line-height:1.75}
+.testi-name{color:#2c1a0e;font-family:'IM Fell English',serif;font-style:italic;font-size:13px;font-weight:400}
+.testi-role{color:#a07848;font-size:10px;letter-spacing:.06em}
+.testi-avatar{background:#e8d5b0;border-radius:50%;border:2px solid #c4a050;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+/* ── EXPERIENCE ── */
+.ep-chr-yr{font-family:'IM Fell English',serif;font-style:italic;letter-spacing:0}
+.ep-chr-item+.ep-chr-item{border-left:2px solid #d4b896}
+.ep-chr-period{color:#a07848;letter-spacing:.08em;font-style:italic}
+.ep-chr-co{font-family:'IM Fell English',serif;font-style:italic;letter-spacing:0}
+.ep-chr-role{color:#6a4a2a;font-style:italic;font-weight:400}
+.ep-chr-badge{border-radius:4px;background:linear-gradient(to bottom,#f0d898,#e8c870);border:1px solid #8b5e1a;color:#6a4a1a;box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}
+.ep-cdi{background:linear-gradient(to bottom,#c8e8a8,#a8d080);color:#2a5010;border-color:#6a9030}
+.ep-free{background:linear-gradient(to bottom,#c8b8f0,#a898d8);color:#3a2070;border-color:#7850b0}
+.ep-cdd{background:linear-gradient(to bottom,#f0e098,#d8c870);color:#5a4010;border-color:#9a7820}
+.ep-stage{background:linear-gradient(to bottom,#a8c8e8,#88a8c8);color:#204060;border-color:#506080}
+.ep-alt{background:linear-gradient(to bottom,#f0c0a0,#d8a080);color:#602010;border-color:#905030}
+.ep-chr-logo-badge{background:linear-gradient(135deg,#fdf4e3,#e8d5b0);border-radius:4px;box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 2px 6px rgba(0,0,0,.2);border:2px solid #c4a050}

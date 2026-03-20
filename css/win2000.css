@@ -116,3 +116,23 @@ footer span:last-child{border-right:none;text-align:right}
   transform:none !important;
 }
 #mood-label{opacity:.6}
+
+/* ── TESTIMONIALS ── */
+.testi-card{background:#fff;border-top:1px solid #fff;border-left:1px solid #fff;border-right:1px solid #808080;border-bottom:1px solid #808080;outline:1px solid #000;border-radius:0}
+.testi-text{color:#444;font-family:Tahoma,Arial,sans-serif;font-size:11px;font-style:normal;line-height:1.7}
+.testi-name{color:#000;font-family:Tahoma,Arial,sans-serif;font-weight:bold;font-size:11px}
+.testi-role{color:#808080;font-size:10px;letter-spacing:0}
+.testi-avatar{background:#d4d0c8;border-radius:0;border:1px solid #808080;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #808080}
+/* ── EXPERIENCE ── */
+.ep-chr-yr{font-family:Tahoma,Arial,sans-serif;font-weight:bold;letter-spacing:0}
+.ep-chr-item+.ep-chr-item{border-left:1px solid #808080}
+.ep-chr-period{color:#808080;font-family:Tahoma,Arial,sans-serif;font-size:10px;letter-spacing:0;text-transform:none}
+.ep-chr-co{font-family:Tahoma,Arial,sans-serif;font-weight:bold;letter-spacing:0;color:#000080}
+.ep-chr-role{color:#444;font-family:Tahoma,Arial,sans-serif;font-size:11px;font-weight:normal}
+.ep-chr-badge{border-radius:0;border:none;outline:1px solid #000;font-family:Tahoma,Arial,sans-serif;font-size:9px;letter-spacing:0;text-transform:none;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #808080}
+.ep-cdi{background:linear-gradient(to right,#000080,#1084d0);color:#fff;outline:none;box-shadow:none}
+.ep-free{background:#008080;color:#fff;outline:none;box-shadow:none}
+.ep-cdd{background:#d4d0c8;color:#000}
+.ep-stage{background:#d4d0c8;color:#000080}
+.ep-alt{background:#d4d0c8;color:#000}
+.ep-chr-logo-badge{background:#d4d0c8;border-top:1px solid #808080;border-left:1px solid #808080;border-right:1px solid #fff;border-bottom:1px solid #fff;border-radius:0;box-shadow:none}
