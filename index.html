@@ -749,7 +749,11 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 .iphone {
   position: relative;
   width: clamp(220px, 26vw, 320px);
-  filter: drop-shadow(0 24px 48px rgba(0,0,0,.28)) drop-shadow(0 4px 12px rgba(0,0,0,.18));
+  /* overflow:hidden clips content to the phone's rounded shape */
+  border-radius: 10.5%;
+  overflow: hidden;
+  /* box-shadow respecte le border-radius contrairement à drop-shadow */
+  box-shadow: 0 28px 60px rgba(0,0,0,.32), 0 4px 14px rgba(0,0,0,.18);
 }
 
 /* PNG frame on top — transparent screen area lets content show through */
@@ -764,7 +768,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   position: absolute;
   inset: 0; z-index: 1;
   overflow: hidden;
-  border-radius: 13%;  /* matches iPhone screen corner radius */
+  /* pas besoin de border-radius ici, le parent clippe */
 }
 
 .iphone-screen img,
