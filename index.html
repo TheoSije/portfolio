@@ -843,8 +843,9 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 /* Desktop mockup */
 .desktop {
   position: relative;
-  width: 125%; /* bien zoomé, saigne à droite */
+  width: 115%;
   flex-shrink: 0;
+  left: 140px;
 }
 .desktop-frame {
   position: relative; z-index: 2;
@@ -882,9 +883,13 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 .desktop-dot.active { background: rgba(0,0,0,.55); }
 
 @media (max-width: 900px) {
-  .block-devices { flex-direction: column; }
-  .devices-right { display: none; }
+  .block-devices { flex-direction: column; margin-right: 0; }
   .devices-left { flex: none; width: 100%; }
+  .devices-right {
+    width: 100%; border-radius: 8px;
+    overflow: hidden; padding-left: 24px; padding-right: 0;
+  }
+  .desktop { width: 130%; left: 0; }
 }
 
 /* ── PROJECT CONTEXT ── */
