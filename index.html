@@ -833,17 +833,17 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   min-width: 0;
   overflow: hidden;
   background: linear-gradient(145deg, #e4e2de 0%, #d0ccc5 100%);
-  border-radius: 0;
+  border-radius: 8px 0 0 8px; /* top-left + bottom-left arrondis, droite saigne */
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding-left: 80px; /* décalé à gauche = bien croppé à droite */
+  padding-left: 64px;
 }
 
 /* Desktop mockup */
 .desktop {
   position: relative;
-  width: 115%; /* plus grand = déborde davantage = envie de scroller */
+  width: 125%; /* bien zoomé, saigne à droite */
   flex-shrink: 0;
 }
 .desktop-frame {
