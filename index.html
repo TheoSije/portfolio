@@ -6,7 +6,7 @@
 <title>theo.design</title>
 <link id="theme-css" rel="stylesheet" href="css/pro.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ephesis&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ephesis&family=Roboto:wght@300;400;500;700;900&family=Roboto+Condensed:wght@700;900&display=swap">
 <style>
 /* DEFAULT LAYOUT TOKENS — overridden by each theme CSS */
 :root { --h-pad: clamp(32px, 6vw, 140px); }
@@ -748,6 +748,24 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   border-radius: 8px; overflow: hidden;
 }
 
+/* Two iPhones side by side — 50/50 */
+.block-iphones-duo {
+  display: flex; gap: 16px; margin-bottom: 24px;
+}
+.block-iphones-duo .iphone-outer {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: clamp(40px, 6vw, 72px) clamp(16px, 3vw, 48px);
+  background: linear-gradient(145deg, #f0ede8 0%, #d8d2c8 100%);
+  border-radius: 8px;
+}
+.block-iphones-duo .iphone-outer:first-child {
+  background: linear-gradient(145deg, #e8edf0 0%, #c8d2d8 100%);
+}
+@media (max-width: 600px) {
+  .block-iphones-duo { flex-direction: column; }
+}
+
 .iphone {
   position: relative;
   width: clamp(220px, 26vw, 320px);
@@ -892,49 +910,178 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   .desktop { width: 130%; left: 0; }
 }
 
-/* ── DESIGN SYSTEM CARD ── */
+/* ── DESIGN SYSTEM CARD — Stitch style ── */
 .ds-card {
-  background: #131210;
-  border-radius: 8px;
-  display: grid;
-  grid-template-columns: 260px 1fr 1fr;
-  gap: 2px;
+  background: #1C1A18;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.07);
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 14px;
   overflow: hidden;
   margin-bottom: 24px;
+  font-family: 'Roboto', sans-serif;
 }
-.ds-col {
-  padding: 32px 28px;
-  background: #1a1917;
+/* ── Minimal title bar ── */
+.ds-title-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
 }
-.ds-colors { display: flex; flex-direction: column; gap: 20px; }
-.ds-swatch-group { display: flex; flex-direction: column; gap: 6px; }
-.ds-swatch-main { height: 44px; border-radius: 4px; }
-.ds-swatch-row { display: flex; gap: 2px; }
-.ds-swatch-row span { flex: 1; height: 10px; border-radius: 1px; }
-.ds-swatch-label { display: flex; justify-content: space-between; font-size: 10px; color: rgba(255,255,255,.4); letter-spacing: .06em; text-transform: uppercase; }
+.ds-glds-mark {
+  font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+  font-size: 10px; font-weight: 900; letter-spacing: .2em; text-transform: uppercase;
+  color: #1C1A18; background: rgba(255,255,255,.88);
+  padding: 3px 8px; border-radius: 3px;
+  flex-shrink: 0;
+}
+.ds-header-title {
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px; font-weight: 400; color: rgba(255,255,255,.45); letter-spacing: .04em;
+}
+.ds-header-sub { display: none; }
+.ds-live-dot { width: 5px; height: 5px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 5px #22c55e; }
+.ds-live-txt { font-size: 9px; color: rgba(255,255,255,.3); letter-spacing: .1em; text-transform: uppercase; font-weight: 400; }
+.ds-badge-pill {
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.09);
+  border-radius: 100px; padding: 3px 10px;
+  font-size: 9px; color: rgba(255,255,255,.3); letter-spacing: .06em;
+  font-family: 'Roboto', sans-serif; font-weight: 400;
+}
 
-.ds-typo { display: flex; flex-direction: column; gap: 12px; }
-.ds-typo-item { display: flex; flex-direction: column; gap: 2px; background: rgba(255,255,255,.04); border-radius: 6px; padding: 16px 20px; }
-.ds-typo-label { font-size: 10px; color: rgba(255,255,255,.3); letter-spacing: .1em; text-transform: uppercase; }
-.ds-typo-aa { color: rgba(255,255,255,.85); line-height: 1; }
+/* ── Body: color strip left + grid right ── */
+.ds-body {
+  display: flex;
+  flex: 1;
+  gap: 8px;
+  min-height: 500px;
+}
 
-.ds-components { display: flex; flex-direction: column; gap: 12px; }
-.ds-comp-row { display: flex; gap: 8px; align-items: center; }
-.ds-btn { border: none; border-radius: 100px; padding: 10px 20px; font-size: 12px; font-weight: 600; cursor: pointer; letter-spacing: .04em; white-space: nowrap; }
-.ds-btn-primary { background: #C8A96E; color: #0A0A0A; }
-.ds-btn-secondary { background: rgba(255,255,255,.08); color: rgba(255,255,255,.8); }
-.ds-btn-dark { background: #0A0A0A; color: #fff; border: 1px solid rgba(255,255,255,.1); }
-.ds-btn-outline { background: transparent; color: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.25); }
-.ds-input { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 6px; padding: 9px 14px; display: flex; align-items: center; gap: 8px; width: 100%; }
-.ds-input-icon { color: rgba(255,255,255,.3); font-size: 16px; }
-.ds-input-placeholder { font-size: 12px; color: rgba(255,255,255,.25); }
-.ds-tags { flex-wrap: wrap; }
-.ds-tag { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 100px; padding: 5px 14px; font-size: 11px; color: rgba(255,255,255,.55); letter-spacing: .04em; }
-.ds-tag-active { background: rgba(200,169,110,.15); border-color: #C8A96E; color: #C8A96E; }
-.ds-icons { gap: 20px; color: rgba(255,255,255,.4); padding: 8px 0; }
+/* ── Color strip — separate rounded cards ── */
+.ds-colors-col {
+  display: flex;
+  flex-direction: column;
+  width: 190px;
+  flex-shrink: 0;
+  gap: 6px;
+}
+.ds-color-card {
+  flex: 1;
+  border-radius: 12px;
+  padding: 14px 14px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 0;
+  overflow: hidden;
+}
+.ds-color-name {
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px; font-weight: 500; letter-spacing: .01em;
+  color: rgba(255,255,255,.9);
+}
+.ds-color-hex {
+  font-family: 'Roboto', sans-serif;
+  font-size: 9px; letter-spacing: .04em; color: rgba(255,255,255,.4);
+  margin-top: 2px;
+}
+.ds-swatch-mini {
+  display: flex; gap: 2px; margin-top: 10px; height: 5px;
+}
+.ds-swatch-mini span {
+  flex: 1; height: 5px; border-radius: 2px;
+}
+
+/* ── 3×3 component grid ── */
+.ds-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 6px;
+}
+.ds-cell {
+  background: #ECEAE6;
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+.ds-cell-label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 8px; font-weight: 400; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(0,0,0,.3);
+  flex-shrink: 0;
+}
+.ds-big-aa {
+  display: flex; align-items: flex-end; flex: 1; min-height: 0;
+}
+
+/* ── GL Buttons (in grid) ── */
+.ds-btn-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: auto;
+  flex: 1;
+  align-content: end;
+}
+.ds-gb {
+  border: none; border-radius: 100px; padding: 9px 12px;
+  font-size: 9px; font-weight: 900; cursor: pointer;
+  letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap;
+  font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+  line-height: 1; text-align: center;
+}
+.ds-gb-primary { background: #0A0A0A; color: #fff; }
+.ds-gb-secondary { background: rgba(0,0,0,.06); color: #0A0A0A; border: 1px solid rgba(0,0,0,.12); }
+.ds-gb-dark-strip {
+  background: #0A0A0A; border-radius: 100px;
+  display: flex; align-items: center; justify-content: center; padding: 1px;
+}
+.ds-gb-inverted { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.28); width: 100%; }
+.ds-gb-outlined { background: transparent; color: #0A0A0A; border: 1px solid rgba(0,0,0,.22); }
+.ds-gb-tertiary { background: transparent; border: none; border-bottom: 1px solid rgba(0,0,0,.4); border-radius: 0; padding: 2px 0; color: #0A0A0A; font-size: 9px; }
+
+/* ── Search bars ── */
+.ds-search-light, .ds-search-dark {
+  display: flex; align-items: center; gap: 7px;
+  border-radius: 6px; padding: 7px 10px;
+}
+.ds-search-light { background: rgba(255,255,255,.9); border: 1px solid rgba(0,0,0,.1); }
+.ds-search-dark  { background: #0A0A0A; }
+.ds-search-placeholder { font-size: 9px; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Roboto', sans-serif; font-weight: 300; color: rgba(0,0,0,.3); }
+.ds-search-dark .ds-search-placeholder { color: rgba(255,255,255,.3); }
+.ds-search-val { font-size: 9px; flex: 1; color: #fff; font-family: 'Roboto', sans-serif; }
+
+/* ── Text fields ── */
+.ds-field-wrap { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+.ds-field-label { font-size: 8px; color: rgba(0,0,0,.4); letter-spacing: .04em; font-family: 'Roboto', sans-serif; }
+.ds-field { background: rgba(255,255,255,.8); border: none; border-bottom: 1px solid rgba(0,0,0,.22); padding: 6px 0; }
+.ds-field-error .ds-field { border-bottom-color: #D4145A; }
+.ds-field-placeholder { font-size: 10px; color: rgba(0,0,0,.22); font-family: 'Roboto', sans-serif; font-weight: 300; }
+.ds-field-val { font-size: 10px; color: #0A0A0A; font-family: 'Roboto', sans-serif; }
+.ds-field-msg { font-size: 8px; color: #D4145A; font-family: 'Roboto', sans-serif; margin-top: 1px; }
+
+/* ── Tags ── */
+.ds-tag {
+  background: rgba(0,0,0,.06); border: 1px solid rgba(0,0,0,.1);
+  border-radius: 100px; padding: 4px 12px;
+  font-size: 9px; color: rgba(0,0,0,.5); letter-spacing: .04em; text-transform: uppercase;
+  font-family: 'Roboto', sans-serif; font-weight: 500;
+}
+.ds-tag-active { background: #0A0A0A; border-color: #0A0A0A; color: #fff; }
 
 @media (max-width: 900px) {
-  .ds-card { grid-template-columns: 1fr; }
+  .ds-body { flex-direction: column; min-height: auto; }
+  .ds-colors-col { width: 100%; flex-direction: row; height: 90px; }
+  .ds-color-card { padding: 10px 12px 8px; }
+  .ds-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+  .ds-title-bar { flex-wrap: wrap; }
 }
 
 /* ── PROJECT CONTEXT ── */
@@ -1441,34 +1588,122 @@ const P = {
   lionel: { title:'Lionel El Sound', type:'Projet Pro', tags:['Musique','Brand'], year:'2025', role:'UI Design · Web', context:"Un producteur au son unique, zéro présence digitale à la hauteur. Pas un template — une vraie direction artistique. La palette est née du son : grains analogiques, textures organiques, silences assumés. One-page immersif où chaque section crée sa propre atmosphère. Player intégré pour écouter sans quitter la page. Un projet où la contrainte devient langage.", problem:"Son unique, zéro présence digitale à la hauteur.", blocks:[{t:'full',n:'01',c:'<strong>Direction artistique.</strong> La palette est née du son : grains, textures, vides.'},{t:'duo',n:'02',c:'<strong>One-page immersif.</strong> Chaque section a sa propre atmosphère.'},{t:'full',n:'03',c:'<strong>Player intégré.</strong> Écouter sans quitter la page.'}], solve:"Bookings ×3 en 6 mois."},
   tunemymusic: { title:'Tune My Music', type:'Projet Pro', tags:['SaaS','Musique','Streaming'], year:'2024', role:'Product Design · Dev', context:"Un SaaS B2C à des millions d'utilisateurs — une interface qui doit être évidente en 30 secondes. Transfert de playlists entre Spotify, Deezer, Apple Music et 40+ services, en quelques clics. Design et développement complets : UI propre, onboarding en micro-étapes, conversion au cœur de chaque écran. Un produit qui cache une vraie complexité technique derrière une expérience limpide.", problem:"La galère universelle : changer de service de streaming sans perdre ses playlists soigneusement construites.", blocks:[{t:'full',n:'01',c:'<strong>Le produit.</strong> Importation de playlists entre tous les services de streaming — Spotify, Apple Music, Deezer, YouTube Music et plus encore.'},{t:'duo',n:'02',c:'<strong>Le site.</strong> Design et développement complets. UI propre, onboarding ultra-simple, conversions au cœur du parcours.'},{t:'full',n:'03',c:'<strong>Flow optimisé.</strong> En quelques clics, l\'utilisateur transfert des centaines de titres sans friction.'}], solve:"Des millions de playlists transférées. Un produit qui parle à tous les mélomanes nomades."},
   mauboussin: { title:'Mauboussin', type:'Projet Pro', tags:['Luxe','Bijoux','IA Gen'], year:'2025', role:'Product Design · Direction Créative', context:"Une maison de haute joaillerie centenaire face à l'IA générative. L'enjeu : intégrer la génération d'images dans un e-commerce luxe sans diluer l'ADN de la marque. Direction artistique des visuels IA — bijoux portés, mises en scène, ambiances raffinées. Refonte e-commerce avec narration, émotion et conversion subtile. Chaque composant pensé pour honorer un siècle d'histoire tout en embarquant de nouveaux outils de création.", problem:"Repenser le site e-com d'une maison de haute joaillerie en intégrant la génération d'images IA pour sublimer les visuels produit.", blocks:[{t:'full',n:'01',c:'<strong>Direction artistique IA.</strong> Génération et curation de visuels produit IA — bijoux portés, mise en scène, ambiances raffinées.'},{t:'duo',n:'02',c:'<strong>Nouveau site.</strong> Refonte e-commerce pensée pour le luxe : narration, émotion, conversion subtile.'},{t:'full',n:'03',c:'<strong>Cohérence de marque.</strong> Chaque pixel aligné avec l\'ADN centenaire de la maison.'}], solve:"Un site à la hauteur d'une maison iconique. L'IA au service du luxe, pas contre lui."},
-  gotaxfree: { title:'Gotaxfree', type:'Projet Pro', tags:['FinTech','Retail','Détaxe'], year:'2025', role:'Product Design · UX', context:"Paris, première destination shopping mondiale — et la détaxe encore coincée dans les années 90. L'enjeu design : un parcours financier cross-border lisible pour des touristes en transit, souvent stressés, sur un téléphone en roaming. Du scan du ticket à l'encaissement en moins de 3 minutes. Zéro friction, trust signals à chaque étape, design rassurant pour des transactions sensibles.", problem:"La détaxe à Paris reste un parcours du combattant — formulaires papier, files d'attente, délais. Gotaxfree veut changer ça.", blocks:[{t:'full',n:'01',c:'<strong>L\'app.</strong> Faire son shopping à Paris sans payer la TVA. Détaxe immédiate, 100% digital.'},{t:'duo',n:'02',c:'<strong>Parcours zéro friction.</strong> Du scan du ticket à l\'encaissement — en moins de 3 minutes.'},{t:'full',n:'03',c:'<strong>Trust & sécurité.</strong> Design rassurant pour des transactions financières cross-border.'}], solve:"La détaxe enfin simple. Pour les touristes, enfin."},
+  gotaxfree: { title:'Gotaxfree', type:'Projet Pro', tags:['FinTech','Retail','Détaxe'], year:'2025', role:'Product Design · UX', context:"Paris, première destination shopping mondiale — et la détaxe encore coincée dans les années 90. L'enjeu design : un parcours financier cross-border lisible pour des touristes en transit, souvent stressés, sur un téléphone en roaming. Du scan du ticket à l'encaissement en moins de 3 minutes. Zéro friction, trust signals à chaque étape, design rassurant pour des transactions sensibles.", problem:"La détaxe à Paris reste un parcours du combattant — formulaires papier, files d'attente, délais. Gotaxfree veut changer ça.", blocks:[{t:'iphones',n:'01',srcSets:[['img/gtf-app-01.jpg','img/gtf-app-02.jpg','img/gtf-app-03.jpg','img/gtf-app-04.jpg','img/gtf-app-05.jpg'],['img/gtf-app-08.jpg','img/gtf-app-09.jpg','img/gtf-app-10.jpg','img/gtf-app-11.jpg','img/gtf-app-12.jpg','img/gtf-app-13.jpg']],c:'<strong>L\'app.</strong> Faire son shopping à Paris sans payer la TVA. Détaxe immédiate, 100% digital. Du scan du ticket à l\'encaissement en moins de 3 minutes.'},{t:'full',n:'02',c:'<strong>Trust & sécurité.</strong> Design rassurant pour des transactions financières cross-border.'}], solve:"La détaxe enfin simple. Pour les touristes, enfin."},
   dsrt: { title:'DSRT', type:'Projet Pro', tags:['Audio','Branding','Logo'], year:'2024', role:'Branding · Direction Artistique', context:"Créer l'identité visuelle d'un logiciel de sound design de zéro — pour une audience de producteurs et sound designers exigeants. Logo conçu à partir des formes sonores : ondes, tension, précision géométrique. Branding system complet — typographie, couleurs, motion — décliné jusqu'à l'interface du logiciel lui-même. Un univers où chaque détail graphique a une raison d'être acoustique.", problem:"Créer l'identité visuelle d'un logiciel de sound design — de zéro. L'outil est puissant, l'image devait l'être aussi.", blocks:[{t:'full',n:'01',c:'<strong>Création du logo.</strong> Identité sonore traduite en forme : ondes, tension, précision.'},{t:'duo',n:'02',c:'<strong>Branding system.</strong> Typographie, couleurs, motion — un univers cohérent pour une audience pro.'},{t:'full',n:'03',c:'<strong>Application produit.</strong> L\'identité déclinée sur l\'interface du logiciel lui-même.'}], solve:"Une marque qui sonne juste — littéralement."},
 };
 const proKeys = Object.keys(P);
 
 function renderImg(b) {
+  if (b.t==='iphones') {
+    const renderPhone = (srcs) => {
+      const slides = srcs.map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="" loading="lazy">`}</div>`).join('');
+      const dots = srcs.map((_,i)=>`<span class="iphone-dot${i===0?' active':''}"></span>`).join('');
+      return `<div class="iphone-outer"><div class="iphone"><div class="iphone-screen" data-slider>${slides}</div><img class="iphone-frame" src="img/iphone.png" alt="" draggable="false"></div><div class="iphone-dots">${dots}</div></div>`;
+    };
+    return `<div class="block-iphones-duo">${(b.srcSets||[]).map(srcs=>renderPhone(srcs)).join('')}</div>`;
+  }
   if (b.t==='duo') return `<div class="block-duo"><div class="block-img"><div class="block-placeholder">image ${b.n}a</div></div><div class="block-img"><div class="block-placeholder">image ${b.n}b</div></div></div>`;
-  if (b.t==='ds') return `<div class="ds-card">
-  <div class="ds-col ds-colors">
-    <div class="ds-swatch-group"><div class="ds-swatch-main" style="background:#0A0A0A"></div><div class="ds-swatch-row">${['#0A0A0A','#2C2C2C','#555','#888','#BBB','#E5E5E5','#F5F0E8','#FFF'].map(c=>`<span style="background:${c}"></span>`).join('')}</div><div class="ds-swatch-label"><span>Noir</span><span>#0A0A0A</span></div></div>
-    <div class="ds-swatch-group"><div class="ds-swatch-main" style="background:#C8A96E"></div><div class="ds-swatch-row">${['#8B6914','#A07C2A','#B89040','#C8A96E','#D9C090','#EAD9B6','#F5EDD8','#FDF9F2'].map(c=>`<span style="background:${c}"></span>`).join('')}</div><div class="ds-swatch-label"><span>Or</span><span>#C8A96E</span></div></div>
-    <div class="ds-swatch-group"><div class="ds-swatch-main" style="background:#D4145A"></div><div class="ds-swatch-row">${['#7A0030','#A0003E','#C0004A','#D4145A','#E04070','#EE7090','#F8B0C0','#FDEAEE'].map(c=>`<span style="background:${c}"></span>`).join('')}</div><div class="ds-swatch-label"><span>Framboise</span><span>#D4145A</span></div></div>
-    <div class="ds-swatch-group"><div class="ds-swatch-main" style="background:#F5F0E8"></div><div class="ds-swatch-row">${['#C8C0B0','#D4CCC0','#E0D8CC','#EAE4DA','#F0EBE2','#F5F0E8','#FAF8F4','#FFFFFF'].map(c=>`<span style="background:${c}"></span>`).join('')}</div><div class="ds-swatch-label"><span>Sable</span><span>#F5F0E8</span></div></div>
+  if (b.t==='ds') {
+    const ico = (path) => `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
+    const swatchRow = (colors) => colors.map(c=>`<span style="background:${c}"></span>`).join('');
+    const icoBox = (path, bg='rgba(0,0,0,.07)') => `<div style="width:36px;height:36px;border-radius:8px;background:${bg};display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${path}</svg></div>`;
+    return `<div class="ds-card">
+  <div class="ds-title-bar">
+    <span class="ds-glds-mark">GLDS</span>
+    <span class="ds-header-title">Galeries Lafayette · Design System</span>
+    <span class="ds-live-dot" style="margin-left:6px"></span>
+    <span class="ds-live-txt">Live</span>
+    <div style="margin-left:auto;display:flex;gap:5px">
+      <span class="ds-badge-pill">280+ composants</span>
+      <span class="ds-badge-pill">Figma · Zeroheight</span>
+    </div>
   </div>
-  <div class="ds-col ds-typo">
-    <div class="ds-typo-item"><span class="ds-typo-label">Display</span><span class="ds-typo-aa" style="font-size:64px;font-weight:800;letter-spacing:-.03em">Aa</span></div>
-    <div class="ds-typo-item"><span class="ds-typo-label">Headline</span><span class="ds-typo-aa" style="font-size:42px;font-weight:600;letter-spacing:-.02em">Aa</span></div>
-    <div class="ds-typo-item"><span class="ds-typo-label">Body</span><span class="ds-typo-aa" style="font-size:28px;font-weight:400">Aa</span></div>
-    <div class="ds-typo-item"><span class="ds-typo-label">Label</span><span class="ds-typo-aa" style="font-size:18px;font-weight:400;letter-spacing:.12em;text-transform:uppercase">Aa</span></div>
-  </div>
-  <div class="ds-col ds-components">
-    <div class="ds-comp-row"><button class="ds-btn ds-btn-primary">Découvrir</button><button class="ds-btn ds-btn-secondary">Voir plus</button></div>
-    <div class="ds-comp-row"><button class="ds-btn ds-btn-dark">Ajouter au panier</button><button class="ds-btn ds-btn-outline">Favoris ♡</button></div>
-    <div class="ds-comp-row"><div class="ds-input"><span class="ds-input-icon">⌕</span><span class="ds-input-placeholder">Rechercher…</span></div></div>
-    <div class="ds-comp-row ds-tags"><span class="ds-tag">Femme</span><span class="ds-tag">Homme</span><span class="ds-tag ds-tag-active">Maison</span><span class="ds-tag">Beauté</span></div>
-    <div class="ds-comp-row ds-icons"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
+  <div class="ds-body">
+    <div class="ds-colors-col">
+      <div class="ds-color-card" style="background:#0A0A0A">
+        <div><div class="ds-color-name">Noir</div><div class="ds-color-hex">#0A0A0A</div></div>
+        <div class="ds-swatch-mini">${swatchRow(['#0A0A0A','#2C2C2C','#555','#888','#BBB','#E5E5E5','#F5F0E8','#FFF'])}</div>
+      </div>
+      <div class="ds-color-card" style="background:#C8A96E">
+        <div><div class="ds-color-name">Or</div><div class="ds-color-hex">#C8A96E</div></div>
+        <div class="ds-swatch-mini">${swatchRow(['#6B4E10','#8B6914','#B89040','#C8A96E','#D9C090','#EAD9B6','#F5EDD8','#FDF9F2'])}</div>
+      </div>
+      <div class="ds-color-card" style="background:#D4145A">
+        <div><div class="ds-color-name">Framboise</div><div class="ds-color-hex">#D4145A</div></div>
+        <div class="ds-swatch-mini">${swatchRow(['#7A0030','#A0003E','#C0004A','#D4145A','#E04070','#EE7090','#F8B0C0','#FDEAEE'])}</div>
+      </div>
+      <div class="ds-color-card" style="background:#F0EBE2">
+        <div><div class="ds-color-name" style="color:#0A0A0A">Sable</div><div class="ds-color-hex" style="color:rgba(0,0,0,.38)">#F0EBE2</div></div>
+        <div class="ds-swatch-mini">${swatchRow(['#A89880','#C0B098','#D0C8B8','#E0D8CC','#EAE4DA','#F0EBE2','#FAF8F4','#FFF'])}</div>
+      </div>
+    </div>
+    <div class="ds-grid">
+      <div class="ds-cell">
+        <span class="ds-cell-label">Headline</span>
+        <div class="ds-big-aa" style="font-family:'Roboto Condensed',sans-serif;font-weight:900;font-size:clamp(48px,5vw,80px);letter-spacing:-.03em;line-height:1;color:#0A0A0A">Aa</div>
+      </div>
+      <div class="ds-cell">
+        <span class="ds-cell-label">Boutons</span>
+        <div class="ds-btn-grid">
+          <button class="ds-gb ds-gb-primary">Primary</button>
+          <button class="ds-gb ds-gb-secondary">Secondary</button>
+          <div class="ds-gb-dark-strip"><button class="ds-gb ds-gb-inverted">Inverted</button></div>
+          <button class="ds-gb ds-gb-outlined">Outlined</button>
+        </div>
+      </div>
+      <div class="ds-cell">
+        <span class="ds-cell-label">Search</span>
+        <div style="display:flex;flex-direction:column;gap:7px;margin-top:auto">
+          <div class="ds-search-light"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,.4)" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span class="ds-search-placeholder">Marques, catégories…</span></div>
+          <div class="ds-search-dark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span class="ds-search-placeholder" style="color:rgba(255,255,255,.3)">Marques, catégories…</span></div>
+          <div class="ds-search-dark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span class="ds-search-val">Robes</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="2.5" stroke-linecap="round" style="margin-left:auto"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+        </div>
+      </div>
+      <div class="ds-cell">
+        <span class="ds-cell-label">Body</span>
+        <div class="ds-big-aa" style="font-family:'Roboto',sans-serif;font-weight:400;font-size:clamp(40px,4.2vw,68px);color:#0A0A0A;letter-spacing:-.01em">Aa</div>
+      </div>
+      <div class="ds-cell">
+        <span class="ds-cell-label">Champ texte</span>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:auto">
+          <div class="ds-field-wrap"><span class="ds-field-label">Label</span><div class="ds-field"><span class="ds-field-placeholder">Placeholder</span></div></div>
+          <div class="ds-field-wrap"><span class="ds-field-label">Label</span><div class="ds-field"><span class="ds-field-val">Contenu saisi</span></div></div>
+          <div class="ds-field-wrap ds-field-error"><span class="ds-field-label">Label</span><div class="ds-field"><span class="ds-field-val">Erreur</span></div><span class="ds-field-msg">Message d'erreur</span></div>
+        </div>
+      </div>
+      <div class="ds-cell">
+        <span class="ds-cell-label">Icônes</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;color:rgba(0,0,0,.55)">
+          ${icoBox('<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/>')}
+          ${icoBox('<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>')}
+          ${icoBox('<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>')}
+          ${icoBox('<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>')}
+          ${icoBox('<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>')}
+          ${icoBox('<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.42 2 2 0 0 1 3.6 1.26h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.16 6.16z"/>')}
+        </div>
+      </div>
+      <div class="ds-cell">
+        <span class="ds-cell-label">Label</span>
+        <div class="ds-big-aa" style="font-family:'Roboto',sans-serif;font-weight:300;font-size:clamp(34px,3.5vw,56px);color:#0A0A0A">Aa</div>
+      </div>
+      <div class="ds-cell">
+        <span class="ds-cell-label">Tags</span>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:auto">
+          <span class="ds-tag">Femme</span><span class="ds-tag">Homme</span><span class="ds-tag ds-tag-active">Maison</span><span class="ds-tag">Beauté</span><span class="ds-tag">Luxe</span><span class="ds-tag">Sport</span>
+        </div>
+      </div>
+      <div class="ds-cell">
+        <span class="ds-cell-label">États</span>
+        <div style="display:flex;flex-direction:column;gap:7px;margin-top:auto">
+          <button class="ds-gb ds-gb-primary" style="width:100%">AJOUTER AU PANIER</button>
+          <button class="ds-gb ds-gb-secondary" style="width:100%">VOIR PLUS</button>
+          <button class="ds-gb ds-gb-tertiary" style="align-self:flex-start">En savoir plus</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>`;
+  }
   if (b.t==='devices') {
     const slides = (b.srcs||[]).map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="" loading="lazy">`}</div>`).join('');
     const dots = (b.srcs||[]).map((_,i)=>`<span class="iphone-dot${i===0?' active':''}"></span>`).join('');
