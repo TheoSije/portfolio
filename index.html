@@ -892,6 +892,51 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   .desktop { width: 130%; left: 0; }
 }
 
+/* ── DESIGN SYSTEM CARD ── */
+.ds-card {
+  background: #131210;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 260px 1fr 1fr;
+  gap: 2px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.ds-col {
+  padding: 32px 28px;
+  background: #1a1917;
+}
+.ds-colors { display: flex; flex-direction: column; gap: 20px; }
+.ds-swatch-group { display: flex; flex-direction: column; gap: 6px; }
+.ds-swatch-main { height: 44px; border-radius: 4px; }
+.ds-swatch-row { display: flex; gap: 2px; }
+.ds-swatch-row span { flex: 1; height: 10px; border-radius: 1px; }
+.ds-swatch-label { display: flex; justify-content: space-between; font-size: 10px; color: rgba(255,255,255,.4); letter-spacing: .06em; text-transform: uppercase; }
+
+.ds-typo { display: flex; flex-direction: column; gap: 12px; }
+.ds-typo-item { display: flex; flex-direction: column; gap: 2px; background: rgba(255,255,255,.04); border-radius: 6px; padding: 16px 20px; }
+.ds-typo-label { font-size: 10px; color: rgba(255,255,255,.3); letter-spacing: .1em; text-transform: uppercase; }
+.ds-typo-aa { color: rgba(255,255,255,.85); line-height: 1; }
+
+.ds-components { display: flex; flex-direction: column; gap: 12px; }
+.ds-comp-row { display: flex; gap: 8px; align-items: center; }
+.ds-btn { border: none; border-radius: 100px; padding: 10px 20px; font-size: 12px; font-weight: 600; cursor: pointer; letter-spacing: .04em; white-space: nowrap; }
+.ds-btn-primary { background: #C8A96E; color: #0A0A0A; }
+.ds-btn-secondary { background: rgba(255,255,255,.08); color: rgba(255,255,255,.8); }
+.ds-btn-dark { background: #0A0A0A; color: #fff; border: 1px solid rgba(255,255,255,.1); }
+.ds-btn-outline { background: transparent; color: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.25); }
+.ds-input { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 6px; padding: 9px 14px; display: flex; align-items: center; gap: 8px; width: 100%; }
+.ds-input-icon { color: rgba(255,255,255,.3); font-size: 16px; }
+.ds-input-placeholder { font-size: 12px; color: rgba(255,255,255,.25); }
+.ds-tags { flex-wrap: wrap; }
+.ds-tag { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 100px; padding: 5px 14px; font-size: 11px; color: rgba(255,255,255,.55); letter-spacing: .04em; }
+.ds-tag-active { background: rgba(200,169,110,.15); border-color: #C8A96E; color: #C8A96E; }
+.ds-icons { gap: 20px; color: rgba(255,255,255,.4); padding: 8px 0; }
+
+@media (max-width: 900px) {
+  .ds-card { grid-template-columns: 1fr; }
+}
+
 /* ── PROJECT CONTEXT ── */
 .proj-context { padding: 56px var(--h-pad) 64px; }
 .context-text { font-size: clamp(16px, 1.6vw, 22px); font-weight: 300; line-height: 1.85; opacity: 0.68; max-width: 720px; }
@@ -1381,9 +1426,8 @@ const P = {
     problem:"3 ans à la tête du design pour l'un des plus grands retailers français. Pas un projet — un écosystème entier : app, web, design system, IA gen, automatisation, et une équipe de choc.",
     blocks:[
       {t:'devices',n:'01',srcs:['img/gl-app-01.jpg','img/gl-app-02.jpg','img/gl-app-03.jpg','img/gl-app-04.jpg','img/gl-app-05.jpg','img/gl-app-06.jpg','img/gl-app-07.jpg'],desktopSrcs:['img/homedesktop.jpg','img/hometendance.jpg'],c:'<strong>App & web, refonte totale.</strong> En cohérence avec le design system, l\'application mobile et le site desktop ont été entièrement repensés. Indice de satisfaction 150. Big up à Flo, dev iOS de génie — embauche-le, il est freelance et il est brillant.'},
-      {t:'duo',n:'02',c:'<strong>Site web mobile & desktop.</strong> Refonte annuelle en cohérence avec le design system. Indice 120 chaque année — un rituel bien huilé entre design et dev.'},
-      {t:'full',n:'03',c:'<strong>Design System showcase.</strong> Composants vivants, documentation interactive, variables unifiées. La fondation sur laquelle tout le reste repose.'},
-      {t:'duo',n:'04',c:'<strong>Looks IA Gen.</strong> Création de visuels mode avec des produits portés reliés au vrai catalogue. Retouche d\'images en batch via un flow Weavy, puis reconstruction du flow en Python.'},
+      {t:'ds',n:'02',c:'<strong>Design System.</strong> Composants vivants, documentation Zeroheight, variables unifiées. La fondation sur laquelle tout le reste repose.'},
+      {t:'duo',n:'03',c:'<strong>Looks IA Gen.</strong> Création de visuels mode avec des produits portés reliés au vrai catalogue. Retouche d\'images en batch via un flow Weavy, puis reconstruction du flow en Python.'},
       {t:'full',n:'05',c:'<strong>Chatbot Gala.</strong> Création de l\'assistant e-com Gala — onboarding conversationnel, recommandation produit, navigation augmentée.'},
       {t:'duo',n:'06',c:'<strong>Centaines d\'apps RPA Low Code.</strong> PowerApp Microsoft avec un design system dédié pour générer des pages ultra rapidement. Big up à Patrick Moysan — un type génial.'},
       {t:'full',n:'07',c:'<strong>Design Thinking, toujours.</strong> Chaque sujet, ultra user testé. Sessions dans une salle à double-sens. Une boucle itérative sans relâche. Shoutout à Camille, Malik, Thuan et Manu — mon équipe de product designers aux Galeries. Talents immenses.'}
@@ -1404,6 +1448,27 @@ const proKeys = Object.keys(P);
 
 function renderImg(b) {
   if (b.t==='duo') return `<div class="block-duo"><div class="block-img"><div class="block-placeholder">image ${b.n}a</div></div><div class="block-img"><div class="block-placeholder">image ${b.n}b</div></div></div>`;
+  if (b.t==='ds') return `<div class="ds-card">
+  <div class="ds-col ds-colors">
+    <div class="ds-swatch-group"><div class="ds-swatch-main" style="background:#0A0A0A"></div><div class="ds-swatch-row">${['#0A0A0A','#2C2C2C','#555','#888','#BBB','#E5E5E5','#F5F0E8','#FFF'].map(c=>`<span style="background:${c}"></span>`).join('')}</div><div class="ds-swatch-label"><span>Noir</span><span>#0A0A0A</span></div></div>
+    <div class="ds-swatch-group"><div class="ds-swatch-main" style="background:#C8A96E"></div><div class="ds-swatch-row">${['#8B6914','#A07C2A','#B89040','#C8A96E','#D9C090','#EAD9B6','#F5EDD8','#FDF9F2'].map(c=>`<span style="background:${c}"></span>`).join('')}</div><div class="ds-swatch-label"><span>Or</span><span>#C8A96E</span></div></div>
+    <div class="ds-swatch-group"><div class="ds-swatch-main" style="background:#D4145A"></div><div class="ds-swatch-row">${['#7A0030','#A0003E','#C0004A','#D4145A','#E04070','#EE7090','#F8B0C0','#FDEAEE'].map(c=>`<span style="background:${c}"></span>`).join('')}</div><div class="ds-swatch-label"><span>Framboise</span><span>#D4145A</span></div></div>
+    <div class="ds-swatch-group"><div class="ds-swatch-main" style="background:#F5F0E8"></div><div class="ds-swatch-row">${['#C8C0B0','#D4CCC0','#E0D8CC','#EAE4DA','#F0EBE2','#F5F0E8','#FAF8F4','#FFFFFF'].map(c=>`<span style="background:${c}"></span>`).join('')}</div><div class="ds-swatch-label"><span>Sable</span><span>#F5F0E8</span></div></div>
+  </div>
+  <div class="ds-col ds-typo">
+    <div class="ds-typo-item"><span class="ds-typo-label">Display</span><span class="ds-typo-aa" style="font-size:64px;font-weight:800;letter-spacing:-.03em">Aa</span></div>
+    <div class="ds-typo-item"><span class="ds-typo-label">Headline</span><span class="ds-typo-aa" style="font-size:42px;font-weight:600;letter-spacing:-.02em">Aa</span></div>
+    <div class="ds-typo-item"><span class="ds-typo-label">Body</span><span class="ds-typo-aa" style="font-size:28px;font-weight:400">Aa</span></div>
+    <div class="ds-typo-item"><span class="ds-typo-label">Label</span><span class="ds-typo-aa" style="font-size:18px;font-weight:400;letter-spacing:.12em;text-transform:uppercase">Aa</span></div>
+  </div>
+  <div class="ds-col ds-components">
+    <div class="ds-comp-row"><button class="ds-btn ds-btn-primary">Découvrir</button><button class="ds-btn ds-btn-secondary">Voir plus</button></div>
+    <div class="ds-comp-row"><button class="ds-btn ds-btn-dark">Ajouter au panier</button><button class="ds-btn ds-btn-outline">Favoris ♡</button></div>
+    <div class="ds-comp-row"><div class="ds-input"><span class="ds-input-icon">⌕</span><span class="ds-input-placeholder">Rechercher…</span></div></div>
+    <div class="ds-comp-row ds-tags"><span class="ds-tag">Femme</span><span class="ds-tag">Homme</span><span class="ds-tag ds-tag-active">Maison</span><span class="ds-tag">Beauté</span></div>
+    <div class="ds-comp-row ds-icons"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
+  </div>
+</div>`;
   if (b.t==='devices') {
     const slides = (b.srcs||[]).map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="" loading="lazy">`}</div>`).join('');
     const dots = (b.srcs||[]).map((_,i)=>`<span class="iphone-dot${i===0?' active':''}"></span>`).join('');
