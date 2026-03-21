@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>theo.design</title>
 <link id="theme-css" rel="stylesheet" href="css/pro.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ephesis&display=swap">
 <style>
 /* DEFAULT LAYOUT TOKENS — overridden by each theme CSS */
 :root { --h-pad: clamp(32px, 6vw, 140px); }
@@ -831,17 +833,18 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   min-width: 0;
   overflow: hidden;
   background: linear-gradient(145deg, #e4e2de 0%, #d0ccc5 100%);
-  border-radius: 0; /* bord droit = bord viewport */
+  border-radius: 0;
   display: flex;
-  align-items: center; /* desktop centré verticalement */
+  align-items: center;
   justify-content: flex-start;
-  padding-left: 32px;
+  padding-left: 48px; /* décalé à gauche = plus croppé à droite */
 }
 
 /* Desktop mockup */
 .desktop {
   position: relative;
-  width: 100%;
+  width: 115%; /* plus grand = déborde davantage = envie de scroller */
+  flex-shrink: 0;
 }
 .desktop-frame {
   position: relative; z-index: 2;
@@ -1029,14 +1032,25 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   <button class="xp-nav-btn" id="xp-btn-next" aria-label="Suivant">&#8594;</button>
   <div class="xp-scroll">
     <div class="proj-card proj-card--xp" onclick="openMiniSite('incipit')">
-      <div class="proj-card-img proj-img--incipit"></div>
+      <div class="proj-card-img proj-img--incipit">
+        <div class="incipit-bg-anim"></div>
+        <div class="incipit-content">
+          <div class="incipit-quote">"</div>
+          <div class="incipit-title">INKIPIT</div>
+        </div>
+      </div>
       <div class="proj-card-inner">
         <span class="proj-card-name">Inkipit</span>
         <p class="xp-card-desc">Générateur d'incipit littéraires avec effet machine à écrire.</p>
       </div>
     </div>
     <div class="proj-card proj-card--xp" onclick="openMiniSite('vinyle')">
-      <div class="proj-card-img proj-img--vinyle"></div>
+      <div class="proj-card-img proj-img--vinyle">
+        <div class="platine-content">
+          <div class="platine-vinyl">💿</div>
+          <div class="platine-title">PLATINE</div>
+        </div>
+      </div>
       <div class="proj-card-inner">
         <span class="proj-card-name">Platine</span>
         <p class="xp-card-desc">Écoute et explore ta musique autour d'un vinyle interactif.</p>
@@ -1789,8 +1803,56 @@ function showHome() {
 .unheard-title  { font-size:22px; font-weight:700; letter-spacing:.18em; color:#fff; line-height:1; text-transform:uppercase; }
 @media (min-width:900px)  { .unheard-emojis{font-size:38px} .unheard-title{font-size:30px} .unheard-content{gap:18px} }
 @media (min-width:1400px) { .unheard-emojis{font-size:46px} .unheard-title{font-size:36px} .unheard-content{gap:22px} }
-.proj-img--incipit  { background: #1a1a1a url('img/inkipit-card.jpg') center/cover no-repeat; }
-.proj-img--vinyle   { background: #0a0a0a url('img/vinyle-card.jpg') center/cover no-repeat; }
+/* ── INKIPIT CARD ── */
+.proj-img--incipit { background: #0d1020; position: relative; overflow: hidden; }
+.incipit-bg-anim {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 40%, rgba(99,102,241,.4) 0%, transparent 60%),
+              radial-gradient(ellipse at 75% 70%, rgba(168,85,247,.25) 0%, transparent 55%);
+  animation: incipit-pulse 4s ease-in-out infinite alternate;
+}
+@keyframes incipit-pulse {
+  from { opacity: .65; transform: scale(1); }
+  to   { opacity: 1;   transform: scale(1.12); }
+}
+.incipit-content {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 4px;
+}
+.incipit-quote {
+  font-family: 'Ephesis', cursive;
+  font-size: clamp(80px, 12vw, 130px);
+  line-height: .8; color: #fff; opacity: .92;
+}
+.incipit-title {
+  font-size: 20px; font-weight: 700; letter-spacing: .2em;
+  color: #fff; text-transform: uppercase; line-height: 1;
+}
+@media (min-width: 900px)  { .incipit-quote { font-size: 110px; } }
+@media (min-width: 1400px) { .incipit-quote { font-size: 130px; } }
+
+/* ── PLATINE CARD ── */
+.proj-img--vinyle { background: #0a0806; position: relative; overflow: hidden; }
+.platine-content {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 16px;
+}
+.platine-vinyl {
+  font-size: clamp(52px, 7vw, 80px);
+  animation: vinyl-spin 4s linear infinite;
+  filter: drop-shadow(0 4px 20px rgba(0,0,0,.6));
+  line-height: 1;
+}
+@keyframes vinyl-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.platine-title {
+  font-size: 20px; font-weight: 700; letter-spacing: .2em;
+  color: rgba(255,255,255,.85); text-transform: uppercase; line-height: 1;
+}
 .proj-img--emojy    { background: linear-gradient(155deg, #7c1d6f 0%, #db2777 45%, #f97316 100%); }
 .proj-img--chess    { background: #0f0f0f url('img/chess-card.jpg') center/cover no-repeat; }
 .proj-img--soundhands {
