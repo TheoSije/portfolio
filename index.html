@@ -863,10 +863,10 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   opacity: 0; transition: opacity .6s ease;
 }
 .desktop-slide.active { opacity: 1; }
-.desktop-slide img { width: 100%; display: block; animation: desk-scroll 18s ease-in-out 2s infinite alternate; }
+.desktop-slide img { width: 100%; display: block; animation: desk-scroll 16s ease-in-out 1.5s forwards; }
 @keyframes desk-scroll {
-  0%,15% { transform: translateY(0); }
-  85%,100% { transform: translateY(-60%); }
+  0%,10% { transform: translateY(0); }
+  90%,100% { transform: translateY(-60%); }
 }
 
 /* desktop dots */
@@ -1460,7 +1460,19 @@ function initDesktopSliders() {
     if (slides.length < 2) return;
     const outer = desktop.closest('.desktop-outer');
     const dots  = [...(outer ? outer.querySelectorAll('.desktop-dot') : [])];
-    let current = 0, timer;
+    let current = 0;
+
+    function resetAnim(img) {
+      img.style.animation = 'none';
+      img.offsetHeight; // force reflow
+      img.style.animation = '';
+    }
+
+    function listenEnd() {
+      const img = slides[current].querySelector('img');
+      if (!img) return;
+      img.addEventListener('animationend', () => goTo(current + 1), { once: true });
+    }
 
     function goTo(n) {
       slides[current].classList.remove('active');
@@ -1468,14 +1480,14 @@ function initDesktopSliders() {
       current = (n + slides.length) % slides.length;
       slides[current].classList.add('active');
       dots[current]?.classList.add('active');
+      const img = slides[current].querySelector('img');
+      if (img) resetAnim(img);
+      listenEnd();
     }
-    function next() { goTo(current + 1); }
-    function start() { timer = setInterval(next, 5000); }
-    function restart() { clearInterval(timer); start(); }
 
-    desktop.addEventListener('click', () => { next(); restart(); });
-    dots.forEach((d, i) => d.addEventListener('click', e => { e.stopPropagation(); goTo(i); restart(); }));
-    start();
+    desktop.addEventListener('click', () => goTo(current + 1));
+    dots.forEach((d, i) => d.addEventListener('click', e => { e.stopPropagation(); goTo(i); }));
+    listenEnd();
   });
 }
 
