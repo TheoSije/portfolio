@@ -806,6 +806,61 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   display: flex; align-items: center; justify-content: center;
   font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: #bbb;
 }
+
+/* ── DEVICES (iPhone + Desktop side by side) ── */
+.block-devices {
+  display: flex;
+  gap: 32px;
+  align-items: flex-end;
+  padding: 48px 0 24px;
+}
+.devices-left {
+  flex: 0 0 38%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.devices-right {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Desktop mockup */
+.desktop {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.desktop-frame {
+  position: relative; z-index: 2;
+  width: 100%; display: block;
+  pointer-events: none;
+}
+.desktop-screen {
+  position: absolute;
+  top: 5.5%; left: 0; right: 0; bottom: 5%;
+  z-index: 1;
+  overflow: hidden;
+}
+.desktop-scroll {
+  width: 100%;
+  display: block;
+  animation: desk-scroll 18s ease-in-out 2s infinite alternate;
+}
+@keyframes desk-scroll {
+  0%   { transform: translateY(0); }
+  15%  { transform: translateY(0); }
+  85%  { transform: translateY(-78%); }
+  100% { transform: translateY(-78%); }
+}
+
+@media (max-width: 900px) {
+  .block-devices { flex-direction: column; }
+  .devices-right { display: none; }
+  .devices-left { flex: none; width: 100%; }
+}
+
 /* ── PROJECT CONTEXT ── */
 .proj-context { padding: 56px var(--h-pad) 64px; }
 .context-text { font-size: clamp(16px, 1.6vw, 22px); font-weight: 300; line-height: 1.85; opacity: 0.68; max-width: 720px; }
@@ -1222,7 +1277,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   <section class="about">
     <div class="about-text">Senior Product Designer & Head of Design basé à Paris. 10 ans à l'intersection du craft, de la stratégie produit et des organisations — entre startups, scale-ups et aujourd'hui les Galeries Lafayette. Je conçois des interfaces, construis des systèmes, structure des équipes, et explore ce que l'IA change vraiment dans notre métier.</div>
     <div class="about-links">
-      <a href="mailto:theosije@gmail.com">theosije@gmail.com</a>
+      <a href="mailto:theosije@gmail.com">Send me an email</a>
       <a href="https://www.linkedin.com/in/theojegousse/" target="_blank" rel="noopener">LinkedIn</a>
       <a href="cv.pdf" target="_blank">Read CV</a>
       <a href="https://github.com/TheoSije" target="_blank" rel="noopener">GitHub</a>
@@ -1283,7 +1338,7 @@ const P = {
     context:"Piloter le design chez GL, c'est coordonner l'interface d'un écosystème entier — avec une équipe de 7 product designers. Refonte complète de l'app mobile iOS & Android, refonte annuelle du site responsive, construction d'un design system vivant avec tokens, composants et documentation Zeroheight. En parallèle : intégration de l'IA générative dans la production de visuels mode, conception UX/UI du chatbot Gala, des centaines d'interfaces Low-Code sur PowerApps. Du composant au système, du wireframe au livrable dev-ready — chef d'orchestre design à l'échelle d'un grand compte.",
     problem:"3 ans à la tête du design pour l'un des plus grands retailers français. Pas un projet — un écosystème entier : app, web, design system, IA gen, automatisation, et une équipe de choc.",
     blocks:[
-      {t:'iphone',n:'01',srcs:['img/gl-app-01.jpg','img/gl-app-02.jpg','img/gl-app-03.jpg','img/gl-app-04.jpg','img/gl-app-05.jpg','img/gl-app-06.jpg','img/gl-app-07.jpg'],c:'<strong>L\'app, refonte totale.</strong> En cohérence avec le design system, l\'application mobile a été entièrement repensée. Indice de satisfaction 150. Big up à Flo, dev iOS de génie — embauche-le, il est freelance et il est brillant.'},
+      {t:'devices',n:'01',srcs:['img/gl-app-01.jpg','img/gl-app-02.jpg','img/gl-app-03.jpg','img/gl-app-04.jpg','img/gl-app-05.jpg','img/gl-app-06.jpg','img/gl-app-07.jpg'],desktop:'img/homedesktop.jpg',c:'<strong>App & web, refonte totale.</strong> En cohérence avec le design system, l\'application mobile et le site desktop ont été entièrement repensés. Indice de satisfaction 150. Big up à Flo, dev iOS de génie — embauche-le, il est freelance et il est brillant.'},
       {t:'duo',n:'02',c:'<strong>Site web mobile & desktop.</strong> Refonte annuelle en cohérence avec le design system. Indice 120 chaque année — un rituel bien huilé entre design et dev.'},
       {t:'full',n:'03',c:'<strong>Design System showcase.</strong> Composants vivants, documentation interactive, variables unifiées. La fondation sur laquelle tout le reste repose.'},
       {t:'duo',n:'04',c:'<strong>Looks IA Gen.</strong> Création de visuels mode avec des produits portés reliés au vrai catalogue. Retouche d\'images en batch via un flow Weavy, puis reconstruction du flow en Python.'},
@@ -1307,6 +1362,13 @@ const proKeys = Object.keys(P);
 
 function renderImg(b) {
   if (b.t==='duo') return `<div class="block-duo"><div class="block-img"><div class="block-placeholder">image ${b.n}a</div></div><div class="block-img"><div class="block-placeholder">image ${b.n}b</div></div></div>`;
+  if (b.t==='devices') {
+    const slides = (b.srcs||[]).map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="" loading="lazy">`}</div>`).join('');
+    const dots = (b.srcs||[]).map((_,i)=>`<span class="iphone-dot${i===0?' active':''}"></span>`).join('');
+    const iphoneHtml = `<div class="iphone-outer"><div class="iphone"><div class="iphone-screen" data-slider>${slides}</div><img class="iphone-frame" src="img/iphone.png" alt="" draggable="false"></div><div class="iphone-dots">${dots}</div></div>`;
+    const desktopHtml = b.desktop ? `<div class="desktop"><img class="desktop-frame" src="img/desktop.png" alt="" draggable="false"><div class="desktop-screen"><img class="desktop-scroll" src="${b.desktop}" alt=""></div></div>` : '';
+    return `<div class="block-devices"><div class="devices-left">${iphoneHtml}</div><div class="devices-right">${desktopHtml}</div></div>`;
+  }
   if (b.t==='iphone') {
     // multi-image slideshow
     if (b.srcs && b.srcs.length > 1) {
