@@ -811,9 +811,10 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 .block-devices {
   display: flex;
   gap: 16px;
-  align-items: stretch; /* même hauteur */
+  align-items: stretch;
   margin-bottom: 24px;
-  overflow: hidden; /* empêche le scroll horizontal */
+  margin-right: calc(-1 * var(--h-pad)); /* saigne jusqu'au bord droit viewport */
+  overflow: hidden;
 }
 .devices-left {
   flex: 0 0 36%;
@@ -828,17 +829,19 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 .devices-right {
   flex: 1;
   min-width: 0;
-  overflow: hidden; /* coupe le desktop qui déborde à droite */
+  overflow: hidden;
   background: linear-gradient(145deg, #e4e2de 0%, #d0ccc5 100%);
-  border-radius: 8px;
+  border-radius: 0; /* bord droit = bord viewport */
   display: flex;
-  align-items: flex-end;
+  align-items: center; /* desktop centré verticalement */
+  justify-content: flex-start;
+  padding-left: 32px;
 }
 
 /* Desktop mockup */
 .desktop {
   position: relative;
-  width: 108%; /* déborde légèrement, coupé par overflow:hidden */
+  width: 96%; /* occupe la largeur disponible, légère marge droite naturelle */
   flex-shrink: 0;
 }
 .desktop-frame {
