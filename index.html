@@ -811,7 +811,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 .block-devices {
   display: flex;
   gap: 16px;
-  align-items: flex-end;
+  align-items: stretch; /* même hauteur */
   margin-bottom: 24px;
 }
 .devices-left {
@@ -819,6 +819,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-end;
   background: linear-gradient(145deg, #f5f2ec 0%, #e8e3d8 100%);
   border-radius: 8px;
   padding: 48px 24px 28px;
@@ -826,9 +827,9 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 .devices-right {
   flex: 1;
   min-width: 0;
+  overflow: hidden; /* coupe le desktop qui déborde à droite */
   background: linear-gradient(145deg, #e4e2de 0%, #d0ccc5 100%);
   border-radius: 8px;
-  padding: 32px 24px 24px;
   display: flex;
   align-items: flex-end;
 }
@@ -836,7 +837,8 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 /* Desktop mockup */
 .desktop {
   position: relative;
-  width: 100%;
+  width: 125%; /* déborde à droite, coupé par overflow:hidden */
+  flex-shrink: 0;
 }
 .desktop-frame {
   position: relative; z-index: 2;
