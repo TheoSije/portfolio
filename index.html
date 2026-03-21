@@ -744,11 +744,11 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 /* ── NAMING WALL ── */
 .block-naming {
   background: #0a0a0a; border-radius: 8px; margin-bottom: 24px;
-  padding: clamp(72px,10vw,140px) clamp(40px,6vw,80px);
+  padding: clamp(40px,5vw,72px) clamp(40px,6vw,80px);
   overflow: hidden;
 }
 .naming-text {
-  font-family: 'DM Sans', sans-serif; font-size: clamp(16px,2.4vw,26px);
+  font-family: 'DM Sans', sans-serif; font-size: clamp(22px,3.5vw,42px);
   font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
   line-height: 2; color: rgba(255,255,255,.18);
   word-spacing: .1em;
@@ -771,7 +771,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   animation: logos-slide 28s linear infinite;
 }
 .logos-track img {
-  height: clamp(380px, 48vw, 620px); width: auto; display: block; flex-shrink: 0;
+  height: clamp(900px, 90vw, 1100px); width: auto; display: block; flex-shrink: 0;
 }
 @keyframes logos-slide {
   0%   { transform: translateX(0); }
@@ -798,17 +798,19 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 
 /* ── LOGO REVEAL ── */
 .block-logo-reveal {
-  background: #0a0a0a; border-radius: 8px; margin-bottom: 24px; overflow: hidden;
+  background: #0a0a0a; border-radius: 8px; margin-bottom: 24px;
+  min-height: 220vh; position: relative;
 }
 .logo-reveal-inner {
   display: flex; align-items: center;
-  min-height: 55vh;
+  position: sticky; top: 0; height: 100vh;
   padding: clamp(56px,8vw,100px) clamp(40px,6vw,80px);
+  overflow: hidden;
 }
 .logo-reveal-logo {
   flex-shrink: 0;
   transform: translateX(var(--lr-offset, 0px));
-  transition: transform 0.75s cubic-bezier(0.34, 1.15, 0.64, 1);
+  transition: transform 0.85s cubic-bezier(0.34, 1.1, 0.64, 1);
 }
 .logo-reveal-logo img {
   width: clamp(160px, 20vw, 280px); border-radius: 22%; display: block;
@@ -818,7 +820,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   flex: 1; min-width: 0;
   padding-left: clamp(32px, 5vw, 64px);
   opacity: 0; transform: translateX(24px);
-  transition: opacity 0.5s ease 0.35s, transform 0.5s ease 0.35s;
+  transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
 }
 .block-logo-reveal.revealed .logo-reveal-list { opacity: 1; transform: translateX(0); }
 .lr-point { margin-bottom: clamp(20px, 3vw, 32px); }
@@ -833,6 +835,25 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 .lr-verbatim { display: flex; gap: 10px; align-items: flex-start; }
 .lr-verbatim-mark { font-size: 18px; color: rgba(255,255,255,.25); line-height: 1.1; flex-shrink: 0; margin-top: 2px; }
 .lr-verbatim-text { font-size: clamp(11px,1.4vw,13px); color: rgba(255,255,255,.5); line-height: 1.6; font-style: italic; }
+
+@media (max-width: 700px) {
+  /* Naming wall — compact sur mobile */
+  .block-naming { padding: 32px 24px; }
+  .naming-text { font-size: 14px; line-height: 1.7; }
+  /* Logo reveal — colonne sur mobile, pas d'animation sticky */
+  .block-logo-reveal { min-height: auto; }
+  .logo-reveal-inner {
+    position: static; height: auto;
+    flex-direction: column; align-items: center;
+    padding: 48px 24px;
+    gap: 32px;
+  }
+  .logo-reveal-logo { transform: none !important; }
+  .logo-reveal-list {
+    opacity: 1 !important; transform: none !important;
+    padding-left: 0; width: 100%;
+  }
+}
 
 .block-iphone-wrap {
   display: flex; justify-content: center; align-items: center;
@@ -1915,9 +1936,17 @@ function initLogoReveal() {
       logo.style.setProperty('--lr-offset', ((inner.offsetWidth / 2) - pad - (logo.offsetWidth / 2)) + 'px');
     };
     setOffset();
-    new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.intersectionRatio >= 0.35) block.classList.add('revealed'); });
-    }, { threshold: 0.35 }).observe(block);
+    window.addEventListener('resize', setOffset);
+    const onScroll = () => {
+      const rect = block.getBoundingClientRect();
+      const scrolled = -rect.top;
+      const scrollable = block.offsetHeight - window.innerHeight;
+      const progress = scrollable > 0 ? scrolled / scrollable : 0;
+      if (progress > 0.45) block.classList.add('revealed');
+      else block.classList.remove('revealed');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   });
 }
 
