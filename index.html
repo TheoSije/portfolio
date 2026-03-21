@@ -837,7 +837,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding-left: 48px; /* décalé à gauche = plus croppé à droite */
+  padding-left: 80px; /* décalé à gauche = bien croppé à droite */
 }
 
 /* Desktop mockup */
@@ -863,7 +863,11 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   opacity: 0; transition: opacity .6s ease;
 }
 .desktop-slide.active { opacity: 1; }
-.desktop-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.desktop-slide img { width: 100%; display: block; animation: desk-scroll 18s ease-in-out 2s infinite alternate; }
+@keyframes desk-scroll {
+  0%,15% { transform: translateY(0); }
+  85%,100% { transform: translateY(-60%); }
+}
 
 /* desktop dots */
 .desktop-outer {
@@ -1824,13 +1828,14 @@ function showHome() {
   font-family: 'Ephesis', cursive;
   font-size: clamp(80px, 12vw, 130px);
   line-height: .8; color: #fff; opacity: .92;
+  display: flex; align-items: center; justify-content: center; width: 100%;
 }
 .incipit-title {
   font-size: 20px; font-weight: 700; letter-spacing: .2em;
   color: #fff; text-transform: uppercase; line-height: 1;
 }
-@media (min-width: 900px)  { .incipit-quote { font-size: 110px; } }
-@media (min-width: 1400px) { .incipit-quote { font-size: 130px; } }
+@media (min-width: 900px)  { .incipit-quote { font-size: 160px; } }
+@media (min-width: 1400px) { .incipit-quote { font-size: 260px; } }
 
 /* ── PLATINE CARD ── */
 .proj-img--vinyle { background: #0a0806; position: relative; overflow: hidden; }
