@@ -1039,7 +1039,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
       <div class="proj-card-img proj-img--incipit">
         <div class="incipit-bg-anim"></div>
         <div class="incipit-content">
-          <div class="incipit-quote">"</div>
+          <div class="incipit-quote"></div>
           <div class="incipit-title">INKIPIT</div>
         </div>
       </div>
@@ -1837,17 +1837,18 @@ function showHome() {
   align-items: center; justify-content: center; gap: 4px;
 }
 .incipit-quote {
-  font-family: 'Ephesis', cursive;
-  font-size: clamp(80px, 12vw, 130px);
-  line-height: .8; color: #fff; opacity: .92;
-  display: flex; align-items: center; justify-content: center; width: 100%;
+  width: clamp(60px, 9vw, 120px);
+  aspect-ratio: 80/77;
+  background: linear-gradient(135deg, #c4b5fd 0%, #e879f9 50%, #f9a8d4 100%);
+  -webkit-mask: url('img/quote-inkipit.svg') center/contain no-repeat;
+  mask: url('img/quote-inkipit.svg') center/contain no-repeat;
 }
 .incipit-title {
   font-size: 20px; font-weight: 700; letter-spacing: .2em;
   color: #fff; text-transform: uppercase; line-height: 1;
 }
-@media (min-width: 900px)  { .incipit-quote { font-size: 160px; } }
-@media (min-width: 1400px) { .incipit-quote { font-size: 260px; } }
+@media (min-width: 900px)  { .incipit-quote { width: 110px; } }
+@media (min-width: 1400px) { .incipit-quote { width: 160px; } }
 
 /* ── PLATINE CARD ── */
 .proj-img--vinyle { background: #0a0806; position: relative; overflow: hidden; }
