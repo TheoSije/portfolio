@@ -813,6 +813,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   gap: 16px;
   align-items: stretch; /* même hauteur */
   margin-bottom: 24px;
+  overflow: hidden; /* empêche le scroll horizontal */
 }
 .devices-left {
   flex: 0 0 36%;
@@ -837,7 +838,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 /* Desktop mockup */
 .desktop {
   position: relative;
-  width: 125%; /* déborde à droite, coupé par overflow:hidden */
+  width: 108%; /* déborde légèrement, coupé par overflow:hidden */
   flex-shrink: 0;
 }
 .desktop-frame {
