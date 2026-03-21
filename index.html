@@ -1009,26 +1009,6 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   <div class="xp-wrap">
   <button class="xp-nav-btn" id="xp-btn-next" aria-label="Suivant">&#8594;</button>
   <div class="xp-scroll">
-    <div class="proj-card proj-card--xp" onclick="openMiniSite('legalmate')">
-      <div class="proj-card-img proj-img--legalmate"></div>
-      <div class="proj-card-inner">
-        <span class="proj-card-name">Legalmate</span>
-        <p class="xp-card-desc">Obtenez des conseils légaux grâce à notre Intelligence Artificielle.</p>
-      </div>
-    </div>
-    <div class="proj-card proj-card--xp" onclick="openMiniSite('unheard')">
-      <div class="proj-card-img proj-img--unheard">
-        <div class="unheard-bg-anim"></div>
-        <div class="unheard-content">
-          <div class="unheard-emojis">🎵&nbsp;&nbsp;🔍</div>
-          <div class="unheard-title">UNHEARD</div>
-        </div>
-      </div>
-      <div class="proj-card-inner">
-        <span class="proj-card-name">Unheard</span>
-        <p class="xp-card-desc">Songs nobody listened to. Un player SoundCloud pour découvrir des tracks à 0 plays.</p>
-      </div>
-    </div>
     <div class="proj-card proj-card--xp" onclick="openMiniSite('incipit')">
       <div class="proj-card-img proj-img--incipit"></div>
       <div class="proj-card-inner">
@@ -1043,11 +1023,17 @@ nav.minisite-nav.minisite-nav--light .nav-role {
         <p class="xp-card-desc">Écoute et explore ta musique autour d'un vinyle interactif.</p>
       </div>
     </div>
-    <div class="proj-card proj-card--xp" onclick="openMiniSite('chess')">
-      <div class="proj-card-img proj-img--chess"></div>
+    <div class="proj-card proj-card--xp" onclick="openMiniSite('unheard')">
+      <div class="proj-card-img proj-img--unheard">
+        <div class="unheard-bg-anim"></div>
+        <div class="unheard-content">
+          <div class="unheard-emojis">🎵&nbsp;&nbsp;🔍</div>
+          <div class="unheard-title">UNHEARD</div>
+        </div>
+      </div>
       <div class="proj-card-inner">
-        <span class="proj-card-name">Chess Puzzles</span>
-        <p class="xp-card-desc">Puzzles d'échecs du plus simple au plus complexe.</p>
+        <span class="proj-card-name">Unheard</span>
+        <p class="xp-card-desc">Songs nobody listened to. Un player pour découvrir des tracks à 0 plays.</p>
       </div>
     </div>
     <div class="proj-card proj-card--xp" onclick="openMiniSite('soundhands')">
@@ -1063,11 +1049,25 @@ nav.minisite-nav.minisite-nav--light .nav-role {
         <p class="xp-card-desc">Contrôle le mix de Louise Chen avec tes mains grâce à la caméra.</p>
       </div>
     </div>
+    <div class="proj-card proj-card--xp" onclick="openMiniSite('chess')">
+      <div class="proj-card-img proj-img--chess"></div>
+      <div class="proj-card-inner">
+        <span class="proj-card-name">Chess Puzzles</span>
+        <p class="xp-card-desc">Puzzles d'échecs du plus simple au plus complexe.</p>
+      </div>
+    </div>
+    <div class="proj-card proj-card--xp" onclick="openMiniSite('legalmate')">
+      <div class="proj-card-img proj-img--legalmate"></div>
+      <div class="proj-card-inner">
+        <span class="proj-card-name">Legalmate</span>
+        <p class="xp-card-desc">Obtenez des conseils légaux grâce à notre Intelligence Artificielle.</p>
+      </div>
+    </div>
     <div class="proj-card proj-card--xp" onclick="openMiniSite('emojy')">
       <div class="proj-card-img proj-img--emojy"></div>
       <div class="proj-card-inner">
-        <span class="proj-card-name">Emojy Words</span>
-        <p class="xp-card-desc">Jeu de devinettes où chaque mot se cache derrière des emojis.</p>
+        <span class="proj-card-name">Ciné Émoji</span>
+        <p class="xp-card-desc">Devine le film caché derrière les emojis.</p>
       </div>
     </div>
   </div>
@@ -1444,7 +1444,7 @@ function showProject(id) {
 const persoLabels = {
   unheard: 'Unheard',
   vinyle: 'Platine',
-  emojy: 'Emojy Words',
+  emojy: 'Ciné Émoji',
   incipit: 'Inkipit',
   chess: 'Chess Puzzles',
   soundhands: 'Sound Hands',
