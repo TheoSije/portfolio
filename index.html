@@ -1048,12 +1048,19 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   display: block;
   flex-shrink: 0;
 }
-.looks-strip-thumb {
-  width: 240px;
+.looks-thumbs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  width: clamp(320px, 38vw, 560px);
+  flex-shrink: 0;
+  gap: 0;
+}
+.looks-thumbs-grid img {
+  width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  flex-shrink: 0;
 }
 
 @media (max-width: 900px) {
@@ -1888,7 +1895,7 @@ function renderImg(b) {
     const mainMedia = mainSrc?.match(/\.(mp4|webm|mov)$/i)
       ? `<video src="${mainSrc}" autoplay loop muted playsinline class="looks-strip-main"></video>`
       : `<img src="${mainSrc}" alt="" class="looks-strip-main">`;
-    const thumbsHtml = thumbSrcs.map(s=>`<img src="${s}" alt="" class="looks-strip-thumb">`).join('');
+    const thumbsHtml = `<div class="looks-thumbs-grid">${thumbSrcs.map(s=>`<img src="${s}" alt="">`).join('')}</div>`;
     return `<div class="block-looks-ia">${iphoneHtml}<div class="looks-strip">${mainMedia}${thumbsHtml}</div></div>`;
   }
   if (b.t==='devices') {
