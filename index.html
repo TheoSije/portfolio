@@ -1014,6 +1014,32 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 }
 .desktop-dot.active { background: rgba(0,0,0,.55); }
 
+/* ── LOOKS IA GRID (right side of devices block) ── */
+.looks-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 4px;
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+}
+.looks-main {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.looks-thumbs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 4px;
+}
+.looks-thumbs img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.devices-right--looks {
+  padding: 0 !important;
+  overflow: hidden;
+}
+
 @media (max-width: 900px) {
   .block-devices { flex-direction: column; margin-right: 0; }
   .devices-left { flex: none; width: 100%; }
@@ -1688,7 +1714,7 @@ const P = {
     blocks:[
       {t:'devices',n:'01',srcs:['img/gl-app-01.jpg','img/gl-app-02.jpg','img/gl-app-03.jpg','img/gl-app-04.jpg','img/gl-app-05.jpg','img/gl-app-06.jpg','img/gl-app-07.jpg'],desktopSrcs:['img/homedesktop.jpg','img/hometendance.jpg'],c:'<strong>App & web, refonte totale.</strong> En cohérence avec le design system, l\'application mobile et le site desktop ont été entièrement repensés. Indice de satisfaction 150. Big up à Flo, dev iOS de génie — embauche-le, il est freelance et il est brillant.'},
       {t:'ds',n:'02',c:'<strong>Design System.</strong> Composants vivants, documentation Zeroheight, variables unifiées. La fondation sur laquelle tout le reste repose.'},
-      {t:'duo',n:'03',c:'<strong>Looks IA Gen.</strong> Création de visuels mode avec des produits portés reliés au vrai catalogue. Retouche d\'images en batch via un flow Weavy, puis reconstruction du flow en Python.'},
+      {t:'looks-ia',n:'03',srcs:['img/gl-app-01.jpg','img/gl-app-02.jpg','img/gl-app-03.jpg','img/gl-app-04.jpg','img/gl-app-05.jpg','img/gl-app-06.jpg','img/gl-app-07.jpg'],mediaSrcs:['img/gl-look-05.mp4','img/gl-look-01.jpg','img/gl-look-02.jpg','img/gl-look-03.jpg','img/gl-look-04.jpg'],c:'<strong>Looks IA Gen.</strong> Création de visuels mode avec des produits portés reliés au vrai catalogue. Retouche d\'images en batch via un flow Weavy, puis reconstruction du flow en Python.'},
       {t:'full',n:'05',c:'<strong>Chatbot Gala.</strong> Création de l\'assistant e-com Gala — onboarding conversationnel, recommandation produit, navigation augmentée.'},
       {t:'duo',n:'06',c:'<strong>Centaines d\'apps RPA Low Code.</strong> PowerApp Microsoft avec un design system dédié pour générer des pages ultra rapidement. Big up à Patrick Moysan — un type génial.'},
       {t:'full',n:'07',c:'<strong>Design Thinking, toujours.</strong> Chaque sujet, ultra user testé. Sessions dans une salle à double-sens. Une boucle itérative sans relâche. Shoutout à Camille, Malik, Thuan et Manu — mon équipe de product designers aux Galeries. Talents immenses.'}
@@ -1834,6 +1860,17 @@ function renderImg(b) {
     </div>
   </div>
 </div>`;
+  }
+  if (b.t==='looks-ia') {
+    const slides = (b.srcs||[]).map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="" loading="lazy">`}</div>`).join('');
+    const dots = (b.srcs||[]).map((_,i)=>`<span class="iphone-dot${i===0?' active':''}"></span>`).join('');
+    const iphoneHtml = `<div class="iphone-outer"><div class="iphone"><div class="iphone-screen" data-slider>${slides}</div><img class="iphone-frame" src="img/iphone.png" alt="" draggable="false"></div><div class="iphone-dots">${dots}</div></div>`;
+    const [mainSrc, ...thumbSrcs] = b.mediaSrcs || [];
+    const mainMedia = mainSrc?.match(/\.(mp4|webm|mov)$/i)
+      ? `<video src="${mainSrc}" autoplay loop muted playsinline class="looks-main"></video>`
+      : `<img src="${mainSrc}" alt="" class="looks-main">`;
+    const thumbsHtml = thumbSrcs.map(s=>`<img src="${s}" alt="">`).join('');
+    return `<div class="block-devices"><div class="devices-left">${iphoneHtml}</div><div class="devices-right devices-right--looks"><div class="looks-grid">${mainMedia}<div class="looks-thumbs">${thumbsHtml}</div></div></div></div>`;
   }
   if (b.t==='devices') {
     const slides = (b.srcs||[]).map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="" loading="lazy">`}</div>`).join('');
