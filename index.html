@@ -1020,7 +1020,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   flex-direction: row;
   align-items: stretch;
   gap: 16px;
-  min-height: 560px;
+  height: 560px;
   margin-bottom: 24px;
   margin-right: calc(-1 * var(--h-pad));
   overflow-x: auto;
@@ -1063,31 +1063,30 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   display: block;
 }
 
-/* ── SHOES 360 — grille 8×2 ── */
+/* ── SHOES 360 — strip inline ── */
 .shoes-grid {
-  display: grid;
-  grid-template-columns: repeat(8, 220px);
-  grid-template-rows: 1fr 1fr;
+  display: flex;
+  flex-direction: row;
   flex-shrink: 0;
   gap: 0;
   border-radius: 8px;
   overflow: hidden;
+  height: 100%;
 }
 .shoes-grid-cell {
-  width: 220px;
+  flex: 0 0 auto;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 11px;
   font-weight: 600;
   color: rgba(0,0,0,.35);
-  letter-spacing: .05em;
 }
 .shoes-grid-cell video,
 .shoes-grid-cell img {
-  width: 100%;
   height: 100%;
-  object-fit: cover;
+  width: auto;
   display: block;
 }
 
@@ -1941,7 +1940,7 @@ function renderImg(b) {
       const isVid = src.match(/\.(mp4|webm|mov)$/i);
       return `<div class="shoes-grid-cell">${isVid?`<video src="${src}" autoplay loop muted playsinline></video>`:`<img src="${src}" alt="">`}</div>`;
     }).join('') : palette.map((c,i)=>`<div class="shoes-grid-cell" style="background:${c}"><span>${i+1}</span></div>`).join('');
-    return `<div class="block-looks-ia">${iphoneHtml}<div class="shoes-grid" style="grid-template-columns:repeat(${cols},480px);grid-template-rows:1fr">${cells}</div></div>`;
+    return `<div class="block-looks-ia">${iphoneHtml}<div class="shoes-grid">${cells}</div></div>`;
   }
   if (b.t==='devices') {
     const slides = (b.srcs||[]).map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="" loading="lazy">`}</div>`).join('');
