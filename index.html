@@ -1031,7 +1031,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 .block-looks-ia::-webkit-scrollbar { display: none; }
 .block-looks-ia .devices-left {
   flex: 0 0 auto;
-  width: clamp(260px, 28vw, 360px);
+  width: clamp(320px, 36vw, 460px);
 }
 .looks-strip {
   display: flex;
@@ -1057,6 +1057,34 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   gap: 0;
 }
 .looks-thumbs-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── SHOES 360 — grille 8×2 ── */
+.shoes-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 220px);
+  grid-template-rows: 1fr 1fr;
+  flex-shrink: 0;
+  gap: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.shoes-grid-cell {
+  width: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(0,0,0,.35);
+  letter-spacing: .05em;
+}
+.shoes-grid-cell video,
+.shoes-grid-cell img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1738,6 +1766,7 @@ const P = {
       {t:'devices',n:'01',srcs:['img/gl-app-01.jpg','img/gl-app-02.jpg','img/gl-app-03.jpg','img/gl-app-04.jpg','img/gl-app-05.jpg','img/gl-app-06.jpg','img/gl-app-07.jpg'],desktopSrcs:['img/homedesktop.jpg','img/hometendance.jpg'],c:'<strong>App & web, refonte totale.</strong> En cohérence avec le design system, l\'application mobile et le site desktop ont été entièrement repensés. Indice de satisfaction 150. Big up à Flo, dev iOS de génie — embauche-le, il est freelance et il est brillant.'},
       {t:'ds',n:'02',c:'<strong>Design System.</strong> Composants vivants, documentation Zeroheight, variables unifiées. La fondation sur laquelle tout le reste repose.'},
       {t:'looks-ia',n:'03',srcs:['img/gl-look-phone.mp4'],mediaSrcs:['img/gl-look-05.mp4','img/gl-look-01.jpg','img/gl-look-02.jpg','img/gl-look-03.jpg','img/gl-look-04.jpg'],c:'<strong>Looks IA Gen.</strong> Création de visuels mode avec des produits portés reliés au vrai catalogue. Retouche d\'images en batch via un flow Weavy, puis reconstruction du flow en Python.'},
+      {t:'shoes-360',n:'04',srcs:['img/gl-shoe-weston.mp4'],cells:['img/gl-shoe-01.mp4','img/gl-shoe-02.mp4','img/gl-shoe-03.mp4','img/gl-shoe-04.mp4','img/gl-shoe-05.mp4','img/gl-shoe-06.mp4','img/gl-shoe-07.mp4'],c:'<strong>360° Spin Shoes.</strong> Transformation des visuels chaussures du catalogue en vidéos 360° interactives via un flow Weavy automatisé.'},
       {t:'full',n:'05',c:'<strong>Chatbot Gala.</strong> Création de l\'assistant e-com Gala — onboarding conversationnel, recommandation produit, navigation augmentée.'},
       {t:'duo',n:'06',c:'<strong>Centaines d\'apps RPA Low Code.</strong> PowerApp Microsoft avec un design system dédié pour générer des pages ultra rapidement. Big up à Patrick Moysan — un type génial.'},
       {t:'full',n:'07',c:'<strong>Design Thinking, toujours.</strong> Chaque sujet, ultra user testé. Sessions dans une salle à double-sens. Une boucle itérative sans relâche. Shoutout à Camille, Malik, Thuan et Manu — mon équipe de product designers aux Galeries. Talents immenses.'}
@@ -1897,6 +1926,22 @@ function renderImg(b) {
       : `<img src="${mainSrc}" alt="" class="looks-strip-main">`;
     const thumbsHtml = `<div class="looks-thumbs-grid">${thumbSrcs.map(s=>`<img src="${s}" alt="">`).join('')}</div>`;
     return `<div class="block-looks-ia">${iphoneHtml}<div class="looks-strip">${mainMedia}${thumbsHtml}</div></div>`;
+  }
+  if (b.t==='shoes-360') {
+    // iPhone gauche
+    const srcs = b.srcs || [];
+    const iSlides = srcs.map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="" loading="lazy">`}</div>`).join('');
+    const iDots = srcs.length > 1 ? `<div class="iphone-dots">${srcs.map((_,i)=>`<span class="iphone-dot${i===0?' active':''}"></span>`).join('')}</div>` : '';
+    const iphoneHtml = `<div class="devices-left"><div class="iphone-outer"><div class="iphone"><div class="iphone-screen"${srcs.length>1?' data-slider':''}>${iSlides}</div><img class="iphone-frame" src="img/iphone.png" alt="" draggable="false"></div>${iDots}</div></div>`;
+    // Grille 8×2 — placeholders colorés ou vraies vidéos
+    const palette = ['#E8DDD4','#D4DDE8','#DDD4E8','#D4E8DD','#E8D4DD','#DDE8D4','#D4D4E8','#E8D4D4','#C8BFB6','#B6BFC8','#BFB6C8','#B6C8BF','#C8B6BF','#BFC8B6','#B6B6C8','#C8B6B6'];
+    const cellList = b.cells || [];
+    const cols = cellList.length ? Math.ceil(cellList.length / 2) : 8;
+    const cells = cellList.length ? cellList.map(src=>{
+      const isVid = src.match(/\.(mp4|webm|mov)$/i);
+      return `<div class="shoes-grid-cell">${isVid?`<video src="${src}" autoplay loop muted playsinline></video>`:`<img src="${src}" alt="">`}</div>`;
+    }).join('') : palette.map((c,i)=>`<div class="shoes-grid-cell" style="background:${c}"><span>${i+1}</span></div>`).join('');
+    return `<div class="block-looks-ia">${iphoneHtml}<div class="shoes-grid" style="grid-template-columns:repeat(${cols},220px)">${cells}</div></div>`;
   }
   if (b.t==='devices') {
     const slides = (b.srcs||[]).map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="" loading="lazy">`}</div>`).join('');
