@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="18 8 120 148">
+  <defs>
+    <linearGradient id="pride" x1="0" y1="0" x2="1" y2="1"
+                    gradientUnits="objectBoundingBox">
+      <!-- 6 stops, each cycling through pride colors with phase offset -->
+      <!-- R=#E40303  O=#FF8C00  Y=#FFED00  G=#008026  B=#004DFF  P=#750787 -->
+      <stop offset="0%"   stop-color="#E40303">
+        <animate attributeName="stop-color"
+          values="#E40303;#FF8C00;#FFED00;#008026;#004DFF;#750787;#E40303"
+          dur="3s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="20%"  stop-color="#FF8C00">
+        <animate attributeName="stop-color"
+          values="#FF8C00;#FFED00;#008026;#004DFF;#750787;#E40303;#FF8C00"
+          dur="3s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="40%"  stop-color="#FFED00">
+        <animate attributeName="stop-color"
+          values="#FFED00;#008026;#004DFF;#750787;#E40303;#FF8C00;#FFED00"
+          dur="3s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="60%"  stop-color="#008026">
+        <animate attributeName="stop-color"
+          values="#008026;#004DFF;#750787;#E40303;#FF8C00;#FFED00;#008026"
+          dur="3s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="80%"  stop-color="#004DFF">
+        <animate attributeName="stop-color"
+          values="#004DFF;#750787;#E40303;#FF8C00;#FFED00;#008026;#004DFF"
+          dur="3s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" stop-color="#750787">
+        <animate attributeName="stop-color"
+          values="#750787;#E40303;#FF8C00;#FFED00;#008026;#004DFF;#750787"
+          dur="3s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+  </defs>
+
+  <!-- Cursor fill with animated pride gradient -->
+  <path d="M15.5409 12.3926C14.8582 9.12947 18.3514 6.59151 21.2438 8.2492L136.503 74.3057C139.436 75.9864 138.949 80.3568 135.718 81.3507L79.7763 98.5591C78.91 98.8256 78.165 99.3881 77.6716 100.148L49.6737 143.277C47.7961 146.17 43.3575 145.34 42.6513 141.965L15.5409 12.3926Z"
+        fill="url(#pride)"/>
+
+  <!-- White stroke outline -->
+  <path d="M134.582 77.6575L78.6401 94.866C76.9077 95.399 75.4181 96.5244 74.4312 98.0447L46.4332 141.173L19.3228 11.6012L134.582 77.6575Z"
+        stroke="white" stroke-width="5" fill="none" stroke-linejoin="round"/>
+</svg>
