@@ -80,6 +80,7 @@ body.dark .about-links a { color: #f0ece4 !important; }
 body.dark .about-links a::before { opacity: .25 !important; }
 
 /* WIL section */
+body.dark .wil-section, body.dark .wil-outer { background: linear-gradient(145deg, #141210 0%, #0d0b09 100%) !important; }
 body.dark .wil-section { background: linear-gradient(145deg, #141210 0%, #0d0b09 100%) !important; }
 body.dark .wil-header .section-title { color: #f0ece4 !important; }
 body.dark .wil-header .section-sub { color: rgba(240,236,228,.38) !important; }
@@ -306,18 +307,19 @@ body.fading { opacity: 0; }
 .exp-section { border-bottom: var(--r); }
 
 /* ── WHAT I LOVE ── */
-.wil-section {
+.wil-outer {
   position: relative;
+  /* height set dynamically by JS */
+}
+.wil-section {
+  position: sticky;
+  top: 0;
   height: 90vh;
   min-height: 560px;
   background: linear-gradient(145deg, #f5f2ec 0%, #e8e3d8 100%);
-  overflow-x: auto;
-  overflow-y: hidden;
-  cursor: grab;
-  scrollbar-width: none;
+  overflow: hidden;
+  cursor: default;
 }
-.wil-section::-webkit-scrollbar { display: none; }
-.wil-section:active { cursor: grabbing; }
 .wil-header {
   position: absolute;
   top: 0;
@@ -1914,13 +1916,15 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   </section>
 
   <!-- ── WHAT I LOVE ── -->
-  <section class="wil-section">
-    <div class="wil-header">
-      <h2 class="section-title">What I Love</h2>
-      <p class="section-sub">Les œuvres qui ont construit celui que je suis.</p>
-    </div>
-    <div class="wil-canvas" id="wil-canvas"></div>
-  </section>
+  <div class="wil-outer">
+    <section class="wil-section">
+      <div class="wil-header">
+        <h2 class="section-title">What I Love</h2>
+        <p class="section-sub">Les œuvres qui ont construit celui que je suis.</p>
+      </div>
+      <div class="wil-canvas" id="wil-canvas"></div>
+    </section>
+  </div>
 
   <section class="about">
     <div class="about-text">Senior Product Designer & Head of Design basé à Paris. 10 ans à l'intersection du craft, de la stratégie produit et des organisations — entre startups, scale-ups et aujourd'hui les Galeries Lafayette. Je conçois des interfaces, construis des systèmes, structure des équipes, et explore ce que l'IA change vraiment dans notre métier.</div>
@@ -2377,18 +2381,39 @@ function toggleTheme() {
     </div>`;
   }).join('');
 
-  // Parallax Y only (X handled by scroll)
-  let ty=0, cy=0;
-  function wilTick(){
-    cy += (ty-cy)*0.07;
-    canvas.style.transform = `translateY(${cy}px)`;
+  // ── Sticky horizontal scroll ──
+  const outer = canvas.closest('.wil-outer');
+  const CANVAS_W = 2700;
+
+  function updateOuterHeight() {
+    const extra = Math.max(0, CANVAS_W - window.innerWidth);
+    outer.style.height = `calc(90vh + ${extra}px)`;
+  }
+  updateOuterHeight();
+  window.addEventListener('resize', updateOuterHeight);
+
+  // Parallax Y + scroll-driven X
+  let ty = 0, cy = 0, tx = 0, ctx = 0;
+  function wilTick() {
+    cy += (ty - cy) * 0.07;
+    ctx += (tx - ctx) * 0.07;
+    canvas.style.transform = `translateX(${ctx}px) translateY(${cy}px)`;
     requestAnimationFrame(wilTick);
   }
   wilTick();
+
   document.addEventListener('mousemove', e => {
-    const hh = window.innerHeight/2;
+    const hh = window.innerHeight / 2;
     ty = (e.clientY - hh) / hh * 16;
   });
+
+  window.addEventListener('scroll', () => {
+    const rect = outer.getBoundingClientRect();
+    const totalScrollable = outer.offsetHeight - window.innerHeight;
+    if (totalScrollable <= 0) return;
+    const progress = Math.max(0, Math.min(1, -rect.top / totalScrollable));
+    tx = -progress * Math.max(0, CANVAS_W - window.innerWidth);
+  }, { passive: true });
 })();
 
 // ══ MINI SITES ══
