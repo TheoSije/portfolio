@@ -3,7 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>theo.design</title>
+<title>Théo Jégousse — Product Designer</title>
+<meta name="description" content="Portfolio de Théo Jégousse, Head of Design aux Galeries Lafayette. 10 ans d'expérience en product design pour Deezer, Devialet, Mauboussin et d'autres.">
+<meta name="author" content="Théo Jégousse">
+<link rel="canonical" href="https://theo.design/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://theo.design/">
+<meta property="og:title" content="Théo Jégousse — Product Designer">
+<meta property="og:description" content="Portfolio de Théo Jégousse, Head of Design aux Galeries Lafayette. 10 ans d'expérience en product design pour Deezer, Devialet, Mauboussin et d'autres.">
+<meta property="og:image" content="https://theo.design/img/og-image.jpg">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="theo.design">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Théo Jégousse — Product Designer">
+<meta name="twitter:description" content="Portfolio de Théo Jégousse, Head of Design aux Galeries Lafayette. 10 ans d'expérience en product design pour Deezer, Devialet, Mauboussin et d'autres.">
+<meta name="twitter:image" content="https://theo.design/img/og-image.jpg">
+
+<!-- Security -->
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https: data:; media-src 'self'; connect-src 'self' https://itunes.apple.com https://api.github.com;">
 <link id="theme-css" rel="stylesheet" href="css/pro.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ephesis&family=Roboto:wght@300;400;500;700;900&family=Roboto+Condensed:wght@700;900&display=swap">
@@ -1501,9 +1523,65 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 @media (min-width: 1024px) {
   .context-text { column-count: 2; column-gap: clamp(40px, 5vw, 80px); max-width: none; }
 }
+
+/* ── SKIP LINK ── */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 16px;
+  padding: 8px 16px;
+  background: #0D99FF;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 6px 6px;
+  z-index: 99999;
+  transition: top 0s;
+}
+.skip-link:focus { top: 0; }
+
+/* ── FOCUS INDICATORS ── */
+:focus-visible {
+  outline: 2px solid #0D99FF;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+button:focus-visible, a:focus-visible { border-radius: 4px; }
+.proj-card:focus-visible, .stack-pill:focus-visible { border-radius: 12px; }
+
+/* ── PREFERS-REDUCED-MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Théo Jégousse",
+  "url": "https://theo.design",
+  "jobTitle": "Head of Design",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Galeries Lafayette"
+  },
+  "description": "Product Designer avec 10 ans d'expérience en digital. Projets pour Galeries Lafayette, Deezer, Devialet, Mauboussin.",
+  "image": "https://theo.design/img/og-image.jpg",
+  "sameAs": [
+    "https://www.linkedin.com/in/theojegousse/",
+    "https://github.com/TheoSije"
+  ]
+}
+</script>
 </head>
 <body class="on-home">
+<a href="#main-content" class="skip-link">Aller au contenu principal</a>
 
 <nav>
   <a class="nav-logo" href="#" onclick="document.body.classList.contains('minisite-open')?closeMiniSite():showHome();return false;">theo.design</a>
@@ -1518,7 +1596,8 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 <span id="copy-tooltip"><span class="check">✓</span> Email copié</span>
 
 <!-- ══ HOME ══ -->
-<div id="home">
+<div id="home" tabindex="-1">
+<span id="main-content"></span>
   <section class="hero">
     <h1 class="hero-title"><span class="t1">Product Design</span><span class="t2"><span class="x-spin">×</span> Code <span class="x-spin">×</span> AI</span></h1>
     <p class="hero-sub">Hello, I'm Théo<span class="profile-chip" onclick="this.classList.toggle('active')"><img class="profile-thumb" src="https://dam.malt.com/8caf3429-6d3a-4021-be11-83800b0e76c1?gravity=face&func=face&face_margin=70&w=440&h=440&force_format=webp" alt="Théo" /><span class="profile-popup"><!-- remplace par <video autoplay muted loop playsinline src="ta-video.mp4"></video> --><img class="profile-popup-img" src="https://dam.malt.com/8caf3429-6d3a-4021-be11-83800b0e76c1?gravity=face&func=face&face_margin=70&w=440&h=440&force_format=webp" alt="Théo" /></span></span>. Product designer with 10+ years of experience in digital products. Today I lead a team of designers at Galeries Lafayette.</p>
@@ -1554,7 +1633,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
     <div class="proj-card" onclick="showProject('gl')">
       <div class="proj-card-img proj-img--gl">
         <video class="proj-card-video" src="img/gl-card.mp4" muted loop playsinline preload="auto"></video>
-        <div class="proj-card-logo-badge"><img src="https://www.google.com/s2/favicons?domain=galerieslafayette.com&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='GL'"></div>
+        <div class="proj-card-logo-badge"><img src="https://www.google.com/s2/favicons?domain=galerieslafayette.com&sz=128" alt="Logo Galeries Lafayette" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='GL'"></div>
         <div class="proj-card-inner">
           <span class="proj-card-year">2024</span>
           <span class="proj-card-name">Galeries Lafayette</span>
@@ -1564,7 +1643,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
     <div class="proj-card" onclick="showProject('deezer')">
       <div class="proj-card-img proj-img--deezer">
         <video class="proj-card-video" src="img/deezer-card.mp4" muted loop playsinline preload="auto" data-start-time="4" poster="img/deezer-card-poster.jpg"></video>
-        <div class="proj-card-logo-badge"><img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='DZR'"></div>
+        <div class="proj-card-logo-badge"><img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=128" alt="Logo Deezer" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='DZR'"></div>
         <div class="proj-card-inner">
           <span class="proj-card-year">2023</span>
           <span class="proj-card-name">Deezer</span>
@@ -1574,7 +1653,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
     <div class="proj-card" onclick="showProject('devialet')">
       <div class="proj-card-img proj-img--devialet">
         <video class="proj-card-video" src="img/devialet-card.mp4" muted loop playsinline preload="auto"></video>
-        <div class="proj-card-logo-badge"><img src="https://www.google.com/s2/favicons?domain=devialet.com&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='DVL'"></div>
+        <div class="proj-card-logo-badge"><img src="https://www.google.com/s2/favicons?domain=devialet.com&sz=128" alt="Logo Devialet" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='DVL'"></div>
         <div class="proj-card-inner">
           <span class="proj-card-year">2023</span>
           <span class="proj-card-name">Devialet</span>
@@ -1593,7 +1672,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
     <div class="proj-card" onclick="showProject('mauboussin')">
       <div class="proj-card-img proj-img--mauboussin">
         <video class="proj-card-video mauboussin-video" src="img/mauboussin-card.mp4" muted loop playsinline preload="auto"></video>
-        <div class="proj-card-logo-badge"><img src="https://www.google.com/s2/favicons?domain=mauboussin.fr&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='MBN'"></div>
+        <div class="proj-card-logo-badge"><img src="https://www.google.com/s2/favicons?domain=mauboussin.fr&sz=128" alt="Logo Mauboussin" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='MBN'"></div>
         <div class="proj-card-inner">
           <span class="proj-card-year">2025</span>
           <span class="proj-card-name">Mauboussin</span>
@@ -1630,7 +1709,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
           <div class="tmm-icon" style="--r:155px;--d:19s;--del:-11.4s;--s:26px"><img src="https://www.google.com/s2/favicons?domain=boomplay.com&sz=64" alt=""></div>
           <div class="tmm-icon" style="--r:155px;--d:19s;--del:-15.2s;--s:26px"><img src="https://www.google.com/s2/favicons?domain=napster.com&sz=64" alt=""></div>
         </div>
-        <div class="proj-card-logo-badge" style="padding:0"><img src="https://www.google.com/s2/favicons?domain=tunemymusic.com&sz=128" alt="" width="100%" height="100%" style="object-fit:cover;display:block" onerror="this.style.display='none';this.parentElement.textContent='TMM'"></div>
+        <div class="proj-card-logo-badge" style="padding:0"><img src="https://www.google.com/s2/favicons?domain=tunemymusic.com&sz=128" alt="Logo Tune My Music" width="100%" height="100%" style="object-fit:cover;display:block" onerror="this.style.display='none';this.parentElement.textContent='TMM'"></div>
         <div class="proj-card-inner">
           <span class="proj-card-year">2024</span>
           <span class="proj-card-name">Tune My Music</span>
@@ -1803,7 +1882,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
           <div class="ep-chr-yr">2023</div>
           <span class="ep-chr-period">2023 — Aujourd'hui</span>
           <div class="ep-chr-head">
-            <div class="ep-chr-logo-badge"><img src="https://www.google.com/s2/favicons?domain=galerieslafayette.com&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='GL'"></div>
+            <div class="ep-chr-logo-badge"><img src="https://www.google.com/s2/favicons?domain=galerieslafayette.com&sz=128" alt="Logo Galeries Lafayette" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='GL'"></div>
             <span class="ep-chr-co">Galeries Lafayette</span>
           </div>
           <div class="ep-chr-role">Head of Design</div>
@@ -1814,7 +1893,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
           <div class="ep-chr-yr">2022</div>
           <span class="ep-chr-period">2022 — 2023</span>
           <div class="ep-chr-head">
-            <div class="ep-chr-logo-badge"><img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='DZR'"></div>
+            <div class="ep-chr-logo-badge"><img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=128" alt="Logo Deezer" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='DZR'"></div>
             <span class="ep-chr-co">Deezer</span>
           </div>
           <div class="ep-chr-role">Lead Product Designer</div>
@@ -1825,7 +1904,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
           <div class="ep-chr-yr">2019</div>
           <span class="ep-chr-period">2019 — 2022</span>
           <div class="ep-chr-head">
-            <div class="ep-chr-logo-badge"><img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='DZR'"></div>
+            <div class="ep-chr-logo-badge"><img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=128" alt="Logo Deezer" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='DZR'"></div>
             <span class="ep-chr-co">Deezer</span>
           </div>
           <div class="ep-chr-role">Senior Product Designer · Design System Tempo</div>
@@ -1847,7 +1926,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
           <div class="ep-chr-yr">2015</div>
           <span class="ep-chr-period">2015 — 2017</span>
           <div class="ep-chr-head">
-            <div class="ep-chr-logo-badge"><img src="https://www.google.com/s2/favicons?domain=somfy.com&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='SMF'"></div>
+            <div class="ep-chr-logo-badge"><img src="https://www.google.com/s2/favicons?domain=somfy.com&sz=128" alt="Logo Somfy" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='SMF'"></div>
             <span class="ep-chr-co">Somfy</span>
           </div>
           <div class="ep-chr-role">Senior Product Designer</div>
@@ -1858,7 +1937,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
           <div class="ep-chr-yr">2014</div>
           <span class="ep-chr-period">2014 — 2015</span>
           <div class="ep-chr-head">
-            <div class="ep-chr-logo-badge"><img src="https://www.google.com/s2/favicons?domain=devialet.com&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='DVL'"></div>
+            <div class="ep-chr-logo-badge"><img src="https://www.google.com/s2/favicons?domain=devialet.com&sz=128" alt="Logo Devialet" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='DVL'"></div>
             <span class="ep-chr-co">Devialet</span>
           </div>
           <div class="ep-chr-role">Senior Product Designer</div>
@@ -1891,7 +1970,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
           <div class="ep-chr-yr">2009</div>
           <span class="ep-chr-period">2009</span>
           <div class="ep-chr-head">
-            <div class="ep-chr-logo-badge"><img src="https://www.google.com/s2/favicons?domain=fft.fr&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='FFT'"></div>
+            <div class="ep-chr-logo-badge"><img src="https://www.google.com/s2/favicons?domain=fft.fr&sz=128" alt="Logo Fédération Française de Tennis" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='FFT'"></div>
             <span class="ep-chr-co">FFT</span>
           </div>
           <div class="ep-chr-role">Graphiste</div>
@@ -1913,7 +1992,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
           <div class="ep-chr-yr">2007</div>
           <span class="ep-chr-period">2007</span>
           <div class="ep-chr-head">
-            <div class="ep-chr-logo-badge"><img src="https://www.google.com/s2/favicons?domain=condenast.com&sz=128" alt="" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='CN'"></div>
+            <div class="ep-chr-logo-badge"><img src="https://www.google.com/s2/favicons?domain=condenast.com&sz=128" alt="Logo Condé Nast" width="100%" height="100%" style="object-fit:contain;display:block" onerror="this.style.display='none';this.parentElement.textContent='CN'"></div>
             <span class="ep-chr-co">Condé Nast</span>
           </div>
           <div class="ep-chr-role">Design Intern</div>
@@ -2021,10 +2100,14 @@ const P = {
 };
 const proKeys = Object.keys(P);
 
+function imgAlt(src) {
+  return src.split('/').pop().replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
+}
+
 function renderImg(b) {
   if (b.t==='iphones') {
     const renderPhone = (srcs) => {
-      const slides = srcs.map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="" loading="lazy">`}</div>`).join('');
+      const slides = srcs.map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="${imgAlt(s)}" loading="lazy">`}</div>`).join('');
       const dots = srcs.map((_,i)=>`<span class="iphone-dot${i===0?' active':''}"></span>`).join('');
       return `<div class="iphone-outer"><div class="iphone"><div class="iphone-screen" data-slider>${slides}</div><img class="iphone-frame" src="img/iphone.png" alt="" draggable="false"></div><div class="iphone-dots">${dots}</div></div>`;
     };
@@ -2037,7 +2120,7 @@ function renderImg(b) {
   if (b.t==='logo-reveal') {
     const pts = b.points.map(p=>`<div class="lr-point"><div class="lr-title">${p.title}</div><div class="lr-desc">→ ${p.desc}</div></div>`).join('');
     const verbatims = b.verbatims ? `<div class="lr-verbatims">${b.verbatims.map(q=>`<div class="lr-verbatim"><span class="lr-verbatim-mark">"</span><span class="lr-verbatim-text">${q}</span></div>`).join('')}</div>` : '';
-    return `<div class="block-logo-reveal"><div class="logo-reveal-inner"><div class="logo-reveal-logo"><img src="${b.src}" alt=""></div><div class="logo-reveal-list">${pts}${verbatims}</div></div></div>`;
+    return `<div class="block-logo-reveal"><div class="logo-reveal-inner"><div class="logo-reveal-logo"><img src="${b.src}" alt="${b.name||imgAlt(b.src)}"></div><div class="logo-reveal-list">${pts}${verbatims}</div></div></div>`;
   }
   if (b.t==='naming') {
     const names = 'LA DETAXE / REFUND PAL / FAST DETAXE / TAX BUSTER / DETAX N GO / TAX IZY / EXPRESS TAX / TAXOS / SWAGTAX / MONEY TAX / WEFEE / ZENTAX / REFUNDS HUB / TAXFREENOW / TAXREPAID / EZTAX / CHILLTAX / REFUNDLY / TAXSPARE / TAXANA / HAPPYTAX / EASYREFUND / CLAIMEASY / HOMETAX / REFUND NOW / FLIP TAX / SAVE VAT / RABBIT DETAX / REFUND HERO / GRABTAX / TAX\'N\'GO / EASYDETAXE / VAT-NOW / GALATAX / SNAPTAX / <span class="naming-highlight">GOTAXFREE</span> / FAST REFUND / RECLAIMED / SPEEDY REFUNDS / CLAIMYTAX / RECLAIM NOW / TAXFREE / JUST-TAX-FREE / GETMYTAX / RETAX / REFUNDIT / EXPRESS REFUND / LIBERTAX / REFUNDABLE / VATIZY / SKIPTAX / JUST DETAX FREE / TAXFREEGO / FLASHTAX / LEAPTAX / QUICKCLAIM / TURBO REFUND / ZIPTAX / TAXRECUP / SMARTAX / GL TAX / REFUNDLE / YESTAX / BYE TAX / LOWFEES / FASTAX / ZEN REFUND / CLEARTAX / RE-FUND / RELAX TAX / HAPPY REFUND / MONEYBACK / GO-VAT / TAX-DETAX / DETAXE ME / FAIR VAT';
@@ -2152,21 +2235,21 @@ function renderImg(b) {
   if (b.t==='looks-ia') {
     // iPhone gauche : vidéo ou slides
     const srcs = b.srcs || [];
-    const iSlides = srcs.map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="" loading="lazy">`}</div>`).join('');
+    const iSlides = srcs.map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="${imgAlt(s)}" loading="lazy">`}</div>`).join('');
     const iDots = srcs.length > 1 ? `<div class="iphone-dots">${srcs.map((_,i)=>`<span class="iphone-dot${i===0?' active':''}"></span>`).join('')}</div>` : '';
     const iphoneHtml = `<div class="devices-left"><div class="iphone-outer"><div class="iphone"><div class="iphone-screen"${srcs.length>1?' data-slider':''}>${iSlides}</div><img class="iphone-frame" src="img/iphone.png" alt="" draggable="false"></div>${iDots}</div></div>`;
     // Strip droite : 1 grande vidéo + N images fixed-width, sans gouttière
     const [mainSrc, ...thumbSrcs] = b.mediaSrcs || [];
     const mainMedia = mainSrc?.match(/\.(mp4|webm|mov)$/i)
       ? `<video src="${mainSrc}" autoplay loop muted playsinline class="looks-strip-main"></video>`
-      : `<img src="${mainSrc}" alt="" class="looks-strip-main">`;
-    const thumbsHtml = `<div class="looks-thumbs-grid">${thumbSrcs.map(s=>`<img src="${s}" alt="">`).join('')}</div>`;
+      : `<img src="${mainSrc}" alt="${imgAlt(mainSrc)}" class="looks-strip-main">`;
+    const thumbsHtml = `<div class="looks-thumbs-grid">${thumbSrcs.map(s=>`<img src="${s}" alt="${imgAlt(s)}">`).join('')}</div>`;
     return `<div class="block-looks-ia">${iphoneHtml}<div class="looks-strip">${mainMedia}${thumbsHtml}</div></div>`;
   }
   if (b.t==='shoes-360') {
     // iPhone gauche
     const srcs = b.srcs || [];
-    const iSlides = srcs.map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="" loading="lazy">`}</div>`).join('');
+    const iSlides = srcs.map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="${imgAlt(s)}" loading="lazy">`}</div>`).join('');
     const iDots = srcs.length > 1 ? `<div class="iphone-dots">${srcs.map((_,i)=>`<span class="iphone-dot${i===0?' active':''}"></span>`).join('')}</div>` : '';
     const iphoneHtml = `<div class="devices-left"><div class="iphone-outer"><div class="iphone"><div class="iphone-screen"${srcs.length>1?' data-slider':''}>${iSlides}</div><img class="iphone-frame" src="img/iphone.png" alt="" draggable="false"></div>${iDots}</div></div>`;
     // Grille 8×2 — placeholders colorés ou vraies vidéos
@@ -2175,16 +2258,16 @@ function renderImg(b) {
     const cols = cellList.length || 8;
     const cells = cellList.length ? cellList.map(src=>{
       const isVid = src.match(/\.(mp4|webm|mov)$/i);
-      return `<div class="shoes-grid-cell">${isVid?`<video src="${src}" autoplay loop muted playsinline></video>`:`<img src="${src}" alt="">`}</div>`;
+      return `<div class="shoes-grid-cell">${isVid?`<video src="${src}" autoplay loop muted playsinline></video>`:`<img src="${src}" alt="${imgAlt(src)}">`}</div>`;
     }).join('') : palette.map((c,i)=>`<div class="shoes-grid-cell" style="background:${c}"><span>${i+1}</span></div>`).join('');
     return `<div class="block-looks-ia">${iphoneHtml}<div class="shoes-grid">${cells}</div></div>`;
   }
   if (b.t==='devices') {
-    const slides = (b.srcs||[]).map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="" loading="lazy">`}</div>`).join('');
+    const slides = (b.srcs||[]).map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="${imgAlt(s)}" loading="lazy">`}</div>`).join('');
     const dots = (b.srcs||[]).map((_,i)=>`<span class="iphone-dot${i===0?' active':''}"></span>`).join('');
     const iphoneHtml = `<div class="iphone-outer"><div class="iphone"><div class="iphone-screen" data-slider>${slides}</div><img class="iphone-frame" src="img/iphone.png" alt="" draggable="false"></div><div class="iphone-dots">${dots}</div></div>`;
     const dSrcs = b.desktopSrcs || (b.desktop ? [b.desktop] : []);
-    const dSlides = dSrcs.map((s,i)=>`<div class="desktop-slide${i===0?' active':''}"><img src="${s}" alt=""></div>`).join('');
+    const dSlides = dSrcs.map((s,i)=>`<div class="desktop-slide${i===0?' active':''}"><img src="${s}" alt="${imgAlt(s)}"></div>`).join('');
     const dDots   = dSrcs.map((_,i)=>`<span class="desktop-dot${i===0?' active':''}"></span>`).join('');
     const desktopHtml = dSrcs.length ? `<div class="desktop-outer"><div class="desktop" data-desktop-slider>${'<img class="desktop-frame" src="img/desktop.png" alt="" draggable="false"><div class="desktop-screen">' + dSlides + '</div></div>'}<div class="desktop-dots">${dDots}</div></div>` : '';
     return `<div class="block-devices"><div class="devices-left">${iphoneHtml}</div><div class="devices-right">${desktopHtml}</div></div>`;
@@ -2192,7 +2275,7 @@ function renderImg(b) {
   if (b.t==='iphone') {
     // multi-image slideshow
     if (b.srcs && b.srcs.length > 1) {
-      const slides = b.srcs.map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="" loading="lazy">`}</div>`).join('');
+      const slides = b.srcs.map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="${imgAlt(s)}" loading="lazy">`}</div>`).join('');
       const dots = b.srcs.map((_,i)=>`<span class="iphone-dot${i===0?' active':''}"></span>`).join('');
       return `<div class="block-iphone-wrap"><div class="iphone-outer"><div class="iphone"><div class="iphone-screen" data-slider>${slides}</div><img class="iphone-frame" src="img/iphone.png" alt="" draggable="false"></div><div class="iphone-dots">${dots}</div></div></div>`;
     }
@@ -2201,7 +2284,7 @@ function renderImg(b) {
     const media = src
       ? (src.match(/\.(mp4|webm|mov)$/i)
           ? `<video src="${src}" autoplay loop muted playsinline></video>`
-          : `<img src="${src}" alt="">`)
+          : `<img src="${src}" alt="${imgAlt(src)}">`)
       : `<div class="iphone-ph">votre capture ici</div>`;
     return `<div class="block-iphone-wrap"><div class="iphone-outer"><div class="iphone"><div class="iphone-screen">${media}</div><img class="iphone-frame" src="img/iphone.png" alt="" draggable="false"></div></div></div>`;
   }
@@ -2294,8 +2377,9 @@ function initLogoReveal() {
   });
 }
 
-function showProject(id) {
+function showProject(id, push) {
   const p = P[id]; if(!p) return;
+  if (push !== false) history.pushState({project: id}, '', BASE_PATH + id);
   document.body.classList.remove('on-home');
   document.getElementById('project-view').innerHTML = `
     <section class="proj-hero">
@@ -2334,7 +2418,8 @@ function toggleTheme() {
 }
 (function initTheme() {
   const saved = localStorage.getItem('theme');
-  if (saved) { setTheme(saved); return; }
+  if (saved === 'dark' || saved === 'light') { setTheme(saved); return; }
+  if (saved) localStorage.removeItem('theme');
   const h = new Date().getHours();
   setTheme(h >= 20 || h < 7 ? 'dark' : 'light');
 })();
@@ -2497,8 +2582,12 @@ function closeCurrentView() {
 window.addEventListener('popstate', (e) => {
   if (e.state?.minisite) {
     _showMiniSite(e.state.minisite);
+  } else if (e.state?.project) {
+    _hideMiniSite();
+    showProject(e.state.project, false);
   } else {
     _hideMiniSite();
+    showHome(false);
   }
 });
 
@@ -2514,9 +2603,13 @@ window.addEventListener('message', function(e) {
   const slug = fromParam
     ? fromParam.replace(/^\/|\/$/g, '')
     : location.pathname.slice(BASE_PATH.length).replace(/\/$/, '');
-  if (slug && persoLabels[slug]) {
+  if (!slug) return;
+  if (persoLabels[slug]) {
     history.replaceState({minisite: slug}, '', BASE_PATH + slug);
     _showMiniSite(slug);
+  } else if (P[slug]) {
+    history.replaceState({project: slug}, '', BASE_PATH + slug);
+    showProject(slug, false);
   }
 })();
 
@@ -2560,7 +2653,8 @@ function scrollCarousel(btn) {
   scroll.scrollTo({ left: atEnd ? 0 : scroll.scrollLeft + 404, behavior: 'smooth' });
 }
 
-function showHome() {
+function showHome(push) {
+  if (push !== false) history.pushState({}, '', BASE_PATH);
   document.body.classList.add('on-home');
   document.querySelector('.nav-role').style.display = 'none';
   document.querySelector('.nav-contact').style.display = '';
@@ -3280,6 +3374,24 @@ function pillEgg(pill, revealIcon, revealName, msg) {
     }, 1600);
   }, 180);
 }
+
+/* ── KEYBOARD ACCESSIBILITY ── */
+(function() {
+  // Rend les proj-cards et stack-pills avec onclick navigables au clavier
+  document.querySelectorAll('.proj-card, .stack-pill[onclick], .profile-chip').forEach(function(el) {
+    el.setAttribute('role', 'button');
+    el.setAttribute('tabindex', '0');
+  });
+  // Enter / Space → click sur les éléments role="button" non-natifs
+  document.addEventListener('keydown', function(e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const el = e.target;
+    if (el.getAttribute('role') === 'button' && el.tagName !== 'BUTTON' && el.tagName !== 'A') {
+      e.preventDefault();
+      el.click();
+    }
+  });
+})();
 </script>
 </body>
 </html>

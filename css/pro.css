@@ -107,7 +107,7 @@ footer span:last-child{border-right:none;text-align:right}
   :root{--h-pad:20px}
   .about{grid-template-columns:1fr}
   .about-text{padding:40px var(--h-pad);font-size:14px}
-  .about-links{padding:0 0 40px}
+  .about-links{padding:0 var(--h-pad) 40px}
   .proj-card{flex:0 0 calc(100vw - 80px)}
   .projects-scroll{gap:10px !important}
   .projects-scroll::before,.projects-scroll::after{width:40px}
