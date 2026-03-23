@@ -57,7 +57,8 @@ body.dark .scroll-btn:hover { border-color: rgba(240,236,228,.5) !important; col
 
 /* Stack */
 body.dark .stack-pill { border-color: rgba(240,236,228,.1) !important; color: rgba(240,236,228,.55) !important; background: rgba(240,236,228,.04) !important; }
-body.dark .stack-icon { filter: brightness(0) invert(.8); }
+body.dark .stack-icon { filter: none; }
+body.dark .stack-icon[src*="github"] { filter: invert(1); }
 
 /* Project cards */
 body.dark .proj-card { background: transparent !important; }
