@@ -11,6 +11,110 @@
 /* DEFAULT LAYOUT TOKENS — overridden by each theme CSS */
 :root { --h-pad: clamp(32px, 6vw, 140px); }
 
+/* ── THEME BUTTON ── */
+#theme-btn {
+  padding: 0 20px 0 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color .2s;
+}
+#theme-btn:hover { color: #111; }
+body:not(.dark) .icon-sun { display: none; }
+body.dark .icon-moon { display: none; }
+
+/* ── DARK MODE ── */
+body, nav, .wil-section, .proj-card, .testi-card,
+.about, .block-img, .pnav-btn {
+  transition: background-color .35s, color .25s, border-color .35s, box-shadow .25s;
+}
+
+body.dark { background: #111 !important; color: #f0ece4; }
+
+/* Nav */
+body.dark nav { background: rgba(15,14,13,0.92) !important; }
+body.dark .nav-logo { color: #f0ece4 !important; }
+body.dark .nav-contact,
+body.dark #theme-btn { color: rgba(240,236,228,.45) !important; }
+body.dark .nav-contact:hover,
+body.dark #theme-btn:hover { color: #f0ece4 !important; }
+
+/* Hero */
+body.dark .hero-title,
+body.dark .t1, body.dark .t2 { color: #f0ece4 !important; }
+body.dark .hero-sub { color: rgba(240,236,228,.42) !important; }
+
+/* Section headers */
+body.dark .section-title { color: #f0ece4 !important; }
+body.dark .section-sub { color: rgba(240,236,228,.38) !important; }
+body.dark .section-count { color: rgba(240,236,228,.12) !important; }
+body.dark .scroll-btn { border-color: rgba(240,236,228,.1) !important; color: rgba(240,236,228,.3) !important; }
+body.dark .scroll-btn:hover { border-color: rgba(240,236,228,.5) !important; color: #f0ece4 !important; }
+
+/* Stack */
+body.dark .stack-pill { border-color: rgba(240,236,228,.1) !important; color: rgba(240,236,228,.55) !important; background: rgba(240,236,228,.04) !important; }
+body.dark .stack-icon { filter: brightness(0) invert(.8); }
+
+/* Project cards */
+body.dark .proj-card { background: #1c1a18 !important; }
+body.dark .proj-card-co { color: rgba(240,236,228,.35) !important; }
+body.dark .proj-card-title { color: #f0ece4 !important; }
+body.dark .proj-card-desc { color: rgba(240,236,228,.45) !important; }
+body.dark .proj-card-tag { background: rgba(240,236,228,.07) !important; color: rgba(240,236,228,.45) !important; }
+body.dark .proj-card-logo-badge { background: rgba(240,236,228,.06) !important; }
+
+/* Testimonials */
+body.dark .testi-section { background: #111 !important; }
+body.dark .testi-card { background: #1c1a18 !important; border-color: rgba(240,236,228,.05) !important; }
+body.dark .testi-text { color: rgba(240,236,228,.65) !important; }
+body.dark .testi-name { color: #f0ece4 !important; }
+body.dark .testi-role { color: rgba(240,236,228,.32) !important; }
+
+/* About */
+body.dark .about-text { color: rgba(240,236,228,.58) !important; }
+body.dark .about-links a { color: #f0ece4 !important; }
+body.dark .about-links a::before { opacity: .25 !important; }
+
+/* WIL section */
+body.dark .wil-section { background: linear-gradient(145deg, #141210 0%, #0d0b09 100%) !important; }
+body.dark .wil-header .section-title { color: #f0ece4 !important; }
+body.dark .wil-header .section-sub { color: rgba(240,236,228,.38) !important; }
+body.dark .wil-cover-wrap { box-shadow: 0 4px 16px rgba(0,0,0,.5), 0 1px 4px rgba(0,0,0,.3) !important; }
+body.dark .wil-item:hover .wil-cover-wrap { box-shadow: 0 16px 40px rgba(0,0,0,.7), 0 6px 16px rgba(0,0,0,.45) !important; transform: translateY(-5px) !important; }
+
+/* Footer */
+body.dark footer span { color: rgba(240,236,228,.22) !important; }
+body.dark .footer-credits { color: rgba(240,236,228,.18) !important; }
+body.dark .footer-credits a { color: rgba(240,236,228,.28) !important; }
+body.dark .footer-credits a:hover { color: #f0ece4 !important; }
+
+/* Project view */
+body.dark #project-view { background: #111 !important; }
+body.dark .proj-header { background: rgba(15,14,13,0.95) !important; }
+body.dark .back-btn { color: rgba(240,236,228,.4) !important; }
+body.dark .back-btn:hover { color: #f0ece4 !important; }
+body.dark .proj-breadcrumb { color: rgba(240,236,228,.28) !important; }
+body.dark .proj-breadcrumb strong { color: #f0ece4 !important; }
+body.dark .proj-title { color: #f0ece4 !important; }
+body.dark .proj-tag { color: rgba(240,236,228,.28) !important; }
+body.dark .meta-label { color: rgba(240,236,228,.28) !important; }
+body.dark .meta-val { color: #f0ece4 !important; }
+body.dark .problem-text { color: #f0ece4 !important; }
+body.dark .solve-text { color: rgba(240,236,228,.48) !important; }
+body.dark .block-label, body.dark .solve-label { color: rgba(240,236,228,.18) !important; }
+body.dark .block-caption { color: rgba(240,236,228,.48) !important; }
+body.dark .block-caption strong { color: #f0ece4 !important; }
+body.dark .block-img { background: #1e1b18 !important; }
+body.dark .block-placeholder { color: rgba(240,236,228,.12) !important; }
+body.dark .block-num { color: rgba(240,236,228,.15) !important; }
+body.dark .pnav-btn { color: #f0ece4 !important; background: transparent !important; }
+body.dark .pnav-btn:hover { background: #1c1a18 !important; }
+body.dark .pnav-dir { color: rgba(240,236,228,.28) !important; }
+
 /* GLASS CLOSE BUTTON — center bottom */
 #glass-close-btn {
   position: fixed;
@@ -200,6 +304,116 @@ body.fading { opacity: 0; }
 
 /* EXPERIENCE */
 .exp-section { border-bottom: var(--r); }
+
+/* ── WHAT I LOVE ── */
+.wil-section {
+  position: relative;
+  height: 90vh;
+  min-height: 560px;
+  background: linear-gradient(145deg, #f5f2ec 0%, #e8e3d8 100%);
+  overflow-x: auto;
+  overflow-y: hidden;
+  cursor: grab;
+  scrollbar-width: none;
+}
+.wil-section::-webkit-scrollbar { display: none; }
+.wil-section:active { cursor: grabbing; }
+.wil-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 28px var(--h-pad) 0;
+  z-index: 10;
+  pointer-events: none;
+}
+.wil-header .section-title { color: #111; }
+.wil-header .section-sub   { color: rgba(0,0,0,.4); }
+.wil-canvas {
+  position: absolute;
+  position: relative;
+  width: 2700px;
+  height: 100%;
+  will-change: transform;
+}
+.wil-item {
+  position: absolute;
+  width: 130px;
+  cursor: pointer;
+  z-index: 2;
+}
+.wil-item.is-album { width: 170px; }
+.wil-item:hover { z-index: 10; }
+.wil-cover-wrap {
+  position: relative;
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,.09), 0 1px 2px rgba(0,0,0,.05);
+  transition: box-shadow .25s ease, transform .25s ease;
+}
+.wil-cover-wrap.is-square { aspect-ratio: 1/1; }
+.wil-cover-wrap.is-portrait { aspect-ratio: 2/3; }
+.wil-item:hover .wil-cover-wrap {
+  box-shadow: 0 14px 36px rgba(0,0,0,.16), 0 4px 10px rgba(0,0,0,.09);
+  transform: translateY(-5px);
+}
+.wil-cover-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 12px 10px;
+  box-sizing: border-box;
+}
+.wil-cover-inner img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.wil-cover-text {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0,0,0,.8);
+}
+.wil-cover-text strong {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+.wil-cover-text small {
+  display: block;
+  font-size: 9px;
+  font-weight: 400;
+  opacity: .7;
+  margin-top: 2px;
+}
+.wil-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(0,0,0,.18);
+  padding: 2px 5px;
+  border-radius: 2px;
+  backdrop-filter: blur(6px);
+  z-index: 3;
+  line-height: 1.6;
+}
 
 /* EXPERIENCE CHRONICLE — horizontal scroll */
 .ep-chronicle { position: relative; }
@@ -1029,10 +1243,6 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   scrollbar-width: none;
 }
 .block-looks-ia::-webkit-scrollbar { display: none; }
-.block-looks-ia .devices-left {
-  flex: 0 0 auto;
-  width: clamp(320px, 36vw, 460px);
-}
 .looks-strip {
   display: flex;
   flex: 0 0 auto;
@@ -1288,6 +1498,10 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   <a class="nav-logo" href="#" onclick="document.body.classList.contains('minisite-open')?closeMiniSite():showHome();return false;">theo.design</a>
   <span class="nav-role" style="display:none">Senior Product Designer · Paris</span>
   <a class="nav-contact" href="#" onclick="copyEmail(event)">Contact</a>
+  <button id="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+    <svg class="icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="19.07" y1="4.93" x2="16.95" y2="7.05"/><line x1="7.05" y1="16.95" x2="4.93" y2="19.07"/></svg>
+  </button>
   <button id="proj-close-btn" onclick="closeCurrentView()">×</button>
 </nav>
 <span id="copy-tooltip"><span class="check">✓</span> Email copié</span>
@@ -1565,7 +1779,8 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   </section>
 
   <!-- ── EXPERIENCE ── -->
-  <section class="exp-section">
+  <!-- exp-section conservée mais masquée pour usage futur -->
+  <section class="exp-section" style="display:none">
     <div class="section-header">
       <h2 class="section-title">Experience</h2>
     </div>
@@ -1696,6 +1911,15 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 
       </div><!-- /.ep-chr-track -->
     </div><!-- /.ep-chronicle -->
+  </section>
+
+  <!-- ── WHAT I LOVE ── -->
+  <section class="wil-section">
+    <div class="wil-header">
+      <h2 class="section-title">What I Love</h2>
+      <p class="section-sub">Les œuvres qui ont construit celui que je suis.</p>
+    </div>
+    <div class="wil-canvas" id="wil-canvas"></div>
   </section>
 
   <section class="about">
@@ -2085,6 +2309,88 @@ function showProject(id) {
   window.scrollTo(0,0);
 }
 
+// ── DARK / LIGHT MODE ──
+function setTheme(t, save) {
+  const dark = t === 'dark';
+  document.body.classList.toggle('dark', dark);
+  document.documentElement.style.background = dark ? '#111' : '';
+  if (save) localStorage.setItem('theme', t);
+}
+function toggleTheme() {
+  setTheme(document.body.classList.contains('dark') ? 'light' : 'dark', true);
+}
+(function initTheme() {
+  const saved = localStorage.getItem('theme');
+  if (saved) { setTheme(saved); return; }
+  const h = new Date().getHours();
+  setTheme(h >= 20 || h < 7 ? 'dark' : 'light');
+})();
+
+// ══ WHAT I LOVE ══
+(function(){
+  const items = [
+    // ── Bloc 1 (0–900px) ──
+    { cat:'BOOK',  sub:'Steve Krug',           bg:'#e8e0d0', src:'https://covers.openlibrary.org/b/isbn/0321965515-L.jpg',   x:55,   top:26, rot:-8  },
+    { cat:'BOOK',  sub:'Nick Bostrom',         bg:'#1a1a2e', src:'https://covers.openlibrary.org/b/isbn/0198739834-L.jpg',   x:200,  top:37, rot:5   },
+    { cat:'ALBUM', sub:'Prokofiev',            bg:'#8b3a2a', src:'https://upload.wikimedia.org/wikipedia/en/8/8b/Peter_and_the_Wolf_Sting.jpg', x:50, top:53, rot:-12 },
+    { cat:'BOOK',  sub:'Giuliano da Empoli',   bg:'#2a1a0e', src:'https://covers.openlibrary.org/b/isbn/2072977460-L.jpg',   x:130,  top:65, rot:8   },
+    { cat:'ALBUM', sub:'A Tribe Called Quest', bg:'#c8a020', src:'https://upload.wikimedia.org/wikipedia/en/6/6e/Atcq_low_end_theory.jpg',     x:420,  top:21, rot:-5  },
+    { cat:'ALBUM', sub:'The Notorious B.I.G.', bg:'#1a1a1a', src:'https://upload.wikimedia.org/wikipedia/en/9/92/Biggie_ready_to_die.jpg',      x:580,  top:29, rot:6   },
+    { cat:'BOOK',  sub:'Jared Diamond',        bg:'#3a5a2a', src:'https://covers.openlibrary.org/b/isbn/2070459527-L.jpg',   x:660,  top:38, rot:-4  },
+    { cat:'ALBUM', sub:'The Blaze',            bg:'#1a2840', src:'https://upload.wikimedia.org/wikipedia/en/4/4f/The_Blaze_-_Jungle.jpg',       x:780,  top:22, rot:7   },
+    { cat:'BOOK',  sub:'Charles Bukowski',     bg:'#d04030', src:'https://covers.openlibrary.org/b/isbn/0876856695-L.jpg',   x:860,  top:21, rot:-6  },
+    { cat:'ALBUM', sub:'A Tribe Called Quest', bg:'#c87020', src:'https://upload.wikimedia.org/wikipedia/en/5/5a/ATCQ_Midnight_Marauders.jpg',  x:430,  top:56, rot:9   },
+    { cat:'ALBUM', sub:'The Blaze',            bg:'#0e1a2a', src:'https://upload.wikimedia.org/wikipedia/en/b/b2/The_Blaze_-_Virile.jpg',       x:620,  top:53, rot:-8  },
+    { cat:'BOOK',  sub:'Charles Bukowski',     bg:'#c03030', src:'https://covers.openlibrary.org/b/isbn/0876857934-L.jpg',   x:580,  top:67, rot:5   },
+    { cat:'ALBUM', sub:'The Notorious B.I.G.', bg:'#181818', src:'https://upload.wikimedia.org/wikipedia/en/9/9b/TheNotoriousBIG-LifeAfterDeath.jpg', x:840, top:48, rot:-4 },
+    { cat:'BOOK',  sub:'Jared Diamond',        bg:'#5a4020', src:'https://covers.openlibrary.org/b/isbn/0393317552-L.jpg',   x:960,  top:59, rot:6   },
+    { cat:'ALBUM', sub:'Prokofiev',            bg:'#2a1a3a', src:'https://upload.wikimedia.org/wikipedia/en/9/97/Prokofiev_Romeo_and_Juliet_Previn.jpg', x:800, top:63, rot:-7 },
+    // ── Bloc 2 (1050–2500px) ──
+    { cat:'ALBUM', sub:'Yusef Kamal',           bg:'#2a3a1a', src:'https://upload.wikimedia.org/wikipedia/en/e/e9/Eastern_Sounds.jpg',            x:1080, top:22, rot:8   },
+    { cat:'ALBUM', sub:'MF DOOM',              bg:'#1a1a1a', src:'https://upload.wikimedia.org/wikipedia/en/1/1d/MM_FOOD.jpg',                   x:1240, top:38, rot:-5  },
+    { cat:'ALBUM', sub:'DJ Khaled',            bg:'#c0a000', src:'https://upload.wikimedia.org/wikipedia/en/5/5e/DJ_Khaled_-_Khaled_Khaled.png', x:1380, top:20, rot:6   },
+    { cat:'ALBUM', sub:'Émile Omar',           bg:'#c87840', src:'https://upload.wikimedia.org/wikipedia/fr/6/6f/Antilles_Cheries.jpg',          x:1520, top:50, rot:-9  },
+    { cat:'ALBUM', sub:'MF DOOM',              bg:'#181818', src:'https://upload.wikimedia.org/wikipedia/en/c/c3/Madvillainy.jpg',               x:1150, top:55, rot:7   },
+    { cat:'ALBUM', sub:'Nas',                  bg:'#303030', src:'https://upload.wikimedia.org/wikipedia/en/5/59/Illmatic.jpg',                  x:1680, top:24, rot:-4  },
+    { cat:'ALBUM', sub:'Portishead',           bg:'#202028', src:'https://upload.wikimedia.org/wikipedia/en/3/35/Portishead_-_Dummy.jpg',        x:1820, top:38, rot:5   },
+    { cat:'ALBUM', sub:'Massive Attack',       bg:'#101018', src:'https://upload.wikimedia.org/wikipedia/en/2/20/Mezzanine.png',                 x:1960, top:20, rot:-7  },
+    { cat:'BOOK',  sub:'Yuval Noah Harari',    bg:'#3a2a1a', src:'https://covers.openlibrary.org/b/isbn/0062316095-L.jpg',                       x:1680, top:57, rot:4   },
+    { cat:'ALBUM', sub:'Kendrick Lamar',       bg:'#1a2010', src:'https://upload.wikimedia.org/wikipedia/en/f/f6/Kendrick_Lamar_-_To_Pimp_a_Butterfly.png', x:2100, top:25, rot:6 },
+    { cat:'BOOK',  sub:'Albert Camus',         bg:'#c8b090', src:'https://covers.openlibrary.org/b/isbn/2070360024-L.jpg',                       x:2050, top:52, rot:-6  },
+    { cat:'ALBUM', sub:'Miles Davis',          bg:'#203040', src:'https://upload.wikimedia.org/wikipedia/en/9/9c/MilesDavisKindofBlue.jpg',       x:2250, top:35, rot:-5  },
+    { cat:'ALBUM', sub:'Pink Floyd',           bg:'#101010', src:'https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png',     x:2380, top:20, rot:8   },
+    { cat:'BOOK',  sub:'Haruki Murakami',      bg:'#2a1a3a', src:'https://covers.openlibrary.org/b/isbn/0375704027-L.jpg',                       x:2280, top:55, rot:5   },
+    { cat:'ALBUM', sub:'Massive Attack',       bg:'#0a0a18', src:'https://upload.wikimedia.org/wikipedia/en/8/83/MassiveAttackBlueLines.jpg',    x:2500, top:40, rot:-6  },
+  ];
+
+  const canvas = document.getElementById('wil-canvas');
+  if (!canvas) return;
+
+  canvas.innerHTML = items.map(it => {
+    const isSquare = it.cat === 'ALBUM';
+    const imgHtml = it.src && !it.src.includes('placeholder') ? `<img src="${it.src}" alt="${it.sub}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none'">` : '';
+    return `
+    <div class="wil-item${isSquare ? ' is-album' : ''}" style="left:${it.x}px;top:${it.top}%;transform:rotate(${it.rot}deg)">
+      <div class="wil-cover-wrap ${isSquare ? 'is-square' : 'is-portrait'}">
+        <div class="wil-cover-inner" style="background:${it.bg}">${imgHtml}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Parallax Y only (X handled by scroll)
+  let ty=0, cy=0;
+  function wilTick(){
+    cy += (ty-cy)*0.07;
+    canvas.style.transform = `translateY(${cy}px)`;
+    requestAnimationFrame(wilTick);
+  }
+  wilTick();
+  document.addEventListener('mousemove', e => {
+    const hh = window.innerHeight/2;
+    ty = (e.clientY - hh) / hh * 16;
+  });
+})();
+
 // ══ MINI SITES ══
 const persoLabels = {
   unheard: 'Unheard',
@@ -2318,25 +2624,6 @@ function showHome() {
 </div>
 
 <!-- ══ SHAPE TOOLBAR ══ -->
-<div id="shape-toolbar" aria-label="Outils de dessin">
-  <div class="stool-label">Draw</div>
-  <button class="stool active" data-s="rect" title="Rectangle">
-    <svg viewBox="0 0 14 14" width="13" height="13"><rect x="1.5" y="1.5" width="11" height="11" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-  </button>
-  <button class="stool" data-s="circle" title="Ellipse">
-    <svg viewBox="0 0 14 14" width="13" height="13"><ellipse cx="7" cy="7" rx="5.5" ry="5.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-  </button>
-  <button class="stool" data-s="line" title="Ligne">
-    <svg viewBox="0 0 14 14" width="13" height="13"><line x1="2" y1="12" x2="12" y2="2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-  </button>
-  <div class="stool-divider"></div>
-  <button class="stool stool-clear" title="Effacer tout (⌫)">
-    <svg viewBox="0 0 14 14" width="13" height="13"><path d="M3 3 L11 11 M11 3 L3 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-  </button>
-</div>
-
-<!-- ══ DRAWING CANVAS ══ -->
-<svg id="draw-canvas" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
 
 <style>
 /* ══ PROJECT CARD GRADIENTS ══ */
@@ -2567,82 +2854,8 @@ body.on-home.over-card #fig-cursor { opacity: 0 !important; }
 }
 #fig-say-input::placeholder { color: rgba(255,255,255,0.45); }
 
-/* Shape toolbar — home only */
-body:not(.on-home) #shape-toolbar,
-body:not(.on-home) #draw-canvas { display: none !important; }
-
-#shape-toolbar {
-  position: fixed;
-  bottom: 28px;
-  left: 50%;
-  transform: translateX(-50%) translateY(6px);
-  opacity: 0;
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 12px;
-  padding: 5px 7px;
-  box-shadow: 0 2px 20px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.05),
-              0 0 0 0.5px rgba(0,0,0,0.07);
-  z-index: 8990;
-  transition: opacity 0.18s ease, transform 0.18s ease;
-}
-#shape-toolbar.draw-visible {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
-}
-.stool-label {
-  font-size: 9px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #bbb;
-  padding: 0 8px 0 4px;
-  font-family: -apple-system, sans-serif;
-  user-select: none;
-}
-.stool {
-  width: 32px;
-  height: 32px;
-  border: none;
-  background: transparent;
-  border-radius: 8px;
-  cursor: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #666;
-  transition: background 0.13s, color 0.13s;
-  flex-shrink: 0;
-}
-.stool:hover { background: rgba(0,0,0,0.06); color: #111; }
-.stool.active { background: rgba(13,153,255,0.12); color: #0D99FF; }
-.stool-clear { color: #bbb; }
-.stool-clear:hover { background: rgba(255,59,48,0.08); color: #ff3b30; }
-.stool-divider {
-  width: 1px; height: 20px;
-  background: rgba(0,0,0,0.08);
-  margin: 0 4px;
-  flex-shrink: 0;
-}
-
-/* Drawing canvas */
-#draw-canvas {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 3;
-}
-
-/* Hide toolbar on touch devices */
+/* Hide cursor on touch devices */
 @media (hover: none) {
-  #shape-toolbar { display: none; }
   #fig-cursor { display: none; }
 }
 </style>
@@ -2814,143 +3027,6 @@ body:not(.on-home) #draw-canvas { display: none !important; }
     figSayInput.value = '';
   }
 
-  /* ─────────────────────────────────────────
-     SHAPE DRAWING
-  ───────────────────────────────────────── */
-  var toolbar = document.getElementById('shape-toolbar');
-  var canvas = document.getElementById('draw-canvas');
-  var tools = toolbar.querySelectorAll('.stool[data-s]');
-  var clearBtn = toolbar.querySelector('.stool-clear');
-
-  var currentTool = 'rect';
-  var isDrawing = false;
-  var drawStarted = false;
-  var sx, sy;
-  var activeShape = null;
-  var NS = 'http://www.w3.org/2000/svg';
-  var hideToolbarTimer = null;
-
-  function showToolbar() {
-    clearTimeout(hideToolbarTimer);
-    toolbar.classList.add('draw-visible');
-  }
-  function scheduleHideToolbar() {
-    clearTimeout(hideToolbarTimer);
-    hideToolbarTimer = setTimeout(function () {
-      toolbar.classList.remove('draw-visible');
-    }, 1500);
-  }
-  // Maintenir le toolbar visible si la souris est dessus
-  toolbar.addEventListener('mouseenter', function () { clearTimeout(hideToolbarTimer); });
-  toolbar.addEventListener('mouseleave', function () { scheduleHideToolbar(); });
-
-  // Tool selection
-  tools.forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      tools.forEach(function (b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      currentTool = btn.dataset.s;
-    });
-  });
-
-  // Clear all
-  clearBtn.addEventListener('click', function (e) {
-    e.stopPropagation();
-    while (canvas.firstChild) canvas.removeChild(canvas.firstChild);
-  });
-
-  // Keyboard shortcut: Backspace = clear all shapes
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Backspace' && e.target === document.body) {
-      if (canvas.lastChild) canvas.removeChild(canvas.lastChild);
-    }
-  });
-
-  function isBackground(el) {
-    return !el.closest('nav, #glass-close-btn, #shape-toolbar, .proj-card, .stack-section, .about, footer, .footer-credits, .section-header, #fig-say, #ghost-cursor, button, a, input, select');
-  }
-
-  var STROKE = 'rgba(13,153,255,0.55)';
-  var FILL = 'rgba(13,153,255,0.04)';
-  var FILL_LINE = 'none';
-
-  function createShapeEl(type, x, y) {
-    var el;
-    if (type === 'circle') {
-      el = document.createElementNS(NS, 'ellipse');
-      el.setAttribute('cx', x); el.setAttribute('cy', y);
-      el.setAttribute('rx', 0); el.setAttribute('ry', 0);
-      el.setAttribute('fill', FILL);
-    } else if (type === 'line') {
-      el = document.createElementNS(NS, 'line');
-      el.setAttribute('x1', x); el.setAttribute('y1', y);
-      el.setAttribute('x2', x); el.setAttribute('y2', y);
-      el.setAttribute('fill', FILL_LINE);
-      el.setAttribute('stroke-linecap', 'round');
-    } else {
-      el = document.createElementNS(NS, 'rect');
-      el.setAttribute('x', x); el.setAttribute('y', y);
-      el.setAttribute('width', 0); el.setAttribute('height', 0);
-      el.setAttribute('rx', 3);
-      el.setAttribute('fill', FILL);
-    }
-    el.setAttribute('stroke', STROKE);
-    el.setAttribute('stroke-width', '1.5');
-    canvas.appendChild(el);
-    return el;
-  }
-
-  function updateShapeEl(el, type, x1, y1, x2, y2) {
-    var w = x2 - x1, h = y2 - y1;
-    if (type === 'circle') {
-      el.setAttribute('cx', (x1 + x2) / 2);
-      el.setAttribute('cy', (y1 + y2) / 2);
-      el.setAttribute('rx', Math.abs(w / 2));
-      el.setAttribute('ry', Math.abs(h / 2));
-    } else if (type === 'line') {
-      el.setAttribute('x2', x2); el.setAttribute('y2', y2);
-    } else {
-      el.setAttribute('x', Math.min(x1, x2));
-      el.setAttribute('y', Math.min(y1, y2));
-      el.setAttribute('width', Math.abs(w));
-      el.setAttribute('height', Math.abs(h));
-    }
-  }
-
-  document.addEventListener('mousedown', function (e) {
-    if (e.button !== 0 || !isBackground(e.target)) return;
-    sx = e.clientX; sy = e.clientY;
-    isDrawing = true;
-    drawStarted = false;
-    activeShape = null;
-    showToolbar();
-  });
-
-  document.addEventListener('mousemove', function (e) {
-    if (!isDrawing) return;
-    var dx = e.clientX - sx, dy = e.clientY - sy;
-    if (!drawStarted && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
-      drawStarted = true;
-      activeShape = createShapeEl(currentTool, sx, sy);
-    }
-    if (drawStarted && activeShape) {
-      updateShapeEl(activeShape, currentTool, sx, sy, e.clientX, e.clientY);
-    }
-  });
-
-  document.addEventListener('mouseup', function (e) {
-    if (!isDrawing) return;
-    isDrawing = false;
-    if (activeShape) {
-      var w = Math.abs(e.clientX - sx);
-      var h = Math.abs(e.clientY - sy);
-      if (w < 5 && h < 5) canvas.removeChild(activeShape);
-    }
-    drawStarted = false;
-    activeShape = null;
-    scheduleHideToolbar();
-  });
 
 })();
 </script>
