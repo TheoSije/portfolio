@@ -1,368 +1,235 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Devis · Hubway</title>
+<title>Hubway · Devis — theo.design</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300&family=Roboto+Condensed:wght@700;900&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Ephesis&family=Roboto:wght@300;400;500;700;900&display=swap">
+<!-- Reuse the exact same design system as the portfolio -->
+<link rel="stylesheet" href="../css/pro.css">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-/* ─── TOKENS ─── */
-:root {
-  --bg:        #f7f7f5;
-  --bg2:       #efefed;
-  --text:      #0a0a0a;
-  --muted:     rgba(10,10,10,.42);
-  --border:    rgba(10,10,10,.1);
-  --inv-bg:    #0a0a0a;
-  --inv-text:  #f7f7f5;
-  --accent:    #0a0a0a;
-}
-[data-theme="dark"] {
-  --bg:        #0a0a0a;
-  --bg2:       #141414;
-  --text:      #f7f7f5;
-  --muted:     rgba(247,247,245,.38);
-  --border:    rgba(247,247,245,.09);
-  --inv-bg:    #f7f7f5;
-  --inv-text:  #0a0a0a;
-  --accent:    #f7f7f5;
-}
-
-html, body {
-  min-height: 100%;
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-  -webkit-font-smoothing: antialiased;
-  transition: background .3s, color .3s;
-}
-
-/* ─── HUBWAY ICON SVG ─── */
-.hw-icon svg { display: block; }
+/* ─── DARK MODE (same as main site body.dark) ─── */
+body, nav { transition: background-color .35s, color .25s; }
+body.dark { background: #111 !important; color: #f0ece4; }
+body.dark nav { background: rgba(17,17,17,.96) !important; }
+body.dark .nav-logo { color: #f0ece4 !important; }
+body.dark .nav-role { color: rgba(240,236,228,.35) !important; }
+body.dark #theme-btn { color: rgba(240,236,228,.45) !important; }
+body.dark #theme-btn:hover { color: #f0ece4 !important; }
+body.dark .proj-title { color: #f0ece4 !important; }
+body.dark .proj-tag { color: rgba(240,236,228,.28) !important; }
+body.dark .meta-label { color: rgba(240,236,228,.28) !important; }
+body.dark .meta-val { color: #f0ece4 !important; }
+body.dark .problem-text { color: #f0ece4 !important; }
+body.dark .solve-text { color: rgba(240,236,228,.48) !important; }
+body.dark .block-label, body.dark .solve-label { color: rgba(240,236,228,.18) !important; }
+body.dark .block-caption { color: rgba(240,236,228,.48) !important; }
+body.dark .block-caption strong { color: #f0ece4 !important; }
+body.dark .block-img { background: #1e1b18 !important; }
+body.dark .block-placeholder { color: rgba(240,236,228,.15) !important; }
+body.dark .block-num { color: rgba(240,236,228,.15) !important; }
+body.dark .pnav-btn { color: #f0ece4 !important; background: transparent !important; }
+body.dark .pnav-btn:hover { background: #1c1a18 !important; }
+body.dark .pnav-dir { color: rgba(240,236,228,.28) !important; }
+body.dark .hw-phase-num { color: rgba(240,236,228,.22) !important; }
+body.dark .hw-price-card { border-color: rgba(240,236,228,.08) !important; }
+body.dark .hw-price-card.featured { border-color: rgba(240,236,228,.35) !important; background: #1a1814 !important; }
+body.dark .hw-price-name { color: rgba(240,236,228,.45) !important; }
+body.dark .hw-price-amount { color: #f0ece4 !important; }
+body.dark .hw-price-desc { color: rgba(240,236,228,.38) !important; }
+body.dark .hw-price-gain { color: rgba(240,236,228,.28) !important; border-color: rgba(240,236,228,.08) !important; }
+body.dark .hw-price-gain strong { color: #f0ece4 !important; }
+body.dark .hw-footnote { border-color: rgba(240,236,228,.08) !important; color: rgba(240,236,228,.38) !important; }
+body.dark .hw-footnote strong { color: #f0ece4 !important; }
+body.dark .hw-pill { border-color: rgba(240,236,228,.1) !important; color: rgba(240,236,228,.45) !important; }
+body.dark .hw-pill.active { border-color: rgba(240,236,228,.35) !important; color: #f0ece4 !important; }
+body.dark #gate { background: #111; }
+body.dark .gate-name { color: #f0ece4; }
+body.dark .gate-sub { color: rgba(240,236,228,.35); }
+body.dark .gate-form { border-color: rgba(240,236,228,.12); }
+body.dark .gate-form:focus-within { border-color: rgba(240,236,228,.4); }
+body.dark #pw-input { color: #f0ece4; }
+body.dark #pw-input::placeholder { color: rgba(240,236,228,.3); }
+body.dark #pw-btn { background: #f0ece4; color: #111; }
+body.dark .gate-error { color: rgba(240,236,228,.38); }
 
 /* ─── GATE ─── */
 #gate {
   position: fixed; inset: 0;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  gap: 28px;
-  background: var(--bg);
-  z-index: 100;
+  gap: 24px;
+  background: #f8f7f4;
+  z-index: 200;
   transition: opacity .5s ease, transform .5s ease;
 }
-#gate.out { opacity: 0; transform: translateY(-20px); pointer-events: none; }
+#gate.out { opacity: 0; transform: translateY(-16px); pointer-events: none; }
 
-.gate-brand {
-  display: flex; flex-direction: column;
-  align-items: center; gap: 14px;
-}
-.gate-icon { width: 48px; height: 48px; }
+.gate-brand { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.gate-icon { width: 40px; height: 40px; }
 .gate-name {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-weight: 900; font-size: 28px;
-  letter-spacing: -.01em;
-  color: var(--text);
+  font-family: 'Archivo', sans-serif;
+  font-weight: 900; font-size: 22px;
+  letter-spacing: -.02em; color: #111;
 }
 .gate-sub {
-  font-size: 11px; letter-spacing: .12em;
-  text-transform: uppercase; color: var(--muted);
+  font-size: 11px; letter-spacing: .15em;
+  text-transform: uppercase; color: #bbb;
 }
 .gate-form {
   display: flex;
-  border: 1px solid var(--border);
-  border-radius: 50px;
+  border: 1px solid #e9e6df;
+  border-radius: 2px;
   overflow: hidden;
   transition: border-color .2s;
 }
-.gate-form:focus-within { border-color: var(--text); }
+.gate-form:focus-within { border-color: #aaa; }
 #pw-input {
   background: none; border: none; outline: none;
-  color: var(--text); font-family: 'Roboto', sans-serif;
-  font-size: 14px; padding: 12px 20px;
-  width: 200px; letter-spacing: .04em;
+  color: #111; font-family: inherit;
+  font-size: 13px; padding: 11px 18px;
+  width: 190px; letter-spacing: .02em;
 }
-#pw-input::placeholder { color: var(--muted); }
+#pw-input::placeholder { color: #bbb; }
 #pw-btn {
-  background: var(--text); color: var(--bg);
+  background: #111; color: #f8f7f4;
   border: none; cursor: pointer;
-  padding: 12px 22px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 700; font-size: 11px;
-  letter-spacing: .1em; text-transform: uppercase;
+  padding: 11px 20px;
+  font-family: inherit; font-weight: 600;
+  font-size: 11px; letter-spacing: .1em;
+  text-transform: uppercase;
   transition: opacity .15s;
 }
 #pw-btn:hover { opacity: .8; }
 .gate-error {
-  font-size: 12px; color: var(--muted);
+  font-size: 12px; color: #bbb;
   opacity: 0; transition: opacity .3s;
 }
 .gate-error.show { opacity: 1; }
 
-/* ─── CONTENT ─── */
-#content {
-  opacity: 0; pointer-events: none;
-  transition: opacity .6s .2s;
-}
-#content.visible { opacity: 1; pointer-events: all; }
-
-/* ─── TOPBAR ─── */
-.topbar {
-  position: sticky; top: 0; z-index: 50;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
+/* ─── NAV OVERRIDE — 4 columns ─── */
+nav { grid-template-columns: 1fr auto auto auto !important; }
+.nav-ref {
+  padding: 0 16px;
+  font-size: 11px; color: #ccc;
   display: flex; align-items: center;
-  justify-content: space-between;
-  padding: 14px clamp(24px, 6vw, 80px);
-  transition: background .3s, border-color .3s;
+  letter-spacing: .04em;
 }
-.topbar-brand {
-  display: flex; align-items: center; gap: 10px;
+body.dark .nav-ref { color: rgba(240,236,228,.2) !important; }
+
+/* ─── CONTENT ─── */
+#hw-content { opacity: 0; pointer-events: none; transition: opacity .5s .15s; }
+#hw-content.visible { opacity: 1; pointer-events: all; }
+
+/* ─── HERO PILLS ─── */
+.hw-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.hw-pill {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: .04em;
+  border: 1px solid #e9e6df;
+  border-radius: 2px; padding: 5px 12px;
+  color: #bbb; font-family: inherit;
 }
-.topbar-icon { width: 22px; height: 22px; flex-shrink: 0; }
-.topbar-name {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-weight: 900; font-size: 16px;
+.hw-pill.active { border-color: #ccc; color: #666; }
+
+/* ─── PHASES (custom rows) ─── */
+.hw-phases { border-top: 1px solid #e9e6df; }
+body.dark .hw-phases { border-color: rgba(240,236,228,.08) !important; }
+.hw-phase {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  border-bottom: 1px solid #e9e6df;
+  min-height: 80px;
+}
+body.dark .hw-phase { border-color: rgba(240,236,228,.08) !important; }
+.hw-phase-num {
+  padding: 28px 24px;
+  font-size: 9px; letter-spacing: .18em;
+  text-transform: uppercase; color: #ccc;
+  display: flex; align-items: flex-start;
+  border-right: none;
+}
+.hw-phase-body { padding: 28px 48px; }
+.hw-phase-title {
+  font-size: 13px; font-weight: 600;
+  color: #111; margin-bottom: 6px;
   letter-spacing: -.01em;
 }
-.topbar-right {
-  display: flex; align-items: center; gap: 16px;
+body.dark .hw-phase-title { color: #f0ece4 !important; }
+.hw-phase-desc {
+  font-size: 13px; line-height: 1.75; color: #888;
 }
-.topbar-ref {
-  font-size: 11px; color: var(--muted);
-  letter-spacing: .06em; text-transform: uppercase;
-}
-/* dark mode toggle */
-#theme-toggle {
-  background: none; border: 1px solid var(--border);
-  border-radius: 50px; cursor: pointer;
-  padding: 5px 12px; display: flex; align-items: center; gap: 6px;
-  color: var(--muted); font-size: 11px;
-  font-family: 'Roboto', sans-serif;
-  letter-spacing: .06em; text-transform: uppercase;
-  transition: border-color .2s, color .2s;
-}
-#theme-toggle:hover { border-color: var(--text); color: var(--text); }
-.toggle-dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: var(--text); flex-shrink: 0;
-  transition: background .3s;
-}
-
-/* ─── WRAP ─── */
-.wrap {
-  max-width: 680px;
-  margin: 0 auto;
-  padding: 64px clamp(24px, 6vw, 48px) 120px;
-}
-
-/* ─── HERO ─── */
-.hero { margin-bottom: 64px; }
-.hero-eyebrow {
-  font-size: 11px; font-weight: 700;
-  letter-spacing: .14em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 16px;
-}
-.hero h1 {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-weight: 900;
-  font-size: clamp(44px, 8vw, 80px);
-  line-height: .92; letter-spacing: -.02em;
-  margin-bottom: 24px;
-}
-.hero-pills {
-  display: flex; flex-wrap: wrap; gap: 8px;
-  margin-bottom: 24px;
-}
-.pill {
-  font-size: 12px; font-weight: 500;
-  letter-spacing: .04em;
-  border: 1px solid var(--border);
-  border-radius: 50px;
-  padding: 5px 14px;
-  color: var(--muted);
-}
-.pill.active { border-color: var(--text); color: var(--text); }
-.hero-lead {
-  font-size: 16px; line-height: 1.7;
-  color: var(--muted); max-width: 520px;
-}
-
-/* ─── DIVIDER ─── */
-.div { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
-
-/* ─── SECTION ─── */
-.section { margin-bottom: 56px; }
-.section-label {
-  font-size: 11px; font-weight: 700;
-  letter-spacing: .14em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 12px;
-  display: flex; align-items: center; gap: 10px;
-}
-.section-label::after {
-  content: ''; flex: 1; height: 1px; background: var(--border);
-}
-h2 {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-weight: 900; font-size: 28px;
-  line-height: 1.05; letter-spacing: -.01em;
-  margin-bottom: 16px;
-}
-.body-text {
-  font-size: 15px; line-height: 1.75;
-  color: var(--muted);
-}
-.body-text + .body-text { margin-top: 12px; }
-.body-text strong { color: var(--text); font-weight: 500; }
-
-/* ─── IMAGE PLACEHOLDER ─── */
-.img-placeholder {
-  margin-top: 28px;
-  aspect-ratio: 16 / 9;
-  border: 1px dashed var(--border);
-  border-radius: 8px;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: 8px;
-  background: var(--bg2);
-  transition: background .3s, border-color .3s;
-}
-.img-placeholder:hover { border-color: var(--text); }
-.img-placeholder-icon {
-  font-size: 28px; opacity: .25;
-}
-.img-placeholder-label {
-  font-size: 12px; font-weight: 500;
-  letter-spacing: .08em; text-transform: uppercase;
-  color: var(--muted);
-}
-.img-placeholder-sub {
-  font-size: 11px; color: var(--muted); opacity: .6;
-}
-
-/* ─── PHASES ─── */
-.phases { display: flex; flex-direction: column; gap: 2px; margin-top: 24px; }
-.phase {
-  display: grid; grid-template-columns: 80px 1fr;
-  gap: 0; align-items: start;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--border);
-}
-.phase:last-child { border-bottom: none; }
-.phase-num {
-  font-size: 11px; font-weight: 700;
-  letter-spacing: .1em; text-transform: uppercase;
-  color: var(--muted); padding-top: 2px;
-}
-.phase-title {
-  font-weight: 500; font-size: 15px;
-  margin-bottom: 4px;
-}
-.phase-desc {
-  font-size: 13px; color: var(--muted); line-height: 1.55;
-}
+body.dark .hw-phase-desc { color: rgba(240,236,228,.42) !important; }
 
 /* ─── PRICING ─── */
-.pricing-grid {
+.hw-pricing-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px; margin-top: 24px;
+  gap: 12px;
 }
-.price-card {
-  border: 1px solid var(--border);
-  border-radius: 8px; padding: 24px 20px;
-  position: relative; overflow: hidden;
+.hw-price-card {
+  border: 1px solid #e9e6df; padding: 28px 24px;
+  border-radius: 2px;
   transition: border-color .2s;
 }
-.price-card:hover { border-color: var(--text); }
-.price-card.featured {
-  border-color: var(--text);
-  background: var(--bg2);
+.hw-price-card:hover { border-color: #bbb; }
+.hw-price-card.featured { border-color: #111; }
+.hw-price-badge {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: #bbb; display: block; margin-bottom: 14px;
 }
-.price-badge {
-  font-size: 10px; font-weight: 700;
-  letter-spacing: .1em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 12px;
-  display: block;
+.hw-price-card.featured .hw-price-badge { color: #111; }
+body.dark .hw-price-card.featured .hw-price-badge { color: #f0ece4 !important; }
+.hw-price-name { font-size: 12px; color: #888; margin-bottom: 12px; }
+.hw-price-amount {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 900; font-size: 36px;
+  letter-spacing: -.03em; line-height: 1;
+  color: #111; margin-bottom: 14px;
 }
-.price-card.featured .price-badge { color: var(--text); }
-.price-name {
-  font-size: 13px; font-weight: 500;
-  margin-bottom: 10px;
+.hw-price-desc { font-size: 12px; color: #999; line-height: 1.6; }
+.hw-price-gain {
+  margin-top: 16px; padding-top: 14px;
+  border-top: 1px solid #e9e6df;
+  font-size: 11px; color: #bbb;
 }
-.price-amount {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-weight: 900; font-size: 32px;
-  letter-spacing: -.02em; line-height: 1;
-  margin-bottom: 12px;
+.hw-price-gain strong { color: #111; font-size: 13px; font-weight: 600; }
+.hw-footnote {
+  margin-top: 16px; padding: 16px 20px;
+  border: 1px solid #e9e6df;
+  font-size: 12px; color: #999; line-height: 1.7;
+  border-radius: 2px;
 }
-.price-desc {
-  font-size: 12px; color: var(--muted);
-  line-height: 1.5;
-}
-.price-gain {
-  margin-top: 16px; padding-top: 12px;
-  border-top: 1px solid var(--border);
-  font-size: 11px; color: var(--muted);
-  letter-spacing: .04em;
-}
-.price-gain strong { color: var(--text); font-size: 13px; }
+.hw-footnote strong { color: #111; font-weight: 500; }
 
-/* ─── FOOTNOTE ─── */
-.footnote {
-  margin-top: 20px; padding: 16px 18px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-size: 12px; color: var(--muted);
-  line-height: 1.6;
-}
-.footnote strong { color: var(--text); font-weight: 500; }
-
-/* ─── SIGNATURE ─── */
-.sig {
-  margin-top: 64px; padding-top: 32px;
-  border-top: 1px solid var(--border);
-  display: flex; justify-content: space-between; align-items: flex-end;
-}
-.sig-from {}
-.sig-name {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-weight: 900; font-size: 20px; letter-spacing: -.01em;
-}
-.sig-role { font-size: 13px; color: var(--muted); margin-top: 4px; }
-.sig-cta {
-  background: var(--text); color: var(--bg);
-  border: none; cursor: pointer;
-  padding: 13px 26px; border-radius: 50px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 700; font-size: 12px;
-  letter-spacing: .08em; text-transform: uppercase;
-  text-decoration: none;
-  transition: opacity .15s;
-  display: inline-block;
-}
-.sig-cta:hover { opacity: .75; }
-
-/* ─── RESPONSIVE ─── */
-@media (max-width: 580px) {
-  .pricing-grid { grid-template-columns: 1fr; }
-  .topbar-ref { display: none; }
-  .sig { flex-direction: column; gap: 24px; align-items: flex-start; }
-  .phase { grid-template-columns: 64px 1fr; }
+@media (max-width: 700px) {
+  .hw-pricing-grid { grid-template-columns: 1fr; }
+  .hw-phase { grid-template-columns: 80px 1fr; }
+  .hw-phase-body { padding: 24px 20px; }
+  .nav-ref { display: none; }
 }
 </style>
 </head>
+
+<!-- Theme applied immediately before paint -->
+<script>
+(function(){
+  var s = localStorage.getItem('theme');
+  if(s==='dark') document.documentElement.setAttribute('data-theme','dark');
+  // Apply body.dark after body exists — handled in DOMContentLoaded
+})();
+</script>
+
 <body>
 
 <!-- ═══ GATE ═══ -->
 <div id="gate">
   <div class="gate-brand">
-    <!-- Hubway icon — reproduction SVG de leur pinwheel -->
-    <div class="gate-icon hw-icon">
+    <div class="gate-icon">
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g transform="translate(50,50)" fill="currentColor">
           <path d="M0-40 L20-26 L10-8 L-12-22Z" transform="rotate(0)"/>
@@ -375,268 +242,262 @@ h2 {
     </div>
     <div class="gate-name">hubway</div>
   </div>
-  <div class="gate-sub">Devis confidentiel</div>
+  <div class="gate-sub">Accès restreint</div>
   <div class="gate-form">
     <input id="pw-input" type="password" placeholder="mot de passe" autocomplete="off" spellcheck="false">
-    <button id="pw-btn" type="button">Entrer</button>
+    <button id="pw-btn">Entrer</button>
   </div>
   <div id="gate-error" class="gate-error">Pas tout à fait 🙃</div>
 </div>
 
-<!-- ═══ CONTENT ═══ -->
-<div id="content">
+<!-- ═══ NAV (same structure as portfolio) ═══ -->
+<nav>
+  <a class="nav-logo" href="/">theo.design</a>
+  <span class="nav-role">— hubway</span>
+  <span class="nav-ref" id="doc-date-nav"></span>
+  <button id="theme-btn" aria-label="Changer de thème">
+    <!-- Moon -->
+    <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+    <!-- Sun -->
+    <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  </button>
+</nav>
 
-  <!-- Topbar -->
-  <div class="topbar">
-    <div class="topbar-brand">
-      <div class="topbar-icon hw-icon">
-        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g transform="translate(50,50)" fill="currentColor">
-            <path d="M0-40 L20-26 L10-8 L-12-22Z" transform="rotate(0)"/>
-            <path d="M0-40 L20-26 L10-8 L-12-22Z" transform="rotate(72)"/>
-            <path d="M0-40 L20-26 L10-8 L-12-22Z" transform="rotate(144)"/>
-            <path d="M0-40 L20-26 L10-8 L-12-22Z" transform="rotate(216)"/>
-            <path d="M0-40 L20-26 L10-8 L-12-22Z" transform="rotate(288)"/>
-          </g>
-        </svg>
-      </div>
-      <div class="topbar-name">hubway</div>
+<!-- ═══ CONTENT ═══ -->
+<div id="hw-content">
+<div style="padding-top:52px">
+
+  <!-- ── Hero ── -->
+  <div class="proj-hero">
+    <div class="proj-tag">Proposition créative · Devis confidentiel · #HBW-2026-01</div>
+    <h1 class="proj-title">Campagne vidéo<br>IA modulaire</h1>
+    <div class="hw-pills">
+      <span class="hw-pill active">Production Kling</span>
+      <span class="hw-pill active">1 film · 20 secondes</span>
+      <span class="hw-pill active">10 plans</span>
+      <span class="hw-pill active">2 variables</span>
+      <span class="hw-pill">Aéroport × Famille</span>
     </div>
-    <div class="topbar-right">
-      <div class="topbar-ref">#HBW-2026-01 · <span id="doc-date"></span></div>
-      <button id="theme-toggle" type="button" aria-label="Changer de thème">
-        <span class="toggle-dot"></span>
-        <span id="theme-label">Light</span>
-      </button>
+    <div class="proj-meta" style="margin-top:40px">
+      <div class="meta-item">
+        <span class="meta-label">Client</span>
+        <span class="meta-val">Hubway AI</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Date</span>
+        <span class="meta-val" id="doc-date">—</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Validité</span>
+        <span class="meta-val">30 jours</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Outil</span>
+        <span class="meta-val">Kling / Weavy</span>
+      </div>
     </div>
   </div>
 
-  <!-- Main -->
-  <div class="wrap">
+  <!-- ── Le principe ── -->
+  <div class="proj-problem">
+    <div class="block-label">Principe</div>
+    <div class="problem-text">Un film.<br>Des dizaines de contextes.</div>
+  </div>
+  <div class="proj-solve">
+    <div class="block-label solve-label">En détail</div>
+    <div class="solve-text">
+      Plutôt que de produire une pub traditionnelle — coûteuse, rigide, à usage unique —
+      on conçoit un <strong style="color:#111;font-weight:500">système vidéo modulaire généré par IA</strong>.
+      Un film maître de 20 secondes, structuré en 10 plans indépendants,
+      chacun conçu avec des variables intégrées dans le script :
+      <strong style="color:#111;font-weight:500">[{LIEU}]</strong> et <strong style="color:#111;font-weight:500">[{PROFIL}]</strong>.<br><br>
+      Pour créer une déclinaison, on remplace les plans impactés par de nouvelles générations
+      correspondant au nouveau contexte — sans retoucher le reste du film.
+      Coût marginal : <strong style="color:#111;font-weight:500">~350 € / version</strong>
+      au lieu de 8 000–25 000 € pour une pub classique.
+    </div>
+  </div>
 
-    <!-- Hero -->
-    <div class="hero">
-      <div class="hero-eyebrow">Proposition créative</div>
-      <h1>Campagne vidéo IA modulaire</h1>
-      <div class="hero-pills">
-        <span class="pill active">Production Kling</span>
-        <span class="pill active">1 film · 20 secondes</span>
-        <span class="pill active">2 variables</span>
-        <span class="pill">Aéroport × Famille</span>
+  <!-- ── Variable A — Aéroport ── -->
+  <div class="content-block">
+    <div class="block-num">A</div>
+    <div class="block-content">
+      <div class="block-caption">
+        <strong>Variable A — Lieu</strong><br>
+        L'aéroport comme décor naturel. Terminal animé, embarquement, arrivées, grand hall.
+        Un décor universel chargé d'émotion — exactement le contexte où Hubway opère.
+        Les plans de lieu sont générés pour coller à l'identité de chaque aéroport partenaire.
       </div>
-      <p class="hero-lead">
-        Plutôt que de produire une pub traditionnelle — coûteuse, rigide, à usage unique —
-        on conçoit un <strong>système vidéo modulaire</strong>.
-        Un film maître généré par IA, déclinable à l'infini selon le contexte.
-      </p>
-    </div>
-
-    <hr class="div">
-
-    <!-- Principe -->
-    <div class="section">
-      <div class="section-label">Le principe</div>
-      <h2>Un film. Des dizaines de contextes.</h2>
-      <p class="body-text">
-        Le film est structuré en <strong>10 plans indépendants</strong>,
-        chacun conçu avec des <strong>variables intégrées</strong> dans le script :
-        <strong>[{LIEU}]</strong> et <strong>[{PROFIL}]</strong>.
-      </p>
-      <p class="body-text">
-        Pour créer une déclinaison, on remplace les plans impactés par de nouvelles générations Kling
-        correspondant au nouveau contexte — sans retoucher le reste du film.
-        Coût marginal : <strong>~350 € par version supplémentaire</strong>
-        au lieu de 8 000 – 25 000 € pour une pub classique.
-      </p>
-    </div>
-
-    <hr class="div">
-
-    <!-- Variable A : Aéroport -->
-    <div class="section">
-      <div class="section-label">Variable A — Lieu</div>
-      <h2>L'aéroport</h2>
-      <p class="body-text">
-        Le terrain de jeu. Terminal animé, embarquement, arrivées, grand hall.
-        Un décor universel chargé d'émotion — <strong>exactement le contexte où Hubway opère</strong>.
-        Les plans de lieu sont générés pour coller précisément à l'identité de chaque aéroport partenaire.
-      </p>
-      <!-- Image placeholder Aéroport -->
-      <div class="img-placeholder">
-        <div class="img-placeholder-icon">✈︎</div>
-        <div class="img-placeholder-label">Référence visuelle — Aéroport</div>
-        <div class="img-placeholder-sub">Insérer une image de référence ici</div>
+      <div class="block-img" style="aspect-ratio:16/9;margin-top:20px">
+        <div class="block-placeholder">Référence visuelle — Aéroport</div>
       </div>
     </div>
+  </div>
 
-    <hr class="div">
-
-    <!-- Variable B : Famille -->
-    <div class="section">
-      <div class="section-label">Variable B — Profil</div>
-      <h2>La famille</h2>
-      <p class="body-text">
-        Le personnage central. Parents, enfants, bagages, excitation du départ.
+  <!-- ── Variable B — Famille ── -->
+  <div class="content-block">
+    <div class="block-num">B</div>
+    <div class="block-content">
+      <div class="block-caption">
+        <strong>Variable B — Profil</strong><br>
+        La famille comme personnage central. Parents, enfants, bagages, excitation du départ.
         Un profil universel, émotionnel, immédiatement identifiable.
-        <strong>Le service Hubway leur simplifie le voyage</strong> — c'est cette promesse qu'on filme.
-      </p>
-      <!-- Image placeholder Famille -->
-      <div class="img-placeholder">
-        <div class="img-placeholder-icon">◎</div>
-        <div class="img-placeholder-label">Référence visuelle — Famille</div>
-        <div class="img-placeholder-sub">Insérer une image de référence ici</div>
+        Le service Hubway leur simplifie le voyage — c'est cette promesse qu'on filme.
+      </div>
+      <div class="block-img" style="aspect-ratio:16/9;margin-top:20px">
+        <div class="block-placeholder">Référence visuelle — Famille</div>
       </div>
     </div>
+  </div>
 
-    <hr class="div">
+  <!-- ── Process ── -->
+  <div class="proj-problem">
+    <div class="block-label">Process</div>
+    <div class="problem-text">4 phases, du brief<br>au film livré.</div>
+  </div>
 
-    <!-- Phases -->
-    <div class="section">
-      <div class="section-label">Process</div>
-      <h2>4 phases, de l'idée au film livré</h2>
-      <div class="phases">
-        <div class="phase">
-          <div class="phase-num">Phase 1</div>
-          <div>
-            <div class="phase-title">Conception</div>
-            <div class="phase-desc">
-              Script modulaire 20s · 10 plans numérotés · Storyboard avec prompts Kling
-              et placeholders des variables. Le template sert de base à toutes les déclinaisons.
-            </div>
-          </div>
-        </div>
-        <div class="phase">
-          <div class="phase-num">Phase 2</div>
-          <div>
-            <div class="phase-title">Production version maître</div>
-            <div class="phase-desc">
-              Génération Kling des 10 plans (~30 itérations au total pour garantir la cohérence visuelle) ·
-              Montage 20s · Sound design + musique licensiée.
-            </div>
-          </div>
-        </div>
-        <div class="phase">
-          <div class="phase-num">Phase 3</div>
-          <div>
-            <div class="phase-title">Déclinaisons contextuelles</div>
-            <div class="phase-desc">
-              Mise en place d'un pipeline automatisé de substitution des variables.
-              Chaque nouvelle version = regénération des 4 à 6 plans impactés + remontage.
-              Coût marginal réduit à ~350 €/version.
-            </div>
-          </div>
-        </div>
-        <div class="phase">
-          <div class="phase-num">Phase 4</div>
-          <div>
-            <div class="phase-title">Livraison multi-formats</div>
-            <div class="phase-desc">
-              Export en 3 formats par version : 16:9 (YouTube, display) ·
-              9:16 (Reels, Stories) · 1:1 (LinkedIn, Meta).
-              Textes et CTA dynamiques en option.
-            </div>
-          </div>
-        </div>
+  <div class="hw-phases" style="margin: 0 var(--h-pad)">
+    <div class="hw-phase">
+      <div class="hw-phase-num">Phase 1</div>
+      <div class="hw-phase-body">
+        <div class="hw-phase-title">Conception</div>
+        <div class="hw-phase-desc">Script modulaire 20s · Storyboard 10 plans avec prompts Kling
+          et placeholders des variables. Template réutilisable pour toutes les déclinaisons.</div>
       </div>
     </div>
-
-    <hr class="div">
-
-    <!-- Pricing -->
-    <div class="section">
-      <div class="section-label">Tarifs</div>
-      <h2>Choisissez votre échelle</h2>
-      <div class="pricing-grid">
-
-        <div class="price-card">
-          <span class="price-badge">Essentiel</span>
-          <div class="price-name">Tester l'approche</div>
-          <div class="price-amount">4 200 €</div>
-          <div class="price-desc">Version maître + exports 3 formats<br>Idéal pour valider avant de scaler</div>
-          <div class="price-gain">1 contexte livré</div>
-        </div>
-
-        <div class="price-card featured">
-          <span class="price-badge">★ Recommandé</span>
-          <div class="price-name">Scalable</div>
-          <div class="price-amount">6 600 €</div>
-          <div class="price-desc">Master + pipeline + 5 déclinaisons<br>1 budget = 6 contextes différents</div>
-          <div class="price-gain">~<strong>1 100 €</strong> / version</div>
-        </div>
-
-        <div class="price-card">
-          <span class="price-badge">Campagne complète</span>
-          <div class="price-name">10 contextes</div>
-          <div class="price-amount">8 100 €</div>
-          <div class="price-desc">Master + pipeline + 10 déclinaisons<br>Couverture maximale</div>
-          <div class="price-gain">~<strong>810 €</strong> / version</div>
-        </div>
-
-      </div>
-
-      <div class="footnote">
-        <strong>Hors périmètre :</strong> Crédits Kling (50–150 € / version selon qualité) ·
-        Voix off · Frais de diffusion et ciblage média.
-        Gain estimé vs. pub classique (8 000–25 000 € / contexte) :
-        <strong>×10 à ×30 sur 10 déclinaisons.</strong>
+    <div class="hw-phase">
+      <div class="hw-phase-num">Phase 2</div>
+      <div class="hw-phase-body">
+        <div class="hw-phase-title">Production version maître</div>
+        <div class="hw-phase-desc">Génération Kling des 10 plans (~30 itérations pour garantir la cohérence visuelle) ·
+          Montage 20s · Sound design + musique licensiée.</div>
       </div>
     </div>
-
-    <!-- Signature -->
-    <div class="sig">
-      <div class="sig-from">
-        <div class="sig-name">Théo Jégousse</div>
-        <div class="sig-role">Product & Brand Designer · theo.design</div>
+    <div class="hw-phase">
+      <div class="hw-phase-num">Phase 3</div>
+      <div class="hw-phase-body">
+        <div class="hw-phase-title">Déclinaisons contextuelles</div>
+        <div class="hw-phase-desc">Pipeline automatisé de substitution des variables.
+          Chaque version = regénération des 4–6 plans impactés + remontage.
+          Coût marginal réduit à ~350 €/version.</div>
       </div>
-      <a href="mailto:theo@theo.design?subject=Go%20Hubway%20%E2%9C%85" class="sig-cta">On y va ✈︎</a>
     </div>
+    <div class="hw-phase">
+      <div class="hw-phase-num">Phase 4</div>
+      <div class="hw-phase-body">
+        <div class="hw-phase-title">Livraison multi-formats</div>
+        <div class="hw-phase-desc">Export par version : 16:9 (YouTube, display) ·
+          9:16 (Reels, Stories) · 1:1 (LinkedIn, Meta).
+          Textes et CTA dynamiques en option.</div>
+      </div>
+    </div>
+  </div>
 
-  </div><!-- /wrap -->
-</div><!-- /content -->
+  <!-- ── Tarifs ── -->
+  <div class="proj-problem" style="margin-top:0">
+    <div class="block-label">Tarifs</div>
+    <div class="problem-text">Choisissez<br>votre échelle.</div>
+  </div>
+
+  <div class="content-block" style="padding-bottom:48px">
+    <div class="block-content" style="padding-top:12px">
+      <div class="hw-pricing-grid">
+
+        <div class="hw-price-card">
+          <span class="hw-price-badge">Essentiel</span>
+          <div class="hw-price-name">Tester l'approche</div>
+          <div class="hw-price-amount">4 200 €</div>
+          <div class="hw-price-desc">Version maître + 3 formats<br>Idéal pour valider avant de scaler</div>
+          <div class="hw-price-gain">1 contexte livré</div>
+        </div>
+
+        <div class="hw-price-card featured">
+          <span class="hw-price-badge">★ Recommandé</span>
+          <div class="hw-price-name">Scalable</div>
+          <div class="hw-price-amount">6 600 €</div>
+          <div class="hw-price-desc">Master + pipeline + 5 déclinaisons<br>1 budget = 6 contextes différents</div>
+          <div class="hw-price-gain">~<strong>1 100 €</strong> / version</div>
+        </div>
+
+        <div class="hw-price-card">
+          <span class="hw-price-badge">Campagne complète</span>
+          <div class="hw-price-name">10 contextes</div>
+          <div class="hw-price-amount">8 100 €</div>
+          <div class="hw-price-desc">Master + pipeline + 10 déclinaisons<br>Couverture maximale</div>
+          <div class="hw-price-gain">~<strong>810 €</strong> / version</div>
+        </div>
+
+      </div>
+
+      <div class="hw-footnote" style="margin-top:12px">
+        <strong>Hors périmètre :</strong> Crédits Kling 50–150 € / version · Voix off · Frais de diffusion &amp; ciblage média.<br>
+        Gain estimé vs. pub classique (8 000–25 000 € / contexte) sur 10 versions : <strong>×10 à ×30.</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Signature ── -->
+  <div class="proj-nav">
+    <div class="pnav-btn prev" style="cursor:default">
+      <div class="pnav-dir">De la part de</div>
+      <div class="pnav-name">Théo Jégousse</div>
+      <div class="pnav-dir" style="margin-top:4px">Product &amp; Brand Designer</div>
+    </div>
+    <a href="mailto:theo@theo.design?subject=Go%20Hubway%20✅" class="pnav-btn next">
+      <div class="pnav-dir">Prêt à démarrer</div>
+      <div class="pnav-name">On y va ✈︎</div>
+    </a>
+  </div>
+
+</div>
+</div><!-- /hw-content -->
 
 <script>
-  const PASSWORD = 'pubduturfu';
+  // ─ Init theme (same mechanism as main site) ─
+  (function initTheme() {
+    var saved = localStorage.getItem('theme');
+    var h = new Date().getHours();
+    var dark = saved === 'dark' || (!saved && (h >= 20 || h < 7));
+    if (dark) document.body.classList.add('dark');
+    // sync sun/moon icons
+    var sun = document.querySelector('.icon-sun');
+    var moon = document.querySelector('.icon-moon');
+    if (dark) { if(sun) sun.style.display='none'; }
+    else { if(moon) moon.style.display='none'; }
+  })();
 
-  // Date
-  document.getElementById('doc-date').textContent =
-    new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+  // ─ Date ─
+  var dateStr = new Date().toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' });
+  document.getElementById('doc-date').textContent = dateStr;
+  document.getElementById('doc-date-nav').textContent = dateStr;
 
-  // Gate
+  // ─ Gate ─
+  var PASSWORD = 'pubduturfu';
   function tryUnlock() {
     if (document.getElementById('pw-input').value === PASSWORD) {
       document.getElementById('gate').classList.add('out');
-      document.getElementById('content').classList.add('visible');
+      document.getElementById('hw-content').classList.add('visible');
     } else {
-      const err = document.getElementById('gate-error');
+      var err = document.getElementById('gate-error');
       err.classList.add('show');
       document.getElementById('pw-input').value = '';
       document.getElementById('pw-input').focus();
-      setTimeout(() => err.classList.remove('show'), 2200);
+      setTimeout(function(){ err.classList.remove('show'); }, 2200);
     }
   }
   document.getElementById('pw-btn').addEventListener('click', tryUnlock);
-  document.getElementById('pw-input').addEventListener('keydown', e => {
+  document.getElementById('pw-input').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') tryUnlock();
   });
 
-  // Theme toggle
-  const root = document.documentElement;
-  const label = document.getElementById('theme-label');
-  const saved = localStorage.getItem('hubway-theme');
-  if (saved) root.setAttribute('data-theme', saved);
-
-  function updateLabel() {
-    const isDark = root.getAttribute('data-theme') === 'dark';
-    label.textContent = isDark ? 'Light' : 'Dark';
-  }
-  updateLabel();
-
-  document.getElementById('theme-toggle').addEventListener('click', () => {
-    const isDark = root.getAttribute('data-theme') === 'dark';
-    const next = isDark ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    localStorage.setItem('hubway-theme', next);
-    updateLabel();
+  // ─ Theme toggle (same as main site) ─
+  document.getElementById('theme-btn').addEventListener('click', function() {
+    var isDark = document.body.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    var sun = document.querySelector('.icon-sun');
+    var moon = document.querySelector('.icon-moon');
+    if (isDark) { if(sun) sun.style.display='none'; if(moon) moon.style.display=''; }
+    else { if(moon) moon.style.display='none'; if(sun) sun.style.display=''; }
   });
 </script>
 </body>
