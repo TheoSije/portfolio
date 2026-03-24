@@ -1140,8 +1140,8 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 /* Bare iphone — no frame, screen fills the container */
 .iphone--bare { border-radius: 12px; aspect-ratio: 9/19.5; overflow: hidden; }
 .iphone--bare .iphone-screen { position: absolute; inset: 0; }
-.iphone--bare .iphone-screen img,
-.iphone--bare .iphone-screen video { border-radius: 0; width: 100%; height: 100%; object-fit: cover; }
+.iphone--bare .iphone-slide img,
+.iphone--bare .iphone-slide video { border-radius: 0; width: 100%; height: 100%; object-fit: contain; }
 
 /* App content sits behind the frame, fills the phone area */
 .iphone-screen {
@@ -2277,7 +2277,8 @@ function renderImg(b) {
     const dSrcs = b.desktopSrcs || (b.desktop ? [b.desktop] : []);
     const dSlides = dSrcs.map((s,i)=>`<div class="desktop-slide${i===0?' active':''}"><img src="${s}" alt="${imgAlt(s)}"></div>`).join('');
     const dDots   = dSrcs.map((_,i)=>`<span class="desktop-dot${i===0?' active':''}"></span>`).join('');
-    const desktopHtml = dSrcs.length ? `<div class="desktop-outer"><div class="desktop" data-desktop-slider>${'<img class="desktop-frame" src="img/desktop.png" alt="" draggable="false"><div class="desktop-screen">' + dSlides + '</div></div>'}<div class="desktop-dots">${dDots}</div></div>` : '';
+    const desktopSlider = dSrcs.length > 1 ? ' data-desktop-slider' : '';
+    const desktopHtml = dSrcs.length ? `<div class="desktop-outer"><div class="desktop"${desktopSlider}>${'<img class="desktop-frame" src="img/desktop.png" alt="" draggable="false"><div class="desktop-screen">' + dSlides + '</div></div>'}<div class="desktop-dots">${dDots}</div></div>` : '';
     return `<div class="block-devices"><div class="devices-left">${iphoneHtml}</div><div class="devices-right">${desktopHtml}</div></div>`;
   }
   if (b.t==='iphone') {
