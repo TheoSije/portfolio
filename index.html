@@ -1261,6 +1261,7 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 }
 .desktop-slide.active { opacity: 1; }
 .desktop-slide img { width: 100%; display: block; animation: desk-scroll 12s ease-in-out 1.5s infinite; }
+.desktop--static .desktop-slide img { animation: none; }
 @keyframes desk-scroll {
   0%     { transform: translateY(0);    opacity: 1; }
   80%    { transform: translateY(-60%); opacity: 1; }
@@ -2294,8 +2295,10 @@ function renderImg(b) {
     const dSlides = dSrcs.map((s,i)=>`<div class="desktop-slide${i===0?' active':''}"><img src="${s}" alt="${imgAlt(s)}"></div>`).join('');
     const dDots   = dSrcs.map((_,i)=>`<span class="desktop-dot${i===0?' active':''}"></span>`).join('');
     const desktopSlider = dSrcs.length > 1 ? ' data-desktop-slider' : '';
-    const desktopHtml = dSrcs.length ? `<div class="desktop-outer"><div class="desktop"${desktopSlider}>${'<img class="desktop-frame" src="img/desktop.png" alt="" draggable="false"><div class="desktop-screen">' + dSlides + '</div></div>'}<div class="desktop-dots">${dDots}</div></div>` : '';
-    return `<div class="block-devices"><div class="devices-left">${iphoneHtml}</div><div class="devices-right">${desktopHtml}</div></div>`;
+    const desktopStatic = dSrcs.length === 1 ? ' desktop--static' : '';
+    const desktopHtml = dSrcs.length ? `<div class="desktop-outer"><div class="desktop${desktopStatic}"${desktopSlider}>${'<img class="desktop-frame" src="img/desktop.png" alt="" draggable="false"><div class="desktop-screen">' + dSlides + '</div></div>'}<div class="desktop-dots">${dDots}</div></div>` : '';
+    const leftBg = b.bg ? ` style="background:${b.bg}"` : '';
+    return `<div class="block-devices"><div class="devices-left"${leftBg}>${iphoneHtml}</div><div class="devices-right">${desktopHtml}</div></div>`;
   }
   if (b.t==='brand-scroll') {
     const items = (b.srcs||[]).map(s=>`<div class="dvlt-brand-item"><img src="${s}" alt="${imgAlt(s)}" loading="lazy"></div>`).join('');
@@ -2424,8 +2427,7 @@ function showProject(id, push) {
     <div class="proj-blocks">
       ${p.blocks.map(b=>{
         if (b.fullWidth) return renderImg(b);
-        const bgStyle = b.bg ? ` style="background:${b.bg};border-radius:8px;overflow:hidden"` : '';
-        return `<div class="content-block"${bgStyle}><span class="block-num">${b.n}</span><div class="block-content">${renderImg(b)}<p class="block-caption">${b.c}</p></div></div>`;
+        return `<div class="content-block"><span class="block-num">${b.n}</span><div class="block-content">${renderImg(b)}<p class="block-caption">${b.c}</p></div></div>`;
       }).join('')}
     </div>`;
   initSliders();
