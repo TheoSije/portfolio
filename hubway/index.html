@@ -120,15 +120,6 @@ body.dark .hw-full-logo .hw-logo-bg { fill: #111; }
 }
 .gate-error.show { opacity: 1; }
 
-/* ─── NAV OVERRIDE — 4 columns ─── */
-nav { grid-template-columns: 1fr auto auto auto !important; }
-.nav-ref {
-  padding: 0 16px;
-  font-size: 11px; color: #ccc;
-  display: flex; align-items: center;
-  letter-spacing: .04em;
-}
-body.dark .nav-ref { color: rgba(240,236,228,.2) !important; }
 
 /* ─── CONTENT ─── */
 #hw-content { opacity: 0; pointer-events: none; transition: opacity .5s .15s; }
@@ -261,23 +252,13 @@ body.dark .hw-price-card.featured .hw-price-badge { color: #f0ece4 !important; }
   <div id="gate-error" class="gate-error">Pas tout à fait 🙃</div>
 </div>
 
-<!-- ═══ NAV (same structure as portfolio) ═══ -->
+<!-- ═══ NAV — identique au portfolio ═══ -->
 <nav>
   <a class="nav-logo" href="/">theo.design</a>
-  <span class="nav-role" style="display:flex;align-items:center;gap:8px;padding-right:0">
-    <span style="color:#ddd;font-weight:300">—</span>
-    <!-- Real Hubway icon mark in nav -->
-    <svg viewBox="335 255 370 350" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;height:16px;width:auto;vertical-align:middle">
-      <path class="hw-logo-fg" d="M 523.4 262.801 L 534.792 264.419 L 524.379 333.836 C 548.642 329.967 572.873 325.908 597.072 321.659 L 695.119 392.032 L 696.649 403.49 C 675.763 405.878 648.687 411.1 627.475 414.564 L 661.468 480.465 C 648.97 515.758 636.497 558.905 625.101 595.073 L 614.865 600.21 L 582.572 537.923 L 543.691 577.07 L 530.561 590.306 L 410.332 591.028 L 402.332 583.01 L 451.636 533.142 L 385.681 500.089 C 372.623 463.293 359.994 422.835 347.799 385.563 L 352.745 375.805 C 373.239 385.457 395.006 396.932 415.523 407.093 C 419.807 385.286 423.37 356.574 426.566 334.164 C 455.426 311.187 493.192 285.004 523.4 262.801 z"/>
-      <path class="hw-logo-bg" style="fill:rgba(248,247,244,0.92)" d="M 487.002 363.952 L 519.571 387.4 C 538.213 384.758 557.473 381.239 576.254 378.415 L 589.921 388.923 L 577.761 427.448 C 585.525 443.61 595.539 461.893 603.877 477.993 L 598.075 494.674 L 557.66 495.012 L 545.048 507.681 L 517.635 535.2 L 500.184 534.963 L 487.447 496.83 L 436.522 471.069 L 431.536 454.334 L 463.91 430.287 C 467.187 412.82 469.921 391.567 472.472 373.898 L 487.002 363.952 z"/>
-    </svg>
-    hubway
-  </span>
-  <span class="nav-ref" id="doc-date-nav"></span>
+  <span class="nav-role"></span>
+  <a class="nav-contact" href="mailto:theo@theo.design">Contact</a>
   <button id="theme-btn" aria-label="Changer de thème">
-    <!-- Moon -->
     <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
-    <!-- Sun -->
     <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
   </button>
 </nav>
@@ -501,7 +482,6 @@ body.dark .hw-price-card.featured .hw-price-badge { color: #f0ece4 !important; }
   // ─ Date ─
   var dateStr = new Date().toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' });
   document.getElementById('doc-date').textContent = dateStr;
-  document.getElementById('doc-date-nav').textContent = dateStr;
 
   // ─ Gate ─
   var PASSWORD = 'pubduturfu';
