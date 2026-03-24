@@ -1137,6 +1137,22 @@ nav.minisite-nav.minisite-nav--light .nav-role {
   pointer-events: none;
 }
 
+/* ── Brand scroll (packaging faces) ── */
+.dvlt-brand-outer { position: relative; }
+.dvlt-brand-section {
+  position: sticky; top: 0;
+  height: 85vh; min-height: 500px;
+  overflow: hidden;
+  background: #1a1614;
+}
+.dvlt-brand-canvas {
+  display: flex; align-items: stretch;
+  height: 100%;
+  will-change: transform;
+}
+.dvlt-brand-item { flex: 0 0 85vh; }
+.dvlt-brand-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
 /* Bare iphone — no frame, screen fills the container */
 .iphone--bare { border-radius: 12px; aspect-ratio: 9/19.5; overflow: hidden; background: #E2E0DC; }
 .iphone--bare .iphone-screen { position: absolute; inset: 0; }
@@ -2096,7 +2112,7 @@ const P = {
     solve:"3 ans. Une app, un site, un design system, des flows IA, un chatbot, des centaines d\'apps Low-Code. Et une équipe qui déchire."
   },
   deezer: { title:'Deezer', type:'Projet Pro', tags:['Mobile','Audio'], year:'2019–2023', role:'UX Design · Prototypage', context:"Quatre ans chez Deezer, en plein rebranding. Logotype, typographie, palette — toute l'identité se reconstruit et chaque interface suit. Écrans iOS & Android, pages web, microsites, Store screenshots, covers de playlists curatées, widgets, OOH, Deezer Originals. Plus de 3 000 covers redesignées dans un système unifié. Sur ce même terrain : feature de découverte sociale dans le player — prototypée, testée, poussée en beta. Le genre de projet où l'on touche à tout, du pixel au système.", problem:"La découverte musicale stagnait. Le moteur de recommandation existait mais personne ne l'utilisait.", blocks:[{t:'full',n:'01',c:'<strong>20 interviews.</strong> Les gens découvrent la musique via leurs amis, pas via les algos.'},{t:'duo',n:'02',c:'<strong>"Flow Social".</strong> Dimension sociale dans le player — subtil, jamais intrusif.'},{t:'full',n:'03',c:'<strong>3 prototypes.</strong> Le gagnant conservait 80% des habitudes existantes.'}], solve:"+34% exploration nouveaux artistes. Beta 10k users."},
-  devialet: { title:'Devialet', type:'Projet Pro', tags:['Luxe','Hardware'], year:'2015', role:'UI Design · Brand', context:"Mon premier vrai plongeon dans le product design. Devialet venait de sortir le Phantom — l'enceinte la plus puissante, la plus précise, la plus dingue jamais conçue. Mon job : créer l'app mobile et desktop native qui allait la contrôler. Pas juste une télécommande. Un objet digital à la hauteur d'un objet physique d'exception. La meilleure expérience de ma carrière.", problem:"L'app de contrôle en décalage total avec un produit à 3000€.", blocks:[{t:'devices',n:'01',srcs:['img/dvlt-app-01.jpg','img/dvlt-app-02.jpg','img/dvlt-app-03.jpg','img/dvlt-app-04.jpg','img/dvlt-app-05.jpg'],desktopSrcs:['img/dvlt-desktop-01.jpg'],noFrame:true,c:'<strong>App Devialet.</strong> Minimalisme radical. Chaque décision devait honorer le Phantom.'},{t:'full',n:'02',c:'<strong>ADN Devialet.</strong> Minimalisme radical. Chaque décision devait l\'honorer.'},{t:'full',n:'03',c:'<strong>Le son comme métaphore.</strong> Ondes, fréquences, visualisations épurées.'},{t:'duo',n:'04',c:'<strong>Micro-interactions.</strong> Même exigence qu\'un bouton physique.'}], solve:"2,8 → 4,6 étoiles App Store. NPS +41."},
+  devialet: { title:'Devialet', type:'Projet Pro', tags:['Luxe','Hardware'], year:'2015', role:'UI Design · Brand', context:"Mon premier vrai plongeon dans le product design. Devialet venait de sortir le Phantom — l'enceinte la plus puissante, la plus précise, la plus dingue jamais conçue. Mon job : créer l'app mobile et desktop native qui allait la contrôler. Pas juste une télécommande. Un objet digital à la hauteur d'un objet physique d'exception. La meilleure expérience de ma carrière.", problem:"L'app de contrôle en décalage total avec un produit à 3000€.", blocks:[{t:'devices',n:'01',srcs:['img/dvlt-app-01.jpg','img/dvlt-app-02.jpg','img/dvlt-app-03.jpg','img/dvlt-app-04.jpg','img/dvlt-app-05.jpg'],desktopSrcs:['img/dvlt-desktop-01.jpg'],noFrame:true,bg:'#E2E0DC',c:'<strong>App Devialet.</strong> Minimalisme radical. Chaque décision devait honorer le Phantom.'},{t:'brand-scroll',n:'02',srcs:['img/dvlt-brand-01.jpg','img/dvlt-brand-02.jpg','img/dvlt-brand-03.jpg','img/dvlt-brand-04.jpg'],fullWidth:true,c:'<strong>Packaging.</strong> Les 4 faces du Phantom original.'},{t:'full',n:'03',c:'<strong>ADN Devialet.</strong> Minimalisme radical. Chaque décision devait l\'honorer.'},{t:'full',n:'04',c:'<strong>Le son comme métaphore.</strong> Ondes, fréquences, visualisations épurées.'},{t:'duo',n:'05',c:'<strong>Micro-interactions.</strong> Même exigence qu\'un bouton physique.'}], solve:"2,8 → 4,6 étoiles App Store. NPS +41."},
   simplon: { title:'Simplon', type:'Projet Pro', tags:['EdTech','Accessibilité'], year:'2022', role:'UX/UI · Accessibilité', context:"Former des personnes éloignées du numérique implique de repenser chaque convention d'interface. La plateforme devait être lisible pour quelqu'un qui ouvre un navigateur pour la première fois. Une action par écran, langage naturel, contrastes WCAG AA, touch targets généreux. Et surtout : 15 minutes de tests avec de vrais primo-accédants, qui valent plus que 15h de réflexion solo. Le genre de projet qui remet le design à sa place — utile, humble, précis.", problem:"Plateforme inaccessible pour des apprenants débutant avec l'informatique.", blocks:[{t:'full',n:'01',c:'<strong>Tests primo-accédants.</strong> 15min de test > 15h de réflexion solo.'},{t:'full',n:'02',c:'<strong>Simplification radicale.</strong> Une action par écran. Langage naturel.'},{t:'half',n:'03',c:'<strong>WCAG AA.</strong> Contrastes, tailles, clavier.'}], solve:"Complétion +28%."},
   legalmate: { title:'Legalmate', type:'Projet Pro', tags:['LegalTech','IA'], year:'2024', role:'Product Design', context:"Le droit reste opaque par design. Legalmate veut le rendre accessible — sans trahir sa complexité ni promettre ce qu'il ne sait pas faire. L'enjeu design est rare : concevoir un assistant IA qui montre ses limites, cite ses sources, et rassure sans survendre. Chaque décision d'interface — micro-copy, niveaux de certitude, références cliquables — sert la crédibilité du produit. Un cas d'usage où la transparence est une feature.", problem:"Le droit est opaque par design. Une interface froide aurait reproduit ce qu'ils voulaient combattre.", blocks:[{t:'full',n:'01',c:'<strong>Design de la confiance.</strong> Transparence sources, limites visibles.'},{t:'duo',n:'02',c:'<strong>Chat augmenté.</strong> Certitude visible, références cliquables.'},{t:'full',n:'03',c:'<strong>Onboarding progressif.</strong> Première interaction = poser une question.'}], solve:"Conversion 18% vs 8% benchmark."},
   lionel: { title:'Lionel El Sound', type:'Projet Pro', tags:['Musique','Brand'], year:'2025', role:'UI Design · Web', context:"Un producteur au son unique, zéro présence digitale à la hauteur. Pas un template — une vraie direction artistique. La palette est née du son : grains analogiques, textures organiques, silences assumés. One-page immersif où chaque section crée sa propre atmosphère. Player intégré pour écouter sans quitter la page. Un projet où la contrainte devient langage.", problem:"Son unique, zéro présence digitale à la hauteur.", blocks:[{t:'full',n:'01',c:'<strong>Direction artistique.</strong> La palette est née du son : grains, textures, vides.'},{t:'duo',n:'02',c:'<strong>One-page immersif.</strong> Chaque section a sa propre atmosphère.'},{t:'full',n:'03',c:'<strong>Player intégré.</strong> Écouter sans quitter la page.'}], solve:"Bookings ×3 en 6 mois."},
@@ -2281,6 +2297,10 @@ function renderImg(b) {
     const desktopHtml = dSrcs.length ? `<div class="desktop-outer"><div class="desktop"${desktopSlider}>${'<img class="desktop-frame" src="img/desktop.png" alt="" draggable="false"><div class="desktop-screen">' + dSlides + '</div></div>'}<div class="desktop-dots">${dDots}</div></div>` : '';
     return `<div class="block-devices"><div class="devices-left">${iphoneHtml}</div><div class="devices-right">${desktopHtml}</div></div>`;
   }
+  if (b.t==='brand-scroll') {
+    const items = (b.srcs||[]).map(s=>`<div class="dvlt-brand-item"><img src="${s}" alt="${imgAlt(s)}" loading="lazy"></div>`).join('');
+    return `<div class="dvlt-brand-outer"><div class="dvlt-brand-section"><div class="dvlt-brand-canvas">${items}</div></div>${b.c?`<p class="block-caption" style="padding:24px var(--h-pad) 0">${b.c}</p>`:''}</div>`;
+  }
   if (b.t==='iphone') {
     // multi-image slideshow
     if (b.srcs && b.srcs.length > 1) {
@@ -2402,10 +2422,15 @@ function showProject(id, push) {
       <p class="context-text">${p.context}</p>
     </div>
     <div class="proj-blocks">
-      ${p.blocks.map(b=>`<div class="content-block"><span class="block-num">${b.n}</span><div class="block-content">${renderImg(b)}<p class="block-caption">${b.c}</p></div></div>`).join('')}
+      ${p.blocks.map(b=>{
+        if (b.fullWidth) return renderImg(b);
+        const bgStyle = b.bg ? ` style="background:${b.bg};border-radius:8px;overflow:hidden"` : '';
+        return `<div class="content-block"${bgStyle}><span class="block-num">${b.n}</span><div class="block-content">${renderImg(b)}<p class="block-caption">${b.c}</p></div></div>`;
+      }).join('')}
     </div>`;
   initSliders();
   initDesktopSliders();
+  initBrandScroll();
   initLogoReveal();
   document.querySelector('.nav-role').style.display = 'none';
   document.querySelector('.nav-contact').style.display = '';
@@ -2518,6 +2543,28 @@ function toggleTheme() {
     tx = -progress * Math.max(0, CANVAS_W - window.innerWidth);
   }, { passive: true });
 })();
+
+// ── Brand horizontal scroll ──
+function initBrandScroll() {
+  const outer = document.querySelector('.dvlt-brand-outer');
+  const canvas = document.querySelector('.dvlt-brand-canvas');
+  if (!outer || !canvas) return;
+  const itemW = window.innerHeight * 0.85;
+  const n = canvas.children.length;
+  const totalW = itemW * n;
+  const scrollableW = Math.max(0, totalW - window.innerWidth);
+  outer.style.height = (scrollableW + window.innerHeight * 0.85) + 'px';
+  let tx = 0, ctx = 0, raf;
+  function tick() { ctx += (tx - ctx) * 0.07; canvas.style.transform = `translateX(${ctx}px)`; raf = requestAnimationFrame(tick); }
+  tick();
+  window.addEventListener('scroll', () => {
+    const rect = outer.getBoundingClientRect();
+    const total = outer.offsetHeight - window.innerHeight;
+    if (total <= 0) return;
+    const progress = Math.max(0, Math.min(1, -rect.top / total));
+    tx = -progress * scrollableW;
+  }, { passive: true });
+}
 
 // ══ MINI SITES ══
 const persoLabels = {
