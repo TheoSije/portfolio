@@ -139,6 +139,24 @@ body.dark #theme-btn:hover { color: #f0ece4 !important; }
 body:not(.dark) .icon-sun { display: none; }
 body.dark .icon-moon { display: none; }
 
+/* ─── TARIF GRID ─── */
+.hw-tarif-grid { display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#e9e6df;border:1px solid #e9e6df;border-radius:4px;overflow:hidden }
+.hw-tarif-cell { background:#f8f7f4;padding:40px 48px }
+.hw-tarif-label { font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#bbb;margin-bottom:16px }
+.hw-tarif-price { font-family:'Archivo',sans-serif;font-weight:700;font-size:48px;letter-spacing:-0.03em;color:#111;line-height:1 }
+.hw-tarif-desc { font-size:13px;color:#888;margin-top:16px;line-height:1.9 }
+.hw-tarif-heading { display:block;font-weight:500;color:#111;margin-bottom:4px }
+.hw-tarif-note { font-size:11px;color:#bbb;margin-top:16px;line-height:1.75 }
+body.dark .hw-tarif-grid { background:rgba(240,236,228,.08);border-color:rgba(240,236,228,.08) }
+body.dark .hw-tarif-cell { background:#1a1814 }
+body.dark .hw-tarif-price { color:#f0ece4 }
+body.dark .hw-tarif-heading { color:#f0ece4 }
+@media(max-width:700px){
+  .hw-tarif-grid { grid-template-columns:1fr }
+  .hw-tarif-cell { padding:32px 20px }
+  .hw-tarif-price { font-size:36px }
+}
+
 /* ─── PROBLEM-TEXT OVERRIDE ─── */
 .problem-text {
   font-family: 'Archivo', sans-serif !important;
@@ -341,10 +359,10 @@ body.dark .hw-price-card.featured .hw-price-badge { color: #f0ece4 !important; }
 
     <div class="solve-text" style="grid-column:1/-1;padding:48px var(--h-pad)">
       Plutôt que de produire une pub traditionnelle — coûteuse, rigide, à usage unique —
-      on conçoit un <strong style="color:#111;font-weight:500">système vidéo modulaire généré par IA</strong>.
+      on conçoit un <strong style="font-weight:600">système vidéo modulaire généré par IA</strong>.
       Un film maître de 20 secondes, structuré en une dizaine de plans indépendants,
       chacun conçu avec des variables intégrées dans le script :
-      <strong style="color:#111;font-weight:500">[Aéroport]</strong> et <strong style="color:#111;font-weight:500">[Famille]</strong>.<br><br>
+      <strong style="font-weight:600">[Aéroport]</strong> et <strong style="font-weight:600">[Famille]</strong>.<br><br>
       Pour créer une déclinaison, on remplace les plans impactés par de nouvelles générations
       correspondant au nouveau contexte — sans retoucher le reste du film.
     </div>
@@ -393,10 +411,10 @@ body.dark .hw-price-card.featured .hw-price-badge { color: #f0ece4 !important; }
         <strong>Mise en pratique</strong><br>
         Une fois le film maître produit, chaque déclinaison se construit en combinant les deux variables.
         Ci-dessous, 4 combinaisons issues du même film maître — même structure, même timing,
-        seuls les plans variables changent : <strong style="color:#111;font-weight:500">Aéroport × Famille asiatique</strong>,
-        <strong style="color:#111;font-weight:500">Aéroport × Famille européenne</strong>,
-        <strong style="color:#111;font-weight:500">Mall × Famille asiatique</strong>,
-        <strong style="color:#111;font-weight:500">Mall × Famille européenne</strong>.
+        seuls les plans variables changent : <strong style="font-weight:600">Aéroport × Famille asiatique</strong>,
+        <strong style="font-weight:600">Aéroport × Famille européenne</strong>,
+        <strong style="font-weight:600">Mall × Famille asiatique</strong>,
+        <strong style="font-weight:600">Mall × Famille européenne</strong>.
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
         <img src="img/result-1.png" alt="Résultat 1" style="width:100%;height:auto;display:block;border-radius:4px">
@@ -491,12 +509,12 @@ body.dark .hw-price-card.featured .hw-price-badge { color: #f0ece4 !important; }
   <div class="content-block" style="padding-bottom:48px">
     <div class="block-content" style="padding-top:12px">
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#e9e6df;border:1px solid #e9e6df;border-radius:4px;overflow:hidden">
-        <div style="background:#f8f7f4;padding:40px 48px">
-          <div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#bbb;margin-bottom:16px">Film maître</div>
-          <div style="font-family:'Archivo',sans-serif;font-weight:700;font-size:48px;letter-spacing:-0.03em;color:#111;line-height:1">3 900 €</div>
-          <div style="font-size:13px;color:#888;margin-top:20px;line-height:1.9">
-            <span style="display:block;color:#111;font-weight:500;margin-bottom:4px">Ce que ça inclut</span>
+      <div class="hw-tarif-grid">
+        <div class="hw-tarif-cell">
+          <div class="hw-tarif-label">Film maître</div>
+          <div class="hw-tarif-price">3 900 €</div>
+          <div class="hw-tarif-desc">
+            <span class="hw-tarif-heading">Ce que ça inclut</span>
             Script modulaire 20s<br>
             Storyboard image par image (Weavy)<br>
             Validation visuelle avant production<br>
@@ -506,11 +524,11 @@ body.dark .hw-price-card.featured .hw-price-badge { color: #f0ece4 !important; }
             Livraison 16:9 master
           </div>
         </div>
-        <div style="background:#f8f7f4;padding:40px 48px">
-          <div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#bbb;margin-bottom:16px">Déclinaison</div>
-          <div style="font-family:'Archivo',sans-serif;font-weight:700;font-size:48px;letter-spacing:-0.03em;color:#111;line-height:1">~450 €</div>
-          <div style="font-size:13px;color:#888;margin-top:16px;line-height:1.7">Par version<br>Lieu × Profil au choix</div>
-          <div style="font-size:11px;color:#bbb;margin-top:16px;line-height:1.75">Le "environ" tient compte des crédits IA variables selon le modèle utilisé — chaque plan regénéré consomme des tokens dont le coût dépend de l'IA choisie via Weavy.</div>
+        <div class="hw-tarif-cell">
+          <div class="hw-tarif-label">Déclinaison</div>
+          <div class="hw-tarif-price">~450 €</div>
+          <div class="hw-tarif-desc">Par version<br>Lieu × Profil au choix</div>
+          <div class="hw-tarif-note">Le "environ" tient compte des crédits IA variables selon le modèle utilisé — chaque plan regénéré consomme des tokens dont le coût dépend de l'IA choisie via Weavy.</div>
         </div>
       </div>
     </div>
