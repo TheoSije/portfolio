@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Devis · Hubway</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Roboto+Condensed:wght@700;900&display=swap">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0e0e0e;
+    --surface: #161616;
+    --border: rgba(255,255,255,.08);
+    --text: #f0ede8;
+    --muted: rgba(240,237,232,.45);
+    --accent: #E40303;
+    --orange: #FF8C00;
+    --yellow: #FFED00;
+    --green: #008026;
+    --blue: #004DFF;
+    --purple: #750787;
+    --radius: 12px;
+  }
+
+  html, body {
+    height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── PASSWORD SCREEN ─── */
+  #gate {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 32px;
+    background: var(--bg);
+    z-index: 100;
+    transition: opacity .5s ease, transform .5s ease;
+  }
+  #gate.out { opacity: 0; transform: translateY(-24px); pointer-events: none; }
+
+  .gate-logo {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(36px, 8vw, 64px);
+    letter-spacing: -.02em;
+    background: linear-gradient(90deg, var(--accent), var(--orange), var(--yellow), var(--green), var(--blue), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200%;
+    animation: slide-hue 3s linear infinite;
+  }
+  @keyframes slide-hue {
+    0%   { background-position: 0% 50%;   }
+    100% { background-position: 200% 50%; }
+  }
+
+  .gate-hint {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  .gate-form {
+    display: flex; gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    overflow: hidden;
+    background: var(--surface);
+    transition: border-color .2s;
+  }
+  .gate-form:focus-within { border-color: rgba(255,255,255,.25); }
+
+  #pw-input {
+    background: none; border: none; outline: none;
+    color: var(--text); font-family: 'Roboto', sans-serif;
+    font-size: 15px; padding: 14px 20px;
+    width: 220px; letter-spacing: .04em;
+  }
+  #pw-input::placeholder { color: var(--muted); }
+
+  #pw-btn {
+    background: var(--text); color: var(--bg);
+    border: none; cursor: pointer;
+    padding: 14px 24px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700; font-size: 13px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    transition: opacity .2s;
+  }
+  #pw-btn:hover { opacity: .85; }
+
+  .gate-error {
+    font-size: 12px; color: #ff6b6b;
+    opacity: 0; transition: opacity .3s;
+    letter-spacing: .04em;
+  }
+  .gate-error.show { opacity: 1; }
+
+  /* ─── MAIN CONTENT ─── */
+  #content {
+    opacity: 0; pointer-events: none;
+    transition: opacity .6s .3s ease;
+    min-height: 100vh;
+  }
+  #content.visible { opacity: 1; pointer-events: all; }
+
+  /* ─── LAYOUT ─── */
+  .wrap { max-width: 800px; margin: 0 auto; padding: 80px 40px 120px; }
+
+  /* ─── HEADER ─── */
+  .doc-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 56px;
+  }
+  .doc-from { font-size: 13px; color: var(--muted); line-height: 1.8; }
+  .doc-from strong { color: var(--text); font-weight: 500; display: block; margin-bottom: 4px; }
+  .doc-meta { font-size: 12px; color: var(--muted); text-align: right; line-height: 2; }
+  .doc-meta span { color: var(--text); font-weight: 500; }
+
+  /* ─── TITLE ─── */
+  .doc-title {
+    margin-bottom: 56px;
+  }
+  .doc-eyebrow {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 12px;
+  }
+  h1 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(40px, 7vw, 72px);
+    line-height: .95;
+    letter-spacing: -.02em;
+  }
+  h1 em {
+    font-style: normal;
+    background: linear-gradient(90deg, var(--orange), var(--yellow));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .doc-subtitle {
+    margin-top: 20px;
+    font-size: 16px; color: var(--muted); line-height: 1.6;
+    max-width: 520px;
+  }
+
+  /* ─── VARIABLES ─── */
+  .variables {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    margin-bottom: 56px;
+  }
+  .var-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+  }
+  .var-label {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 10px;
+  }
+  .var-value {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 900; font-size: 28px;
+    letter-spacing: -.01em;
+  }
+  .var-card:first-child .var-value { color: var(--blue); }
+  .var-card:last-child .var-value { color: var(--orange); }
+  .var-desc {
+    margin-top: 8px;
+    font-size: 13px; color: var(--muted); line-height: 1.5;
+  }
+
+  /* ─── SECTION ─── */
+  .section { margin-bottom: 48px; }
+  .section-num {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 8px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-num::after {
+    content: ''; flex: 1; height: 1px;
+    background: var(--border);
+  }
+  h2 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 900; font-size: 28px;
+    letter-spacing: -.01em; margin-bottom: 20px;
+    line-height: 1.1;
+  }
+  p {
+    font-size: 15px; line-height: 1.75;
+    color: rgba(240,237,232,.75);
+    margin-bottom: 12px;
+  }
+  p strong { color: var(--text); font-weight: 500; }
+
+  /* ─── CONCEPT CARD ─── */
+  .concept-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    margin-top: 24px;
+    position: relative; overflow: hidden;
+  }
+  .concept-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--orange), var(--yellow), var(--green), var(--blue), var(--purple));
+  }
+  .concept-tag {
+    display: inline-block;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 4px 12px;
+    margin-bottom: 16px;
+  }
+  .concept-title {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 900; font-size: 36px;
+    line-height: 1; margin-bottom: 16px;
+    letter-spacing: -.02em;
+  }
+  .concept-title em {
+    font-style: normal;
+    background: linear-gradient(90deg, var(--blue), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ─── STEPS ─── */
+  .steps { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+  .step {
+    display: grid; grid-template-columns: 40px 1fr;
+    gap: 16px; align-items: start;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: border-color .2s;
+  }
+  .step:hover { border-color: rgba(255,255,255,.15); }
+  .step-num {
+    width: 40px; height: 40px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    color: var(--muted); flex-shrink: 0;
+  }
+  .step-body { }
+  .step-title {
+    font-weight: 700; font-size: 14px;
+    margin-bottom: 4px; letter-spacing: .01em;
+  }
+  .step-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+  .step-duration {
+    display: inline-block; margin-top: 8px;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--yellow);
+  }
+
+  /* ─── DELIVERABLES ─── */
+  .deliverables {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px; margin-top: 24px;
+  }
+  .del-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 18px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .del-icon { font-size: 20px; margin-bottom: 10px; }
+  .del-name { font-weight: 500; margin-bottom: 4px; }
+  .del-detail { font-size: 12px; color: var(--muted); }
+
+  /* ─── BUDGET TABLE ─── */
+  .budget-table { width: 100%; margin-top: 24px; border-collapse: collapse; }
+  .budget-table tr { border-bottom: 1px solid var(--border); }
+  .budget-table td {
+    padding: 14px 0; font-size: 14px;
+    color: rgba(240,237,232,.75);
+  }
+  .budget-table td:last-child { text-align: right; font-weight: 500; color: var(--text); }
+  .budget-table .total td {
+    border-bottom: none; padding-top: 20px;
+    font-weight: 700; font-size: 16px;
+    color: var(--text) !important;
+  }
+  .budget-table .total td:first-child { color: var(--muted) !important; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+
+  /* ─── TIMELINE ─── */
+  .timeline { display: flex; gap: 0; margin-top: 24px; }
+  .tl-item {
+    flex: 1;
+    position: relative;
+    padding: 0 0 0 0;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    top: 10px; left: 0; right: 0;
+    height: 2px;
+    background: var(--border);
+  }
+  .tl-item:first-child::before { left: 0; }
+  .tl-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--text);
+    position: relative; z-index: 1;
+    margin-bottom: 14px;
+    margin-left: 2px;
+    flex-shrink: 0;
+  }
+  .tl-week {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 4px;
+    padding-left: 2px;
+  }
+  .tl-label {
+    font-size: 12px; font-weight: 500;
+    padding-left: 2px; line-height: 1.4;
+  }
+
+  /* ─── SIGNATURE ─── */
+  .sig {
+    margin-top: 64px; padding-top: 40px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+    align-items: flex-end;
+  }
+  .sig-from { }
+  .sig-name {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 900; font-size: 22px;
+    letter-spacing: -.01em;
+  }
+  .sig-role { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .sig-cta {
+    background: var(--text); color: var(--bg);
+    border: none; cursor: pointer;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700; font-size: 13px;
+    letter-spacing: .06em; text-transform: uppercase;
+    text-decoration: none;
+    transition: opacity .2s;
+    display: inline-block;
+  }
+  .sig-cta:hover { opacity: .8; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 600px) {
+    .wrap { padding: 48px 24px 80px; }
+    .doc-header { flex-direction: column; gap: 20px; }
+    .doc-meta { text-align: left; }
+    .variables { grid-template-columns: 1fr; }
+    .timeline { flex-direction: column; gap: 24px; }
+    .tl-item::before { display: none; }
+    .sig { flex-direction: column; gap: 24px; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── PASSWORD GATE ─── -->
+<div id="gate">
+  <div class="gate-logo">hubway</div>
+  <div class="gate-hint">Accès restreint · Devis confidentiel</div>
+  <div class="gate-form">
+    <input id="pw-input" type="password" placeholder="mot de passe" autocomplete="off" spellcheck="false">
+    <button id="pw-btn" type="button">Entrer</button>
+  </div>
+  <div id="gate-error" class="gate-error">Mauvais mot de passe, même pas près 🙃</div>
+</div>
+
+<!-- ─── CONTENT ─── -->
+<div id="content">
+  <div class="wrap">
+
+    <!-- Header -->
+    <div class="doc-header">
+      <div class="doc-from">
+        <strong>Théo Jégousse</strong>
+        Product Designer<br>
+        theo.design
+      </div>
+      <div class="doc-meta">
+        Client <span>Hubway</span><br>
+        Réf <span>#HBW-2026-01</span><br>
+        Date <span id="doc-date"></span><br>
+        Validité <span>30 jours</span>
+      </div>
+    </div>
+
+    <!-- Title -->
+    <div class="doc-title">
+      <div class="doc-eyebrow">Proposition créative &amp; devis</div>
+      <h1>Une pub<br>qui <em>décolle</em>.</h1>
+      <p class="doc-subtitle">
+        Voici comment je vais concevoir votre campagne publicitaire.
+        Du brief au film livré — méthode, étapes, et tarifs.
+      </p>
+    </div>
+
+    <!-- Variables -->
+    <div class="variables">
+      <div class="var-card">
+        <div class="var-label">Variable A</div>
+        <div class="var-value">Aéroport</div>
+        <div class="var-desc">Le terrain de jeu. Terminal, piste, décollage, arrivées. Un lieu chargé d'émotions universelles.</div>
+      </div>
+      <div class="var-card">
+        <div class="var-label">Variable B</div>
+        <div class="var-value">Famille</div>
+        <div class="var-desc">Le personnage central. Parents, enfants, souvenirs à faire. L'aventure partagée comme fil conducteur.</div>
+      </div>
+    </div>
+
+    <!-- Brief -->
+    <div class="section">
+      <div class="section-num">01 — Contexte</div>
+      <h2>Pourquoi cette pub ?</h2>
+      <p>
+        Hubway n'est pas juste un aéroport. C'est <strong>le point de départ des souvenirs.</strong>
+        La campagne doit ancrer cette idée : avant le voyage, il y a Hubway.
+        Et Hubway, c'est déjà le voyage qui commence.
+      </p>
+      <p>
+        Notre cible : les <strong>familles qui voyagent</strong>. Celles qui planifient 6 mois à l'avance,
+        qui téléchargent les jeux avant le vol, qui repèrent le Burger King du terminal en arrivant.
+        Elles veulent de la magie, pas de la logistique.
+      </p>
+    </div>
+
+    <!-- Concept -->
+    <div class="section">
+      <div class="section-num">02 — Concept</div>
+      <h2>La grande idée</h2>
+
+      <div class="concept-card">
+        <div class="concept-tag">Big Idea</div>
+        <div class="concept-title">« L'aéroport,<br>c'est déjà <em>là-bas</em> »</div>
+        <p>
+          Le film montre une famille qui arrive à l'aéroport. Les enfants s'embellent aux vitrines,
+          le père rate sa valise sur le tapis, la mère filme tout.
+          Et puis — <strong>l'avion décolle. Mais l'aventure, elle, a commencé au terminal.</strong>
+        </p>
+        <p style="margin-bottom:0">
+          Ton : chaleureux, humour doux, un brin nostalgique.
+          Format primaire : <strong>film 30s</strong> + déclinaison 6s pour social.
+        </p>
+      </div>
+    </div>
+
+    <!-- Steps -->
+    <div class="section">
+      <div class="section-num">03 — Process</div>
+      <h2>Comment on procède</h2>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-body">
+            <div class="step-title">Brief créatif approfondi</div>
+            <div class="step-desc">
+              On affine ensemble les 2 variables. Quel aéroport exact ? Quelle famille type ?
+              Quels mots sont interdits dans la copy ? On aligne les attentes avant de toucher un pixel.
+            </div>
+            <span class="step-duration">Sem. 1 — 2 jours</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-body">
+            <div class="step-title">Storyboard &amp; concept visuel</div>
+            <div class="step-desc">
+              3 directions créatives livrées sous forme de storyboards annotés.
+              Choix d'une direction, puis développement complet du script, des plans, de la bande-son.
+            </div>
+            <span class="step-duration">Sem. 2–3 — 8 jours</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-body">
+            <div class="step-title">Production</div>
+            <div class="step-desc">
+              Tournage en aéroport (autorisation incluse dans le devis).
+              1 journée de tournage, équipe légère : réalisateur, DP, acteurs famille.
+              Direction artistique assurée par mes soins.
+            </div>
+            <span class="step-duration">Sem. 4 — 1 jour tournage</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-body">
+            <div class="step-title">Post-production &amp; sound design</div>
+            <div class="step-desc">
+              Montage, étalonnage, sound design, musique licence-free ou originale.
+              2 allers-retours inclus. Export multi-formats : TV, Instagram, YouTube, Stories.
+            </div>
+            <span class="step-duration">Sem. 5–6 — 10 jours</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">05</div>
+          <div class="step-body">
+            <div class="step-title">Livraison &amp; handoff</div>
+            <div class="step-desc">
+              Tous les masters + fichiers sources organisés. Brief média optionnel pour le plan de diffusion.
+              Debriefing &amp; recommandations pour la suite.
+            </div>
+            <span class="step-duration">Sem. 7 — 2 jours</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deliverables -->
+    <div class="section">
+      <div class="section-num">04 — Livrables</div>
+      <h2>Ce que vous recevez</h2>
+      <div class="deliverables">
+        <div class="del-item">
+          <div class="del-icon">🎬</div>
+          <div class="del-name">Film 30s</div>
+          <div class="del-detail">Master HD + DCP TV</div>
+        </div>
+        <div class="del-item">
+          <div class="del-icon">⚡️</div>
+          <div class="del-name">Bumper 6s</div>
+          <div class="del-detail">YouTube + pré-roll</div>
+        </div>
+        <div class="del-item">
+          <div class="del-icon">📱</div>
+          <div class="del-name">Vertical 15s</div>
+          <div class="del-detail">Instagram &amp; TikTok</div>
+        </div>
+        <div class="del-item">
+          <div class="del-icon">🖼</div>
+          <div class="del-name">3 stills photo</div>
+          <div class="del-detail">Retouchés, licence large</div>
+        </div>
+        <div class="del-item">
+          <div class="del-icon">🎵</div>
+          <div class="del-name">Jingle</div>
+          <div class="del-detail">15s, droits inclus 3 ans</div>
+        </div>
+        <div class="del-item">
+          <div class="del-icon">📁</div>
+          <div class="del-name">Sources</div>
+          <div class="del-detail">Rushes + projet éditing</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Budget -->
+    <div class="section">
+      <div class="section-num">05 — Budget</div>
+      <h2>Estimation tarifaire</h2>
+      <table class="budget-table">
+        <tr>
+          <td>Direction créative &amp; concept</td>
+          <td>4 500 €</td>
+        </tr>
+        <tr>
+          <td>Storyboard &amp; pre-production</td>
+          <td>2 200 €</td>
+        </tr>
+        <tr>
+          <td>Production (tournage 1j, équipe, location)</td>
+          <td>8 500 €</td>
+        </tr>
+        <tr>
+          <td>Post-production &amp; son</td>
+          <td>5 800 €</td>
+        </tr>
+        <tr>
+          <td>Déclinaisons formats sociaux</td>
+          <td>1 800 €</td>
+        </tr>
+        <tr>
+          <td>Autorisations, droits &amp; assurances</td>
+          <td>900 €</td>
+        </tr>
+        <tr class="total">
+          <td>Total HT</td>
+          <td>23 700 €</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Timeline -->
+    <div class="section">
+      <div class="section-num">06 — Calendrier</div>
+      <h2>7 semaines, du brief au film</h2>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-week">Sem. 1</div>
+          <div class="tl-label">Brief &amp; cadrage</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-week">Sem. 2–3</div>
+          <div class="tl-label">Storyboard &amp; concept</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-week">Sem. 4</div>
+          <div class="tl-label">Tournage</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-week">Sem. 5–6</div>
+          <div class="tl-label">Post-prod &amp; son</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-week">Sem. 7</div>
+          <div class="tl-label">Livraison</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Signature -->
+    <div class="sig">
+      <div class="sig-from">
+        <div class="sig-name">Théo Jégousse</div>
+        <div class="sig-role">Product & Brand Designer · theo.design</div>
+      </div>
+      <a href="mailto:theo@theo.design?subject=Go%20pour%20le%20devis%20Hubway" class="sig-cta">On y va 🛫</a>
+    </div>
+
+  </div><!-- /wrap -->
+</div><!-- /content -->
+
+<script>
+  // Password
+  const PASSWORD = 'skipthisad';
+
+  document.getElementById('doc-date').textContent = new Date().toLocaleDateString('fr-FR', {
+    day: 'numeric', month: 'long', year: 'numeric'
+  });
+
+  function tryUnlock() {
+    const val = document.getElementById('pw-input').value;
+    if (val === PASSWORD) {
+      document.getElementById('gate').classList.add('out');
+      document.getElementById('content').classList.add('visible');
+    } else {
+      const err = document.getElementById('gate-error');
+      err.classList.add('show');
+      document.getElementById('pw-input').value = '';
+      document.getElementById('pw-input').focus();
+      setTimeout(() => err.classList.remove('show'), 2500);
+    }
+  }
+
+  document.getElementById('pw-btn').addEventListener('click', tryUnlock);
+  document.getElementById('pw-input').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') tryUnlock();
+  });
+</script>
+</body>
+</html>
