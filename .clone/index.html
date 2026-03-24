@@ -139,30 +139,6 @@ body.dark #theme-btn:hover { color: #f0ece4 !important; }
 body:not(.dark) .icon-sun { display: none; }
 body.dark .icon-moon { display: none; }
 
-/* ─── PROBLEM-TEXT OVERRIDE ─── */
-.problem-text {
-  font-family: 'Archivo', sans-serif !important;
-  font-size: clamp(24px, 3.5vw, 48px) !important;
-  font-weight: 700 !important;
-  letter-spacing: -0.03em !important;
-  line-height: 1.05 !important;
-  color: #111 !important;
-}
-body.dark .problem-text { color: #f0ece4 !important; }
-
-/* ─── SECTION TITLES ─── */
-.block-caption > strong:first-child {
-  font-family: 'Archivo', sans-serif;
-  font-size: clamp(24px, 3.5vw, 48px);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  color: #111;
-  display: block;
-  margin-bottom: 12px;
-  line-height: 1.05;
-}
-body.dark .block-caption > strong:first-child { color: #f0ece4 !important; }
-
 /* ─── CONTENT ─── */
 #gate { display: none; }
 #hw-content { opacity: 1; pointer-events: all; transition: opacity .5s .15s; }
@@ -433,8 +409,9 @@ body.dark .hw-price-card.featured .hw-price-badge { color: #f0ece4 !important; }
   </div>
 
   <!-- ── Process ── -->
-  <div class="proj-problem" style="grid-template-columns:1fr">
-    <div class="problem-text">5 phases,<br>du brief au film livré.</div>
+  <div class="proj-problem">
+    <div class="block-label">Process</div>
+    <div class="problem-text">5 phases, du brief<br>au film livré.</div>
   </div>
 
   <div class="hw-phases" style="margin: 0 var(--h-pad)">
@@ -484,8 +461,9 @@ body.dark .hw-price-card.featured .hw-price-badge { color: #f0ece4 !important; }
   </div>
 
   <!-- ── Tarifs ── -->
-  <div class="proj-problem" style="margin-top:0;grid-template-columns:1fr">
-    <div class="problem-text">Un film maître.<br>Des déclinaisons à 450 €.</div>
+  <div class="proj-problem" style="margin-top:0">
+    <div class="block-label">Tarifs</div>
+    <div class="problem-text">Le système une fois.<br>Chaque contexte à la carte.</div>
   </div>
 
   <div class="content-block" style="padding-bottom:48px">
@@ -495,16 +473,7 @@ body.dark .hw-price-card.featured .hw-price-badge { color: #f0ece4 !important; }
         <div style="background:#f8f7f4;padding:40px 48px">
           <div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#bbb;margin-bottom:16px">Film maître</div>
           <div style="font-family:'Archivo',sans-serif;font-weight:700;font-size:48px;letter-spacing:-0.03em;color:#111;line-height:1">3 900 €</div>
-          <div style="font-size:13px;color:#888;margin-top:20px;line-height:1.9">
-            <span style="display:block;color:#111;font-weight:500;margin-bottom:4px">Ce que ça inclut</span>
-            Script modulaire 20s<br>
-            Storyboard image par image (Weavy)<br>
-            Validation visuelle avant production<br>
-            Génération vidéo plan par plan<br>
-            Montage + sound design<br>
-            Musique licensiée<br>
-            Livraison 16:9 master
-          </div>
+          <div style="font-size:13px;color:#888;margin-top:16px;line-height:1.7">Concept · Storyboard validé<br>Production · Montage livré</div>
         </div>
         <div style="background:#f8f7f4;padding:40px 48px">
           <div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#bbb;margin-bottom:16px">Déclinaison</div>
