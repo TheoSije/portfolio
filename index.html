@@ -2404,7 +2404,7 @@ function initYoutubePlayers() {
       iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none';
       wrap.innerHTML = '';
       wrap.appendChild(iframe);
-    }, { threshold: 0.5 });
+    }, { threshold: 0.1 });
     obs.observe(wrap);
   });
 }
@@ -2476,13 +2476,13 @@ function showProject(id, push) {
   initBrandScroll();
   initLogoReveal();
   initParallax();
-  initYoutubePlayers();
   document.querySelector('.nav-role').style.display = 'none';
   document.querySelector('.nav-contact').style.display = '';
   document.getElementById('proj-close-btn').style.display = 'none';
   document.getElementById('home').style.display='none';
   document.getElementById('project-view').style.display='block';
   window.scrollTo(0,0);
+  initYoutubePlayers();
 }
 
 // ── DARK / LIGHT MODE ──
