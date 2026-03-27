@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <rect width="256" height="256" rx="56" fill="#1DA0C3"/>
+  <!-- Bandcamp triangle logo -->
+  <polygon points="56,176 136,80 200,176" fill="#fff"/>
+  <polygon points="104,176 184,80 248,176" fill="#1DA0C3"/>
+</svg>
