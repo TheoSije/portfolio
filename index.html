@@ -1798,9 +1798,15 @@ button:focus-visible, a:focus-visible { border-radius: 4px; }
       </div>
     </div>
     <div class="proj-card proj-card--xp" onclick="openMiniSite('emojy')">
-      <div class="proj-card-img proj-img--emojy"></div>
+      <div class="proj-card-img proj-img--emojy">
+        <div class="emojy-bg-anim"></div>
+        <div class="emojy-content">
+          <div class="emojy-icons">🦈&nbsp;&nbsp;🕺&nbsp;&nbsp;❄️</div>
+          <div class="emojy-title">Ciné<span>moji</span></div>
+        </div>
+      </div>
       <div class="proj-card-inner">
-        <span class="proj-card-name">Ciné Émoji</span>
+        <span class="proj-card-name">Cinémoji</span>
         <p class="xp-card-desc">Devine le film caché derrière les emojis.</p>
       </div>
     </div>
@@ -2584,7 +2590,7 @@ function initBrandScroll() {
 const persoLabels = {
   unheard: 'Unheard',
   vinyle: 'Platine',
-  emojy: 'Ciné Émoji',
+  emojy: 'Cinémoji',
   incipit: 'Inkipit',
   chess: 'Chess Puzzles',
   soundhands: 'Sound Hands',
@@ -2929,7 +2935,31 @@ function showHome(push) {
   font-size: 20px; font-weight: 700; letter-spacing: .2em;
   color: rgba(255,255,255,.85); text-transform: uppercase; line-height: 1;
 }
-.proj-img--emojy    { background: linear-gradient(155deg, #7c1d6f 0%, #db2777 45%, #f97316 100%); }
+.proj-img--emojy { background: #0a040e; position: relative; overflow: hidden; }
+.emojy-bg-anim {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 20% 70%, rgba(219,39,119,.45) 0%, transparent 58%),
+              radial-gradient(ellipse at 80% 25%, rgba(249,115,22,.32) 0%, transparent 52%),
+              radial-gradient(ellipse at 55% 90%, rgba(124,29,111,.38) 0%, transparent 48%);
+  animation: emojy-pulse 4.5s ease-in-out infinite alternate;
+}
+@keyframes emojy-pulse {
+  from { opacity: .55; transform: scale(1); }
+  to   { opacity: 1;   transform: scale(1.1); }
+}
+.emojy-content {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 14px;
+}
+.emojy-icons { font-size: 28px; letter-spacing: .08em; filter: drop-shadow(0 0 10px rgba(255,255,255,.25)); }
+.emojy-title {
+  font-size: 22px; font-weight: 700; letter-spacing: .14em;
+  color: #fff; line-height: 1; text-transform: uppercase;
+}
+.emojy-title span { opacity: .55; margin-left: 4px; }
+@media (min-width: 900px)  { .emojy-icons { font-size: 38px; } .emojy-title { font-size: 30px; } .emojy-content { gap: 18px; } }
+@media (min-width: 1400px) { .emojy-icons { font-size: 46px; } .emojy-title { font-size: 36px; } .emojy-content { gap: 22px; } }
 .proj-img--chess    { background: #0f0f0f url('img/chess-card.jpg') center/cover no-repeat; }
 .proj-img--soundhands {
   background: #07060f;
