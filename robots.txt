@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://theo.design/sitemap.xml
+Sitemap: https://jegousse.com/sitemap.xml

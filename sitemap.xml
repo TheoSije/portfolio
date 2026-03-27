@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://theo.design/</loc>
+    <loc>https://jegousse.com/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://theo.design/vinyle/</loc>
+    <loc>https://jegousse.com/vinyle/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://theo.design/chess/</loc>
+    <loc>https://jegousse.com/chess/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://theo.design/emojy/</loc>
+    <loc>https://jegousse.com/emojy/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://theo.design/incipit/</loc>
+    <loc>https://jegousse.com/incipit/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://theo.design/legalmate/</loc>
+    <loc>https://jegousse.com/legalmate/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://theo.design/soundhands/</loc>
+    <loc>https://jegousse.com/soundhands/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://theo.design/unheard/</loc>
+    <loc>https://jegousse.com/unheard/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
