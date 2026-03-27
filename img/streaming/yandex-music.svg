@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="ym" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFDB4D"/>
+      <stop offset="100%" stop-color="#FFB700"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="56" fill="url(#ym)"/>
+  <!-- Y lettermark with music note feel -->
+  <path d="M72 72 L128 148 L128 184" stroke="#1A1A1A" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M184 72 L128 148" stroke="#1A1A1A" stroke-width="24" stroke-linecap="round" fill="none"/>
+</svg>

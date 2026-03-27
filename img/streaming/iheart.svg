@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <rect width="256" height="256" rx="56" fill="#CC0000"/>
+  <!-- Heart -->
+  <path d="M128 186 Q60 144 60 104 Q60 72 90 68 Q112 66 128 88 Q144 66 166 68 Q196 72 196 104 Q196 144 128 186Z" fill="#fff"/>
+</svg>
