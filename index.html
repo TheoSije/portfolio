@@ -1692,7 +1692,7 @@ button:focus-visible, a:focus-visible { border-radius: 4px; }
         </div>
       </div>
     </div>
-    <div class="proj-card" onclick="showProject('lionel')">
+    <!-- <div class="proj-card" onclick="showProject('lionel')">
       <div class="proj-card-img proj-img--lionel">
         <div class="proj-card-logo-badge">LES</div>
         <div class="proj-card-inner">
@@ -1700,7 +1700,7 @@ button:focus-visible, a:focus-visible { border-radius: 4px; }
           <span class="proj-card-name">Lionel El Sound</span>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="proj-card" onclick="showProject('mauboussin')">
       <div class="proj-card-img proj-img--mauboussin">
         <video class="proj-card-video mauboussin-video" src="img/mauboussin-card.mp4" muted loop playsinline preload="auto"></video>
@@ -1720,34 +1720,7 @@ button:focus-visible, a:focus-visible { border-radius: 4px; }
         </div>
       </div>
     </div>
-    <div class="proj-card" onclick="showProject('tunemymusic')">
-      <div class="proj-card-img proj-img--tunemymusic">
-        <div class="tmm-platforms" aria-hidden="true">
-          <!-- Ring 1 — inner, 4 icons, r=70px, 8s, espacement parfait 25% -->
-          <div class="tmm-icon" style="--r:70px;--d:8s;--del:0s;--s:36px"><img src="https://www.google.com/s2/favicons?domain=spotify.com&sz=64" alt=""></div>
-          <div class="tmm-icon" style="--r:70px;--d:8s;--del:-2s;--s:36px"><img src="https://www.google.com/s2/favicons?domain=music.apple.com&sz=64" alt=""></div>
-          <div class="tmm-icon" style="--r:70px;--d:8s;--del:-4s;--s:36px"><img src="https://www.google.com/s2/favicons?domain=music.youtube.com&sz=64" alt=""></div>
-          <div class="tmm-icon" style="--r:70px;--d:8s;--del:-6s;--s:36px"><img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=64" alt=""></div>
-          <!-- Ring 2 — middle, 5 icons, r=112px, 13s, espacement parfait 20% -->
-          <div class="tmm-icon" style="--r:112px;--d:13s;--del:0s;--s:30px"><img src="https://www.google.com/s2/favicons?domain=tidal.com&sz=64" alt=""></div>
-          <div class="tmm-icon" style="--r:112px;--d:13s;--del:-2.6s;--s:30px"><img src="https://www.google.com/s2/favicons?domain=music.amazon.com&sz=64" alt=""></div>
-          <div class="tmm-icon" style="--r:112px;--d:13s;--del:-5.2s;--s:30px"><img src="https://www.google.com/s2/favicons?domain=soundcloud.com&sz=64" alt=""></div>
-          <div class="tmm-icon" style="--r:112px;--d:13s;--del:-7.8s;--s:30px"><img src="https://www.google.com/s2/favicons?domain=qobuz.com&sz=64" alt=""></div>
-          <div class="tmm-icon" style="--r:112px;--d:13s;--del:-10.4s;--s:30px"><img src="https://www.google.com/s2/favicons?domain=last.fm&sz=64" alt=""></div>
-          <!-- Ring 3 — outer, 5 icons, r=155px, 19s, espacement parfait 20% -->
-          <div class="tmm-icon" style="--r:155px;--d:19s;--del:0s;--s:26px"><img src="https://www.google.com/s2/favicons?domain=bandcamp.com&sz=64" alt=""></div>
-          <div class="tmm-icon" style="--r:155px;--d:19s;--del:-3.8s;--s:26px"><img src="https://www.google.com/s2/favicons?domain=pandora.com&sz=64" alt=""></div>
-          <div class="tmm-icon" style="--r:155px;--d:19s;--del:-7.6s;--s:26px"><img src="https://www.google.com/s2/favicons?domain=iheart.com&sz=64" alt=""></div>
-          <div class="tmm-icon" style="--r:155px;--d:19s;--del:-11.4s;--s:26px"><img src="https://www.google.com/s2/favicons?domain=boomplay.com&sz=64" alt=""></div>
-          <div class="tmm-icon" style="--r:155px;--d:19s;--del:-15.2s;--s:26px"><img src="https://www.google.com/s2/favicons?domain=napster.com&sz=64" alt=""></div>
-        </div>
-        <div class="proj-card-logo-badge" style="padding:0"><img src="https://www.google.com/s2/favicons?domain=tunemymusic.com&sz=128" alt="Logo Tune My Music" width="100%" height="100%" style="object-fit:cover;display:block" onerror="this.style.display='none';this.parentElement.textContent='TMM'"></div>
-        <div class="proj-card-inner">
-          <span class="proj-card-year">2024</span>
-          <span class="proj-card-name">Tune My Music</span>
-        </div>
-      </div>
-    </div>
+    <!-- Tune My Music masqué — intégré dans la section Deezer -->
   </div>
   </div><!-- /.carousel-wrap -->
 
@@ -2120,7 +2093,7 @@ const P = {
     ],
     solve:"3 ans. Une app, un site, un design system, des flows IA, un chatbot, des centaines d\'apps Low-Code. Et une équipe qui déchire."
   },
-  deezer: { title:'Deezer', type:'Projet Pro', tags:['Mobile','Audio'], year:'2019–2023', role:'UX Design · Prototypage', context:"Quatre ans chez Deezer, en plein rebranding. Logotype, typographie, palette — toute l'identité se reconstruit et chaque interface suit. Écrans iOS & Android, pages web, microsites, Store screenshots, covers de playlists curatées, widgets, OOH, Deezer Originals. Plus de 3 000 covers redesignées dans un système unifié. Sur ce même terrain : feature de découverte sociale dans le player — prototypée, testée, poussée en beta. Le genre de projet où l'on touche à tout, du pixel au système.", problem:"La découverte musicale stagnait. Le moteur de recommandation existait mais personne ne l'utilisait.", blocks:[{t:'iphones',n:'01',srcSets:[['img/deezer-mood.mp4'],['img/deezer-home.mp4']],c:'<strong>L\'app Deezer.</strong> Quatre ans à reconstruire chaque écran au fil du rebranding — iOS, Android, web, widgets. Et surtout : la chance de créer trois features devenues iconiques — Flow Social, Blindtest et Shaker.'},{t:'iphones',n:'02',srcSets:[['img/deezer-blindtest-01.jpg','img/deezer-blindtest-02.jpg','img/deezer-blindtest-03.jpg','img/deezer-blindtest-04.jpg','img/deezer-blindtest-05.jpg'],['img/deezer-shaker-01.jpg','img/deezer-shaker-02.jpg','img/deezer-shaker-03.jpg','img/deezer-shaker-04.jpg']],c:'<strong>Blindtest & Shaker.</strong> Deux features que j\'ai designées de zéro. Le Blindtest pour jouer avec la musique, le Shaker pour en découvrir — secouer son téléphone pour lancer un titre aléatoire. Des idées simples, une adoption immédiate.'},{t:'full',n:'03',src:'img/deezer-year.jpg',c:'<strong>My Deezer Year.</strong> J\'ai eu la chance de concevoir les 3 premières éditions — avant que ça devienne un rendez-vous annuel. Chaque utilisateur reçoit le bilan de son année musicale : artistes, genres, moments. La version Deezer du Wrapped, designée à la main, écran par écran.'}], solve:"+34% exploration nouveaux artistes. Beta 10k users."},
+  deezer: { title:'Deezer', type:'Projet Pro', tags:['Mobile','Audio'], year:'2019–2023', role:'UX Design · Prototypage', context:"Quatre ans chez Deezer, en plein rebranding. Logotype, typographie, palette — toute l'identité se reconstruit et chaque interface suit. Écrans iOS & Android, pages web, microsites, Store screenshots, covers de playlists curatées, widgets, OOH, Deezer Originals. Plus de 3 000 covers redesignées dans un système unifié. Sur ce même terrain : feature de découverte sociale dans le player — prototypée, testée, poussée en beta. Le genre de projet où l'on touche à tout, du pixel au système.", problem:"La découverte musicale stagnait. Le moteur de recommandation existait mais personne ne l'utilisait.", blocks:[{t:'iphones',n:'01',srcSets:[['img/deezer-mood.mp4'],['img/deezer-home.mp4']],c:'<strong>L\'app Deezer.</strong> Quatre ans à reconstruire chaque écran au fil du rebranding — iOS, Android, web, widgets. Et surtout : la chance de créer trois features devenues iconiques — Flow Social, Blindtest et Shaker.'},{t:'full',n:'02',src:'img/deezer-year.jpg',c:'<strong>My Deezer Year.</strong> J\'ai eu la chance de concevoir les 3 premières éditions — avant que ça devienne un rendez-vous annuel. Chaque utilisateur reçoit le bilan de son année musicale : artistes, genres, moments. La version Deezer du Wrapped, designée à la main, écran par écran.'},{t:'iphones',n:'03',srcSets:[['img/deezer-blindtest-01.jpg','img/deezer-blindtest-02.jpg','img/deezer-blindtest-03.jpg','img/deezer-blindtest-04.jpg','img/deezer-blindtest-05.jpg'],['img/deezer-shaker-01.jpg','img/deezer-shaker-02.jpg','img/deezer-shaker-03.jpg','img/deezer-shaker-04.jpg']],c:'<strong>Blindtest & Shaker.</strong> Deux features que j\'ai designées de zéro. Le Blindtest pour jouer avec la musique, le Shaker pour en découvrir — secouer son téléphone pour lancer un titre aléatoire. Des idées simples, une adoption immédiate.'},{t:'tmm-orbit',n:'04',c:'<strong>Tune My Music.</strong> En parallèle de Deezer, j\'ai redesigné l\'ensemble du service — un outil utilisé par des millions de personnes pour synchroniser leurs playlists entre Spotify, Apple Music, Deezer, YouTube Music et 40+ plateformes. De zéro : UI, flows, onboarding.'}], solve:"+34% exploration nouveaux artistes. Beta 10k users."},
   devialet: { title:'Devialet', type:'Projet Pro', tags:['Luxe','Hardware'], year:'2015', role:'UI Design · Brand', context:"Mon premier vrai plongeon dans le product design. Devialet venait de sortir le Phantom — l'enceinte la plus puissante, la plus précise, la plus dingue jamais conçue. Mon job : créer l'app mobile et desktop native qui allait la contrôler. Pas juste une télécommande. Un objet digital à la hauteur d'un objet physique d'exception. La meilleure expérience de ma carrière.", problem:"L'app de contrôle en décalage total avec un produit à 3000€.", blocks:[{t:'devices',n:'01',srcs:['img/dvlt-app-01.jpg','img/dvlt-app-02.jpg','img/dvlt-app-03.jpg','img/dvlt-app-04.jpg','img/dvlt-app-05.jpg'],desktopSrcs:['img/dvlt-desktop-01.jpg'],noFrame:true,bg:'#E2E0DC',c:'<strong>App Devialet.</strong> Minimalisme radical. Chaque décision devait honorer le Phantom.'},{t:'brand-scroll',n:'02',srcs:['img/dvlt-brand-01.jpg','img/dvlt-brand-02.jpg','img/dvlt-brand-03.jpg','img/dvlt-brand-04.jpg'],fullWidth:true,c:'<strong>Packaging.</strong> Les 4 faces du Phantom original.'},{t:'full',n:'03',src:'img/dvlt-app-07.png',c:'<strong>Spark,</strong> l\'app qui contrôle la meilleure enceinte du monde.'},{t:'youtube',n:'04',videoId:'ju6ERMA_5xE',start:256,c:'<strong>Le meilleur son du monde.</strong> Cet influenceur écoute le Phantom pour la première fois. Sa réaction dit tout — aucun mot ne décrit vraiment ce que cette enceinte fait à l\'air.'},{t:'parallax',n:'05',src:'img/dvlt-xray.png',c:'Is it alive ?'}], solve:"2,8 → 4,6 étoiles App Store. NPS +41."},
   simplon: { title:'Simplon', type:'Projet Pro', tags:['EdTech','Accessibilité'], year:'2022', role:'UX/UI · Accessibilité', context:"Former des personnes éloignées du numérique implique de repenser chaque convention d'interface. La plateforme devait être lisible pour quelqu'un qui ouvre un navigateur pour la première fois. Une action par écran, langage naturel, contrastes WCAG AA, touch targets généreux. Et surtout : 15 minutes de tests avec de vrais primo-accédants, qui valent plus que 15h de réflexion solo. Le genre de projet qui remet le design à sa place — utile, humble, précis.", problem:"Plateforme inaccessible pour des apprenants débutant avec l'informatique.", blocks:[{t:'full',n:'01',c:'<strong>Tests primo-accédants.</strong> 15min de test > 15h de réflexion solo.'},{t:'full',n:'02',c:'<strong>Simplification radicale.</strong> Une action par écran. Langage naturel.'},{t:'half',n:'03',c:'<strong>WCAG AA.</strong> Contrastes, tailles, clavier.'}], solve:"Complétion +28%."},
   legalmate: { title:'Legalmate', type:'Projet Pro', tags:['LegalTech','IA'], year:'2024', role:'Product Design', context:"Le droit reste opaque par design. Legalmate veut le rendre accessible — sans trahir sa complexité ni promettre ce qu'il ne sait pas faire. L'enjeu design est rare : concevoir un assistant IA qui montre ses limites, cite ses sources, et rassure sans survendre. Chaque décision d'interface — micro-copy, niveaux de certitude, références cliquables — sert la crédibilité du produit. Un cas d'usage où la transparence est une feature.", problem:"Le droit est opaque par design. Une interface froide aurait reproduit ce qu'ils voulaient combattre.", blocks:[{t:'full',n:'01',c:'<strong>Design de la confiance.</strong> Transparence sources, limites visibles.'},{t:'duo',n:'02',c:'<strong>Chat augmenté.</strong> Certitude visible, références cliquables.'},{t:'full',n:'03',c:'<strong>Onboarding progressif.</strong> Première interaction = poser une question.'}], solve:"Conversion 18% vs 8% benchmark."},
@@ -2329,6 +2302,10 @@ function renderImg(b) {
           : `<img src="${src}" alt="${imgAlt(src)}">`)
       : `<div class="iphone-ph">votre capture ici</div>`;
     return `<div class="block-iphone-wrap"><div class="iphone-outer"><div class="iphone"><div class="iphone-screen">${media}</div><img class="iphone-frame" src="img/iphone.png" alt="" draggable="false"></div></div></div>`;
+  }
+  if (b.t==='tmm-orbit') {
+    const icons = [{domain:'spotify.com',r:'70px',d:'8s',del:'0s',s:'36px'},{domain:'music.apple.com',r:'70px',d:'8s',del:'-2s',s:'36px'},{domain:'music.youtube.com',r:'70px',d:'8s',del:'-4s',s:'36px'},{domain:'deezer.com',r:'70px',d:'8s',del:'-6s',s:'36px'},{domain:'tidal.com',r:'112px',d:'13s',del:'0s',s:'30px'},{domain:'music.amazon.com',r:'112px',d:'13s',del:'-2.6s',s:'30px'},{domain:'soundcloud.com',r:'112px',d:'13s',del:'-5.2s',s:'30px'},{domain:'qobuz.com',r:'112px',d:'13s',del:'-7.8s',s:'30px'},{domain:'last.fm',r:'112px',d:'13s',del:'-10.4s',s:'30px'},{domain:'bandcamp.com',r:'155px',d:'19s',del:'0s',s:'26px'},{domain:'pandora.com',r:'155px',d:'19s',del:'-3.8s',s:'26px'},{domain:'iheart.com',r:'155px',d:'19s',del:'-7.6s',s:'26px'},{domain:'boomplay.com',r:'155px',d:'19s',del:'-11.4s',s:'26px'},{domain:'napster.com',r:'155px',d:'19s',del:'-15.2s',s:'26px'}].map(i=>`<div class="tmm-icon" style="--r:${i.r};--d:${i.d};--del:${i.del};--s:${i.s}"><img src="https://www.google.com/s2/favicons?domain=${i.domain}&sz=64" alt=""></div>`).join('');
+    return `<div class="block-img full block-tmm-orbit" style="background:linear-gradient(155deg,#0f0c29 0%,#302b63 45%,#24243e 100%);overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center"><div class="tmm-platforms" aria-hidden="true">${icons}</div><div class="tmm-center-logo" style="position:relative;z-index:2;width:52px;height:52px;border-radius:13px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.6)"><img src="img/tunemymusic-logo.png" alt="Tune My Music" width="100%" height="100%" style="object-fit:cover;display:block"></div></div>`;
   }
   if (b.t==='full' && b.src) return `<div class="block-img full" style="overflow:hidden"><img src="${b.src}" alt="${imgAlt(b.src)}" style="width:100%;height:100%;object-fit:contain;display:block"></div>`;
   if (b.t==='youtube') { return `<div class="block-img full" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden"><iframe src="https://www.youtube.com/embed/${b.videoId}?si=4YPejP6zoFwwSSkf&start=256" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe></div>`; }
@@ -2863,7 +2840,13 @@ function showHome(push) {
 .proj-img--tunemymusic{ background: linear-gradient(155deg, #0f0c29 0%, #302b63 45%, #24243e 100%); }
 .tmm-platforms { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0; display:flex; align-items:center; justify-content:center; }
 .tmm-icon { position:absolute; width:var(--s); height:var(--s); margin:calc(var(--s)/-2) 0 0 calc(var(--s)/-2); animation:tmm-orbit var(--d) linear infinite var(--del); }
-.tmm-icon img { width:100%; height:100%; border-radius:11px; box-shadow:0 4px 22px rgba(0,0,0,0.55); display:block; opacity:0.9; }
+.tmm-icon img { width:100%; height:100%; border-radius:11px; display:block; opacity:0.9; }
+.block-tmm-orbit { min-height:460px; aspect-ratio:unset !important; width:100% !important; }
+@media (min-width:768px) {
+  .block-tmm-orbit { min-height:700px !important; }
+  .block-tmm-orbit .tmm-platforms { transform: scale(2.4); }
+  .block-tmm-orbit .tmm-center-logo { width:160px !important; height:160px !important; border-radius:36px !important; }
+}
 @keyframes tmm-orbit {
   from { transform: rotate(0deg) translateX(var(--r)) rotate(0deg); }
   to   { transform: rotate(360deg) translateX(var(--r)) rotate(-360deg); }
