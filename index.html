@@ -1810,6 +1810,20 @@ button:focus-visible, a:focus-visible { border-radius: 4px; }
         <p class="xp-card-desc">Devine le film caché derrière les emojis.</p>
       </div>
     </div>
+    <div class="proj-card proj-card--xp" onclick="openMiniSite('meteomiche')">
+      <div class="proj-card-img proj-img--meteomiche">
+        <div class="meteomiche-bg-anim"></div>
+        <div class="meteomiche-content">
+          <div class="meteomiche-icon">🌱</div>
+          <div class="meteomiche-title">météomiche</div>
+          <div class="meteomiche-sub">Eymoutiers · 87120</div>
+        </div>
+      </div>
+      <div class="proj-card-inner">
+        <span class="proj-card-name">Météomiche</span>
+        <p class="xp-card-desc">Météo jardinière : pluie, gel, légumes à Eymoutiers.</p>
+      </div>
+    </div>
   </div>
   </div><!-- /.xp-wrap -->
 
@@ -2593,6 +2607,7 @@ const persoLabels = {
   incipit: 'Inkipit',
   chess: 'Chess Puzzles',
   soundhands: 'Sound Hands',
+  meteomiche: 'Météomiche',
 };
 
 // Base path robuste — fonctionne en / ou /portfolio/ ou custom domain
@@ -3003,6 +3018,46 @@ function showHome(push) {
   background: linear-gradient(90deg, #a78bfa, #ec4899, #f97316);
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* ── MÉTÉOMICHE CARD ── */
+.proj-img--meteomiche {
+  background: linear-gradient(155deg, #071208 0%, #112018 50%, #1c3818 100%);
+  position: relative; overflow: hidden;
+}
+.meteomiche-bg-anim {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 70%, rgba(96,174,224,.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 72% 28%, rgba(100,200,60,.12) 0%, transparent 50%);
+  animation: meteomiche-pulse 5s ease-in-out infinite alternate;
+}
+@keyframes meteomiche-pulse {
+  from { opacity: .6; transform: scale(1); }
+  to   { opacity: 1;  transform: scale(1.08); }
+}
+.meteomiche-content {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 6px;
+}
+.meteomiche-icon { font-size: 38px; filter: drop-shadow(0 0 10px rgba(100,200,60,.3)); }
+.meteomiche-title {
+  font-size: 20px; font-weight: 700; letter-spacing: -0.03em; line-height: 1;
+  color: rgba(180,230,120,.95);
+}
+.meteomiche-sub {
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(100,160,60,.65);
+}
+@media (min-width: 900px) {
+  .meteomiche-icon { font-size: 48px; }
+  .meteomiche-title { font-size: 26px; }
+  .meteomiche-content { gap: 8px; }
+}
+@media (min-width: 1400px) {
+  .meteomiche-icon { font-size: 56px; }
+  .meteomiche-title { font-size: 30px; }
 }
 
 /* ══ GHOST CURSORS — HERO ONLY ══ */
