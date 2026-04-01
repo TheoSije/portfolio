@@ -2301,7 +2301,7 @@ function renderImg(b) {
     const dSlides = dSrcs.map((s,i)=>`<div class="desktop-slide${i===0?' active':''}"><img src="${s}" alt="${imgAlt(s)}"></div>`).join('');
     const dDots   = dSrcs.map((_,i)=>`<span class="desktop-dot${i===0?' active':''}"></span>`).join('');
     const desktopSlider = dSrcs.length > 1 ? ' data-desktop-slider' : '';
-    const desktopStatic = dSrcs.length === 1 ? ' desktop--static' : '';
+    const desktopStatic = '';
     const desktopHtml = dSrcs.length ? `<div class="desktop-outer"><div class="desktop${desktopStatic}"${desktopSlider}>${'<img class="desktop-frame" src="img/desktop.png" alt="" draggable="false"><div class="desktop-screen">' + dSlides + '</div></div>'}<div class="desktop-dots">${dDots}</div></div>` : '';
     const leftBg = b.bg ? ` style="background:${b.bg}"` : '';
     return `<div class="block-devices"><div class="devices-left"${leftBg}>${iphoneHtml}</div><div class="devices-right">${desktopHtml}</div></div>`;
