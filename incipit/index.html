@@ -944,6 +944,16 @@ function show(idx, direction) {
 function next() { current = (current + 1) % quotes.length; show(current, 1); startTimer(); }
 function prev() { current = (current - 1 + quotes.length) % quotes.length; show(current, -1); startTimer(); }
 
+// ── SWIPE ──────────────────────────────────────────────────────────────────
+let _tx = null;
+document.addEventListener('touchstart', function(e) { _tx = e.touches[0].clientX; }, { passive: true });
+document.addEventListener('touchend', function(e) {
+  if (_tx === null) return;
+  const dx = e.changedTouches[0].clientX - _tx;
+  if (Math.abs(dx) > 40) dx < 0 ? next() : prev();
+  _tx = null;
+}, { passive: true });
+
 // ── AUTO-ADVANCE TIMER (circular ring) ──
 const ringFill  = document.getElementById('timer-ring-fill');
 const timerIcon = document.getElementById('timer-icon');
