@@ -739,216 +739,77 @@ body.quiz-active .ctrl-arrow  { visibility: hidden; }
 
 <script>
 const quotes = [
+  // ── Littérature française ──
   { text: "Aujourd'hui, maman est morte. Ou peut-être hier, je ne sais pas.", author: "L'Étranger — Albert Camus, 1942" },
+  { text: "Les curieux événements qui font le sujet de cette chronique se produisirent en 194., à Oran.", author: "La Peste — Albert Camus, 1947" },
+  { text: "Puis-je, monsieur, vous proposer mes services, sans risquer d'être importun ?", author: "La Chute — Albert Camus, 1956" },
   { text: "Longtemps, je me suis couché de bonne heure.", author: "À la recherche du temps perdu — Marcel Proust, 1913" },
+  { text: "Nous étions à l'étude, quand le Proviseur entra, suivi d'un nouveau habillé en bourgeois.", author: "Madame Bovary — Gustave Flaubert, 1857" },
+  { text: "C'était à Mégara, faubourg de Carthage, dans les jardins d'Hamilcar.", author: "Salammbô — Gustave Flaubert, 1862" },
+  { text: "Le 15 septembre 1840, vers six heures du matin, la Ville-de-Montereau, près de partir, fumait à gros tourbillons devant le quai Saint-Bernard.", author: "L'Éducation sentimentale — Gustave Flaubert, 1869" },
+  { text: "La petite ville de Verrières peut passer pour l'une des plus jolies de la Franche-Comté.", author: "Le Rouge et le Noir — Stendhal, 1830" },
+  { text: "Le 15 mai 1796, le général Bonaparte fit son entrée dans Milan à la tête de cette jeune armée qui venait de passer le pont de Lodi.", author: "La Chartreuse de Parme — Stendhal, 1839" },
+  { text: "En 1815, M. Charles-François-Bienvenu Myriel était évêque de Digne.", author: "Les Misérables — Victor Hugo, 1862" },
+  { text: "Il y avait aujourd'hui trois cent quarante-huit ans six mois et dix-neuf jours que les Parisiens s'éveillèrent au bruit de toutes les cloches sonnant à grande volée dans la triple enceinte de la Cité, de l'Université et de la Ville.", author: "Notre-Dame de Paris — Victor Hugo, 1831" },
+  { text: "Il y avait en Westphalie, dans le château de M. le baron de Thunder-ten-Tronckh, un jeune garçon à qui la nature avait donné les mœurs les plus douces.", author: "Candide — Voltaire, 1759" },
+  { text: "Quand la caissière lui eut rendu la monnaie de sa pièce de cent sous, Georges Duroy sortit du restaurant.", author: "Bel-Ami — Guy de Maupassant, 1885" },
+  { text: "Dans la plaine rase, sous la nuit sans étoiles, d'une obscurité et d'une épaisseur d'encre, un homme suivait seul la grande route de Marchiennes à Montsou, dix kilomètres de pavé coupant tout droit, à travers les champs de betteraves.", author: "Germinal — Émile Zola, 1885" },
+  { text: "Gervaise avait attendu Lantier jusqu'à deux heures du matin.", author: "L'Assommoir — Émile Zola, 1877" },
+  { text: "Sur ce sentiment inconnu dont l'ennui, la douceur m'obsèdent, j'hésite à apposer le nom, le beau nom grave de tristesse.", author: "Bonjour Tristesse — Françoise Sagan, 1954" },
+  { text: "Ça a débuté comme ça.", author: "Voyage au bout de la nuit — Louis-Ferdinand Céline, 1932" },
+  { text: "Vous avez mis le pied gauche sur la rainure de cuivre, et de votre épaule droite vous essayez en vain de pousser un peu plus le panneau coulissant.", author: "La Modification — Michel Butor, 1957" },
+  { text: "Un jour, j'étais âgée déjà, dans le hall d'un lieu public, un homme est venu vers moi.", author: "L'Amant — Marguerite Duras, 1984" },
+  { text: "Lorsque j'avais six ans, j'ai vu, une fois, une magnifique image dans un livre sur la Forêt Vierge qui s'appelait Histoires Vécues.", author: "Le Petit Prince — Antoine de Saint-Exupéry, 1943" },
+  { text: "Le 24 février 1815, la vigie de Notre-Dame de la Garde signala le trois-mâts le Pharaon, venant de Smyrne, Trieste et Naples.", author: "Le Comte de Monte-Cristo — Alexandre Dumas, 1844" },
+  { text: "Il arriva chez nous un dimanche de novembre 18.., quelques jours après la rentrée des classes.", author: "Le Grand Meaulnes — Alain-Fournier, 1913" },
+  { text: "Jadis, si je me souviens bien, ma vie était un festin où s'ouvraient tous les cœurs, où tous les vins coulaient.", author: "Une Saison en enfer — Arthur Rimbaud, 1873" },
+
+  // ── Littérature mondiale ──
   { text: "Lolita, lumière de ma vie, feu de mes reins.", author: "Lolita — Vladimir Nabokov, 1955" },
   { text: "Appelez-moi Ismaël.", author: "Moby-Dick — Herman Melville, 1851" },
-  { text: "Je suis né à Reims un 25 décembre — ce qui ne m'a pas porté bonheur jusqu'ici.", author: "La Promesse de l'aube — Romain Gary, 1960" },
-  { text: "C'est à l'heure du commencement qu'il faut tout particulièrement veiller à ce que les équilibres soient précis.", author: "Dune — Frank Herbert, 1965" },
-  { text: "Au quartier, les choses se déroulent comme elles doivent se dérouler.", author: "Moi j'suis de la race écrite ! — Yohann Elmaleh, 2020" },
-  { text: "Nous étions à l'étude, quand le Proviseur entra, suivi d'un nouveau habillé en bourgeois.", author: "Madame Bovary — Gustave Flaubert, 1857" },
-  { text: "Il était une fois un pays où les hommes mouraient deux fois.", author: "Le Testament français — Andreï Makine, 1995" },
-  { text: "La nuit est longue qui ne finit point.", author: "Le Grand Meaulnes — Alain-Fournier, 1913" },
-  { text: "Tout commence par quelqu'un qui part.", author: "La Route des Flandres — Claude Simon, 1960" },
-  { text: "Il était une fois un homme qui vivait au bord du gouffre.", author: "Le Rivage des Syrtes — Julien Gracq, 1951" },
   { text: "Solennellement, le gros Buck Mulligan émergea du haut de l'escalier.", author: "Ulysse — James Joyce, 1922" },
   { text: "C'était le meilleur des temps, c'était le pire des temps.", author: "Le Conte de deux villes — Charles Dickens, 1859" },
+  { text: "Je serai ou non le héros de ma propre vie, la suite de ces pages le dira.", author: "David Copperfield — Charles Dickens, 1850" },
   { text: "Toutes les familles heureuses se ressemblent ; chaque famille malheureuse l'est à sa façon.", author: "Anna Karénine — Léon Tolstoï, 1878" },
   { text: "C'est une vérité universellement reconnue qu'un célibataire pourvu d'une belle fortune doit avoir envie de se marier.", author: "Orgueil et Préjugés — Jane Austen, 1813" },
+  { text: "Fin novembre, par un dégel, vers neuf heures du matin, le train de Pétersbourg-Varsovie approchait à toute vapeur de Saint-Pétersbourg.", author: "L'Idiot — Fiodor Dostoïevski, 1869" },
+  { text: "Alexeï Fedorovitch Karamazov était le troisième fils d'un propriétaire foncier de notre district, Fiodor Pavlovitch Karamazov.", author: "Les Frères Karamazov — Fiodor Dostoïevski, 1880" },
+  { text: "Quelqu'un avait dû calomnier Josef K., car, un matin, sans avoir rien fait de mal, il se trouva arrêté.", author: "Le Procès — Franz Kafka, 1925" },
+  { text: "En se réveillant un matin après des rêves agités, Gregor Samsa se retrouva dans son lit métamorphosé en un monstrueux insecte.", author: "La Métamorphose — Franz Kafka, 1915" },
+  { text: "Où maintenant ? Quand maintenant ? Qui maintenant ?", author: "L'Innommable — Samuel Beckett, 1953" },
+  { text: "Il était un vieil homme qui pêchait seul sur son bateau dans le Gulf Stream et il n'avait pas pris de poisson depuis quatre-vingt-quatre jours.", author: "Le Vieil Homme et la Mer — Ernest Hemingway, 1952" },
+  { text: "Robert Cohn était une fois champion de boxe poids moyen de Princeton.", author: "Le Soleil se lève aussi — Ernest Hemingway, 1926" },
+  { text: "L'idée de l'éternel retour est mystérieuse et Nietzsche a mis par elle les autres philosophes dans l'embarras.", author: "L'Insoutenable légèreté de l'être — Milan Kundera, 1984" },
+  { text: "Moi, Hassan, fils de Muhammad le peseur, moi, Jean-Léon de Médicis, circoncis de la main d'un barbier et baptisé de la main d'un pape, on m'appelle aujourd'hui l'Africain, mais je ne suis ni d'Afrique, ni d'Europe, ni d'Arabie.", author: "Léon l'Africain — Amin Maalouf, 1986" },
+  { text: "Cette œuvre est avant tout l'histoire d'un homme, qui vécut la plus grande partie de sa vie en Europe occidentale, durant la seconde moitié du XXe siècle.", author: "Les Particules élémentaires — Michel Houellebecq, 1998" },
+  { text: "J'avais rencontré Dean Moriarty peu de temps après la séparation de ma femme et de moi.", author: "Sur la route — Jack Kerouac, 1957" },
+  { text: "Un soir, j'étais assis sur le lit de ma chambre d'hôtel à Bunker Hill, en plein cœur de Los Angeles.", author: "Demande à la poussière — John Fante, 1939" },
+  { text: "Quand Zarathoustra eut atteint sa trentième année, il quitta sa patrie et le lac de sa patrie et s'en alla dans la montagne.", author: "Ainsi parlait Zarathoustra — Friedrich Nietzsche, 1885" },
+  { text: "Après que l'expérience m'eut appris que tout ce qui se rencontre ordinairement dans la vie commune est vain et futile, je me résolus enfin de chercher s'il n'y avait point quelque bien véritable et capable de se communiquer.", author: "Traité de la réforme de l'entendement — Baruch Spinoza, 1677" },
+  { text: "Le village de Holcomb est situé sur les hautes plaines de blé du sud-ouest du Kansas, une contrée solitaire que l'on aurait peine à distinguer du reste de l'Amérique.", author: "De sang-froid — Truman Capote, 1966" },
   { text: "Je suis un homme invisible.", author: "Homme invisible, pour qui chantes-tu ? — Ralph Ellison, 1952" },
   { text: "Le ciel au-dessus du port avait la couleur d'un écran de télé calé sur un émetteur hors service.", author: "Neuromancien — William Gibson, 1984" },
   { text: "Tout cela s'est passé, plus ou moins.", author: "Abattoir 5 — Kurt Vonnegut, 1969" },
-  { text: "Au commencement était le Verbe.", author: "Évangile selon Jean — Anonyme, ~90 ap. J.-C." },
-  { text: "Quelqu'un avait dû calomnier Josef K., car, un matin, sans avoir rien fait de mal, il se trouva arrêté.", author: "Le Procès — Franz Kafka, 1925" },
-  { text: "Où maintenant ? Quand maintenant ? Qui maintenant ?", author: "L'Innommable — Samuel Beckett, 1953" },
-  { text: "Je n'ai jamais su si j'avais du talent.", author: "Les Mots — Jean-Paul Sartre, 1964" },
-  { text: "Depuis longtemps, l'asile de vieillards de Marengo est à soixante-dix kilomètres d'Alger.", author: "Le Premier Homme — Albert Camus, 1994" },
-  { text: "La marquise sortit à cinq heures.", author: "Les Faux-Monnayeurs — André Gide, 1925" },
-  { text: "Je est un autre.", author: "Lettre à Paul Demeny — Arthur Rimbaud, 1871" },
-  { text: "Il faut imaginer Sisyphe heureux.", author: "Le Mythe de Sisyphe — Albert Camus, 1942" },
-  { text: "Je serai ou non le héros de ma propre vie, la suite de ces pages le dira.", author: "David Copperfield — Charles Dickens, 1850" },
-  { text: "Un hurlement traverse le ciel.", author: "L'Arc-en-ciel de la gravité — Thomas Pynchon, 1973" },
+  { text: "Tout avait commencé par erreur.", author: "La Poste — Charles Bukowski, 1971" },
   { text: "C'était une froide journée d'avril et les horloges sonnaient treize heures.", author: "1984 — George Orwell, 1949" },
   { text: "Si vous voulez vraiment que je vous en parle, ce que vous voudrez savoir d'abord, c'est où je suis né.", author: "L'Attrape-cœurs — J.D. Salinger, 1951" },
   { text: "La nuit dernière, j'ai rêvé que je retournais à Manderley.", author: "Rebecca — Daphne du Maurier, 1938" },
-  { text: "En se réveillant un matin après des rêves agités, Gregor Samsa se retrouva dans son lit métamorphosé en un monstrueux insecte.", author: "La Métamorphose — Franz Kafka, 1915" },
   { text: "Bien des années plus tard, face au peloton d'exécution, le colonel Aureliano Buendia allait se rappeler cet après-midi lointain où son père l'avait emmené découvrir la glace.", author: "Cent ans de solitude — García Márquez, 1967" },
-  { text: "C'était une nuit sombre et orageuse.", author: "Paul Clifford — Edward Bulwer-Lytton, 1830" },
   { text: "124 était maléfique.", author: "Beloved — Toni Morrison, 1987" },
   { text: "J'écris ces lignes assise dans l'évier de la cuisine.", author: "Je capture le château — Dodie Smith, 1948" },
   { text: "L'homme en noir fuyait à travers le désert, et le pistolero le suivait.", author: "La Tour Sombre — Stephen King, 1982" },
   { text: "Dans un trou vivait un hobbit.", author: "Le Hobbit — J.R.R. Tolkien, 1937" },
-  { text: "Ce fut le coup de foudre.", author: "Catch-22 — Joseph Heller, 1961" },
-  { text: "Le temps n'est pas une ligne mais une dimension.", author: "Œil-de-chat — Margaret Atwood, 1988" },
   { text: "Je suis condamné à me souvenir d'un garçon à la voix brisée.", author: "Une prière pour Owen Meany — John Irving, 1989" },
   { text: "Nous étions quelque part autour de Barstow, en lisière du désert, quand les drogues commencèrent à agir.", author: "Las Vegas Parano — Hunter S. Thompson, 1971" },
-  { text: "Tout avait commencé par erreur.", author: "La Poste — Charles Bukowski, 1971" },
   { text: "Dans ma jeunesse plus sensible et plus vulnérable, mon père m'a donné un conseil que je n'ai cessé de ruminer depuis.", author: "Gatsby le Magnifique — F. Scott Fitzgerald, 1925" },
   { text: "Il y avait un garçon du nom d'Eustache Clarence Scrubbs, et il méritait presque ce nom.", author: "L'Odyssée du Passeur d'Aurore — C.S. Lewis, 1952" },
-  { text: "Je suis vieux et je n'ai pas encore commencé à vivre.", author: "L'Immoraliste — André Gide, 1902" },
-  { text: "Le monde va finir. La seule raison pour laquelle il pourrait durer, c'est qu'il existe.", author: "Mon cœur mis à nu — Charles Baudelaire, 1887" },
-  { text: "Combien de royaumes nous ignorent !", author: "Pensées — Blaise Pascal, 1670" },
-  { text: "Toute ma vie je me suis fait une certaine idée de la France.", author: "Mémoires de guerre — Charles de Gaulle, 1954" },
-  { text: "Je n'ai jamais aimé que les absents.", author: "La Chute — Albert Camus, 1956" },
-  { text: "Le bonheur est une idée neuve en Europe.", author: "Discours à la Convention — Louis Antoine de Saint-Just, 1794" },
-  { text: "Les hommes font l'histoire, mais ils ne savent pas l'histoire qu'ils font.", author: "Introduction à la philosophie de l'histoire — Raymond Aron, 1938" },
-  { text: "Pendant longtemps, je me suis demandé pourquoi je vivais.", author: "La Nausée — Jean-Paul Sartre, 1938" },
-  { text: "Aujourd'hui je suis allé à la mer.", author: "La Fièvre — J.M.G. Le Clézio, 1965" },
-  { text: "C'était à Mégara, faubourg de Carthage, dans les jardins d'Hamilcar.", author: "Salammbô — Gustave Flaubert, 1862" },
-  { text: "Ce fut d'abord comme une vision.", author: "Salammbô — Gustave Flaubert, 1862" },
-  { text: "J'avais sept ans et je ne savais pas encore que le monde était beau.", author: "La Gloire de mon père — Marcel Pagnol, 1957" },
-  { text: "Mes enfants, permettez-moi de vous appeler ainsi car vous êtes pour moi tous des enfants.", author: "Le Père Goriot — Honoré de Balzac, 1835" },
-  { text: "Ma vie commence après.", author: "Le Chercheur d'or — J.M.G. Le Clézio, 1985" },
-  { text: "J'avais une ferme en Afrique, au pied des monts Ngong.", author: "La Ferme africaine — Karen Blixen, 1937" },
-  { text: "La neige fondait dans les montagnes et Bunny était mort depuis plusieurs semaines, avant que nous commencions à prendre conscience de la gravité de notre situation.", author: "Le Maître des illusions — Donna Tartt, 1992" },
-  { text: "Le rire, c'est le soleil qui chasse l'hiver du visage humain.", author: "Les Misérables — Victor Hugo, 1862" },
-  { text: "Il ne faut pas toucher aux idoles : la dorure en reste aux mains.", author: "L'Éducation sentimentale — Gustave Flaubert, 1869" },
-  { text: "Partir, c'est mourir un peu.", author: "Rondel de l'adieu — Edmond Haraucourt, 1891" },
-  { text: "Être ou ne pas être, telle est la question.", author: "Hamlet — William Shakespeare, 1603" },
-  { text: "Tous les animaux sont égaux, mais certains animaux sont plus égaux que les autres.", author: "La Ferme des animaux — George Orwell, 1945" },
-  { text: "Tout ce qui brille n'est pas or ; tous ceux qui errent ne sont pas perdus.", author: "Le Seigneur des Anneaux — J.R.R. Tolkien, 1954" },
-  { text: "Ce n'est pas en s'attardant sur les rêves et en oubliant de vivre que l'on avance.", author: "Harry Potter à l'école des sorciers — J.K. Rowling, 1997" },
-  { text: "Je veux écrire un livre dont le titre serait : Demain.", author: "Journal — Jules Renard, 1900" },
-  { text: "L'enfer, c'est les autres.", author: "Huis Clos — Jean-Paul Sartre, 1944" },
-  { text: "On ne naît pas femme : on le devient.", author: "Le Deuxième Sexe — Simone de Beauvoir, 1949" },
-  { text: "Il y avait en Westphalie, dans le château de M. le baron de Thunder-ten-Tronckh, un jeune garçon à qui la nature avait donné les mœurs les plus douces.", author: "Candide — Voltaire, 1759" },
-  { text: "Tout est pour le mieux dans le meilleur des mondes possibles.", author: "Candide — Voltaire, 1759" },
-  { text: "Il n'est pas de plus grande agonie que de porter en soi une histoire qui n'a pas été racontée.", author: "Je sais pourquoi chante l'oiseau en cage — Maya Angelou, 1969" },
-  { text: "Nous acceptons l'amour que nous croyons mériter.", author: "Les Avantages d'être un homme invisible — Stephen Chbosky, 1999" },
-  { text: "Où que tu ailles, vas-y de tout ton cœur.", author: "Entretiens (Analectes) — Confucius, ~500 av. J.-C." },
   { text: "Je pris une grande inspiration et écoutai le vieux battement sourd de mon cœur : je suis, je suis, je suis.", author: "La Cloche de détresse — Sylvia Plath, 1963" },
-  { text: "Je ne suis pas un oiseau et aucun filet ne m'emprisonne.", author: "Jane Eyre — Charlotte Brontë, 1847" },
-  { text: "Les mots sont, à mon humble avis, notre source de magie la plus inépuisable.", author: "Harry Potter — J.K. Rowling, 1997" },
-  { text: "C'est dans les crises qu'on se découvre vraiment.", author: "L'Adversaire — Emmanuel Carrère, 2000" },
-  { text: "Les mots manquent aux émotions.", author: "Les Contemplations — Victor Hugo, 1856" },
-  { text: "Tout était beau et rien ne faisait mal.", author: "Abattoir 5 — Kurt Vonnegut, 1969" },
-  { text: "Peut-être ne désirait-on pas tant être aimé qu'être compris.", author: "1984 — George Orwell, 1949" },
-  { text: "Certaines personnes apportent tellement de soleil dans votre vie simplement en entrant dans une pièce.", author: "Winnie l'Ourson — A.A. Milne, 1926" },
-  { text: "Un homme qui dort tient en cercle autour de lui le fil des heures, l'ordre des années et des mondes.", author: "Du côté de chez Swann — Marcel Proust, 1913" },
-  { text: "La vraie générosité envers l'avenir consiste à tout donner au présent.", author: "L'Homme révolté — Albert Camus, 1951" },
-  { text: "Qui n'a pas connu la prison ne connaît pas la vie.", author: "Souvenirs de la maison des morts — Fiodor Dostoïevski, 1862" },
-  { text: "Le superflu est une chose très nécessaire.", author: "Le Mondain — Voltaire, 1736" },
-  { text: "Écrire, c'est aussi ne pas parler. C'est se taire. C'est hurler sans bruit.", author: "Écrire — Marguerite Duras, 1993" },
-  { text: "Il faut se méfier des ingénieurs, ça commence par la machine à coudre et ça finit par la bombe atomique.", author: "La Jument verte — Marcel Aymé, 1933" },
-  { text: "Dans chaque œuvre de génie nous reconnaissons nos propres pensées rejetées.", author: "La Confiance en soi — Ralph Waldo Emerson, 1841" },
-  { text: "Le silence est le seul ami qui ne trahit jamais.", author: "Entretiens (Analectes) — Confucius, ~500 av. J.-C." },
-  { text: "Vivre est la chose la plus rare au monde. La plupart des gens se contentent d'exister.", author: "L'Âme de l'homme sous le socialisme — Oscar Wilde, 1891" },
-  { text: "Je peux résister à tout, sauf à la tentation.", author: "L'Éventail de Lady Windermere — Oscar Wilde, 1892" },
-  { text: "L'expérience est simplement le nom que nous donnons à nos erreurs.", author: "Le Portrait de Dorian Gray — Oscar Wilde, 1890" },
-  { text: "Pardonnez toujours à vos ennemis ; rien ne les irrite davantage.", author: "Une femme sans importance — Oscar Wilde, 1893" },
-  { text: "La vérité est rarement pure et n'est jamais simple.", author: "L'Importance d'être Constant — Oscar Wilde, 1895" },
-  { text: "C'était une belle matinée pour la fin du monde.", author: "La Fin des temps — Haruki Murakami, 1985" },
-  { text: "Je dormais, mais mon cœur veillait.", author: "Cantique des Cantiques — Anonyme, ~950 av. J.-C." },
-  { text: "Et tout cela, ô misère, était la vie.", author: "Les Misérables — Victor Hugo, 1862" },
-  { text: "Ce que tes yeux expriment me semble valoir plus que tout ce que j'ai lu dans toute ma vie.", author: "Feuilles d'herbe — Walt Whitman, 1855" },
-  { text: "L'imagination est plus importante que le savoir.", author: "Comment je vois le monde — Albert Einstein, 1931" },
-  { text: "Le génie, c'est l'enfance retrouvée à volonté.", author: "Le Peintre de la vie moderne — Charles Baudelaire, 1863" },
-
-  // ── Virginie Despentes ──
-  { text: "J'écris de chez les moches, pour les moches, les vieilles, les camionneuses, les frigides, les mal baisées, les imbaisables, les hystériques, les tarées, toutes les exclues du grand marché à la bonne meuf.", author: "King Kong Théorie — Virginie Despentes, 2006" },
-  { text: "Je parle en tant que femme et en tant qu'écrivain.", author: "King Kong Théorie — Virginie Despentes, 2006" },
-  { text: "Je suis la reine, la truie, la pute, la mal baisée, la vieille, l'hystérique. Je suis aussi l'écrivain.", author: "King Kong Théorie — Virginie Despentes, 2006" },
-  { text: "Il avait cru que la musique le protègerait de tout. Il avait eu tort, et maintenant il savait.", author: "Vernon Subutex — Virginie Despentes, 2015" },
-  { text: "La révolution sera féminine ou ne sera pas.", author: "King Kong Théorie — Virginie Despentes, 2006" },
-
-  // ── Emmanuel Carrère ──
-  { text: "Je pensais écrire un livre joyeux sur le yoga. Je ne sais plus ce que j'écris.", author: "Yoga — Emmanuel Carrère, 2020" },
-  { text: "La méditation ne consiste pas à arrêter ses pensées, mais à ne plus être emporté par elles.", author: "Yoga — Emmanuel Carrère, 2020" },
-  { text: "C'est dans les crises qu'on se découvre vraiment.", author: "L'Adversaire — Emmanuel Carrère, 2000" },
-
-  // ── Annie Ernaux ──
-  { text: "Peut-être que ma vraie raison d'écrire, c'est de venger ma race.", author: "La Place — Annie Ernaux, 1983" },
-  { text: "Il vivait dans la honte et la méfiance, dans l'impossibilité de rien dire.", author: "La Place — Annie Ernaux, 1983" },
-  { text: "Toutes les images disparaîtront.", author: "Les Années — Annie Ernaux, 2008" },
-  { text: "Une vie, ça ne se raconte pas, ça se montre.", author: "Les Années — Annie Ernaux, 2008" },
-  { text: "Il m'est arrivé de ne rien faire d'autre qu'attendre qu'il téléphone.", author: "Passion simple — Annie Ernaux, 1991" },
-  { text: "C'était une douleur sans nom, sans image possible, une douleur absolue.", author: "L'Événement — Annie Ernaux, 2000" },
-  { text: "Écrire, c'est le seul moyen que j'aie de retrouver la réalité de ce que j'ai vécu.", author: "L'Atelier noir — Annie Ernaux, 2011" },
-  { text: "La honte ne disparaît pas. Elle change de forme.", author: "La Honte — Annie Ernaux, 1997" },
-
-  // ── Édouard Louis ──
-  { text: "Dans le village où j'ai grandi, les hommes ne pleuraient pas.", author: "En finir avec Eddy Bellegueule — Édouard Louis, 2014" },
-  { text: "La violence faite aux corps n'a pas besoin de se justifier ; elle se contente d'exister.", author: "En finir avec Eddy Bellegueule — Édouard Louis, 2014" },
-  { text: "Je voulais partir, et partir c'est déjà changer.", author: "En finir avec Eddy Bellegueule — Édouard Louis, 2014" },
-
-  // ── Classiques — incipit ──
-  { text: "La petite ville de Verrières peut passer pour une des plus jolies de la Franche-Comté.", author: "Le Rouge et le Noir — Stendhal, 1830" },
-  { text: "Le plaisir d'incendier ! Quel plaisir extraordinaire c'était de voir les choses se faire dévorer, de les voir noircir et se transformer.", author: "Fahrenheit 451 — Ray Bradbury, 1953" },
-
-  // ── Spinoza ──
-  { text: "L'homme libre ne pense à rien moins qu'à la mort, et sa sagesse est une méditation non de la mort mais de la vie.", author: "L'Éthique — Baruch Spinoza, 1677" },
-  { text: "Ne pas pleurer, ne pas rire, ne pas détester, mais comprendre.", author: "Traité politique — Baruch Spinoza, 1677" },
-  { text: "La béatitude n'est pas la récompense de la vertu, mais la vertu elle-même.", author: "L'Éthique — Baruch Spinoza, 1677" },
-
-  // ── John Fante ──
-  { text: "Los Angeles, donne-moi quelque chose. Je suis en train de mourir ici.", author: "Ask the Dust — John Fante, 1939" },
-  { text: "Je suis Arturo Bandini, en attente d'une lettre de mon éditeur, et tout le reste peut aller se faire foutre.", author: "Ask the Dust — John Fante, 1939" },
-  { text: "L'écriture, c'est facile. Tu t'assoies devant ta machine à écrire et tu saignes.", author: "Ask the Dust — John Fante, 1939" },
-
-  // ── Albert Cohen ──
-  { text: "Elle était belle comme le péché du monde.", author: "Belle du Seigneur — Albert Cohen, 1968" },
-  { text: "Trop tard, toujours trop tard, c'est la loi des fils.", author: "Le Livre de ma mère — Albert Cohen, 1954" },
-  { text: "Être aimé pour ce qu'on n'est pas, c'est ne pas être aimé.", author: "Belle du Seigneur — Albert Cohen, 1968" },
-
-  // ── Nietzsche ──
-  { text: "Ce qui ne me tue pas me rend plus fort.", author: "Le Crépuscule des idoles — Friedrich Nietzsche, 1888" },
-  { text: "Sans musique, la vie serait une erreur.", author: "Le Crépuscule des idoles — Friedrich Nietzsche, 1888" },
-  { text: "Il faut avoir du chaos en soi pour accoucher d'une étoile qui danse.", author: "Ainsi parlait Zarathoustra — Friedrich Nietzsche, 1885" },
-
-  // ── Marguerite Duras ──
-  { text: "L'histoire de ma vie n'existe pas. Ça n'existe pas. Il n'y a jamais de centre. Pas de chemin, pas de ligne.", author: "L'Amant — Marguerite Duras, 1984" },
-  { text: "Je te désire. Quoi que tu fasses, quoi qu'il arrive, ça ne passera pas.", author: "L'Amant — Marguerite Duras, 1984" },
-  { text: "Écrire c'est aussi ne pas parler. C'est se taire. C'est hurler sans bruit.", author: "Écrire — Marguerite Duras, 1993" },
-
-  // ── Milan Kundera ──
-  { text: "L'homme ne peut jamais savoir ce qu'il faut vouloir, car il n'a qu'une vie et ne peut ni la comparer à ses vies antérieures ni la corriger dans ses vies ultérieures.", author: "L'Insoutenable Légèreté de l'être — Milan Kundera, 1984" },
-  { text: "Le roman est la grande forme de prose dans laquelle l'auteur, à travers des ego expérimentaux, examine jusqu'au bout quelques grands thèmes de l'existence.", author: "L'Art du roman — Milan Kundera, 1986" },
-  { text: "Nous ne pouvons jamais savoir ce que nous voulons, parce que nous n'avons qu'une vie.", author: "L'Insoutenable Légèreté de l'être — Milan Kundera, 1984" },
-
-  // ── Hemingway ──
-  { text: "Il suffit de deux verres pour être heureux dans n'importe quel bar du monde.", author: "Paris est une fête — Ernest Hemingway, 1964" },
-  { text: "Si tu as la chance d'avoir vécu jeune à Paris, où que tu ailles pour le reste de ta vie, ça te suit.", author: "Paris est une fête — Ernest Hemingway, 1964" },
-  { text: "Le monde est beau et vaut la peine qu'on se batte pour lui.", author: "Pour qui sonne le glas — Ernest Hemingway, 1940" },
-
-  // ── Dostoïevski ──
-  { text: "Aimer quelqu'un, c'est le voir tel que Dieu l'a voulu.", author: "L'Idiot — Fiodor Dostoïevski, 1869" },
-  { text: "La beauté sauvera le monde.", author: "L'Idiot — Fiodor Dostoïevski, 1869" },
-
-  // ── Saint-Exupéry ──
-  { text: "On ne voit bien qu'avec le cœur. L'essentiel est invisible pour les yeux.", author: "Le Petit Prince — Antoine de Saint-Exupéry, 1943" },
-  { text: "Tu deviens responsable pour toujours de ce que tu as apprivoisé.", author: "Le Petit Prince — Antoine de Saint-Exupéry, 1943" },
-
-  // ── Boris Vian ──
-  { text: "Je voudrais que personne ne meure, c'est tout.", author: "L'Écume des jours — Boris Vian, 1947" },
-  { text: "Il ne faut pas laisser les intellectuels jouer avec les allumettes.", author: "En avant la zizique — Boris Vian, 1958" },
-
-  // ── Céline ──
-  { text: "Voyager, c'est bien utile, ça fait travailler l'imagination.", author: "Voyage au bout de la nuit — Louis-Ferdinand Céline, 1932" },
-  { text: "Le vrai voyage de découverte ne consiste pas à chercher de nouveaux paysages, mais à avoir de nouveaux yeux.", author: "La Prisonnière — Marcel Proust, 1923" },
-
-  // ── Zola ──
-  { text: "Je suis venu dire la vérité au nom de ceux qui n'osent pas.", author: "J'accuse — Émile Zola, 1898" },
-
-  // ── Jack Kerouac ──
-  { text: "On the road again. Parce que la route, c'est la vie.", author: "Sur la route — Jack Kerouac, 1957" },
-  { text: "Il me faut des démons furieux à mes côtés, des gens qui soient fous à vivre, fous à parler, fous à être sauvés.", author: "Sur la route — Jack Kerouac, 1957" },
-
-  // ── Truman Capote ──
-  { text: "Aucun endroit où je puisse trouver ma place. Et c'est exactement ce que je voulais dire.", author: "Petit-déjeuner chez Tiffany — Truman Capote, 1958" },
-
-  // ── Marguerite Yourcenar ──
-  { text: "Je commence à apercevoir le profil de ma mort.", author: "Mémoires d'Hadrien — Marguerite Yourcenar, 1951" },
-  { text: "Tout bonheur est une innocence.", author: "Mémoires d'Hadrien — Marguerite Yourcenar, 1951" },
-
-  // ── Houellebecq ──
-  { text: "Le monde comme volonté et comme représentation, c'est bien joli, mais en pratique on manque de volonté et on se représente très mal les choses.", author: "Les Particules élémentaires — Michel Houellebecq, 1998" },
-
-  // ── Amin Maalouf ──
-  { text: "Ma langue est ma patrie.", author: "Les Identités meurtrières — Amin Maalouf, 1998" },
-  { text: "Chaque homme a deux patries : la sienne et puis la France.", author: "Les Croisades vues par les Arabes — Amin Maalouf, 1983" },
-
-  // ── Raymond Carver ──
-  { text: "De quoi parlons-nous quand nous parlons d'amour ?", author: "Les Vitamines du bonheur — Raymond Carver, 1981" },
+  { text: "C'était une nuit sombre et orageuse.", author: "Paul Clifford — Edward Bulwer-Lytton, 1830" },
+  { text: "La neige fondait dans les montagnes et Bunny était mort depuis plusieurs semaines, avant que nous commencions à prendre conscience de la gravité de notre situation.", author: "Le Maître des illusions — Donna Tartt, 1992" },
+  { text: "Ce fut le coup de foudre.", author: "Catch-22 — Joseph Heller, 1961" },
+  { text: "Un hurlement traverse le ciel.", author: "L'Arc-en-ciel de la gravité — Thomas Pynchon, 1973" },
+  { text: "J'avais une ferme en Afrique, au pied des monts Ngong.", author: "La Ferme africaine — Karen Blixen, 1937" },
+  { text: "Au commencement était le Verbe.", author: "Évangile selon Jean — Anonyme, ~90 ap. J.-C." },
 ];
 
 // ── COLOR PALETTE (smooth, muted tones) ──
