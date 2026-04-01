@@ -2114,7 +2114,7 @@ const P = {
     context:"Piloter le design chez GL, c'est coordonner l'interface d'un écosystème entier — avec une équipe de 7 product designers. Refonte complète de l'app mobile iOS & Android, refonte annuelle du site responsive, construction d'un design system vivant avec tokens, composants et documentation Zeroheight. En parallèle : intégration de l'IA générative dans la production de visuels mode, conception UX/UI du chatbot Gala, des centaines d'interfaces Low-Code sur PowerApps. Du composant au système, du wireframe au livrable dev-ready — chef d'orchestre design à l'échelle d'un grand compte.",
     problem:"3 ans à la tête du design pour l'un des plus grands retailers français. Pas un projet — un écosystème entier : app, web, design system, IA gen, automatisation, et une équipe de choc.",
     blocks:[
-      {t:'devices',n:'01',srcs:['img/gl-app-01.jpg','img/gl-app-02.jpg','img/gl-app-03.jpg','img/gl-app-04.jpg','img/gl-app-05.jpg','img/gl-app-06.jpg','img/gl-app-07.jpg'],desktopSrcs:['img/homedesktop.jpg','img/hometendance.jpg'],c:'<strong>App & web, refonte totale.</strong> En cohérence avec le design system, l\'application mobile et le site desktop ont été entièrement repensés. Indice de satisfaction 150. Big up à Flo, dev iOS de génie — embauche-le, il est freelance et il est brillant.'},
+      {t:'devices',n:'01',srcs:['img/gl-app-01.jpg','img/gl-app-02.jpg','img/gl-app-03.jpg','img/gl-app-04.jpg','img/gl-app-05.jpg','img/gl-app-06.jpg','img/gl-app-07.jpg'],desktopSrcs:['img/gl-homedesktop.jpg'],c:'<strong>App & web, refonte totale.</strong> En cohérence avec le design system, l\'application mobile et le site desktop ont été entièrement repensés. Indice de satisfaction 150. Big up à Flo, dev iOS de génie — embauche-le, il est freelance et il est brillant.'},
       {t:'ds',n:'02',c:'<strong>Design System.</strong> Composants vivants, documentation Zeroheight, variables unifiées. La fondation sur laquelle tout le reste repose.'},
       {t:'looks-ia',n:'03',srcs:['img/gl-look-phone.mp4'],mediaSrcs:['img/gl-look-05.mp4','img/gl-look-01.jpg','img/gl-look-02.jpg','img/gl-look-03.jpg','img/gl-look-04.jpg'],c:'<strong>Looks IA Gen.</strong> Création de visuels mode avec des produits portés reliés au vrai catalogue. Retouche d\'images en batch via un flow Weavy, puis reconstruction du flow en Python.'},
       {t:'shoes-360',n:'04',srcs:['img/gl-shoe-weston.mp4'],cells:['img/gl-shoe-01.mp4','img/gl-shoe-02.mp4','img/gl-shoe-03.mp4','img/gl-shoe-04.mp4','img/gl-shoe-05.mp4','img/gl-shoe-06.mp4','img/gl-shoe-07.mp4'],c:'<strong>360° Spin.</strong> On a construit un flow Weavy qui transforme automatiquement les images catalogue des Galeries — sacs, chaussures, accessoires — en vues 360° spin interactives. Chaque produit devient navigable à partir des photos existantes, sans intervention manuelle.'},
@@ -2279,7 +2279,7 @@ function renderImg(b) {
       ? `<video src="${mainSrc}" autoplay loop muted playsinline class="looks-strip-main"></video>`
       : `<img src="${mainSrc}" alt="${imgAlt(mainSrc)}" class="looks-strip-main">`;
     const thumbsHtml = `<div class="looks-thumbs-grid">${thumbSrcs.map(s=>`<img src="${s}" alt="${imgAlt(s)}">`).join('')}</div>`;
-    return `<div class="block-looks-ia">${iphoneHtml}<div class="looks-strip">${mainMedia}${thumbsHtml}</div></div>`;
+    return `<div class="block-looks-ia">${iphoneHtml}</div>`;
   }
   if (b.t==='shoes-360') {
     // iPhone gauche
@@ -2295,7 +2295,7 @@ function renderImg(b) {
       const isVid = src.match(/\.(mp4|webm|mov)$/i);
       return `<div class="shoes-grid-cell">${isVid?`<video src="${src}" autoplay loop muted playsinline></video>`:`<img src="${src}" alt="${imgAlt(src)}">`}</div>`;
     }).join('') : palette.map((c,i)=>`<div class="shoes-grid-cell" style="background:${c}"><span>${i+1}</span></div>`).join('');
-    return `<div class="block-looks-ia">${iphoneHtml}<div class="shoes-grid">${cells}</div></div>`;
+    return `<div class="block-looks-ia">${iphoneHtml}</div>`;
   }
   if (b.t==='devices') {
     const slides = (b.srcs||[]).map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="${imgAlt(s)}" loading="lazy">`}</div>`).join('');
