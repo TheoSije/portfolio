@@ -970,7 +970,29 @@ const colorPalette = [
   { from: '#e1bee7', to: '#c490d1' },   // lilac
 ];
 
-let current = 0;
+// ── PLAY ORDER — shufflé, jamais 2x le même auteur de suite ──
+function buildPlayOrder() {
+  const getAuthor = i => quotes[i].author.split(' — ')[1]?.split(',')[0]?.trim() || quotes[i].author;
+  let pool = quotes.map((_, i) => i);
+  // Fisher-Yates shuffle
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  // Réorganise pour qu'aucun auteur ne soit consécutif
+  const order = [];
+  while (pool.length) {
+    const lastAuthor = order.length ? getAuthor(order[order.length - 1]) : null;
+    const idx = pool.findIndex(i => getAuthor(i) !== lastAuthor);
+    if (idx === -1) { order.push(...pool); break; }
+    order.push(pool.splice(idx, 1)[0]);
+  }
+  return order;
+}
+
+let playOrder = buildPlayOrder();
+let playIdx   = 0;
+let current   = playOrder[0];
 let currentColorIdx = 0;
 
 const block   = document.getElementById('quote-block');
@@ -1025,8 +1047,17 @@ function show(idx, direction) {
   }, 280);
 }
 
-function next() { current = (current + 1) % quotes.length; show(current, 1); startTimer(); }
-function prev() { current = (current - 1 + quotes.length) % quotes.length; show(current, -1); startTimer(); }
+function next() {
+  playIdx = (playIdx + 1) % playOrder.length;
+  if (playIdx === 0) playOrder = buildPlayOrder();
+  current = playOrder[playIdx];
+  show(current, 1); startTimer();
+}
+function prev() {
+  playIdx = (playIdx - 1 + playOrder.length) % playOrder.length;
+  current = playOrder[playIdx];
+  show(current, -1); startTimer();
+}
 
 // ── SWIPE ──────────────────────────────────────────────────────────────────
 let _tx = null;
@@ -1072,7 +1103,9 @@ function startTimer() {
     if (progress > 0) {
       timerRaf = requestAnimationFrame(tick);
     } else {
-      current = (current + 1) % quotes.length;
+      playIdx = (playIdx + 1) % playOrder.length;
+      if (playIdx === 0) playOrder = buildPlayOrder();
+      current = playOrder[playIdx];
       show(current, 1);
       startTimer();
     }
