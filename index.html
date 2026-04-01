@@ -1295,18 +1295,12 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 /* ── LOOKS IA — section horizontale scrollable ── */
 .block-looks-ia {
   display: flex;
-  flex-direction: row;
-  align-items: stretch;
   gap: 16px;
-  height: 760px;
+  align-items: stretch;
   margin-bottom: 24px;
   margin-right: calc(-1 * var(--h-pad));
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  overflow: hidden;
 }
-.block-looks-ia::-webkit-scrollbar { display: none; }
 .looks-strip {
   display: flex;
   flex: 0 0 auto;
