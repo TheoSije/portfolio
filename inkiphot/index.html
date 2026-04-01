@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inkip'hot — theo.design</title>
+<meta name="description" content="Passages de littérature érotique. Générés, colorés, partageables.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jegousse.com/inkiphot/">
+<meta property="og:title" content="Inkip'hot — theo.design">
+<meta property="og:description" content="Passages de littérature érotique. Générés, colorés, partageables.">
+<meta property="og:image" content="https://jegousse.com/img/inkipit-og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Inkip'hot — theo.design">
+<meta name="twitter:image" content="https://jegousse.com/img/inkipit-og.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  background: #0a0a0a;
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: 48px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  gap: 14px;
+}
+
+.nav-back {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(255,255,255,.32);
+  font-size: 12px;
+  letter-spacing: .04em;
+  transition: color .2s;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  padding: 0;
+  text-decoration: none;
+}
+.nav-back:hover { color: rgba(255,255,255,.7); }
+.nav-sep { width: 1px; height: 13px; background: rgba(255,255,255,.1); }
+.nav-logo { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.65); }
+.nav-right { display: none; }
+
+/* ── IN-IFRAME ── */
+body.in-iframe nav { display: none; }
+body.in-iframe main { padding-top: 0; }
+body.quiz-active.in-iframe main { padding-top: 76px; }
+
+/* ── PLAYER CONTROLS (Spotify-style) ── */
+.timer-btn {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+}
+.timer-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.timer-ring-bg {
+  fill: none;
+  stroke: rgba(255,255,255,.1);
+  stroke-width: 1.5;
+}
+.timer-ring-fill {
+  fill: none;
+  stroke: rgba(255,255,255,.5);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 175.93;
+  stroke-dashoffset: 0;
+  transition: stroke .6s ease;
+}
+.play-inner {
+  position: relative;
+  z-index: 1;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .2s cubic-bezier(0.34,1.56,0.64,1), background .2s;
+}
+.timer-icon {
+  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.timer-btn:hover .play-inner { transform: scale(1.06); background: #f0f0f0; }
+.timer-btn:active .play-inner { transform: scale(0.94); }
+
+.player-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.ctrl-arrow {
+  width: 56px;
+  height: 64px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,.5);
+  transition: color .18s, transform .18s;
+  padding: 0;
+}
+.ctrl-arrow:hover { color: rgba(255,255,255,.9); transform: scale(1.1); }
+.ctrl-arrow:active { transform: scale(0.9); }
+
+.share-icon-btn {
+  position: absolute;
+  right: clamp(28px, 6vw, 88px);
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: rgba(255,255,255,.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  transition: color .18s;
+  padding: 0;
+}
+.share-icon-btn:hover { color: rgba(255,255,255,.85); }
+
+main {
+  height: 100vh;
+  padding-top: 48px;
+  padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: clamp(28px, 6vw, 88px);
+  padding-right: clamp(28px, 6vw, 88px);
+}
+
+.quote-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 860px;
+}
+
+.quote-mark {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(60px, 10vw, 110px);
+  line-height: .85;
+  margin-bottom: 8px;
+  display: block;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .4s ease, transform .4s ease, color 1.8s ease;
+}
+
+.quote-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 4.8vw, 72px);
+  font-weight: 800;
+  line-height: 1.12;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .4s ease .07s, transform .4s ease .07s, color 1.8s ease;
+}
+.quote-text--md { font-size: clamp(22px, 3.4vw, 52px); }
+.quote-text--lg { font-size: clamp(17px, 2.6vw, 38px); }
+.quote-text--xl { font-size: clamp(14px, 1.9vw, 28px); line-height: 1.2; }
+
+.quote-book {
+  margin-top: 32px;
+  font-size: clamp(13px, 1.4vw, 17px);
+  font-weight: 500;
+  font-style: italic;
+  color: rgba(255,255,255,.65);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .4s ease .14s, transform .4s ease .14s;
+  letter-spacing: .01em;
+}
+
+.quote-author {
+  margin-top: 4px;
+  font-size: clamp(11px, 1.1vw, 13px);
+  font-weight: 400;
+  color: rgba(255,255,255,.32);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .4s ease .18s, transform .4s ease .18s;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.quote-block.visible .quote-mark,
+.quote-block.visible .quote-text,
+.quote-block.visible .quote-book,
+.quote-block.visible .quote-author {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── BOTTOM BAR ── */
+.bottom-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0 22px;
+  background: #000;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+
+
+/* ── SHARE MODAL ── */
+.share-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 0 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+.share-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.share-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.share-sheet {
+  position: relative;
+  z-index: 1;
+  width: min(520px, calc(100% - 32px));
+  background: rgba(36,34,34,0.96);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,.1);
+  box-shadow: 0 24px 80px rgba(0,0,0,.6);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transform: translateY(24px);
+  transition: transform .35s cubic-bezier(0.34,1.2,0.64,1);
+}
+.share-overlay.open .share-sheet {
+  transform: translateY(0);
+}
+
+.share-preview-wrap {
+  display: flex;
+  justify-content: center;
+}
+#share-canvas {
+  border-radius: 12px;
+  display: block;
+  max-width: 100%;
+  box-shadow: 0 8px 32px rgba(0,0,0,.5);
+}
+
+.share-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.share-label {
+  font-size: 9px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+}
+.share-options {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.share-opt {
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: none;
+  color: rgba(255,255,255,.5);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.share-opt:hover { border-color: rgba(255,255,255,.3); color: rgba(255,255,255,.85); }
+.share-opt.active {
+  background: rgba(255,255,255,.12);
+  border-color: rgba(255,255,255,.35);
+  color: #fff;
+}
+
+.share-color-opts {
+  display: flex;
+  gap: 8px;
+}
+.share-color-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform .15s, border-color .15s;
+  flex-shrink: 0;
+}
+.share-color-swatch:hover { transform: scale(1.12); }
+.share-color-swatch.active { border-color: #fff; }
+
+.share-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.share-actions-row {
+  display: flex;
+  gap: 10px;
+}
+.share-dl-btn {
+  flex: 1;
+  height: 42px;
+  border-radius: 100px;
+  border: none;
+  background: #fff;
+  color: #111;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.share-dl-btn:hover { opacity: .88; }
+.share-close-btn {
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: none;
+  color: rgba(255,255,255,.5);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.share-close-btn:hover { color: #fff; border-color: rgba(255,255,255,.3); }
+.share-copy-btn {
+  width: 100%;
+  height: 38px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: none;
+  color: rgba(255,255,255,.5);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all .2s;
+  letter-spacing: .02em;
+}
+.share-copy-btn:hover { border-color: rgba(255,255,255,.3); color: rgba(255,255,255,.85); }
+.share-copy-btn.copied { border-color: rgba(100,220,130,.5); color: rgba(100,220,130,.95); }
+
+/* ── QUIZ GAME BUTTON ── */
+.quiz-game-btn {
+  position: absolute;
+  left: clamp(28px, 6vw, 88px);
+  border: 1px solid rgba(255,255,255,.14);
+  background: none;
+  cursor: pointer;
+  color: rgba(255,255,255,.55);
+  display: flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .03em;
+  transition: color .18s, border-color .18s;
+  white-space: nowrap;
+}
+.quiz-game-btn:hover { color: rgba(255,255,255,.9); border-color: rgba(255,255,255,.35); }
+.quiz-game-btn.quit { border-color: rgba(230,80,80,.35); color: rgba(230,80,80,.75); }
+.quiz-game-btn.quit:hover { border-color: rgba(230,80,80,.65); color: rgba(230,80,80,1); }
+
+/* ── QUIZ PANEL ── */
+/* Timer en mode quiz : on garde seulement le cercle stroke, sans fill ni icône */
+body.quiz-active .play-inner  { display: none; }
+body.quiz-active .timer-btn   { pointer-events: none; cursor: default; }
+body.quiz-active .ctrl-arrow  { visibility: hidden; }
+
+.quiz-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 0 4px;
+}
+.quiz-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.1);
+  transition: background .25s, transform .2s;
+  flex-shrink: 0;
+}
+.quiz-dot.current { background: rgba(255,255,255,.4); transform: scale(1.25); }
+.quiz-dot.correct { background: rgba(80,200,110,.85); transform: scale(1); }
+.quiz-dot.wrong   { background: rgba(230,80,80,.75);  transform: scale(1); }
+.quiz-panel {
+  margin-top: 28px;
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+}
+.quiz-opts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.quiz-opt {
+  padding: 11px 16px;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 12px;
+  background: rgba(255,255,255,.03);
+  color: rgba(255,255,255,.7);
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(12px, 1.3vw, 15px);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color .15s, background .15s, color .15s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+.quiz-opt-letter {
+  font-size: 10px;
+  letter-spacing: .08em;
+  color: rgba(255,255,255,.25);
+  min-width: 14px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+.quiz-opt:hover:not(.correct):not(.wrong):not(.selected):not(:disabled) {
+  border-color: rgba(255,255,255,.28);
+  color: rgba(255,255,255,.9);
+  background: rgba(255,255,255,.06);
+}
+.quiz-opt.selected {
+  border-color: rgba(255,255,255,.45);
+  color: #fff;
+  background: rgba(255,255,255,.08);
+}
+.quiz-opt.correct {
+  border-color: rgba(80,200,110,.6);
+  color: rgba(80,200,110,.95);
+  background: rgba(80,200,110,.07);
+}
+.quiz-opt.wrong {
+  border-color: rgba(230,80,80,.5);
+  color: rgba(230,80,80,.8);
+  background: rgba(230,80,80,.06);
+}
+.quiz-footer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 4px;
+}
+.quiz-validate {
+  padding: 9px 22px;
+  border-radius: 100px;
+  border: none;
+  background: #fff;
+  color: #111;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.quiz-validate:hover:not(:disabled) { opacity: .88; }
+.quiz-validate:disabled { opacity: .35; cursor: default; }
+.quiz-inline-result {
+  font-size: 13px;
+  font-weight: 500;
+  transition: color .2s;
+}
+
+/* ── QUIZ RESULT SCREEN ── */
+.quiz-result-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 210;
+  background: #0a0a0a;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(28px, 8vw, 88px);
+  gap: 28px;
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+.quiz-result-screen.open    { display: flex; }
+.quiz-result-screen.visible { opacity: 1; }
+.quiz-rs-label {
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+  font-weight: 500;
+}
+.quiz-rs-score {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(80px, 15vw, 148px);
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(135deg, #e8d5b7 0%, #c9a87c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.quiz-rs-sub {
+  font-size: clamp(13px, 1.5vw, 16px);
+  color: rgba(255,255,255,.38);
+  margin-top: -12px;
+  text-align: center;
+}
+.quiz-rs-dots {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 280px;
+}
+.quiz-rs-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+}
+.quiz-rs-dot.correct { background: rgba(80,200,110,.85); }
+.quiz-rs-dot.wrong   { background: rgba(230,80,80,.72); }
+.quiz-rs-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.quiz-rs-btn {
+  height: 42px;
+  padding: 0 24px;
+  border-radius: 100px;
+  border: none;
+  background: #fff;
+  color: #111;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.quiz-rs-btn:hover { opacity: .85; }
+.quiz-rs-btn.ghost {
+  background: none;
+  border: 1px solid rgba(255,255,255,.16);
+  color: rgba(255,255,255,.5);
+}
+.quiz-rs-btn.ghost:hover { border-color: rgba(255,255,255,.38); color: rgba(255,255,255,.88); }
+
+/* Book-page swatch : blanc parchemin avec liseré rouge */
+.share-swatch-book {
+  background: #fffef8;
+  border: 2px solid rgba(200,170,100,.35) !important;
+  position: relative;
+  overflow: hidden;
+}
+.share-swatch-book::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 7px;
+  width: 1.5px;
+  background: rgba(210,80,80,.28);
+}
+
+@media (max-width: 600px) {
+  nav { padding: 0 16px; }
+  .nav-right { display: none; }
+  main { padding-left: 20px; padding-right: 20px; }
+  .share-icon-btn { right: 16px; }
+  .quiz-game-btn { left: 16px; }
+  .timer-btn { width: 56px; height: 56px; }
+  .play-inner { width: 46px; height: 46px; }
+}
+
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-back" href="../" onclick="event.preventDefault();if(window.parent!==window){window.parent.postMessage('close-minisite','*');}else{window.location.href='../';}">← theo.design</a>
+  <div class="nav-sep"></div>
+  <span class="nav-logo">inkip'hot</span>
+</nav>
+
+<main>
+  <div class="quote-block" id="quote-block">
+    <span class="quote-mark" id="quote-mark">"</span>
+    <p class="quote-text" id="quote-text"></p>
+    <p class="quote-book" id="quote-book"></p>
+    <p class="quote-author" id="quote-author"></p>
+    <div class="quiz-panel" id="quiz-panel">
+      <div class="quiz-opts" id="quiz-opts"></div>
+      <div class="quiz-footer">
+        <button class="quiz-validate" id="quiz-validate">Valider</button>
+        <span class="quiz-inline-result" id="quiz-inline-result"></span>
+      </div>
+      <div class="quiz-dots" id="quiz-dots"></div>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <button class="quiz-game-btn" id="quiz-game-btn" onclick="quizGameBtnClick()">Mode jeu</button>
+    <div class="player-group">
+      <button class="ctrl-arrow" onclick="prev()" title="Précédent">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="timer-btn" id="timer-btn" onclick="toggleTimer()" title="Pause / Reprendre">
+        <svg class="timer-ring" viewBox="0 0 64 64">
+          <circle class="timer-ring-bg" cx="32" cy="32" r="28"/>
+          <circle class="timer-ring-fill" id="timer-ring-fill" cx="32" cy="32" r="28"/>
+        </svg>
+        <div class="play-inner">
+          <span class="timer-icon" id="timer-icon">
+            <svg width="10" height="12" viewBox="0 0 9 10" fill="currentColor"><rect x="0" y="0" width="3" height="10" rx="1"/><rect x="6" y="0" width="3" height="10" rx="1"/></svg>
+          </span>
+        </div>
+      </button>
+      <button class="ctrl-arrow" onclick="next()" title="Suivant">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+    <button class="share-icon-btn" onclick="openShare()" title="Partager">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+    </button>
+  </div>
+</main>
+
+<!-- SHARE MODAL -->
+<div class="share-overlay" id="share-overlay">
+  <div class="share-backdrop" onclick="closeShare()"></div>
+  <div class="share-sheet">
+    <div class="share-preview-wrap">
+      <canvas id="share-canvas"></canvas>
+    </div>
+
+    <div class="share-row">
+      <span class="share-label">Format</span>
+      <div class="share-options" id="fmt-opts">
+        <button class="share-opt active" data-fmt="square" onclick="setFmt(this)">Carré</button>
+        <button class="share-opt" data-fmt="story" onclick="setFmt(this)">Story</button>
+        <button class="share-opt" data-fmt="wide" onclick="setFmt(this)">Paysage</button>
+      </div>
+    </div>
+
+    <div class="share-row">
+      <span class="share-label">Couleur</span>
+      <div class="share-color-opts" id="color-opts">
+        <div class="share-color-swatch active" style="background:#222" data-idx="0" onclick="setColor(this)" title="Nuit"></div>
+        <div class="share-color-swatch" style="background:#1a3456" data-idx="1" onclick="setColor(this)" title="Minuit"></div>
+        <div class="share-color-swatch" style="background:#32116e" data-idx="2" onclick="setColor(this)" title="Violet"></div>
+        <div class="share-color-swatch" style="background:#f5f0e8" data-idx="3" onclick="setColor(this)" title="Crème"></div>
+        <div class="share-color-swatch share-swatch-book" data-idx="4" onclick="setColor(this)" title="Page de livre"></div>
+      </div>
+    </div>
+
+    <div class="share-actions">
+      <div class="share-actions-row">
+        <button class="share-dl-btn" onclick="downloadCard()">↓ Télécharger</button>
+        <button class="share-close-btn" onclick="closeShare()">Annuler</button>
+      </div>
+      <button class="share-copy-btn" id="share-copy-btn" onclick="copyLink()">⎘ Copier le lien</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const quotes = [
+  // ── Histoire d'O ──
+  { text: "Son amant la ramena un jour dans un quartier où ils n'avaient jamais été ensemble, une rue derrière le Panthéon.", author: "Histoire d'O — Pauline Réage, 1954" },
+  { text: "On lui ôta ses vêtements. Elle frissonnait, mais ne résistait pas.", author: "Histoire d'O — Pauline Réage, 1954" },
+  { text: "Elle était heureuse d'être entre leurs mains, heureuse qu'ils la prennent, heureuse d'être contrainte à n'être plus qu'un objet entre leurs mains.", author: "Histoire d'O — Pauline Réage, 1954" },
+  { text: "Sir Stephen lui glissa au doigt, à l'annulaire de la main gauche, un anneau de fer poli orné d'une pierre d'or.", author: "Histoire d'O — Pauline Réage, 1954" },
+
+  // ── L'Histoire de l'Œil ──
+  { text: "J'avais seize ans quand je rencontrai Simone au bord de la mer, par une chaleur torride.", author: "Histoire de l'Œil — Georges Bataille, 1928" },
+  { text: "Le désir que j'éprouvais pour elle était d'une telle violence qu'il avait une saveur de souffrance.", author: "Histoire de l'Œil — Georges Bataille, 1928" },
+
+  // ── L'Amant de Lady Chatterley ──
+  { text: "Et soudain elle abandonna toute résistance, et son corps se dissolvait dans une volupté douce et obscure.", author: "L'Amant de Lady Chatterley — D.H. Lawrence, 1928" },
+  { text: "Ses mains modelaient doucement les hanches de la femme, avec une patience qui ressemblait à une prière.", author: "L'Amant de Lady Chatterley — D.H. Lawrence, 1928" },
+
+  // ── L'Amant ──
+  { text: "Il pose sa main sur le genou, je vois sa main, elle est brune, douce, plutôt belle.", author: "L'Amant — Marguerite Duras, 1984" },
+  { text: "Dans la chambre, il vient vers elle lentement. Il la regarde. Il commence à la déshabiller. Il tremble.", author: "L'Amant — Marguerite Duras, 1984" },
+
+  // ── Delta de Vénus ──
+  { text: "Le désir de Mathilde, comme un métal en fusion, coulait lentement, cherchant sa forme.", author: "Delta de Vénus — Anaïs Nin, 1977" },
+  { text: "Elle avait appris à aimer le silence qui précède le toucher, cette suspension du monde où tout est encore possible.", author: "Delta de Vénus — Anaïs Nin, 1977" },
+  { text: "Son corps gardait la mémoire de chaque main, de chaque bouche, comme un livre écrit dans une langue secrète.", author: "Delta de Vénus — Anaïs Nin, 1977" },
+
+  // ── Les Chansons de Bilitis ──
+  { text: "Elle posa ses lèvres sur ma joue et je sentis son souffle chaud dans mes cheveux défaits.", author: "Les Chansons de Bilitis — Pierre Louÿs, 1894" },
+  { text: "Ses bras blancs s'enlacèrent autour de mon cou et le monde au-dehors n'existait plus.", author: "Les Chansons de Bilitis — Pierre Louÿs, 1894" },
+
+  // ── Aphrodite ──
+  { text: "À cette heure de la nuit, Alexandrie était encore pleine de bruit, de lumière et de parfums lourds.", author: "Aphrodite — Pierre Louÿs, 1896" },
+  { text: "Chéréas vit Chrysis et comprit qu'il ferait tout ce qu'elle voudrait.", author: "Aphrodite — Pierre Louÿs, 1896" },
+
+  // ── Les Liaisons dangereuses ──
+  { text: "Voilà, ma belle amie, la fidèle histoire d'une victoire que vous demandiez à attendre.", author: "Les Liaisons dangereuses — Choderlos de Laclos, 1782" },
+  { text: "Ce n'est pas ma faute si vous m'êtes si facile à lire et si difficile à oublier.", author: "Les Liaisons dangereuses — Choderlos de Laclos, 1782" },
+
+  // ── La Vénus à la fourrure ──
+  { text: "J'étais debout devant elle, tremblant de tout mon corps, comme un animal dompté devant son dompteur.", author: "La Vénus à la fourrure — Leopold von Sacher-Masoch, 1870" },
+  { text: "Il y a dans certaines femmes quelque chose d'inexorable et de divin qui ressemble à la mort.", author: "La Vénus à la fourrure — Leopold von Sacher-Masoch, 1870" },
+
+  // ── Nana ──
+  { text: "Tout à coup, dans la bonne enfant, la femme se dressa, inquiétante, apportant le coup de folie de son sexe, ouvrant l'inconnu des ténèbres.", author: "Nana — Émile Zola, 1880" },
+
+  // ── Tropique du Cancer ──
+  { text: "Elle était là, nue, et son corps avait la qualité calme et impersonnelle d'un beau paysage.", author: "Tropique du Cancer — Henry Miller, 1934" },
+  { text: "Je n'essayais plus de comprendre ce que nous faisions. Je savais seulement que c'était nécessaire.", author: "Tropique du Cancer — Henry Miller, 1934" },
+
+  // ── Notre-Dame des Fleurs ──
+  { text: "Il était beau d'une beauté accidentelle et charnelle, comme certains crimes.", author: "Notre-Dame des Fleurs — Jean Genet, 1943" },
+
+  // ── Emmanuelle ──
+  { text: "Le désir, pensa Emmanuelle, ne se donne pas. Il se prend, ou il se reçoit — jamais il ne se négocie.", author: "Emmanuelle — Emmanuelle Arsan, 1959" },
+  { text: "Elle avait découvert que son corps était capable d'une générosité qu'aucune vertu ne peut atteindre.", author: "Emmanuelle — Emmanuelle Arsan, 1959" },
+
+  // ── Le Diable au corps ──
+  { text: "Je céderai au mal d'aimer car ce mal est plus doux que n'importe laquelle de vos sagesses.", author: "Le Diable au corps — Raymond Radiguet, 1923" },
+
+  // ── La Vie sexuelle de Catherine M. ──
+  { text: "Je me suis donnée souvent. Et toujours avec la même disponibilité tranquille, que ce soit à un inconnu ou à quelqu'un d'aimé.", author: "La Vie sexuelle de Catherine M. — Catherine Millet, 2001" },
+  { text: "Mon corps était un territoire ouvert. Je n'en ai jamais eu honte.", author: "La Vie sexuelle de Catherine M. — Catherine Millet, 2001" },
+
+  // ── Baise-moi ──
+  { text: "Elle avait ce regard particulier des femmes qui ont décidé que leur corps ne leur ferait plus peur.", author: "Baise-moi — Virginie Despentes, 1994" },
+
+  // ── La Philosophie dans le boudoir ──
+  { text: "La volupté est l'âme des sens ; c'est en elle que les sens s'accomplissent et se justifient.", author: "La Philosophie dans le boudoir — Marquis de Sade, 1795" },
+  { text: "Ce n'est pas le crime de jouir qui est un désordre, c'est le refus d'admettre que la jouissance est une loi.", author: "La Philosophie dans le boudoir — Marquis de Sade, 1795" },
+
+  // ── Les Onze mille verges ──
+  { text: "Il n'avait ni remords ni pudeur, seulement cette faim précise et loyale qui est la marque de l'honnêteté des corps.", author: "Les Onze mille verges — Guillaume Apollinaire, 1907" },
+];
+
+// ── COLOR PALETTE (dark, sensual tones) ──
+const colorPalette = [
+  { from: '#c41230', to: '#7a0b1e' },   // deep crimson
+  { from: '#8b1a4a', to: '#5c0d30' },   // dark burgundy rose
+  { from: '#6b2060', to: '#420f3d' },   // deep plum
+  { from: '#3d1010', to: '#1e0808' },   // dark velvet
+  { from: '#b5446e', to: '#7a2a48' },   // deep rose
+  { from: '#8b4513', to: '#5c2a0a' },   // dark amber
+  { from: '#1e1030', to: '#0d0818' },   // near-black indigo
+  { from: '#6b1a1a', to: '#3d0d0d' },   // dark garnet
+  { from: '#3d1530', to: '#200a1a' },   // midnight burgundy
+  { from: '#8b2040', to: '#5c1228' },   // deep magenta
+  { from: '#4a2010', to: '#280f08' },   // dark mahogany
+  { from: '#601520', to: '#3d0d14' },   // oxblood
+];
+
+// ── PLAY ORDER — shufflé, jamais 2x le même auteur de suite ──
+function buildPlayOrder() {
+  const getAuthor = i => quotes[i].author.split(' — ')[1]?.split(',')[0]?.trim() || quotes[i].author;
+  let pool = quotes.map((_, i) => i);
+  // Fisher-Yates shuffle
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  // Réorganise pour qu'aucun auteur ne soit consécutif
+  const order = [];
+  while (pool.length) {
+    const lastAuthor = order.length ? getAuthor(order[order.length - 1]) : null;
+    const idx = pool.findIndex(i => getAuthor(i) !== lastAuthor);
+    if (idx === -1) { order.push(...pool); break; }
+    order.push(pool.splice(idx, 1)[0]);
+  }
+  return order;
+}
+
+let playOrder = buildPlayOrder();
+let playIdx   = 0;
+let current   = playOrder[0];
+let currentColorIdx = 0;
+
+const block   = document.getElementById('quote-block');
+const markEl  = document.getElementById('quote-mark');
+const textEl  = document.getElementById('quote-text');
+const bookEl  = document.getElementById('quote-book');
+const authorEl= document.getElementById('quote-author');
+
+function parseAuthor(str) {
+  const sep = str.indexOf(' — ');
+  if (sep !== -1) {
+    const book = str.slice(0, sep).trim();
+    const rest = str.slice(sep + 3).trim();
+    const comma = rest.lastIndexOf(',');
+    if (comma !== -1) return { book, author: rest.slice(0, comma).trim(), year: rest.slice(comma + 1).trim() };
+    return { book, author: rest, year: '' };
+  }
+  return { book: '', author: str, year: '' };
+}
+
+function applyColor(idx) {
+  const c = colorPalette[idx % colorPalette.length];
+  const grad = `linear-gradient(135deg, ${c.from} 0%, ${c.to} 100%)`;
+  markEl.style.background = grad;
+  markEl.style.webkitBackgroundClip = 'text';
+  markEl.style.webkitTextFillColor = 'transparent';
+  markEl.style.backgroundClip = 'text';
+  textEl.style.background = grad;
+  textEl.style.webkitBackgroundClip = 'text';
+  textEl.style.webkitTextFillColor = 'transparent';
+  textEl.style.backgroundClip = 'text';
+}
+
+function sizeQuote(len) {
+  textEl.classList.remove('quote-text--md', 'quote-text--lg', 'quote-text--xl');
+  if (len > 220)      textEl.classList.add('quote-text--xl');
+  else if (len > 150) textEl.classList.add('quote-text--lg');
+  else if (len > 100) textEl.classList.add('quote-text--md');
+}
+
+function show(idx, direction) {
+  block.classList.remove('visible');
+  setTimeout(() => {
+    textEl.textContent = quotes[idx].text;
+    sizeQuote(quotes[idx].text.length);
+    const p = parseAuthor(quotes[idx].author);
+    bookEl.textContent = p.book;
+    authorEl.textContent = p.year ? p.author + ' · ' + p.year : p.author;
+    currentColorIdx = idx % colorPalette.length;
+    applyColor(currentColorIdx);
+    block.classList.add('visible');
+  }, 280);
+}
+
+function next() {
+  playIdx = (playIdx + 1) % playOrder.length;
+  if (playIdx === 0) playOrder = buildPlayOrder();
+  current = playOrder[playIdx];
+  show(current, 1); startTimer();
+}
+function prev() {
+  playIdx = (playIdx - 1 + playOrder.length) % playOrder.length;
+  current = playOrder[playIdx];
+  show(current, -1); startTimer();
+}
+
+// ── SWIPE ──────────────────────────────────────────────────────────────────
+let _tx = null;
+document.addEventListener('touchstart', function(e) { _tx = e.touches[0].clientX; }, { passive: true });
+document.addEventListener('touchend', function(e) {
+  if (_tx === null) return;
+  const dx = e.changedTouches[0].clientX - _tx;
+  if (Math.abs(dx) > 40) dx < 0 ? next() : prev();
+  _tx = null;
+}, { passive: true });
+
+// ── AUTO-ADVANCE TIMER (circular ring) ──
+const ringFill  = document.getElementById('timer-ring-fill');
+const timerIcon = document.getElementById('timer-icon');
+const CIRCUMFERENCE = 2 * Math.PI * 28; // r=28 → ~175.93
+const TIMER_MS = 10000;
+let timerRaf = null;
+let timerStart = null;
+let timerElapsedOffset = 0; // ms already elapsed when paused
+let timerPaused = false;
+
+const PAUSE_SVG = `<svg width="9" height="10" viewBox="0 0 9 10" fill="currentColor"><rect x="0" y="0" width="3" height="10" rx="1"/><rect x="6" y="0" width="3" height="10" rx="1"/></svg>`;
+const PLAY_SVG  = `<svg width="9" height="10" viewBox="0 0 10 10" fill="currentColor"><polygon points="1,0 10,5 1,10"/></svg>`;
+
+function setRing(progress) {
+  // progress 1→0: ring drains clockwise
+  ringFill.style.strokeDashoffset = CIRCUMFERENCE * (1 - progress);
+}
+
+function startTimer() {
+  if (quizActive) return;
+  if (timerRaf) cancelAnimationFrame(timerRaf);
+  timerPaused = false;
+  timerElapsedOffset = 0;
+  timerIcon.innerHTML = PAUSE_SVG;
+  timerStart = performance.now();
+  const c = colorPalette[currentColorIdx % colorPalette.length];
+  ringFill.style.stroke = c.from;
+  function tick(now) {
+    const elapsed = timerElapsedOffset + (now - timerStart);
+    const progress = Math.max(0, 1 - elapsed / TIMER_MS);
+    setRing(progress);
+    if (progress > 0) {
+      timerRaf = requestAnimationFrame(tick);
+    } else {
+      playIdx = (playIdx + 1) % playOrder.length;
+      if (playIdx === 0) playOrder = buildPlayOrder();
+      current = playOrder[playIdx];
+      show(current, 1);
+      startTimer();
+    }
+  }
+  timerRaf = requestAnimationFrame(tick);
+}
+
+function toggleTimer() {
+  if (quizActive) return;
+  if (timerPaused) {
+    // Resume
+    timerPaused = false;
+    timerIcon.innerHTML = PAUSE_SVG;
+    timerStart = performance.now();
+    const c = colorPalette[currentColorIdx % colorPalette.length];
+    ringFill.style.stroke = c.from;
+    function tick(now) {
+      const elapsed = timerElapsedOffset + (now - timerStart);
+      const progress = Math.max(0, 1 - elapsed / TIMER_MS);
+      setRing(progress);
+      if (progress > 0) {
+        timerRaf = requestAnimationFrame(tick);
+      } else {
+        current = (current + 1) % quotes.length;
+        show(current, 1);
+        startTimer();
+      }
+    }
+    timerRaf = requestAnimationFrame(tick);
+  } else {
+    // Pause
+    timerPaused = true;
+    timerElapsedOffset += performance.now() - timerStart;
+    if (timerRaf) cancelAnimationFrame(timerRaf);
+    timerRaf = null;
+    timerIcon.innerHTML = PLAY_SVG;
+  }
+}
+
+// ── QUIZ GAME ──
+const QUIZ_TOTAL = 10;
+const QUIZ_Q_MS  = 10000;
+let quizActive    = false;
+let quizGame      = null; // { questions, qIdx, answers, score }
+let quizSelected  = null;
+let quizValidated = false;
+let quizTimerRaf  = null;
+let quizTimerStart = null;
+
+function quizGameBtnClick() {
+  if (quizActive) { exitQuizGame(); } else { startQuizGame(); }
+}
+
+function startQuizGame() {
+  // Close result screen if open
+  const rs = document.getElementById('quiz-result-screen');
+  rs.classList.remove('visible');
+  setTimeout(() => rs.classList.remove('open'), 400);
+
+  // Pick QUIZ_TOTAL random unique quote indices
+  const pool = [...Array(quotes.length).keys()];
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  quizGame     = { questions: pool.slice(0, QUIZ_TOTAL), qIdx: 0, answers: [], score: 0 };
+  quizActive   = true;
+  quizSelected = null;
+  quizValidated= false;
+
+  // Stop normal timer
+  if (timerRaf) { cancelAnimationFrame(timerRaf); timerRaf = null; }
+
+  // UI
+  document.body.classList.add('quiz-active');
+  document.getElementById('quiz-panel').style.display = 'flex';
+  bookEl.style.display   = 'none';
+  authorEl.style.display = 'none';
+
+  const btn = document.getElementById('quiz-game-btn');
+  btn.textContent = 'Quitter';
+  btn.classList.add('quit');
+
+  buildQuizDots();
+  loadQuizQuestion(0);
+}
+
+function buildQuizDots() {
+  const el = document.getElementById('quiz-dots');
+  el.innerHTML = '';
+  for (let i = 0; i < QUIZ_TOTAL; i++) {
+    const d = document.createElement('div');
+    d.className = 'quiz-dot' + (i === 0 ? ' current' : '');
+    el.appendChild(d);
+  }
+}
+
+function updateQuizDots() {
+  const dots = document.querySelectorAll('.quiz-dot');
+  const { qIdx, answers } = quizGame;
+  dots.forEach((d, i) => {
+    d.className = 'quiz-dot';
+    if (i < answers.length) d.classList.add(answers[i] ? 'correct' : 'wrong');
+    else if (i === qIdx)    d.classList.add('current');
+  });
+}
+
+function loadQuizQuestion(qIdx) {
+  quizGame.qIdx = qIdx;
+  quizSelected  = null;
+  quizValidated = false;
+
+  const idx = quizGame.questions[qIdx];
+  updateQuizDots();
+
+  // Animate quote in
+  block.classList.remove('visible');
+  setTimeout(() => {
+    textEl.textContent = quotes[idx].text;
+    sizeQuote(quotes[idx].text.length);
+    currentColorIdx = idx % colorPalette.length;
+    applyColor(currentColorIdx);
+    block.classList.add('visible');
+  }, qIdx === 0 ? 80 : 260);
+
+  buildQuizOptions(idx);
+  startQuizTimer();
+}
+
+function buildQuizOptions(idx) {
+  const correctAuthor = parseAuthor(quotes[idx].author).author;
+  const seen = new Set([correctAuthor]);
+  const pool = [];
+  const shuffledIdx = [...Array(quotes.length).keys()].sort(() => Math.random() - .5);
+  for (const i of shuffledIdx) {
+    if (pool.length >= 20) break;
+    const a = parseAuthor(quotes[i].author).author;
+    if (!seen.has(a)) { seen.add(a); pool.push(a); }
+  }
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  const options = [correctAuthor, pool[0], pool[1]];
+  for (let i = options.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [options[i], options[j]] = [options[j], options[i]];
+  }
+  const optsEl = document.getElementById('quiz-opts');
+  optsEl.innerHTML = '';
+  options.forEach((author, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.dataset.correct = author === correctAuthor ? '1' : '0';
+    btn.innerHTML = `<span class="quiz-opt-letter">${String.fromCharCode(65 + i)}</span>${author}`;
+    btn.onclick = () => selectQuizOpt(btn);
+    optsEl.appendChild(btn);
+  });
+  const valBtn = document.getElementById('quiz-validate');
+  valBtn.textContent = 'Valider';
+  valBtn.disabled    = true;
+  valBtn.onclick     = validateQuiz;
+  document.getElementById('quiz-inline-result').textContent = '';
+}
+
+function startQuizTimer() {
+  stopQuizTimer();
+  quizTimerStart = performance.now();
+  setRing(1);
+  ringFill.style.stroke = 'rgba(255,255,255,.5)';
+  function tick(now) {
+    const progress = Math.max(0, 1 - (now - quizTimerStart) / QUIZ_Q_MS);
+    setRing(progress);
+    ringFill.style.stroke = progress < 0.2 ? 'rgba(230,100,80,.85)' : 'rgba(255,255,255,.5)';
+    if (progress > 0) { quizTimerRaf = requestAnimationFrame(tick); }
+    else { onQuizTimeout(); }
+  }
+  quizTimerRaf = requestAnimationFrame(tick);
+}
+
+function stopQuizTimer() {
+  if (quizTimerRaf) { cancelAnimationFrame(quizTimerRaf); quizTimerRaf = null; }
+}
+
+function onQuizTimeout() {
+  if (quizValidated) return;
+  quizValidated = true;
+  document.querySelectorAll('.quiz-opt').forEach(b => {
+    b.disabled = true;
+    if (b.dataset.correct === '1') b.classList.add('correct');
+  });
+  const res = document.getElementById('quiz-inline-result');
+  res.textContent = '⏱ Temps écoulé !';
+  res.style.color = 'rgba(255,255,255,.35)';
+  document.getElementById('quiz-validate').disabled = true;
+  advanceQuiz(false);
+}
+
+function selectQuizOpt(btn) {
+  if (quizValidated) return;
+  document.querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  quizSelected = btn;
+  document.getElementById('quiz-validate').disabled = false;
+}
+
+function validateQuiz() {
+  if (!quizSelected || quizValidated) return;
+  stopQuizTimer();
+  quizValidated = true;
+  const isCorrect = quizSelected.dataset.correct === '1';
+  document.querySelectorAll('.quiz-opt').forEach(b => {
+    b.disabled = true;
+    if (b.dataset.correct === '1') b.classList.add('correct');
+    else if (b === quizSelected)   b.classList.add('wrong');
+  });
+  document.getElementById('quiz-validate').disabled = true;
+  const res = document.getElementById('quiz-inline-result');
+  res.textContent = isCorrect ? '✓ Bonne réponse !' : '✗ Raté…';
+  res.style.color  = isCorrect ? 'rgba(80,200,110,.9)' : 'rgba(230,80,80,.85)';
+  advanceQuiz(isCorrect);
+}
+
+function advanceQuiz(isCorrect) {
+  quizGame.answers.push(isCorrect);
+  if (isCorrect) quizGame.score++;
+  updateQuizDots();
+  setRing(0);
+  setTimeout(() => {
+    if (quizGame.qIdx + 1 >= QUIZ_TOTAL) { showQuizResults(); }
+    else { loadQuizQuestion(quizGame.qIdx + 1); }
+  }, 1300);
+}
+
+function showQuizResults() {
+  const { score, answers } = quizGame;
+  document.getElementById('quiz-rs-score').textContent = score + '/10';
+  const sub = score <= 3 ? 'Retente ta chance !'
+    : score <= 5 ? 'Pas mal, continue !'
+    : score <= 8 ? 'Bien joué !'
+    : 'Parfait ! 🎉';
+  document.getElementById('quiz-rs-sub').textContent = sub;
+  const dotsEl = document.getElementById('quiz-rs-dots');
+  dotsEl.innerHTML = '';
+  answers.forEach(a => {
+    const d = document.createElement('div');
+    d.className = 'quiz-rs-dot ' + (a ? 'correct' : 'wrong');
+    dotsEl.appendChild(d);
+  });
+  document.getElementById('quiz-rs-share').textContent = 'Partager le score';
+  const rs = document.getElementById('quiz-result-screen');
+  rs.classList.add('open');
+  setTimeout(() => rs.classList.add('visible'), 10);
+}
+
+async function shareQuizResult() {
+  const { score } = quizGame;
+  const text = `J'ai obtenu ${score}/10 au quiz Inkipit ! 📚`;
+  const btn  = document.getElementById('quiz-rs-share');
+  if (navigator.share) {
+    try { await navigator.share({ title: 'Inkipit Quiz', text, url: location.href }); return; } catch {}
+  }
+  try { await navigator.clipboard.writeText(text + ' → ' + location.href); }
+  catch {
+    const ta = document.createElement('textarea');
+    ta.value = text + ' → ' + location.href;
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+  }
+  btn.textContent = '✓ Copié !';
+  setTimeout(() => { btn.textContent = 'Partager le score'; }, 2200);
+}
+
+function exitQuizGame() {
+  stopQuizTimer();
+  quizActive = false;
+  quizGame   = null;
+
+  // Close result screen
+  const rs = document.getElementById('quiz-result-screen');
+  rs.classList.remove('visible');
+  setTimeout(() => rs.classList.remove('open'), 400);
+
+  // Restore UI
+  document.body.classList.remove('quiz-active');
+  document.getElementById('quiz-panel').style.display = 'none';
+  bookEl.style.display   = '';
+  authorEl.style.display = '';
+
+  const btn = document.getElementById('quiz-game-btn');
+  btn.textContent = 'Mode jeu';
+  btn.classList.remove('quit');
+
+  show(current);
+  startTimer();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next();
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prev();
+});
+
+// ── SHARE ──
+const FORMATS = {
+  square: { w: 1080, h: 1080, label: 'Carré' },
+  story:  { w: 1080, h: 1920, label: 'Story' },
+  wide:   { w: 1920, h: 1080, label: 'Paysage' },
+};
+const CARD_COLORS = [
+  { bg: '#1c1c1e', sub: 'rgba(255,255,255,.42)', brand: 'rgba(255,255,255,.18)' },
+  { bg: '#1a3456', sub: 'rgba(255,255,255,.45)', brand: 'rgba(255,255,255,.2)'  },
+  { bg: '#32116e', sub: 'rgba(255,255,255,.45)', brand: 'rgba(255,255,255,.2)'  },
+  { bg: '#f5f0e8', sub: 'rgba(0,0,0,.38)',       brand: 'rgba(0,0,0,.16)'       },
+  // idx 4 = book page mode (rendered separately)
+];
+
+let shareFmt = 'square';
+let shareColorIdx = 0;
+const canvas = document.getElementById('share-canvas');
+const ctx = canvas.getContext('2d');
+
+function renderCanvas() {
+  const fmt    = FORMATS[shareFmt];
+  const isBook = shareColorIdx === 4;
+  const col    = isBook ? null : CARD_COLORS[shareColorIdx];
+  const c      = colorPalette[currentColorIdx];
+
+  // Responsive preview
+  const maxPW = 440, maxPH = 320;
+  const displayScale = Math.min(maxPW / fmt.w, maxPH / fmt.h);
+  canvas.width  = fmt.w;
+  canvas.height = fmt.h;
+  canvas.style.width  = Math.round(fmt.w * displayScale) + 'px';
+  canvas.style.height = Math.round(fmt.h * displayScale) + 'px';
+
+  const W = fmt.w, H = fmt.h;
+  const base = Math.min(W, H);
+  const pad  = base * 0.1;
+
+  // ── SIZES (computed before BG so book ruling lines can use them) ──
+  const qMarkSize = base * 0.15;
+  const textSize  = Math.min(base * 0.065, 88);
+  const authorSize= Math.max(base * 0.024, 22);
+  const brandSize = Math.max(base * 0.020, 18);
+  const lineH     = textSize * 1.22;
+  const maxTextW  = W - pad * 2;
+
+  // Text wrapping
+  ctx.font = `800 ${textSize}px 'Georgia', serif`;
+  const words = quotes[current].text.split(' ');
+  let line = '', lines = [];
+  for (const w of words) {
+    const test = line ? line + ' ' + w : w;
+    if (ctx.measureText(test).width > maxTextW && line) { lines.push(line); line = w; }
+    else line = test;
+  }
+  lines.push(line);
+
+  const blockH = qMarkSize * 0.85 + 16 + lines.length * lineH + authorSize * 1.8;
+  const startY = (H - blockH) / 2;
+  const textY  = startY + qMarkSize * 0.85 + 16 + textSize;
+  const authorY= textY + lines.length * lineH + authorSize * 0.6;
+
+  // ── BG ──
+  if (isBook) {
+    // Subtle page shadow
+    ctx.fillStyle = 'rgba(0,0,0,0.1)';
+    ctx.fillRect(pad * 0.5, pad * 0.5, W, H);
+    // White parchment page
+    ctx.fillStyle = '#fffef8';
+    ctx.fillRect(0, 0, W, H);
+    // Horizontal ruling lines (very subtle)
+    ctx.strokeStyle = 'rgba(0,0,0,0.045)';
+    ctx.lineWidth = Math.max(1, base * 0.0012);
+    for (let y = pad * 1.4; y < H - pad; y += lineH) {
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+    }
+    // Left margin line
+    const marginX = pad * 0.78;
+    ctx.strokeStyle = 'rgba(200,70,70,0.2)';
+    ctx.lineWidth = Math.max(2, base * 0.002);
+    ctx.beginPath(); ctx.moveTo(marginX, 0); ctx.lineTo(marginX, H); ctx.stroke();
+  } else {
+    ctx.fillStyle = col.bg;
+    ctx.fillRect(0, 0, W, H);
+    // Gradient blob
+    const grd = ctx.createRadialGradient(W * 0.18, H * 0.2, 0, W * 0.18, H * 0.2, base * 0.55);
+    grd.addColorStop(0, hexAlpha(c.from, 0.22));
+    grd.addColorStop(1, 'transparent');
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  if (isBook) {
+    // ── BOOK: QUOTE MARK ──
+    ctx.font = `800 ${qMarkSize}px 'Georgia', serif`;
+    ctx.fillStyle = 'rgba(0,0,0,0.10)';
+    ctx.globalAlpha = 1;
+    ctx.fillText('\u201C', pad, startY + qMarkSize * 0.85);
+
+    // ── BOOK: QUOTE TEXT (dark charcoal) ──
+    ctx.font = `800 ${textSize}px 'Georgia', serif`;
+    ctx.fillStyle = '#1a1818';
+    lines.forEach((l, i) => ctx.fillText(l, pad, textY + i * lineH));
+
+    // ── BOOK: ornamental separator ──
+    ctx.strokeStyle = 'rgba(0,0,0,0.15)';
+    ctx.lineWidth = Math.max(1, base * 0.001);
+    ctx.beginPath();
+    ctx.moveTo(pad, authorY - authorSize * 0.95);
+    ctx.lineTo(pad + base * 0.22, authorY - authorSize * 0.95);
+    ctx.stroke();
+
+    // ── BOOK: AUTHOR (italic, muted) ──
+    ctx.font = `italic 400 ${authorSize}px 'Georgia', serif`;
+    ctx.fillStyle = 'rgba(0,0,0,0.42)';
+    ctx.fillText(quotes[current].author, pad, authorY);
+
+    // ── BOOK: BRAND ──
+    ctx.font = `500 ${brandSize}px 'DM Sans', sans-serif`;
+    ctx.fillStyle = 'rgba(0,0,0,0.18)';
+    ctx.textAlign = 'right';
+    ctx.fillText('inkip'hot \u00B7 theo.design', W - pad * 0.55, H - pad * 0.5);
+    ctx.textAlign = 'left';
+
+  } else {
+    // ── NORMAL: QUOTE MARK ──
+    ctx.font = `800 ${qMarkSize}px 'Georgia', serif`;
+    ctx.fillStyle = c.from;
+    ctx.globalAlpha = 0.82;
+    ctx.fillText('\u201C', pad, startY + qMarkSize * 0.85);
+    ctx.globalAlpha = 1;
+
+    // ── NORMAL: QUOTE TEXT (gradient) ──
+    const tGrad = ctx.createLinearGradient(pad, 0, Math.min(W - pad, pad + maxTextW), 0);
+    tGrad.addColorStop(0, c.from);
+    tGrad.addColorStop(1, c.to);
+    ctx.fillStyle = tGrad;
+    ctx.font = `800 ${textSize}px 'Georgia', serif`;
+    lines.forEach((l, i) => ctx.fillText(l, pad, textY + i * lineH));
+
+    // ── NORMAL: AUTHOR ──
+    ctx.font = `400 ${authorSize}px 'DM Sans', sans-serif`;
+    ctx.fillStyle = col.sub;
+    ctx.fillText(quotes[current].author, pad, authorY);
+
+    // ── NORMAL: BRAND ──
+    ctx.font = `500 ${brandSize}px 'DM Sans', sans-serif`;
+    ctx.fillStyle = col.brand;
+    ctx.textAlign = 'right';
+    ctx.fillText('inkip'hot \u00B7 theo.design', W - pad * 0.55, H - pad * 0.5);
+    ctx.textAlign = 'left';
+  }
+}
+
+function hexAlpha(hex, alpha) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+function openShare() {
+  renderCanvas();
+  document.getElementById('share-overlay').classList.add('open');
+}
+function closeShare() {
+  document.getElementById('share-overlay').classList.remove('open');
+}
+
+function setFmt(btn) {
+  shareFmt = btn.dataset.fmt;
+  document.querySelectorAll('#fmt-opts .share-opt').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCanvas();
+}
+
+function setColor(el) {
+  shareColorIdx = +el.dataset.idx;
+  document.querySelectorAll('.share-color-swatch').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  renderCanvas();
+}
+
+function downloadCard() {
+  canvas.toBlob(function(blob) {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.download = 'inkiphot-' + (current + 1) + '.png';
+    link.href = url;
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    setTimeout(function() {
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }, 100);
+  }, 'image/png');
+}
+
+async function copyLink() {
+  const btn = document.getElementById('share-copy-btn');
+  try {
+    await navigator.clipboard.writeText(window.location.href);
+    btn.textContent = '✓ Lien copié !';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '⎘ Copier le lien';
+      btn.classList.remove('copied');
+    }, 2200);
+  } catch {
+    // Fallback for restricted contexts
+    const ta = document.createElement('textarea');
+    ta.value = window.location.href;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = '✓ Lien copié !';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '⎘ Copier le lien';
+      btn.classList.remove('copied');
+    }, 2200);
+  }
+}
+
+current = Math.floor(Math.random() * quotes.length);
+show(current);
+startTimer();
+
+if (window.self !== window.top) document.body.classList.add('in-iframe');
+</script>
+
+<!-- QUIZ RESULT SCREEN -->
+<div class="quiz-result-screen" id="quiz-result-screen">
+  <span class="quiz-rs-label">Résultat</span>
+  <div class="quiz-rs-score" id="quiz-rs-score">—</div>
+  <p class="quiz-rs-sub" id="quiz-rs-sub"></p>
+  <div class="quiz-rs-dots" id="quiz-rs-dots"></div>
+  <div class="quiz-rs-actions">
+    <button class="quiz-rs-btn" onclick="startQuizGame()">↺ Rejouer</button>
+    <button class="quiz-rs-btn ghost" id="quiz-rs-share" onclick="shareQuizResult()">Partager le score</button>
+    <button class="quiz-rs-btn ghost" onclick="exitQuizGame()">Quitter</button>
+  </div>
+</div>
+
+</body>
+</html>
