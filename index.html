@@ -1360,6 +1360,8 @@ nav.minisite-nav.minisite-nav--light .nav-role {
 
 @media (max-width: 900px) {
   .block-devices { flex-direction: column; margin-right: 0; }
+  .block-looks-ia { flex-direction: column; margin-right: 0; overflow: hidden; }
+  .looks-strip--desktop, .shoes-grid--desktop { display: none; }
   .devices-left { flex: none; width: 100%; }
   .devices-right {
     width: 100%; border-radius: 8px;
@@ -2273,7 +2275,7 @@ function renderImg(b) {
       ? `<video src="${mainSrc}" autoplay loop muted playsinline class="looks-strip-main"></video>`
       : `<img src="${mainSrc}" alt="${imgAlt(mainSrc)}" class="looks-strip-main">`;
     const thumbsHtml = `<div class="looks-thumbs-grid">${thumbSrcs.map(s=>`<img src="${s}" alt="${imgAlt(s)}">`).join('')}</div>`;
-    return `<div class="block-looks-ia">${iphoneHtml}</div>`;
+    return `<div class="block-looks-ia">${iphoneHtml}<div class="looks-strip looks-strip--desktop">${mainMedia}${thumbsHtml}</div></div>`;
   }
   if (b.t==='shoes-360') {
     // iPhone gauche
@@ -2289,7 +2291,7 @@ function renderImg(b) {
       const isVid = src.match(/\.(mp4|webm|mov)$/i);
       return `<div class="shoes-grid-cell">${isVid?`<video src="${src}" autoplay loop muted playsinline></video>`:`<img src="${src}" alt="${imgAlt(src)}">`}</div>`;
     }).join('') : palette.map((c,i)=>`<div class="shoes-grid-cell" style="background:${c}"><span>${i+1}</span></div>`).join('');
-    return `<div class="block-looks-ia">${iphoneHtml}</div>`;
+    return `<div class="block-looks-ia">${iphoneHtml}<div class="shoes-grid shoes-grid--desktop">${cells}</div></div>`;
   }
   if (b.t==='devices') {
     const slides = (b.srcs||[]).map((s,i)=>`<div class="iphone-slide${i===0?' active':''}">${s.match(/\.(mp4|webm|mov)$/i)?`<video src="${s}" autoplay loop muted playsinline></video>`:`<img src="${s}" alt="${imgAlt(s)}" loading="lazy">`}</div>`).join('');
