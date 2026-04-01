@@ -2450,6 +2450,7 @@ function showProject(id, push) {
   const p = P[id]; if(!p) return;
   if (push !== false) history.pushState({project: id}, '', BASE_PATH + id);
   if (window.posthog) posthog.capture('work_opened', { project: id, title: p.title });
+  document.getElementById('theme-css').href = 'css/pro.css';
   document.body.classList.remove('on-home');
   document.getElementById('project-view').innerHTML = `
     <section class="proj-hero">
@@ -2626,6 +2627,7 @@ const BASE_PATH = (() => {
 })();
 
 function _showMiniSite(slug) {
+  document.getElementById('theme-css').href = 'css/pro.css';
   document.body.classList.remove('on-home');
   document.body.classList.add('minisite-open');
   const frame = document.getElementById('minisite-frame');
@@ -2644,6 +2646,7 @@ function _showMiniSite(slug) {
 }
 
 function _hideMiniSite() {
+  document.getElementById('theme-css').href = 'css/' + moods[currentMood].file + '.css';
   document.body.classList.add('on-home');
   document.body.classList.remove('minisite-open');
   document.getElementById('minisite-overlay').style.display = 'none';
@@ -2756,6 +2759,7 @@ function scrollCarousel(btn) {
 
 function showHome(push) {
   if (push !== false) history.pushState({}, '', BASE_PATH);
+  document.getElementById('theme-css').href = 'css/' + moods[currentMood].file + '.css';
   document.body.classList.add('on-home');
   document.querySelector('.nav-role').style.display = 'none';
   document.querySelector('.nav-contact').style.display = '';
