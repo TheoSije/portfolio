@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surf Basque — theo.design</title>
+<meta name="description" content="Livecams et conditions surf en temps réel sur la Côte Basque.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jegousse.com/surfcams/">
+<meta property="og:title" content="Surf Basque — theo.design">
+<meta property="og:description" content="Livecams et forecast surf sur la Côte Basque.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#05090e;--surface:#0b1722;--card:#101e2e;
+  --border:rgba(90,160,220,.1);--border2:rgba(90,160,220,.06);
+  --accent:#00d4aa;
+  --text:#b0c8e2;--text2:rgba(176,200,226,.42);
+  --sw:272px;
+}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;height:50px;
+  background:rgba(5,9,14,.94);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;padding:0 18px;gap:11px;
+}
+.nav-back{color:var(--text2);font-size:12px;letter-spacing:.04em;cursor:pointer;background:none;border:none;font-family:inherit;transition:color .2s;text-decoration:none;display:flex;align-items:center;gap:5px}
+.nav-back:hover{color:var(--text)}
+.nav-sep{width:1px;height:12px;background:var(--border);flex-shrink:0}
+.nav-title{font-size:13px;font-weight:500;color:rgba(176,200,226,.7)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+
+/* view toggle */
+.vtoggle{display:flex;height:30px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:100px;padding:2px;gap:2px}
+.vtab{height:100%;padding:0 11px;border-radius:100px;border:none;background:none;color:var(--text2);font-family:inherit;font-size:11px;font-weight:500;cursor:pointer;transition:all .18s;white-space:nowrap}
+.vtab.on{background:rgba(0,212,170,.15);color:var(--accent)}
+
+/* compare btn */
+.compare-btn{
+  height:30px;padding:0 12px;border-radius:100px;
+  border:1px solid var(--border);background:none;
+  color:var(--text2);font-family:inherit;font-size:12px;font-weight:500;
+  cursor:pointer;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:6px;
+}
+.compare-btn:hover{border-color:var(--accent);color:var(--accent)}
+.compare-btn.active{background:rgba(0,212,170,.1);border-color:rgba(0,212,170,.4);color:var(--accent)}
+.compare-count{background:var(--accent);color:#000;border-radius:100px;font-size:10px;font-weight:700;padding:1px 5px;display:none}
+.compare-btn.active .compare-count{display:inline}
+
+body.in-iframe nav{display:none}
+body.in-iframe .app{top:0!important}
+
+/* ── LAYOUT ── */
+.app{position:fixed;top:50px;left:0;right:0;bottom:0;display:flex}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  width:var(--sw);flex-shrink:0;
+  background:var(--surface);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;overflow:hidden;
+  transition:transform .28s cubic-bezier(0.4,0,0.2,1);
+}
+.sidebar-top{padding:12px 14px 10px;flex-shrink:0;border-bottom:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between}
+.sidebar-meta{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);font-weight:500}
+.spot-list{flex:1;overflow-y:auto;padding:6px 6px 24px;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+
+/* ── ZONE HEADER ── */
+.zone-header{padding:10px 8px 4px;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--text2);font-weight:500;display:flex;align-items:center;gap:6px}
+.zone-header::after{content:'';flex:1;height:1px;background:var(--border2)}
+
+/* ── SPOT ITEM ── */
+.spot-item{
+  padding:10px 9px 9px;border-radius:10px;cursor:pointer;
+  transition:background .14s;margin-bottom:1px;position:relative;
+  display:flex;flex-direction:column;gap:5px;border:1px solid transparent;
+}
+.spot-item:hover{background:var(--card)}
+.spot-item.active{background:var(--card);border-color:var(--border)}
+.spot-item.active::before{content:'';position:absolute;left:0;top:10px;bottom:10px;width:2.5px;background:var(--accent);border-radius:100px}
+.spot-row1{display:flex;align-items:center;gap:6px}
+.spot-name{font-size:13px;font-weight:500;color:var(--text);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.spot-lvl{font-size:9px;font-weight:600;padding:2px 7px;border-radius:100px;flex-shrink:0;letter-spacing:.04em}
+.spot-row2{display:flex;align-items:center;gap:10px}
+.sc{font-size:11px;font-family:'DM Mono',monospace;font-weight:500;display:flex;align-items:center;gap:3px;color:var(--text)}
+.sc-ico{font-size:10px;opacity:.7}
+.sq{font-size:10px;font-weight:600;margin-left:auto}
+.qdot{width:6px;height:6px;border-radius:50%;flex-shrink:0;background:rgba(255,255,255,.1)}
+.cam-tag{font-size:9px;padding:1px 6px;border-radius:100px;border:1px solid rgba(0,212,170,.3);color:rgba(0,212,170,.7);flex-shrink:0;font-weight:500}
+
+/* compare checkbox */
+.cbox{width:18px;height:18px;border-radius:4px;border:1.5px solid var(--border);display:none;align-items:center;justify-content:center;cursor:pointer;background:none;flex-shrink:0;transition:all .15s}
+.sidebar.cmode .cbox{display:flex}
+.sidebar.cmode .qdot,.sidebar.cmode .cam-tag{display:none}
+.cbox.on{background:var(--accent);border-color:var(--accent)}
+.cbox.on svg{opacity:1}
+.cbox svg{opacity:0;pointer-events:none}
+
+/* ── MAIN ── */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;position:relative}
+
+/* mobile spot pills */
+.mpills{display:none;overflow-x:auto;overflow-y:hidden;padding:8px 12px;gap:7px;flex-shrink:0;background:var(--surface);border-bottom:1px solid var(--border);scrollbar-width:none}
+.mpills::-webkit-scrollbar{display:none}
+.mpill{flex-shrink:0;height:28px;padding:0 11px;border-radius:100px;border:1px solid var(--border);background:none;color:var(--text2);font-size:11px;font-weight:500;font-family:inherit;cursor:pointer;white-space:nowrap;transition:all .15s}
+.mpill.active{background:rgba(0,212,170,.1);border-color:rgba(0,212,170,.35);color:var(--accent)}
+
+/* ── CAM AREA ── */
+.cam-area{flex:1;position:relative;overflow:hidden;background:#000;min-height:0}
+
+/* header overlay */
+.cam-hd{
+  position:absolute;top:0;left:0;right:0;z-index:10;
+  padding:14px 18px 50px;
+  background:linear-gradient(to bottom,rgba(2,6,12,.9) 0%,transparent 100%);
+  display:flex;align-items:flex-start;gap:10px;pointer-events:none;
+}
+.cam-hd-info{flex:1;min-width:0}
+.cam-hd-name{font-size:clamp(18px,2.4vw,26px);font-weight:600;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.5);line-height:1.1}
+.cam-hd-zone{font-size:12px;color:rgba(255,255,255,.42);margin-top:2px}
+.cam-hd-actions{pointer-events:all;display:flex;gap:7px;align-items:flex-start;flex-shrink:0}
+.cam-ext,.cam-cams-btn{
+  height:28px;padding:0 11px;border-radius:100px;
+  border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.35);backdrop-filter:blur(12px);
+  color:rgba(255,255,255,.65);font-size:11px;font-weight:500;font-family:inherit;
+  cursor:pointer;text-decoration:none;display:flex;align-items:center;gap:4px;
+  transition:all .2s;white-space:nowrap;
+}
+.cam-ext:hover,.cam-cams-btn:hover{border-color:rgba(255,255,255,.4);color:#fff}
+.cam-cams-btn.on{background:rgba(0,212,170,.2);border-color:rgba(0,212,170,.5);color:var(--accent)}
+
+/* iframe */
+.cam-iframe{width:100%;height:100%;border:none;display:block;position:absolute;inset:0}
+
+/* no-cam overlay */
+.no-cam{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:12px;background:var(--bg);z-index:5;
+}
+.no-cam-ico{font-size:40px;opacity:.25}
+.no-cam-txt{font-size:14px;color:var(--text2);text-align:center;line-height:1.5;max-width:260px}
+.no-cam-link{height:34px;padding:0 16px;border-radius:100px;border:1px solid var(--border);background:none;color:var(--text2);font-size:12px;font-weight:500;font-family:inherit;cursor:pointer;text-decoration:none;display:flex;align-items:center;gap:6px;transition:all .2s}
+.no-cam-link:hover{border-color:var(--accent);color:var(--accent)}
+
+/* footer overlay */
+.cam-ft{
+  position:absolute;bottom:0;left:0;right:0;z-index:10;
+  padding:32px 18px 14px;
+  background:linear-gradient(to top,rgba(2,6,12,.92) 0%,transparent 100%);
+  display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;
+}
+.cc{display:flex;flex-direction:column;gap:2px}
+.cc-val{font-size:clamp(16px,2.2vw,28px);font-weight:600;color:#fff;font-family:'DM Mono',monospace;line-height:1}
+.cc-lbl{font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.09em;margin-top:2px}
+.cc-sub{font-size:10px;color:rgba(255,255,255,.45);margin-top:1px}
+.cdiv{width:1px;height:32px;background:rgba(255,255,255,.08);align-self:flex-end}
+.qbadge{font-size:12px;font-weight:600;padding:5px 13px;border-radius:100px;border:1.5px solid;white-space:nowrap}
+.qbadge.epic{color:#00ffcc;border-color:rgba(0,255,204,.4);background:rgba(0,255,204,.07)}
+.qbadge.good{color:#00cc80;border-color:rgba(0,204,128,.4);background:rgba(0,204,128,.07)}
+.qbadge.fair{color:#f0c030;border-color:rgba(240,192,48,.35);background:rgba(240,192,48,.06)}
+.qbadge.poor{color:#ff7040;border-color:rgba(255,112,64,.35);background:rgba(255,112,64,.06)}
+.qbadge.flat{color:#555;border-color:rgba(128,128,128,.2);background:transparent}
+.cam-ft-right{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.wq-badge{font-size:11px;font-weight:500;padding:3px 10px;border-radius:100px;border:1px solid}
+.wq-epic,.wq-good{color:#00cc80;border-color:rgba(0,204,128,.3)}
+.wq-fair{color:#f0c030;border-color:rgba(240,192,48,.3)}
+.wq-poor{color:#ff7040;border-color:rgba(255,112,64,.3)}
+.wtime{font-size:10px;color:rgba(255,255,255,.3);margin-top:2px}
+
+/* ── COMPARE GRID ── */
+.cmp-grid{display:none;width:100%;height:100%;gap:2px;background:#000}
+.cmp-grid.on{display:grid}
+.cmp-cell{position:relative;overflow:hidden;background:var(--bg)}
+.cmp-cell-hd{position:absolute;top:0;left:0;right:0;z-index:5;padding:8px 10px;background:linear-gradient(to bottom,rgba(0,0,0,.8) 0%,transparent 100%)}
+.cmp-cell-name{font-size:12px;font-weight:600;color:#fff}
+.cmp-cell-zone{font-size:10px;color:rgba(255,255,255,.38)}
+.cmp-cell-ft{position:absolute;bottom:0;left:0;right:0;z-index:5;padding:6px 10px;background:linear-gradient(to top,rgba(0,0,0,.82) 0%,transparent 100%);display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap}
+.cmp-cv{font-size:13px;font-weight:600;color:#fff;font-family:'DM Mono',monospace}
+.cmp-cl{font-size:9px;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.07em;display:block;margin-bottom:1px}
+.cmp-qb{font-size:9px;font-weight:600;padding:2px 8px;border-radius:100px;border:1px solid;margin-left:auto}
+.cmp-qb.epic{color:#00ffcc;border-color:rgba(0,255,204,.35)}
+.cmp-qb.good{color:#00cc80;border-color:rgba(0,204,128,.35)}
+.cmp-qb.fair{color:#f0c030;border-color:rgba(240,192,48,.3)}
+.cmp-qb.poor{color:#ff7040;border-color:rgba(255,112,64,.3)}
+.cmp-qb.flat{color:#555;border-color:rgba(128,128,128,.2)}
+.cmp-empty{display:flex;align-items:center;justify-content:center;height:100%;color:var(--text2);font-size:14px;flex-direction:column;gap:10px;grid-column:1/-1;grid-row:1/-1}
+.cmp-empty-ico{font-size:38px;opacity:.25}
+
+/* ── FORECAST STRIP ── */
+.fstrip{
+  height:86px;flex-shrink:0;
+  background:var(--surface);border-top:1px solid var(--border);
+  display:flex;align-items:stretch;overflow-x:auto;overflow-y:hidden;
+  padding:0 8px;scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+  gap:2px;
+}
+.fh{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:0 7px;gap:3px;flex-shrink:0;min-width:52px;
+  border-radius:8px;transition:background .14s;cursor:default;
+}
+.fh:hover{background:var(--card)}
+.fh.now{background:rgba(0,212,170,.05);outline:1px solid rgba(0,212,170,.15);outline-offset:-1px}
+.fh-t{font-size:10px;color:var(--text2);font-weight:500}
+.fh-bw{height:24px;width:5px;background:rgba(255,255,255,.05);border-radius:3px;position:relative;overflow:hidden}
+.fh-b{position:absolute;bottom:0;left:0;right:0;border-radius:3px;transition:height .3s}
+.fh-v{font-size:10px;font-weight:500;font-family:'DM Mono',monospace}
+.fh-w{font-size:9px;color:var(--text2)}
+
+/* loading skeleton */
+@keyframes sk{0%,100%{opacity:.2}50%{opacity:.45}}
+.sk{animation:sk 1.6s ease-in-out infinite;border-radius:4px;background:rgba(255,255,255,.1);display:inline-block}
+
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  :root{--sw:0px}
+  .sidebar{display:none}
+  .mpills{display:flex}
+  .cam-hd{padding:10px 12px 30px}
+  .cam-ft{gap:10px;padding:20px 12px 10px}
+  .cc-val{font-size:17px}
+  .fstrip{height:76px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-back" href="../" onclick="event.preventDefault();if(window.parent!==window){window.parent.postMessage('close-minisite','*');}else{window.location.href='../';}">← theo.design</a>
+  <div class="nav-sep"></div>
+  <span class="nav-title">🌊 Surf Basque</span>
+  <div class="nav-right">
+    <div class="vtoggle">
+      <button class="vtab on" id="vtabForecast" onclick="setView('forecast')">Forecast</button>
+      <button class="vtab" id="vtabCam" onclick="setView('cam')">Livecam</button>
+    </div>
+    <button class="compare-btn" id="cmpBtn" onclick="toggleCompare()">
+      Comparer <span class="compare-count" id="cmpCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<div class="app">
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-meta" id="sidebarMeta">10 spots · Côte Basque</div>
+    </div>
+    <div class="spot-list" id="spotList"></div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="mpills" id="mpills"></div>
+
+    <!-- CAM AREA -->
+    <div class="cam-area" id="camArea">
+      <!-- Single view -->
+      <div id="singleView" style="position:absolute;inset:0">
+        <div class="cam-hd" id="camHd">
+          <div class="cam-hd-info">
+            <div class="cam-hd-name" id="camName">—</div>
+            <div class="cam-hd-zone" id="camZone">—</div>
+          </div>
+          <div class="cam-hd-actions">
+            <a class="cam-ext" id="camExt" href="#" target="_blank" rel="noopener">↗ Surf Report</a>
+          </div>
+        </div>
+        <div id="camWrap" style="position:absolute;inset:0;z-index:1"></div>
+        <div class="cam-ft" id="camFt" style="z-index:2">
+          <div class="cc">
+            <div class="cc-val sk" id="ftWave" style="min-width:48px;min-height:24px">&nbsp;</div>
+            <div class="cc-lbl">Hauteur</div>
+          </div>
+          <div class="cdiv"></div>
+          <div class="cc">
+            <div class="cc-val sk" id="ftPeriod" style="min-width:36px;min-height:24px">&nbsp;</div>
+            <div class="cc-lbl">Période</div>
+          </div>
+          <div class="cdiv"></div>
+          <div class="cc">
+            <div class="cc-val sk" id="ftDir" style="min-width:32px;min-height:24px">&nbsp;</div>
+            <div class="cc-lbl">Direction</div>
+          </div>
+          <div class="cdiv"></div>
+          <div class="cc">
+            <div class="cc-val sk" id="ftWind" style="min-width:40px;min-height:24px">&nbsp;</div>
+            <div class="cc-sub" id="ftGusts"></div>
+            <div class="cc-lbl">Vent (kn)</div>
+          </div>
+          <div class="cam-ft-right">
+            <div class="qbadge flat" id="camQbadge">—</div>
+            <div class="wq-badge wq-fair" id="camWqBadge">—</div>
+            <div class="wtime" id="wtime"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Compare grid -->
+      <div class="cmp-grid" id="cmpGrid"></div>
+    </div>
+
+    <!-- FORECAST STRIP -->
+    <div class="fstrip" id="fstrip">
+      <div style="display:flex;align-items:center;padding:0 12px;color:var(--text2);font-size:11px">Chargement du forecast…</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── SPOTS ─────────────────────────────────────────────────────────────────────
+// camUrl : URL Windy Webcam publique (https://webcams.windy.com/webcams/public/embed/player/{id})
+// windy webcam IDs pour la côte basque (vérifiés training data)
+const SPOTS = [
+  { id:'graviere',    name:'La Gravière',     zone:'Hossegor',          lat:43.6680, lon:-1.4350, aspect:270, level:'Expert',
+    lc:'#ff4030',
+    camUrl: 'https://webcams.windy.com/webcams/public/embed/player/1485602185',
+    camLink:'https://www.windy.com/webcams/1485602185',
+    surfLink:'https://www.surf-forecast.com/breaks/Hossegor/surf-report' },
+
+  { id:'culsnuls',    name:'Les Culs Nuls',    zone:'Hossegor',          lat:43.6720, lon:-1.4320, aspect:265, level:'Avancé',
+    lc:'#ff8030',
+    camUrl:null,
+    camLink:'https://www.surf-report.fr/webcam/hossegor/',
+    surfLink:'https://www.surf-forecast.com/breaks/Hossegor/surf-report' },
+
+  { id:'bourdaines',  name:'Les Bourdaines',   zone:'Seignosse',         lat:43.3920, lon:-1.4180, aspect:275, level:'Avancé',
+    lc:'#ff8030',
+    camUrl:null,
+    camLink:'https://www.surf-report.fr/webcam/seignosse/',
+    surfLink:'https://www.surf-forecast.com/breaks/Seignosse-le-Penon/surf-report' },
+
+  { id:'capbreton',   name:'Le Santocha',      zone:'Capbreton',         lat:43.6450, lon:-1.4350, aspect:310, level:'Intermédiaire',
+    lc:'#f0c030',
+    camUrl: 'https://webcams.windy.com/webcams/public/embed/player/1485602182',
+    camLink:'https://www.windy.com/webcams/1485602182',
+    surfLink:'https://www.surf-forecast.com/breaks/Capbreton/surf-report' },
+
+  { id:'cavaliers',   name:'Les Cavaliers',    zone:'Anglet',            lat:43.5300, lon:-1.5580, aspect:270, level:'Intermédiaire',
+    lc:'#f0c030',
+    camUrl: 'https://webcams.windy.com/webcams/public/embed/player/1485602164',
+    camLink:'https://www.anglet.fr/decouvrir-anglet/mer-surf-et-nautisme/webcam/',
+    surfLink:'https://www.surf-forecast.com/breaks/Cavaliers/surf-report' },
+
+  { id:'labarre',     name:'La Barre',         zone:'Anglet',            lat:43.5360, lon:-1.5520, aspect:310, level:'Tous niveaux',
+    lc:'#30cc80',
+    camUrl: 'https://webcams.windy.com/webcams/public/embed/player/1485602165',
+    camLink:'https://www.anglet.fr/decouvrir-anglet/mer-surf-et-nautisme/webcam/',
+    surfLink:'https://www.surf-forecast.com/breaks/Anglet/surf-report' },
+
+  { id:'grandeplage', name:'Grande Plage',     zone:'Biarritz',          lat:43.4850, lon:-1.5580, aspect:320, level:'Tous niveaux',
+    lc:'#30cc80',
+    camUrl: 'https://webcams.windy.com/webcams/public/embed/player/1485602175',
+    camLink:'https://www.biarritz.fr/webcams',
+    surfLink:'https://www.surf-forecast.com/breaks/Biarritz/surf-report' },
+
+  { id:'cotesbasques',name:'Côte des Basques', zone:'Biarritz',          lat:43.4790, lon:-1.5650, aspect:280, level:'Longboard',
+    lc:'#6090ff',
+    camUrl:null,
+    camLink:'https://www.biarritz.fr/webcams',
+    surfLink:'https://www.surf-forecast.com/breaks/Cote-des-Basques/surf-report' },
+
+  { id:'lafitenia',   name:'Lafitenia',        zone:'Saint-Jean-de-Luz', lat:43.3890, lon:-1.6660, aspect:315, level:'Avancé',
+    lc:'#ff8030',
+    camUrl:null,
+    camLink:'https://www.surf-report.fr/webcam/',
+    surfLink:'https://www.surf-forecast.com/breaks/Lafitenia/surf-report' },
+
+  { id:'hendaye',     name:'Hendaye Plage',    zone:'Hendaye',           lat:43.3730, lon:-1.7790, aspect:350, level:'Débutant',
+    lc:'#30cc80',
+    camUrl: 'https://webcams.windy.com/webcams/public/embed/player/1485602198',
+    camLink:'https://www.surf-forecast.com/breaks/Hendaye/surf-report',
+    surfLink:'https://www.surf-forecast.com/breaks/Hendaye/surf-report' },
+];
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let selId   = SPOTS[0].id;
+let cmpMode = false;
+let cmpIds  = new Set();
+let curView = 'forecast'; // 'forecast' | 'cam'
+const COND  = {};
+
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+const cardinal = d => ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSO','SO','OSO','O','ONO','NO','NNO'][Math.round(((d%360)+360)%360/22.5)%16];
+
+function windQuality(windDir, windSpd, aspect) {
+  const offDir = (aspect + 180) % 360;
+  const diff   = Math.abs(((windDir - offDir + 180 + 360) % 360) - 180);
+  if (windSpd < 4) return { label:'Calme', cls:'wq-good' };
+  if (diff < 45)   return { label:'Offshore ✓', cls:'wq-epic' };
+  if (diff < 90)   return { label:'Side-off', cls:'wq-good' };
+  if (diff < 135)  return { label:'Side-on', cls:'wq-fair' };
+  return               { label:'Onshore ✗', cls:'wq-poor' };
+}
+
+function rateConditions(wave, period, windSpd, windDir, aspect) {
+  if (!wave || wave < 0.2) return { label:'Flat', cls:'flat', color:'#555', dot:'#2a2a2a' };
+  const wq = windQuality(windDir, windSpd, aspect);
+  const ok = wq.cls === 'wq-epic' || wq.cls === 'wq-good';
+  if (period > 12 && ok && wave >= 1.2) return { label:'Epic 🔥', cls:'epic', color:'#00ffcc', dot:'#00ffcc' };
+  if (period > 9  && ok && wave >= 0.6) return { label:'Bon ✓',   cls:'good', color:'#00cc80', dot:'#00cc80' };
+  if (wave > 0.4 && period >= 6)        return { label:'Moyen',   cls:'fair', color:'#f0c030', dot:'#f0c030' };
+  return                                       { label:'Agité',   cls:'poor', color:'#ff7040', dot:'#ff5a30' };
+}
+
+function waveColor(h) {
+  if (!h || h < 0.2) return '#333';
+  if (h < 0.8)  return '#f0c030';
+  if (h < 1.5)  return '#30cc80';
+  if (h < 2.5)  return '#1a80ff';
+  return '#ff4030';
+}
+
+function windyMapUrl(lat, lon) {
+  return `https://embed.windy.com/embed2.html?lat=${lat}&lon=${lon}&zoom=10&level=surface&overlay=waves&product=ecmwf&menu=&message=&marker=true&calendar=now&pressure=false&type=map&location=coordinates&detail=false&metricWind=kt&metricTemp=%C2%B0C&radarRange=-1`;
+}
+
+function fmtTime(date) {
+  return date.toLocaleTimeString('fr', { hour:'2-digit', minute:'2-digit' });
+}
+
+// ── API ───────────────────────────────────────────────────────────────────────
+async function fetchCond(spot) {
+  try {
+    const [mar, atm] = await Promise.all([
+      fetch(`https://marine-api.open-meteo.com/v1/marine?latitude=${spot.lat}&longitude=${spot.lon}&current=wave_height,wave_period,wave_direction&hourly=wave_height,wave_period&timezone=Europe%2FParis&forecast_days=1`).then(r=>r.json()),
+      fetch(`https://api.open-meteo.com/v1/forecast?latitude=${spot.lat}&longitude=${spot.lon}&current=wind_speed_10m,wind_direction_10m,wind_gusts_10m&wind_speed_unit=kn&timezone=Europe%2FParis`).then(r=>r.json())
+    ]);
+    const c = mar.current, w = atm.current;
+    const d = {
+      wave:    c.wave_height        ?? 0,
+      period:  c.wave_period        ?? 0,
+      waveDir: c.wave_direction     ?? 0,
+      wind:    w.wind_speed_10m     ?? 0,
+      windDir: w.wind_direction_10m ?? 0,
+      gusts:   w.wind_gusts_10m    ?? 0,
+      hours:   mar.hourly?.time     ?? [],
+      hWave:   mar.hourly?.wave_height  ?? [],
+      hPeriod: mar.hourly?.wave_period  ?? [],
+      updated: new Date(),
+    };
+    d.quality = rateConditions(d.wave, d.period, d.wind, d.windDir, spot.aspect);
+    d.wq      = windQuality(d.windDir, d.wind, spot.aspect);
+    COND[spot.id] = d;
+    return d;
+  } catch { COND[spot.id] = null; return null; }
+}
+
+// ── VIEW TOGGLE ───────────────────────────────────────────────────────────────
+function setView(v) {
+  curView = v;
+  document.getElementById('vtabForecast').classList.toggle('on', v==='forecast');
+  document.getElementById('vtabCam').classList.toggle('on', v==='cam');
+  if (!cmpMode) renderCam(selId);
+}
+
+// ── RENDER SIDEBAR ────────────────────────────────────────────────────────────
+function renderSidebar() {
+  const list    = document.getElementById('spotList');
+  const pills   = document.getElementById('mpills');
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('cmode', cmpMode);
+
+  const zones = [...new Set(SPOTS.map(s => s.zone))];
+  let html = '';
+  zones.forEach(zone => {
+    html += `<div class="zone-header">${zone}</div>`;
+    SPOTS.filter(s => s.zone === zone).forEach(s => {
+      const c   = COND[s.id];
+      const q   = c?.quality;
+      const dot = q ? q.dot : 'rgba(255,255,255,.08)';
+      const wh  = c ? `${c.wave.toFixed(1)}m` : '—';
+      const pr  = c ? `${Math.round(c.period)}s` : '—';
+      const wi  = c ? `${Math.round(c.wind)}kn`  : '—';
+      const isOn = cmpIds.has(s.id);
+      const hasCam = !!s.camUrl;
+      html += `
+      <div class="spot-item ${s.id===selId&&!cmpMode?'active':''}" id="si_${s.id}" onclick="selSpot('${s.id}')">
+        <div class="spot-row1">
+          <div class="spot-name">${s.name}</div>
+          <span class="spot-lvl" style="color:${s.lc};background:${s.lc}22">${s.level}</span>
+          ${hasCam ? '<span class="cam-tag">📷 live</span>' : ''}
+          <div class="qdot" style="background:${dot}"></div>
+          <button class="cbox ${isOn?'on':''}" onclick="toggleCmpSpot(event,'${s.id}')">
+            <svg width="9" height="7" viewBox="0 0 9 7" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,3.5 3.5,6 8,1"/></svg>
+          </button>
+        </div>
+        <div class="spot-row2">
+          <div class="sc"><span class="sc-ico">🌊</span>${wh}</div>
+          <div class="sc"><span class="sc-ico">⏱</span>${pr}</div>
+          <div class="sc"><span class="sc-ico">💨</span>${wi}</div>
+          ${q ? `<div class="sq" style="color:${q.color}">${q.label}</div>` : ''}
+        </div>
+      </div>`;
+    });
+  });
+  list.innerHTML = html;
+
+  pills.innerHTML = SPOTS.map(s => `
+    <button class="mpill ${s.id===selId?'active':''}" onclick="selSpot('${s.id}')">${s.name}</button>
+  `).join('');
+}
+
+// ── RENDER CAM / MAP ──────────────────────────────────────────────────────────
+function renderCam(id) {
+  const spot = SPOTS.find(s => s.id === id);
+  if (!spot) return;
+
+  document.getElementById('camName').textContent = spot.name;
+  document.getElementById('camZone').textContent = spot.zone;
+
+  const ext = document.getElementById('camExt');
+  ext.href = spot.surfLink;
+
+  const wrap = document.getElementById('camWrap');
+
+  if (curView === 'forecast') {
+    // Windy wave map — always useful
+    wrap.innerHTML = `<iframe class="cam-iframe" src="${windyMapUrl(spot.lat, spot.lon)}" allowfullscreen loading="lazy"></iframe>`;
+  } else {
+    // Livecam
+    if (spot.camUrl) {
+      wrap.innerHTML = `<iframe class="cam-iframe" src="${spot.camUrl}" allowfullscreen loading="lazy"></iframe>`;
+    } else {
+      wrap.innerHTML = `
+        <div class="no-cam">
+          <div class="no-cam-ico">📷</div>
+          <div class="no-cam-txt">Pas de livecam publique disponible pour ce spot.<br>Voir sur surf-report.fr (abonnement requis)</div>
+          <a class="no-cam-link" href="${spot.camLink}" target="_blank" rel="noopener">Voir la cam ↗</a>
+        </div>`;
+    }
+  }
+
+  // Update footer conditions
+  const c = COND[id];
+  if (c) {
+    const fw = document.getElementById('ftWave');
+    fw.textContent = `${c.wave.toFixed(1)}m`;
+    fw.classList.remove('sk'); fw.style.minWidth='';fw.style.minHeight='';
+    const fp = document.getElementById('ftPeriod');
+    fp.textContent = `${Math.round(c.period)}s`;
+    fp.classList.remove('sk');fp.style.minWidth='';fp.style.minHeight='';
+    const fd = document.getElementById('ftDir');
+    fd.textContent = cardinal(c.waveDir);
+    fd.classList.remove('sk');fd.style.minWidth='';fd.style.minHeight='';
+    const fw2 = document.getElementById('ftWind');
+    fw2.textContent = `${Math.round(c.wind)}`;
+    fw2.classList.remove('sk');fw2.style.minWidth='';fw2.style.minHeight='';
+    document.getElementById('ftGusts').textContent = `rafales ${Math.round(c.gusts)}kn`;
+    const qb = document.getElementById('camQbadge');
+    qb.textContent = c.quality.label; qb.className = `qbadge ${c.quality.cls}`;
+    const wqb = document.getElementById('camWqBadge');
+    wqb.textContent = c.wq.label; wqb.className = `wq-badge ${c.wq.cls}`;
+    document.getElementById('wtime').textContent = `Maj ${fmtTime(c.updated)}`;
+  }
+}
+
+// ── RENDER FORECAST STRIP ─────────────────────────────────────────────────────
+function renderForecast(id) {
+  const c = COND[id];
+  const strip = document.getElementById('fstrip');
+  if (!c?.hours?.length) { strip.innerHTML = ''; return; }
+
+  const now  = new Date();
+  const maxH = Math.max(...c.hWave.filter(Boolean), 0.5);
+
+  strip.innerHTML = c.hours.map((t, i) => {
+    const d   = new Date(t);
+    const h   = c.hWave[i]   ?? 0;
+    const p   = c.hPeriod[i] ?? 0;
+    const pct = Math.max(4, (h / maxH) * 100);
+    const isNow = Math.abs(d - now) < 1800000;
+    const col = waveColor(h);
+    return `<div class="fh ${isNow?'now':''}">
+      <div class="fh-t">${fmtTime(d)}</div>
+      <div class="fh-bw"><div class="fh-b" style="height:${pct}%;background:${col}"></div></div>
+      <div class="fh-v" style="color:${col}">${h.toFixed(1)}</div>
+      <div class="fh-w">${p ? Math.round(p)+'s' : ''}</div>
+    </div>`;
+  }).join('');
+
+  strip.querySelector('.now')?.scrollIntoView({ inline:'center', behavior:'smooth' });
+}
+
+// ── RENDER COMPARE GRID ───────────────────────────────────────────────────────
+function renderCompareGrid() {
+  const grid = document.getElementById('cmpGrid');
+  const ids  = [...cmpIds];
+
+  if (!ids.length) {
+    grid.innerHTML = `<div class="cmp-empty"><div class="cmp-empty-ico">🏄</div><div>Sélectionne 2–4 spots à comparer</div></div>`;
+    return;
+  }
+
+  const cols = ids.length <= 2 ? 'repeat(2,1fr)' : 'repeat(2,1fr)';
+  const rows = ids.length <= 2 ? '1fr' : 'repeat(2,1fr)';
+  grid.style.gridTemplateColumns = cols;
+  grid.style.gridTemplateRows    = rows;
+
+  grid.innerHTML = ids.map(id => {
+    const s  = SPOTS.find(x => x.id === id);
+    const c  = COND[id];
+    const q  = c?.quality;
+    const src = curView === 'forecast'
+      ? windyMapUrl(s.lat, s.lon)
+      : (s.camUrl || null);
+
+    return `<div class="cmp-cell">
+      <div class="cmp-cell-hd">
+        <div class="cmp-cell-name">${s.name}</div>
+        <div class="cmp-cell-zone">${s.zone}</div>
+      </div>
+      ${src
+        ? `<iframe class="cam-iframe" src="${src}" loading="lazy"></iframe>`
+        : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text2);font-size:12px">Pas de cam</div>`
+      }
+      <div class="cmp-cell-ft">
+        <div><span class="cmp-cl">Vagues</span><span class="cmp-cv">${c ? c.wave.toFixed(1)+'m' : '—'}</span></div>
+        <div><span class="cmp-cl">Période</span><span class="cmp-cv">${c ? Math.round(c.period)+'s' : '—'}</span></div>
+        <div><span class="cmp-cl">Vent</span><span class="cmp-cv">${c ? Math.round(c.wind)+'kn' : '—'}</span></div>
+        ${q ? `<div class="cmp-qb ${q.cls}">${q.label}</div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── SELECT SPOT ───────────────────────────────────────────────────────────────
+function selSpot(id) {
+  if (cmpMode) { toggleCmpSpot(null, id); return; }
+  selId = id;
+  renderSidebar();
+  renderCam(id);
+  renderForecast(id);
+}
+
+// ── COMPARE ───────────────────────────────────────────────────────────────────
+function toggleCompare() {
+  cmpMode = !cmpMode;
+  const btn    = document.getElementById('cmpBtn');
+  const single = document.getElementById('singleView');
+  const grid   = document.getElementById('cmpGrid');
+
+  btn.classList.toggle('active', cmpMode);
+
+  if (cmpMode) {
+    cmpIds.add(selId);
+    single.style.display = 'none';
+    grid.classList.add('on');
+  } else {
+    cmpIds.clear();
+    single.style.display = '';
+    grid.classList.remove('on');
+    renderCam(selId);
+    renderForecast(selId);
+  }
+  updateCmpCount();
+  renderSidebar();
+  if (cmpMode) renderCompareGrid();
+}
+
+function toggleCmpSpot(e, id) {
+  if (e) e.stopPropagation();
+  if (!cmpMode) return;
+  if (cmpIds.has(id)) { if (cmpIds.size > 1) cmpIds.delete(id); }
+  else                 { if (cmpIds.size < 4) cmpIds.add(id); }
+  updateCmpCount();
+  renderSidebar();
+  renderCompareGrid();
+}
+
+function updateCmpCount() {
+  document.getElementById('cmpCount').textContent = cmpIds.size;
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+(function init() {
+  if (window.parent !== window) document.body.classList.add('in-iframe');
+
+  renderSidebar();
+  renderCam(selId);
+
+  Promise.all(SPOTS.map(s => fetchCond(s))).then(() => {
+    renderSidebar();
+    if (cmpMode) renderCompareGrid();
+    else { renderCam(selId); renderForecast(selId); }
+  });
+
+  // Refresh toutes les 10 min
+  setInterval(() => {
+    Promise.all(SPOTS.map(s => fetchCond(s))).then(() => {
+      renderSidebar();
+      if (cmpMode) renderCompareGrid();
+      else { renderCam(selId); renderForecast(selId); }
+    });
+  }, 10 * 60 * 1000);
+})();
+</script>
+</body>
+</html>
