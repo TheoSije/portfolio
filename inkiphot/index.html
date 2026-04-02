@@ -812,18 +812,18 @@ const quotes = [
 
 // ── COLOR PALETTE (dark, sensual tones) ──
 const colorPalette = [
-  { from: '#c41230', to: '#7a0b1e' },   // deep crimson
-  { from: '#8b1a4a', to: '#5c0d30' },   // dark burgundy rose
-  { from: '#6b2060', to: '#420f3d' },   // deep plum
-  { from: '#3d1010', to: '#1e0808' },   // dark velvet
-  { from: '#b5446e', to: '#7a2a48' },   // deep rose
-  { from: '#8b4513', to: '#5c2a0a' },   // dark amber
-  { from: '#1e1030', to: '#0d0818' },   // near-black indigo
-  { from: '#6b1a1a', to: '#3d0d0d' },   // dark garnet
-  { from: '#3d1530', to: '#200a1a' },   // midnight burgundy
-  { from: '#8b2040', to: '#5c1228' },   // deep magenta
-  { from: '#4a2010', to: '#280f08' },   // dark mahogany
-  { from: '#601520', to: '#3d0d14' },   // oxblood
+  { from: '#e8304e', to: '#a01828' },   // crimson
+  { from: '#d4547a', to: '#8b2a4a' },   // rose profond
+  { from: '#b060c0', to: '#7a2a90' },   // prune lumineux
+  { from: '#e05060', to: '#9a2030' },   // rouge cerise
+  { from: '#d46888', to: '#9a3858' },   // rose sombre
+  { from: '#c07830', to: '#885010' },   // ambre chaud
+  { from: '#8878d0', to: '#5040a0' },   // indigo doux
+  { from: '#c04040', to: '#882020' },   // grenat
+  { from: '#c040a0', to: '#882070' },   // magenta sombre
+  { from: '#d05070', to: '#903040' },   // framboise
+  { from: '#b86840', to: '#804020' },   // acajou
+  { from: '#c83050', to: '#8a1030' },   // bordeaux vif
 ];
 
 // ── PLAY ORDER — shufflé, jamais 2x le même auteur de suite ──
@@ -1383,7 +1383,7 @@ function renderCanvas() {
     ctx.font = `500 ${brandSize}px 'DM Sans', sans-serif`;
     ctx.fillStyle = 'rgba(0,0,0,0.18)';
     ctx.textAlign = 'right';
-    ctx.fillText('inkip'hot \u00B7 theo.design', W - pad * 0.55, H - pad * 0.5);
+    ctx.fillText("inkip'hot \u00B7 theo.design", W - pad * 0.55, H - pad * 0.5);
     ctx.textAlign = 'left';
 
   } else {
@@ -1411,7 +1411,7 @@ function renderCanvas() {
     ctx.font = `500 ${brandSize}px 'DM Sans', sans-serif`;
     ctx.fillStyle = col.brand;
     ctx.textAlign = 'right';
-    ctx.fillText('inkip'hot \u00B7 theo.design', W - pad * 0.55, H - pad * 0.5);
+    ctx.fillText("inkip'hot \u00B7 theo.design", W - pad * 0.55, H - pad * 0.5);
     ctx.textAlign = 'left';
   }
 }
