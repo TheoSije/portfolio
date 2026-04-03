@@ -1121,6 +1121,13 @@ clearBtn.addEventListener('click', () => {
 
 init();
 </script>
-<script>if('serviceWorker'in navigator)navigator.serviceWorker.getRegistrations().then(r=>r.forEach(s=>s.unregister()));</script>
+<script>
+if('serviceWorker'in navigator){
+  navigator.serviceWorker.getRegistrations().then(r=>r.forEach(s=>s.unregister()));
+}
+if(window.caches){
+  caches.keys().then(keys=>keys.forEach(k=>caches.delete(k)));
+}
+</script>
 </body>
 </html>
