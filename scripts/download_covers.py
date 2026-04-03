@@ -74,20 +74,22 @@ def fetch_cover_url(title, author):
     # 1) Google Books — titre + auteur
     q = f'intitle:{title}'
     if last: q += f'+inauthor:{last}'
-    data = safe_json(f'https://www.googleapis.com/books/v1/volumes?q={urllib.parse.quote(q)}&maxResults=3')
-    if data and data.get('items'):
-        links = data['items'][0].get('volumeInfo', {}).get('imageLinks', {})
-        thumb = links.get('thumbnail') or links.get('smallThumbnail')
-        if thumb:
-            return thumb.replace('http://', 'https://').replace('zoom=1', 'zoom=2').replace('&edge=curl', '')
+    data = safe_json(f'https://www.googleapis.com/books/v1/volumes?q={urllib.parse.quote(q)}&maxResults=5')
+    if data:
+        for item in data.get('items', []):
+            links = item.get('volumeInfo', {}).get('imageLinks', {})
+            thumb = links.get('thumbnail') or links.get('smallThumbnail')
+            if thumb:
+                return thumb.replace('http://', 'https://').replace('zoom=1', 'zoom=2').replace('&edge=curl', '')
 
     # 2) Google Books — titre seul
-    data = safe_json(f'https://www.googleapis.com/books/v1/volumes?q=intitle:{urllib.parse.quote(title)}&maxResults=3')
-    if data and data.get('items'):
-        links = data['items'][0].get('volumeInfo', {}).get('imageLinks', {})
-        thumb = links.get('thumbnail') or links.get('smallThumbnail')
-        if thumb:
-            return thumb.replace('http://', 'https://').replace('zoom=1', 'zoom=2').replace('&edge=curl', '')
+    data = safe_json(f'https://www.googleapis.com/books/v1/volumes?q=intitle:{urllib.parse.quote(title)}&maxResults=5')
+    if data:
+        for item in data.get('items', []):
+            links = item.get('volumeInfo', {}).get('imageLinks', {})
+            thumb = links.get('thumbnail') or links.get('smallThumbnail')
+            if thumb:
+                return thumb.replace('http://', 'https://').replace('zoom=1', 'zoom=2').replace('&edge=curl', '')
 
     # 3) Open Library — titre + auteur
     q2 = urllib.parse.quote(f'{title} {author}'.strip())
