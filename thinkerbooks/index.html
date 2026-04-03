@@ -413,7 +413,13 @@ footer a:hover { color: var(--accent); }
 
 .top-info { flex: 1; min-width: 0; }
 .top-title { font-size: 13px; font-weight: 500; color: var(--bright); line-height: 1.3; }
-.top-author { font-size: 11px; color: var(--muted); font-style: italic; }
+.top-author { font-size: 11px; color: var(--muted); font-style: italic; margin-bottom: 4px; }
+.top-cited {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--muted);
+  line-height: 1.5; opacity: .7;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
 
 .top-badge {
   flex-shrink: 0;
@@ -909,14 +915,16 @@ document.querySelectorAll('.nav-tab').forEach(btn => {
 let topRendered = false;
 
 function computeTopBooks() {
-  const counts = new Map(); // normalizedKey → { title, author, count }
+  const counts = new Map(); // normalizedKey → { title, author, count, episodes[] }
   for (const ep of ALL_EPISODES) {
     for (const b of ep.books) {
       const key = normalize(b.title);
       if (!counts.has(key)) {
-        counts.set(key, { title: b.title, author: b.author, count: 0 });
+        counts.set(key, { title: b.title, author: b.author, count: 0, episodes: [] });
       }
-      counts.get(key).count++;
+      const entry = counts.get(key);
+      entry.count++;
+      entry.episodes.push(ep.title);
     }
   }
   return [...counts.values()]
@@ -947,6 +955,7 @@ function renderTop() {
       <div class="top-info">
         <div class="top-title">${escHtml(b.title)}</div>
         ${b.author ? `<div class="top-author">${escHtml(b.author)}</div>` : ''}
+        <div class="top-cited" title="${escHtml(b.episodes.join(' · '))}">${escHtml(b.episodes.join(' · '))}</div>
       </div>
       <div class="top-badge">× ${b.count}</div>
       <a class="top-buy" href="https://www.fnac.com/SearchResult/ResultList.aspx?SCat=2!1&Search=${encodeURIComponent(b.title + (b.author ? ' ' + b.author : ''))}" target="_blank" rel="noopener">Acheter</a>
