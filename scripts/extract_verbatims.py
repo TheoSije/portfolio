@@ -16,7 +16,7 @@ from youtube_transcript_api import YouTubeTranscriptApi
 EPISODES_JSON = os.path.join(os.path.dirname(__file__), '..', 'thinkerbooks', 'data', 'episodes.json')
 OUTPUT_JSON   = os.path.join(os.path.dirname(__file__), '..', 'thinkerbooks', 'data', 'verbatims.json')
 WINDOW_SECS   = 90   # secondes de contexte autour de la mention
-MAX_EPISODES  = 20   # limiter aux N premiers épisodes
+MAX_EPISODES  = 40   # limiter aux N premiers épisodes
 
 # ── HELPERS ─────────────────────────────────────────────────────────────────
 def normalize(s):
