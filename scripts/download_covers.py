@@ -70,22 +70,59 @@ def parse_readme(text):
 
 def fetch_cover_url(title, author):
     last = author.strip().split()[-1] if author.strip() else ''
+
+    # 1) Google Books — titre + auteur
     q = f'intitle:{title}'
     if last: q += f'+inauthor:{last}'
-    gb_url = f'https://www.googleapis.com/books/v1/volumes?q={urllib.parse.quote(q)}&maxResults=3'
-    data = safe_json(gb_url)
+    data = safe_json(f'https://www.googleapis.com/books/v1/volumes?q={urllib.parse.quote(q)}&maxResults=3')
     if data and data.get('items'):
         links = data['items'][0].get('volumeInfo', {}).get('imageLinks', {})
         thumb = links.get('thumbnail') or links.get('smallThumbnail')
         if thumb:
             return thumb.replace('http://', 'https://').replace('zoom=1', 'zoom=2').replace('&edge=curl', '')
 
+    # 2) Google Books — titre seul
+    data = safe_json(f'https://www.googleapis.com/books/v1/volumes?q=intitle:{urllib.parse.quote(title)}&maxResults=3')
+    if data and data.get('items'):
+        links = data['items'][0].get('volumeInfo', {}).get('imageLinks', {})
+        thumb = links.get('thumbnail') or links.get('smallThumbnail')
+        if thumb:
+            return thumb.replace('http://', 'https://').replace('zoom=1', 'zoom=2').replace('&edge=curl', '')
+
+    # 3) Open Library — titre + auteur
     q2 = urllib.parse.quote(f'{title} {author}'.strip())
-    ol_url = f'https://openlibrary.org/search.json?q={q2}&limit=1&fields=cover_i'
-    data2 = safe_json(ol_url)
+    data2 = safe_json(f'https://openlibrary.org/search.json?q={q2}&limit=1&fields=cover_i')
     if data2 and data2.get('docs'):
         cid = data2['docs'][0].get('cover_i')
         if cid: return f'https://covers.openlibrary.org/b/id/{cid}-M.jpg'
+
+    # 4) Open Library — titre seul
+    data3 = safe_json(f'https://openlibrary.org/search.json?title={urllib.parse.quote(title)}&limit=1&fields=cover_i')
+    if data3 and data3.get('docs'):
+        cid = data3['docs'][0].get('cover_i')
+        if cid: return f'https://covers.openlibrary.org/b/id/{cid}-M.jpg'
+
+    # 5) BnF (Bibliothèque nationale de France) — excellent pour les livres français
+    bnf_q = urllib.parse.quote(f'bib.title adj "{title}"')
+    bnf_data = safe_json(
+        f'https://catalogue.bnf.fr/api/SRU?version=1.2&operation=searchRetrieve'
+        f'&query={bnf_q}&maximumRecords=1&recordSchema=unimarcxchange', timeout=10
+    )
+    if bnf_data:
+        # BnF returns XML — look for ISBN in response to build cover URL
+        import re as _re
+        raw_bnf = safe_get(
+            f'https://catalogue.bnf.fr/api/SRU?version=1.2&operation=searchRetrieve'
+            f'&query={bnf_q}&maximumRecords=1&recordSchema=unimarcxchange', timeout=10
+        )
+        if raw_bnf:
+            isbn_match = _re.search(rb'<datafield[^>]*tag="010"[^>]*>.*?<subfield[^>]*code="a"[^>]*>([0-9X\-]+)</subfield>', raw_bnf, _re.DOTALL)
+            if isbn_match:
+                isbn = isbn_match.group(1).decode().replace('-', '').strip()
+                if len(isbn) in (10, 13):
+                    cover = safe_get(f'https://covers.openlibrary.org/b/isbn/{isbn}-M.jpg')
+                    if cover and len(cover) > 1000:
+                        return f'https://covers.openlibrary.org/b/isbn/{isbn}-M.jpg'
 
     return None
 
@@ -99,10 +136,12 @@ def process_book(args):
     title, author, key = b['title'], b['author'], b['key']
 
     with manifest_lock:
-        if key in manifest:
-            with counters_lock:
-                counters['skip'] += 1
-            return None
+        existing = manifest.get(key, 'MISSING')
+    # Skip if already has a local file; retry if null (not found previously)
+    if existing != 'MISSING' and existing is not None:
+        with counters_lock:
+            counters['skip'] += 1
+        return None
 
     cover_url = fetch_cover_url(title, author)
 
