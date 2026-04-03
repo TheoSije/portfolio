@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://jegousse.com/sitemap.xml
