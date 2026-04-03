@@ -1121,5 +1121,6 @@ clearBtn.addEventListener('click', () => {
 
 init();
 </script>
+<script>if('serviceWorker'in navigator)navigator.serviceWorker.getRegistrations().then(r=>r.forEach(s=>s.unregister()));</script>
 </body>
 </html>
