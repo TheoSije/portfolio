@@ -42,12 +42,10 @@ def parse_book_line(raw):
     author = ''
     title = text
 
-    # Pattern 1: dash separator " - UPPERCASE_AUTHOR"
-    # e.g. "Le Livre - DUPONT Jean"
-    dash_match = re.search(r'\s-\s([A-ZÁÀÂÄÉÈÊËÎÏÔÖÙÛÜ][A-ZÁÀÂÄÉÈÊËÎÏÔÖÙÛÜ\s\-]+)$', text)
+    # Pattern 1: dash separator " - Capitalized Author" (mirrors JS: / - [UPPERCASE]/)
+    dash_match = re.search(r' - ([A-ZÁÀÂÄÉÈÊËÎÏÔÖÙÛÜ].+)$', text)
     if dash_match:
         candidate_author = dash_match.group(1).strip()
-        # Only use if what's before the dash is a reasonable title
         before = text[:dash_match.start()].strip()
         if before:
             title = before
