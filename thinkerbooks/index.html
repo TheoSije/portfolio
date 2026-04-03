@@ -587,6 +587,7 @@ footer a:hover { color: var(--accent); }
 // ── BOOK OVERRIDES ──
 // Keys are normalize(title) — custom cover, link, or button label per book
 const BOOK_OVERRIDES = {
+  'la bible': { author: 'Sky' },
   'les hauts-parleurs': {
     cover: '../img/thinkerbooks/damasio-hauts-parleurs.jpg',
     link: 'https://www.juriscom.net/documents/HautsParleurs.pdf',
@@ -747,6 +748,7 @@ function buildCard(ep, q) {
 
   const bookItems = booksToShow.map((b, j) => {
     const ov = getOverride(b.title);
+    const displayAuthor = ov?.author ?? b.author;
     const buyHref = ov?.link
       ? ov.link
       : `https://www.fnac.com/SearchResult/ResultList.aspx?SCat=2!1&Search=${encodeURIComponent(b.title + (b.author ? ' ' + b.author : ''))}`;
@@ -761,7 +763,7 @@ function buildCard(ep, q) {
       <div class="book-num">${j + 1}</div>
       <div class="book-info">
         <div class="book-title">${highlight(b.title, q)}</div>
-        ${b.author ? `<div class="book-author">${highlight(b.author, q)}</div>` : ''}
+        ${displayAuthor ? `<div class="book-author">${highlight(displayAuthor, q)}</div>` : ''}
       </div>
       <div class="book-actions">
         <a class="buy-btn" href="${escHtml(buyHref)}" target="_blank" rel="noopener">${buyLabel}</a>
