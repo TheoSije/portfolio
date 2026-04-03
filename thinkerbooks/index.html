@@ -15,6 +15,8 @@
 <meta property="og:url" content="https://jegousse.com/thinkerbooks/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://jegousse.com/img/og-image-thinkerbooks.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -495,6 +497,20 @@ footer a:hover { color: var(--accent); }
   .top-buy { display: none; }
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "ThinkerBooks",
+  "url": "https://jegousse.com/thinkerbooks/",
+  "description": "Tous les livres recommandés par les invités de Thinkerview réunis en un seul endroit. Plus de 1 250 références classées par épisode.",
+  "publisher": {
+    "@type": "Person",
+    "name": "Théo Jégousse",
+    "url": "https://jegousse.com"
+  }
+}
+</script>
 </head>
 <body>
 
@@ -1067,11 +1083,46 @@ async function init() {
       }
     } catch {}
 
-    const res = await fetch(README_URL);
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const text = await res.text();
+    // Try pre-compiled JSON first (faster, resilient), fallback to raw README
+    let text = null;
+    try {
+      const jr = await fetch('./data/episodes.json', { cache: 'no-cache' });
+      if (jr.ok) {
+        ALL_EPISODES = await jr.json();
+        text = null; // skip parseReadme
+      }
+    } catch(e) {}
 
-    ALL_EPISODES = parseReadme(text);
+    if (!ALL_EPISODES.length) {
+      const res = await fetch(README_URL);
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      text = await res.text();
+      ALL_EPISODES = parseReadme(text);
+    }
+
+    // Inject JSON-LD ItemList for top books (SEO)
+    try {
+      const topForSeo = computeTopBooks().slice(0, 20);
+      const itemList = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Top livres recommandés par Thinkerview",
+        "numberOfItems": topForSeo.length,
+        "itemListElement": topForSeo.map((b, i) => ({
+          "@type": "ListItem",
+          "position": i + 1,
+          "item": {
+            "@type": "Book",
+            "name": b.title,
+            ...(b.author ? { "author": { "@type": "Person", "name": b.author } } : {})
+          }
+        }))
+      };
+      const s = document.createElement('script');
+      s.type = 'application/ld+json';
+      s.textContent = JSON.stringify(itemList);
+      document.head.appendChild(s);
+    } catch(e) {}
 
     const totalBooks = ALL_EPISODES.reduce((s, e) => s + e.books.length, 0);
     const fmt = totalBooks.toLocaleString('fr');
@@ -1120,6 +1171,11 @@ clearBtn.addEventListener('click', () => {
 });
 
 init();
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
+}
 </script>
 </body>
 </html>
