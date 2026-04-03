@@ -670,6 +670,15 @@ function parseReadme(text) {
           bookTitle = cleanBookText(bookTitle.substring(0, dashIdx));
         }
 
+        // "Title de/par Author Name" split — author must be capitalized words at end
+        if (!author) {
+          const deMatch = bookTitle.match(/^(.+?)\s+(?:de|par)\s+([A-ZÁÀÂÄÉÈÊËÎÏÔÖÙÛÜ][a-zA-ZÀ-ÿ.\-]+(?:\s+[A-ZÁÀÂÄÉÈÊËÎÏÔÖÙÛÜ][a-zA-ZÀ-ÿ.\-]+)*)$/);
+          if (deMatch) {
+            bookTitle = cleanBookText(deMatch[1]);
+            author = cleanBookText(deMatch[2]);
+          }
+        }
+
         if (!bookTitle) continue;
         books.push({ title: bookTitle, author, guest: currentGuest });
       }
