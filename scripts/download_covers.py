@@ -1,24 +1,27 @@
 #!/usr/bin/env python3
-"""Download book covers for ThinkerBooks from Google Books + Open Library."""
+"""Download book covers for ThinkerBooks — parallel version."""
 
-import os, re, json, time, unicodedata, hashlib
+import os, re, json, unicodedata, hashlib, threading
 import urllib.request, urllib.parse, urllib.error
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
-README_URL   = 'https://raw.githubusercontent.com/sebastienp7669/Thinkerview-Recommandations-lecture/master/README.md'
-OUTPUT_DIR   = os.path.join(os.path.dirname(__file__), '..', 'img', 'thinkerbooks')
-MANIFEST     = os.path.join(OUTPUT_DIR, 'covers.json')
-DELAY        = 0.25   # seconds between API calls
+README_URL  = 'https://raw.githubusercontent.com/sebastienp7669/Thinkerview-Recommandations-lecture/master/README.md'
+OUTPUT_DIR  = os.path.join(os.path.dirname(__file__), '..', 'img', 'thinkerbooks')
+MANIFEST    = os.path.join(OUTPUT_DIR, 'covers.json')
+WORKERS     = 20
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+manifest_lock = threading.Lock()
 
 # ── helpers ────────────────────────────────────────────────────────────────
 
 def clean(s):
     if not s: return ''
-    s = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', s)   # markdown links
-    s = re.sub(r'\*{1,3}([^*]+)\*{1,3}', r'\1', s)  # bold/italic
+    s = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', s)
+    s = re.sub(r'\*{1,3}([^*]+)\*{1,3}', r'\1', s)
     s = s.replace('`', '')
-    s = re.sub(r'\s*\([^)]*\)\s*$', '', s)            # trailing parens
+    s = re.sub(r'\s*\([^)]*\)\s*$', '', s)
     s = re.sub(r'\s*,\s*(dans|extrait|tiré|paru|traduit|trad\.?)\b.*$', '', s, flags=re.I)
     return s.strip()
 
@@ -66,7 +69,6 @@ def parse_readme(text):
 # ── cover fetching ─────────────────────────────────────────────────────────
 
 def fetch_cover_url(title, author):
-    # 1) Google Books
     last = author.strip().split()[-1] if author.strip() else ''
     q = f'intitle:{title}'
     if last: q += f'+inauthor:{last}'
@@ -78,9 +80,6 @@ def fetch_cover_url(title, author):
         if thumb:
             return thumb.replace('http://', 'https://').replace('zoom=1', 'zoom=2').replace('&edge=curl', '')
 
-    time.sleep(DELAY)
-
-    # 2) Open Library fallback
     q2 = urllib.parse.quote(f'{title} {author}'.strip())
     ol_url = f'https://openlibrary.org/search.json?q={q2}&limit=1&fields=cover_i'
     data2 = safe_json(ol_url)
@@ -90,6 +89,53 @@ def fetch_cover_url(title, author):
 
     return None
 
+# ── worker ─────────────────────────────────────────────────────────────────
+
+counters = {'ok': 0, 'fail': 0, 'skip': 0, 'total': 0}
+counters_lock = threading.Lock()
+
+def process_book(args):
+    i, b, manifest = args
+    title, author, key = b['title'], b['author'], b['key']
+
+    with manifest_lock:
+        if key in manifest:
+            with counters_lock:
+                counters['skip'] += 1
+            return None
+
+    cover_url = fetch_cover_url(title, author)
+
+    if not cover_url:
+        with manifest_lock:
+            manifest[key] = None
+        with counters_lock:
+            counters['fail'] += 1
+        print(f'[{i:4}] NONE  {title[:60]}')
+        return None
+
+    h = hashlib.md5(key.encode()).hexdigest()[:6]
+    fname = f'{slug(title)}-{h}.jpg'
+    fpath = os.path.join(OUTPUT_DIR, fname)
+
+    img = safe_get(cover_url)
+    if img and len(img) > 500:
+        with open(fpath, 'wb') as f:
+            f.write(img)
+        with manifest_lock:
+            manifest[key] = f'img/thinkerbooks/{fname}'
+        with counters_lock:
+            counters['ok'] += 1
+        print(f'[{i:4}] OK    {title[:55]:55s} → {fname}')
+        return key
+    else:
+        with manifest_lock:
+            manifest[key] = None
+        with counters_lock:
+            counters['fail'] += 1
+        print(f'[{i:4}] FAIL  {title[:60]}')
+        return None
+
 # ── main ───────────────────────────────────────────────────────────────────
 
 print('Fetching README…')
@@ -97,55 +143,27 @@ raw = safe_get(README_URL)
 books = parse_readme(raw.decode('utf-8'))
 print(f'→ {len(books)} unique books\n')
 
-# Load existing manifest
 manifest = {}
 if os.path.exists(MANIFEST):
     with open(MANIFEST) as f:
         manifest = json.load(f)
 
-ok = fail = skip = 0
+args_list = [(i, b, manifest) for i, b in enumerate(books, 1)]
 
-for i, b in enumerate(books, 1):
-    title, author, key = b['title'], b['author'], b['key']
+saved_count = 0
+with ThreadPoolExecutor(max_workers=WORKERS) as executor:
+    futures = {executor.submit(process_book, a): a for a in args_list}
+    for fut in as_completed(futures):
+        fut.result()
+        with counters_lock:
+            total = counters['ok'] + counters['fail'] + counters['skip']
+        if total % 50 == 0:
+            with manifest_lock:
+                with open(MANIFEST, 'w') as f:
+                    json.dump(manifest, f, ensure_ascii=False)
 
-    if key in manifest:
-        skip += 1
-        print(f'[{i:4}/{len(books)}] SKIP  {title[:60]}')
-        continue
-
-    cover_url = fetch_cover_url(title, author)
-    time.sleep(DELAY)
-
-    if not cover_url:
-        manifest[key] = None
-        fail += 1
-        print(f'[{i:4}/{len(books)}] NONE  {title[:60]}')
-    else:
-        # Build filename — use hash suffix to avoid collisions
-        h = hashlib.md5(key.encode()).hexdigest()[:6]
-        fname = f'{slug(title)}-{h}.jpg'
-        fpath = os.path.join(OUTPUT_DIR, fname)
-
-        img = safe_get(cover_url)
-        if img and len(img) > 500:
-            with open(fpath, 'wb') as f:
-                f.write(img)
-            manifest[key] = f'img/thinkerbooks/{fname}'
-            ok += 1
-            print(f'[{i:4}/{len(books)}] OK    {title[:55]:55s} → {fname}')
-        else:
-            manifest[key] = None
-            fail += 1
-            print(f'[{i:4}/{len(books)}] FAIL  {title[:60]}')
-
-    # Save every 20 books
-    if i % 20 == 0:
-        with open(MANIFEST, 'w') as f:
-            json.dump(manifest, f, ensure_ascii=False)
-
-# Final save
 with open(MANIFEST, 'w') as f:
     json.dump(manifest, f, ensure_ascii=False)
 
-print(f'\n✓ {ok} covers downloaded  ✗ {fail} not found  → {skip} skipped')
+print(f'\n✓ {counters["ok"]} covers downloaded  ✗ {counters["fail"]} not found  → {counters["skip"]} skipped')
 print(f'Manifest: {MANIFEST}')
