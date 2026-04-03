@@ -584,6 +584,20 @@ footer a:hover { color: var(--accent); }
 </footer>
 
 <script>
+// ── BOOK OVERRIDES ──
+// Keys are normalize(title) — custom cover, link, or button label per book
+const BOOK_OVERRIDES = {
+  'les hauts-parleurs': {
+    cover: '../img/thinkerbooks/damasio-hauts-parleurs.jpg',
+    link: 'https://www.juriscom.net/documents/HautsParleurs.pdf',
+    linkLabel: 'Télécharger',
+  },
+};
+
+function getOverride(title) {
+  return BOOK_OVERRIDES[normalize(title)] || null;
+}
+
 // ── STATE ──
 let ALL_EPISODES = [];
 let FILTERED_EPISODES = [];
@@ -720,9 +734,16 @@ function buildCard(ep, q) {
        </a>`
     : '';
 
-  const bookItems = booksToShow.map((b, j) => `
+  const bookItems = booksToShow.map((b, j) => {
+    const ov = getOverride(b.title);
+    const buyHref = ov?.link
+      ? ov.link
+      : `https://www.fnac.com/SearchResult/ResultList.aspx?SCat=2!1&Search=${encodeURIComponent(b.title + (b.author ? ' ' + b.author : ''))}`;
+    const buyLabel = ov?.linkLabel || 'Acheter';
+    const coverExtra = ov?.cover ? ` data-override-cover="${escHtml(ov.cover)}"` : '';
+    return `
     <div class="book-item">
-      <div class="book-cover" data-title="${escHtml(b.title)}" data-author="${escHtml(b.author)}">
+      <div class="book-cover" data-title="${escHtml(b.title)}" data-author="${escHtml(b.author)}"${coverExtra}>
         <div class="book-cover-placeholder">▪</div>
         <img alt="${escHtml(b.title)}" loading="lazy">
       </div>
@@ -732,9 +753,10 @@ function buildCard(ep, q) {
         ${b.author ? `<div class="book-author">${highlight(b.author, q)}</div>` : ''}
       </div>
       <div class="book-actions">
-        <a class="buy-btn" href="https://www.fnac.com/SearchResult/ResultList.aspx?SCat=2!1&Search=${encodeURIComponent(b.title + (b.author ? ' ' + b.author : ''))}" target="_blank" rel="noopener">Acheter</a>
+        <a class="buy-btn" href="${escHtml(buyHref)}" target="_blank" rel="noopener">${buyLabel}</a>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 
   return `
     <div class="ep-card">
@@ -829,6 +851,15 @@ async function loadBookForEl(el) {
   const title  = el.dataset.title  || '';
   const author = el.dataset.author || '';
   if (!title) return;
+
+  // Use override cover if set
+  if (el.dataset.overrideCover) {
+    const img = el.querySelector('img');
+    img.onload = () => { img.classList.add('loaded'); el.classList.add('has-img'); };
+    img.onerror = () => {};
+    img.src = el.dataset.overrideCover;
+    return;
+  }
 
   const cacheKey = title + '||' + author;
   let coverUrl = bookCache.get(cacheKey);
