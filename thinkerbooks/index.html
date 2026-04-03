@@ -62,6 +62,7 @@ header {
   align-items: center;
   gap: 18px;
   margin-bottom: 20px;
+  justify-content: space-between;
 }
 
 .brand-tv {
@@ -349,33 +350,30 @@ footer a { color: var(--muted); text-decoration: underline; text-underline-offse
 footer a:hover { color: var(--accent); }
 
 /* ── NAV ── */
-.site-nav {
-  max-width: 820px;
-  margin: 0 auto;
-  padding: 0 24px;
+.brand-nav {
   display: flex;
   gap: 2px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 8px;
+  align-items: center;
+  margin-left: auto;
 }
 
 .nav-tab {
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-  padding: 10px 16px;
+  padding: 6px 12px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 500;
   letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--muted);
   cursor: pointer;
   transition: color .15s, border-color .15s;
+  border-radius: 2px;
 }
 .nav-tab:hover { color: var(--text); }
-.nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.nav-tab.active { color: var(--accent); background: var(--tag-bg); }
 
 /* ── TOP VIEW ── */
 #view-top, #view-about {
@@ -486,7 +484,8 @@ footer a:hover { color: var(--accent); }
   .grid { padding: 0 12px 60px; }
   .stats-bar { padding: 0 12px; }
   .book-actions { display: none; }
-  .site-nav { padding: 0 12px; }
+  .brand-nav { gap: 0; }
+  .nav-tab { padding: 5px 8px; font-size: 9px; }
   #view-top, #view-about { padding: 16px 12px 60px; }
   .top-buy { display: none; }
 }
@@ -506,6 +505,11 @@ footer a:hover { color: var(--accent); }
       <div class="brand-label">// project</div>
       <h1 class="brand-title"><span class="t-prefix">Thinker</span>Books<span class="brand-cursor"></span></h1>
     </div>
+    <nav class="brand-nav">
+      <button class="nav-tab active" data-tab="episodes">Épisodes</button>
+      <button class="nav-tab" data-tab="top">Top</button>
+      <button class="nav-tab" data-tab="about">About</button>
+    </nav>
   </div>
 
   <p class="seo-intro">
@@ -526,12 +530,6 @@ footer a:hover { color: var(--accent); }
   </div>
   <div class="search-hint"><strong id="total-books-count">…</strong> livres indexés · recherche en temps réel</div>
 </header>
-
-<nav class="site-nav">
-  <button class="nav-tab active" data-tab="episodes">Épisodes</button>
-  <button class="nav-tab" data-tab="top">Top livres</button>
-  <button class="nav-tab" data-tab="about">About</button>
-</nav>
 
 <div id="view-episodes">
 <div class="grid" id="grid">
