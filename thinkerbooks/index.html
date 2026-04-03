@@ -497,6 +497,36 @@ footer a:hover { color: var(--accent); }
   #view-top, #view-about { padding: 16px 12px 60px; }
   .top-buy { display: none; }
 }
+
+/* ── VERBATIMS ── */
+.book-verbatim-toggle {
+  margin-top: 7px;
+  font-size: 11px;
+  color: var(--accent);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  opacity: 0.75;
+  user-select: none;
+  transition: opacity .15s;
+}
+.book-verbatim-toggle:hover { opacity: 1; }
+.verbatim-chevron { font-size: 9px; transition: transform .2s; display: inline-block; }
+.book-verbatim-toggle.open .verbatim-chevron { transform: rotate(90deg); }
+.book-verbatim {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-left: 2px solid var(--accent);
+  background: rgba(0,204,122,.04);
+}
+.book-verbatim blockquote {
+  font-style: italic;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  white-space: pre-wrap;
+}
 </style>
 </head>
 <body>
@@ -617,6 +647,7 @@ let searchQuery = '';
 let sentinelObserver = null;
 let LOCAL_COVERS = {};     // raw from covers.json
 let LOCAL_COVERS_NORM = {}; // indexed by normalize(title)||normalize(author)
+let VERBATIMS = {};         // key: "title||author" → {verbatim, episode, mention_sec}
 
 // ── TEXT CLEANUP ──
 function cleanBookText(str) {
@@ -764,8 +795,21 @@ function buildCard(ep, q) {
       : `https://www.fnac.com/SearchResult/ResultList.aspx?SCat=2!1&Search=${encodeURIComponent(b.title + (b.author ? ' ' + b.author : ''))}`;
     const buyLabel = ov?.linkLabel || 'Acheter';
     const coverExtra = ov?.cover ? ` data-override-cover="${escHtml(ov.cover)}"` : '';
+
+    // Verbatim lookup (try title||author, then title||)
+    const verbKey = `${b.title}||${b.author}`;
+    const verbEntry = VERBATIMS[verbKey] || VERBATIMS[`${b.title}||`] || null;
+    const hasVerbatim = verbEntry?.found && verbEntry?.verbatim;
+    const verbatimHtml = hasVerbatim ? `
+      <div class="book-verbatim-toggle" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden;this.classList.toggle('open')">
+        <span class="verbatim-chevron">▸</span> Ce qu'en dit l'invité
+      </div>
+      <div class="book-verbatim" hidden>
+        <blockquote>${escHtml(verbEntry.verbatim)}</blockquote>
+      </div>` : '';
+
     return `
-    <div class="book-item">
+    <div class="book-item${hasVerbatim ? ' has-verbatim' : ''}">
       <div class="book-cover" data-title="${escHtml(b.title)}" data-author="${escHtml(b.author)}"${coverExtra}>
         <div class="book-cover-placeholder">▪</div>
         <img alt="${escHtml(b.title)}" loading="lazy">
@@ -774,6 +818,7 @@ function buildCard(ep, q) {
       <div class="book-info">
         <div class="book-title">${highlight(b.title, q)}</div>
         ${displayAuthor ? `<div class="book-author">${highlight(displayAuthor, q)}</div>` : ''}
+        ${verbatimHtml}
       </div>
       <div class="book-actions">
         <a class="buy-btn" href="${escHtml(buyHref)}" target="_blank" rel="noopener">${buyLabel}</a>
@@ -1068,6 +1113,12 @@ async function init() {
           }
         }
       }
+    } catch {}
+
+    // Load verbatims (silent fail)
+    try {
+      const vr = await fetch('./data/verbatims.json', { cache: 'no-cache' });
+      if (vr.ok) VERBATIMS = await vr.json();
     } catch {}
 
     const res = await fetch(README_URL);
