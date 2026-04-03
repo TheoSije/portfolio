@@ -1173,8 +1173,9 @@ clearBtn.addEventListener('click', () => {
 init();
 </script>
 <script>
+// Unregister any previously installed service worker
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
+  navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.unregister()));
 }
 </script>
 </body>
