@@ -16,7 +16,7 @@ from youtube_transcript_api import YouTubeTranscriptApi
 EPISODES_JSON = os.path.join(os.path.dirname(__file__), '..', 'thinkerbooks', 'data', 'episodes.json')
 OUTPUT_JSON   = os.path.join(os.path.dirname(__file__), '..', 'thinkerbooks', 'data', 'verbatims.json')
 WINDOW_SECS   = 90   # secondes de contexte autour de la mention
-MAX_EPISODES  = 2    # limiter aux N premiers épisodes
+MAX_EPISODES  = 20   # limiter aux N premiers épisodes
 
 # ── HELPERS ─────────────────────────────────────────────────────────────────
 def normalize(s):
@@ -50,8 +50,16 @@ def full_text_with_time(segments):
     return ' '.join(parts), offsets
 
 def find_mention(full_text, offsets, keywords, window_secs, total_duration):
-    """Cherche la première mention d'un keyword, retourne le passage +/- window_secs."""
-    norm_text = normalize(full_text)
+    """Cherche la première mention d'un keyword dans le dernier tiers, retourne le passage +/- window_secs."""
+    # Les recommandations ont lieu à la fin des interviews — on ne cherche que dans le dernier 30%
+    if offsets:
+        last_sec = offsets[-1][0]
+        cutoff_sec = last_sec * 0.70  # on commence à 70% de la durée
+        start_char = next((char_off for (sec, char_off) in offsets if sec >= cutoff_sec), 0)
+    else:
+        start_char = 0
+    search_text = full_text[start_char:]
+    norm_text = normalize(search_text)
     for kw in keywords:
         norm_kw = normalize(kw)
         if len(norm_kw) < 3:
@@ -67,10 +75,12 @@ def find_mention(full_text, offsets, keywords, window_secs, total_duration):
                     idx = m.start()
         if idx == -1:
             continue
-        # Trouver le timestamp correspondant à idx
+        # idx est relatif à search_text, reconvertir en position absolue dans full_text
+        abs_idx = start_char + idx
+        # Trouver le timestamp correspondant à abs_idx
         mention_sec = None
         for (sec, char_off) in reversed(offsets):
-            if char_off <= idx:
+            if char_off <= abs_idx:
                 mention_sec = sec
                 break
         if mention_sec is None:
@@ -115,7 +125,7 @@ Si le livre n'est pas clairement mentionné dans ce passage, retourne uniquement
 
 # ── MAIN ─────────────────────────────────────────────────────────────────────
 def main():
-    client = anthropic.Anthropic()
+    client = None  # Claude API non utilisé dans ce mode batch
 
     with open(EPISODES_JSON) as f:
         episodes = json.load(f)
@@ -169,21 +179,14 @@ def main():
                 continue
 
             print(f"    → Trouvé à {mention_sec:.0f}s, passage de {len(passage)} chars")
-            print(f"    → Nettoyage Claude...")
-
-            cleaned = clean_with_claude(client, ep['title'], title, author, passage)
-
-            if '[non trouvé]' in cleaned.lower():
-                print(f"    → Claude: non pertinent")
-                verbatims[key] = {"episode": ep['title'], "found": False, "verbatim": None}
-            else:
-                print(f"    → OK ({len(cleaned)} chars)")
-                verbatims[key] = {
-                    "episode": ep['title'],
-                    "found": True,
-                    "mention_sec": int(mention_sec),
-                    "verbatim": cleaned
-                }
+            verbatims[key] = {
+                "episode": ep['title'],
+                "found": True,
+                "mention_sec": int(mention_sec),
+                "verbatim": passage,
+                "needs_cleaning": True
+            }
+            print(f"    → Passage brut sauvegardé (needs_cleaning=True)")
 
             # Sauvegarde intermédiaire
             with open(OUTPUT_JSON, 'w') as f:
