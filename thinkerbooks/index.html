@@ -672,9 +672,10 @@ function parseReadme(text) {
         }
 
         // "Title de/par Author Name" split — author must be capitalized words at end
+        // Skip generic collective references: "Oeuvres de X", "L'oeuvre de X", "Les livres de X", etc.
         if (!author) {
           const deMatch = bookTitle.match(/^(.+?)\s+(?:de|par)\s+([A-ZÁÀÂÄÉÈÊËÎÏÔÖÙÛÜ][a-zA-ZÀ-ÿ.\-]+(?:\s+[A-ZÁÀÂÄÉÈÊËÎÏÔÖÙÛÜ][a-zA-ZÀ-ÿ.\-]+)*)$/);
-          if (deMatch) {
+          if (deMatch && !/^(?:l[''])?(?:oeuvre|oeuvres?|livre|livres?|ouvrage|ouvrages?)$/i.test(deMatch[1].trim())) {
             bookTitle = cleanBookText(deMatch[1]);
             author = cleanBookText(deMatch[2]);
           }
@@ -964,8 +965,11 @@ let topRendered = false;
 function computeTopBooks() {
   const counts = new Map(); // normalizedKey → { title, author, count, episodes[] }
   for (const ep of ALL_EPISODES) {
+    const seenInEp = new Set(); // deduplicate within a single episode
     for (const b of ep.books) {
       const key = normalize(b.title);
+      if (seenInEp.has(key)) continue;
+      seenInEp.add(key);
       if (!counts.has(key)) {
         counts.set(key, { title: b.title, author: b.author, count: 0, episodes: [] });
       }
@@ -1008,7 +1012,7 @@ function renderTop() {
       <a class="top-buy" href="https://www.fnac.com/SearchResult/ResultList.aspx?SCat=2!1&Search=${encodeURIComponent(b.title + (b.author ? ' ' + b.author : ''))}" target="_blank" rel="noopener">Acheter</a>
     </div>`).join('');
 
-  // Lazy-load covers for top list
+  // Lazy-load covers for top list — check local manifest first, then API
   const observer = new IntersectionObserver((entries) => {
     for (const entry of entries) {
       if (!entry.isIntersecting) continue;
@@ -1017,7 +1021,15 @@ function renderTop() {
       const author = entry.target.dataset.author || '';
       const img = entry.target.querySelector('img');
       if (!img || !title) continue;
-      fetchCover(title, author).then(url => {
+      const normKey = normalize(title) + '||' + normalize(author);
+      let coverPromise;
+      if (normKey in LOCAL_COVERS_NORM) {
+        const local = LOCAL_COVERS_NORM[normKey];
+        coverPromise = Promise.resolve(local ? ('../' + local) : null);
+      } else {
+        coverPromise = fetchCover(title, author);
+      }
+      coverPromise.then(url => {
         if (!url) return;
         img.onload = () => img.classList.add('loaded');
         img.src = url;
