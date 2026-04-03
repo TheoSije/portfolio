@@ -605,6 +605,8 @@ let renderedCount = 0;
 const BATCH = 20;
 let searchQuery = '';
 let sentinelObserver = null;
+let LOCAL_COVERS = {};     // raw from covers.json
+let LOCAL_COVERS_NORM = {}; // indexed by normalize(title)||normalize(author)
 
 // ── TEXT CLEANUP ──
 function cleanBookText(str) {
@@ -865,7 +867,13 @@ async function loadBookForEl(el) {
   let coverUrl = bookCache.get(cacheKey);
 
   if (coverUrl === undefined) {
-    coverUrl = await fetchCover(title, author);
+    // Check local manifest first (normalized lookup)
+    const normKey = normalize(title) + '||' + normalize(author);
+    if (normKey in LOCAL_COVERS_NORM) {
+      coverUrl = LOCAL_COVERS_NORM[normKey] ? ('../' + LOCAL_COVERS_NORM[normKey]) : null;
+    } else {
+      coverUrl = await fetchCover(title, author);
+    }
     bookCache.set(cacheKey, coverUrl);
   }
 
@@ -1013,6 +1021,23 @@ function renderTop() {
 async function init() {
   const README_URL = 'https://raw.githubusercontent.com/sebastienp7669/Thinkerview-Recommandations-lecture/master/README.md';
   try {
+    // Load local covers manifest (silent fail)
+    try {
+      const r = await fetch('../img/thinkerbooks/covers.json');
+      if (r.ok) {
+        LOCAL_COVERS = await r.json();
+        // Build normalized index (handles accent/case mismatches)
+        for (const [key, val] of Object.entries(LOCAL_COVERS)) {
+          const [t, a] = key.split('||');
+          const normKey = normalize(t || '') + '||' + normalize(a || '');
+          // Prefer non-null value if key already exists
+          if (!(normKey in LOCAL_COVERS_NORM) || val !== null) {
+            LOCAL_COVERS_NORM[normKey] = val;
+          }
+        }
+      }
+    } catch {}
+
     const res = await fetch(README_URL);
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const text = await res.text();
