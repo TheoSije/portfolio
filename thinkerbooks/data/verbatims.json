@@ -117,8 +117,9 @@
   },
   "Traité théologico-politique||Baruch Spinoza": {
     "episode": "L'Europe a peur, elle bâillonne ? Bluetouff et Nicolas Conquer",
-    "found": false,
-    "verbatim": null
+    "found": true,
+    "mention_sec": 7329,
+    "verbatim": "Le traité théologico-politique de Spinoza qui est foutrement actuel sur la liberté d'expression."
   },
   "Cyberpunk||Le nouveau système totalitaire - Asma Mhalla": {
     "episode": "L'Europe a peur, elle bâillonne ? Bluetouff et Nicolas Conquer",
