@@ -140,13 +140,15 @@
   },
   "Bocuse||Gautier Battistella": {
     "episode": "Le Patron des Patrons : Le MEDEF sans filtre ? Patrick Martin",
-    "found": false,
-    "verbatim": null
+    "found": true,
+    "mention_sec": 7588,
+    "verbatim": "j'ai lu la biographie de Bocuse. C'est des personnages extraordinaires. J'aime bien les personnages extraordinaires avec des faces cachées ou en tout cas un peu ombrés."
   },
   "Le roi Arthur||Dominique Bona": {
     "episode": "Le Patron des Patrons : Le MEDEF sans filtre ? Patrick Martin",
-    "found": false,
-    "verbatim": null
+    "found": true,
+    "mention_sec": 7604,
+    "verbatim": "Je viens de finir un bouquin écrit par une amie que je respecte infiniment, d'autant qu'elle est à l'Académie française, Dominique Bona, qui a écrit un bouquin sur son père qui est un type parti de rien et qui a été dernier président de l'ORTF."
   },
   "L'art de la guerre||Sun Tzu": {
     "episode": "Sous surveillance émotionnelle : La Machine voit tout ? Sébastien Crozier",
