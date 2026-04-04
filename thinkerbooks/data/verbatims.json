@@ -576,10 +576,10 @@
     "verbatim": null
   },
   "Mémoires d'Hadrien||Marguerite Yourcenar": {
-    "episode": "Jean-Philippe Tanguy sans filtres ?",
+    "episode": "Reprendre le pouvoir ou finir esclaves ? Nicolas Dupont-Aignan",
     "found": true,
-    "mention_sec": 8932,
-    "verbatim": "Le livre le plus important pour moi, c'est les Mémoires d'Hadrien de Yourcenar. C'est un livre que je lis presque tous les ans."
+    "mention_sec": 8199,
+    "verbatim": "les Mémoires d'Hadrien de Yourcenar que j'aime beaucoup"
   },
   "Mémoires||Charles de Gaulle": {
     "episode": "Jean-Philippe Tanguy sans filtres ?",
@@ -813,10 +813,10 @@
     "verbatim": "Les livres écrits par un philosophe français qui m'a beaucoup influencé : François Julien. N'importe quel livre de François Julien sur la Chine — le Détour, l'immanence, les Transformations silencieuses — n'importe quel livre est une découverte extraordinaire."
   },
   "De la Chine||Henry Kissinger": {
-    "episode": "Doit-on avoir peur de la Chine ? André Chieng",
+    "episode": "Guerre économique : l'Europe, charogne rongée à l'os ? David Baverez",
     "found": true,
-    "mention_sec": 8858,
-    "verbatim": "Le livre écrit par Henry Kissinger qui s'appelle De la Chine — absolument remarquable. C'est un livre écrit à deux mains dans lequel Kissinger a fait travailler un de ses étudiants, qui a fait un essai sur la Chine phénoménal, et dans lequel il a rajouté sa touche personnelle et son expérience absolument extraordinaire de la diplomatie et des relations avec la Chine."
+    "mention_sec": 8535,
+    "verbatim": "un bouquin traditionnel, c’est Kissinger on China, donc de la Chine"
   },
   "L'Ancien régime et la Révolution||Alexis de Tocqueville": {
     "episode": "Doit-on avoir peur de la Chine ? André Chieng",
@@ -882,16 +882,16 @@
     "verbatim": null
   },
   "De la démocratie en Amérique||Alexis de Tocqueville": {
-    "episode": "François Ecalle : Le Déni Politique pour une Réalité qui Frappe ?",
+    "episode": "Charles de Courson : Macron cauchemarde, la France résiste ?",
     "found": true,
-    "mention_sec": 5120,
-    "verbatim": "Je vais reciter Tocqueville — entre La Démocratie en Amérique et L'Ancien Régime et la Révolution, je trouve qu'il y a matière. Et c'est en lien avec les sujets de finances publiques françaises. Relisez L'Ancien Régime et la Révolution et La Démocratie en Amérique — ça donne un éclairage sur ce qui se passe aussi en ce moment, aussi bien en Europe qu'aux États-Unis, sur le déni des politiques face à la réalité."
+    "mention_sec": 5528,
+    "verbatim": "les bouquins d'Alexis de Tocqueville : celui le plus connu de la démocratie en Amérique, mais les deux autres qui sont moins connus qui sont aussi très intéressants."
   },
   "L'Ancien Régime et la Révolution||Alexis de Tocqueville": {
-    "episode": "François Ecalle : Le Déni Politique pour une Réalité qui Frappe ?",
+    "episode": "Charles de Courson : Macron cauchemarde, la France résiste ?",
     "found": true,
-    "mention_sec": 5120,
-    "verbatim": "Je vais reciter Tocqueville — entre La Démocratie en Amérique et L'Ancien Régime et la Révolution, je trouve qu'il y a matière. Et c'est en lien avec les sujets de finances publiques françaises. Relisez L'Ancien Régime et la Révolution et La Démocratie en Amérique — ça donne un éclairage sur ce qui se passe aussi en ce moment, aussi bien en Europe qu'aux États-Unis, sur le déni des politiques face à la réalité."
+    "mention_sec": 5535,
+    "verbatim": "celui sur la révolution dans lequel il montre que au fond la révolution n'a fait qu'accélérer le mouvement de centralisme de la royauté française, qui est très intéressant du point de vue sociologique."
   },
   "L’énergie, face cachée de la monnaie||Pierre Noizat et Edouard Gallego": {
     "episode": "Énergie, face cachée de la monnaie ? Sébastien Gouspillou et Pierre Noizat",
@@ -952,5 +952,371 @@
     "found": true,
     "mention_sec": 8757,
     "verbatim": "L'Archipel français de Jérôme Fourquet, parce que Fourquet a rassemblé beaucoup de données très intéressantes sur l'évolution de la société française sur les 50 dernières années. Ça peut expliquer en partie les problèmes qu'on rencontre aujourd'hui. La société française a perdu un certain nombre d'institutions — l'Église, le Parti communiste — qui rassemblaient beaucoup de Français. Aujourd'hui on n'en a plus tellement : chacun vit avec les siens, dans des communautés."
+  },
+  "Ressources: Un défi pour l’humanité||Vincent Perriot et Philippe Bihouix": {
+    "episode": "Urgences énergétiques, la réalité sans filtre ? P. Charlez, F. Perrin et N. Meilhan",
+    "found": true,
+    "mention_sec": 10068,
+    "verbatim": "j’allais proposer la dernière BD de Philip Wix ressources mais qui est excellente et que je vous recommande mais je pense que son livre fondateur qu’il faut avoir lu c’est l’âge des lotch"
+  },
+  "L’Âge des low tech: vers une civilisation techniquement soutenable||Philippe Bihouix": {
+    "episode": "Urgences énergétiques, la réalité sans filtre ? P. Charlez, F. Perrin et N. Meilhan",
+    "found": true,
+    "mention_sec": 10077,
+    "verbatim": "son livre fondateur qu’il faut avoir lu c’est l’âge des lotch puisque l’âge des lotch c’est pour moi la suite d’un livre qui m’a aussi marqué qui s’appelle le rapport du club de Rome mais qui donne les solutions"
+  },
+  "Les autres ne pensent pas comme nous||Maurice Gourdault-Montagne": {
+    "episode": "Urgences énergétiques, la réalité sans filtre ? P. Charlez, F. Perrin et N. Meilhan",
+    "found": true,
+    "mention_sec": 10087,
+    "verbatim": "il y en a un second que je suis en train de lire, j’ai du mal à trouver du temps, mais qui s’appelle Les autres ne pensent pas comme nous. Et malheureusement, j’aurais du mal à vous dire l’auteur montagne. Voilà. Exactement. Souhirac."
+  },
+  "Bienvenue en économie de guerre||David Baverez": {
+    "episode": "Urgences énergétiques, la réalité sans filtre ? P. Charlez, F. Perrin et N. Meilhan",
+    "found": true,
+    "mention_sec": 10113,
+    "verbatim": "bienvenue en économie de guerre David Bavrez. C’est pas trop long à lire et c’est plutôt intéressant et une grille de lecture je pense qu’il est bon d’avoir en tête"
+  },
+  "Les illusionnistes||Géraldine Woessner et Erwan Seznec": {
+    "episode": "Urgences énergétiques, la réalité sans filtre ? P. Charlez, F. Perrin et N. Meilhan",
+    "found": true,
+    "mention_sec": 10163,
+    "verbatim": "j’ai beaucoup aimé les illusionnistes de Géraldine Vosner et Johann Sek. Donc qui effectivement explique un peu l’illusion que nous font entrevoir les écologistes. Alors ça ne parle pas que d’énergie, ça parle aussi beaucoup d’agriculture."
+  },
+  "Rien n’est joué||Jacques Lecomte": {
+    "episode": "Urgences énergétiques, la réalité sans filtre ? P. Charlez, F. Perrin et N. Meilhan",
+    "found": true,
+    "mention_sec": 10186,
+    "verbatim": "Rien n’est joué de Jacques Lecte. C’est un livre sur le catastrophisme à travers les âges. Et en fait c’est assez intéressant parce qu’il nous montre que à travers les âges depuis Nostradamus, tous les catastrophistes se sont toujours plantés de A à Z."
+  },
+  "De Gaïa à l’IA: Pour une science libérée de l’écologisme||Jean-Paul Oury": {
+    "episode": "Urgences énergétiques, la réalité sans filtre ? P. Charlez, F. Perrin et N. Meilhan",
+    "found": true,
+    "mention_sec": 10222,
+    "verbatim": "le livre de Jean-Paul Oury qui s’appelle de Gaïa à l’IA où il explique effectivement l’excès d’un côté de la technologie et le retour à Gaïa et la supériorité de Gaïa sur la race humaine de l’autre que considèrent les écologistes."
+  },
+  "Perspectives énergétiques mondiales (AIE) (https://www.iea.org/search?q=world%20energy%20outlook)||": {
+    "episode": "Urgences énergétiques, la réalité sans filtre ? P. Charlez, F. Perrin et N. Meilhan",
+    "found": true,
+    "mention_sec": 10363,
+    "verbatim": "si vous vous intéressez à la prospective énergétique dans une idée de long terme, lisez les perspectives énergétiques mondiales de l’AIE, agence internationale de l’énergie basée à Paris"
+  },
+  "World oil outlook (OPEP) (https://www.opec.org/world-oil-outlook.html)||": {
+    "episode": "Urgences énergétiques, la réalité sans filtre ? P. Charlez, F. Perrin et N. Meilhan",
+    "found": true,
+    "mention_sec": 10372,
+    "verbatim": "lisez les perspectives énergétiques mondiales de l’AIE, de l’OPEP, l’Organisation des pays exportateurs de pétrole à Vienne et du département de l’énergie des États-Unis, Washington et vous aurez déjà trois points de vue différents sur la même thématique"
+  },
+  "Publications du Département de l’Energie US (DOE) (https://www.energy.gov/cfo/reports)||": {
+    "episode": "Urgences énergétiques, la réalité sans filtre ? P. Charlez, F. Perrin et N. Meilhan",
+    "found": true,
+    "mention_sec": 10372,
+    "verbatim": "lisez les perspectives énergétiques mondiales de l’AIE, de l’OPEP et du département de l’énergie des États-Unis, Washington et vous aurez déjà trois points de vue différents sur la même thématique"
+  },
+  "Dragon tactics: Les tactiques des entrepreneurs chinois pour mieux diriger dans l’incertitude||Sandrine Zerbib": {
+    "episode": "Guerre économique : l'Europe, charogne rongée à l'os ? David Baverez",
+    "found": true,
+    "mention_sec": 8535,
+    "verbatim": "un bouquin culturel génial, c’est Dragon Tactics de Sandrine Zerbib qui vous explique de manière géniale le pourquoi le management chinois est fantastique. C’est quelqu’un qui a monté Adidas de 0 à 1 milliard en Chine. C’est vraiment quelque chose d’extraordinaire."
+  },
+  "La roulette chinoise | Argent, pouvoir, corruption et vengeance dans la Chine d’aujourd’hui - Desmond Shum||": {
+    "episode": "Guerre économique : l'Europe, charogne rongée à l'os ? David Baverez",
+    "found": true,
+    "mention_sec": 8551,
+    "verbatim": "pour vous marrer, puisqu’il faut se marrer dans la vie, vous lisez Red Roulette. C’est peut-être traduit par roulette rouge, je sais pas en français. Qui est la vie de Madame 30 %, je vous en dis pas plus."
+  },
+  "La connaissance inutile||Jean-François Revel": {
+    "episode": "Guerre économique : l'Europe, charogne rongée à l'os ? David Baverez",
+    "found": true,
+    "mention_sec": 8568,
+    "verbatim": "la Bible, la Bible, je vous l’ai déjà cité, c’est la connaissance inutile de Jean-François Revel qui est écrit avant les réseaux sociaux. C’est sur l’information, c’est pour moi ça reste l’un des livres qui m’a le plus marqué."
+  },
+  "Homo Cretinus: Le triomphe de la bêtise||Olivier Postel-Vinay": {
+    "episode": "Guerre économique : l'Europe, charogne rongée à l'os ? David Baverez",
+    "found": true,
+    "mention_sec": 8615,
+    "verbatim": "c’est un bouquin que j’ai lu récemment et que j’ai adoré qui est Homo Cretinus, le triomphe de la bêtise de Olivier Postel-Vinay avec la définition de la bêtise : la bêtise c’est s’en tenir là peu importe où."
+  },
+  "Le chemin le moins fréquenté: Apprendre à vivre avec la vie||Scott Peck": {
+    "episode": "Société et relations, et si on communiquait sans violence? Thomas D'Ansembourg",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Père manquant fils manqué: De la blessure à la parole||Guy Corneau": {
+    "episode": "Société et relations, et si on communiquait sans violence? Thomas D'Ansembourg",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Le pouvoir du moment présent: Guide d'éveil spirituel||Eckhart Tolle": {
+    "episode": "Société et relations, et si on communiquait sans violence? Thomas D'Ansembourg",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Poor Charlie's Almanack: The Essential Wit & Wisdom of Charles T. Munger||Charles T. Munger": {
+    "episode": "Comprendre le Gourou des Gourous de Wall Street ? Shane Parrish",
+    "found": true,
+    "mention_sec": 3208,
+    "verbatim": "I'm a big fan of Poor Charlie's Almanac which is published by Stripe Press."
+  },
+  "Seeking Wisdom : From Darwin to Munger||Peter Bevelin": {
+    "episode": "Comprendre le Gourou des Gourous de Wall Street ? Shane Parrish",
+    "found": true,
+    "mention_sec": 3216,
+    "verbatim": "another book on sort of the Buffett Munger thing called Seeking Wisdom by Peter Bevlin. And I'm a big fan of meditations by Marcus Aurelius."
+  },
+  "Méditations||Marc Aurèle": {
+    "episode": "Comprendre le Gourou des Gourous de Wall Street ? Shane Parrish",
+    "found": true,
+    "mention_sec": 3216,
+    "verbatim": "I'm a big fan of Meditations by Marcus Aurelius, a book that I come back to at certain moments in my life. Here you have the most powerful man in the world and you basically could do anything and yet he's very humble and very down to earth and this is his private journal."
+  },
+  "Le grand échiquier: L'Amérique et le reste du monde||Zbigniew Brzezinski": {
+    "episode": "Géopolitique, Guerres, Propagandes et PsyOps ? Caroline Galactéros",
+    "found": true,
+    "mention_sec": 9015,
+    "verbatim": "le grand échiquier de Zbigniew Brzezinski"
+  },
+  "La Guerre hors limites -  Qiao Liang & Wang Xiangsui||": {
+    "episode": "Géopolitique, Guerres, Propagandes et PsyOps ? Caroline Galactéros",
+    "found": true,
+    "mention_sec": 9020,
+    "verbatim": "la guerre hors limite des deux Chinois dont j'ai oublié le nom des colonels, qui est sorti en 2006 peut-être en français mais qui date d'un peu avant"
+  },
+  "Le mage du Kremlin||Giuliano da Empoli": {
+    "episode": "Géopolitique, Guerres, Propagandes et PsyOps ? Caroline Galactéros",
+    "found": true,
+    "mention_sec": 9067,
+    "verbatim": "si vous voulez avoir une idée de ce que peut-être la mentalité russe sur la guerre, sur la mort, sur plein de choses, c'est le mage du Kremlin. C'est une histoire romancée. Ça se lit comme ça. C'est écrit par Giuliano da Empoli."
+  },
+  "Plutôt nourrir||Noémia Calais & Clément Osé": {
+    "episode": "La mort est dans le pré : Les dessous de l'élevage selon Ulysse Thevenon ?",
+    "found": true,
+    "mention_sec": 7280,
+    "verbatim": "ce livre écrit à quatre mains, c'est la rencontre de Clément Osé qui était son camarade de promo à Sciences Po et Noémi. C'est pas très long et c'est absolument fantastique si on veut comprendre ce que c'est être paysan aujourd'hui, l'amour de ce métier, toutes les résistances auxquelles il faut faire face."
+  },
+  "La Horde du Contrevent||Alain Damasio": {
+    "episode": "La mort est dans le pré : Les dessous de l'élevage selon Ulysse Thevenon ?",
+    "found": true,
+    "mention_sec": 7351,
+    "verbatim": "l'Horde du Contrevent d'Alain Damasio, c'est un livre qui a changé ma vie. Un roman de science-fiction. Les pages sont numérotées à l'envers. C'est l'histoire d'une épopée incroyable d'un groupe de personnes dont la mission de vie est de lutter contre le vent."
+  },
+  "Il n'y a plus personne||Noémie Alazard (https://fr.ulule.com/roman-il-n-y-a-plus-personne-/)": {
+    "episode": "La mort est dans le pré : Les dessous de l'élevage selon Ulysse Thevenon ?",
+    "found": true,
+    "mention_sec": 7425,
+    "verbatim": "Il n'y a plus personne de Noémie Alazard. C'est ma petite amie qui s'est mis un interdit de faire l'autopromo et je vais le faire quand même parce que son livre est introuvable. Je reste persuadé que si je découvrais ce livre au hasard, je l'aurais adoré."
+  },
+  "Les découvreurs||Daniel Boorstin": {
+    "episode": "Prémices d'une insurrection : Les ZFE, étincelle d'un chaos social ? Alexandre Jardin",
+    "found": true,
+    "mention_sec": 7996,
+    "verbatim": "les découvreurs de Boorstin qui était le bibliothécaire de la Bibliothèque du Congrès américain. J'ai appris énormément de choses, c'est un livre que tout le monde devrait avoir chez soi."
+  },
+  "Un thérapeute hors du commun: Milton H. Erickson||Jay Haley, Alain Cayrol, et al.": {
+    "episode": "Prémices d'une insurrection : Les ZFE, étincelle d'un chaos social ? Alexandre Jardin",
+    "found": true,
+    "mention_sec": 8021,
+    "verbatim": "un thérapeute hors du commun, Milton Erickson, c'est le père de la communication indirecte, c'est le père de toute l'école de Palo Alto. Ça a l'air d'un psychiatre, c'est une pensée qu'on peut appliquer à la totalité des activités humaines."
+  },
+  "Frédéric de Hohenstaufen||Jacques-Benoît Méchin": {
+    "episode": "Prémices d'une insurrection : Les ZFE, étincelle d'un chaos social ? Alexandre Jardin",
+    "found": true,
+    "mention_sec": 8055,
+    "verbatim": "la biographie de Frédéric de Hohenstaufen, l'homme qui a importé la science expérimentale arabe en Occident, de Benoît Méchin qui était un peu une fripouille mais un génial biographe. Ce sont des livres qui ouvrent le jeu, qui font que on se dit : le monde est beaucoup plus vaste que ce que je croyais."
+  },
+  "Petite Poucette||Michel Serres": {
+    "episode": "Métadonnées, l'arme invisible, Sommes nous déjà tous fichés ? Alexis Roussel",
+    "found": true,
+    "mention_sec": 6367,
+    "verbatim": "la Petite Poucette, elle s'appelle la petite Poucette parce qu'elle tape avec les pouces sur l'écran. Michel Serres était pour moi un des plus grands philosophes du numérique malgré son âge très avancé."
+  },
+  "The Sovereign Individual: Mastering the Transition to the Information Age||James Dale Davidson": {
+    "episode": "Métadonnées, l'arme invisible, Sommes nous déjà tous fichés ? Alexis Roussel",
+    "found": true,
+    "mention_sec": 6382,
+    "verbatim": "l'individu souverain, Sovereign Individual en anglais, un livre qu'il faut lire avec beaucoup de critiques, mais qui montre la transformation de la société de l'âge féodal vers industriel et industriel vers numérique. La thèse c'est que le monopole de la violence à chaque ère se transforme."
+  },
+  "Abdullah Öcalan||Le confédéralisme démocratique (https://fr.anarchistlibraries.net/library/abdullah-ocalan-confederalisme-democratique)": {
+    "episode": "Métadonnées, l'arme invisible, Sommes nous déjà tous fichés ? Alexis Roussel",
+    "found": true,
+    "mention_sec": 6469,
+    "verbatim": "Abdullah Öcalan qui est actuellement en prison en Turquie, il a écrit un livre qui s'appelle le confédéralisme démocratique, disponible gratuitement. Il explique comment au Kurdistan syrien, entouré de l'État islamique, ils créent une société sans frontière décentralisée. Il inspire beaucoup les milieux technologiques qui travaillent sur les technologies de la décentralisation."
+  },
+  "(Film) Le sel de la terre -  Wim Wenders, Juliano Ribeiro Salgado (2014)||": {
+    "episode": "Reprendre le pouvoir ou finir esclaves ? Nicolas Dupont-Aignan",
+    "found": true,
+    "mention_sec": 8217,
+    "verbatim": "le sel de la terre de Wim Wenders, c'est de Salgado, sur l'humanité, sur la monstruosité des guerres de la misère. C'est un des plus beaux films qui existe et pour moi c'est aussi important qu'un livre."
+  },
+  "Lettres à la petite fille qui vient de naître||Patrice Franceschi": {
+    "episode": "Reprendre le pouvoir ou finir esclaves ? Nicolas Dupont-Aignan",
+    "found": true,
+    "mention_sec": 8440,
+    "verbatim": "lettre à ma fillole d'un dénommé Franceschi, un bouquin qu'on m'a offert pour mon anniversaire, un petit bouquin passionnant de 24 lettres, très émouvant d'un homme que je connaissais pas."
+  },
+  "Souvenirs||Alexis de Tocqueville": {
+    "episode": "Charles de Courson : Macron cauchemarde, la France résiste ?",
+    "found": true,
+    "mention_sec": 5551,
+    "verbatim": "ses souvenirs de cette période où il a été un éphémère ministre. Il explique comment lui qui était royaliste devient républicain, en disant que l'essentiel c'est pas la forme politique, c'est les libertés, la défense des libertés pour chacun."
+  },
+  "La Comédie Humaine||Honoré de Balzac": {
+    "episode": "Charles de Courson : Macron cauchemarde, la France résiste ?",
+    "found": true,
+    "mention_sec": 5582,
+    "verbatim": "Honoré de Balzac et la Comédie Humaine. Je trouve ça la description des caractères de l'âme humaine. Moi j'ai jamais cru que l'espèce humaine était peuplée de bisounours."
+  },
+  "Objectif Lune||Hergé": {
+    "episode": "Charles de Courson : Macron cauchemarde, la France résiste ?",
+    "found": true,
+    "mention_sec": 5776,
+    "verbatim": "Objectif Lune c'est formidable. Objectif Lune voilà, là il y a pas d'interprétation politico — quand on sait son passé."
+  },
+  "L'âge d'or de la corruption parlementaire 1930-1980||Jean-Yves Mollier": {
+    "episode": "La république,les affaires, que peut encore faire le journalisme ? Marc Endeweld",
+    "found": true,
+    "mention_sec": 13274,
+    "verbatim": "un historien de la presse et de l'édition qui s'appelle Jean-Yves Mollier, qui a fait un formidable ouvrage : l'âge d'or de la corruption parlementaire 1930-1980. Un ouvrage historique très précis, très bien écrit, ça raconte l'histoire du groupe Lagardère et comment il a totalement collaboré avec l'occupant nazi."
+  },
+  "Les patrons de la presse nationale: Tous mauvais||Jean Stern et Olivier Tosas-Giro": {
+    "episode": "La république,les affaires, que peut encore faire le journalisme ? Marc Endeweld",
+    "found": true,
+    "mention_sec": 13344,
+    "verbatim": "les patrons de presse nationale tous mauvais, le titre est assez cash. C'est un ouvrage de Jean Stern, un ancien journaliste de La Tribune et Libération, qui explique que les oligarques ont intérêt à ce que la presse perde de l'argent parce que ça leur permet de défiscaliser via des structures de holding."
+  },
+  "L'Empire de la douleur||Patrick Radden Keefe": {
+    "episode": "La république,les affaires, que peut encore faire le journalisme ? Marc Endeweld",
+    "found": true,
+    "mention_sec": 13401,
+    "verbatim": "Patrick Radden Keefe, un journaliste d'investigation américain : l'empire de la douleur, c'est sur la crise des opioïdes aux États-Unis. C'est du journalisme américain, super bien écrit, sur l'histoire de la famille Sackler à l'origine de la plus grave crise des opioïdes."
+  },
+  "La Tech : Quand la Silicon Valley refait le monde||Olivier Alexandre": {
+    "episode": "La république,les affaires, que peut encore faire le journalisme ? Marc Endeweld",
+    "found": true,
+    "mention_sec": 13460,
+    "verbatim": "la tech quand la Silicon Valley refait le monde, c'est un sociologue qui a passé 5 ans en Californie. Il a rencontré les gens de la tech et tout déconstruit. Très intéressant de comprendre comment ça fonctionne et notamment comment en France ça fonctionne pas."
+  },
+  "L'Inconnue de Dallas : Une espionne au cœur de l'assassinat de JFK||Mary Haverstick": {
+    "episode": "La république,les affaires, que peut encore faire le journalisme ? Marc Endeweld",
+    "found": true,
+    "mention_sec": 13502,
+    "verbatim": "une espionne au cœur de l'assassinat de JFK, l'inconnue de Dallas, Mary Haverstick, une documentariste qui voulait faire un film sur une espionne liée à l'assassinat de Kennedy."
+  },
+  "Terre des Hommes||Antoine de Saint exupéry": {
+    "episode": "Ministre des finances sans filtre ? Antoine Armand",
+    "found": true,
+    "mention_sec": 9221,
+    "verbatim": "Saint-Exupéry, Terre des Hommes. Il raconte ses expéditions pour l'Aéropostale et ce qui est incroyable c'est très peu de technologie et donc moins de technologie plus de..."
+  },
+  "Parlons-nous tous la même langue ? Comment les imaginaires transforment la France||Frédéric Dabi et Brice Soccol": {
+    "episode": "Ministre des finances sans filtre ? Antoine Armand",
+    "found": true,
+    "mention_sec": 9247,
+    "verbatim": "Parlons-nous la même langue ? Il y a des gens qui parlent de tranquillité publique et d'autres que ça insupporte qui disent non mais c'est de la sécurité. Le problème aujourd'hui dans notre débat public c'est que les mots font référence à d'autres mots et plus à des choses."
+  },
+  "Sans transition: Une nouvelle histoire de l'énergie||Jean-Baptiste Fressoz": {
+    "episode": "Ministre des finances sans filtre ? Antoine Armand",
+    "found": true,
+    "mention_sec": 9320,
+    "verbatim": "Jean-Baptiste Fressoz, Sans transition, avec qui je partage pas tout mais qui est quand même sacrément bien documenté. Le message en une phrase c'est : il n'y a pas eu de transition énergétique, on a juste additionné les énergies."
+  },
+  "Du \"miracle\" en économie: Leçons au Collège de France||Alain Peyrefitte": {
+    "episode": "Xavier Fontanet, Des Stratèges ou des Amateurs à la tête de l’État ?",
+    "found": true,
+    "mention_sec": 5782,
+    "verbatim": "le livre de Peyrefitte sur la confiance, il s'appelle Du miracle en économie, c'est le dernier livre qu'il a écrit. C'est le plus beau livre sur la confiance."
+  },
+  "Steve Jobs||Walter Isaacson": {
+    "episode": "Xavier Fontanet, Des Stratèges ou des Amateurs à la tête de l’État ?",
+    "found": true,
+    "mention_sec": 5854,
+    "verbatim": "Steve Jobs par Isaacson, il y a 10 bouquins, le seul bon c'est Isaacson. Vous allez voir ce que c'est qu'un génie, ce que c'est que le business. Il est absolument passionnant et il y a une dimension émotionnelle énorme."
+  },
+  "Grammaire des civilisations||Fernand Braudel": {
+    "episode": "Xavier Fontanet, Des Stratèges ou des Amateurs à la tête de l’État ?",
+    "found": true,
+    "mention_sec": 5878,
+    "verbatim": "la Grammaire des civilisations de Braudel, un grand historien qui s'est intéressé à l'économie du temps long. Pompidou avait demandé à Braudel de fusionner les cours d'économie, d'histoire et de géographie dans ce qu'on appelle une Grammaire des civilisations."
+  },
+  "Les nouveaux chiens de garde||Serge Halimi": {
+    "episode": "Virginie Joron cogne l'UE, corrompue et en crise ?",
+    "found": true,
+    "mention_sec": 9795,
+    "verbatim": "le livre de Serge Halimi Les nouveaux chiens de garde, 97, c'est là que j'ai commencé à regarder les médias d'une autre façon."
+  },
+  "Socrate, Jésus et Bouddha, Trois Maîtres De Vie||Frédéric Lenoir": {
+    "episode": "Virginie Joron cogne l'UE, corrompue et en crise ?",
+    "found": true,
+    "mention_sec": 9829,
+    "verbatim": "le livre de Frédéric Lenoir c'est Socrate Bouddha Jésus, maîtres de vie. La politique les rapports les chiffres à un moment donné j'aime bien me sourcer ailleurs, voir d'autres choses et trouver le sens de tout ça."
+  },
+  "Tous vaccinés, tous protégés ? Vaccins covid-19, Chronique d'une catastrophe sanitaire annoncée||Christine Cotton": {
+    "episode": "Virginie Joron cogne l'UE, corrompue et en crise ?",
+    "found": true,
+    "mention_sec": 9844,
+    "verbatim": "tous les livres qui concernent la crise covid : celui de Christine Cotton, celui d'Alexandra Henrion-Caude, celui de Pierre Chaillot, celui de Christian Perronne. Chaque personnalité a amené une pierre à l'édifice pour comprendre cette pandémie."
+  },
+  "Les apprentis sorciers||Alexandra Henrion-Caude": {
+    "episode": "Virginie Joron cogne l'UE, corrompue et en crise ?",
+    "found": true,
+    "mention_sec": 9844,
+    "verbatim": "que ça soit Alexandra Henrion-Caude par rapport au vaccin ARN messager, chacun a apporté sa petite pierre à l'édifice."
+  },
+  "Covid 19, ce que révèlent les chiffres officiels fin 2023||Pierre Chaillot": {
+    "episode": "Virginie Joron cogne l'UE, corrompue et en crise ?",
+    "found": true,
+    "mention_sec": 9875,
+    "verbatim": "que ça soit Pierre Chaillot par rapport aux statistiques, chacun a apporté sa petite pierre à l'édifice pour comprendre cette pandémie."
+  },
+  "Le réveil, 4 ans après||Christian Perronne": {
+    "episode": "Virginie Joron cogne l'UE, corrompue et en crise ?",
+    "found": true,
+    "mention_sec": 9851,
+    "verbatim": "Christian Perronne pour nous expliquer le virus. J'ai pas lu celui de Didier Raoult mais pour moi c'est important parce que c'est une période qui..."
+  },
+  "The great reset||Klaus Schwab": {
+    "episode": "Virginie Joron cogne l'UE, corrompue et en crise ?",
+    "found": true,
+    "mention_sec": 7307,
+    "verbatim": "depuis que j'ai découvert le livre Great Reset, je connaissais pas du tout ce monsieur Klaus Schwab. Je me suis renseignée et j'ai découvert que tous les ans il y avait ce fameux sommet de Davos."
+  },
+  "Les Enfants du Bronx||Adrian Nicole Leblanc": {
+    "episode": "Drogues : Les Camés et les Cramés de la Ripoublik ? Philippe Pujol",
+    "found": true,
+    "mention_sec": 11950,
+    "verbatim": "Les enfants du Bronx d'Adrian Nicole LeBlanc, une plongée dans les stupéfiants, dans des trafics portoricains aux États-Unis. C'est très bien écrit et ça raconte avec un peu d'avance ce qu'on a ici."
+  },
+  "The corner||David Simon": {
+    "episode": "Drogues : Les Camés et les Cramés de la Ripoublik ? Philippe Pujol",
+    "found": true,
+    "mention_sec": 11987,
+    "verbatim": "The Corner de David Simon, qui a aussi fait The Wire. Exceptionnel. Ça évolue, c'est plus à jour mais il n'y est pour rien."
+  },
+  "Sociologie de Marseille||Michel Peraldi, Claire Duport, Michel Samson": {
+    "episode": "Drogues : Les Camés et les Cramés de la Ripoublik ? Philippe Pujol",
+    "found": true,
+    "mention_sec": 12077,
+    "verbatim": "la Sociologie de Marseille de Claire Duport et Michel Peraldi pour les plus ardus c'est Gouverner Marseille. Sociologie de Marseille c'est accessible, ça raconte très bien les clientélismes, comment ils sont mis en place, et ça casse beaucoup d'idées reçues."
+  },
+  "Gouverner Marseille : Enquête sur les mondes politiques marseillais||Michel Peraldi, Michel Samson": {
+    "episode": "Drogues : Les Camés et les Cramés de la Ripoublik ? Philippe Pujol",
+    "found": true,
+    "mention_sec": 12085,
+    "verbatim": "pour les plus ardus c'est Gouverner Marseille, mais alors là c'est ardu. Sociologie de Marseille c'est plus accessible."
+  },
+  "Shâhnâmeh, le livre des rois persans||Ferdowsi": {
+    "episode": "Ambassadeur d’Iran sans filtre ? Mohammad Amin Nejad",
+    "found": true,
+    "mention_sec": 8635,
+    "verbatim": "un livre très important qui peut expliquer la nature du comportement et de l'approche iranienne, c'est le livre de Ferdoussi qui a fait beaucoup sur la culture et la civilisation iranienne moderne, sur la langue iranienne, les croyances monothéistes des Iraniens."
+  },
+  "Gulistan ou le jardin des roses||Saadi": {
+    "episode": "Ambassadeur d’Iran sans filtre ? Mohammad Amin Nejad",
+    "found": true,
+    "mention_sec": 8738,
+    "verbatim": "le livre de Saadi, Gulistan, ça veut dire le jardinage, où il y a beaucoup de sagesse et beaucoup de pureté de l'essence de l'homme et des Iraniens."
   }
 }
