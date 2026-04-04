@@ -588,10 +588,10 @@
     "verbatim": "Les Mémoires du général — tous les tomes, pas seulement Mémoires de guerre ou Mémoires d'espoir, l'ensemble. À lire avec le bagage — il faut aussi avoir lu des historiens qui permettent de recontextualiser ce que de Gaulle écrit, parce qu'il écrit dans un contexte où il veut reprendre le pouvoir ou légitimer ce qu'il a fait."
   },
   "La Bible||": {
-    "episode": "Une catastrophe financière biblique à l'horizon ? Marc Touati",
+    "episode": "Énergie, face cachée de la monnaie ? Sébastien Gouspillou et Pierre Noizat",
     "found": true,
-    "mention_sec": 8202,
-    "verbatim": "Moi j'ai un livre de chevet. Tu vas rigoler, c'est la Bible. Je pense c'est très important de lire — tu es dans un autre monde. Des fois tu as des passages un peu durs, c'est costaud, mais c'est dans un autre monde."
+    "mention_sec": 9279,
+    "verbatim": "La Bible, moi je l'ai lue pour essayer de comprendre ce qu'il y avait dedans — la version moderne, en livre de poche. J'ai lu ça quand j'avais 12, 13, 14 ans, sur plusieurs années. J'ai aussi lu le Coran et la Torah. Pas en entier, mais j'ai lu la Bible en entier. C'est une démarche de compréhension du monde."
   },
   "Théorie générale de l'emploi, de l'intérêt et de la monnaie||John Maynard Keynes": {
     "episode": "Une catastrophe financière biblique à l'horizon ? Marc Touati",
@@ -892,5 +892,35 @@
     "found": true,
     "mention_sec": 5120,
     "verbatim": "Je vais reciter Tocqueville — entre La Démocratie en Amérique et L'Ancien Régime et la Révolution, je trouve qu'il y a matière. Et c'est en lien avec les sujets de finances publiques françaises. Relisez L'Ancien Régime et la Révolution et La Démocratie en Amérique — ça donne un éclairage sur ce qui se passe aussi en ce moment, aussi bien en Europe qu'aux États-Unis, sur le déni des politiques face à la réalité."
+  },
+  "L’énergie, face cachée de la monnaie||Pierre Noizat et Edouard Gallego": {
+    "episode": "Énergie, face cachée de la monnaie ? Sébastien Gouspillou et Pierre Noizat",
+    "found": true,
+    "mention_sec": 9304,
+    "verbatim": "Je conseillerai le best-seller du moment : L'Énergie face cachée de la monnaie de Pierre Noizat. Un très très très bon bouquin que j'avais déjà conseillé à mon dernier passage. Pierre m'a amené au Bitcoin — lui a commencé en 2009, moi en 2016. En 2015 quand je me suis vraiment intéressé au Bitcoin, il y avait trois sources en français, dont Pierre Noizat."
+  },
+  "Tao Te King||Lao Tseu": {
+    "episode": "Énergie, face cachée de la monnaie ? Sébastien Gouspillou et Pierre Noizat",
+    "found": true,
+    "mention_sec": 9053,
+    "verbatim": "J'aurais envie de conseiller le Tao Te King — le livre de base du taoïsme — pour que les gens se familiarisent avec une philosophie orientale accessible. Ma recommandation, c'est de s'intéresser à ces philosophies orientales, puisqu'elles m'ont aidé à appréhender le monde et je trouve qu'elles résonnent très bien avec ma thèse sur l'énergie comme constituant fondamental de l'univers."
+  },
+  "L’athéisme expliqué aux croyants||Paul Desalmand": {
+    "episode": "Énergie, face cachée de la monnaie ? Sébastien Gouspillou et Pierre Noizat",
+    "found": true,
+    "mention_sec": 9140,
+    "verbatim": "Je recommande un 2e livre : L'Athéisme expliqué aux croyants de Paul Desalmand. C'est un livre assez peu connu mais extrêmement bien fait — une critique du concept de Dieu en tant que concept, au même titre que l'énergie est un concept. Ce n'est pas une recommandation pour les croyants de devenir athées, mais au moins il y a une critique rigoureuse de ce concept."
+  },
+  "L’Internet de l’argent||Andreas Antonopoulos": {
+    "episode": "Énergie, face cachée de la monnaie ? Sébastien Gouspillou et Pierre Noizat",
+    "found": true,
+    "mention_sec": 9191,
+    "verbatim": "Sur Bitcoin, j'aime beaucoup Andreas Antonopoulos. Je recommande L'Internet de l'argent — c'est une suite de conférences, facile à lire. On prend une petite conférence une après l'autre. Il aborde différents sujets et quand on a lu Antonopoulos, on a une bonne compréhension de Bitcoin à la fin."
+  },
+  "Zadig||Voltaire": {
+    "episode": "Énergie, face cachée de la monnaie ? Sébastien Gouspillou et Pierre Noizat",
+    "found": true,
+    "mention_sec": 9437,
+    "verbatim": "Je pense à Zadig de Voltaire. C'est un livre qui m'a beaucoup marqué."
   }
 }
