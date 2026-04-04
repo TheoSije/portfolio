@@ -76,9 +76,10 @@
     "verbatim": "Pour ceux qui parlent anglais, c'est un podcast d'un Américain qui s'appelle Nate Hagens. Son podcast s'appelle The Great Simplification. Je le recommande parce que Nate explique que l'abondance énergétique a non seulement rendu le monde abondant, mais il l'a rendu complexe — ce qui a permis de rendre les objets complexes et sophistiqués, c'est l'abondance énergétique. Et donc la décrue énergétique causera ce qu'il appelle une grande simplification, qui évidemment risque de pas se faire de façon extrêmement sympathique partout et tout le temps."
   },
   "Poèmes||Hafez: Le Divân de Hafez": {
-    "episode": "EXCLUSIF : IRAN face à l'escalade militaire majeure, le sort du Monde ?",
-    "found": false,
-    "verbatim": null
+    "episode": "Iran nucléaire: Entre souveraineté, escalade et chaos mondial ? Mohammad Amin Nejad",
+    "found": true,
+    "mention_sec": 4993,
+    "verbatim": "La littérature iranienne est très riche. Nous avons des poètes et des écrivains avec une ancienneté de 1000 ans. Pour un étranger, je crois que les poètes iraniens sont une source et un moyen de connaître la culture iranienne — une culture de paix, de respect, de tolérance et de coexistence. C'est ça l'Iran et le peuple iranien. Donc les livres de Hafez, de Molavi, de Saadi — ce sont des livres que les Européens adorent."
   },
   "Poèmes||Molavi": {
     "episode": "EXCLUSIF : IRAN face à l'escalade militaire majeure, le sort du Monde ?",
@@ -153,9 +154,10 @@
     "verbatim": "L'Art de la guerre permet de gérer les affrontements et de comprendre la géopolitique du monde actuel. Nous sommes en guerre, nous avons toujours été en guerre depuis la nuit des temps. Sun Tzu est intéressant parce qu'il permet de comprendre une partie de la géopolitique du monde et des opérations menées par les grands acteurs. Le principe de Sun Tzu, c'est qu'en substance, tout moyen doit être utilisé avant l'affrontement."
   },
   "Le Prince||Nicolas Machiavel": {
-    "episode": "Sous surveillance émotionnelle : La Machine voit tout ? Sébastien Crozier",
-    "found": false,
-    "verbatim": null
+    "episode": "Jean-Philippe Tanguy sans filtres ?",
+    "found": true,
+    "mention_sec": 8955,
+    "verbatim": "Le Prince de Machiavel — pour moi, fondamental. Désolé, c'est pas très original."
   },
   "De la guerre||Carl von Clausewitz": {
     "episode": "Sous surveillance émotionnelle : La Machine voit tout ? Sébastien Crozier",
@@ -174,9 +176,10 @@
     "verbatim": null
   },
   "1984||George Orwell": {
-    "episode": "Sous surveillance émotionnelle : La Machine voit tout ? Sébastien Crozier",
-    "found": false,
-    "verbatim": null
+    "episode": "David Lisnard sans filtre : Où va la France ?",
+    "found": true,
+    "mention_sec": 7407,
+    "verbatim": "J'ai grandi en lisant La Ferme des animaux d'Orwell, 1984, et tous ces auteurs qui adorent le dystopique. J'ai bien plus de paranoïa que vous le pensez. Et pour citer encore Woody Allen : « Ce n'est pas parce que vous êtes paranoïaque que vous n'avez pas d'ennemis. »"
   },
   "Le meilleur des mondes||Aldous Huxley": {
     "episode": "Sous surveillance émotionnelle : La Machine voit tout ? Sébastien Crozier",
@@ -398,10 +401,10 @@
     "verbatim": "Saint-Germain ou la Négociation — un livre que m'a conseillé un ami militaire et qui raconte une négociation. C'est un livre très fin sur la psychologie — pas en diplomatie, mais en négociation. Comment on retourne une situation. C'est un petit livre comme ça, très sympa, très fin."
   },
   "Les fleurs du mal||Charles Baudelaire": {
-    "episode": "Virage stratégique invisible : La France abandonne nos Outre-mers ? Estelle Youssouffa",
+    "episode": "David Lisnard sans filtre : Où va la France ?",
     "found": true,
-    "mention_sec": 8670,
-    "verbatim": "Les Fleurs du mal de Baudelaire — parce que Baudelaire avait une passion pour les Antilles et il a écrit des très très belles lignes sur la beauté créole et sur les beautés ultramarines. C'est très beau."
+    "mention_sec": 9653,
+    "verbatim": "Les Fleurs du mal. Allez, tiens, ça change une vie."
   },
   "Les livres de Pearl Buck||": {
     "episode": "Virage stratégique invisible : La France abandonne nos Outre-mers ? Estelle Youssouffa",
@@ -571,5 +574,323 @@
     "episode": "Le pays va-t-il s'effondrer ? Henri Proglio et Bernard Accoyer",
     "found": false,
     "verbatim": null
+  },
+  "Mémoires d'Hadrien||Marguerite Yourcenar": {
+    "episode": "Jean-Philippe Tanguy sans filtres ?",
+    "found": true,
+    "mention_sec": 8932,
+    "verbatim": "Le livre le plus important pour moi, c'est les Mémoires d'Hadrien de Yourcenar. C'est un livre que je lis presque tous les ans."
+  },
+  "Mémoires||Charles de Gaulle": {
+    "episode": "Jean-Philippe Tanguy sans filtres ?",
+    "found": true,
+    "mention_sec": 8970,
+    "verbatim": "Les Mémoires du général — tous les tomes, pas seulement Mémoires de guerre ou Mémoires d'espoir, l'ensemble. À lire avec le bagage — il faut aussi avoir lu des historiens qui permettent de recontextualiser ce que de Gaulle écrit, parce qu'il écrit dans un contexte où il veut reprendre le pouvoir ou légitimer ce qu'il a fait."
+  },
+  "La Bible||": {
+    "episode": "Une catastrophe financière biblique à l'horizon ? Marc Touati",
+    "found": true,
+    "mention_sec": 8202,
+    "verbatim": "Moi j'ai un livre de chevet. Tu vas rigoler, c'est la Bible. Je pense c'est très important de lire — tu es dans un autre monde. Des fois tu as des passages un peu durs, c'est costaud, mais c'est dans un autre monde."
+  },
+  "Théorie générale de l'emploi, de l'intérêt et de la monnaie||John Maynard Keynes": {
+    "episode": "Une catastrophe financière biblique à l'horizon ? Marc Touati",
+    "found": false,
+    "verbatim": null
+  },
+  "Le Droit au retour : Le Problème des réfugiés palestiniens||Collectif": {
+    "episode": "Rima Hassan sans filtre ?",
+    "found": true,
+    "mention_sec": 12316,
+    "verbatim": "J'ai ramené des livres sur ces questions qui peuvent vraiment nous accompagner pour prendre en complexité la question palestinienne. Le droit au retour — une dizaine de contributions de différents chercheurs qui traitent de toute la question autour des réfugiés palestiniens, des dimensions historiques, des témoignages, la question des camps, l'économie dans les camps. Il y a même deux contributions sur le droit international et la question du droit au retour — des analyses juridiques poussées."
+  },
+  "Israël-Palestine, la solution : un Etat||Ghada Karmi": {
+    "episode": "Rima Hassan sans filtre ?",
+    "found": true,
+    "mention_sec": 12350,
+    "verbatim": "Ghada Karmi, autrice palestinienne — Israël-Palestine, la solution : un État. Pour commencer à réfléchir sur l'alternative post-Oslo qui ne fait pas du tout partie des débats publics. Des contributions qui datent de plusieurs années, israéliennes comme palestiniennes, sur un état."
+  },
+  "Un État commun: Entre le Jourdain et la mer||Eric Hazan & Eyal Sivan": {
+    "episode": "Rima Hassan sans filtre ?",
+    "found": true,
+    "mention_sec": 12381,
+    "verbatim": "Eric Hazan et Eyal Sivan — cinéaste. Eric Hazan, c'est le fondateur de la maison d'édition La Fabrique. Un État commun entre le Jourdain et la mer. Très intéressant, beaucoup plus court et synthétique."
+  },
+  "Lettre à un ami juif||Ibrahim Souss": {
+    "episode": "Rima Hassan sans filtre ?",
+    "found": true,
+    "mention_sec": 12402,
+    "verbatim": "Un dernier, c'est le coup de cœur — un livre que ma mère m'a mis entre les mains quand j'étais très jeune : Lettre à un ami juif d'Ibrahim Souss. Il s'inspire du modèle des Lettres à un ami allemand de Camus. Pour Camus, c'est un ami imaginaire, mais pour Souss, c'est un vrai ami juif à qui il s'adresse et à qui il expose sa peine d'être palestinien, sa souffrance, et il lui demande de lui tendre la main. C'est un très très beau livre."
+  },
+  "Oeuvres de Jean Racine||": {
+    "episode": "Juan Branco : Empoisonnement ? [EN DIRECT]",
+    "found": true,
+    "mention_sec": 8071,
+    "verbatim": "Alors, je recommande juste une chose. Vous téléchargez un des derniers miracles qui a généré l'État français, c'est Radio France, pas France Inter. Vous allez télécharger l'application, vous allez sur l'appli Radio France, vous allez sur France Culture, vous tapez juste sur la barre de recherche de l'application, tapez Racine. Et là, vous avez les enregistrements de la Comédie française des années 60, des années 70. Vous avez des gens qui pendant des décennies ont fait l'effort de rendre accessible à des gens qui n'avaient pas forcément le temps, l'énergie de lire et ainsi de suite des œuvres qui sont fondamentales pour comprendre non seulement pour sédimenter la langue française — c'est à ce moment-là que se sédimente la langue française. Racine prend la mythologie grecque et fait disparaître les dieux. Si vous lisez Racine par rapport à ce socle, vous découvrez que c'est le drame réduit à l'humain. C'est la tragédie mais sans les délibérations entre les différents dieux : vous retrouvez juste la chair humaine qui est la proie de la tragédie."
+  },
+  "Le monde comme volonté et comme représentation||Arthur Schopenhauer": {
+    "episode": "Juan Branco : Empoisonnement ? [EN DIRECT]",
+    "found": true,
+    "mention_sec": 8234,
+    "verbatim": "Est-ce que vous avez un conseil pour les jeunes générations ? Je conseille L'Art d'avoir toujours raison d'Arthur Schopenhauer, qui est un de ses moins bons livres. Par contre, Le Monde comme représentation est excellent. C'est le troisième livre que je recommande. Le Monde comme représentation — lisez les 15 premières pages de Schopenhauer. C'est un bouquin de 600 pages. Vous lisez les 15 premières pages si vous voulez vous frotter un peu avec de la philosophie. Vous prenez ça, vous lisez à voix haute autant de fois que nécessaire, mais à un moment donné, vous confrontez à la beauté sublime des concepts qu'il vous propose. Schopenhauer, c'est assez impressionnant et ça devient très vite jouissif, mais il faut prendre le temps."
+  },
+  "Oeuvres de Rainer Maria Rilke||": {
+    "episode": "Juan Branco : Empoisonnement ? [EN DIRECT]",
+    "found": false,
+    "verbatim": null
+  },
+  "Vers un monde univoque: Sur la perte d'ambiguïté et de diversité||Thomas Baure & Christopher Pollmann": {
+    "episode": "Explosez l'Incertitude, Comment Penser l'Avenir en Profondeur ? Jérôme Clech",
+    "found": true,
+    "mention_sec": 11020,
+    "verbatim": "Un livre qui m'a vraiment plu : c'est Vers un monde univoque de Baure — un islamologue allemand qui a pris son terrain d'étude et l'a étendu très largement pour montrer que sous couvert de diversité et de pluralité, on arrive à un monde univoque et que les choses sont monocolores. Il le démontre. La thèse est hyper solide, hyper étayée, hyper documentée. On peut ne pas être d'accord mais c'est assez solide. Si on veut faire de la bonne prospective, c'est exactement de ça dont il faut sortir. Si on voit le monde comme ça, on serait incapable d'appréhender le présent et d'envisager le futur."
+  },
+  "La Cité aux murs incertains||Haruki Murakami": {
+    "episode": "Explosez l'Incertitude, Comment Penser l'Avenir en Profondeur ? Jérôme Clech",
+    "found": true,
+    "mention_sec": 11118,
+    "verbatim": "Un deuxième livre, celui-ci je l'ai lu il y a un peu plus de temps et ça n'a absolument rien à voir. C'est Murakami — La Cité aux murs incertains. Ce que j'aime dans ce bouquin, c'est le côté — pour la prospective — la cité au mur. La jaquette est extraordinaire. Et j'aime les couleurs. Ce que j'aime dans ce bouquin, c'est le pouvoir d'évocation. Pour construire de bons récits prospectifs, il faut que ça tienne un peu du mythe, que ça fleure un parfum d'éternité. Ce bouquin donne une vision éthique qui permet d'aboutir à une vision du monde."
+  },
+  "Yanaï, une journée réussie||Jérome Clech": {
+    "episode": "Explosez l'Incertitude, Comment Penser l'Avenir en Profondeur ? Jérôme Clech",
+    "found": true,
+    "mention_sec": 11242,
+    "verbatim": "Lisez donc Yanaï, une journée réussie. Ce bouquin a été réédité à la faveur d'un partenariat avec Achetez livre. Vous y trouverez à peu près tout ce qui est — pour ceux que ça intéresse — à la graine. Cette méthode prospective que j'ai développée, tout part évidemment de là. C'est ésotérique, c'est transdisciplinaire, c'est un ovni. C'est 9 ans de boulot. Il a été publié pour la première fois en 2018 après 9 ans de boulot, et en y réfléchissant, je pense qu'il n'y avait pas une virgule à changer."
+  },
+  "Odyssée de l'Endurance||Ernest Henry Shackleton": {
+    "episode": "L'Homme a besoin de passion pour exister. Marie Tabarly sans filtre.",
+    "found": true,
+    "mention_sec": 6012,
+    "verbatim": "Le premier, sans hésiter, ce sera Shackleton, l'Odyssée de l'endurance. Ça, j'adore. Shackleton, la plus grande expédition ratée de l'histoire. C'est rien que la préface — elle est de Paul-Émile Victor — et elle est déjà hyper inspirante. Mais Shackleton, c'est pour moi le plus grand des leaders. Il faut lire tout le livre. On le lit en sachant qu'ils s'en sortent à la fin, mais à chaque page, tu te dis : là, ils vont mourir, c'est sûr. Ils vont dans des endroits pas possibles. L'idée c'était d'aller traverser l'Antarctique et ils se font prendre par les glaces, le bateau coule. Ça a duré deux ans et demi — et tout le monde s'en est sorti vivant."
+  },
+  "Ocean's songs||Olivier de Kersauson": {
+    "episode": "L'Homme a besoin de passion pour exister. Marie Tabarly sans filtre.",
+    "found": true,
+    "mention_sec": 6096,
+    "verbatim": "J'ai beaucoup aimé Ocean Songs d'Olivier de Kersauson. Celui-là m'a vraiment vraiment fait voyager. J'adore Olivier, mais voilà — c'était vraiment un livre que j'ai vraiment beaucoup aimé."
+  },
+  "Cavalcade océane||": {
+    "episode": "L'Homme a besoin de passion pour exister. Marie Tabarly sans filtre.",
+    "found": true,
+    "mention_sec": 6117,
+    "verbatim": "Mon bouquin s'appelle Cavalcade Océane. Ça reprenait évidemment le côté équestre avec Cavalcade. Pis Océan, c'est le dernier livre écrit par Florence Arthaud — un petit clin d'œil à Florence. Du coup, je l'ai fait avec Cavalcade Océan."
+  },
+  "Océane||Florence Arthaud": {
+    "episode": "L'Homme a besoin de passion pour exister. Marie Tabarly sans filtre.",
+    "found": true,
+    "mention_sec": 6124,
+    "verbatim": "Océane, c'est le dernier livre écrit par Florence Arthaud. J'ai voulu lui faire un petit clin d'œil en incorporant « Océan » dans le titre de mon livre Cavalcade Océane. Florence et... tu sais que mes rosiers s'appellent comme ça."
+  },
+  "Poèmes||Saadi: Kolliāt": {
+    "episode": "Iran nucléaire: Entre souveraineté, escalade et chaos mondial ? Mohammad Amin Nejad",
+    "found": true,
+    "mention_sec": 5003,
+    "verbatim": "La littérature iranienne est très riche. Nous avons des poètes et des écrivains avec une ancienneté de 1000 ans. Pour un étranger, je crois que les poètes iraniens sont une source et un moyen de connaître la culture iranienne — une culture de paix, de respect, de tolérance et de coexistence. C'est ça l'Iran et le peuple iranien. Donc les livres de Hafez, de Molavi, de Saadi — ce sont des livres que les Européens adorent."
+  },
+  "Mémoires du prince de Ligne...||Lacroix et Charles-Joseph de Ligne": {
+    "episode": "Diplomatie en déclin : Le diagnostic d'un d'ambassadeur ? Maurice Gourdault-Montagne",
+    "found": true,
+    "mention_sec": 7323,
+    "verbatim": "Je conseillerai les Mémoires du prince de Ligne — parce qu'il faut lire ça, c'est le XVIIIe siècle, c'est toujours très intéressant."
+  },
+  "De Staline à Hitler: Mémoires d'un ambassadeur||Robert Coulondre": {
+    "episode": "Diplomatie en déclin : Le diagnostic d'un d'ambassadeur ? Maurice Gourdault-Montagne",
+    "found": true,
+    "mention_sec": 7331,
+    "verbatim": "J'ai un autre livre qui s'appelle De Staline à Hitler, d'un diplomate qui s'appelait Robert Coulondre — ambassadeur à Berlin juste avant la guerre de 39-40 — qui fait une analyse extrêmement précise de la manière dont s'est passée la conférence de Munich. On en parle en permanence : Munich par-ci, Munich par-là. C'est extrêmement important de le lire."
+  },
+  "Le Monde d'hier: Souvenirs d'un Européen||Stefan Zweig": {
+    "episode": "Diplomatie en déclin : Le diagnostic d'un d'ambassadeur ? Maurice Gourdault-Montagne",
+    "found": true,
+    "mention_sec": 7383,
+    "verbatim": "Si on me disait prends un livre qui est un témoignage de ce qu'est l'Europe et de ce qui reste encore de l'Europe — parce que nous l'avons en nous — c'est Le Monde d'hier de Stefan Zweig, qui reste pour moi le summum de ce qu'est ce patrimoine culturel européen dont nous vivons encore et que nous respirons chaque jour."
+  },
+  "Diverses autobiographies||": {
+    "episode": "Diplomatie en déclin : Le diagnostic d'un d'ambassadeur ? Maurice Gourdault-Montagne",
+    "found": true,
+    "mention_sec": 7360,
+    "verbatim": "Je recommanderais de lire tout ce qui peut être autobiographie. Je n'ai pas d'autobiographie particulière à recommander, mais lire des autobiographies ou des portraits — je crois que c'est nécessaire."
+  },
+  "Oeuvres de René Goscinny||": {
+    "episode": "David Lisnard sans filtre : Où va la France ?",
+    "found": true,
+    "mention_sec": 9671,
+    "verbatim": "L'œuvre de Goscinny. Toute l'œuvre de Goscinny."
+  },
+  "Arsène Lupin||Maurice Leblanc": {
+    "episode": "David Lisnard sans filtre : Où va la France ?",
+    "found": true,
+    "mention_sec": 9678,
+    "verbatim": "Maurice Leblanc, hein, c'est Lupin."
+  },
+  "San Antonio||Frédéric Dard": {
+    "episode": "David Lisnard sans filtre : Où va la France ?",
+    "found": true,
+    "mention_sec": 9686,
+    "verbatim": "Évidemment Frédéric Dard, San Antonio. J'ai lu San Antonio très jeune et ça a fait mon éducation argotique. Ça m'a fait découvrir aussi des Alexandre Vialatte, par exemple."
+  },
+  "Oeuvres d'Alexandre Viallate||": {
+    "episode": "David Lisnard sans filtre : Où va la France ?",
+    "found": true,
+    "mention_sec": 9761,
+    "verbatim": "San Antonio m'a fait découvrir aussi des Alexandre Vialatte, par exemple — et Blondin. La richesse de ces portraits… j'en oublie et je m'en veux."
+  },
+  "Oeuvres de Milan Kundera||": {
+    "episode": "David Lisnard sans filtre : Où va la France ?",
+    "found": true,
+    "mention_sec": 9772,
+    "verbatim": "J'adore l'œuvre de Kundera. Kundera, c'est sublime. Ça fait partie des livres que je veux relire avant de mourir."
+  },
+  "Oeuvres de Leon Tolstoï||": {
+    "episode": "David Lisnard sans filtre : Où va la France ?",
+    "found": true,
+    "mention_sec": 9772,
+    "verbatim": "Je veux relire aussi des Tolstoï et Dostoïevski — les grands Russes. En version bien traduite, parce que ça a été retraduit."
+  },
+  "Oeuvres de Fiodor Dostoïevski||": {
+    "episode": "David Lisnard sans filtre : Où va la France ?",
+    "found": true,
+    "mention_sec": 9781,
+    "verbatim": "Je veux relire aussi des Tolstoï et des Dostoïevski — les grands Russes. En version bien traduite, parce que ça a été retraduit."
+  },
+  "Poèmes||Victor Hugo": {
+    "episode": "David Lisnard sans filtre : Où va la France ?",
+    "found": true,
+    "mention_sec": 9837,
+    "verbatim": "Victor Hugo, évidemment. Et Paul Valéry — j'aime ça. La poésie lorsqu'elle est en vers, avec une écriture complètement dissonante et créative. Mais j'aime bien même la poésie un peu pompier."
+  },
+  "Poèmes||Stéphane Mallarmé": {
+    "episode": "David Lisnard sans filtre : Où va la France ?",
+    "found": false,
+    "verbatim": null
+  },
+  "Oeuvres de David Lodge||": {
+    "episode": "David Lisnard sans filtre : Où va la France ?",
+    "found": true,
+    "mention_sec": 9795,
+    "verbatim": "David Lodge — si on parle d'un auteur britannique qui est formidable."
+  },
+  "Poèmes de||Paul Valéry": {
+    "episode": "David Lisnard sans filtre : Où va la France ?",
+    "found": true,
+    "mention_sec": 9837,
+    "verbatim": "Paul Valéry — j'aime ça. La poésie avec une écriture complètement dissonante et créative."
+  },
+  "Sapiens et les microbes, les épidémies d'autrefois||": {
+    "episode": "Géopolitique des épidémies. Renaud Piarroux",
+    "found": true,
+    "mention_sec": 73,
+    "verbatim": "Je viens d'écrire un livre qui s'appelle Sapiens et les microbes, les épidémies d'autrefois."
+  },
+  "La guerre des mondes||H.G. Wells": {
+    "episode": "Géopolitique des épidémies. Renaud Piarroux",
+    "found": true,
+    "mention_sec": 11177,
+    "verbatim": "Il y a La Guerre des mondes pour le pouvoir des microbes — c'est un truc intéressant. Parce qu'il y a une attaque aussi dans Guerre des mondes."
+  },
+  "1493: Comment la découverte de l'Amérique a transformé le reste du monde||Charles C. Mann et Marina Boraso": {
+    "episode": "Géopolitique des épidémies. Renaud Piarroux",
+    "found": true,
+    "mention_sec": 11193,
+    "verbatim": "Un deuxième bouquin qui est 1493 — c'est sur l'histoire de la conquête des Amériques, mais du côté des Amérindiens. C'est moins à la gloire évidemment des cowboys et des Anglais au départ."
+  },
+  "Figures de l'immanence. Pour une lecture philosophique du Yi king||François Julien": {
+    "episode": "Doit-on avoir peur de la Chine ? André Chieng",
+    "found": true,
+    "mention_sec": 8842,
+    "verbatim": "Les livres écrits par un philosophe français qui m'a beaucoup influencé : François Julien. N'importe quel livre de François Julien sur la Chine — le Détour, l'immanence, les Transformations silencieuses — n'importe quel livre est une découverte extraordinaire."
+  },
+  "Le Détour et l'Accès. Stratégies du sens en Chine, en Grèce||François Julien": {
+    "episode": "Doit-on avoir peur de la Chine ? André Chieng",
+    "found": true,
+    "mention_sec": 8836,
+    "verbatim": "Les livres écrits par un philosophe français qui m'a beaucoup influencé : François Julien. N'importe quel livre de François Julien sur la Chine — le Détour, l'immanence, les Transformations silencieuses — n'importe quel livre est une découverte extraordinaire."
+  },
+  "Les Transformations silencieuses||François Julien": {
+    "episode": "Doit-on avoir peur de la Chine ? André Chieng",
+    "found": true,
+    "mention_sec": 8842,
+    "verbatim": "Les livres écrits par un philosophe français qui m'a beaucoup influencé : François Julien. N'importe quel livre de François Julien sur la Chine — le Détour, l'immanence, les Transformations silencieuses — n'importe quel livre est une découverte extraordinaire."
+  },
+  "De la Chine||Henry Kissinger": {
+    "episode": "Doit-on avoir peur de la Chine ? André Chieng",
+    "found": true,
+    "mention_sec": 8858,
+    "verbatim": "Le livre écrit par Henry Kissinger qui s'appelle De la Chine — absolument remarquable. C'est un livre écrit à deux mains dans lequel Kissinger a fait travailler un de ses étudiants, qui a fait un essai sur la Chine phénoménal, et dans lequel il a rajouté sa touche personnelle et son expérience absolument extraordinaire de la diplomatie et des relations avec la Chine."
+  },
+  "L'Ancien régime et la Révolution||Alexis de Tocqueville": {
+    "episode": "Doit-on avoir peur de la Chine ? André Chieng",
+    "found": true,
+    "mention_sec": 8902,
+    "verbatim": "Un troisième livre — pas De la démocratie en Amérique que tout le monde connaît — mais L'Ancien Régime et la Révolution d'Alexis de Tocqueville. Un essai absolument extraordinaire où il décrit les origines de la Révolution et comment on est arrivé à l'Empire. La portée de son analyse est tellement puissante qu'elle s'applique aussi à la Chine."
+  },
+  "Vers un monde univoque: Sur la perte d’ambiguïté et de diversité||Thomas Baure & Christopher Pollmann": {
+    "episode": "Explosez l'Incertitude, Comment Penser l'Avenir en Profondeur ? Jérôme Clech",
+    "found": true,
+    "mention_sec": 11020,
+    "verbatim": "Un livre qui m'a vraiment plu : c'est Vers un monde univoque de Baure — un islamologue allemand qui a pris son terrain d'étude et l'a étendu très largement pour montrer que sous couvert de diversité et de pluralité, on arrive à un monde univoque et que les choses sont monocolores. Il le démontre. La thèse est hyper solide, hyper étayée, hyper documentée. On peut ne pas être d'accord mais c'est assez solide. Si on veut faire de la bonne prospective, c'est exactement de ça dont il faut sortir. Si on voit le monde comme ça, on serait incapable d'appréhender le présent et d'envisager le futur."
+  },
+  "Figures de l’immanence. Pour une lecture philosophique du Yi king||François Julien": {
+    "episode": "Doit-on avoir peur de la Chine ? André Chieng",
+    "found": true,
+    "mention_sec": 8842,
+    "verbatim": "Les livres écrits par un philosophe français qui m'a beaucoup influencé : François Julien. N'importe quel livre de François Julien sur la Chine — le Détour, l'immanence, les Transformations silencieuses — n'importe quel livre est une découverte extraordinaire."
+  },
+  "Le Détour et l’Accès. Stratégies du sens en Chine, en Grèce||François Julien": {
+    "episode": "Doit-on avoir peur de la Chine ? André Chieng",
+    "found": true,
+    "mention_sec": 8836,
+    "verbatim": "Les livres écrits par un philosophe français qui m'a beaucoup influencé : François Julien. N'importe quel livre de François Julien sur la Chine — le Détour, l'immanence, les Transformations silencieuses — n'importe quel livre est une découverte extraordinaire."
+  },
+  "Belle du seigneur||Albert Cohen": {
+    "episode": "Sarah Knafo sans filtre : où va la France ?",
+    "found": true,
+    "mention_sec": 12965,
+    "verbatim": "Belle du Seigneur d'Albert Cohen — pour les plus sensibles d'entre vous. Très beau livre, très long, mais quand on le ferme, on regrette qu'il ait été si court. Alors qu'au début, on a du mal à s'y mettre en se disant « C'est 1000 pages, j'y arriverai pas. » Magnifique livre sur la passion amoureuse, sur les relations entre les hommes et les femmes, mais aussi — je le citais tout à l'heure — un diplomate à la Société des Nations très désabusé sur la vanité, l'inutilité de ce métier parfois. Vraiment très beau livre."
+  },
+  "Les misérables||Victor Hugo": {
+    "episode": "Juan Branco sans filtre ? Avant les présidentielles.",
+    "found": true,
+    "mention_sec": 10936,
+    "verbatim": "Les Misérables de Victor Hugo."
+  },
+  "Les enfants Tanner||Robert Walser": {
+    "episode": "Juan Branco sans filtre ? Avant les présidentielles.",
+    "found": true,
+    "mention_sec": 10936,
+    "verbatim": "Les Enfants Tanner de Walser."
+  },
+  "Or noir: La grande histoire du pétrole||Matthieu Auzanneau": {
+    "episode": "Juan Branco sans filtre ? Avant les présidentielles.",
+    "found": true,
+    "mention_sec": 10957,
+    "verbatim": "J'avais beaucoup aimé — pour rendre hommage quand même à Matthieu Auzanneau — Or noir, qui est une Bible sur le pétrole. Passionnante."
+  },
+  "La machine gouverne||Paul Valéry": {
+    "episode": "Intelligence artificielle : l'oubli de l'humanité, choc civilisationnel ? Éric Sadin",
+    "found": false,
+    "verbatim": null
+  },
+  "Pourquoi je hais l'indifférence||Antonio Gramsci": {
+    "episode": "Intelligence artificielle : l'oubli de l'humanité, choc civilisationnel ? Éric Sadin",
+    "found": false,
+    "verbatim": null
+  },
+  "Spinoza, philosophie pratique||Gilles Deleuze": {
+    "episode": "Intelligence artificielle : l'oubli de l'humanité, choc civilisationnel ? Éric Sadin",
+    "found": false,
+    "verbatim": null
+  },
+  "De la démocratie en Amérique||Alexis de Tocqueville": {
+    "episode": "François Ecalle : Le Déni Politique pour une Réalité qui Frappe ?",
+    "found": true,
+    "mention_sec": 5120,
+    "verbatim": "Je vais reciter Tocqueville — entre La Démocratie en Amérique et L'Ancien Régime et la Révolution, je trouve qu'il y a matière. Et c'est en lien avec les sujets de finances publiques françaises. Relisez L'Ancien Régime et la Révolution et La Démocratie en Amérique — ça donne un éclairage sur ce qui se passe aussi en ce moment, aussi bien en Europe qu'aux États-Unis, sur le déni des politiques face à la réalité."
+  },
+  "L'Ancien Régime et la Révolution||Alexis de Tocqueville": {
+    "episode": "François Ecalle : Le Déni Politique pour une Réalité qui Frappe ?",
+    "found": true,
+    "mention_sec": 5120,
+    "verbatim": "Je vais reciter Tocqueville — entre La Démocratie en Amérique et L'Ancien Régime et la Révolution, je trouve qu'il y a matière. Et c'est en lien avec les sujets de finances publiques françaises. Relisez L'Ancien Régime et la Révolution et La Démocratie en Amérique — ça donne un éclairage sur ce qui se passe aussi en ce moment, aussi bien en Europe qu'aux États-Unis, sur le déni des politiques face à la réalité."
   }
 }
