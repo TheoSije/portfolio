@@ -922,5 +922,35 @@
     "found": true,
     "mention_sec": 9437,
     "verbatim": "Je pense à Zadig de Voltaire. C'est un livre qui m'a beaucoup marqué."
+  },
+  "20 000 lieues sous les mers||Jules Verne": {
+    "episode": "Électricité : Les prix vont-ils exploser ? André Merlin et Vincent Delahaye",
+    "found": true,
+    "mention_sec": 8667,
+    "verbatim": "Je suis un fanatique de Jules Verne, un collectionneur de Jules Verne. Mes livres préférés, c'est les romans de Jules Verne — en particulier les plus connus : Vingt Mille Lieues sous les mers, et Michel Strogoff. Il y a eu récemment d'ailleurs un film dessus."
+  },
+  "Michel Strogoff||Jules Verne": {
+    "episode": "Électricité : Les prix vont-ils exploser ? André Merlin et Vincent Delahaye",
+    "found": true,
+    "mention_sec": 8691,
+    "verbatim": "Je suis un fanatique de Jules Verne, un collectionneur de Jules Verne. Mes livres préférés, c'est les romans de Jules Verne — en particulier les plus connus : Vingt Mille Lieues sous les mers, et Michel Strogoff. Il y a eu récemment d'ailleurs un film dessus."
+  },
+  "Mémoires||Raymond Aron": {
+    "episode": "Électricité : Les prix vont-ils exploser ? André Merlin et Vincent Delahaye",
+    "found": true,
+    "mention_sec": 8707,
+    "verbatim": "Les Mémoires de Raymond Aron. C'est compliqué, c'est dur — parfois il faut relire deux ou trois fois certains chapitres — mais il y a du fond. C'est quelqu'un qui était un peu à l'opposé de ce qui se faisait à l'époque en terme de philosophie, d'intellectuel, et qui n'a pas hésité, qui a été courageux, qui a défendu ses idées. J'aime beaucoup Raymond Aron et ce livre des Mémoires m'a toujours passionné."
+  },
+  "Le premier homme||Albert Camus": {
+    "episode": "Électricité : Les prix vont-ils exploser ? André Merlin et Vincent Delahaye",
+    "found": true,
+    "mention_sec": 8740,
+    "verbatim": "Le Premier homme de Camus aussi. C'était son dernier roman inachevé, mais qui décrit vraiment ce qu'il a vécu — avec la qualité d'écriture de Camus."
+  },
+  "L’archipel français||Jérôme Fourquet": {
+    "episode": "Électricité : Les prix vont-ils exploser ? André Merlin et Vincent Delahaye",
+    "found": true,
+    "mention_sec": 8757,
+    "verbatim": "L'Archipel français de Jérôme Fourquet, parce que Fourquet a rassemblé beaucoup de données très intéressantes sur l'évolution de la société française sur les 50 dernières années. Ça peut expliquer en partie les problèmes qu'on rencontre aujourd'hui. La société française a perdu un certain nombre d'institutions — l'Église, le Parti communiste — qui rassemblaient beaucoup de Français. Aujourd'hui on n'en a plus tellement : chacun vit avec les siens, dans des communautés."
   }
 }
