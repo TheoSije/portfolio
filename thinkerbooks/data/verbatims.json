@@ -1879,5 +1879,185 @@
     "found": false,
     "mention_sec": null,
     "verbatim": ""
+  },
+  "Les gens ordinaires ne portent pas de mitraillettes||Artem Chapeye": {
+    "episode": "Les gens ordinaires ne portent pas de mitraillettes. Artem Chapeye",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Alain Gresh||Palestine, un peuple qui ne veut pas mourir": {
+    "episode": "Israël/Palestine : fuir sous les bombes ? Alain Gresh & Rony Brauman",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Maxime Rodinson||Peuple juif ou problème juif ?": {
+    "episode": "Israël/Palestine : fuir sous les bombes ? Alain Gresh & Rony Brauman",
+    "found": true,
+    "mention_sec": 12256,
+    "verbatim": "Maxime Rodinson, orientaliste français qui était juif. Un petit bouquin qui s'appelle Peuple juif ou problème juif — qui essaie d'éclairer qu'est-ce que c'est les juifs, d'où viennent les persécutions."
+  },
+  "Edward W. Said||L'Orientalisme: L'Orient créé par l'Occident": {
+    "episode": "Israël/Palestine : fuir sous les bombes ? Alain Gresh & Rony Brauman",
+    "found": true,
+    "mention_sec": 12285,
+    "verbatim": "L'orientalisme d'Edward Saïd, un intellectuel américano-palestinien. Comment l'Occident a inventé un Orient imaginaire qui justifiait le racisme et les discriminations."
+  },
+  "Karl Marx & Friedrich Engels||Manifeste du parti communiste": {
+    "episode": "Israël/Palestine : fuir sous les bombes ? Alain Gresh & Rony Brauman",
+    "found": true,
+    "mention_sec": 12318,
+    "verbatim": "Marx, le Manifeste du Parti communiste. C'est un texte majeur qui parle de la mondialisation. On a l'impression de lire des choses d'une grande actualité."
+  },
+  "Sylvain Cypel||L'Etat d'Israël contre les Juifs": {
+    "episode": "Israël/Palestine : fuir sous les bombes ? Alain Gresh & Rony Brauman",
+    "found": true,
+    "mention_sec": 12397,
+    "verbatim": "Sylvain Cypel, grand connaisseur de la société israélienne. Son dernier livre s'appelle L'État d'Israël contre les Juifs, dont le titre est déjà une sorte de manifeste."
+  },
+  "Eyal Weizman||Une occupation civile, la politique de l'architecture israélienne": {
+    "episode": "Israël/Palestine : fuir sous les bombes ? Alain Gresh & Rony Brauman",
+    "found": true,
+    "mention_sec": 12456,
+    "verbatim": "Eyal Weizman, architecte-urbaniste d'origine israélienne. Une occupation civile — une étude très analytique et critique de l'architecture des colonies israéliennes. Absolument passionnant."
+  },
+  "Leonardo Padura||L'homme qui aimait les chiens": {
+    "episode": "Israël/Palestine : fuir sous les bombes ? Alain Gresh & Rony Brauman",
+    "found": true,
+    "mention_sec": 12541,
+    "verbatim": "L'homme qui aimait les chiens de Leonardo Padura — littéralement fascinant. L'histoire de Ramon Mercader, l'homme qui a assassiné Trotski. Un polar fantastique, on apprend beaucoup en histoire."
+  },
+  "Stephen Graham||Villes sous contrôle : La militarisation de l'espace urbain": {
+    "episode": "Israël/Palestine : fuir sous les bombes ? Alain Gresh & Rony Brauman",
+    "found": true,
+    "mention_sec": 12505,
+    "verbatim": "La militarisation de l'espace urbain — une architecture spécifique, une société à laquelle on ne se mélange pas."
+  },
+  "Charles Gave||La Vérité vous rendra libre": {
+    "episode": "Économistes face à la réalité sans filtre: Charles Gave, Pierre Larrouturou",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Pierre Larrouturou - 32h, la semaine de 4 jours, c'est possible||": {
+    "episode": "Économistes face à la réalité sans filtre: Charles Gave, Pierre Larrouturou",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Unsettled: What Climate Science Tells Us, What It Doesn't, and Why It Matters||Steven E. Koonin": {
+    "episode": "Économistes face à la réalité sans filtre: Charles Gave, Pierre Larrouturou",
+    "found": true,
+    "mention_sec": 11069,
+    "verbatim": "Le bouquin de Koonin, que j'aime beaucoup. Et Lomborg, celui-là c'est le premier qui a été intéressant parce qu'il a commencé à écrire là-dessus il y a plus de 20 ans."
+  },
+  "L'écologiste sceptique||Bjorn Lomborg": {
+    "episode": "Économistes face à la réalité sans filtre: Charles Gave, Pierre Larrouturou",
+    "found": true,
+    "mention_sec": 11045,
+    "verbatim": "L'écologiste sceptique de Lomborg. C'est le premier qui a été intéressant parce qu'il a commencé à écrire là-dessus il y a plus de 20 ans."
+  },
+  "The Population Explosion||Paul R. Ehrlich, Anne H. Ehrlich": {
+    "episode": "Économistes face à la réalité sans filtre: Charles Gave, Pierre Larrouturou",
+    "found": true,
+    "mention_sec": 11093,
+    "verbatim": "Il faut relire The Population Explosion d'Ehrlich, professeur à Stanford — pour voir ce que ce type expliquait. Il disait qu'il allait mourir 300 à 400 millions de personnes en Inde dans les 10 ans. Depuis, la population de l'Inde a triplé et ils sont exportateurs agricoles."
+  },
+  "Perdre la Terre: Une histoire de notre temps||Nathanael Rich": {
+    "episode": "Économistes face à la réalité sans filtre: Charles Gave, Pierre Larrouturou",
+    "found": true,
+    "mention_sec": 11266,
+    "verbatim": "Perdre la Terre de Nathanaël Rich, journaliste du New York Times. Il montre comment dès 1978 il y avait un consensus scientifique sur le réchauffement climatique. Passionnant."
+  },
+  "Jean Jouzel, Entretiens||Paul Goupil": {
+    "episode": "Économistes face à la réalité sans filtre: Charles Gave, Pierre Larrouturou",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Camus, notre rempart||Hubert Védrine": {
+    "episode": "Pensée stratégique française, ils naviguent à vue ? Hubert Védrine",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Grands diplomates: Les maîtres des relations internationales de Mazarin à nos jours||Hubert Védrine & Collectif": {
+    "episode": "Pensée stratégique française, ils naviguent à vue ? Hubert Védrine",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Dictionnaire amoureux de la géopolitique||Hubert Védrine": {
+    "episode": "Pensée stratégique française, ils naviguent à vue ? Hubert Védrine",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Au coeur du pouvoir : Mémoires politiques||Evgueni Primakov": {
+    "episode": "Pensée stratégique française, ils naviguent à vue ? Hubert Védrine",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Le Procès Pétain: Vichy face à ses juge||Julian Jackson": {
+    "episode": "Pensée stratégique française, ils naviguent à vue ? Hubert Védrine",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Le Désastre de Pavie||Jean Giono": {
+    "episode": "Pensée stratégique française, ils naviguent à vue ? Hubert Védrine",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Le cycle de la culture||Iain M. Banks": {
+    "episode": "Intelligence artificielle, bullsh*t, pipotron ? Benjamin Bayart",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Le savant et le politique||Max Weber": {
+    "episode": "Intelligence artificielle, bullsh*t, pipotron ? Benjamin Bayart",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Pyramides||Romain Banassaya": {
+    "episode": "Intelligence artificielle, bullsh*t, pipotron ? Benjamin Bayart",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Arca||Romain Benassaya": {
+    "episode": "Intelligence artificielle, bullsh*t, pipotron ? Benjamin Bayart",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "La Captive du temps perdu||Vernor Vinge": {
+    "episode": "Intelligence artificielle, bullsh*t, pipotron ? Benjamin Bayart",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Livre blanc sur le Bitcoin||": {
+    "episode": "Les Hackers face aux cyberguerres ? Bluetouff, Fabrice Epelboin & Marc-Antoine Ledieu",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Les ingénieurs du chaos||Giuliano da Empoli": {
+    "episode": "Les Hackers face aux cyberguerres ? Bluetouff, Fabrice Epelboin & Marc-Antoine Ledieu",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Saint-Elme||Serge Lehman": {
+    "episode": "Les Hackers face aux cyberguerres ? Bluetouff, Fabrice Epelboin & Marc-Antoine Ledieu",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
   }
 }
