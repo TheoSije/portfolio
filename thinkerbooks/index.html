@@ -1150,6 +1150,16 @@ async function init() {
       }
     } catch {}
 
+    // Sort all episodes by date descending (most recent first)
+    const MOIS = {janvier:1,février:2,fevrier:2,mars:3,avril:4,mai:5,juin:6,juillet:7,août:8,aout:8,septembre:9,octobre:10,novembre:11,décembre:12,decembre:12};
+    const parseDate = d => {
+      if (!d) return 0;
+      const m = d.toLowerCase().replace(/1er/,'1').match(/(\d{1,2})\s+(\w+)\s+(\d{4})/);
+      if (!m) return 0;
+      return parseInt(m[3]) * 10000 + (MOIS[m[2]] || 0) * 100 + parseInt(m[1]);
+    };
+    ALL_EPISODES.sort((a, b) => parseDate(b.date) - parseDate(a.date));
+
     const totalBooks = ALL_EPISODES.reduce((s, e) => s + e.books.length, 0);
     const fmt = totalBooks.toLocaleString('fr');
 
