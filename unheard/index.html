@@ -462,7 +462,7 @@ function loadTrack(track, h, autoPlay = false) {
 
   /* Artwork */
   const art    = track.artwork;
-  const artUrl = art?.['_480x480'] || art?.['_150x150'] || art?.['_1000x1000'] || null;
+  const artUrl = art?.['480x480'] || art?.['_480x480'] || art?.['1000x1000'] || art?.['_1000x1000'] || art?.['150x150'] || art?.['_150x150'] || null;
 
   cover.classList.remove('loaded');
   placeholder.style.opacity = '1';
@@ -578,7 +578,7 @@ progressWrap.addEventListener('click', e => {
 });
 
 /* ── Init ── */
-fetchTrack();
+fetchTrack(true);
 </script>
 </body>
 </html>
