@@ -1741,5 +1741,143 @@
     "found": true,
     "mention_sec": 10518,
     "verbatim": "L'énergie, face cachée de la monnaie de Pierre Noizat, ingénieur polytechnicien. La monnaie sous le prisme de l'énergie, c'est très intéressant."
+  },
+  "Black list : Quinze grands journalistes américains brisent la loi du silence||Kristina Borjesson": {
+    "episode": "Secrets d’États, Espionnage, Mafia : la mort ou le silence ? Laurent Richard",
+    "found": true,
+    "mention_sec": 10103,
+    "verbatim": "Blacklist de Borjesson — elle a interviewé 12 ou 13 journalistes américains qui racontent leur histoire de censure, qui travaillaient pour CBS, CNN, et racontent le jour où une histoire a été censurée."
+  },
+  "Hacks, Leaks, and Revelations : The Art of Analyzing Hacked and Leaked Data||Micah Lee": {
+    "episode": "Secrets d’États, Espionnage, Mafia : la mort ou le silence ? Laurent Richard",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Informer n'est pas un délit : Ensemble contre les nouvelles censures||Collectif, sous la direction de Fabrice arfi et Paul Moreira": {
+    "episode": "Secrets d’États, Espionnage, Mafia : la mort ou le silence ? Laurent Richard",
+    "found": true,
+    "mention_sec": 10118,
+    "verbatim": "Informer n'est pas un délit, qu'on a coécrit à 16 journalistes français. Il y a Paul Moreira, Fabrice Arfi, Benoît Colomba et d'autres. On raconte tous un bout d'histoire de pression, de censure dans le journalisme français."
+  },
+  "Iran: La jeunesse démocratique contre l'État prédateur||Farhad Khosrokhavar": {
+    "episode": "Géopolitique: fous de Dieu, fous de guerre ? Farhad Khosrokhavar & Pierre Conesa",
+    "found": true,
+    "mention_sec": 829,
+    "verbatim": "La jeunesse démocratique contre l'État prédateur — ça a été publié il y a un an et demi."
+  },
+  "Un silence religieux||Jean Birnbaum": {
+    "episode": "Géopolitique: fous de Dieu, fous de guerre ? Farhad Khosrokhavar & Pierre Conesa",
+    "found": true,
+    "mention_sec": 6462,
+    "verbatim": "Le livre de Birnbaum qui s'appelle Un silence religieux, sur la façon dont la gauche [a traité le religieux]."
+  },
+  "La Tyrannie de la pénitence||Pascal Bruckner": {
+    "episode": "Géopolitique: fous de Dieu, fous de guerre ? Farhad Khosrokhavar & Pierre Conesa",
+    "found": true,
+    "mention_sec": 6620,
+    "verbatim": "Je suis en train d'en lire un autre qui s'appelle La tyrannie de la pénitence de Bruckner."
+  },
+  "Les formes élémentaires de la vie religieuse||Émile Durkheim": {
+    "episode": "Géopolitique: fous de Dieu, fous de guerre ? Farhad Khosrokhavar & Pierre Conesa",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "L'éthique protestante et l'esprit du capitalisme||Max Weber": {
+    "episode": "Géopolitique: fous de Dieu, fous de guerre ? Farhad Khosrokhavar & Pierre Conesa",
+    "found": true,
+    "mention_sec": 6860,
+    "verbatim": "Max Weber et son livre sur le protestantisme et le capitalisme."
+  },
+  "L'enfer numérique: Voyage au bout d'un Like||Guillaume Pitron": {
+    "episode": "IA et transition écologique : les liaisons dangereuses ? Guillaume Pitron",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Immigration : le grand déni||François Héran": {
+    "episode": "IA et transition écologique : les liaisons dangereuses ? Guillaume Pitron",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "La Formule de Dieu||José Rodrigues Dos Santos": {
+    "episode": "IA et transition écologique : les liaisons dangereuses ? Guillaume Pitron",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "La parole donnée||Jean Lassalle": {
+    "episode": "Willy et Jean tirent à vue : l’avenir de la France et de l’Europe - Willy Schraen & Jean Lassalle",
+    "found": true,
+    "mention_sec": 8127,
+    "verbatim": "La Parole donnée de Jean Lassalle, chez Cherche Midi. Très beau livre."
+  },
+  "Aurore ou crépuscule||Jean Lassalle": {
+    "episode": "Willy et Jean tirent à vue : l’avenir de la France et de l’Europe - Willy Schraen & Jean Lassalle",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "La France authentique||Jean Lassalle": {
+    "episode": "Willy et Jean tirent à vue : l’avenir de la France et de l’Europe - Willy Schraen & Jean Lassalle",
+    "found": true,
+    "mention_sec": 8161,
+    "verbatim": "La France authentique de Jean Lassalle, aux éditions Glyph."
+  },
+  "Cyrano de Bergerac||Edmond Rostand": {
+    "episode": "Willy et Jean tirent à vue : l’avenir de la France et de l’Europe - Willy Schraen & Jean Lassalle",
+    "found": true,
+    "mention_sec": 8061,
+    "verbatim": "Cyrano de Bergerac — c'est fétiche, il faut que je le lise une fois par an. Je me reconnais dans ce personnage. Et puis c'est encore plus beau quand c'est inutile."
+  },
+  "Le seigneur des anneaux||J.R.R Tolkien": {
+    "episode": "Willy et Jean tirent à vue : l’avenir de la France et de l’Europe - Willy Schraen & Jean Lassalle",
+    "found": true,
+    "mention_sec": 8077,
+    "verbatim": "Le Seigneur des Anneaux, un bouquin qui m'a vraiment fait rêver. Le mec qui a écrit ça, Tolkien, faut vraiment avoir un cerveau en ébullition."
+  },
+  "Madame Bovary||Gustave Flaubert": {
+    "episode": "Willy et Jean tirent à vue : l’avenir de la France et de l’Europe - Willy Schraen & Jean Lassalle",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "La stratégie de l'émotion||Anne-Cécile Robert": {
+    "episode": "L'humour comme miroir de la société ? Haroun",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Le piège identitaire||Yascha Mounk": {
+    "episode": "L'humour comme miroir de la société ? Haroun",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Les identités meurtrières||Amin Maalouf": {
+    "episode": "L'humour comme miroir de la société ? Haroun",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "La vie devant soi||Romain Gary (sous le nom d'Emile Ajar)": {
+    "episode": "L'humour comme miroir de la société ? Haroun",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "Comment faire tomber un dictateur quand on est seul, tout petit, et sans armes||Srdja Popovic": {
+    "episode": "L'humour comme miroir de la société ? Haroun",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
+  },
+  "La lamentation du prépuce||Shalom Auslander": {
+    "episode": "L'humour comme miroir de la société ? Haroun",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
   }
 }
