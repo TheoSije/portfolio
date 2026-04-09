@@ -1127,6 +1127,29 @@ async function init() {
 
     ALL_EPISODES = parseReadme(text);
 
+    // Merge local episodes.json (episodes not yet in the README)
+    try {
+      const er = await fetch('./data/episodes.json', { cache: 'no-cache' });
+      if (er.ok) {
+        const localEps = await er.json();
+        const extractId = url => { const m = (url||'').match(/[?&]v=([\w-]+)/); return m ? m[1] : null; };
+        const readmeIds = new Set(ALL_EPISODES.map(e => extractId(e.youtube)).filter(Boolean));
+        const readmeTitles = new Set(ALL_EPISODES.map(e => normalize(e.title)));
+        const toAdd = [];
+        for (const ep of localEps) {
+          const id = extractId(ep.youtube);
+          if ((id && readmeIds.has(id)) || readmeTitles.has(normalize(ep.title))) continue;
+          toAdd.push({
+            title: ep.title,
+            date: ep.date,
+            youtube: ep.youtube ? ep.youtube.replace(/\)$/, '') : '',
+            books: (ep.books || []).map(b => ({ title: b.title, author: b.author || '', guest: null }))
+          });
+        }
+        if (toAdd.length) ALL_EPISODES = [...toAdd, ...ALL_EPISODES];
+      }
+    } catch {}
+
     const totalBooks = ALL_EPISODES.reduce((s, e) => s + e.books.length, 0);
     const fmt = totalBooks.toLocaleString('fr');
 
