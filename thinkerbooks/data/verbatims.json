@@ -64,10 +64,10 @@
     "verbatim": "Un film que j'ai trouvé très marrant à double titre : Don't Look Up avec Di Caprio sur la météorite qui doit anéantir la terre. C'est doublement intéressant. Le premier truc, celui dont tout le monde a parlé, c'est le dialogue de sourd entre le monde scientifique, le monde politique et le monde médiatique — médiatique totalement frivole, politique totalement frivole, scientifiques désespérés. Il y a beaucoup de points communs avec ce qu'on observe sur la question climatique ou la biodiversité. Et le truc dont beaucoup moins de gens ont parlé mais qui m'a frappé aussi, c'est que ce sont les États-Unis qui décident pour le reste du monde. Ils disent « on va le faire » — le débat sur l'avenir du monde est un débat domestique américain. Je trouvais ça très représentatif."
   },
   "De l'inégalité parmi les sociétés||Jared Diamond": {
-    "episode": "Crise pétrolière, effondrement, émeutes de la faim ? Jean-Marc Jancovici",
+    "episode": "Sobriété, déconsommateurs : cache-misère des gouvernements ? Jean-Marc Jancovici",
     "found": true,
-    "mention_sec": 8984,
-    "verbatim": "Un livre dont j'avais peut-être pas parlé jusqu'ici, que j'ai trouvé extrêmement intéressant, c'est un livre de Jared Diamond — pas Effondrement, que j'ai trouvé pas extraordinaire pour être très franc, mais celui qui en anglais s'appelle Guns, Germs and Steel et qui a été très mal traduit en français par De l'inégalité parmi les sociétés. C'est un livre qui explique comment, sur très longue période, le déterminisme géographique a façonné les civilisations humaines. C'est une invitation à se plonger dans le temps long de façon extraordinaire."
+    "mention_sec": 9222,
+    "verbatim": "j'ai trouvé beaucoup plus intéressant que l'autre bouquin de Jared Diamond effondrement qui a beaucoup fait parler de lui ou il se concentre quand même sur quelques cas d'études les escapales les Vikings l'île de Pâques etc toute la société mondiale est pas comme l'île de Pâques là j'ai trouvé que gun germancil c'était beaucoup plus intéressant donc ça ce bouquin là je l'ai trouvé très bien."
   },
   "\"The great simplification\"||Nate Hagens": {
     "episode": "Crise pétrolière, effondrement, émeutes de la faim ? Jean-Marc Jancovici",
@@ -157,13 +157,13 @@
     "verbatim": "L'Art de la guerre permet de gérer les affrontements et de comprendre la géopolitique du monde actuel. Nous sommes en guerre, nous avons toujours été en guerre depuis la nuit des temps. Sun Tzu est intéressant parce qu'il permet de comprendre une partie de la géopolitique du monde et des opérations menées par les grands acteurs. Le principe de Sun Tzu, c'est qu'en substance, tout moyen doit être utilisé avant l'affrontement."
   },
   "Le Prince||Nicolas Machiavel": {
-    "episode": "Jean-Philippe Tanguy sans filtres ?",
+    "episode": "Immigration, où va la France ? Estelle Youssouffa",
     "found": true,
-    "mention_sec": 8955,
-    "verbatim": "Le Prince de Machiavel — pour moi, fondamental. Désolé, c'est pas très original."
+    "mention_sec": 6061,
+    "verbatim": "un deuxième livre le Prince de Machiavel... la littérature m'a permis de comprendre qu'il pouvait y avoir de la complexité du sous-entendu du double discours enfin de sortir du simplisme dans lequel j'étais"
   },
   "De la guerre||Carl von Clausewitz": {
-    "episode": "Sous surveillance émotionnelle : La Machine voit tout ? Sébastien Crozier",
+    "episode": "Criminalisation des luttes : écoterrorisme ? M. Dulac, C. Bonneuil, A. Planchard",
     "found": false,
     "verbatim": null
   },
@@ -179,16 +179,16 @@
     "verbatim": null
   },
   "1984||George Orwell": {
-    "episode": "David Lisnard sans filtre : Où va la France ?",
-    "found": true,
-    "mention_sec": 7407,
-    "verbatim": "J'ai grandi en lisant La Ferme des animaux d'Orwell, 1984, et tous ces auteurs qui adorent le dystopique. J'ai bien plus de paranoïa que vous le pensez. Et pour citer encore Woody Allen : « Ce n'est pas parce que vous êtes paranoïaque que vous n'avez pas d'ennemis. »"
+    "episode": "La guerre des intelligences ? Laurent Alexandre",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
   },
   "Le meilleur des mondes||Aldous Huxley": {
-    "episode": "Sous surveillance émotionnelle : La Machine voit tout ? Sébastien Crozier",
-    "found": true,
-    "mention_sec": 10705,
-    "verbatim": "Huxley et Orwell — l'un était l'élève de l'autre. Le Meilleur des mondes nous apparaît peut-être plus décalé, mais sa finesse et sa profondeur sont réelles. L'idée qu'on produit des êtres humains dont la capacité organique est identique à l'origine, mais dans lesquels on les intoxique volontairement pour en faire des sous-hommes — c'est une idée fascinante. Vous êtes sûr que c'est une fiction ? À son époque, oui. Relire Le Meilleur des mondes, c'est intéressant parce qu'il y a des idées qui sont extrêmement violentes, extrêmement brutales et qui nous ramènent parfois au réel."
+    "episode": "La guerre des intelligences ? Laurent Alexandre",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
   },
   "Blade runner||Philip K. Dick": {
     "episode": "Sous surveillance émotionnelle : La Machine voit tout ? Sébastien Crozier",
@@ -244,10 +244,10 @@
     "verbatim": null
   },
   "Mémoires de guerre||Charles de Gaulle": {
-    "episode": "Relever la tête et sauver le pays ? Jon de Lorraine",
+    "episode": "Second tour, fable politique ? Albert Dupontel",
     "found": true,
-    "mention_sec": 7214,
-    "verbatim": "Un autre livre, c'est les Mémoires de guerre de De Gaulle, en trois parties. Je l'avais lu il y a longtemps et je trouve que c'est d'autant plus intéressant de les relire maintenant : dans une situation où la France est à genoux et où des pays étrangers essaient de la gérer, c'est savoir tirer le meilleur de soi, protéger ses intérêts dans la situation la plus difficile possible. Ça confirme ce que je disais — c'est parce qu'il a réussi à fédérer, avec tout ce qu'ils ont fait au sein du CNR, le Comité national de résistance, qu'ils ont pu créer un projet et ensuite faire la Ve République. C'est comme ça qu'on arrive à changer les choses."
+    "mention_sec": 4316,
+    "verbatim": "je sais pas peut-être les mémoires de guerre de De Gaulle voilà c'est intéressant voilà plus que 3 je pourrais donner."
   },
   "Les affranchis||Martin Scorsese": {
     "episode": "Relever la tête et sauver le pays ? Jon de Lorraine",
@@ -579,10 +579,10 @@
     "verbatim": null
   },
   "Mémoires d'Hadrien||Marguerite Yourcenar": {
-    "episode": "Reprendre le pouvoir ou finir esclaves ? Nicolas Dupont-Aignan",
-    "found": true,
-    "mention_sec": 8199,
-    "verbatim": "les Mémoires d'Hadrien de Yourcenar que j'aime beaucoup"
+    "episode": "La Finance peut-elle arrêter de ruiner la planète ? Bertrand Badré",
+    "found": false,
+    "mention_sec": null,
+    "verbatim": ""
   },
   "Mémoires||Charles de Gaulle": {
     "episode": "Jean-Philippe Tanguy sans filtres ?",
@@ -591,15 +591,16 @@
     "verbatim": "Les Mémoires du général — tous les tomes, pas seulement Mémoires de guerre ou Mémoires d'espoir, l'ensemble. À lire avec le bagage — il faut aussi avoir lu des historiens qui permettent de recontextualiser ce que de Gaulle écrit, parce qu'il écrit dans un contexte où il veut reprendre le pouvoir ou légitimer ce qu'il a fait."
   },
   "La Bible||": {
-    "episode": "Énergie, face cachée de la monnaie ? Sébastien Gouspillou et Pierre Noizat",
+    "episode": "Une catastrophe financière biblique à l'horizon ? Marc Touati",
     "found": true,
-    "mention_sec": 9279,
-    "verbatim": "La Bible, moi je l'ai lue pour essayer de comprendre ce qu'il y avait dedans — la version moderne, en livre de poche. J'ai lu ça quand j'avais 12, 13, 14 ans, sur plusieurs années. J'ai aussi lu le Coran et la Torah. Pas en entier, mais j'ai lu la Bible en entier. C'est une démarche de compréhension du monde."
+    "mention_sec": 8204,
+    "verbatim": "c'est la Bible. je pense c'est très important de lire euh c'est tu c dans un autre monde. Alors des fois tu tu as des passages un peu durs, c'est costaud mais bon voilà c'est bien."
   },
   "Théorie générale de l'emploi, de l'intérêt et de la monnaie||John Maynard Keynes": {
     "episode": "Une catastrophe financière biblique à l'horizon ? Marc Touati",
-    "found": false,
-    "verbatim": null
+    "found": true,
+    "mention_sec": 8215,
+    "verbatim": "le deuxième livre là c'est le livre de Kens théorie générale qui est formidable. Moi je le lis en anglais, j'aime bien le relire parce qu'en fait cet économiste est un économiste anglais qui a sauvé le monde, faut pas l'oublier... il a conseillé Roosevelt et donc c'est ce qui a permis de relancer la machine. Kens est un grand libéral parce que les gens comprennent pas Kens en fait il disait faut effectivement relancer la machine"
   },
   "Le Droit au retour : Le Problème des réfugiés palestiniens||Collectif": {
     "episode": "Rima Hassan sans filtre ?",
@@ -626,39 +627,39 @@
     "verbatim": "Un dernier, c'est le coup de cœur — un livre que ma mère m'a mis entre les mains quand j'étais très jeune : Lettre à un ami juif d'Ibrahim Souss. Il s'inspire du modèle des Lettres à un ami allemand de Camus. Pour Camus, c'est un ami imaginaire, mais pour Souss, c'est un vrai ami juif à qui il s'adresse et à qui il expose sa peine d'être palestinien, sa souffrance, et il lui demande de lui tendre la main. C'est un très très beau livre."
   },
   "Oeuvres de Jean Racine||": {
-    "episode": "Juan Branco : Empoisonnement ? [EN DIRECT]",
+    "episode": "Juan Branco : Empoisonnement ?",
     "found": true,
-    "mention_sec": 8071,
-    "verbatim": "Alors, je recommande juste une chose. Vous téléchargez un des derniers miracles qui a généré l'État français, c'est Radio France, pas France Inter. Vous allez télécharger l'application, vous allez sur l'appli Radio France, vous allez sur France Culture, vous tapez juste sur la barre de recherche de l'application, tapez Racine. Et là, vous avez les enregistrements de la Comédie française des années 60, des années 70. Vous avez des gens qui pendant des décennies ont fait l'effort de rendre accessible à des gens qui n'avaient pas forcément le temps, l'énergie de lire et ainsi de suite des œuvres qui sont fondamentales pour comprendre non seulement pour sédimenter la langue française — c'est à ce moment-là que se sédimente la langue française. Racine prend la mythologie grecque et fait disparaître les dieux. Si vous lisez Racine par rapport à ce socle, vous découvrez que c'est le drame réduit à l'humain. C'est la tragédie mais sans les délibérations entre les différents dieux : vous retrouvez juste la chair humaine qui est la proie de la tragédie."
+    "mention_sec": 8037,
+    "verbatim": "j'ai beaucoup lu euh ces derniers temps, l'été dernier, l'été, racine. Et alors encore une fois, c'est compliqué de lire Racine quand on se l'a vu infliger à l'école... je recommande juste une chose. Vous téléchargez l'application Radio France, vous allez sur France Culture, vous tapez Racine. Et là, vous avez les enregistrements de la Comédie française des 60, des 70. Qu'est-ce que fait Racine ? Il prend la mythologie grecque"
   },
   "Le monde comme volonté et comme représentation||Arthur Schopenhauer": {
-    "episode": "Juan Branco : Empoisonnement ? [EN DIRECT]",
-    "found": true,
-    "mention_sec": 8234,
-    "verbatim": "Est-ce que vous avez un conseil pour les jeunes générations ? Je conseille L'Art d'avoir toujours raison d'Arthur Schopenhauer, qui est un de ses moins bons livres. Par contre, Le Monde comme représentation est excellent. C'est le troisième livre que je recommande. Le Monde comme représentation — lisez les 15 premières pages de Schopenhauer. C'est un bouquin de 600 pages. Vous lisez les 15 premières pages si vous voulez vous frotter un peu avec de la philosophie. Vous prenez ça, vous lisez à voix haute autant de fois que nécessaire, mais à un moment donné, vous confrontez à la beauté sublime des concepts qu'il vous propose. Schopenhauer, c'est assez impressionnant et ça devient très vite jouissif, mais il faut prendre le temps."
-  },
-  "Oeuvres de Rainer Maria Rilke||": {
-    "episode": "Juan Branco : Empoisonnement ? [EN DIRECT]",
+    "episode": "Juan Branco : Empoisonnement ?",
     "found": false,
     "verbatim": null
+  },
+  "Oeuvres de Rainer Maria Rilke||": {
+    "episode": "Juan Branco : Empoisonnement ?",
+    "found": true,
+    "mention_sec": 7991,
+    "verbatim": "Moi, je pense qu'il faut absolument euh lire de la poésie, ce qui est pas facile. Euh donc euh des exemples, je je pensais à un exemple, un auteur allemand pour être écuménique. Rilque Rilque RE, c'est quelque chose d'accessible et d'une légèreté et d'une beauté vraiment phénoménale, y compris dans cette traduction"
   },
   "Vers un monde univoque: Sur la perte d'ambiguïté et de diversité||Thomas Baure & Christopher Pollmann": {
     "episode": "Explosez l'Incertitude, Comment Penser l'Avenir en Profondeur ? Jérôme Clech",
     "found": true,
-    "mention_sec": 11020,
-    "verbatim": "Un livre qui m'a vraiment plu : c'est Vers un monde univoque de Baure — un islamologue allemand qui a pris son terrain d'étude et l'a étendu très largement pour montrer que sous couvert de diversité et de pluralité, on arrive à un monde univoque et que les choses sont monocolores. Il le démontre. La thèse est hyper solide, hyper étayée, hyper documentée. On peut ne pas être d'accord mais c'est assez solide. Si on veut faire de la bonne prospective, c'est exactement de ça dont il faut sortir. Si on voit le monde comme ça, on serait incapable d'appréhender le présent et d'envisager le futur."
+    "mention_sec": 11021,
+    "verbatim": "vers un monde univoque Bower... c'est un islamologue allemand qui a pris comme terrain d'étude son terrain mais qui l'a étendu très largement pour montrer... la thèse est hyper solide, hyper étayée, hyper documentée. Si on veut éviter ça précisément euh l'antidote c'est celle sur laquelle je travaille — on arrive à un monde univoque et que les choses sont monocolores il le démontre."
   },
   "La Cité aux murs incertains||Haruki Murakami": {
     "episode": "Explosez l'Incertitude, Comment Penser l'Avenir en Profondeur ? Jérôme Clech",
     "found": true,
-    "mention_sec": 11118,
-    "verbatim": "Un deuxième livre, celui-ci je l'ai lu il y a un peu plus de temps et ça n'a absolument rien à voir. C'est Murakami — La Cité aux murs incertains. Ce que j'aime dans ce bouquin, c'est le côté — pour la prospective — la cité au mur. La jaquette est extraordinaire. Et j'aime les couleurs. Ce que j'aime dans ce bouquin, c'est le pouvoir d'évocation. Pour construire de bons récits prospectifs, il faut que ça tienne un peu du mythe, que ça fleure un parfum d'éternité. Ce bouquin donne une vision éthique qui permet d'aboutir à une vision du monde."
+    "mention_sec": 11097,
+    "verbatim": "c'est Murakami sur la la cité au... c'est la cité au mur. Ouais. Jaquette est extraordinaire. Oui. Et j'aime la couleur aussi. J'aime les couleurs parce qu'en fait ça renvoie... ce que j'aime en fait dans ce bouquin, c'est le côté là aussi c'est pour la prospective"
   },
   "Yanaï, une journée réussie||Jérome Clech": {
     "episode": "Explosez l'Incertitude, Comment Penser l'Avenir en Profondeur ? Jérôme Clech",
     "found": true,
     "mention_sec": 11242,
-    "verbatim": "Lisez donc Yanaï, une journée réussie. Ce bouquin a été réédité à la faveur d'un partenariat avec Achetez livre. Vous y trouverez à peu près tout ce qui est — pour ceux que ça intéresse — à la graine. Cette méthode prospective que j'ai développée, tout part évidemment de là. C'est ésotérique, c'est transdisciplinaire, c'est un ovni. C'est 9 ans de boulot. Il a été publié pour la première fois en 2018 après 9 ans de boulot, et en y réfléchissant, je pense qu'il n'y avait pas une virgule à changer."
+    "verbatim": "lisez donc euh Yanaï une journée réussie. Alors ce bouquin là, il a été réédité à la faveur d'une d'un partenariat avec achète livre. Voilà. Euh et vous y trouverez à peu près tout euh ce qui est pour ceux que ça intéresse qui est à la graine, à cette méthode prospective"
   },
   "Odyssée de l'Endurance||Ernest Henry Shackleton": {
     "episode": "L'Homme a besoin de passion pour exister. Marie Tabarly sans filtre.",
@@ -885,16 +886,16 @@
     "verbatim": null
   },
   "De la démocratie en Amérique||Alexis de Tocqueville": {
-    "episode": "Charles de Courson : Macron cauchemarde, la France résiste ?",
+    "episode": "François Ecalle : Le Déni Politique pour une Réalité qui Frappe ?",
     "found": true,
-    "mention_sec": 5528,
-    "verbatim": "les bouquins d'Alexis de Tocqueville : celui le plus connu de la démocratie en Amérique, mais les deux autres qui sont moins connus qui sont aussi très intéressants."
+    "mention_sec": 5120,
+    "verbatim": "je vais reciter quelqu'un que j'ai cité tout à l'heure c'est tocqueville je je entre la démocratie en Amérique et l'Ancien Régime et la Révolution je trouve qu'il y a matière et et c'est en lien avec avec les sujets de finances publiques français — relire l'Ancien Régime et la Révolution et la démocratie en Amérique ça donne un éclairage sur ce qui se passe aussi en ce moment aussi bien en Europe que aux États-Unis sur le déni des politiques face à la réalité"
   },
   "L'Ancien Régime et la Révolution||Alexis de Tocqueville": {
-    "episode": "Charles de Courson : Macron cauchemarde, la France résiste ?",
+    "episode": "François Ecalle : Le Déni Politique pour une Réalité qui Frappe ?",
     "found": true,
-    "mention_sec": 5535,
-    "verbatim": "celui sur la révolution dans lequel il montre que au fond la révolution n'a fait qu'accélérer le mouvement de centralisme de la royauté française, qui est très intéressant du point de vue sociologique."
+    "mention_sec": 5122,
+    "verbatim": "entre la démocratie en Amérique et l'Ancien Régime et la Révolution je trouve qu'il y a matière et et c'est en lien avec avec les sujets de finances publiques français — relire l'Ancien Régime et la Révolution et la démocratie en Amérique ça donne un éclairage sur ce qui se passe aussi en ce moment aussi bien en Europe que aux États-Unis sur le déni des politiques face à la réalité"
   },
   "L’énergie, face cachée de la monnaie||Pierre Noizat et Edouard Gallego": {
     "episode": "Énergie, face cachée de la monnaie ? Sébastien Gouspillou et Pierre Noizat",
@@ -1263,10 +1264,10 @@
     "verbatim": "tous les livres qui concernent la crise covid : celui de Christine Cotton, celui d'Alexandra Henrion-Caude, celui de Pierre Chaillot, celui de Christian Perronne. Chaque personnalité a amené une pierre à l'édifice pour comprendre cette pandémie."
   },
   "Les apprentis sorciers||Alexandra Henrion-Caude": {
-    "episode": "Virginie Joron cogne l'UE, corrompue et en crise ?",
+    "episode": "Quand est-ce que l'on touche le fond ? Pierre Sabatier et Olivier Delamarche",
     "found": true,
-    "mention_sec": 9844,
-    "verbatim": "que ça soit Alexandra Henrion-Caude par rapport au vaccin ARN messager, chacun a apporté sa petite pierre à l'édifice."
+    "mention_sec": 9706,
+    "verbatim": "celle qui bossent depuis des années et des années sur la RN messager et généticienne oui et qui s'est fait évidemment démolir par notre ministre de la Santé écoute je pense j'ai un petit peu plus confiance dans ce qu'elle raconte elle qui bosse là dessus depuis des années plutôt que les apprentis sorciers et c'est très bien fait c'est très intéressant."
   },
   "Covid 19, ce que révèlent les chiffres officiels fin 2023||Pierre Chaillot": {
     "episode": "Virginie Joron cogne l'UE, corrompue et en crise ?",
@@ -2084,17 +2085,11 @@
     "mention_sec": 8428,
     "verbatim": "et qui résume très bien le conflit en cours et il y a un très très très très très très très beau livre que j'ai lu là récemment qui s'appelle Warda de sonala Ibrahim un écrivain égyptien qui raconte également une histoire dingue d'un écrivain donc un cet écrivain égyptien qui tombe amoureux d'une jeune révolutionnaire omanaise yménite c'est dans les années 60 et euh et lui il est arrêté par Naser parce qu'il est communiste il est jeté en prison"
   },
-  "Théorie générale de l'emploi, de l'intérêt et de la monnaie||John Maynard Keynes": {
-    "episode": "Économie : le mensonge face à la réalité ? Marc Touati",
-    "found": false,
-    "mention_sec": null,
-    "verbatim": ""
-  },
   "Le Père Goriot||Honoré de Balzac": {
-    "episode": "Économie : le mensonge face à la réalité ? Marc Touati",
-    "found": false,
-    "mention_sec": null,
-    "verbatim": ""
+    "episode": "Deux économistes sous stress-test ? Julia Cagé et Thomas Piketty",
+    "found": true,
+    "mention_sec": 9086,
+    "verbatim": "moi ce qui m'a le plus marqué dans mes lectures à part les livres d'historiens c'est souvent des romans parce qu'il y a une espèce de puissance évocatrice dans la littérature tout à l'heure je parlais du perregorio Balzac le poids de l'héritage au 19e siècle mais on pourrait dire la même chose."
   },
   "Le Nom de la rose||Umberto Eco": {
     "episode": "Économie : le mensonge face à la réalité ? Marc Touati",
@@ -2187,12 +2182,6 @@
     "verbatim": ""
   },
   "Blueberry, La Mine de l'Allemand perdu||Jean Giraud, Jean-Michel Charlier": {
-    "episode": "La Finance peut-elle arrêter de ruiner la planète ? Bertrand Badré",
-    "found": false,
-    "mention_sec": null,
-    "verbatim": ""
-  },
-  "Mémoires d'Hadrien||Marguerite Yourcenar": {
     "episode": "La Finance peut-elle arrêter de ruiner la planète ? Bertrand Badré",
     "found": false,
     "mention_sec": null,
@@ -2359,12 +2348,6 @@
     "found": false,
     "mention_sec": null,
     "verbatim": ""
-  },
-  "Le Père Goriot||Honoré de Balzac": {
-    "episode": "Deux économistes sous stress-test ? Julia Cagé et Thomas Piketty",
-    "found": true,
-    "mention_sec": 9086,
-    "verbatim": "moi ce qui m'a le plus marqué dans mes lectures à part les livres d'historiens c'est souvent des romans parce qu'il y a une espèce de puissance évocatrice dans la littérature tout à l'heure je parlais du perregorio Balzac le poids de l'héritage au 19e siècle mais on pourrait dire la même chose."
   },
   "La volonté et la fortune||Carlos Fuentes": {
     "episode": "Deux économistes sous stress-test ? Julia Cagé et Thomas Piketty",
@@ -2594,18 +2577,6 @@
     "mention_sec": 9581,
     "verbatim": "après le cycle fondation à mon avis auteur immense de la fiction délirante c'est Philippe cadiic tout le monde a vu bled Runner je suppose dans ceux qui m'écoutent et quand vous regardez Blade Runner vous touchez du doigt à quoi sert la science-fiction."
   },
-  "Le meilleur des mondes||Aldous Huxley": {
-    "episode": "La guerre des intelligences ? Laurent Alexandre",
-    "found": false,
-    "mention_sec": null,
-    "verbatim": ""
-  },
-  "1984||George Orwell": {
-    "episode": "La guerre des intelligences ? Laurent Alexandre",
-    "found": false,
-    "mention_sec": null,
-    "verbatim": ""
-  },
   "Ex Machina||Alex Garland": {
     "episode": "La guerre des intelligences ? Laurent Alexandre",
     "found": false,
@@ -2630,12 +2601,6 @@
     "mention_sec": null,
     "verbatim": ""
   },
-  "De l'inégalité parmi les sociétés||Jared Diamond": {
-    "episode": "Sobriété, déconsommateurs : cache-misère des gouvernements ? Jean-Marc Jancovici",
-    "found": true,
-    "mention_sec": 9222,
-    "verbatim": "j'ai trouvé beaucoup plus intéressant que l'autre bouquin de Jared Diamond effondrement qui a beaucoup fait parler de lui ou il se concentre quand même sur quelques cas d'études les escapales les Vikings l'île de Pâques etc toute la société mondiale est pas comme l'île de Pâques là j'ai trouvé que gun germancil c'était beaucoup plus intéressant donc ça ce bouquin là je l'ai trouvé très bien."
-  },
   "Les Limites à la croissance||Dennis Meadows, Donella Meadows et Jørgen Randers (la version originale)": {
     "episode": "Sobriété, déconsommateurs : cache-misère des gouvernements ? Jean-Marc Jancovici",
     "found": true,
@@ -2653,12 +2618,6 @@
     "found": true,
     "mention_sec": 4278,
     "verbatim": "trois autres livres qu'est-ce que je pourrais vous dire pour alors un truc terrifiant du Grand Pierre Lemaître de mariée c'est un petit polar mais terrifiant qui se fait rapidement que voilà que j'ai relu à pas longtemps qui est incroyable."
-  },
-  "Mémoires de guerre||Charles de Gaulle": {
-    "episode": "Second tour, fable politique ? Albert Dupontel",
-    "found": true,
-    "mention_sec": 4316,
-    "verbatim": "je sais pas peut-être les mémoires de guerre de De Gaulle voilà c'est intéressant voilà plus que 3 je pourrais donner."
   },
   "Buffet froid||Bertrand Blier": {
     "episode": "Second tour, fable politique ? Albert Dupontel",
@@ -2774,12 +2733,6 @@
     "mention_sec": null,
     "verbatim": ""
   },
-  "Les apprentis sorciers||Alexandra Henrion-Caude": {
-    "episode": "Quand est-ce que l'on touche le fond ? Pierre Sabatier et Olivier Delamarche",
-    "found": true,
-    "mention_sec": 9706,
-    "verbatim": "celle qui bossent depuis des années et des années sur la RN messager et généticienne oui et qui s'est fait évidemment démolir par notre ministre de la Santé écoute je pense j'ai un petit peu plus confiance dans ce qu'elle raconte elle qui bosse là dessus depuis des années plutôt que les apprentis sorciers et c'est très bien fait c'est très intéressant."
-  },
   "Ménon||Platon": {
     "episode": "Quand est-ce que l'on touche le fond ? Pierre Sabatier et Olivier Delamarche",
     "found": true,
@@ -2821,11 +2774,6 @@
     "found": true,
     "mention_sec": 9672,
     "verbatim": "les soulèvements de la terre ça va pas se faire dissoudre comme ça parce qu'il y a quelque chose de primordial là-dedans"
-  },
-  "De la guerre||Carl von Clausewitz": {
-    "episode": "Criminalisation des luttes : écoterrorisme ? M. Dulac, C. Bonneuil, A. Planchard",
-    "found": false,
-    "verbatim": null
   },
   "Ralentir ou périr||Timothée Parrique": {
     "episode": "Les émeutes de la pauvreté ? Olivier De Schutter",
@@ -2918,12 +2866,6 @@
     "found": true,
     "mention_sec": 6054,
     "verbatim": "Les Fleurs du Mal de Baudelaire... la littérature elle m'a appris à comprendre le double discours et un monde qui est multidimensionnel moi j'avais toujours en fait ma réflexion elle est plate et assez simple et en fait la littérature m'a permis de comprendre qu'il pouvait y avoir de la complexité du sous-entendu du double discours enfin de sortir du simplisme"
-  },
-  "Le Prince||Nicolas Machiavel": {
-    "episode": "Immigration, où va la France ? Estelle Youssouffa",
-    "found": true,
-    "mention_sec": 6061,
-    "verbatim": "un deuxième livre le Prince de Machiavel... la littérature m'a permis de comprendre qu'il pouvait y avoir de la complexité du sous-entendu du double discours enfin de sortir du simplisme dans lequel j'étais"
   },
   "Saint-Germain ou la négociation||Francis Walder": {
     "episode": "Immigration, où va la France ? Estelle Youssouffa",
