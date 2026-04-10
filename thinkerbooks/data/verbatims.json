@@ -179,10 +179,10 @@
     "verbatim": null
   },
   "1984||George Orwell": {
-    "episode": "La guerre des intelligences ? Laurent Alexandre",
-    "found": false,
-    "mention_sec": null,
-    "verbatim": ""
+    "episode": "France Corruption : Qui se partage les 120 milliards d'Euros chaque année ? Paul Cassia, Inès Bernard, Elise Van Beneden",
+    "found": true,
+    "mention_sec": 7741,
+    "verbatim": "je me permets de conseiller de lire l'un desmodable et très actuel 1984 de George Arwell c'est un livre absolument intemporel pour les jeunes génération"
   },
   "Le meilleur des mondes||Aldous Huxley": {
     "episode": "La guerre des intelligences ? Laurent Alexandre",
@@ -339,10 +339,10 @@
     "verbatim": "C'est très important de revoir La Ligne rouge de Terrence Malick maintenant que les spectres de la guerre reviennent — c'est un des plus grands films qui ont été faits sur la guerre."
   },
   "Voyage au bout de la nuit||Louis-Ferdinand Céline": {
-    "episode": "Juan Branco : Légitime Colère ?",
+    "episode": "Comment préparer une guillotine ? Juan Branco",
     "found": true,
-    "mention_sec": 9527,
-    "verbatim": "Un livre que je recommande à chaque fois : Voyage au bout de la nuit de Céline. C'est classique mais c'est important. Malgré ses positions tendancieuses sur deux-trois trucs, c'est sans importance par rapport à son génie littéraire. Il a raconté la guerre comme peu de personnes l'ont fait. Il y a deux façons de savoir ce qui est vraiment la guerre à part la vivre — la lecture d'œuvres comme celle-ci, qui raconte sur la durée ce que c'est que de se confronter à la mort."
+    "mention_sec": 11212,
+    "verbatim": "voyage au bout de la nuit de Céline parce que c'est le plus grand livre de littérature du 20e siècle de très loin."
   },
   "Le petit Prince||Antoine de Saint Exupéry": {
     "episode": "Ancien Patron de la DGSE sans filtres ? Alain Juillet",
@@ -853,16 +853,15 @@
     "verbatim": "Belle du Seigneur d'Albert Cohen — pour les plus sensibles d'entre vous. Très beau livre, très long, mais quand on le ferme, on regrette qu'il ait été si court. Alors qu'au début, on a du mal à s'y mettre en se disant « C'est 1000 pages, j'y arriverai pas. » Magnifique livre sur la passion amoureuse, sur les relations entre les hommes et les femmes, mais aussi — je le citais tout à l'heure — un diplomate à la Société des Nations très désabusé sur la vanité, l'inutilité de ce métier parfois. Vraiment très beau livre."
   },
   "Les misérables||Victor Hugo": {
-    "episode": "Juan Branco sans filtre ? Avant les présidentielles.",
+    "episode": "Comment préparer une guillotine ? Juan Branco",
     "found": true,
-    "mention_sec": 10936,
-    "verbatim": "Les Misérables de Victor Hugo."
+    "mention_sec": 11149,
+    "verbatim": "les misérables de Victor Hugo parce que ça vous donne une charpente littéraire politique intellectuelle et que c'est pas du tout un livre chiant. En fait, c'est le genre de livre qu'on se dit qu'ils sont pas faits pour nous. Enfin que en fait c'est des livres merveilleux à découvrir par soi-même et à se les approprier."
   },
   "Les enfants Tanner||Robert Walser": {
-    "episode": "Juan Branco sans filtre ? Avant les présidentielles.",
-    "found": true,
-    "mention_sec": 10936,
-    "verbatim": "Les Enfants Tanner de Walser."
+    "episode": "Comment préparer une guillotine ? Juan Branco",
+    "found": false,
+    "verbatim": null
   },
   "Or noir: La grande histoire du pétrole||Matthieu Auzanneau": {
     "episode": "Juan Branco sans filtre ? Avant les présidentielles.",
@@ -946,10 +945,10 @@
     "verbatim": "Les Mémoires de Raymond Aron. C'est compliqué, c'est dur — parfois il faut relire deux ou trois fois certains chapitres — mais il y a du fond. C'est quelqu'un qui était un peu à l'opposé de ce qui se faisait à l'époque en terme de philosophie, d'intellectuel, et qui n'a pas hésité, qui a été courageux, qui a défendu ses idées. J'aime beaucoup Raymond Aron et ce livre des Mémoires m'a toujours passionné."
   },
   "Le premier homme||Albert Camus": {
-    "episode": "Électricité : Les prix vont-ils exploser ? André Merlin et Vincent Delahaye",
+    "episode": "Comprendre la guerre qui vient ? Henri Guaino",
     "found": true,
-    "mention_sec": 8740,
-    "verbatim": "Le Premier homme de Camus aussi. C'était son dernier roman inachevé, mais qui décrit vraiment ce qu'il a vécu — avec la qualité d'écriture de Camus."
+    "mention_sec": 12715,
+    "verbatim": "qui pourrait lire aussi euh le premier homme ça serait toujours de Camu ça serait ça serait pas mal aussi voilà enfin moi c'est le livre le plus émouvant que j'ai lu de ma vie"
   },
   "L’archipel français||Jérôme Fourquet": {
     "episode": "Électricité : Les prix vont-ils exploser ? André Merlin et Vincent Delahaye",
@@ -1558,10 +1557,10 @@
     "verbatim": "Un cours de Lorenz, n'importe lequel, ils se font plaisir. L'Homme en péril. Il est bien celui-là."
   },
   "Fables||Jean de La Fontaine": {
-    "episode": "Guerre Civile en approche : État des Lieux à l’Extrême Droite ? Laurent Obertone",
+    "episode": "La France en perdition : Pourquoi et à quoi s'attendre ? Anaïs Voy-Gillis et Maroun Eddé",
     "found": true,
-    "mention_sec": 7186,
-    "verbatim": "Les Fables de La Fontaine."
+    "mention_sec": 7127,
+    "verbatim": "un 4riè pour la route c'est les Fabes de la Fontaine parce que comme me disait un ami très cher juste avant de venir il y en a toujours une qui correspond que tu veux raconter"
   },
   "Mauvaises pensées||Paul Valéry": {
     "episode": "Guerre Civile en approche : État des Lieux à l’Extrême Droite ? Laurent Obertone",
@@ -2872,5 +2871,114 @@
     "found": true,
     "mention_sec": 6067,
     "verbatim": "Saint-Germain ou la négociation qui est un livre qui m'a permis de comprendre la subtilité c'est à dire que moi j'étais quelqu'un de très linéaire et en fait pour moi la littérature elle m'a appris à comprendre le double discours et un monde qui est multidimensionnel moi j'avais toujours en fait ma réflexion elle est plate et assez simple et en fait la littérature m'a permis de comprendre qu'il pouvait y avoir de la complexité du sous-entendu"
+  },
+  "La désindustrialisation de la France: 1995-2015||Nicolas Dufourcq": {
+    "episode": "La France en perdition : Pourquoi et à quoi s'attendre ? Anaïs Voy-Gillis et Maroun Eddé",
+    "found": false,
+    "verbatim": null
+  },
+  "La destruction de l'État||": {
+    "episode": "La France en perdition : Pourquoi et à quoi s'attendre ? Anaïs Voy-Gillis et Maroun Eddé",
+    "found": false,
+    "verbatim": null
+  },
+  "Les villes invisibles||Italo Calvino": {
+    "episode": "La France en perdition : Pourquoi et à quoi s'attendre ? Anaïs Voy-Gillis et Maroun Eddé",
+    "found": true,
+    "mention_sec": 7101,
+    "verbatim": "la hord du contrevant d'Alain damadiio les ville invisible d'Italo Calvino euh la renaissance industrielle de Pierre Musseau et ah j'ai mangé son nom le PDG d'asso system Bernard charless qui parle aussi d'imaginaire dans l'industrie et un 4riè pour la route c'est les Fabes de la Fontaine"
+  },
+  "La Renaissance de l'industrie : Dialogue entre un industriel et un philosophe||Bernard Charlès et Pierre Musso": {
+    "episode": "La France en perdition : Pourquoi et à quoi s'attendre ? Anaïs Voy-Gillis et Maroun Eddé",
+    "found": true,
+    "mention_sec": 7110,
+    "verbatim": "la renaissance industrielle de Pierre Musseau et ah j'ai mangé son nom le PDG d'asso system Bernard charless qui parle aussi d'imaginaire dans l'industrie"
+  },
+  "Ces Messieurs de Lazard||Martine Orange": {
+    "episode": "La France en perdition : Pourquoi et à quoi s'attendre ? Anaïs Voy-Gillis et Maroun Eddé",
+    "found": true,
+    "mention_sec": 7180,
+    "verbatim": "c'est messieurs de Lazar qui a été écrit par Martine orange c'est il rentre au cœur de la banque d'affaires Lazar et il retrace son histoire des années 50 à aujourd'hui toutes les privatisations qui ont été menées comment elle est progressivement devenu américaine... elle a fait une enquête Martine c'est voilà elle est très forte"
+  },
+  "Les Nouveaux maîtres du monde, et ceux qui leur résistent||Jean Ziegler": {
+    "episode": "La France en perdition : Pourquoi et à quoi s'attendre ? Anaïs Voy-Gillis et Maroun Eddé",
+    "found": false,
+    "verbatim": null
+  },
+  "La concurrence des victimes : Génocide, identité, reconnaissance||Jean-Michel Chaumont": {
+    "episode": "La France en perdition : Pourquoi et à quoi s'attendre ? Anaïs Voy-Gillis et Maroun Eddé",
+    "found": false,
+    "verbatim": null
+  },
+  "La Corruption de la République||Yves Mény": {
+    "episode": "France Corruption : Qui se partage les 120 milliards d'Euros chaque année ? Paul Cassia, Inès Bernard, Elise Van Beneden",
+    "found": true,
+    "mention_sec": 7741,
+    "verbatim": "le très actuel et indémodable ouvrage de Evi qui s'appelle la corruption de la République qui date de 1992 que j'ai étudié à l'époque et qui m'a vraiment beaucoup marqué"
+  },
+  "La promesse de l'aube||Romain Gary": {
+    "episode": "France Corruption : Qui se partage les 120 milliards d'Euros chaque année ? Paul Cassia, Inès Bernard, Elise Van Beneden",
+    "found": true,
+    "mention_sec": 7764,
+    "verbatim": "pour donner une note d'espoir de joie peut-être un bon petit romain gar voilà la promesse de l'aube quel beau titre pour finir une émission comme la vôtre"
+  },
+  "Les Rapaces||Camille Vigogne Le Coat": {
+    "episode": "France Corruption : Qui se partage les 120 milliards d'Euros chaque année ? Paul Cassia, Inès Bernard, Elise Van Beneden",
+    "found": true,
+    "mention_sec": 7770,
+    "verbatim": "moi j'ai recommandé de lire une enquête qui est sortie il y a peu de temps cette année il me semble qui est rapace qui concerne la corruption dans le sud de la France"
+  },
+  "Résister à la corruption||Éric Alt, Élise Van Beneden": {
+    "episode": "France Corruption : Qui se partage les 120 milliards d'Euros chaque année ? Paul Cassia, Inès Bernard, Elise Van Beneden",
+    "found": true,
+    "mention_sec": 7781,
+    "verbatim": "ellise je conseille ton tract... le tract anticorps le tract galimar — les droits d'auteurs sont versés à l'association donc c'est aussi un moyen de la soutenir"
+  },
+  "Auschwitz et après (3 tomes)||Charlotte Delbo": {
+    "episode": "France Corruption : Qui se partage les 120 milliards d'Euros chaque année ? Paul Cassia, Inès Bernard, Elise Van Beneden",
+    "found": true,
+    "mention_sec": 7805,
+    "verbatim": "en dehors du sujet de corruption moi je je conseille toujours de lire Delbo et c'est ta trilogie sur sur la la Choa qui est en fait un livre sur l'engagement et avec vraiment la littérature et et même de la poésie et qui permet en fait de voir le sort qui est réservé aux personnes qui s'engag"
+  },
+  "Le cavalier suédois||Leo Perutz": {
+    "episode": "France Corruption : Qui se partage les 120 milliards d'Euros chaque année ? Paul Cassia, Inès Bernard, Elise Van Beneden",
+    "found": true,
+    "mention_sec": 7805,
+    "verbatim": "j'ai ru récemment le cavalier suédois qui est une lecture absolument magnifique"
+  },
+  "Un homme||Oriana Fallaci": {
+    "episode": "France Corruption : Qui se partage les 120 milliards d'Euros chaque année ? Paul Cassia, Inès Bernard, Elise Van Beneden",
+    "found": true,
+    "mention_sec": 7805,
+    "verbatim": "le 3è un homme Oriana falaci"
+  },
+  "Crimes et châtiment||Fedor Dostoïevski": {
+    "episode": "Comment préparer une guillotine ? Juan Branco",
+    "found": true,
+    "mention_sec": 11055,
+    "verbatim": "d'abord un livre de de Dostoyevski euh Crimé et châtiment pour une raison très simple. Aujourd'hui, comme les bouquins de Pushkin et compagnie, il y a un mouvement massif de destruction de tous les auteurs russes dans les bibliothèques ukrainiennes. Dostoyevski, Pushkin et compagnie, c'est soit rangés dans les réserves, soit jetés — et vous avez un article du monde qui décrit ça dans des termes positifs — crimer châtiment Dostevski parce que c'est une des plus belles œuvres de l'histoire de l'humanité"
+  },
+  "L'homme révolté||Albert Camus": {
+    "episode": "Comprendre la guerre qui vient ? Henri Guaino",
+    "found": true,
+    "mention_sec": 12464,
+    "verbatim": "je dirais d'abord l'homme révolté de Camu ou l'homme révolté c'est un homme c'est c'est c'est un homme qui dit non qui a-t-il dans ce nom il y a vous avez franchi une limite — je pense qu'il aurait beaucoup attiré pour la la jeunesse d'aujourd'hui"
+  },
+  "Les Grands cimetières sous la lune||Georges Bernanos": {
+    "episode": "Comprendre la guerre qui vient ? Henri Guaino",
+    "found": true,
+    "mention_sec": 12873,
+    "verbatim": "je viens de de le relire qui est les les grands cimetières sous la lune de Bernanos très très très instructif alors c'est un personnage qu'on connaît moins aujourd'hui — c'est Bernanos qui dit dans dans les grand cimetière sous la lune il écrit en 1937 il dit que le nazisme au fond c'est c'est c'est le visage de la souffrance et de l'humiliation allemande"
+  },
+  "Mémoires d'Outre-Tombe||François-René de Chateaubriand": {
+    "episode": "Comprendre la guerre qui vient ? Henri Guaino",
+    "found": false,
+    "verbatim": null
+  },
+  "La Horde du Contrevent||Alain Damasio (2)": {
+    "episode": "France Corruption : Qui se partage les 120 milliards d'Euros chaque année ? Paul Cassia, Inès Bernard, Elise Van Beneden",
+    "found": true,
+    "mention_sec": 7805,
+    "verbatim": "je vous conseille aussi de lire l'ordre du contrevant qui est aussi un un bouquin absolument magnifique"
   }
 }
