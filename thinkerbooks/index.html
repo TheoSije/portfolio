@@ -51,6 +51,17 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: env(safe-area-inset-top);
+  background: var(--bg);
+  z-index: 300;
+}
+
 body::after {
   content: '';
   position: fixed;
