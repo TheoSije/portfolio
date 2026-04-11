@@ -60,9 +60,24 @@ body::after {
   z-index: 9999;
 }
 
+/* ── BRAND BAR (sticky) ── */
+.brand-bar {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+}
+.brand-bar .brand {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 14px 0;
+}
+
 /* ── HEADER ── */
 header {
-  padding: 52px 24px 32px;
+  padding: 28px 24px 32px;
   max-width: 820px;
   margin: 0 auto;
 }
@@ -486,7 +501,8 @@ footer a:hover { color: var(--accent); }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 600px) {
-  header { padding: 32px 16px 24px; }
+  header { padding: 20px 16px 24px; }
+  .brand-bar { padding: 0 16px; }
   .brand { gap: 12px; }
   .brand-logo { height: 32px; }
   h1.brand-title { font-size: 20px; }
@@ -533,7 +549,7 @@ footer a:hover { color: var(--accent); }
 </head>
 <body>
 
-<header>
+<div class="brand-bar">
   <div class="brand">
     <div class="brand-tv" style="cursor:pointer" onclick="window.scrollTo({top:0,behavior:'smooth'});document.getElementById('search').value='';document.getElementById('search').dispatchEvent(new Event('input'));">
       <img src="../img/thinkerview-logo.svg" alt="Thinkerview" class="brand-logo"
@@ -551,7 +567,9 @@ footer a:hover { color: var(--accent); }
       <button class="nav-tab" data-tab="about">About</button>
     </nav>
   </div>
+</div>
 
+<header>
   <p class="seo-intro">
     Tous les <strong>livres cités dans Thinkerview</strong> réunis en un seul endroit.
     <strong id="seo-count">Plus de 1&nbsp;250 références</strong> extraites de chaque épisode —
@@ -1016,13 +1034,21 @@ let activeTab = 'episodes';
 document.querySelectorAll('.nav-tab').forEach(btn => {
   btn.addEventListener('click', () => {
     const tab = btn.dataset.tab;
-    if (tab === activeTab) return;
     activeTab = tab;
     document.querySelectorAll('.nav-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
     Object.entries(VIEWS).forEach(([key, id]) => {
       document.getElementById(id).hidden = key !== tab;
     });
     if (tab === 'top') renderTop();
+    const start = window.scrollY;
+    const duration = 220;
+    const t0 = performance.now();
+    function easeScroll(t) {
+      const p = Math.min((t - t0) / duration, 1);
+      window.scrollTo(0, start * (1 - p * (2 - p)));
+      if (p < 1) requestAnimationFrame(easeScroll);
+    }
+    requestAnimationFrame(easeScroll);
   });
 });
 
