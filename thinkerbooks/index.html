@@ -254,7 +254,8 @@ h1.brand-title {
 .ep-books { padding: 0 18px 15px; border-top: 1px solid var(--border); }
 
 .book-item {
-  display: flex; align-items: center; gap: 12px;
+  display: flex; align-items: flex-start; gap: 12px;
+  flex-wrap: wrap;
   padding: 10px 0; border-bottom: 1px solid var(--border);
 }
 .book-item:last-child { border-bottom: none; padding-bottom: 0; }
@@ -284,7 +285,8 @@ h1.brand-title {
   display: none;
 }
 
-.book-info { flex: 1; min-width: 0; }
+.book-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.book-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; gap: 8px; }
 
 .book-guest {
   font-family: 'JetBrains Mono', monospace;
@@ -490,7 +492,6 @@ footer a:hover { color: var(--accent); }
   h1.brand-title { font-size: 20px; }
   .grid { padding: 0 12px 60px; }
   .stats-bar { padding: 0 12px; }
-  .book-actions { display: flex; }
   .brand { flex-wrap: wrap; justify-content: flex-start; }
   .brand-nav { width: 100%; border-top: 1px solid var(--border); padding-top: 10px; gap: 4px; }
   .nav-tab { padding: 6px 14px; font-size: 10px; }
@@ -500,7 +501,7 @@ footer a:hover { color: var(--accent); }
 
 /* ── VERBATIMS ── */
 .book-verbatim-toggle {
-  margin-top: 7px;
+  margin-top: 0;
   font-size: 11px;
   color: var(--accent);
   cursor: pointer;
@@ -515,7 +516,8 @@ footer a:hover { color: var(--accent); }
 .verbatim-chevron { font-size: 9px; transition: transform .2s; display: inline-block; }
 .book-verbatim-toggle.open .verbatim-chevron { transform: rotate(90deg); }
 .book-verbatim {
-  margin-top: 8px;
+  flex-basis: 100%;
+  margin-top: 0;
   padding: 10px 12px;
   border-left: 2px solid var(--accent);
   background: rgba(0,204,122,.04);
@@ -805,10 +807,11 @@ function buildCard(ep, q) {
     const verbKey = `${b.title}||${b.author}`;
     const verbEntry = VERBATIMS[verbKey] || VERBATIMS[`${b.title}||`] || null;
     const hasVerbatim = verbEntry?.found && verbEntry?.verbatim;
-    const verbatimHtml = hasVerbatim ? `
-      <div class="book-verbatim-toggle" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden;this.classList.toggle('open')">
+    const verbatimToggle = hasVerbatim ? `
+      <div class="book-verbatim-toggle" onclick="var v=this.closest('.book-item').querySelector('.book-verbatim');v.hidden=!v.hidden;this.classList.toggle('open')">
         <span class="verbatim-chevron">▸</span> Ce qu'en dit l'invité
-      </div>
+      </div>` : '';
+    const verbatimBlock = hasVerbatim ? `
       <div class="book-verbatim" hidden>
         <blockquote>${escHtml(verbEntry.verbatim)}</blockquote>
       </div>` : '';
@@ -823,11 +826,14 @@ function buildCard(ep, q) {
       <div class="book-info">
         <div class="book-title">${highlight(b.title, q)}</div>
         ${displayAuthor ? `<div class="book-author">${highlight(displayAuthor, q)}</div>` : ''}
-        ${verbatimHtml}
+        <div class="book-bottom">
+          ${verbatimToggle}
+          <div class="book-actions">
+            <a class="buy-btn" href="${escHtml(buyHref)}" target="_blank" rel="noopener">${buyLabel}</a>
+          </div>
+        </div>
       </div>
-      <div class="book-actions">
-        <a class="buy-btn" href="${escHtml(buyHref)}" target="_blank" rel="noopener">${buyLabel}</a>
-      </div>
+      ${verbatimBlock}
     </div>`;
   }).join('');
 
