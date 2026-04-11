@@ -143,7 +143,7 @@ h1.brand-title {
   margin-bottom: 26px;
   max-width: 580px;
   font-size: 13px;
-  color: var(--muted);
+  color: rgba(160, 200, 175, 0.65);
   line-height: 1.7;
 }
 .seo-intro strong { color: var(--text); font-weight: 500; }
@@ -170,7 +170,7 @@ h1.brand-title {
   outline: none;
   transition: border-color .2s, box-shadow .2s;
 }
-#search::placeholder { color: var(--muted); font-style: italic; }
+#search::placeholder { color: rgba(160, 200, 175, 0.65); font-style: italic; }
 #search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow); }
 
 .search-clear {
@@ -185,7 +185,7 @@ h1.brand-title {
 .search-hint {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
-  color: var(--muted);
+  color: rgba(160, 200, 175, 0.65);
   padding-left: 2px;
 }
 .search-hint strong { color: var(--accent); }
@@ -233,7 +233,7 @@ h1.brand-title {
 .ep-info {
   display: flex; align-items: center; gap: 8px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; color: var(--muted); flex-wrap: wrap;
+  font-size: 10px; color: rgba(160, 200, 175, 0.65); flex-wrap: wrap;
 }
 .ep-dot { opacity: .25; }
 .ep-book-count {
@@ -281,8 +281,7 @@ h1.brand-title {
 .book-cover.has-img .book-cover-placeholder { opacity: 0; }
 
 .book-num {
-  flex-shrink: 0; font-family: 'JetBrains Mono', monospace;
-  font-size: 9px; color: var(--muted); width: 14px; text-align: right; opacity: .45;
+  display: none;
 }
 
 .book-info { flex: 1; min-width: 0; }
@@ -300,7 +299,7 @@ h1.brand-title {
   background: rgba(0,204,122,.2); color: var(--accent2);
   border-radius: 1px; padding: 0 1px;
 }
-.book-author { font-size: 13px; color: var(--muted); font-style: italic; }
+.book-author { font-size: 13px; color: rgba(160, 200, 175, 0.65); font-style: italic; }
 .book-author mark {
   background: rgba(0,204,122,.2); color: var(--accent2);
   border-radius: 1px; padding: 0 1px; font-style: normal;
@@ -375,7 +374,7 @@ footer a:hover { color: var(--accent); }
   font-weight: 500;
   letter-spacing: .08em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: rgba(160, 200, 175, 0.65);
   cursor: pointer;
   transition: color .15s, border-color .15s;
   border-radius: 2px;
@@ -415,15 +414,15 @@ footer a:hover { color: var(--accent); }
 }
 .top-cover img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity .3s; }
 .top-cover img.loaded { opacity: 1; }
-.top-cover-placeholder { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--accent); opacity: .18; }
+.top-cover-placeholder { display: none; }
 
 .top-info { flex: 1; min-width: 0; }
 .top-title { font-size: 15px; font-weight: 500; color: var(--bright); line-height: 1.3; }
-.top-author { font-size: 13px; color: var(--muted); font-style: italic; margin-bottom: 4px; }
+.top-author { font-size: 13px; color: rgba(160, 200, 175, 0.65); font-style: italic; margin-bottom: 4px; }
 .top-cited {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; color: var(--muted);
-  line-height: 1.5; opacity: .7;
+  font-size: 10px; color: rgba(160, 200, 175, 0.65);
+  line-height: 1.5;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
@@ -534,7 +533,7 @@ footer a:hover { color: var(--accent); }
 
 <header>
   <div class="brand">
-    <div class="brand-tv">
+    <div class="brand-tv" style="cursor:pointer" onclick="window.scrollTo({top:0,behavior:'smooth'});document.getElementById('search').value='';document.getElementById('search').dispatchEvent(new Event('input'));">
       <img src="../img/thinkerview-logo.svg" alt="Thinkerview" class="brand-logo"
            onerror="this.onerror=null;this.style.display='none';document.getElementById('tv-wordmark').style.display='block'">
       <span id="tv-wordmark" class="brand-tv-wordmark" style="display:none">THINKERVIEW</span>
@@ -600,7 +599,7 @@ footer a:hover { color: var(--accent); }
   <div class="about-block">
     <h2>Sources</h2>
     <ul>
-      <li>Données : <a href="https://github.com/sebastienp7669/Thinkerview-Recommandations-lecture" target="_blank" rel="noopener">sebastienp7669 sur GitHub</a> — merci pour ce travail de fourmi.</li>
+      <li>Données initiales : <a href="https://github.com/sebastienp7669/Thinkerview-Recommandations-lecture" target="_blank" rel="noopener">sebastienp7669 sur GitHub</a> — merci pour ce travail de fourmi.</li>
       <li>Couvertures : <a href="https://books.google.com" target="_blank" rel="noopener">Google Books API</a> · <a href="https://openlibrary.org" target="_blank" rel="noopener">Open Library</a></li>
       <li>Acheter : <a href="https://www.fnac.com" target="_blank" rel="noopener">Fnac.com</a></li>
     </ul>
@@ -611,16 +610,12 @@ footer a:hover { color: var(--accent); }
     <p>
       <a href="https://jegousse.com" target="_blank" rel="noopener">Théo Jégousse</a> — designer & développeur.
     </p>
-    <p class="about-muted">
-      Les données sont chargées en temps réel depuis le README GitHub de sebastienp7669.
-      Aucune donnée n'est stockée côté serveur.
-    </p>
+
   </div>
 </div>
 
 <footer>
-  données — <a href="https://github.com/sebastienp7669/Thinkerview-Recommandations-lecture" target="_blank" rel="noopener">github.com/sebastienp7669</a>
-  &nbsp;·&nbsp; <a href="https://jegousse.com" target="_blank" rel="noopener">jegousse.com</a>
+  <a href="https://jegousse.com" target="_blank" rel="noopener">jegousse.com</a>
 </footer>
 
 <script>
