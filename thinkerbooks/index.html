@@ -61,9 +61,8 @@ body::after {
   z-index: 9999;
 }
 
-/* ── SAFE AREA COVER — couvre la zone status bar ── */
-body::before {
-  content: '';
+/* ── SAFE AREA COVER (vrai élément HTML) ── */
+.sa-cover {
   position: fixed;
   top: 0;
   left: 0;
@@ -71,18 +70,23 @@ body::before {
   height: env(safe-area-inset-top);
   background: var(--bg);
   z-index: 201;
+  pointer-events: none;
 }
 
-/* ── BRAND BAR (sticky) ── */
+/* ── BRAND BAR ── */
 .brand-bar {
   position: fixed;
-  top: 0;
+  top: env(safe-area-inset-top);
   left: 0;
   right: 0;
   z-index: 200;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
-  padding: env(safe-area-inset-top) 24px 0;
+  padding: 0 24px;
+}
+
+body {
+  padding-top: calc(var(--navbar-h, 70px) + env(safe-area-inset-top));
 }
 .brand-bar .brand {
   max-width: 820px;
@@ -518,7 +522,7 @@ footer a:hover { color: var(--accent); }
 /* ── RESPONSIVE ── */
 @media (max-width: 600px) {
   header { padding: 20px 16px 24px; }
-  .brand-bar { padding: env(safe-area-inset-top) 16px 0; }
+  .brand-bar { padding: 0 16px; }
   #search { font-size: 16px; }
   .brand { gap: 12px; }
   .brand-logo { height: 32px; }
@@ -566,6 +570,7 @@ footer a:hover { color: var(--accent); }
 </head>
 <body>
 
+<div class="sa-cover"></div>
 <div class="brand-bar">
   <div class="brand">
     <div class="brand-tv" style="cursor:pointer" onclick="window.scrollTo({top:0,behavior:'smooth'});document.getElementById('search').value='';document.getElementById('search').dispatchEvent(new Event('input'));">
@@ -1290,7 +1295,7 @@ init();
 // ── BRAND BAR HEIGHT OFFSET ──
 function adjustBrandOffset() {
   const bar = document.querySelector('.brand-bar');
-  document.body.style.paddingTop = bar.offsetHeight + 'px';
+  document.documentElement.style.setProperty('--navbar-h', bar.offsetHeight + 'px');
 }
 adjustBrandOffset();
 window.addEventListener('resize', adjustBrandOffset);
