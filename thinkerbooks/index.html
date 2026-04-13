@@ -315,7 +315,7 @@ h1.brand-title {
 }
 
 .book-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.book-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; gap: 8px; }
+.book-bottom { display: flex; align-items: center; margin-top: 6px; gap: 8px; }
 
 .book-guest {
   font-family: 'JetBrains Mono', monospace;
@@ -845,7 +845,7 @@ function buildCard(ep, q) {
     const verbatimToggle = hasVerbatim ? `
       <div class="book-verbatim-toggle" onclick="var v=this.closest('.book-item').querySelector('.book-verbatim');v.hidden=!v.hidden;this.classList.toggle('open')">
         <span class="verbatim-chevron">▸</span> Ce qu'en dit l'invité
-      </div>` : '';
+      </div>` : '<div></div>';
     const verbatimBlock = hasVerbatim ? `
       <div class="book-verbatim" hidden>
         <blockquote>${escHtml(verbEntry.verbatim)}</blockquote>
