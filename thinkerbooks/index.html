@@ -85,9 +85,6 @@ body::after {
   padding: 0 24px;
 }
 
-body {
-  padding-top: calc(var(--navbar-h, 70px) + env(safe-area-inset-top));
-}
 .brand-bar .brand {
   max-width: 820px;
   margin: 0 auto;
@@ -1295,11 +1292,16 @@ init();
 // ── BRAND BAR HEIGHT OFFSET ──
 function adjustBrandOffset() {
   const bar = document.querySelector('.brand-bar');
-  document.documentElement.style.setProperty('--navbar-h', bar.offsetHeight + 'px');
+  if (!bar) return;
+  document.body.style.paddingTop = bar.offsetHeight + 'px';
 }
 adjustBrandOffset();
 window.addEventListener('resize', adjustBrandOffset);
 document.fonts.ready.then(adjustBrandOffset);
+window.addEventListener('load', adjustBrandOffset);
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', adjustBrandOffset);
+}
 </script>
 <script>
 if('serviceWorker'in navigator){
