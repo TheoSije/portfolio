@@ -74,8 +74,10 @@ body::after {
 
 /* ── BRAND BAR (sticky) ── */
 .brand-bar {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 200;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
@@ -1258,6 +1260,14 @@ clearBtn.addEventListener('click', () => {
 });
 
 init();
+
+// ── BRAND BAR HEIGHT OFFSET ──
+function adjustBrandOffset() {
+  const bar = document.querySelector('.brand-bar');
+  document.body.style.paddingTop = bar.offsetHeight + 'px';
+}
+adjustBrandOffset();
+window.addEventListener('resize', adjustBrandOffset);
 </script>
 <script>
 if('serviceWorker'in navigator){
