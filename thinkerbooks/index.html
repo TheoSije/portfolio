@@ -61,30 +61,15 @@ body::after {
   z-index: 9999;
 }
 
-/* ── SAFE AREA COVER (vrai élément HTML) ── */
-.sa-cover {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: env(safe-area-inset-top);
-  background: var(--bg);
-  z-index: 201;
-  pointer-events: none;
-}
-
 /* ── BRAND BAR ── */
 .brand-bar {
-  position: fixed;
+  position: -webkit-sticky;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
   z-index: 200;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
   padding: env(safe-area-inset-top, 0px) 24px 0;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
 }
 
 .brand-bar .brand {
@@ -569,7 +554,6 @@ footer a:hover { color: var(--accent); }
 </head>
 <body>
 
-<div class="sa-cover"></div>
 <div class="brand-bar">
   <div class="brand">
     <div class="brand-tv" style="cursor:pointer" onclick="window.scrollTo({top:0,behavior:'smooth'});document.getElementById('search').value='';document.getElementById('search').dispatchEvent(new Event('input'));">
@@ -1291,19 +1275,6 @@ clearBtn.addEventListener('click', () => {
 
 init();
 
-// ── BRAND BAR HEIGHT OFFSET ──
-function adjustBrandOffset() {
-  const bar = document.querySelector('.brand-bar');
-  if (!bar) return;
-  document.body.style.paddingTop = bar.offsetHeight + 'px';
-}
-adjustBrandOffset();
-window.addEventListener('resize', adjustBrandOffset);
-document.fonts.ready.then(adjustBrandOffset);
-window.addEventListener('load', adjustBrandOffset);
-if (window.visualViewport) {
-  window.visualViewport.addEventListener('resize', adjustBrandOffset);
-}
 </script>
 <script>
 if('serviceWorker'in navigator){
