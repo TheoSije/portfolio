@@ -5,7 +5,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLP54VYN34"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SLP54VYN34');</script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05080d">
 <link rel="icon" type="image/svg+xml" href="../img/thinkerview-logo.svg">
 <title>ThinkerBooks — Tous les livres recommandés par Thinkerview</title>
@@ -63,19 +63,25 @@ body::after {
 
 /* ── BRAND BAR ── */
 .brand-bar {
-  position: -webkit-sticky;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 200;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
-  padding: env(safe-area-inset-top, 0px) 24px 0;
+  padding: 0 24px;
 }
 
 .brand-bar .brand {
   max-width: 820px;
   margin: 0 auto;
   padding: 14px 0;
+  margin-bottom: 0; /* override generic .brand margin-bottom: 20px */
+}
+
+body {
+  padding-top: 69px; /* brand-bar height: 14+40+14+1 */
 }
 
 /* ── HEADER ── */
@@ -506,7 +512,8 @@ footer a:hover { color: var(--accent); }
 /* ── RESPONSIVE ── */
 @media (max-width: 600px) {
   header { padding: 20px 16px 24px; }
-  .brand-bar { padding: env(safe-area-inset-top, 0px) 16px 0; }
+  .brand-bar { padding: 0 16px; }
+  body { padding-top: 112px; } /* brand-bar wraps on mobile: 14+32+12+39+14+1 */
   #search { font-size: 16px; }
   .brand { gap: 12px; }
   .brand-logo { height: 32px; }
