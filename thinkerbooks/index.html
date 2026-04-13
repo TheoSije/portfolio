@@ -61,6 +61,18 @@ body::after {
   z-index: 9999;
 }
 
+/* ── SAFE AREA COVER — couvre la zone status bar ── */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: env(safe-area-inset-top);
+  background: var(--bg);
+  z-index: 201;
+}
+
 /* ── BRAND BAR (sticky) ── */
 .brand-bar {
   position: fixed;
@@ -71,9 +83,6 @@ body::after {
   background: var(--bg);
   border-bottom: 1px solid var(--border);
   padding: env(safe-area-inset-top) 24px 0;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  will-change: transform;
 }
 .brand-bar .brand {
   max-width: 820px;
@@ -1285,6 +1294,7 @@ function adjustBrandOffset() {
 }
 adjustBrandOffset();
 window.addEventListener('resize', adjustBrandOffset);
+document.fonts.ready.then(adjustBrandOffset);
 </script>
 <script>
 if('serviceWorker'in navigator){
