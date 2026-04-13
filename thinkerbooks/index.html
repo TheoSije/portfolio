@@ -76,13 +76,13 @@ body::after {
 /* ── BRAND BAR ── */
 .brand-bar {
   position: fixed;
-  top: env(safe-area-inset-top);
+  top: 0;
   left: 0;
   right: 0;
   z-index: 200;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
-  padding: 0 24px;
+  padding: env(safe-area-inset-top, 0px) 24px 0;
 }
 
 .brand-bar .brand {
@@ -519,7 +519,7 @@ footer a:hover { color: var(--accent); }
 /* ── RESPONSIVE ── */
 @media (max-width: 600px) {
   header { padding: 20px 16px 24px; }
-  .brand-bar { padding: 0 16px; }
+  .brand-bar { padding: env(safe-area-inset-top, 0px) 16px 0; }
   #search { font-size: 16px; }
   .brand { gap: 12px; }
   .brand-logo { height: 32px; }
