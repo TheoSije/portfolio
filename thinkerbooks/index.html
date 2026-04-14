@@ -638,7 +638,7 @@ footer a:hover { color: var(--accent); }
     <ul>
       <li>Données initiales : <a href="https://github.com/sebastienp7669/Thinkerview-Recommandations-lecture" target="_blank" rel="noopener">sebastienp7669 sur GitHub</a> — merci pour ce travail de fourmi.</li>
       <li>Couvertures : <a href="https://books.google.com" target="_blank" rel="noopener">Google Books API</a> · <a href="https://openlibrary.org" target="_blank" rel="noopener">Open Library</a></li>
-      <li>Acheter : <a href="https://www.fnac.com" target="_blank" rel="noopener">Fnac.com</a></li>
+      <li>Acheter : <a href="https://www.amazon.fr" target="_blank" rel="noopener">Amazon.fr</a> (liens affiliés)</li>
     </ul>
   </div>
 
@@ -668,7 +668,18 @@ const BOOK_OVERRIDES = {
     linkLabel: 'Lire',
   },
   'oeuvres de erving gofman': {
-    link: 'https://www.fnac.com/Erving-Goffman/ia55536',
+    linkLabel: 'Acheter',
+  },
+  'naruto': {
+    link: 'https://amzn.to/4tOSVnp',
+    linkLabel: 'Acheter',
+  },
+  'les dessous de la politique de l\'oncle sam': {
+    link: 'https://amzn.to/4cmX8Y5',
+    linkLabel: 'Acheter',
+  },
+  'le peuple contre la democratie': {
+    link: 'https://amzn.to/48IElFC',
     linkLabel: 'Acheter',
   },
 };
@@ -831,7 +842,7 @@ function buildCard(ep, q) {
     const displayAuthor = ov?.author ?? b.author;
     const buyHref = ov?.link
       ? ov.link
-      : `https://www.fnac.com/SearchResult/ResultList.aspx?SCat=2!1&Search=${encodeURIComponent(b.title + (b.author ? ' ' + b.author : ''))}`;
+      : `https://www.amazon.fr/s?k=${encodeURIComponent(b.title + (b.author ? ' ' + b.author : ''))}&tag=thinkerbooks-21`;
     const buyLabel = ov?.linkLabel || 'Acheter';
     const coverExtra = ov?.cover ? ` data-override-cover="${escHtml(ov.cover)}"` : '';
 
