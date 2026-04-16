@@ -1,0 +1,2 @@
+/thinkerbooks    https://thinkerbook.org    301
+/thinkerbooks/*  https://thinkerbook.org/:splat    301
