@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05080d">
-<link rel="icon" type="image/svg+xml" href="thinkerview-logo.svg">
+<link rel="icon" type="image/svg+xml" href="https://cdn.jsdelivr.net/gh/TheoSije/portfolio@main/thinkerbooks/img/thinkerview-logo.svg">
 <title>ThinkerBooks — Tous les livres recommandés par Thinkerview</title>
 <meta name="description" content="Tous les livres cités dans Thinkerview en un seul endroit. Plus de 1 250 références extraites de 280+ épisodes, cherchables par titre, auteur ou invité. Retrouvez instantanément le livre entendu dans une interview.">
 <link rel="canonical" href="https://jegousse.com/thinkerbooks/">
@@ -564,7 +564,7 @@ footer a:hover { color: var(--accent); }
 <div class="brand-bar">
   <div class="brand">
     <div class="brand-tv" style="cursor:pointer" onclick="window.scrollTo({top:0,behavior:'smooth'});document.getElementById('search').value='';document.getElementById('search').dispatchEvent(new Event('input'));">
-      <img src="thinkerview-logo.svg" alt="Thinkerview" class="brand-logo"
+      <img src="https://cdn.jsdelivr.net/gh/TheoSije/portfolio@main/thinkerbooks/img/thinkerview-logo.svg" alt="Thinkerview" class="brand-logo"
            onerror="this.onerror=null;this.style.display='none';document.getElementById('tv-wordmark').style.display='block'">
       <span id="tv-wordmark" class="brand-tv-wordmark" style="display:none">THINKERVIEW</span>
     </div>
@@ -1202,7 +1202,7 @@ async function init() {
   try {
     // Load local covers manifest (silent fail)
     try {
-      const r = await fetch('img/covers.json', { cache: 'no-cache' });
+      const r = await fetch('https://cdn.jsdelivr.net/gh/TheoSije/portfolio@main/thinkerbooks/img/covers.json', { cache: 'no-cache' });
       if (r.ok) {
         LOCAL_COVERS = await r.json();
         // Build normalized index (handles accent/case mismatches)
@@ -1219,7 +1219,7 @@ async function init() {
 
     // Load verbatims (silent fail)
     try {
-      const vr = await fetch('./data/verbatims.json', { cache: 'no-cache' });
+      const vr = await fetch('https://cdn.jsdelivr.net/gh/TheoSije/portfolio@main/thinkerbooks/data/verbatims.json', { cache: 'no-cache' });
       if (vr.ok) VERBATIMS = await vr.json();
     } catch {}
 
@@ -1231,7 +1231,7 @@ async function init() {
 
     // Merge local episodes.json — LOCAL ALWAYS WINS over README
     try {
-      const er = await fetch('./data/episodes.json', { cache: 'no-cache' });
+      const er = await fetch('https://cdn.jsdelivr.net/gh/TheoSije/portfolio@main/thinkerbooks/data/episodes.json', { cache: 'no-cache' });
       if (er.ok) {
         const localEps = await er.json();
         const extractId = url => { const m = (url||'').match(/[?&]v=([\w-]+)/); return m ? m[1] : null; };
