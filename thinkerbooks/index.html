@@ -1181,7 +1181,7 @@ function renderTop() {
       let coverPromise;
       if (normKey in LOCAL_COVERS_NORM) {
         const local = LOCAL_COVERS_NORM[normKey];
-        coverPromise = Promise.resolve(local ? local : null);
+        coverPromise = Promise.resolve(local ? (local.startsWith('http') ? local : 'https://cdn.jsdelivr.net/gh/TheoSije/portfolio@main/thinkerbooks/' + local) : null);
       } else {
         coverPromise = fetchCover(title, author);
       }
