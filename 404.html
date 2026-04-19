@@ -7,13 +7,17 @@
   <meta charset="UTF-8">
   <title>Redirection…</title>
   <script>
-    // Redirige vers le portfolio en passant le slug en paramètre ?from=
-    // Fonctionne pour pages utilisateur (/) et pages projet (/portfolio/)
     var path = location.pathname.replace(/\/$/, '');
-    var lastSlash = path.lastIndexOf('/');
-    var slug = path.slice(lastSlash + 1);
-    var base = path.slice(0, lastSlash + 1) || '/';
-    location.replace(base + (slug ? '?from=' + encodeURIComponent(slug) : ''));
+    // Redirect thinkerbooks paths to thinkerbook.org
+    if (path === '/thinkerbooks' || path.startsWith('/thinkerbooks/')) {
+      location.replace('https://thinkerbook.org' + path.slice('/thinkerbooks'.length));
+    } else {
+      // Redirige vers le portfolio en passant le slug en paramètre ?from=
+      var lastSlash = path.lastIndexOf('/');
+      var slug = path.slice(lastSlash + 1);
+      var base = path.slice(0, lastSlash + 1) || '/';
+      location.replace(base + (slug ? '?from=' + encodeURIComponent(slug) : ''));
+    }
   </script>
 </head>
 <body></body>
