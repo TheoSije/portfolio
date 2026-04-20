@@ -2,21 +2,20 @@
 """
 Extrait les verbatims Thinkerview par livre depuis les transcriptions YouTube.
 Etape 1 : récupère la transcription
-Etape 2 : cherche les mentions du livre (titre + auteur, fuzzy)
-Etape 3 : extrait une fenêtre de ~90s autour de chaque mention
-Etape 4 : nettoie avec Claude API
-Etape 5 : sauvegarde dans verbatims.json
+Etape 2 : cherche les mentions du livre dans les 20% finaux (recos toujours à la fin)
+Etape 3 : extrait une fenêtre de ~120s autour de chaque mention
+Etape 4 : sauvegarde dans verbatims.json (needs_cleaning=True pour nettoyage ultérieur)
 """
 
 import json, re, os, unicodedata, time
-import anthropic
 from youtube_transcript_api import YouTubeTranscriptApi
 
 # ── CONFIG ──────────────────────────────────────────────────────────────────
-EPISODES_JSON = os.path.join(os.path.dirname(__file__), '..', 'thinkerbooks', 'data', 'episodes.json')
-OUTPUT_JSON   = os.path.join(os.path.dirname(__file__), '..', 'thinkerbooks', 'data', 'verbatims.json')
-WINDOW_SECS   = 90   # secondes de contexte autour de la mention
-MAX_EPISODES  = 40   # limiter aux N premiers épisodes
+EPISODES_JSON = '/Users/tjegousse/Downloads/thinkerbooks/data/episodes.json'
+OUTPUT_JSON   = '/Users/tjegousse/Downloads/thinkerbooks/data/verbatims.json'
+WINDOW_SECS   = 120   # secondes de contexte autour de la mention
+MAX_EPISODES  = 999   # tous les épisodes
+CUTOFF        = 0.80  # chercher dans les 20% finaux — recos toujours à la fin
 
 # ── HELPERS ─────────────────────────────────────────────────────────────────
 def normalize(s):
@@ -39,9 +38,7 @@ def fetch_transcript(video_id):
     return [{'start': s.start, 'duration': s.duration, 'text': s.text} for s in segments]
 
 def full_text_with_time(segments):
-    """Retourne le texte complet et un index (start_sec → char_offset)."""
-    parts = []
-    offsets = []
+    parts, offsets = [], []
     pos = 0
     for seg in segments:
         offsets.append((seg['start'], pos))
@@ -49,24 +46,25 @@ def full_text_with_time(segments):
         pos += len(seg['text']) + 1
     return ' '.join(parts), offsets
 
-def find_mention(full_text, offsets, keywords, window_secs, total_duration):
-    """Cherche la première mention d'un keyword dans le dernier tiers, retourne le passage +/- window_secs."""
-    # Les recommandations ont lieu à la fin des interviews — on ne cherche que dans le dernier 30%
+def find_mention(full_text, offsets, keywords, window_secs):
+    """Cherche la première mention d'un keyword dans les derniers 20% de la vidéo."""
     if offsets:
         last_sec = offsets[-1][0]
-        cutoff_sec = last_sec * 0.70  # on commence à 70% de la durée
+        cutoff_sec = last_sec * CUTOFF
         start_char = next((char_off for (sec, char_off) in offsets if sec >= cutoff_sec), 0)
     else:
         start_char = 0
+
     search_text = full_text[start_char:]
     norm_text = normalize(search_text)
+
     for kw in keywords:
         norm_kw = normalize(kw)
         if len(norm_kw) < 3:
             continue
         idx = norm_text.find(norm_kw)
         if idx == -1:
-            # Essaie mot par mot (au moins 2 mots significatifs)
+            # Essaie mot par mot (au moins 2 mots significatifs > 4 chars)
             words = [w for w in norm_kw.split() if len(w) > 4]
             if len(words) >= 2:
                 pattern = r'\b' + r'.{0,30}'.join(re.escape(w) for w in words[:2]) + r'\b'
@@ -75,9 +73,8 @@ def find_mention(full_text, offsets, keywords, window_secs, total_duration):
                     idx = m.start()
         if idx == -1:
             continue
-        # idx est relatif à search_text, reconvertir en position absolue dans full_text
+
         abs_idx = start_char + idx
-        # Trouver le timestamp correspondant à abs_idx
         mention_sec = None
         for (sec, char_off) in reversed(offsets):
             if char_off <= abs_idx:
@@ -85,117 +82,100 @@ def find_mention(full_text, offsets, keywords, window_secs, total_duration):
                 break
         if mention_sec is None:
             continue
-        # Extraire la fenêtre
+
         start_sec = max(0, mention_sec - window_secs // 3)
-        end_sec   = mention_sec + window_secs
+        end_sec = mention_sec + window_secs
         passage_parts = []
-        for seg in [s for s in [{'start': o[0], 'text': full_text[o[1]:offsets[offsets.index(o)+1][1] if offsets.index(o)+1 < len(offsets) else len(full_text)]} for o in offsets]]:
-            if start_sec <= seg['start'] <= end_sec:
-                passage_parts.append(seg['text'])
+        for i, (sec, char_off) in enumerate(offsets):
+            if start_sec <= sec <= end_sec:
+                next_off = offsets[i+1][1] if i+1 < len(offsets) else len(full_text)
+                passage_parts.append(full_text[char_off:next_off])
         passage = ' '.join(passage_parts).strip()
         return passage, mention_sec
+
     return None, None
-
-def clean_with_claude(client, episode_title, book_title, book_author, raw_passage):
-    """Nettoie la transcription brute avec Claude."""
-    prompt = f"""Voici un passage brut d'une transcription YouTube auto-générée de l'émission Thinkerview.
-L'épisode est : « {episode_title} »
-Le livre mentionné est : « {book_title} » de {book_author or 'auteur inconnu'}.
-
-Transcription brute :
----
-{raw_passage}
----
-
-Ta tâche :
-1. Corrige les erreurs de transcription automatique (noms propres mal orthographiés, mots coupés, etc.)
-2. Retire les hésitations ("euh", "ben", "voilà voilà"), les répétitions inutiles
-3. Garde le sens exact et les mots de l'intervenant — ne reformule pas, ne résume pas
-4. Retire tout passage hors-sujet qui ne concerne pas le livre (si le livre n'est mentionné qu'en passant et que le reste est sans rapport, garde uniquement le passage pertinent)
-5. Retourne uniquement le texte nettoyé, sans introduction ni commentaire de ta part
-
-Si le livre n'est pas clairement mentionné dans ce passage, retourne uniquement: [non trouvé]
-"""
-    msg = client.messages.create(
-        model="claude-opus-4-5",
-        max_tokens=1024,
-        messages=[{"role": "user", "content": prompt}]
-    )
-    return msg.content[0].text.strip()
 
 # ── MAIN ─────────────────────────────────────────────────────────────────────
 def main():
-    client = None  # Claude API non utilisé dans ce mode batch
-
     with open(EPISODES_JSON) as f:
         episodes = json.load(f)
 
-    # Charger verbatims existants si présents
     if os.path.exists(OUTPUT_JSON):
         with open(OUTPUT_JSON) as f:
             verbatims = json.load(f)
     else:
         verbatims = {}
 
-    for ep in episodes[:MAX_EPISODES]:
-        print(f"\n=== {ep['title']} ===")
+    total = len(episodes[:MAX_EPISODES])
+    found_count = sum(1 for v in verbatims.values() if v.get('found'))
+    print(f"Départ : {found_count} verbatims trouvés, {total} épisodes à traiter\n")
+
+    for i, ep in enumerate(episodes[:MAX_EPISODES]):
+        print(f"[{i+1}/{total}] {ep['title']}")
         vid_id = extract_video_id(ep.get('youtube', ''))
         if not vid_id:
-            print("  Pas d'URL YouTube, skip")
+            print("  → Pas d'URL YouTube, skip")
             continue
 
-        print(f"  Téléchargement transcription {vid_id}...")
+        all_keys = [f"{b['title']}||{b['author']}" for b in ep['books']]
+        # Skip si tous les livres ont déjà un verbatim trouvé (ou ont été cherchés)
+        already_done = [k for k in all_keys if k in verbatims and verbatims[k].get('verbatim') is not None]
+        not_found = [k for k in all_keys if k in verbatims and verbatims[k].get('found') is False and verbatims[k].get('verbatim') is None]
+        missing = [k for k in all_keys if k not in verbatims]
+
+        if not missing and not already_done and len(not_found) == len(all_keys):
+            # Tous déjà marqués not-found, on peut re-tenter
+            pass
+        elif all_keys and not missing and len(already_done) + len(not_found) == len(all_keys):
+            print(f"  → Déjà complet ({len(already_done)} trouvés, {len(not_found)} non trouvés), skip")
+            continue
+
+        print(f"  → Téléchargement transcription...")
         try:
             segments = fetch_transcript(vid_id)
         except Exception as e:
-            print(f"  Erreur transcription: {e}")
+            print(f"  → Erreur: {e}")
             continue
 
         full_text, offsets = full_text_with_time(segments)
-        print(f"  {len(segments)} segments, {len(full_text)} caractères")
+        last_sec = offsets[-1][0] if offsets else 0
+        print(f"  → {len(segments)} segments, durée ~{last_sec:.0f}s, cutoff à {last_sec*CUTOFF:.0f}s")
 
         for book in ep['books']:
             title  = book['title']
             author = book['author']
             key    = f"{title}||{author}"
 
-            if key in verbatims:
-                print(f"  SKIP (déjà traité): {title}")
+            # Skip seulement si on a déjà un vrai verbatim
+            if verbatims.get(key, {}).get('verbatim'):
+                print(f"  SKIP (déjà trouvé): {title}")
                 continue
 
-            # Mots-clés à chercher : titre complet, mots du titre, auteur
             keywords = [title, author]
-            # Ajoute les mots significatifs du titre (> 5 chars)
             title_words = [w for w in title.split() if len(w) > 5]
             if title_words:
                 keywords.append(' '.join(title_words[:3]))
 
-            print(f"  Livre: {title} ({author})")
-            passage, mention_sec = find_mention(full_text, offsets, keywords, WINDOW_SECS, len(full_text))
+            passage, mention_sec = find_mention(full_text, offsets, keywords, WINDOW_SECS)
 
             if not passage:
-                print(f"    → Non trouvé dans la transcription")
+                print(f"  [{title[:40]}] → non trouvé dans les {int((1-CUTOFF)*100)}% finaux")
                 verbatims[key] = {"episode": ep['title'], "found": False, "verbatim": None}
-                continue
+            else:
+                print(f"  [{title[:40]}] → trouvé à {mention_sec:.0f}s ({len(passage)} chars)")
+                verbatims[key] = {
+                    "episode": ep['title'],
+                    "found": True,
+                    "mention_sec": int(mention_sec),
+                    "verbatim": passage,
+                    "needs_cleaning": True
+                }
 
-            print(f"    → Trouvé à {mention_sec:.0f}s, passage de {len(passage)} chars")
-            verbatims[key] = {
-                "episode": ep['title'],
-                "found": True,
-                "mention_sec": int(mention_sec),
-                "verbatim": passage,
-                "needs_cleaning": True
-            }
-            print(f"    → Passage brut sauvegardé (needs_cleaning=True)")
-
-            # Sauvegarde intermédiaire
             with open(OUTPUT_JSON, 'w') as f:
                 json.dump(verbatims, f, ensure_ascii=False, indent=2)
 
-            time.sleep(0.5)  # rate limit Claude
-
-    print(f"\nTerminé. {sum(1 for v in verbatims.values() if v.get('found'))} verbatims trouvés / {len(verbatims)} livres traités")
-    print(f"Sauvegardé dans {OUTPUT_JSON}")
+    found_count = sum(1 for v in verbatims.values() if v.get('found'))
+    print(f"\n✅ Terminé. {found_count} verbatims trouvés / {len(verbatims)} livres traités")
 
 if __name__ == '__main__':
     main()
