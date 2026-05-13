@@ -239,10 +239,22 @@
     </div>
     <div class="header-right">
       <button class="btn btn-ghost btn-sm" onclick="reload()">↺ Rafraîchir</button>
+      <button class="btn btn-ghost btn-sm" id="submissions-btn" onclick="toggleSubmissions()">📥 Soumissions <span id="submissions-count" style="display:none;background:var(--red);color:#fff;border-radius:99px;padding:1px 7px;font-size:11px;margin-left:4px"></span></button>
       <button class="btn btn-gold btn-sm" onclick="toggleAddForm()">+ Ajouter</button>
       <button class="logout-btn" onclick="logout()">Déconnexion</button>
     </div>
   </header>
+
+  <!-- Submissions panel -->
+  <div id="submissions-panel" style="display:none;border-bottom:1px solid var(--border);background:rgba(255,255,255,0.02)">
+    <div style="padding:16px 24px 0;display:flex;align-items:center;justify-content:space-between">
+      <span style="font-size:13px;font-weight:600;color:var(--text)">📥 Soumissions utilisateurs</span>
+      <button class="btn btn-ghost btn-sm" onclick="loadSubmissions()" style="font-size:11px">↺ Actualiser</button>
+    </div>
+    <div id="submissions-list" style="padding:12px 24px 16px;display:flex;flex-direction:column;gap:10px">
+      <span style="font-size:13px;color:var(--muted)">Chargement…</span>
+    </div>
+  </div>
 
   <!-- Enrich progress bar -->
   <div id="enrich-bar" style="display:none;padding:12px 24px;border-bottom:1px solid var(--border);background:rgba(201,168,76,0.04)">
@@ -402,6 +414,93 @@ async function loadData() {
   }
 }
 async function reload() { await loadData(); }
+
+// ── Submissions ───────────────────────────────────────────────────────────
+function toggleSubmissions() {
+  const panel = document.getElementById('submissions-panel');
+  const open  = panel.style.display === 'none';
+  panel.style.display = open ? 'block' : 'none';
+  if (open) loadSubmissions();
+}
+
+async function loadSubmissions() {
+  const list = document.getElementById('submissions-list');
+  list.innerHTML = '<span style="font-size:13px;color:var(--muted)">Chargement…</span>';
+  try {
+    const res  = await fetch(
+      'https://api.github.com/repos/TheoSije/inkipit-content/issues?state=open&labels=soumission&per_page=30',
+      { headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' } }
+    );
+    const issues = await res.json();
+    // Update badge
+    const badge = document.getElementById('submissions-count');
+    if (issues.length > 0) {
+      badge.textContent = issues.length;
+      badge.style.display = 'inline';
+    } else {
+      badge.style.display = 'none';
+    }
+    if (!issues.length) {
+      list.innerHTML = '<span style="font-size:13px;color:var(--muted)">Aucune soumission en attente 🎉</span>';
+      return;
+    }
+    list.innerHTML = issues.map(issue => {
+      // Extract JSON from issue body
+      const jsonMatch = issue.body?.match(/```json\s*([\s\S]*?)```/);
+      let parsed = null;
+      try { if (jsonMatch) parsed = JSON.parse(jsonMatch[1].trim()); } catch(_) {}
+      const text   = parsed?.text   || '';
+      const author = parsed?.author || '';
+      return `
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px">
+        <div style="font-size:13px;color:var(--text);margin-bottom:6px;line-height:1.5">${escHtml(text)}</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:12px">${escHtml(author)}</div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-gold btn-sm" onclick="validateSubmission(${issue.number}, ${escHtml(JSON.stringify({text,author}))})">✓ Valider</button>
+          <button class="btn btn-danger btn-sm" onclick="rejectSubmission(${issue.number}, this)">✕ Rejeter</button>
+          <a href="${issue.html_url}" target="_blank" class="btn btn-ghost btn-sm" style="text-decoration:none">↗ GitHub</a>
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    list.innerHTML = `<span style="font-size:13px;color:var(--red)">Erreur : ${e.message}</span>`;
+  }
+}
+
+function validateSubmission(issueNumber, dataJson) {
+  let data;
+  try { data = JSON.parse(dataJson); } catch(_) { return; }
+  // Pré-remplit le formulaire d'ajout et l'ouvre
+  document.getElementById('new-text').value   = data.text   || '';
+  document.getElementById('new-author').value = data.author || '';
+  // Ouvre le formulaire d'ajout
+  const form = document.getElementById('add-form');
+  if (form && form.style.display === 'none') toggleAddForm();
+  form?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Ferme le panneau et note le numéro d'issue à fermer après validation
+  window._pendingCloseIssue = issueNumber;
+  document.getElementById('submissions-panel').style.display = 'none';
+}
+
+async function rejectSubmission(issueNumber, btn) {
+  if (!confirm('Rejeter cette soumission (ferme l\'issue GitHub) ?')) return;
+  btn.disabled = true;
+  btn.textContent = '…';
+  try {
+    await fetch(
+      `https://api.github.com/repos/TheoSije/inkipit-content/issues/${issueNumber}`,
+      {
+        method: 'PATCH',
+        headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ state: 'closed', state_reason: 'not_planned' })
+      }
+    );
+    btn.closest('div[style]').remove();
+    loadSubmissions();
+  } catch(e) {
+    btn.disabled = false; btn.textContent = '✕ Rejeter';
+  }
+}
 
 async function save(message) {
   // Garde-fou : jamais sauvegarder un tableau vide ou tronqué
@@ -933,8 +1032,19 @@ async function addIncipit() {
 
   incipits.push(entry);
   document.getElementById('add-form').style.display = 'none';
+  ['new-text','new-author','new-cover','new-amazon','new-description','new-bio']
+    .forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
   renderList();
   await save(`add: ${text.slice(0, 50)}`);
+  // Ferme l'issue GitHub si la soumission venait d'une issue
+  if (window._pendingCloseIssue) {
+    fetch(`https://api.github.com/repos/TheoSije/inkipit-content/issues/${window._pendingCloseIssue}`, {
+      method: 'PATCH',
+      headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ state: 'closed', state_reason: 'completed' })
+    });
+    window._pendingCloseIssue = null;
+  }
 }
 
 // ── Edit ──────────────────────────────────────────────────────────────────
