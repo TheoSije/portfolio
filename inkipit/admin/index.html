@@ -127,7 +127,8 @@
 
   .row-content { flex: 1; min-width: 0; }
 
-  .row-display { display: flex; gap: 12px; align-items: flex-start; }
+  .row-display { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; }
+  .row-display:hover .row-text { opacity: 0.75; }
   .row-cover {
     width: 36px; height: 50px; border-radius: 4px; object-fit: cover;
     flex-shrink: 0; background: rgba(255,255,255,0.06); border: 1px solid var(--border);
@@ -472,7 +473,7 @@ function renderList() {
     ].filter(Boolean).join('');
 
     const coverHtml = inc.cover
-      ? `<img class="row-cover" src="${escHtml(inc.cover)}" alt="" onerror="this.style.display='none'">`
+      ? `<div class="row-cover-wrap"><img class="row-cover" src="${inc.cover}" referrerpolicy="no-referrer" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="row-cover-placeholder" style="display:none">📚</div></div>`
       : `<div class="row-cover-placeholder">📚</div>`;
 
     return `
@@ -480,7 +481,7 @@ function renderList() {
       <span class="row-index">${inc._i + 1}</span>
       <div class="row-content">
 
-        <div class="row-display">
+        <div class="row-display" onclick="startEdit(${inc._i})">
           ${coverHtml}
           <div class="row-main">
             <div class="row-text">${escHtml(inc.text)}</div>
@@ -502,7 +503,8 @@ function renderList() {
           <div class="form-grid">
             <div class="field-group">
               <div class="field-label">📖 Image de couverture (URL)</div>
-              <input type="url" id="edit-cover-${inc._i}" value="${escHtml(inc.cover||'')}" placeholder="https://…/cover.jpg" />
+              <input type="url" id="edit-cover-${inc._i}" value="${escHtml(inc.cover||'')}" placeholder="https://…/cover.jpg" oninput="updateCoverPreview(${inc._i},this.value)" />
+              <img id="cover-preview-${inc._i}" src="${inc.cover||''}" referrerpolicy="no-referrer" alt="" style="margin-top:8px;height:80px;border-radius:6px;object-fit:cover;display:${inc.cover?'block':'none'}" onerror="this.style.display='none'">
             </div>
             <div class="field-group">
               <div class="field-label">🛒 Lien Amazon</div>
@@ -534,6 +536,18 @@ function renderList() {
 
 function escHtml(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function updateCoverPreview(i, url) {
+  const img = document.getElementById(`cover-preview-${i}`);
+  if (!img) return;
+  if (url) {
+    img.src = url;
+    img.style.display = 'block';
+    img.onerror = () => { img.style.display = 'none'; };
+  } else {
+    img.style.display = 'none';
+  }
 }
 
 // ── Book data fetcher (Google Books + Open Library fallback) ─────────────
