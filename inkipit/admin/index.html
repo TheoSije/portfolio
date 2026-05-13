@@ -546,7 +546,7 @@ async function autoFill() {
   try {
     // ── Google Books ──
     const gbQuery = encodeURIComponent(`intitle:${title}${author ? ' inauthor:' + author : ''}`);
-    const gbRes   = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${gbQuery}&langRestrict=fr&maxResults=3`);
+    const gbRes   = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${gbQuery}&maxResults=5`);
     const gbData  = await gbRes.json();
     const book    = gbData.items?.[0]?.volumeInfo;
 
@@ -566,17 +566,24 @@ async function autoFill() {
       }
     }
 
-    // ── Wikipedia (bio auteur) ──
+    // ── Wikipedia (bio auteur) — FR puis EN fallback ──
     if (author) {
-      const wikiSearch = await fetch(
-        `https://fr.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(author)}`
-      );
-      if (wikiSearch.ok) {
-        const wiki = await wikiSearch.json();
-        if (wiki.extract && wiki.type !== 'disambiguation') {
-          document.getElementById('new-bio').value = wiki.extract.slice(0, 400);
-          filled.push('bio');
-        }
+      let bioFound = false;
+      for (const lang of ['fr', 'en']) {
+        if (bioFound) break;
+        try {
+          const wikiRes = await fetch(
+            `https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(author)}`
+          );
+          if (wikiRes.ok) {
+            const wiki = await wikiRes.json();
+            if (wiki.extract && wiki.type !== 'disambiguation') {
+              document.getElementById('new-bio').value = wiki.extract.slice(0, 400);
+              filled.push('bio');
+              bioFound = true;
+            }
+          }
+        } catch(_) {}
       }
     }
 
