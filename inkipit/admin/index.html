@@ -239,6 +239,7 @@
     <div class="header-right">
       <button class="btn btn-ghost btn-sm" onclick="reload()">↺ Rafraîchir</button>
       <button class="btn btn-ghost btn-sm" id="enrich-btn" onclick="enrichAll()">✨ Enrichir tout</button>
+      <button class="btn btn-ghost btn-sm" id="reset-desc-btn" onclick="resetDescriptions()">🔄 Résumés Wikipedia</button>
       <button class="btn btn-gold btn-sm" onclick="toggleAddForm()">+ Ajouter</button>
       <button class="logout-btn" onclick="logout()">Déconnexion</button>
     </div>
@@ -692,6 +693,65 @@ async function autoFill() {
 
   btn.disabled    = false;
   btn.textContent = '🔍 Auto-remplir';
+}
+
+// ── Wikipedia description only ────────────────────────────────────────────
+async function fetchWikiDescription(title) {
+  for (const lang of ['fr', 'en']) {
+    try {
+      const res  = await fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`);
+      if (!res.ok) continue;
+      const wiki = await res.json();
+      if (wiki.extract && wiki.type !== 'disambiguation' && wiki.extract.length > 80) {
+        return wiki.extract.trim().slice(0, 700);
+      }
+    } catch(_) {}
+  }
+  return null;
+}
+
+async function resetDescriptions() {
+  if (!confirm(`Effacer TOUS les résumés existants et les remplacer par Wikipedia ?\n\nLes champs "text" et "author" ne seront JAMAIS modifiés.`)) return;
+
+  enrichStopped = false;
+  const bar   = document.getElementById('enrich-bar');
+  const label = document.getElementById('enrich-label');
+  const prog  = document.getElementById('enrich-progress');
+  const btn   = document.getElementById('reset-desc-btn');
+  bar.style.display = 'block';
+  btn.disabled = true;
+
+  // Efface tous les résumés existants
+  incipits.forEach(inc => { delete inc.description; });
+
+  let done = 0, enriched = 0;
+  const total = incipits.length;
+
+  for (let i = 0; i < total; i++) {
+    if (enrichStopped) break;
+    const inc   = incipits[i];
+    const title = inc.author.split(' — ')[0].trim();
+
+    label.textContent = `(${done + 1}/${total}) ${title}…`;
+    prog.style.width  = `${Math.round((done / total) * 100)}%`;
+
+    const desc = await fetchWikiDescription(title);
+    if (desc) { incipits[i].description = desc; enriched++; }
+
+    done++;
+    await new Promise(r => setTimeout(r, 250));
+  }
+
+  prog.style.width  = '100%';
+  label.textContent = enrichStopped
+    ? `⏹ Arrêté — ${enriched} résumés Wikipedia sur ${done} traités`
+    : `✓ Terminé — ${enriched} résumés Wikipedia sur ${total} inkipits`;
+
+  renderList();
+  await save(`reset résumés: ${enriched} Wikipedia sur ${total}`);
+
+  btn.disabled = false;
+  setTimeout(() => { bar.style.display = 'none'; }, 6000);
 }
 
 // ── Enrich all ────────────────────────────────────────────────────────────
