@@ -535,6 +535,86 @@ function escHtml(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+// ── Book data fetcher (Google Books + Open Library fallback) ─────────────
+async function fetchBookData(title, author) {
+  let cover = null, description = null;
+
+  // 1️⃣ Google Books
+  const gbQueries = [
+    `intitle:${title}${author ? ' inauthor:' + author : ''}`,
+    `${title} ${author}`.trim(),
+    title
+  ];
+  for (const q of gbQueries) {
+    if (cover && description) break;
+    try {
+      const res  = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(q)}&maxResults=10`);
+      const data = await res.json();
+      if (!data.items) continue;
+      for (const item of data.items) {
+        const vi    = item.volumeInfo;
+        const score = (vi.imageLinks ? 2 : 0) + (vi.description ? 2 : 0);
+        if (score === 0) continue;
+        if (!cover && vi.imageLinks) {
+          const img = vi.imageLinks;
+          const url = (img.extraLarge||img.large||img.medium||img.thumbnail||img.smallThumbnail||'')
+            .replace('http://','https://').replace(/zoom=\d/,'zoom=3');
+          if (url) cover = url;
+        }
+        if (!description && vi.description) {
+          description = vi.description.replace(/<[^>]+>/g,'').trim().slice(0, 600);
+        }
+        if (cover && description) break;
+      }
+    } catch(_) {}
+  }
+
+  // 2️⃣ Open Library fallback (excellent pour la littérature française/mondiale)
+  if (!cover || !description) {
+    try {
+      const olQuery = encodeURIComponent(`${title}${author ? ' ' + author : ''}`);
+      const res     = await fetch(`https://openlibrary.org/search.json?q=${olQuery}&limit=5&fields=key,title,cover_i,first_sentence`);
+      const data    = await res.json();
+      if (data.docs?.length) {
+        for (const doc of data.docs) {
+          if (!cover && doc.cover_i) {
+            cover = `https://covers.openlibrary.org/b/id/${doc.cover_i}-L.jpg`;
+          }
+          if (!description && doc.first_sentence?.[0]) {
+            description = doc.first_sentence[0].slice(0, 600);
+          }
+          if (cover && description) break;
+        }
+      }
+    } catch(_) {}
+  }
+
+  // 3️⃣ Open Library works API pour la description si toujours manquante
+  if (!description) {
+    try {
+      const olQuery = encodeURIComponent(`${title}${author ? ' ' + author : ''}`);
+      const res     = await fetch(`https://openlibrary.org/search.json?q=${olQuery}&limit=3&fields=key,cover_i`);
+      const data    = await res.json();
+      const workKey = data.docs?.[0]?.key;
+      if (workKey) {
+        if (!cover && data.docs[0].cover_i) {
+          cover = `https://covers.openlibrary.org/b/id/${data.docs[0].cover_i}-L.jpg`;
+        }
+        const workRes  = await fetch(`https://openlibrary.org${workKey}.json`);
+        const workData = await workRes.json();
+        if (workData.description) {
+          const desc = typeof workData.description === 'string'
+            ? workData.description
+            : workData.description?.value || '';
+          if (desc) description = desc.replace(/<[^>]+>/g,'').trim().slice(0, 600);
+        }
+      }
+    } catch(_) {}
+  }
+
+  return { cover, description };
+}
+
 // ── Auto-fill (Google Books + Wikipedia) ─────────────────────────────────
 async function autoFill() {
   const authorField = document.getElementById('new-author').value.trim();
@@ -556,84 +636,43 @@ async function autoFill() {
   let filled = [];
 
   try {
-    // ── Google Books — essaie plusieurs requêtes ──
-    const queries = [
-      `intitle:${title}${author ? ' inauthor:' + author : ''}`,
-      `${title}${author ? ' ' + author : ''}`,
-      title
-    ];
+    status.textContent = 'Recherche couverture & description…';
+    const { cover, description } = await fetchBookData(title, author);
 
-    let bestBook = null;
-    for (const q of queries) {
-      if (bestBook?.imageLinks && bestBook?.description) break;
-      try {
-        const res  = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(q)}&maxResults=10`);
-        const data = await res.json();
-        if (!data.items) continue;
-        // Cherche le résultat le plus complet (cover + description en priorité)
-        for (const item of data.items) {
-          const vi = item.volumeInfo;
-          const score =
-            (vi.imageLinks ? 2 : 0) +
-            (vi.description ? 2 : 0) +
-            (vi.authors ? 1 : 0);
-          if (!bestBook || score > (
-            (bestBook.imageLinks ? 2 : 0) +
-            (bestBook.description ? 2 : 0) +
-            (bestBook.authors ? 1 : 0)
-          )) { bestBook = vi; }
-          if (score >= 4) break; // parfait, on arrête
-        }
-      } catch(_) {}
+    if (cover) {
+      document.getElementById('new-cover').value = cover;
+      filled.push('couverture');
     }
-
-    if (bestBook) {
-      // Cover — préfère la plus haute résolution
-      const imgLinks = bestBook.imageLinks || {};
-      const cover = imgLinks.extraLarge || imgLinks.large || imgLinks.medium ||
-                    imgLinks.thumbnail  || imgLinks.smallThumbnail;
-      if (cover) {
-        const hq = cover.replace('http://', 'https://').replace(/zoom=\d/, 'zoom=3');
-        document.getElementById('new-cover').value = hq;
-        filled.push('couverture');
-      }
-      // Description
-      if (bestBook.description) {
-        const desc = bestBook.description.replace(/<[^>]+>/g, '').trim().slice(0, 600);
-        document.getElementById('new-description').value = desc;
-        filled.push('description');
-      }
+    if (description) {
+      document.getElementById('new-description').value = description;
+      filled.push('description');
     }
 
     // ── Wikipedia (bio auteur) — FR puis EN ──
     if (author) {
-      status.textContent = 'Recherche Wikipedia…';
-      let bioFound = false;
+      status.textContent = 'Recherche bio auteur…';
       for (const lang of ['fr', 'en']) {
-        if (bioFound) break;
         try {
-          const res  = await fetch(
-            `https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(author)}`
-          );
+          const res  = await fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(author)}`);
           if (!res.ok) continue;
           const wiki = await res.json();
           if (wiki.extract && wiki.type !== 'disambiguation') {
             document.getElementById('new-bio').value = wiki.extract.trim().slice(0, 500);
             filled.push('bio auteur');
-            bioFound = true;
+            break;
           }
         } catch(_) {}
       }
     }
 
-    status.style.color  = filled.length ? 'var(--green)' : 'var(--red)';
-    status.textContent  = filled.length
+    status.style.color = filled.length ? 'var(--green)' : 'var(--red)';
+    status.textContent = filled.length
       ? `✓ Récupéré : ${filled.join(', ')}`
       : `Aucune donnée trouvée pour "${title}". Remplis manuellement.`;
 
   } catch(e) {
-    status.style.color  = 'var(--red)';
-    status.textContent  = 'Erreur réseau. Réessaie.';
+    status.style.color = 'var(--red)';
+    status.textContent = 'Erreur réseau. Réessaie.';
   }
 
   btn.disabled    = false;
@@ -678,40 +717,11 @@ async function enrichAll() {
     label.textContent = `(${done + 1}/${toEnrich.length}) ${title}…`;
     prog.style.width  = `${Math.round((done / toEnrich.length) * 100)}%`;
 
-    // ── Google Books ──
+    // ── Google Books + Open Library ──
     if (!inc.cover || !inc.description) {
-      try {
-        const queries = [
-          `intitle:${title}${author ? ' inauthor:' + author : ''}`,
-          `${title} ${author}`.trim(),
-        ];
-        let bestBook = null;
-        for (const q of queries) {
-          if (bestBook?.imageLinks && bestBook?.description) break;
-          const res  = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(q)}&maxResults=10`);
-          const data = await res.json();
-          if (!data.items) continue;
-          for (const item of data.items) {
-            const vi    = item.volumeInfo;
-            const score = (vi.imageLinks ? 2 : 0) + (vi.description ? 2 : 0);
-            const bScore = (bestBook?.imageLinks ? 2 : 0) + (bestBook?.description ? 2 : 0);
-            if (!bestBook || score > bScore) bestBook = vi;
-            if (score >= 4) break;
-          }
-        }
-        if (bestBook) {
-          if (!inc.cover && bestBook.imageLinks) {
-            const img = bestBook.imageLinks;
-            const url = (img.extraLarge||img.large||img.medium||img.thumbnail||img.smallThumbnail||'')
-              .replace('http://','https://').replace(/zoom=\d/,'zoom=3');
-            if (url) { incipits[i].cover = url; enriched++; }
-          }
-          if (!inc.description && bestBook.description) {
-            incipits[i].description = bestBook.description.replace(/<[^>]+>/g,'').trim().slice(0,600);
-            enriched++;
-          }
-        }
-      } catch(_) {}
+      const { cover, description } = await fetchBookData(title, author);
+      if (!inc.cover && cover)             { incipits[i].cover = cover;             enriched++; }
+      if (!inc.description && description) { incipits[i].description = description; enriched++; }
     }
 
     // ── Wikipedia bio ──
