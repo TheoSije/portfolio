@@ -304,8 +304,8 @@
       </div>
     </div>
     <div class="field-group">
-      <div class="field-label">📝 Description du livre</div>
-      <textarea id="new-description" placeholder="Quatrième de couverture, résumé…" rows="3"></textarea>
+      <div class="field-label">📝 Résumé</div>
+      <textarea id="new-description" placeholder="Résumé du livre…" rows="3"></textarea>
     </div>
     <div class="field-group">
       <div class="field-label">👤 Bio auteur</div>
@@ -465,7 +465,7 @@ function renderList() {
 
   list.innerHTML = filtered.map(inc => {
     const chips = [
-      inc.description ? '<span class="chip chip-desc">📝 desc</span>' : '',
+      inc.description ? '<span class="chip chip-desc">📝 résumé</span>' : '',
       inc.bio         ? '<span class="chip chip-bio">👤 bio</span>'   : '',
       inc.amazon      ? '<span class="chip chip-amazon">🛒</span>'    : '',
     ].filter(Boolean).join('');
@@ -509,8 +509,8 @@ function renderList() {
             </div>
           </div>
           <div class="field-group">
-            <div class="field-label">📝 Description du livre</div>
-            <textarea id="edit-description-${inc._i}" rows="3" placeholder="Quatrième de couverture…">${escHtml(inc.description||'')}</textarea>
+            <div class="field-label">📝 Résumé</div>
+            <textarea id="edit-description-${inc._i}" rows="3" placeholder="Résumé du livre…">${escHtml(inc.description||'')}</textarea>
           </div>
           <div class="field-group">
             <div class="field-label">👤 Bio auteur</div>
@@ -610,6 +610,21 @@ async function fetchBookData(title, author) {
         }
       }
     } catch(_) {}
+  }
+
+  // 4️⃣ Wikipedia FR puis EN — résumé de l'œuvre (excellent pour les classiques)
+  if (!description) {
+    for (const lang of ['fr', 'en']) {
+      try {
+        const res  = await fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`);
+        if (!res.ok) continue;
+        const wiki = await res.json();
+        if (wiki.extract && wiki.type !== 'disambiguation' && wiki.extract.length > 80) {
+          description = wiki.extract.trim().slice(0, 600);
+          break;
+        }
+      } catch(_) {}
+    }
   }
 
   return { cover, description };
