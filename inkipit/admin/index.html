@@ -239,8 +239,6 @@
     </div>
     <div class="header-right">
       <button class="btn btn-ghost btn-sm" onclick="reload()">↺ Rafraîchir</button>
-      <button class="btn btn-ghost btn-sm" id="enrich-btn" onclick="enrichAll()">✨ Enrichir tout</button>
-      <button class="btn btn-ghost btn-sm" id="reset-desc-btn" onclick="resetDescriptions()">🔄 Résumés Wikipedia</button>
       <button class="btn btn-gold btn-sm" onclick="toggleAddForm()">+ Ajouter</button>
       <button class="logout-btn" onclick="logout()">Déconnexion</button>
     </div>
@@ -406,11 +404,16 @@ async function loadData() {
 async function reload() { await loadData(); }
 
 async function save(message) {
-  setStatus('saving', 'Sauvegarde…');
+  // Garde-fou : jamais sauvegarder un tableau vide ou tronqué
+  if (!incipits || incipits.length < 10) {
+    setStatus('error', `⛔ Sauvegarde annulée — ${incipits?.length ?? 0} inkipits en mémoire (trop peu, rechargez)`);
+    return;
+  }
+  setStatus('saving', `Sauvegarde (${incipits.length} inkipits)…`);
   try {
     const result = await ghPut(FILE, JSON.stringify(incipits, null, 2), fileSha, message);
     fileSha = result.content.sha;
-    setStatus('success', '✓ ' + message);
+    setStatus('success', `✓ ${message} — ${incipits.length} inkipits`);
     setTimeout(clearStatus, 3000);
   } catch(e) {
     setStatus('error', 'Erreur : ' + e.message);
@@ -504,7 +507,7 @@ function renderList() {
             <div class="field-group">
               <div class="field-label">📖 Image de couverture (URL)</div>
               <input type="url" id="edit-cover-${inc._i}" value="${escHtml(inc.cover||'')}" placeholder="https://…/cover.jpg" oninput="updateCoverPreview(${inc._i},this.value)" />
-              <img id="cover-preview-${inc._i}" src="${inc.cover||''}" referrerpolicy="no-referrer" alt="" style="margin-top:8px;height:80px;border-radius:6px;object-fit:cover;display:${inc.cover?'block':'none'}" onerror="this.style.display='none'">
+              <img id="cover-preview-${inc._i}" src="${inc.cover||''}" referrerpolicy="no-referrer" alt="" style="margin-top:8px;width:60px;height:86px;border-radius:6px;object-fit:cover;display:${inc.cover?'block':'none'}" onerror="this.style.display='none'">
             </div>
             <div class="field-group">
               <div class="field-label">🛒 Lien Amazon</div>
@@ -954,11 +957,16 @@ async function saveEdit(i) {
 
   if (!text || !author) { alert('Texte et auteur sont requis.'); return; }
 
-  const entry = { text, author };
-  if (cover)       entry.cover       = cover;
-  if (description) entry.description = description;
-  if (bio)         entry.bio         = bio;
-  if (amazon)      entry.amazon      = amazon;
+  // Merge sur l'existant — on ne perd aucun champ hors-formulaire
+  const entry = { ...incipits[i], text, author };
+  // Champs optionnels : mettre à jour si rempli, supprimer si vidé volontairement
+  if (cover)       entry.cover       = cover;       else delete entry.cover;
+  if (description) entry.description = description; else delete entry.description;
+  if (bio)         entry.bio         = bio;         else delete entry.bio;
+  if (amazon)      entry.amazon      = amazon;      else delete entry.amazon;
+
+  // Garde-fou : vérifier qu'on ne réduit pas le nombre d'inkipits
+  if (incipits.length !== incipits.length) { alert('Erreur de cohérence — rechargement.'); reload(); return; }
 
   incipits[i] = entry;
   renderList();
