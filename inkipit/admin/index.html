@@ -576,7 +576,9 @@ async function fetchBookData(title, author) {
         if (!cover && vi.imageLinks) {
           const img = vi.imageLinks;
           const url = (img.extraLarge||img.large||img.medium||img.thumbnail||img.smallThumbnail||'')
-            .replace('http://','https://').replace(/zoom=\d/,'zoom=3');
+            .replace('http://','https://')
+            .replace(/zoom=\d/,'zoom=1')   // zoom=1 = thumbnail fiable
+            .replace(/&edge=curl/,'');      // edge=curl bloque AsyncImage iOS
           if (url) cover = url;
         }
         if (!description && vi.description) {
