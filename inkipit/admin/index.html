@@ -238,10 +238,22 @@
     </div>
     <div class="header-right">
       <button class="btn btn-ghost btn-sm" onclick="reload()">↺ Rafraîchir</button>
+      <button class="btn btn-ghost btn-sm" id="enrich-btn" onclick="enrichAll()">✨ Enrichir tout</button>
       <button class="btn btn-gold btn-sm" onclick="toggleAddForm()">+ Ajouter</button>
       <button class="logout-btn" onclick="logout()">Déconnexion</button>
     </div>
   </header>
+
+  <!-- Enrich progress bar -->
+  <div id="enrich-bar" style="display:none;padding:12px 24px;border-bottom:1px solid var(--border);background:rgba(201,168,76,0.04)">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <span id="enrich-label" style="font-size:13px;color:var(--gold)"></span>
+      <button class="btn btn-ghost btn-sm" onclick="stopEnrich()">Arrêter</button>
+    </div>
+    <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:6px;overflow:hidden">
+      <div id="enrich-progress" style="height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold));border-radius:4px;transition:width 0.3s;width:0%"></div>
+    </div>
+  </div>
 
   <div id="status-bar">
     <div class="spinner"></div>
@@ -626,6 +638,115 @@ async function autoFill() {
 
   btn.disabled    = false;
   btn.textContent = '🔍 Auto-remplir';
+}
+
+// ── Enrich all ────────────────────────────────────────────────────────────
+let enrichStopped = false;
+
+function stopEnrich() {
+  enrichStopped = true;
+}
+
+async function enrichAll() {
+  const toEnrich = incipits
+    .map((inc, i) => ({ inc, i }))
+    .filter(({ inc }) => !inc.cover || !inc.description || !inc.bio);
+
+  if (!toEnrich.length) {
+    alert('Tous les inkipits sont déjà complets !');
+    return;
+  }
+
+  if (!confirm(`Enrichir ${toEnrich.length} inkipits sans cover/description/bio ?\n\nLes champs "text" et "author" ne seront JAMAIS modifiés.`)) return;
+
+  enrichStopped = false;
+  const bar     = document.getElementById('enrich-bar');
+  const label   = document.getElementById('enrich-label');
+  const prog    = document.getElementById('enrich-progress');
+  const btn     = document.getElementById('enrich-btn');
+  bar.style.display = 'block';
+  btn.disabled = true;
+
+  let done = 0, enriched = 0;
+
+  for (const { inc, i } of toEnrich) {
+    if (enrichStopped) break;
+
+    const title  = inc.author.split(' — ')[0].trim();
+    const author = inc.author.split(' — ')[1]?.split(',')[0].trim() || '';
+
+    label.textContent = `(${done + 1}/${toEnrich.length}) ${title}…`;
+    prog.style.width  = `${Math.round((done / toEnrich.length) * 100)}%`;
+
+    // ── Google Books ──
+    if (!inc.cover || !inc.description) {
+      try {
+        const queries = [
+          `intitle:${title}${author ? ' inauthor:' + author : ''}`,
+          `${title} ${author}`.trim(),
+        ];
+        let bestBook = null;
+        for (const q of queries) {
+          if (bestBook?.imageLinks && bestBook?.description) break;
+          const res  = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(q)}&maxResults=10`);
+          const data = await res.json();
+          if (!data.items) continue;
+          for (const item of data.items) {
+            const vi    = item.volumeInfo;
+            const score = (vi.imageLinks ? 2 : 0) + (vi.description ? 2 : 0);
+            const bScore = (bestBook?.imageLinks ? 2 : 0) + (bestBook?.description ? 2 : 0);
+            if (!bestBook || score > bScore) bestBook = vi;
+            if (score >= 4) break;
+          }
+        }
+        if (bestBook) {
+          if (!inc.cover && bestBook.imageLinks) {
+            const img = bestBook.imageLinks;
+            const url = (img.extraLarge||img.large||img.medium||img.thumbnail||img.smallThumbnail||'')
+              .replace('http://','https://').replace(/zoom=\d/,'zoom=3');
+            if (url) { incipits[i].cover = url; enriched++; }
+          }
+          if (!inc.description && bestBook.description) {
+            incipits[i].description = bestBook.description.replace(/<[^>]+>/g,'').trim().slice(0,600);
+            enriched++;
+          }
+        }
+      } catch(_) {}
+    }
+
+    // ── Wikipedia bio ──
+    if (!inc.bio && author) {
+      for (const lang of ['fr','en']) {
+        try {
+          const res  = await fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(author)}`);
+          if (!res.ok) continue;
+          const wiki = await res.json();
+          if (wiki.extract && wiki.type !== 'disambiguation') {
+            incipits[i].bio = wiki.extract.trim().slice(0,500);
+            enriched++;
+            break;
+          }
+        } catch(_) {}
+      }
+    }
+
+    done++;
+    // Pause pour ne pas surcharger les APIs
+    await new Promise(r => setTimeout(r, 300));
+  }
+
+  prog.style.width  = '100%';
+  label.textContent = enrichStopped
+    ? `⏹ Arrêté — ${enriched} champs ajoutés sur ${done} inkipits traités`
+    : `✓ Terminé — ${enriched} champs ajoutés sur ${toEnrich.length} inkipits`;
+
+  if (enriched > 0) {
+    renderList();
+    await save(`enrich: ${enriched} champs ajoutés (cover/desc/bio)`);
+  }
+
+  btn.disabled = false;
+  setTimeout(() => { bar.style.display = 'none'; }, 5000);
 }
 
 // ── Duplicate check ───────────────────────────────────────────────────────
