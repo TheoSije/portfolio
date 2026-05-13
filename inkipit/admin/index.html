@@ -11,6 +11,7 @@
   :root {
     --bg:       #0a0a0a;
     --surface:  #141414;
+    --surface2: #1a1a1a;
     --border:   rgba(255,255,255,0.08);
     --gold:     #c9a84c;
     --gold2:    #f0d060;
@@ -18,6 +19,7 @@
     --muted:    rgba(255,255,255,0.35);
     --red:      #ff6b6b;
     --green:    #4ade80;
+    --blue:     #60a5fa;
     --radius:   14px;
   }
 
@@ -30,242 +32,183 @@
 
   /* ── Login ── */
   #login-screen {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 24px;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 24px;
   }
   .login-box {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 40px;
-    width: 100%;
-    max-width: 420px;
-    text-align: center;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 20px; padding: 40px; width: 100%; max-width: 420px; text-align: center;
   }
   .login-box h1 { font-size: 22px; margin-bottom: 6px; }
-  .login-box p { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+  .login-box p  { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
   .login-box input {
-    width: 100%;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 14px;
-    color: var(--text);
-    font-size: 14px;
-    margin-bottom: 12px;
-    outline: none;
-    font-family: monospace;
+    width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 14px; color: var(--text); font-size: 14px;
+    margin-bottom: 12px; outline: none; font-family: monospace;
   }
   .login-box input:focus { border-color: var(--gold); }
   .login-box a { font-size: 12px; color: var(--gold); text-decoration: none; display: block; margin-bottom: 20px; }
 
-  /* ── App layout ── */
+  /* ── App ── */
   #app { display: none; }
 
   header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 24px;
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    background: var(--bg);
-    z-index: 10;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 24px; border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; background: var(--bg); z-index: 10;
   }
   .header-left { display: flex; align-items: center; gap: 12px; }
   .header-left h1 { font-size: 16px; font-weight: 600; }
   .count-badge {
-    background: rgba(201,168,76,0.15);
-    color: var(--gold);
-    font-size: 11px;
-    font-weight: 600;
-    padding: 3px 8px;
-    border-radius: 20px;
+    background: rgba(201,168,76,0.15); color: var(--gold);
+    font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 20px;
   }
   .header-right { display: flex; align-items: center; gap: 10px; }
 
   /* ── Buttons ── */
   .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 500;
-    transition: opacity 0.15s;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 16px; border-radius: 10px; border: none;
+    cursor: pointer; font-size: 13px; font-weight: 500; transition: opacity 0.15s;
   }
   .btn:hover { opacity: 0.85; }
   .btn:disabled { opacity: 0.4; cursor: not-allowed; }
-  .btn-gold { background: linear-gradient(135deg, var(--gold2), var(--gold)); color: #000; }
-  .btn-ghost { background: rgba(255,255,255,0.07); color: var(--text); border: 1px solid var(--border); }
-  .btn-danger { background: rgba(255,107,107,0.15); color: var(--red); border: 1px solid rgba(255,107,107,0.2); }
-  .btn-sm { padding: 5px 10px; font-size: 12px; border-radius: 7px; }
+  .btn-gold    { background: linear-gradient(135deg, var(--gold2), var(--gold)); color: #000; }
+  .btn-ghost   { background: rgba(255,255,255,0.07); color: var(--text); border: 1px solid var(--border); }
+  .btn-danger  { background: rgba(255,107,107,0.15); color: var(--red); border: 1px solid rgba(255,107,107,0.2); }
+  .btn-sm      { padding: 5px 10px; font-size: 12px; border-radius: 7px; }
 
-  /* ── Search + toolbar ── */
+  /* ── Toolbar ── */
   .toolbar {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px 24px;
-    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px 24px; border-bottom: 1px solid var(--border);
   }
-  .search-wrap {
-    flex: 1;
-    position: relative;
-  }
-  .search-wrap svg {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--muted);
-  }
+  .search-wrap { flex: 1; position: relative; }
+  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); }
   .search-wrap input {
-    width: 100%;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 9px 14px 9px 36px;
-    color: var(--text);
-    font-size: 14px;
-    outline: none;
+    width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+    border-radius: 10px; padding: 9px 14px 9px 36px; color: var(--text); font-size: 14px; outline: none;
   }
   .search-wrap input:focus { border-color: var(--gold); }
   .search-wrap input::placeholder { color: var(--muted); }
 
+  /* ── Filter pills ── */
+  .filter-pills { display: flex; gap: 6px; }
+  .pill {
+    padding: 5px 10px; border-radius: 20px; border: 1px solid var(--border);
+    background: none; color: var(--muted); font-size: 12px; cursor: pointer; transition: all 0.15s;
+  }
+  .pill.active { background: rgba(201,168,76,0.15); color: var(--gold); border-color: rgba(201,168,76,0.3); }
+
   /* ── Status bar ── */
   #status-bar {
-    display: none;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 24px;
-    font-size: 13px;
-    border-bottom: 1px solid var(--border);
+    display: none; align-items: center; gap: 8px;
+    padding: 10px 24px; font-size: 13px; border-bottom: 1px solid var(--border);
   }
   #status-bar.saving { display: flex; color: var(--gold); background: rgba(201,168,76,0.05); }
   #status-bar.success { display: flex; color: var(--green); background: rgba(74,222,128,0.05); }
-  #status-bar.error { display: flex; color: var(--red); background: rgba(255,107,107,0.05); }
+  #status-bar.error   { display: flex; color: var(--red);   background: rgba(255,107,107,0.05); }
 
   /* ── List ── */
   .list { padding: 16px 24px; display: flex; flex-direction: column; gap: 8px; }
 
   .incipit-row {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px 16px;
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    transition: border-color 0.15s;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px 16px;
+    display: flex; align-items: flex-start; gap: 14px; transition: border-color 0.15s;
   }
-  .incipit-row:hover { border-color: rgba(255,255,255,0.15); }
+  .incipit-row:hover  { border-color: rgba(255,255,255,0.15); }
   .incipit-row.editing { border-color: var(--gold); }
 
   .row-index {
-    font-size: 11px;
-    color: var(--muted);
-    font-variant-numeric: tabular-nums;
-    min-width: 28px;
-    padding-top: 2px;
+    font-size: 11px; color: var(--muted);
+    font-variant-numeric: tabular-nums; min-width: 28px; padding-top: 2px;
   }
 
   .row-content { flex: 1; min-width: 0; }
-  .row-text {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.5;
-    margin-bottom: 4px;
-    white-space: pre-wrap;
-  }
-  .row-author { font-size: 12px; color: var(--muted); }
 
-  .row-edit-form { display: none; flex-direction: column; gap: 8px; width: 100%; }
-  .row-edit-form textarea,
-  .row-edit-form input {
-    width: 100%;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 12px;
-    color: var(--text);
-    font-size: 14px;
-    outline: none;
-    font-family: inherit;
-    resize: vertical;
+  .row-display { display: flex; gap: 12px; align-items: flex-start; }
+  .row-cover {
+    width: 36px; height: 50px; border-radius: 4px; object-fit: cover;
+    flex-shrink: 0; background: rgba(255,255,255,0.06); border: 1px solid var(--border);
   }
-  .row-edit-form textarea { min-height: 80px; }
+  .row-cover-placeholder {
+    width: 36px; height: 50px; border-radius: 4px; flex-shrink: 0;
+    background: rgba(255,255,255,0.04); border: 1px dashed var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: var(--muted);
+  }
+  .row-main { flex: 1; min-width: 0; }
+  .row-text   { font-size: 14px; font-weight: 500; line-height: 1.5; margin-bottom: 4px; white-space: pre-wrap; }
+  .row-author { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .row-chips  { display: flex; gap: 4px; flex-wrap: wrap; }
+  .chip {
+    font-size: 10px; padding: 2px 7px; border-radius: 10px; font-weight: 500;
+  }
+  .chip-desc    { background: rgba(96,165,250,0.12);  color: var(--blue); }
+  .chip-bio     { background: rgba(167,139,250,0.12); color: #a78bfa; }
+  .chip-amazon  { background: rgba(251,146,60,0.12);  color: #fb923c; }
+
+  /* ── Edit form ── */
+  .row-edit-form { display: none; flex-direction: column; gap: 8px; width: 100%; }
+
+  .field-group { display: flex; flex-direction: column; gap: 4px; }
+  .field-label { font-size: 11px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  .row-edit-form textarea,
+  .row-edit-form input,
+  #add-form textarea,
+  #add-form input {
+    width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 12px; color: var(--text); font-size: 14px;
+    outline: none; font-family: inherit; resize: vertical;
+  }
+  .row-edit-form textarea { min-height: 70px; }
   .row-edit-form textarea:focus,
-  .row-edit-form input:focus { border-color: var(--gold); }
-  .row-edit-actions { display: flex; gap: 6px; }
+  .row-edit-form input:focus,
+  #add-form textarea:focus,
+  #add-form input:focus { border-color: var(--gold); }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+
+  .form-separator {
+    border: none; border-top: 1px solid var(--border);
+    margin: 4px 0;
+  }
+
+  .row-edit-actions { display: flex; gap: 6px; margin-top: 4px; }
 
   .row-actions { display: flex; gap: 6px; flex-shrink: 0; opacity: 0; transition: opacity 0.15s; }
   .incipit-row:hover .row-actions { opacity: 1; }
 
   /* ── Add form ── */
   #add-form {
-    display: none;
-    margin: 0 24px 16px;
-    background: var(--surface);
-    border: 1px solid var(--gold);
-    border-radius: var(--radius);
-    padding: 20px;
+    display: none; margin: 0 24px 16px;
+    background: var(--surface); border: 1px solid var(--gold);
+    border-radius: var(--radius); padding: 20px;
   }
-  #add-form h3 { font-size: 14px; margin-bottom: 14px; color: var(--gold); }
-  #add-form textarea,
-  #add-form input {
-    width: 100%;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 12px;
-    color: var(--text);
-    font-size: 14px;
-    outline: none;
-    font-family: inherit;
-    margin-bottom: 8px;
-    resize: vertical;
-  }
-  #add-form textarea { min-height: 80px; }
-  #add-form textarea:focus,
-  #add-form input:focus { border-color: var(--gold); }
-  #add-form .add-actions { display: flex; gap: 8px; }
+  #add-form h3 { font-size: 14px; margin-bottom: 16px; color: var(--gold); }
+  #add-form textarea { min-height: 70px; margin: 0; }
+  #add-form input    { margin: 0; }
+  #add-form .add-actions { display: flex; gap: 8px; margin-top: 4px; }
+  #add-form .field-group { margin-bottom: 8px; }
 
   /* ── Empty ── */
-  .empty {
-    text-align: center;
-    padding: 60px 24px;
-    color: var(--muted);
-    font-size: 14px;
-  }
+  .empty { text-align: center; padding: 60px 24px; color: var(--muted); font-size: 14px; }
 
   /* ── Spinner ── */
   .spinner {
     width: 16px; height: 16px;
     border: 2px solid rgba(255,255,255,0.15);
-    border-top-color: currentColor;
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-    flex-shrink: 0;
+    border-top-color: currentColor; border-radius: 50%;
+    animation: spin 0.7s linear infinite; flex-shrink: 0;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ── Logout ── */
   .logout-btn {
-    background: none;
-    border: none;
-    color: var(--muted);
-    font-size: 12px;
-    cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 6px;
+    background: none; border: none; color: var(--muted); font-size: 12px;
+    cursor: pointer; padding: 4px 8px; border-radius: 6px;
   }
   .logout-btn:hover { color: var(--text); background: rgba(255,255,255,0.06); }
 </style>
@@ -312,13 +255,47 @@
       </svg>
       <input type="text" id="search-input" placeholder="Rechercher un incipit ou un auteur…" oninput="renderList()" />
     </div>
+    <div class="filter-pills">
+      <button class="pill active" data-filter="all"     onclick="setFilter('all',this)">Tous</button>
+      <button class="pill"        data-filter="complete" onclick="setFilter('complete',this)">✦ Complets</button>
+      <button class="pill"        data-filter="missing"  onclick="setFilter('missing',this)">⚠ Incomplets</button>
+    </div>
   </div>
 
   <!-- Add form -->
   <div id="add-form">
-    <h3>Nouvel incipit</h3>
-    <textarea id="new-text" placeholder="Texte de l'incipit…" rows="3"></textarea>
-    <input type="text" id="new-author" placeholder="Titre — Auteur, Année  (ex: Germinal — Émile Zola, 1885)" />
+    <h3>✦ Nouvel incipit</h3>
+
+    <div class="field-group">
+      <div class="field-label">Texte *</div>
+      <textarea id="new-text" placeholder="Texte de l'incipit…" rows="3"></textarea>
+    </div>
+    <div class="field-group">
+      <div class="field-label">Auteur *</div>
+      <input type="text" id="new-author" placeholder="Titre — Auteur, Année  (ex: Germinal — Émile Zola, 1885)" />
+    </div>
+
+    <hr class="form-separator" />
+
+    <div class="form-grid">
+      <div class="field-group">
+        <div class="field-label">📖 Image de couverture (URL)</div>
+        <input type="url" id="new-cover" placeholder="https://…/cover.jpg" />
+      </div>
+      <div class="field-group">
+        <div class="field-label">🛒 Lien Amazon</div>
+        <input type="url" id="new-amazon" placeholder="https://amzn.to/…" />
+      </div>
+    </div>
+    <div class="field-group">
+      <div class="field-label">📝 Description du livre</div>
+      <textarea id="new-description" placeholder="Quatrième de couverture, résumé…" rows="3"></textarea>
+    </div>
+    <div class="field-group">
+      <div class="field-label">👤 Bio auteur</div>
+      <textarea id="new-bio" placeholder="Courte biographie de l'auteur…" rows="2"></textarea>
+    </div>
+
     <div class="add-actions">
       <button class="btn btn-gold" onclick="addIncipit()">Ajouter</button>
       <button class="btn btn-ghost" onclick="toggleAddForm()">Annuler</button>
@@ -329,18 +306,17 @@
 </div>
 
 <script>
-// ── Config ──
 const OWNER  = 'TheoSije';
 const REPO   = 'inkipit-content';
 const FILE   = 'inkipits.json';
 const BRANCH = 'main';
 
-// ── State ──
 let token    = '';
 let incipits = [];
 let fileSha  = '';
+let activeFilter = 'all';
 
-// ── Auth ──
+// ── Auth ──────────────────────────────────────────────────────────────────
 function login() {
   const t = document.getElementById('token-input').value.trim();
   if (!t) return;
@@ -349,54 +325,51 @@ function login() {
   document.getElementById('login-error').style.display = 'none';
   loadData();
 }
-
 function logout() {
   localStorage.removeItem('inkipit_token');
-  token = '';
-  incipits = [];
+  token = ''; incipits = [];
   document.getElementById('app').style.display = 'none';
   document.getElementById('login-screen').style.display = 'flex';
   document.getElementById('token-input').value = '';
 }
 
-// ── GitHub API ──
+// ── GitHub API ────────────────────────────────────────────────────────────
 async function ghGet(path) {
-  const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}?ref=${BRANCH}`, {
-    headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github+json' }
-  });
+  const r = await fetch(
+    `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}?ref=${BRANCH}`,
+    { headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github+json' } }
+  );
   if (!r.ok) throw new Error(`GitHub ${r.status}: ${r.statusText}`);
   return r.json();
 }
-
 async function ghPut(path, content, sha, message) {
-  const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, {
-    method: 'PUT',
-    headers: {
-      Authorization: `token ${token}`,
-      Accept: 'application/vnd.github+json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      message,
-      content: btoa(unescape(encodeURIComponent(content))),
-      sha,
-      branch: BRANCH
-    })
-  });
-  if (!r.ok) {
-    const err = await r.json();
-    throw new Error(err.message || `GitHub ${r.status}`);
-  }
+  const r = await fetch(
+    `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`,
+    {
+      method: 'PUT',
+      headers: {
+        Authorization: `token ${token}`,
+        Accept: 'application/vnd.github+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message,
+        content: btoa(unescape(encodeURIComponent(content))),
+        sha, branch: BRANCH
+      })
+    }
+  );
+  if (!r.ok) { const e = await r.json(); throw new Error(e.message || `GitHub ${r.status}`); }
   return r.json();
 }
 
-// ── Load ──
+// ── Load / Save ───────────────────────────────────────────────────────────
 async function loadData() {
   setStatus('saving', 'Chargement…');
   try {
     const data = await ghGet(FILE);
     fileSha  = data.sha;
-    incipits = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g, '')))));
+    incipits = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g,'')))));
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     setStatus('success', `${incipits.length} inkipits chargés`);
@@ -404,7 +377,7 @@ async function loadData() {
     renderList();
   } catch(e) {
     if (e.message.includes('401') || e.message.includes('403')) {
-      document.getElementById('login-error').textContent = 'Token invalide ou insuffisant.';
+      document.getElementById('login-error').textContent = 'Token invalide.';
       document.getElementById('login-error').style.display = 'block';
       token = '';
     } else {
@@ -412,18 +385,13 @@ async function loadData() {
     }
   }
 }
+async function reload() { await loadData(); }
 
-async function reload() {
-  await loadData();
-}
-
-// ── Save ──
 async function save(message) {
-  setStatus('saving', 'Sauvegarde en cours…');
+  setStatus('saving', 'Sauvegarde…');
   try {
-    const json    = JSON.stringify(incipits, null, 2);
-    const result  = await ghPut(FILE, json, fileSha, message);
-    fileSha       = result.content.sha;
+    const result = await ghPut(FILE, JSON.stringify(incipits, null, 2), fileSha, message);
+    fileSha = result.content.sha;
     setStatus('success', '✓ ' + message);
     setTimeout(clearStatus, 3000);
   } catch(e) {
@@ -431,127 +399,207 @@ async function save(message) {
   }
 }
 
-// ── Status ──
+// ── Status ────────────────────────────────────────────────────────────────
 function setStatus(type, msg) {
   const bar = document.getElementById('status-bar');
   bar.className = type;
   document.getElementById('status-msg').textContent = msg;
 }
 function clearStatus() {
-  document.getElementById('status-bar').className = '';
-  document.getElementById('status-bar').style.display = '';
+  const bar = document.getElementById('status-bar');
+  bar.className = '';
 }
 
-// ── Render ──
+// ── Filter ────────────────────────────────────────────────────────────────
+function setFilter(f, el) {
+  activeFilter = f;
+  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  renderList();
+}
+
+function isComplete(inc) {
+  return !!(inc.cover && inc.description && inc.bio && inc.amazon);
+}
+
+// ── Render ────────────────────────────────────────────────────────────────
 function renderList() {
   const q    = document.getElementById('search-input').value.toLowerCase();
   const list = document.getElementById('list');
-  const filtered = incipits
-    .map((inc, i) => ({ ...inc, _i: i }))
-    .filter(inc => !q || inc.text.toLowerCase().includes(q) || inc.author.toLowerCase().includes(q));
 
+  let filtered = incipits.map((inc, i) => ({ ...inc, _i: i }));
+
+  if (q) filtered = filtered.filter(inc =>
+    inc.text.toLowerCase().includes(q) || inc.author.toLowerCase().includes(q)
+  );
+  if (activeFilter === 'complete') filtered = filtered.filter(isComplete);
+  if (activeFilter === 'missing')  filtered = filtered.filter(inc => !isComplete(inc));
+
+  const total    = incipits.length;
+  const complete = incipits.filter(isComplete).length;
   document.getElementById('count-badge').textContent =
-    q ? `${filtered.length} / ${incipits.length}` : `${incipits.length}`;
+    q || activeFilter !== 'all'
+      ? `${filtered.length} / ${total}`
+      : `${total} · ${complete} complets`;
 
   if (!filtered.length) {
     list.innerHTML = '<div class="empty">Aucun résultat.</div>';
     return;
   }
 
-  list.innerHTML = filtered.map(inc => `
+  list.innerHTML = filtered.map(inc => {
+    const chips = [
+      inc.description ? '<span class="chip chip-desc">📝 desc</span>' : '',
+      inc.bio         ? '<span class="chip chip-bio">👤 bio</span>'   : '',
+      inc.amazon      ? '<span class="chip chip-amazon">🛒</span>'    : '',
+    ].filter(Boolean).join('');
+
+    const coverHtml = inc.cover
+      ? `<img class="row-cover" src="${escHtml(inc.cover)}" alt="" onerror="this.style.display='none'">`
+      : `<div class="row-cover-placeholder">📚</div>`;
+
+    return `
     <div class="incipit-row" id="row-${inc._i}">
       <span class="row-index">${inc._i + 1}</span>
       <div class="row-content">
+
         <div class="row-display">
-          <div class="row-text">${escHtml(inc.text)}</div>
-          <div class="row-author">${escHtml(inc.author)}</div>
+          ${coverHtml}
+          <div class="row-main">
+            <div class="row-text">${escHtml(inc.text)}</div>
+            <div class="row-author">${escHtml(inc.author)}</div>
+            ${chips ? `<div class="row-chips">${chips}</div>` : ''}
+          </div>
         </div>
+
         <div class="row-edit-form" id="form-${inc._i}">
-          <textarea id="edit-text-${inc._i}" rows="3">${escHtml(inc.text)}</textarea>
-          <input type="text" id="edit-author-${inc._i}" value="${escHtml(inc.author)}" placeholder="Titre — Auteur, Année" />
+          <div class="field-group">
+            <div class="field-label">Texte *</div>
+            <textarea id="edit-text-${inc._i}" rows="3">${escHtml(inc.text)}</textarea>
+          </div>
+          <div class="field-group">
+            <div class="field-label">Auteur *</div>
+            <input type="text" id="edit-author-${inc._i}" value="${escHtml(inc.author)}" placeholder="Titre — Auteur, Année" />
+          </div>
+          <hr class="form-separator" />
+          <div class="form-grid">
+            <div class="field-group">
+              <div class="field-label">📖 Image de couverture (URL)</div>
+              <input type="url" id="edit-cover-${inc._i}" value="${escHtml(inc.cover||'')}" placeholder="https://…/cover.jpg" />
+            </div>
+            <div class="field-group">
+              <div class="field-label">🛒 Lien Amazon</div>
+              <input type="url" id="edit-amazon-${inc._i}" value="${escHtml(inc.amazon||'')}" placeholder="https://amzn.to/…" />
+            </div>
+          </div>
+          <div class="field-group">
+            <div class="field-label">📝 Description du livre</div>
+            <textarea id="edit-description-${inc._i}" rows="3" placeholder="Quatrième de couverture…">${escHtml(inc.description||'')}</textarea>
+          </div>
+          <div class="field-group">
+            <div class="field-label">👤 Bio auteur</div>
+            <textarea id="edit-bio-${inc._i}" rows="2" placeholder="Courte biographie…">${escHtml(inc.bio||'')}</textarea>
+          </div>
           <div class="row-edit-actions">
             <button class="btn btn-gold btn-sm" onclick="saveEdit(${inc._i})">Enregistrer</button>
             <button class="btn btn-ghost btn-sm" onclick="cancelEdit(${inc._i})">Annuler</button>
           </div>
         </div>
+
       </div>
       <div class="row-actions">
         <button class="btn btn-ghost btn-sm" onclick="startEdit(${inc._i})">✏️</button>
         <button class="btn btn-danger btn-sm" onclick="deleteIncipit(${inc._i})">🗑</button>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 }
 
 function escHtml(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// ── Add ──
+// ── Add ───────────────────────────────────────────────────────────────────
 function toggleAddForm() {
   const f = document.getElementById('add-form');
   const visible = f.style.display === 'block';
   f.style.display = visible ? 'none' : 'block';
   if (!visible) {
-    document.getElementById('new-text').value   = '';
-    document.getElementById('new-author').value = '';
+    ['new-text','new-author','new-cover','new-amazon','new-description','new-bio']
+      .forEach(id => document.getElementById(id).value = '');
     document.getElementById('new-text').focus();
   }
 }
 
 async function addIncipit() {
-  const text   = document.getElementById('new-text').value.trim();
-  const author = document.getElementById('new-author').value.trim();
-  if (!text || !author) { alert('Texte et auteur requis.'); return; }
-  incipits.push({ text, author });
+  const text        = document.getElementById('new-text').value.trim();
+  const author      = document.getElementById('new-author').value.trim();
+  const cover       = document.getElementById('new-cover').value.trim();
+  const amazon      = document.getElementById('new-amazon').value.trim();
+  const description = document.getElementById('new-description').value.trim();
+  const bio         = document.getElementById('new-bio').value.trim();
+
+  if (!text || !author) { alert('Texte et auteur sont requis.'); return; }
+
+  const entry = { text, author };
+  if (cover)       entry.cover       = cover;
+  if (description) entry.description = description;
+  if (bio)         entry.bio         = bio;
+  if (amazon)      entry.amazon      = amazon;
+
+  incipits.push(entry);
   document.getElementById('add-form').style.display = 'none';
   renderList();
-  await save(`incipit: ${text.slice(0, 50)}`);
+  await save(`add: ${text.slice(0, 50)}`);
 }
 
-// ── Edit ──
+// ── Edit ──────────────────────────────────────────────────────────────────
 function startEdit(i) {
   document.getElementById(`row-${i}`).classList.add('editing');
   document.getElementById(`form-${i}`).style.display = 'flex';
   document.getElementById(`row-${i}`).querySelector('.row-display').style.display = 'none';
-  document.getElementById(`row-${i}`).querySelector('.row-actions').style.opacity = '0';
   document.getElementById(`edit-text-${i}`).focus();
 }
-
 function cancelEdit(i) {
   document.getElementById(`row-${i}`).classList.remove('editing');
   document.getElementById(`form-${i}`).style.display = 'none';
-  document.getElementById(`row-${i}`).querySelector('.row-display').style.display = 'block';
+  document.getElementById(`row-${i}`).querySelector('.row-display').style.display = 'flex';
 }
-
 async function saveEdit(i) {
-  const text   = document.getElementById(`edit-text-${i}`).value.trim();
-  const author = document.getElementById(`edit-author-${i}`).value.trim();
-  if (!text || !author) { alert('Texte et auteur requis.'); return; }
-  incipits[i] = { text, author };
+  const text        = document.getElementById(`edit-text-${i}`).value.trim();
+  const author      = document.getElementById(`edit-author-${i}`).value.trim();
+  const cover       = document.getElementById(`edit-cover-${i}`).value.trim();
+  const amazon      = document.getElementById(`edit-amazon-${i}`).value.trim();
+  const description = document.getElementById(`edit-description-${i}`).value.trim();
+  const bio         = document.getElementById(`edit-bio-${i}`).value.trim();
+
+  if (!text || !author) { alert('Texte et auteur sont requis.'); return; }
+
+  const entry = { text, author };
+  if (cover)       entry.cover       = cover;
+  if (description) entry.description = description;
+  if (bio)         entry.bio         = bio;
+  if (amazon)      entry.amazon      = amazon;
+
+  incipits[i] = entry;
   renderList();
   await save(`edit: ${text.slice(0, 50)}`);
 }
 
-// ── Delete ──
+// ── Delete ────────────────────────────────────────────────────────────────
 async function deleteIncipit(i) {
-  const preview = incipits[i].text.slice(0, 60);
-  if (!confirm(`Supprimer cet incipit ?\n\n"${preview}…"`)) return;
+  if (!confirm(`Supprimer ?\n\n"${incipits[i].text.slice(0,80)}…"`)) return;
   incipits.splice(i, 1);
   renderList();
-  await save(`delete: ${preview}`);
+  await save(`delete incipit #${i}`);
 }
 
-// ── Init ──
+// ── Init ──────────────────────────────────────────────────────────────────
 document.getElementById('token-input').addEventListener('keydown', e => {
   if (e.key === 'Enter') login();
 });
-
 const saved = localStorage.getItem('inkipit_token');
-if (saved) {
-  token = saved;
-  loadData();
-}
+if (saved) { token = saved; loadData(); }
 </script>
 </body>
 </html>
