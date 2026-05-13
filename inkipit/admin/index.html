@@ -272,7 +272,11 @@
     </div>
     <div class="field-group">
       <div class="field-label">Auteur *</div>
-      <input type="text" id="new-author" placeholder="Titre — Auteur, Année  (ex: Germinal — Émile Zola, 1885)" />
+      <div style="display:flex;gap:8px;align-items:center">
+        <input type="text" id="new-author" placeholder="Titre — Auteur, Année  (ex: Germinal — Émile Zola, 1885)" style="flex:1" />
+        <button class="btn btn-ghost btn-sm" id="autofill-btn" onclick="autoFill()" type="button" style="white-space:nowrap;flex-shrink:0">🔍 Auto-remplir</button>
+      </div>
+      <div id="autofill-status" style="font-size:11px;color:var(--muted);margin-top:4px;display:none"></div>
     </div>
 
     <hr class="form-separator" />
@@ -517,6 +521,79 @@ function renderList() {
 
 function escHtml(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Auto-fill (Google Books + Wikipedia) ─────────────────────────────────
+async function autoFill() {
+  const authorField = document.getElementById('new-author').value.trim();
+  if (!authorField) { alert('Remplis d\'abord le champ Auteur (Titre — Auteur, Année).'); return; }
+
+  // Parse "Titre — Auteur, Année"
+  const parts  = authorField.split(' — ');
+  const title  = parts[0].trim();
+  const author = parts[1] ? parts[1].split(',')[0].trim() : '';
+
+  const btn    = document.getElementById('autofill-btn');
+  const status = document.getElementById('autofill-status');
+  btn.disabled = true;
+  btn.textContent = '⏳';
+  status.style.display = 'block';
+  status.style.color   = 'var(--muted)';
+  status.textContent   = 'Recherche en cours…';
+
+  let filled = [];
+
+  try {
+    // ── Google Books ──
+    const gbQuery = encodeURIComponent(`intitle:${title}${author ? ' inauthor:' + author : ''}`);
+    const gbRes   = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${gbQuery}&langRestrict=fr&maxResults=3`);
+    const gbData  = await gbRes.json();
+    const book    = gbData.items?.[0]?.volumeInfo;
+
+    if (book) {
+      // Cover
+      const cover = book.imageLinks?.thumbnail || book.imageLinks?.smallThumbnail;
+      if (cover) {
+        const hq = cover.replace('http://', 'https://').replace('zoom=1', 'zoom=2');
+        document.getElementById('new-cover').value = hq;
+        filled.push('couverture');
+      }
+      // Description
+      if (book.description) {
+        const desc = book.description.replace(/<[^>]+>/g, '').slice(0, 500);
+        document.getElementById('new-description').value = desc;
+        filled.push('description');
+      }
+    }
+
+    // ── Wikipedia (bio auteur) ──
+    if (author) {
+      const wikiSearch = await fetch(
+        `https://fr.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(author)}`
+      );
+      if (wikiSearch.ok) {
+        const wiki = await wikiSearch.json();
+        if (wiki.extract && wiki.type !== 'disambiguation') {
+          document.getElementById('new-bio').value = wiki.extract.slice(0, 400);
+          filled.push('bio');
+        }
+      }
+    }
+
+    if (filled.length) {
+      status.style.color   = 'var(--green)';
+      status.textContent   = `✓ Récupéré : ${filled.join(', ')}`;
+    } else {
+      status.style.color   = 'var(--red)';
+      status.textContent   = 'Aucun résultat trouvé. Remplis manuellement.';
+    }
+  } catch(e) {
+    status.style.color   = 'var(--red)';
+    status.textContent   = 'Erreur réseau. Réessaie.';
+  }
+
+  btn.disabled    = false;
+  btn.textContent = '🔍 Auto-remplir';
 }
 
 // ── Add ───────────────────────────────────────────────────────────────────
