@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inkipit · Admin</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg:       #0a0a0a;
+    --surface:  #141414;
+    --border:   rgba(255,255,255,0.08);
+    --gold:     #c9a84c;
+    --gold2:    #f0d060;
+    --text:     #e8e8e8;
+    --muted:    rgba(255,255,255,0.35);
+    --red:      #ff6b6b;
+    --green:    #4ade80;
+    --radius:   14px;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── Login ── */
+  #login-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+  }
+  .login-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+  }
+  .login-box h1 { font-size: 22px; margin-bottom: 6px; }
+  .login-box p { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+  .login-box input {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: var(--text);
+    font-size: 14px;
+    margin-bottom: 12px;
+    outline: none;
+    font-family: monospace;
+  }
+  .login-box input:focus { border-color: var(--gold); }
+  .login-box a { font-size: 12px; color: var(--gold); text-decoration: none; display: block; margin-bottom: 20px; }
+
+  /* ── App layout ── */
+  #app { display: none; }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 10;
+  }
+  .header-left { display: flex; align-items: center; gap: 12px; }
+  .header-left h1 { font-size: 16px; font-weight: 600; }
+  .count-badge {
+    background: rgba(201,168,76,0.15);
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 20px;
+  }
+  .header-right { display: flex; align-items: center; gap: 10px; }
+
+  /* ── Buttons ── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: opacity 0.15s;
+  }
+  .btn:hover { opacity: 0.85; }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-gold { background: linear-gradient(135deg, var(--gold2), var(--gold)); color: #000; }
+  .btn-ghost { background: rgba(255,255,255,0.07); color: var(--text); border: 1px solid var(--border); }
+  .btn-danger { background: rgba(255,107,107,0.15); color: var(--red); border: 1px solid rgba(255,107,107,0.2); }
+  .btn-sm { padding: 5px 10px; font-size: 12px; border-radius: 7px; }
+
+  /* ── Search + toolbar ── */
+  .toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .search-wrap {
+    flex: 1;
+    position: relative;
+  }
+  .search-wrap svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+  }
+  .search-wrap input {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 9px 14px 9px 36px;
+    color: var(--text);
+    font-size: 14px;
+    outline: none;
+  }
+  .search-wrap input:focus { border-color: var(--gold); }
+  .search-wrap input::placeholder { color: var(--muted); }
+
+  /* ── Status bar ── */
+  #status-bar {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+  }
+  #status-bar.saving { display: flex; color: var(--gold); background: rgba(201,168,76,0.05); }
+  #status-bar.success { display: flex; color: var(--green); background: rgba(74,222,128,0.05); }
+  #status-bar.error { display: flex; color: var(--red); background: rgba(255,107,107,0.05); }
+
+  /* ── List ── */
+  .list { padding: 16px 24px; display: flex; flex-direction: column; gap: 8px; }
+
+  .incipit-row {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    transition: border-color 0.15s;
+  }
+  .incipit-row:hover { border-color: rgba(255,255,255,0.15); }
+  .incipit-row.editing { border-color: var(--gold); }
+
+  .row-index {
+    font-size: 11px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    min-width: 28px;
+    padding-top: 2px;
+  }
+
+  .row-content { flex: 1; min-width: 0; }
+  .row-text {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 4px;
+    white-space: pre-wrap;
+  }
+  .row-author { font-size: 12px; color: var(--muted); }
+
+  .row-edit-form { display: none; flex-direction: column; gap: 8px; width: 100%; }
+  .row-edit-form textarea,
+  .row-edit-form input {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: var(--text);
+    font-size: 14px;
+    outline: none;
+    font-family: inherit;
+    resize: vertical;
+  }
+  .row-edit-form textarea { min-height: 80px; }
+  .row-edit-form textarea:focus,
+  .row-edit-form input:focus { border-color: var(--gold); }
+  .row-edit-actions { display: flex; gap: 6px; }
+
+  .row-actions { display: flex; gap: 6px; flex-shrink: 0; opacity: 0; transition: opacity 0.15s; }
+  .incipit-row:hover .row-actions { opacity: 1; }
+
+  /* ── Add form ── */
+  #add-form {
+    display: none;
+    margin: 0 24px 16px;
+    background: var(--surface);
+    border: 1px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  #add-form h3 { font-size: 14px; margin-bottom: 14px; color: var(--gold); }
+  #add-form textarea,
+  #add-form input {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: var(--text);
+    font-size: 14px;
+    outline: none;
+    font-family: inherit;
+    margin-bottom: 8px;
+    resize: vertical;
+  }
+  #add-form textarea { min-height: 80px; }
+  #add-form textarea:focus,
+  #add-form input:focus { border-color: var(--gold); }
+  #add-form .add-actions { display: flex; gap: 8px; }
+
+  /* ── Empty ── */
+  .empty {
+    text-align: center;
+    padding: 60px 24px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  /* ── Spinner ── */
+  .spinner {
+    width: 16px; height: 16px;
+    border: 2px solid rgba(255,255,255,0.15);
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    flex-shrink: 0;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── Logout ── */
+  .logout-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 12px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+  .logout-btn:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+</style>
+</head>
+<body>
+
+<!-- ── Login ── -->
+<div id="login-screen">
+  <div class="login-box">
+    <h1>✦ Inkipit Admin</h1>
+    <p>Entre ton GitHub Personal Access Token<br>pour gérer les inkipits.</p>
+    <input type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off" />
+    <a href="https://github.com/settings/tokens/new?scopes=repo&description=Inkipit+CMS" target="_blank">
+      Créer un token GitHub →
+    </a>
+    <button class="btn btn-gold" style="width:100%" onclick="login()">Connexion</button>
+    <p id="login-error" style="color:var(--red);font-size:12px;margin-top:12px;display:none"></p>
+  </div>
+</div>
+
+<!-- ── App ── -->
+<div id="app">
+  <header>
+    <div class="header-left">
+      <h1>✦ Inkipit Admin</h1>
+      <span class="count-badge" id="count-badge">—</span>
+    </div>
+    <div class="header-right">
+      <button class="btn btn-ghost btn-sm" onclick="reload()">↺ Rafraîchir</button>
+      <button class="btn btn-gold btn-sm" onclick="toggleAddForm()">+ Ajouter</button>
+      <button class="logout-btn" onclick="logout()">Déconnexion</button>
+    </div>
+  </header>
+
+  <div id="status-bar">
+    <div class="spinner"></div>
+    <span id="status-msg"></span>
+  </div>
+
+  <div class="toolbar">
+    <div class="search-wrap">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="text" id="search-input" placeholder="Rechercher un incipit ou un auteur…" oninput="renderList()" />
+    </div>
+  </div>
+
+  <!-- Add form -->
+  <div id="add-form">
+    <h3>Nouvel incipit</h3>
+    <textarea id="new-text" placeholder="Texte de l'incipit…" rows="3"></textarea>
+    <input type="text" id="new-author" placeholder="Titre — Auteur, Année  (ex: Germinal — Émile Zola, 1885)" />
+    <div class="add-actions">
+      <button class="btn btn-gold" onclick="addIncipit()">Ajouter</button>
+      <button class="btn btn-ghost" onclick="toggleAddForm()">Annuler</button>
+    </div>
+  </div>
+
+  <div class="list" id="list"></div>
+</div>
+
+<script>
+// ── Config ──
+const OWNER  = 'TheoSije';
+const REPO   = 'inkipit-content';
+const FILE   = 'inkipits.json';
+const BRANCH = 'main';
+
+// ── State ──
+let token    = '';
+let incipits = [];
+let fileSha  = '';
+
+// ── Auth ──
+function login() {
+  const t = document.getElementById('token-input').value.trim();
+  if (!t) return;
+  token = t;
+  localStorage.setItem('inkipit_token', t);
+  document.getElementById('login-error').style.display = 'none';
+  loadData();
+}
+
+function logout() {
+  localStorage.removeItem('inkipit_token');
+  token = '';
+  incipits = [];
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('token-input').value = '';
+}
+
+// ── GitHub API ──
+async function ghGet(path) {
+  const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}?ref=${BRANCH}`, {
+    headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github+json' }
+  });
+  if (!r.ok) throw new Error(`GitHub ${r.status}: ${r.statusText}`);
+  return r.json();
+}
+
+async function ghPut(path, content, sha, message) {
+  const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `token ${token}`,
+      Accept: 'application/vnd.github+json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      message,
+      content: btoa(unescape(encodeURIComponent(content))),
+      sha,
+      branch: BRANCH
+    })
+  });
+  if (!r.ok) {
+    const err = await r.json();
+    throw new Error(err.message || `GitHub ${r.status}`);
+  }
+  return r.json();
+}
+
+// ── Load ──
+async function loadData() {
+  setStatus('saving', 'Chargement…');
+  try {
+    const data = await ghGet(FILE);
+    fileSha  = data.sha;
+    incipits = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g, '')))));
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    setStatus('success', `${incipits.length} inkipits chargés`);
+    setTimeout(clearStatus, 2000);
+    renderList();
+  } catch(e) {
+    if (e.message.includes('401') || e.message.includes('403')) {
+      document.getElementById('login-error').textContent = 'Token invalide ou insuffisant.';
+      document.getElementById('login-error').style.display = 'block';
+      token = '';
+    } else {
+      setStatus('error', 'Erreur : ' + e.message);
+    }
+  }
+}
+
+async function reload() {
+  await loadData();
+}
+
+// ── Save ──
+async function save(message) {
+  setStatus('saving', 'Sauvegarde en cours…');
+  try {
+    const json    = JSON.stringify(incipits, null, 2);
+    const result  = await ghPut(FILE, json, fileSha, message);
+    fileSha       = result.content.sha;
+    setStatus('success', '✓ ' + message);
+    setTimeout(clearStatus, 3000);
+  } catch(e) {
+    setStatus('error', 'Erreur : ' + e.message);
+  }
+}
+
+// ── Status ──
+function setStatus(type, msg) {
+  const bar = document.getElementById('status-bar');
+  bar.className = type;
+  document.getElementById('status-msg').textContent = msg;
+}
+function clearStatus() {
+  document.getElementById('status-bar').className = '';
+  document.getElementById('status-bar').style.display = '';
+}
+
+// ── Render ──
+function renderList() {
+  const q    = document.getElementById('search-input').value.toLowerCase();
+  const list = document.getElementById('list');
+  const filtered = incipits
+    .map((inc, i) => ({ ...inc, _i: i }))
+    .filter(inc => !q || inc.text.toLowerCase().includes(q) || inc.author.toLowerCase().includes(q));
+
+  document.getElementById('count-badge').textContent =
+    q ? `${filtered.length} / ${incipits.length}` : `${incipits.length}`;
+
+  if (!filtered.length) {
+    list.innerHTML = '<div class="empty">Aucun résultat.</div>';
+    return;
+  }
+
+  list.innerHTML = filtered.map(inc => `
+    <div class="incipit-row" id="row-${inc._i}">
+      <span class="row-index">${inc._i + 1}</span>
+      <div class="row-content">
+        <div class="row-display">
+          <div class="row-text">${escHtml(inc.text)}</div>
+          <div class="row-author">${escHtml(inc.author)}</div>
+        </div>
+        <div class="row-edit-form" id="form-${inc._i}">
+          <textarea id="edit-text-${inc._i}" rows="3">${escHtml(inc.text)}</textarea>
+          <input type="text" id="edit-author-${inc._i}" value="${escHtml(inc.author)}" placeholder="Titre — Auteur, Année" />
+          <div class="row-edit-actions">
+            <button class="btn btn-gold btn-sm" onclick="saveEdit(${inc._i})">Enregistrer</button>
+            <button class="btn btn-ghost btn-sm" onclick="cancelEdit(${inc._i})">Annuler</button>
+          </div>
+        </div>
+      </div>
+      <div class="row-actions">
+        <button class="btn btn-ghost btn-sm" onclick="startEdit(${inc._i})">✏️</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteIncipit(${inc._i})">🗑</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Add ──
+function toggleAddForm() {
+  const f = document.getElementById('add-form');
+  const visible = f.style.display === 'block';
+  f.style.display = visible ? 'none' : 'block';
+  if (!visible) {
+    document.getElementById('new-text').value   = '';
+    document.getElementById('new-author').value = '';
+    document.getElementById('new-text').focus();
+  }
+}
+
+async function addIncipit() {
+  const text   = document.getElementById('new-text').value.trim();
+  const author = document.getElementById('new-author').value.trim();
+  if (!text || !author) { alert('Texte et auteur requis.'); return; }
+  incipits.push({ text, author });
+  document.getElementById('add-form').style.display = 'none';
+  renderList();
+  await save(`incipit: ${text.slice(0, 50)}`);
+}
+
+// ── Edit ──
+function startEdit(i) {
+  document.getElementById(`row-${i}`).classList.add('editing');
+  document.getElementById(`form-${i}`).style.display = 'flex';
+  document.getElementById(`row-${i}`).querySelector('.row-display').style.display = 'none';
+  document.getElementById(`row-${i}`).querySelector('.row-actions').style.opacity = '0';
+  document.getElementById(`edit-text-${i}`).focus();
+}
+
+function cancelEdit(i) {
+  document.getElementById(`row-${i}`).classList.remove('editing');
+  document.getElementById(`form-${i}`).style.display = 'none';
+  document.getElementById(`row-${i}`).querySelector('.row-display').style.display = 'block';
+}
+
+async function saveEdit(i) {
+  const text   = document.getElementById(`edit-text-${i}`).value.trim();
+  const author = document.getElementById(`edit-author-${i}`).value.trim();
+  if (!text || !author) { alert('Texte et auteur requis.'); return; }
+  incipits[i] = { text, author };
+  renderList();
+  await save(`edit: ${text.slice(0, 50)}`);
+}
+
+// ── Delete ──
+async function deleteIncipit(i) {
+  const preview = incipits[i].text.slice(0, 60);
+  if (!confirm(`Supprimer cet incipit ?\n\n"${preview}…"`)) return;
+  incipits.splice(i, 1);
+  renderList();
+  await save(`delete: ${preview}`);
+}
+
+// ── Init ──
+document.getElementById('token-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') login();
+});
+
+const saved = localStorage.getItem('inkipit_token');
+if (saved) {
+  token = saved;
+  loadData();
+}
+</script>
+</body>
+</html>
