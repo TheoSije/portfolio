@@ -535,68 +535,93 @@ async function autoFill() {
 
   const btn    = document.getElementById('autofill-btn');
   const status = document.getElementById('autofill-status');
-  btn.disabled = true;
+  btn.disabled    = true;
   btn.textContent = '⏳';
   status.style.display = 'block';
   status.style.color   = 'var(--muted)';
-  status.textContent   = 'Recherche en cours…';
+  status.textContent   = 'Recherche Google Books…';
 
   let filled = [];
 
   try {
-    // ── Google Books ──
-    const gbQuery = encodeURIComponent(`intitle:${title}${author ? ' inauthor:' + author : ''}`);
-    const gbRes   = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${gbQuery}&maxResults=5`);
-    const gbData  = await gbRes.json();
-    const book    = gbData.items?.[0]?.volumeInfo;
+    // ── Google Books — essaie plusieurs requêtes ──
+    const queries = [
+      `intitle:${title}${author ? ' inauthor:' + author : ''}`,
+      `${title}${author ? ' ' + author : ''}`,
+      title
+    ];
 
-    if (book) {
-      // Cover
-      const cover = book.imageLinks?.thumbnail || book.imageLinks?.smallThumbnail;
+    let bestBook = null;
+    for (const q of queries) {
+      if (bestBook?.imageLinks && bestBook?.description) break;
+      try {
+        const res  = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(q)}&maxResults=10`);
+        const data = await res.json();
+        if (!data.items) continue;
+        // Cherche le résultat le plus complet (cover + description en priorité)
+        for (const item of data.items) {
+          const vi = item.volumeInfo;
+          const score =
+            (vi.imageLinks ? 2 : 0) +
+            (vi.description ? 2 : 0) +
+            (vi.authors ? 1 : 0);
+          if (!bestBook || score > (
+            (bestBook.imageLinks ? 2 : 0) +
+            (bestBook.description ? 2 : 0) +
+            (bestBook.authors ? 1 : 0)
+          )) { bestBook = vi; }
+          if (score >= 4) break; // parfait, on arrête
+        }
+      } catch(_) {}
+    }
+
+    if (bestBook) {
+      // Cover — préfère la plus haute résolution
+      const imgLinks = bestBook.imageLinks || {};
+      const cover = imgLinks.extraLarge || imgLinks.large || imgLinks.medium ||
+                    imgLinks.thumbnail  || imgLinks.smallThumbnail;
       if (cover) {
-        const hq = cover.replace('http://', 'https://').replace('zoom=1', 'zoom=2');
+        const hq = cover.replace('http://', 'https://').replace(/zoom=\d/, 'zoom=3');
         document.getElementById('new-cover').value = hq;
         filled.push('couverture');
       }
       // Description
-      if (book.description) {
-        const desc = book.description.replace(/<[^>]+>/g, '').slice(0, 500);
+      if (bestBook.description) {
+        const desc = bestBook.description.replace(/<[^>]+>/g, '').trim().slice(0, 600);
         document.getElementById('new-description').value = desc;
         filled.push('description');
       }
     }
 
-    // ── Wikipedia (bio auteur) — FR puis EN fallback ──
+    // ── Wikipedia (bio auteur) — FR puis EN ──
     if (author) {
+      status.textContent = 'Recherche Wikipedia…';
       let bioFound = false;
       for (const lang of ['fr', 'en']) {
         if (bioFound) break;
         try {
-          const wikiRes = await fetch(
+          const res  = await fetch(
             `https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(author)}`
           );
-          if (wikiRes.ok) {
-            const wiki = await wikiRes.json();
-            if (wiki.extract && wiki.type !== 'disambiguation') {
-              document.getElementById('new-bio').value = wiki.extract.slice(0, 400);
-              filled.push('bio');
-              bioFound = true;
-            }
+          if (!res.ok) continue;
+          const wiki = await res.json();
+          if (wiki.extract && wiki.type !== 'disambiguation') {
+            document.getElementById('new-bio').value = wiki.extract.trim().slice(0, 500);
+            filled.push('bio auteur');
+            bioFound = true;
           }
         } catch(_) {}
       }
     }
 
-    if (filled.length) {
-      status.style.color   = 'var(--green)';
-      status.textContent   = `✓ Récupéré : ${filled.join(', ')}`;
-    } else {
-      status.style.color   = 'var(--red)';
-      status.textContent   = 'Aucun résultat trouvé. Remplis manuellement.';
-    }
+    status.style.color  = filled.length ? 'var(--green)' : 'var(--red)';
+    status.textContent  = filled.length
+      ? `✓ Récupéré : ${filled.join(', ')}`
+      : `Aucune donnée trouvée pour "${title}". Remplis manuellement.`;
+
   } catch(e) {
-    status.style.color   = 'var(--red)';
-    status.textContent   = 'Erreur réseau. Réessaie.';
+    status.style.color  = 'var(--red)';
+    status.textContent  = 'Erreur réseau. Réessaie.';
   }
 
   btn.disabled    = false;
