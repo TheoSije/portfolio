@@ -603,6 +603,44 @@ async function autoFill() {
   btn.textContent = '🔍 Auto-remplir';
 }
 
+// ── Duplicate check ───────────────────────────────────────────────────────
+function normalize(s) {
+  return s.toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '') // accents
+    .replace(/[^a-z0-9\s]/g, '')                      // ponctuation
+    .replace(/\s+/g, ' ').trim();
+}
+
+function similarity(a, b) {
+  a = normalize(a); b = normalize(b);
+  if (!a || !b) return 0;
+  if (a === b) return 1;
+  if (a.includes(b) || b.includes(a)) return 0.9;
+  // Levenshtein
+  const m = a.length, n = b.length;
+  const dp = Array.from({length: m+1}, (_, i) =>
+    Array.from({length: n+1}, (_, j) => i === 0 ? j : j === 0 ? i : 0)
+  );
+  for (let i = 1; i <= m; i++)
+    for (let j = 1; j <= n; j++)
+      dp[i][j] = a[i-1] === b[j-1]
+        ? dp[i-1][j-1]
+        : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+  return 1 - dp[m][n] / Math.max(m, n);
+}
+
+function extractTitle(authorField) {
+  return authorField.split(' — ')[0].trim();
+}
+
+function findDuplicates(newAuthorField) {
+  const newTitle = extractTitle(newAuthorField);
+  return incipits
+    .map((inc, i) => ({ inc, i, sim: similarity(newTitle, extractTitle(inc.author)) }))
+    .filter(x => x.sim >= 0.75)
+    .sort((a, b) => b.sim - a.sim);
+}
+
 // ── Add ───────────────────────────────────────────────────────────────────
 function toggleAddForm() {
   const f = document.getElementById('add-form');
@@ -624,6 +662,18 @@ async function addIncipit() {
   const bio         = document.getElementById('new-bio').value.trim();
 
   if (!text || !author) { alert('Texte et auteur sont requis.'); return; }
+
+  // Duplicate check
+  const dupes = findDuplicates(author);
+  if (dupes.length) {
+    const list = dupes.map(d =>
+      `• ${d.inc.author} (${Math.round(d.sim * 100)}% similaire)`
+    ).join('\n');
+    const proceed = confirm(
+      `⚠️ Ce livre semble déjà présent :\n\n${list}\n\nAjouter quand même ?`
+    );
+    if (!proceed) return;
+  }
 
   const entry = { text, author };
   if (cover)       entry.cover       = cover;
