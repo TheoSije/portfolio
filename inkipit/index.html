@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inkipit — Les premières lignes qui changent tout</title>
+<meta name="description" content="Découvrez les plus beaux incipit de la littérature mondiale. Une phrase, un roman. Disponible sur iPhone.">
+<meta name="author" content="Théo Jégousse">
+<link rel="canonical" href="https://jegousse.com/inkipit/">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jegousse.com/inkipit/">
+<meta property="og:title" content="Inkipit — Les premières lignes qui changent tout">
+<meta property="og:description" content="Découvrez les plus beaux incipit de la littérature mondiale. Une phrase, un roman.">
+<meta property="og:locale" content="fr_FR">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0612;
+    --purple: #9b7fe8;
+    --purple-dim: rgba(155, 127, 232, 0.15);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: #fff;
+    font-family: 'Inter', -apple-system, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Ambient glow ── */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -200px; left: 50%;
+    transform: translateX(-50%);
+    width: 700px; height: 700px;
+    background: radial-gradient(ellipse, rgba(42, 16, 96, 0.7) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Layout ── */
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Header ── */
+  header {
+    padding: 48px 0 0;
+    text-align: center;
+  }
+
+  .app-icon {
+    width: 80px; height: 80px;
+    border-radius: 20px;
+    margin: 0 auto 20px;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #1e0f3a 0%, #3d2580 100%);
+    box-shadow: 0 8px 32px rgba(155, 127, 232, 0.3);
+  }
+
+  .app-icon svg {
+    width: 44px; height: 42px;
+    fill: rgba(155, 127, 232, 0.9);
+  }
+
+  .app-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(32px, 6vw, 52px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: #fff;
+    margin-bottom: 18px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .tagline {
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.6;
+    max-width: 380px;
+    margin: 0 auto 40px;
+  }
+
+  /* ── CTA ── */
+  .cta-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 60px;
+  }
+
+  .btn-appstore {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    color: #000;
+    text-decoration: none;
+    border-radius: 14px;
+    padding: 12px 22px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+
+  .btn-appstore:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+
+  .btn-appstore svg { flex-shrink: 0; }
+
+  .btn-appstore .label-top {
+    font-size: 10px;
+    font-weight: 400;
+    opacity: 0.65;
+    display: block;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  .free-badge {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Card carousel ── */
+  .cards-section {
+    position: relative;
+    height: 340px;
+    margin-bottom: 80px;
+  }
+
+  .card {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 36px 32px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    will-change: opacity, transform;
+  }
+
+  .card.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Gradient palettes — matching the app */
+  .card:nth-child(1) { background: linear-gradient(135deg, #3d4fa0, #4a2d7a); }
+  .card:nth-child(2) { background: linear-gradient(135deg, #8b2fc9, #b52d5c); }
+  .card:nth-child(3) { background: linear-gradient(135deg, #1a5fa8, #0d7a8a); }
+  .card:nth-child(4) { background: linear-gradient(135deg, #5a3ea0, #8a3070); }
+  .card:nth-child(5) { background: linear-gradient(135deg, #b03060, #8a2090); }
+  .card:nth-child(6) { background: linear-gradient(135deg, #1a6a8a, #1a3a8a); }
+
+  /* Dark veil at bottom for readability */
+  .card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.28) 100%);
+    pointer-events: none;
+  }
+
+  .card-logo {
+    position: absolute;
+    top: 20px; left: 24px;
+    opacity: 0.25;
+  }
+
+  .card-logo svg { width: 28px; height: 27px; fill: #fff; }
+
+  .card-text {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(18px, 3.5vw, 24px);
+    line-height: 1.45;
+    color: #fff;
+    font-weight: 400;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 20px;
+  }
+
+  .card-attribution {
+    position: relative;
+    z-index: 1;
+  }
+
+  .card-book {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .card-author {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* Dots navigation */
+  .dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 16px;
+  }
+
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    transition: background 0.3s, width 0.3s;
+    cursor: pointer;
+  }
+
+  .dot.active {
+    background: var(--purple);
+    width: 18px;
+    border-radius: 3px;
+  }
+
+  /* ── Features ── */
+  .features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 80px;
+  }
+
+  @media (max-width: 480px) {
+    .features { grid-template-columns: 1fr; }
+  }
+
+  .feature {
+    background: rgba(255,255,255,0.04);
+    border: 0.8px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 20px;
+  }
+
+  .feature-icon {
+    font-size: 22px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .feature-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .feature-desc {
+    font-size: 12px;
+    color: rgba(255,255,255,0.38);
+    line-height: 1.5;
+  }
+
+  /* ── Bottom CTA ── */
+  .bottom-cta {
+    text-align: center;
+    padding: 60px 0 80px;
+    border-top: 0.8px solid rgba(255,255,255,0.07);
+    margin-bottom: 40px;
+  }
+
+  .bottom-cta p {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+
+  /* ── Footer ── */
+  footer {
+    padding: 0 0 48px;
+    text-align: center;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 16px;
+  }
+
+  .footer-links a {
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: rgba(255,255,255,0.55); }
+
+  footer p {
+    font-size: 11px;
+    color: rgba(255,255,255,0.12);
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <header>
+    <div class="app-icon">
+      <!-- Inkipit icon shape SVG -->
+      <svg viewBox="0 0 28 27" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 2C8.477 2 4 6.477 4 12c0 3.09 1.4 5.857 3.617 7.72L6.5 24.5l5.1-2.55A10 10 0 0 0 14 22c5.523 0 10-4.477 10-10S19.523 2 14 2z"/>
+      </svg>
+    </div>
+    <p class="app-name">Inkipit</p>
+    <h1>Les premières lignes<br><em>qui changent tout.</em></h1>
+    <p class="tagline">Un incipit par jour. Les plus belles ouvertures de la littérature mondiale, dans ta poche.</p>
+
+    <div class="cta-wrap">
+      <a class="btn-appstore" href="https://apps.apple.com/fr/app/inkipit/id6762474250" target="_blank" rel="noopener">
+        <!-- Apple logo -->
+        <svg width="20" height="24" viewBox="0 0 20 24" fill="none">
+          <path d="M16.24 12.76c-.02-2.57 2.1-3.8 2.19-3.86-1.19-1.74-3.05-1.98-3.71-2.01-1.58-.16-3.08.93-3.88.93-.8 0-2.03-.91-3.33-.88-1.72.02-3.3 1-4.19 2.54-1.79 3.1-.46 7.7 1.28 10.22.85 1.23 1.86 2.61 3.19 2.56 1.28-.05 1.76-.83 3.31-.83 1.54 0 1.98.83 3.33.8 1.38-.02 2.24-1.25 3.08-2.49.98-1.43 1.38-2.82 1.4-2.89-.03-.01-2.67-1.02-2.7-4.09z" fill="currentColor"/>
+          <path d="M13.8 4.47c.71-.86 1.18-2.05 1.05-3.24-.99.04-2.24.67-2.97 1.51-.64.74-1.21 1.95-1.06 3.1 1.11.08 2.24-.56 2.98-1.37z" fill="currentColor"/>
+        </svg>
+        <span>
+          <span class="label-top">Télécharger sur</span>
+          App Store
+        </span>
+      </a>
+      <span class="free-badge">Gratuit · iOS</span>
+    </div>
+  </header>
+
+  <!-- Cards -->
+  <div class="cards-section">
+    <div class="card active">
+      <div class="card-logo">
+        <svg viewBox="0 0 28 27"><path d="M14 2C8.477 2 4 6.477 4 12c0 3.09 1.4 5.857 3.617 7.72L6.5 24.5l5.1-2.55A10 10 0 0 0 14 22c5.523 0 10-4.477 10-10S19.523 2 14 2z"/></svg>
+      </div>
+      <p class="card-text">« Aujourd'hui, maman est morte. Ou peut-être hier, je ne sais pas. »</p>
+      <div class="card-attribution">
+        <span class="card-book">L'Étranger</span>
+        <span class="card-author">Albert Camus · 1942</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-logo">
+        <svg viewBox="0 0 28 27"><path d="M14 2C8.477 2 4 6.477 4 12c0 3.09 1.4 5.857 3.617 7.72L6.5 24.5l5.1-2.55A10 10 0 0 0 14 22c5.523 0 10-4.477 10-10S19.523 2 14 2z"/></svg>
+      </div>
+      <p class="card-text">« Longtemps, je me suis couché de bonne heure. »</p>
+      <div class="card-attribution">
+        <span class="card-book">À la recherche du temps perdu</span>
+        <span class="card-author">Marcel Proust · 1913</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-logo">
+        <svg viewBox="0 0 28 27"><path d="M14 2C8.477 2 4 6.477 4 12c0 3.09 1.4 5.857 3.617 7.72L6.5 24.5l5.1-2.55A10 10 0 0 0 14 22c5.523 0 10-4.477 10-10S19.523 2 14 2z"/></svg>
+      </div>
+      <p class="card-text">« Puis-je, monsieur, vous proposer mes services, sans risquer d'être importun ? »</p>
+      <div class="card-attribution">
+        <span class="card-book">La Chute</span>
+        <span class="card-author">Albert Camus · 1956</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-logo">
+        <svg viewBox="0 0 28 27"><path d="M14 2C8.477 2 4 6.477 4 12c0 3.09 1.4 5.857 3.617 7.72L6.5 24.5l5.1-2.55A10 10 0 0 0 14 22c5.523 0 10-4.477 10-10S19.523 2 14 2z"/></svg>
+      </div>
+      <p class="card-text">« Nous étions à l'étude, quand le Proviseur entra, suivi d'un nouveau habillé en bourgeois. »</p>
+      <div class="card-attribution">
+        <span class="card-book">Madame Bovary</span>
+        <span class="card-author">Gustave Flaubert · 1857</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-logo">
+        <svg viewBox="0 0 28 27"><path d="M14 2C8.477 2 4 6.477 4 12c0 3.09 1.4 5.857 3.617 7.72L6.5 24.5l5.1-2.55A10 10 0 0 0 14 22c5.523 0 10-4.477 10-10S19.523 2 14 2z"/></svg>
+      </div>
+      <p class="card-text">« Les curieux événements qui font le sujet de cette chronique se produisirent en 194., à Oran. »</p>
+      <div class="card-attribution">
+        <span class="card-book">La Peste</span>
+        <span class="card-author">Albert Camus · 1947</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-logo">
+        <svg viewBox="0 0 28 27"><path d="M14 2C8.477 2 4 6.477 4 12c0 3.09 1.4 5.857 3.617 7.72L6.5 24.5l5.1-2.55A10 10 0 0 0 14 22c5.523 0 10-4.477 10-10S19.523 2 14 2z"/></svg>
+      </div>
+      <p class="card-text">« C'était à Mégara, faubourg de Carthage, dans les jardins d'Hamilcar. »</p>
+      <div class="card-attribution">
+        <span class="card-book">Salammbô</span>
+        <span class="card-author">Gustave Flaubert · 1862</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dots -->
+  <div class="dots" id="dots"></div>
+
+  <!-- Features -->
+  <div class="features" style="margin-top: 48px;">
+    <div class="feature">
+      <span class="feature-icon">📖</span>
+      <p class="feature-title">Un incipit par swipe</p>
+      <p class="feature-desc">Redécouvrez les ouvertures les plus marquantes de la littérature mondiale.</p>
+    </div>
+    <div class="feature">
+      <span class="feature-icon">🎮</span>
+      <p class="feature-title">Jouez</p>
+      <p class="feature-desc">Devine l'auteur, complète l'incipit, duel entre deux extraits — 3 modes.</p>
+    </div>
+    <div class="feature">
+      <span class="feature-icon">🔖</span>
+      <p class="feature-title">Sauvegardez</p>
+      <p class="feature-desc">Gardez vos incipits favoris et retrouvez-les à tout moment.</p>
+    </div>
+    <div class="feature">
+      <span class="feature-icon">🖼</span>
+      <p class="feature-title">Widget</p>
+      <p class="feature-desc">Un bel incipit sur votre écran d'accueil, qui change chaque jour.</p>
+    </div>
+  </div>
+
+  <!-- Bottom CTA -->
+  <div class="bottom-cta">
+    <p>« La littérature commence toujours<br>par une première phrase. »</p>
+    <a class="btn-appstore" href="https://apps.apple.com/fr/app/inkipit/id6762474250" target="_blank" rel="noopener">
+      <svg width="20" height="24" viewBox="0 0 20 24" fill="none">
+        <path d="M16.24 12.76c-.02-2.57 2.1-3.8 2.19-3.86-1.19-1.74-3.05-1.98-3.71-2.01-1.58-.16-3.08.93-3.88.93-.8 0-2.03-.91-3.33-.88-1.72.02-3.3 1-4.19 2.54-1.79 3.1-.46 7.7 1.28 10.22.85 1.23 1.86 2.61 3.19 2.56 1.28-.05 1.76-.83 3.31-.83 1.54 0 1.98.83 3.33.8 1.38-.02 2.24-1.25 3.08-2.49.98-1.43 1.38-2.82 1.4-2.89-.03-.01-2.67-1.02-2.7-4.09z" fill="currentColor"/>
+        <path d="M13.8 4.47c.71-.86 1.18-2.05 1.05-3.24-.99.04-2.24.67-2.97 1.51-.64.74-1.21 1.95-1.06 3.1 1.11.08 2.24-.56 2.98-1.37z" fill="currentColor"/>
+      </svg>
+      <span>
+        <span class="label-top">Télécharger sur</span>
+        App Store
+      </span>
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="/inkipit/privacy.html">Confidentialité</a>
+      <a href="https://jegousse.com">jegousse.com</a>
+    </div>
+    <p>© 2026 Théo Jégousse · Inkipit</p>
+  </footer>
+
+</div>
+
+<script>
+  // Card carousel
+  const cards = document.querySelectorAll('.card');
+  const dotsEl = document.getElementById('dots');
+  let current = 0;
+  let timer;
+
+  // Build dots
+  cards.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(idx) {
+    cards[current].classList.remove('active');
+    dotsEl.children[current].classList.remove('active');
+    current = idx;
+    cards[current].classList.add('active');
+    dotsEl.children[current].classList.add('active');
+    clearInterval(timer);
+    timer = setInterval(next, 4000);
+  }
+
+  function next() {
+    goTo((current + 1) % cards.length);
+  }
+
+  timer = setInterval(next, 4000);
+
+  // Pause on hover
+  document.querySelector('.cards-section').addEventListener('mouseenter', () => clearInterval(timer));
+  document.querySelector('.cards-section').addEventListener('mouseleave', () => {
+    timer = setInterval(next, 4000);
+  });
+</script>
+
+</body>
+</html>
