@@ -5,544 +5,603 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Inkipit — Les premières lignes qui changent tout</title>
 <meta name="description" content="Découvrez les plus beaux incipit de la littérature mondiale. Une phrase, un roman. Disponible sur iPhone.">
-<meta name="author" content="Théo Jégousse">
 <link rel="canonical" href="https://jegousse.com/inkipit/">
-<meta name="robots" content="index, follow">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-
-<!-- Open Graph -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://jegousse.com/inkipit/">
 <meta property="og:title" content="Inkipit — Les premières lignes qui changent tout">
-<meta property="og:description" content="Découvrez les plus beaux incipit de la littérature mondiale. Une phrase, un roman.">
-<meta property="og:locale" content="fr_FR">
-
-<!-- Google Fonts -->
+<meta property="og:description" content="Découvrez les plus beaux incipit de la littérature mondiale.">
+<meta property="og:url" content="https://jegousse.com/inkipit/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  :root {
-    --bg: #0a0612;
-    --purple: #9b7fe8;
-    --purple-dim: rgba(155, 127, 232, 0.15);
-  }
+:root {
+  --bg: #080612;
+  --purple: #9b7fe8;
+  --text: rgba(255,255,255,0.88);
+  --muted: rgba(255,255,255,0.38);
+}
 
-  html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
 
-  body {
-    background: var(--bg);
-    color: #fff;
-    font-family: 'Inter', -apple-system, sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  overflow-x: hidden;
+}
 
-  /* ── Ambient glow ── */
-  body::before {
-    content: '';
-    position: fixed;
-    top: -200px; left: 50%;
-    transform: translateX(-50%);
-    width: 700px; height: 700px;
-    background: radial-gradient(ellipse, rgba(42, 16, 96, 0.7) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-  }
+/* ── Ambient bg ── */
+.ambient {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(42,16,96,0.75) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(90,30,120,0.2) 0%, transparent 60%);
+}
 
-  /* ── Layout ── */
-  .container {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 0 24px;
-    position: relative;
-    z-index: 1;
-  }
+.container { max-width: 1000px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 1; }
 
-  /* ── Header ── */
-  header {
-    padding: 48px 0 0;
-    text-align: center;
-  }
+/* ────────── HERO ────────── */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  min-height: 100vh;
+  padding: 80px 0 60px;
+}
 
-  .app-icon {
-    width: 80px; height: 80px;
-    border-radius: 20px;
-    margin: 0 auto 20px;
-    display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, #1e0f3a 0%, #3d2580 100%);
-    box-shadow: 0 8px 32px rgba(155, 127, 232, 0.3);
-  }
+@media (max-width: 720px) {
+  .hero { grid-template-columns: 1fr; padding: 60px 0 40px; gap: 48px; }
+  .hero-phones { order: -1; }
+}
 
-  .app-icon svg {
-    width: 44px; height: 42px;
-    fill: rgba(155, 127, 232, 0.9);
-  }
+/* Left */
+.hero-left { display: flex; flex-direction: column; gap: 0; }
 
-  .app-name {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--purple);
-    margin-bottom: 16px;
-  }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--purple); margin-bottom: 28px;
+}
 
-  h1 {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(32px, 6vw, 52px);
-    font-weight: 700;
-    line-height: 1.15;
-    color: #fff;
-    margin-bottom: 18px;
-  }
+.hero-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--purple);
+  box-shadow: 0 0 8px var(--purple);
+  animation: pulse 2s ease-in-out infinite;
+}
 
-  h1 em {
-    font-style: italic;
-    color: rgba(255,255,255,0.6);
-  }
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
 
-  .tagline {
-    font-size: 16px;
-    font-weight: 300;
-    color: rgba(255,255,255,0.45);
-    line-height: 1.6;
-    max-width: 380px;
-    margin: 0 auto 40px;
-  }
+.app-icon-wrap {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 24px;
+}
 
-  /* ── CTA ── */
-  .cta-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 60px;
-  }
+.app-icon {
+  width: 72px; height: 72px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(155,127,232,0.35), 0 2px 8px rgba(0,0,0,0.5);
+  flex-shrink: 0;
+}
 
-  .btn-appstore {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: #fff;
-    color: #000;
-    text-decoration: none;
-    border-radius: 14px;
-    padding: 12px 22px;
-    font-size: 15px;
-    font-weight: 600;
-    transition: transform 0.18s ease, box-shadow 0.18s ease;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-  }
+.app-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  .btn-appstore:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-  }
+.app-meta { display: flex; flex-direction: column; gap: 3px; }
+.app-name-lg { font-size: 22px; font-weight: 600; color: #fff; }
+.app-sub { font-size: 12px; color: var(--muted); }
 
-  .btn-appstore svg { flex-shrink: 0; }
+h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 700;
+  line-height: 1.12;
+  color: #fff;
+  margin-bottom: 20px;
+}
 
-  .btn-appstore .label-top {
-    font-size: 10px;
-    font-weight: 400;
-    opacity: 0.65;
-    display: block;
-    line-height: 1;
-    margin-bottom: 2px;
-  }
+h1 em { font-style: italic; color: rgba(255,255,255,0.52); }
 
-  .free-badge {
-    font-size: 12px;
-    color: rgba(255,255,255,0.3);
-    letter-spacing: 0.5px;
-  }
+.hero-desc {
+  font-size: 16px; font-weight: 300;
+  color: var(--muted); line-height: 1.7;
+  max-width: 400px; margin-bottom: 36px;
+}
 
-  /* ── Card carousel ── */
-  .cards-section {
-    position: relative;
-    height: 340px;
-    margin-bottom: 80px;
-  }
+.cta-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
 
-  .card {
-    position: absolute;
-    inset: 0;
-    border-radius: 24px;
-    padding: 36px 32px 28px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    opacity: 0;
-    transform: translateY(20px) scale(0.97);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-    will-change: opacity, transform;
-  }
+.btn-store {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #fff; color: #000;
+  text-decoration: none; border-radius: 14px;
+  padding: 13px 22px; font-size: 15px; font-weight: 600;
+  transition: transform 0.18s, box-shadow 0.18s;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.45);
+}
+.btn-store:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(0,0,0,0.55); }
+.btn-store .lbl-top { font-size: 10px; font-weight: 400; opacity: 0.6; display: block; line-height: 1; margin-bottom: 2px; }
 
-  .card.active {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+.cta-note { font-size: 12px; color: rgba(255,255,255,0.22); }
 
-  /* Gradient palettes — matching the app */
-  .card:nth-child(1) { background: linear-gradient(135deg, #3d4fa0, #4a2d7a); }
-  .card:nth-child(2) { background: linear-gradient(135deg, #8b2fc9, #b52d5c); }
-  .card:nth-child(3) { background: linear-gradient(135deg, #1a5fa8, #0d7a8a); }
-  .card:nth-child(4) { background: linear-gradient(135deg, #5a3ea0, #8a3070); }
-  .card:nth-child(5) { background: linear-gradient(135deg, #b03060, #8a2090); }
-  .card:nth-child(6) { background: linear-gradient(135deg, #1a6a8a, #1a3a8a); }
+/* ── Stars rating ── */
+.rating {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 28px;
+}
+.stars { color: #f6d365; font-size: 13px; letter-spacing: 1px; }
+.rating-text { font-size: 12px; color: var(--muted); }
 
-  /* Dark veil at bottom for readability */
-  .card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 24px;
-    background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.28) 100%);
-    pointer-events: none;
-  }
+/* ────────── PHONES ────────── */
+.hero-phones {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 560px;
+}
 
-  .card-logo {
-    position: absolute;
-    top: 20px; left: 24px;
-    opacity: 0.25;
-  }
+.phone-wrap {
+  position: absolute;
+  transition: transform 0.3s ease;
+}
 
-  .card-logo svg { width: 28px; height: 27px; fill: #fff; }
+.phone-wrap:nth-child(1) { transform: rotate(-8deg) translateX(-80px); z-index: 1; }
+.phone-wrap:nth-child(2) { transform: rotate(0deg) translateY(-10px); z-index: 3; }
+.phone-wrap:nth-child(3) { transform: rotate(8deg) translateX(80px); z-index: 2; }
 
-  .card-text {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(18px, 3.5vw, 24px);
-    line-height: 1.45;
-    color: #fff;
-    font-weight: 400;
-    position: relative;
-    z-index: 1;
-    margin-bottom: 20px;
-  }
+.hero-phones:hover .phone-wrap:nth-child(1) { transform: rotate(-6deg) translateX(-90px); }
+.hero-phones:hover .phone-wrap:nth-child(3) { transform: rotate(6deg) translateX(90px); }
 
-  .card-attribution {
-    position: relative;
-    z-index: 1;
-  }
+/* iPhone frame */
+.phone {
+  width: 200px;
+  background: #1a1a2e;
+  border-radius: 36px;
+  padding: 10px;
+  box-shadow:
+    0 0 0 1.5px rgba(255,255,255,0.12),
+    0 30px 80px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(255,255,255,0.05);
+  position: relative;
+}
 
-  .card-book {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 13px;
-    color: rgba(255,255,255,0.75);
-    display: block;
-    margin-bottom: 4px;
-  }
+.phone-notch {
+  width: 70px; height: 22px;
+  background: #1a1a2e;
+  border-radius: 0 0 14px 14px;
+  margin: 0 auto 6px;
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+}
+.notch-cam { width: 9px; height: 9px; border-radius: 50%; background: #0d0d1a; border: 1.5px solid rgba(255,255,255,0.1); }
 
-  .card-author {
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
-  }
+.phone-screen {
+  border-radius: 26px;
+  overflow: hidden;
+  position: relative;
+  height: 400px;
+}
 
-  /* Dots navigation */
-  .dots {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-    margin-top: 16px;
-  }
+/* Incipit card inside phone */
+.phone-card {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: 20px 18px 16px;
+  position: relative;
+}
 
-  .dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.2);
-    transition: background 0.3s, width 0.3s;
-    cursor: pointer;
-  }
+/* Logo inkipit inside card */
+.phone-logo {
+  position: absolute; top: 14px; left: 16px;
+  opacity: 0.22;
+}
+.phone-logo svg { width: 18px; height: 17px; fill: #fff; }
 
-  .dot.active {
-    background: var(--purple);
-    width: 18px;
-    border-radius: 3px;
-  }
+.phone-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px; line-height: 1.5;
+  color: #fff; font-weight: 400;
+  margin-bottom: 14px;
+  position: relative; z-index: 1;
+}
 
-  /* ── Features ── */
-  .features {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 80px;
-  }
+.phone-book {
+  font-family: 'Playfair Display', serif;
+  font-style: italic; font-size: 10px;
+  color: rgba(255,255,255,0.7);
+  display: block; margin-bottom: 3px;
+}
+.phone-author {
+  font-size: 7.5px; font-weight: 500;
+  letter-spacing: 1.4px; text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+}
 
-  @media (max-width: 480px) {
-    .features { grid-template-columns: 1fr; }
-  }
+/* Bottom dots on phone */
+.phone-dots {
+  position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 4px; align-items: center;
+}
+.phone-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.25); }
+.phone-dot.on { background: rgba(255,255,255,0.75); width: 10px; border-radius: 2px; }
 
-  .feature {
-    background: rgba(255,255,255,0.04);
-    border: 0.8px solid rgba(255,255,255,0.08);
-    border-radius: 16px;
-    padding: 20px;
-  }
+/* Gradients per phone */
+.g1 { background: linear-gradient(135deg, #3d4fa0, #4a2d7a); }
+.g2 { background: linear-gradient(135deg, #8b2fc9, #b52d5c); }
+.g3 { background: linear-gradient(135deg, #1a5fa8, #0d7a8a); }
+.g4 { background: linear-gradient(135deg, #5a3ea0, #8a3070); } /* paper style */
 
-  .feature-icon {
-    font-size: 22px;
-    margin-bottom: 10px;
-    display: block;
-  }
+/* Phone 2 — papier style */
+.phone-paper { background: #f5edd8; }
+.phone-paper .phone-text { color: #3a2510; }
+.phone-paper .phone-book { color: rgba(58,37,16,0.65); }
+.phone-paper .phone-author { color: rgba(58,37,16,0.4); }
+.phone-paper .phone-logo svg { fill: #8b6340; }
+.phone-paper .phone-dot { background: rgba(58,37,16,0.15); }
+.phone-paper .phone-dot.on { background: rgba(58,37,16,0.5); width: 10px; }
+.phone-paper .phone-lines { position: absolute; inset: 0; }
 
-  .feature-title {
-    font-size: 14px;
-    font-weight: 500;
-    color: #fff;
-    margin-bottom: 4px;
-  }
+/* Tabbar */
+.phone-tabbar {
+  height: 44px;
+  background: rgba(10,8,20,0.95);
+  border-top: 0.5px solid rgba(255,255,255,0.08);
+  display: flex; align-items: center; justify-content: space-around;
+  padding: 0 10px 4px;
+}
+.tab-item { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.tab-icon { font-size: 14px; opacity: 0.4; }
+.tab-icon.active { opacity: 1; filter: drop-shadow(0 0 4px var(--purple)); }
+.tab-label { font-size: 7px; opacity: 0.3; }
+.tab-label.active { opacity: 0.8; color: var(--purple); }
 
-  .feature-desc {
-    font-size: 12px;
-    color: rgba(255,255,255,0.38);
-    line-height: 1.5;
-  }
+/* ────────── FEATURES ────────── */
+.section { padding: 100px 0; }
 
-  /* ── Bottom CTA ── */
-  .bottom-cta {
-    text-align: center;
-    padding: 60px 0 80px;
-    border-top: 0.8px solid rgba(255,255,255,0.07);
-    margin-bottom: 40px;
-  }
+.section-label {
+  font-size: 11px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--purple);
+  margin-bottom: 16px;
+}
 
-  .bottom-cta p {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-style: italic;
-    color: rgba(255,255,255,0.5);
-    margin-bottom: 32px;
-    line-height: 1.5;
-  }
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700; color: #fff;
+  line-height: 1.2; margin-bottom: 60px;
+}
 
-  /* ── Footer ── */
-  footer {
-    padding: 0 0 48px;
-    text-align: center;
-  }
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
 
-  .footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    margin-bottom: 16px;
-  }
+@media (max-width: 560px) { .features-grid { grid-template-columns: 1fr; } }
 
-  .footer-links a {
-    font-size: 12px;
-    color: rgba(255,255,255,0.25);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
+.feat {
+  background: rgba(255,255,255,0.035);
+  border: 0.8px solid rgba(255,255,255,0.07);
+  border-radius: 20px; padding: 28px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.feat:hover {
+  background: rgba(255,255,255,0.055);
+  border-color: rgba(155,127,232,0.25);
+}
 
-  .footer-links a:hover { color: rgba(255,255,255,0.55); }
+.feat-icon { font-size: 28px; margin-bottom: 14px; display: block; }
+.feat-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 6px; }
+.feat-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
 
-  footer p {
-    font-size: 11px;
-    color: rgba(255,255,255,0.12);
-  }
+/* ────────── INCIPITS STRIP ────────── */
+.strip { padding: 0 0 100px; }
+
+.strip-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(24px, 3vw, 36px);
+  color: #fff; margin-bottom: 32px;
+  font-style: italic;
+}
+
+.quotes { display: flex; flex-direction: column; gap: 1px; }
+
+.quote-row {
+  display: flex; align-items: baseline; gap: 20px;
+  padding: 22px 0;
+  border-bottom: 0.8px solid rgba(255,255,255,0.06);
+  cursor: default;
+  transition: background 0.2s;
+}
+.quote-row:first-child { border-top: 0.8px solid rgba(255,255,255,0.06); }
+
+.quote-num {
+  font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.15);
+  width: 24px; flex-shrink: 0; font-variant-numeric: tabular-nums;
+}
+
+.quote-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(15px, 2.5vw, 19px); color: rgba(255,255,255,0.75);
+  line-height: 1.4; flex: 1;
+  font-style: italic;
+  transition: color 0.2s;
+}
+.quote-row:hover .quote-text { color: #fff; }
+
+.quote-meta {
+  font-size: 11px; color: rgba(255,255,255,0.22);
+  white-space: nowrap; text-align: right; flex-shrink: 0;
+}
+.quote-meta strong { display: block; color: rgba(255,255,255,0.35); font-weight: 500; }
+
+@media (max-width: 560px) { .quote-meta { display: none; } }
+
+/* ────────── BOTTOM CTA ────────── */
+.bottom { padding: 80px 0 100px; text-align: center; border-top: 0.8px solid rgba(255,255,255,0.06); }
+
+.bottom h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 48px); font-weight: 700;
+  color: #fff; margin-bottom: 12px; line-height: 1.2;
+}
+.bottom h2 em { font-style: italic; color: rgba(255,255,255,0.4); }
+.bottom p { font-size: 16px; color: var(--muted); margin-bottom: 36px; }
+
+/* ────────── FOOTER ────────── */
+footer {
+  padding: 32px 0 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 0.8px solid rgba(255,255,255,0.05);
+  flex-wrap: wrap; gap: 12px;
+}
+
+.footer-left { display: flex; align-items: center; gap: 10px; }
+.footer-icon { width: 28px; height: 28px; border-radius: 8px; overflow: hidden; }
+.footer-icon img { width: 100%; height: 100%; object-fit: cover; }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.18); }
+
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: 12px; color: rgba(255,255,255,0.22); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: rgba(255,255,255,0.55); }
 </style>
 </head>
-
 <body>
+
+<div class="ambient"></div>
 
 <div class="container">
 
-  <!-- Header -->
-  <header>
-    <div class="app-icon">
-      <!-- Inkipit icon shape SVG -->
-      <svg viewBox="0 0 28 27" xmlns="http://www.w3.org/2000/svg">
-        <path d="M14 2C8.477 2 4 6.477 4 12c0 3.09 1.4 5.857 3.617 7.72L6.5 24.5l5.1-2.55A10 10 0 0 0 14 22c5.523 0 10-4.477 10-10S19.523 2 14 2z"/>
-      </svg>
-    </div>
-    <p class="app-name">Inkipit</p>
-    <h1>Les premières lignes<br><em>qui changent tout.</em></h1>
-    <p class="tagline">Un incipit par jour. Les plus belles ouvertures de la littérature mondiale, dans ta poche.</p>
+  <!-- ── HERO ── -->
+  <section class="hero">
 
-    <div class="cta-wrap">
-      <a class="btn-appstore" href="https://apps.apple.com/fr/app/inkipit/id6762474250" target="_blank" rel="noopener">
-        <!-- Apple logo -->
-        <svg width="20" height="24" viewBox="0 0 20 24" fill="none">
-          <path d="M16.24 12.76c-.02-2.57 2.1-3.8 2.19-3.86-1.19-1.74-3.05-1.98-3.71-2.01-1.58-.16-3.08.93-3.88.93-.8 0-2.03-.91-3.33-.88-1.72.02-3.3 1-4.19 2.54-1.79 3.1-.46 7.7 1.28 10.22.85 1.23 1.86 2.61 3.19 2.56 1.28-.05 1.76-.83 3.31-.83 1.54 0 1.98.83 3.33.8 1.38-.02 2.24-1.25 3.08-2.49.98-1.43 1.38-2.82 1.4-2.89-.03-.01-2.67-1.02-2.7-4.09z" fill="currentColor"/>
-          <path d="M13.8 4.47c.71-.86 1.18-2.05 1.05-3.24-.99.04-2.24.67-2.97 1.51-.64.74-1.21 1.95-1.06 3.1 1.11.08 2.24-.56 2.98-1.37z" fill="currentColor"/>
-        </svg>
-        <span>
-          <span class="label-top">Télécharger sur</span>
-          App Store
-        </span>
-      </a>
-      <span class="free-badge">Gratuit · iOS</span>
-    </div>
-  </header>
+    <div class="hero-left">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Disponible sur iOS
+      </div>
 
-  <!-- Cards -->
-  <div class="cards-section">
-    <div class="card active">
-      <div class="card-logo">
-        <svg viewBox="0 0 28 27"><path d="M14 2C8.477 2 4 6.477 4 12c0 3.09 1.4 5.857 3.617 7.72L6.5 24.5l5.1-2.55A10 10 0 0 0 14 22c5.523 0 10-4.477 10-10S19.523 2 14 2z"/></svg>
+      <div class="app-icon-wrap">
+        <div class="app-icon">
+          <img src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/bf/b6/6f/bfb66f60-8086-89a8-e6ca-e60b9925ca4d/Placeholder.mill/400x400bb-75.webp" alt="Inkipit">
+        </div>
+        <div class="app-meta">
+          <span class="app-name-lg">Inkipit</span>
+          <span class="app-sub">Littérature · Gratuit</span>
+        </div>
       </div>
-      <p class="card-text">« Aujourd'hui, maman est morte. Ou peut-être hier, je ne sais pas. »</p>
-      <div class="card-attribution">
-        <span class="card-book">L'Étranger</span>
-        <span class="card-author">Albert Camus · 1942</span>
-      </div>
-    </div>
 
-    <div class="card">
-      <div class="card-logo">
-        <svg viewBox="0 0 28 27"><path d="M14 2C8.477 2 4 6.477 4 12c0 3.09 1.4 5.857 3.617 7.72L6.5 24.5l5.1-2.55A10 10 0 0 0 14 22c5.523 0 10-4.477 10-10S19.523 2 14 2z"/></svg>
+      <h1>Les premières lignes<br><em>qui changent tout.</em></h1>
+
+      <p class="hero-desc">Un incipit par swipe. Les ouvertures les plus marquantes de la littérature mondiale — dans ta poche.</p>
+
+      <div class="cta-row">
+        <a class="btn-store" href="https://apps.apple.com/fr/app/inkipit/id6762474250" target="_blank" rel="noopener">
+          <svg width="20" height="24" viewBox="0 0 20 24" fill="none">
+            <path d="M16.24 12.76c-.02-2.57 2.1-3.8 2.19-3.86-1.19-1.74-3.05-1.98-3.71-2.01-1.58-.16-3.08.93-3.88.93-.8 0-2.03-.91-3.33-.88-1.72.02-3.3 1-4.19 2.54-1.79 3.1-.46 7.7 1.28 10.22.85 1.23 1.86 2.61 3.19 2.56 1.28-.05 1.76-.83 3.31-.83 1.54 0 1.98.83 3.33.8 1.38-.02 2.24-1.25 3.08-2.49.98-1.43 1.38-2.82 1.4-2.89-.03-.01-2.67-1.02-2.7-4.09z" fill="currentColor"/>
+            <path d="M13.8 4.47c.71-.86 1.18-2.05 1.05-3.24-.99.04-2.24.67-2.97 1.51-.64.74-1.21 1.95-1.06 3.1 1.11.08 2.24-.56 2.98-1.37z" fill="currentColor"/>
+          </svg>
+          <span><span class="lbl-top">Télécharger sur</span>App Store</span>
+        </a>
+        <span class="cta-note">iPhone · Gratuit</span>
       </div>
-      <p class="card-text">« Longtemps, je me suis couché de bonne heure. »</p>
-      <div class="card-attribution">
-        <span class="card-book">À la recherche du temps perdu</span>
-        <span class="card-author">Marcel Proust · 1913</span>
+
+      <div class="rating">
+        <span class="stars">★★★★★</span>
+        <span class="rating-text">Littérature · Jeux de culture</span>
       </div>
     </div>
 
-    <div class="card">
-      <div class="card-logo">
-        <svg viewBox="0 0 28 27"><path d="M14 2C8.477 2 4 6.477 4 12c0 3.09 1.4 5.857 3.617 7.72L6.5 24.5l5.1-2.55A10 10 0 0 0 14 22c5.523 0 10-4.477 10-10S19.523 2 14 2z"/></svg>
-      </div>
-      <p class="card-text">« Puis-je, monsieur, vous proposer mes services, sans risquer d'être importun ? »</p>
-      <div class="card-attribution">
-        <span class="card-book">La Chute</span>
-        <span class="card-author">Albert Camus · 1956</span>
-      </div>
-    </div>
+    <!-- ── 3 iPhones ── -->
+    <div class="hero-phones">
 
-    <div class="card">
-      <div class="card-logo">
-        <svg viewBox="0 0 28 27"><path d="M14 2C8.477 2 4 6.477 4 12c0 3.09 1.4 5.857 3.617 7.72L6.5 24.5l5.1-2.55A10 10 0 0 0 14 22c5.523 0 10-4.477 10-10S19.523 2 14 2z"/></svg>
+      <!-- Phone 1 — gradient violet -->
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="phone-notch"><div class="notch-cam"></div></div>
+          <div class="phone-screen">
+            <div class="phone-card g2">
+              <div class="phone-logo"><svg viewBox="0 0 28 27"><path d="M4 13.5C4 8.253 8.253 4 13.5 4S23 8.253 23 13.5c0 2.9-1.3 5.5-3.35 7.25L21 25l-4.8-2.4A9.55 9.55 0 0 1 13.5 23C8.253 23 4 18.747 4 13.5z"/></svg></div>
+              <p class="phone-text">« Longtemps, je me suis couché de bonne heure. »</p>
+              <div>
+                <span class="phone-book">À la recherche du temps perdu</span>
+                <span class="phone-author">Marcel Proust · 1913</span>
+              </div>
+              <div class="phone-dots">
+                <div class="phone-dot"></div>
+                <div class="phone-dot on"></div>
+                <div class="phone-dot"></div>
+                <div class="phone-dot"></div>
+              </div>
+            </div>
+            <div class="phone-tabbar">
+              <div class="tab-item"><span class="tab-icon active">⬡</span><span class="tab-label active">Inkipits</span></div>
+              <div class="tab-item"><span class="tab-icon">🎮</span><span class="tab-label">Jeux</span></div>
+              <div class="tab-item"><span class="tab-icon">⚙</span><span class="tab-label">Réglages</span></div>
+            </div>
+          </div>
+        </div>
       </div>
-      <p class="card-text">« Nous étions à l'étude, quand le Proviseur entra, suivi d'un nouveau habillé en bourgeois. »</p>
-      <div class="card-attribution">
-        <span class="card-book">Madame Bovary</span>
-        <span class="card-author">Gustave Flaubert · 1857</span>
-      </div>
-    </div>
 
-    <div class="card">
-      <div class="card-logo">
-        <svg viewBox="0 0 28 27"><path d="M14 2C8.477 2 4 6.477 4 12c0 3.09 1.4 5.857 3.617 7.72L6.5 24.5l5.1-2.55A10 10 0 0 0 14 22c5.523 0 10-4.477 10-10S19.523 2 14 2z"/></svg>
+      <!-- Phone 2 — centre, gradient indigo -->
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="phone-notch"><div class="notch-cam"></div></div>
+          <div class="phone-screen">
+            <div class="phone-card g1">
+              <div class="phone-logo"><svg viewBox="0 0 28 27"><path d="M4 13.5C4 8.253 8.253 4 13.5 4S23 8.253 23 13.5c0 2.9-1.3 5.5-3.35 7.25L21 25l-4.8-2.4A9.55 9.55 0 0 1 13.5 23C8.253 23 4 18.747 4 13.5z"/></svg></div>
+              <p class="phone-text">« Aujourd'hui, maman est morte. Ou peut-être hier, je ne sais pas. »</p>
+              <div>
+                <span class="phone-book">L'Étranger</span>
+                <span class="phone-author">Albert Camus · 1942</span>
+              </div>
+              <div class="phone-dots">
+                <div class="phone-dot on"></div>
+                <div class="phone-dot"></div>
+                <div class="phone-dot"></div>
+                <div class="phone-dot"></div>
+              </div>
+            </div>
+            <div class="phone-tabbar">
+              <div class="tab-item"><span class="tab-icon active">⬡</span><span class="tab-label active">Inkipits</span></div>
+              <div class="tab-item"><span class="tab-icon">🎮</span><span class="tab-label">Jeux</span></div>
+              <div class="tab-item"><span class="tab-icon">⚙</span><span class="tab-label">Réglages</span></div>
+            </div>
+          </div>
+        </div>
       </div>
-      <p class="card-text">« Les curieux événements qui font le sujet de cette chronique se produisirent en 194., à Oran. »</p>
-      <div class="card-attribution">
-        <span class="card-book">La Peste</span>
-        <span class="card-author">Albert Camus · 1947</span>
+
+      <!-- Phone 3 — style papier -->
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="phone-notch"><div class="notch-cam"></div></div>
+          <div class="phone-screen">
+            <div class="phone-card phone-paper" style="background:#f5edd8;">
+              <div class="phone-logo"><svg viewBox="0 0 28 27"><path d="M4 13.5C4 8.253 8.253 4 13.5 4S23 8.253 23 13.5c0 2.9-1.3 5.5-3.35 7.25L21 25l-4.8-2.4A9.55 9.55 0 0 1 13.5 23C8.253 23 4 18.747 4 13.5z"/></svg></div>
+              <p class="phone-text" style="color:#3a2510;">« Puis-je, monsieur, vous proposer mes services, sans risquer d'être importun ? »</p>
+              <div>
+                <span class="phone-book" style="color:rgba(58,37,16,0.65);">La Chute</span>
+                <span class="phone-author" style="color:rgba(58,37,16,0.4);">Albert Camus · 1956</span>
+              </div>
+              <div class="phone-dots">
+                <div class="phone-dot" style="background:rgba(58,37,16,0.15);"></div>
+                <div class="phone-dot" style="background:rgba(58,37,16,0.15);"></div>
+                <div class="phone-dot on" style="background:rgba(58,37,16,0.5);width:10px;border-radius:2px;"></div>
+                <div class="phone-dot" style="background:rgba(58,37,16,0.15);"></div>
+              </div>
+            </div>
+            <div class="phone-tabbar">
+              <div class="tab-item"><span class="tab-icon active">⬡</span><span class="tab-label active">Inkipits</span></div>
+              <div class="tab-item"><span class="tab-icon">🎮</span><span class="tab-label">Jeux</span></div>
+              <div class="tab-item"><span class="tab-icon">⚙</span><span class="tab-label">Réglages</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── INCIPITS STRIP ── -->
+  <section class="strip">
+    <h2 class="strip-title">Quelques premières lignes…</h2>
+    <div class="quotes">
+      <div class="quote-row">
+        <span class="quote-num">01</span>
+        <span class="quote-text">« Aujourd'hui, maman est morte. Ou peut-être hier, je ne sais pas. »</span>
+        <div class="quote-meta"><strong>Albert Camus</strong>L'Étranger, 1942</div>
+      </div>
+      <div class="quote-row">
+        <span class="quote-num">02</span>
+        <span class="quote-text">« Longtemps, je me suis couché de bonne heure. »</span>
+        <div class="quote-meta"><strong>Marcel Proust</strong>Du côté de chez Swann, 1913</div>
+      </div>
+      <div class="quote-row">
+        <span class="quote-num">03</span>
+        <span class="quote-text">« Nous étions à l'étude, quand le Proviseur entra, suivi d'un nouveau habillé en bourgeois. »</span>
+        <div class="quote-meta"><strong>Gustave Flaubert</strong>Madame Bovary, 1857</div>
+      </div>
+      <div class="quote-row">
+        <span class="quote-num">04</span>
+        <span class="quote-text">« Puis-je, monsieur, vous proposer mes services, sans risquer d'être importun ? »</span>
+        <div class="quote-meta"><strong>Albert Camus</strong>La Chute, 1956</div>
+      </div>
+      <div class="quote-row">
+        <span class="quote-num">05</span>
+        <span class="quote-text">« C'était à Mégara, faubourg de Carthage, dans les jardins d'Hamilcar. »</span>
+        <div class="quote-meta"><strong>Gustave Flaubert</strong>Salammbô, 1862</div>
+      </div>
+      <div class="quote-row">
+        <span class="quote-num">06</span>
+        <span class="quote-text">« La petite ville de Verrières peut passer pour l'une des plus jolies de la Franche-Comté. »</span>
+        <div class="quote-meta"><strong>Stendhal</strong>Le Rouge et le Noir, 1830</div>
       </div>
     </div>
+  </section>
 
-    <div class="card">
-      <div class="card-logo">
-        <svg viewBox="0 0 28 27"><path d="M14 2C8.477 2 4 6.477 4 12c0 3.09 1.4 5.857 3.617 7.72L6.5 24.5l5.1-2.55A10 10 0 0 0 14 22c5.523 0 10-4.477 10-10S19.523 2 14 2z"/></svg>
+  <!-- ── FEATURES ── -->
+  <section class="section" style="padding-top:0;">
+    <p class="section-label">Ce qu'il y a dedans</p>
+    <h2 class="section-title">Plus qu'une simple<br>application de lecture.</h2>
+    <div class="features-grid">
+      <div class="feat">
+        <span class="feat-icon">📖</span>
+        <p class="feat-title">Un incipit par swipe</p>
+        <p class="feat-desc">Redécouvrez les ouvertures les plus marquantes de la littérature mondiale, de Proust à Houellebecq.</p>
       </div>
-      <p class="card-text">« C'était à Mégara, faubourg de Carthage, dans les jardins d'Hamilcar. »</p>
-      <div class="card-attribution">
-        <span class="card-book">Salammbô</span>
-        <span class="card-author">Gustave Flaubert · 1862</span>
+      <div class="feat">
+        <span class="feat-icon">🎮</span>
+        <p class="feat-title">3 modes de jeu</p>
+        <p class="feat-desc">Devine l'auteur, complète l'incipit, duel entre deux extraits. 10 rounds, 20 secondes chacun.</p>
+      </div>
+      <div class="feat">
+        <span class="feat-icon">🎨</span>
+        <p class="feat-title">6 styles visuels</p>
+        <p class="feat-desc">Dégradés vibrants, papier, minuit, midi, photo, emoji — chaque style transforme l'expérience.</p>
+      </div>
+      <div class="feat">
+        <span class="feat-icon">🔖</span>
+        <p class="feat-title">Favoris & widget</p>
+        <p class="feat-desc">Gardez vos extraits préférés et affichez un bel incipit sur votre écran d'accueil chaque jour.</p>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Dots -->
-  <div class="dots" id="dots"></div>
-
-  <!-- Features -->
-  <div class="features" style="margin-top: 48px;">
-    <div class="feature">
-      <span class="feature-icon">📖</span>
-      <p class="feature-title">Un incipit par swipe</p>
-      <p class="feature-desc">Redécouvrez les ouvertures les plus marquantes de la littérature mondiale.</p>
-    </div>
-    <div class="feature">
-      <span class="feature-icon">🎮</span>
-      <p class="feature-title">Jouez</p>
-      <p class="feature-desc">Devine l'auteur, complète l'incipit, duel entre deux extraits — 3 modes.</p>
-    </div>
-    <div class="feature">
-      <span class="feature-icon">🔖</span>
-      <p class="feature-title">Sauvegardez</p>
-      <p class="feature-desc">Gardez vos incipits favoris et retrouvez-les à tout moment.</p>
-    </div>
-    <div class="feature">
-      <span class="feature-icon">🖼</span>
-      <p class="feature-title">Widget</p>
-      <p class="feature-desc">Un bel incipit sur votre écran d'accueil, qui change chaque jour.</p>
-    </div>
-  </div>
-
-  <!-- Bottom CTA -->
-  <div class="bottom-cta">
-    <p>« La littérature commence toujours<br>par une première phrase. »</p>
-    <a class="btn-appstore" href="https://apps.apple.com/fr/app/inkipit/id6762474250" target="_blank" rel="noopener">
+  <!-- ── BOTTOM CTA ── -->
+  <div class="bottom">
+    <h2>Commence par<br><em>une première ligne.</em></h2>
+    <p>Gratuit · iPhone · La littérature dans ta poche</p>
+    <a class="btn-store" href="https://apps.apple.com/fr/app/inkipit/id6762474250" target="_blank" rel="noopener">
       <svg width="20" height="24" viewBox="0 0 20 24" fill="none">
         <path d="M16.24 12.76c-.02-2.57 2.1-3.8 2.19-3.86-1.19-1.74-3.05-1.98-3.71-2.01-1.58-.16-3.08.93-3.88.93-.8 0-2.03-.91-3.33-.88-1.72.02-3.3 1-4.19 2.54-1.79 3.1-.46 7.7 1.28 10.22.85 1.23 1.86 2.61 3.19 2.56 1.28-.05 1.76-.83 3.31-.83 1.54 0 1.98.83 3.33.8 1.38-.02 2.24-1.25 3.08-2.49.98-1.43 1.38-2.82 1.4-2.89-.03-.01-2.67-1.02-2.7-4.09z" fill="currentColor"/>
         <path d="M13.8 4.47c.71-.86 1.18-2.05 1.05-3.24-.99.04-2.24.67-2.97 1.51-.64.74-1.21 1.95-1.06 3.1 1.11.08 2.24-.56 2.98-1.37z" fill="currentColor"/>
       </svg>
-      <span>
-        <span class="label-top">Télécharger sur</span>
-        App Store
-      </span>
+      <span><span class="lbl-top">Télécharger sur</span>App Store</span>
     </a>
   </div>
 
-  <!-- Footer -->
+  <!-- ── FOOTER ── -->
   <footer>
+    <div class="footer-left">
+      <div class="footer-icon">
+        <img src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/bf/b6/6f/bfb66f60-8086-89a8-e6ca-e60b9925ca4d/Placeholder.mill/400x400bb-75.webp" alt="Inkipit">
+      </div>
+      <span class="footer-copy">© 2026 Théo Jégousse · Inkipit</span>
+    </div>
     <div class="footer-links">
       <a href="/inkipit/privacy.html">Confidentialité</a>
       <a href="https://jegousse.com">jegousse.com</a>
     </div>
-    <p>© 2026 Théo Jégousse · Inkipit</p>
   </footer>
 
 </div>
-
-<script>
-  // Card carousel
-  const cards = document.querySelectorAll('.card');
-  const dotsEl = document.getElementById('dots');
-  let current = 0;
-  let timer;
-
-  // Build dots
-  cards.forEach((_, i) => {
-    const d = document.createElement('div');
-    d.className = 'dot' + (i === 0 ? ' active' : '');
-    d.addEventListener('click', () => goTo(i));
-    dotsEl.appendChild(d);
-  });
-
-  function goTo(idx) {
-    cards[current].classList.remove('active');
-    dotsEl.children[current].classList.remove('active');
-    current = idx;
-    cards[current].classList.add('active');
-    dotsEl.children[current].classList.add('active');
-    clearInterval(timer);
-    timer = setInterval(next, 4000);
-  }
-
-  function next() {
-    goTo((current + 1) % cards.length);
-  }
-
-  timer = setInterval(next, 4000);
-
-  // Pause on hover
-  document.querySelector('.cards-section').addEventListener('mouseenter', () => clearInterval(timer));
-  document.querySelector('.cards-section').addEventListener('mouseleave', () => {
-    timer = setInterval(next, 4000);
-  });
-</script>
 
 </body>
 </html>
