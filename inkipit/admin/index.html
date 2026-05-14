@@ -445,19 +445,25 @@ async function loadSubmissions() {
       return;
     }
     list.innerHTML = issues.map(issue => {
-      // Extract JSON from issue body
       const jsonMatch = issue.body?.match(/```json\s*([\s\S]*?)```/);
       let parsed = null;
       try { if (jsonMatch) parsed = JSON.parse(jsonMatch[1].trim()); } catch(_) {}
       const text   = parsed?.text   || '';
+      const book   = parsed?.book   || '';
       const author = parsed?.author || '';
+      const year   = parsed?.year   || '';
+      // Stocke les données dans un data-attribute pour éviter les pb de quotes dans onclick
+      const payload = encodeURIComponent(JSON.stringify({ text, book, author, year }));
       return `
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px">
-        <div style="font-size:13px;color:var(--text);margin-bottom:6px;line-height:1.5">${escHtml(text)}</div>
-        <div style="font-size:11px;color:var(--muted);margin-bottom:12px">${escHtml(author)}</div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px"
+           data-issue="${issue.number}" data-payload="${payload}">
+        <div style="font-size:13px;font-style:italic;color:var(--text);margin-bottom:6px;line-height:1.5">${escHtml(text)}</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:12px">
+          ${escHtml([book, author, year].filter(Boolean).join(' · '))}
+        </div>
         <div style="display:flex;gap:8px">
-          <button class="btn btn-gold btn-sm" onclick="validateSubmission(${issue.number}, ${escHtml(JSON.stringify({text,author}))})">✓ Valider</button>
-          <button class="btn btn-danger btn-sm" onclick="rejectSubmission(${issue.number}, this)">✕ Rejeter</button>
+          <button class="btn btn-gold btn-sm" onclick="validateSubmission(this)">✓ Valider</button>
+          <button class="btn btn-danger btn-sm" onclick="rejectSubmission(this)">✕ Rejeter</button>
           <a href="${issue.html_url}" target="_blank" class="btn btn-ghost btn-sm" style="text-decoration:none">↗ GitHub</a>
         </div>
       </div>`;
@@ -467,38 +473,67 @@ async function loadSubmissions() {
   }
 }
 
-function validateSubmission(issueNumber, dataJson) {
-  let data;
-  try { data = JSON.parse(dataJson); } catch(_) { return; }
-  // Pré-remplit le formulaire d'ajout et l'ouvre
-  document.getElementById('new-text').value   = data.text   || '';
-  document.getElementById('new-author').value = data.author || '';
-  // Ouvre le formulaire d'ajout
+function validateSubmission(btn) {
+  const card = btn.closest('[data-issue]');
+  if (!card) return;
+  const issueNumber = card.dataset.issue;
+  let data = {};
+  try { data = JSON.parse(decodeURIComponent(card.dataset.payload)); } catch(_) {}
+
+  // Pré-remplit le formulaire — reconstruit le champ "Titre — Auteur, Année"
+  document.getElementById('new-text').value = data.text || '';
+  const parts = [data.book, data.author, data.year].filter(Boolean);
+  // Format attendu par le CMS : "Titre — Auteur, Année"
+  let authorField = '';
+  if (data.book && data.author) {
+    authorField = data.book + ' — ' + data.author + (data.year ? ', ' + data.year : '');
+  } else {
+    authorField = parts.join(', ');
+  }
+  document.getElementById('new-author').value = authorField;
+
+  // Ouvre le formulaire
   const form = document.getElementById('add-form');
-  if (form && form.style.display === 'none') toggleAddForm();
-  form?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  // Ferme le panneau et note le numéro d'issue à fermer après validation
+  if (form.style.display !== 'block') toggleAddForm();
+  setTimeout(() => form.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+
+  // Note l'issue à fermer après validation
   window._pendingCloseIssue = issueNumber;
   document.getElementById('submissions-panel').style.display = 'none';
 }
 
-async function rejectSubmission(issueNumber, btn) {
-  if (!confirm('Rejeter cette soumission (ferme l\'issue GitHub) ?')) return;
+async function rejectSubmission(btn) {
+  const card = btn.closest('[data-issue]');
+  if (!card) return;
+  const issueNumber = card.dataset.issue;
+  if (!confirm('Rejeter cette soumission ?')) return;
+
   btn.disabled = true;
   btn.textContent = '…';
   try {
-    await fetch(
+    const res = await fetch(
       `https://api.github.com/repos/TheoSije/inkipit-content/issues/${issueNumber}`,
       {
         method: 'PATCH',
-        headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ state: 'closed', state_reason: 'not_planned' })
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/vnd.github+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ state: 'closed' })
       }
     );
-    btn.closest('div[style]').remove();
-    loadSubmissions();
+    if (!res.ok) throw new Error(`GitHub ${res.status}`);
+    card.remove();
+    // Met à jour le badge
+    const remaining = document.querySelectorAll('[data-issue]').length;
+    const badge = document.getElementById('submissions-count');
+    if (remaining > 0) { badge.textContent = remaining; }
+    else { badge.style.display = 'none'; }
   } catch(e) {
-    btn.disabled = false; btn.textContent = '✕ Rejeter';
+    btn.disabled = false;
+    btn.textContent = '✕ Rejeter';
+    alert('Erreur : ' + e.message + '\nVérifie que ton token a les droits Issues write.');
   }
 }
 
