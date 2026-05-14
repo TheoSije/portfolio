@@ -428,7 +428,7 @@ async function loadSubmissions() {
   list.innerHTML = '<span style="font-size:13px;color:var(--muted)">Chargement…</span>';
   try {
     const res  = await fetch(
-      'https://api.github.com/repos/TheoSije/inkipit-content/issues?state=open&labels=soumission&per_page=30',
+      'https://api.github.com/repos/TheoSije/inkipit-content/issues?state=open&per_page=30',
       { headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' } }
     );
     const issues = await res.json();
