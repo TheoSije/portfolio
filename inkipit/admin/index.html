@@ -341,8 +341,9 @@
 <script>
 const OWNER  = 'TheoSije';
 const REPO   = 'inkipit-content';
-const FILE   = 'inkipits.json';
-const BRANCH = 'main';
+const FILE         = 'inkipits.json';
+const BRANCH       = 'main';
+const AMAZON_TAG   = 'inkipit-21';
 
 let token    = '';
 let incipits = [];
@@ -733,9 +734,9 @@ async function wikiSearch(query, lang = 'fr', maxChars = 600) {
   return null;
 }
 
-// ── Book data fetcher (Wikipedia FR prioritaire + Google Books pour la couverture) ──
+// ── Book data fetcher (Wikipedia FR prioritaire + Google Books pour la couverture + Amazon ASIN) ──
 async function fetchBookData(title, author) {
-  let cover = null, description = null;
+  let cover = null, description = null, amazon = null;
 
   // 1️⃣ Wikipedia FR — résumé de l'œuvre (le meilleur pour les classiques francophones)
   description = await wikiSearch(`${title} ${author}`.trim(), 'fr', 600);
@@ -745,14 +746,14 @@ async function fetchBookData(title, author) {
     description = await wikiSearch(`${title} ${author}`.trim(), 'en', 600);
   }
 
-  // 3️⃣ Google Books — prioritairement pour la couverture, description en dernier recours
+  // 3️⃣ Google Books — couverture + ISBN-10 (= ASIN Amazon) + description fallback
   const gbQueries = [
     `intitle:${title}${author ? ' inauthor:' + author : ''}`,
     `${title} ${author}`.trim(),
     title
   ];
   for (const q of gbQueries) {
-    if (cover && description) break;
+    if (cover && amazon && description) break;
     try {
       const res  = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(q)}&maxResults=10&langRestrict=fr`);
       const data = await res.json();
@@ -767,16 +768,21 @@ async function fetchBookData(title, author) {
             .replace(/&edge=curl/,'');
           if (url) cover = url;
         }
+        // ISBN-10 → ASIN Amazon
+        if (!amazon && vi.industryIdentifiers) {
+          const isbn10 = vi.industryIdentifiers.find(id => id.type === 'ISBN_10')?.identifier;
+          if (isbn10) amazon = `https://www.amazon.fr/dp/${isbn10}?tag=${AMAZON_TAG}`;
+        }
         // Google Books description uniquement si Wikipedia n'a rien trouvé
         if (!description && vi.description) {
           description = vi.description.replace(/<[^>]+>/g,'').trim().slice(0, 600);
         }
-        if (cover && description) break;
+        if (cover && amazon && description) break;
       }
     } catch(_) {}
   }
 
-  // 4️⃣ Open Library — couverture seulement (pas first_sentence : souvent en anglais)
+  // 4️⃣ Open Library — couverture seulement si Google Books n'en a pas
   if (!cover) {
     try {
       const olQuery = encodeURIComponent(`${title}${author ? ' ' + author : ''}`);
@@ -787,7 +793,7 @@ async function fetchBookData(title, author) {
     } catch(_) {}
   }
 
-  return { cover, description };
+  return { cover, description, amazon };
 }
 
 // ── Auto-fill (Google Books + Wikipedia) ─────────────────────────────────
@@ -811,8 +817,8 @@ async function autoFill() {
   let filled = [];
 
   try {
-    status.textContent = 'Recherche couverture & description…';
-    const { cover, description } = await fetchBookData(title, author);
+    status.textContent = 'Recherche couverture, description & Amazon…';
+    const { cover, description, amazon } = await fetchBookData(title, author);
 
     if (cover) {
       document.getElementById('new-cover').value = cover;
@@ -821,6 +827,10 @@ async function autoFill() {
     if (description) {
       document.getElementById('new-description').value = description;
       filled.push('description');
+    }
+    if (amazon && !document.getElementById('new-amazon').value) {
+      document.getElementById('new-amazon').value = amazon;
+      filled.push('lien Amazon');
     }
 
     // ── Wikipedia (bio auteur) — FR puis EN via search API ──
