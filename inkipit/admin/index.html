@@ -108,6 +108,7 @@
   #status-bar.saving { display: flex; color: var(--gold); background: rgba(201,168,76,0.05); }
   #status-bar.success { display: flex; color: var(--green); background: rgba(74,222,128,0.05); }
   #status-bar.error   { display: flex; color: var(--red);   background: rgba(255,107,107,0.05); }
+  #status-bar.success .spinner, #status-bar.error .spinner { display: none; }
 
   /* ── List ── */
   .list { padding: 16px 24px; display: flex; flex-direction: column; gap: 8px; }
@@ -221,9 +222,13 @@
   <div class="login-box">
     <h1>✦ Inkipit Admin</h1>
     <p>Entre ton GitHub Personal Access Token<br>pour gérer les inkipits.</p>
-    <input type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off" />
-    <a href="https://github.com/settings/tokens/new?scopes=repo&description=Inkipit+CMS" target="_blank">
-      Créer un token GitHub →
+    <p style="font-size:11px;color:var(--muted);margin-bottom:16px;line-height:1.6">
+      Token fine-grained requis sur <strong style="color:var(--text)">inkipit-content</strong> :<br>
+      Contents → <strong style="color:var(--gold)">Read and write</strong>
+    </p>
+    <input type="password" id="token-input" placeholder="github_pat_…" autocomplete="off" />
+    <a href="https://github.com/settings/personal-access-tokens/new" target="_blank">
+      Créer un token fine-grained →
     </a>
     <button class="btn btn-gold" style="width:100%" onclick="login()">Connexion</button>
     <p id="login-error" style="color:var(--red);font-size:12px;margin-top:12px;display:none"></p>
@@ -423,6 +428,9 @@ function toggleSubmissions() {
   if (open) loadSubmissions();
 }
 
+// Stockage JS des données de soumission (évite les pb d'échappement dans data-attributes HTML)
+const submissionsData = {};
+
 async function loadSubmissions() {
   const list = document.getElementById('submissions-list');
   list.innerHTML = '<span style="font-size:13px;color:var(--muted)">Chargement…</span>';
@@ -445,6 +453,7 @@ async function loadSubmissions() {
       return;
     }
     list.innerHTML = issues.map(issue => {
+      // Extraction du JSON depuis le bloc ```json ... ```
       const jsonMatch = issue.body?.match(/```json\s*([\s\S]*?)```/);
       let parsed = null;
       try { if (jsonMatch) parsed = JSON.parse(jsonMatch[1].trim()); } catch(_) {}
@@ -452,11 +461,11 @@ async function loadSubmissions() {
       const book   = parsed?.book   || '';
       const author = parsed?.author || '';
       const year   = parsed?.year   || '';
-      // Stocke les données dans un data-attribute pour éviter les pb de quotes dans onclick
-      const payload = encodeURIComponent(JSON.stringify({ text, book, author, year }));
+      // Stocke dans l'objet JS (pas dans l'attribut HTML — évite les corruptions)
+      submissionsData[issue.number] = { text, book, author, year };
       return `
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px"
-           data-issue="${issue.number}" data-payload="${payload}">
+           data-issue="${issue.number}">
         <div style="font-size:13px;font-style:italic;color:var(--text);margin-bottom:6px;line-height:1.5">${escHtml(text)}</div>
         <div style="font-size:11px;color:var(--muted);margin-bottom:12px">
           ${escHtml([book, author, year].filter(Boolean).join(' · '))}
@@ -477,29 +486,36 @@ function validateSubmission(btn) {
   const card = btn.closest('[data-issue]');
   if (!card) return;
   const issueNumber = card.dataset.issue;
-  let data = {};
-  try { data = JSON.parse(decodeURIComponent(card.dataset.payload)); } catch(_) {}
+  const data = submissionsData[issueNumber] || {};
 
-  // Pré-remplit le formulaire — reconstruit le champ "Titre — Auteur, Année"
+  // Ouvre le formulaire directement (sans toggleAddForm qui efface les champs)
+  const form = document.getElementById('add-form');
+  if (form.style.display !== 'block') {
+    form.style.display = 'block';
+    // Reset les champs optionnels seulement
+    ['new-cover','new-amazon','new-description','new-bio']
+      .forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+  }
+
+  // Pré-remplit texte + auteur depuis la soumission
   document.getElementById('new-text').value = data.text || '';
-  const parts = [data.book, data.author, data.year].filter(Boolean);
-  // Format attendu par le CMS : "Titre — Auteur, Année"
   let authorField = '';
   if (data.book && data.author) {
     authorField = data.book + ' — ' + data.author + (data.year ? ', ' + data.year : '');
   } else {
-    authorField = parts.join(', ');
+    authorField = [data.book, data.author, data.year].filter(Boolean).join(', ');
   }
   document.getElementById('new-author').value = authorField;
 
-  // Ouvre le formulaire
-  const form = document.getElementById('add-form');
-  if (form.style.display !== 'block') toggleAddForm();
-  setTimeout(() => form.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
-
-  // Note l'issue à fermer après validation
+  // Note l'issue à fermer après validation + cache le panel
   window._pendingCloseIssue = issueNumber;
   document.getElementById('submissions-panel').style.display = 'none';
+
+  // Scroll vers le formulaire puis lance l'auto-fill (Wikipedia + couverture)
+  setTimeout(() => {
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (authorField) autoFill();
+  }, 100);
 }
 
 async function rejectSubmission(btn) {
@@ -550,7 +566,12 @@ async function save(message) {
     setStatus('success', `✓ ${message} — ${incipits.length} inkipits`);
     setTimeout(clearStatus, 3000);
   } catch(e) {
-    setStatus('error', 'Erreur : ' + e.message);
+    const msg = e.message || '';
+    if (msg.toLowerCase().includes('not accessible') || msg.includes('403') || msg.includes('401')) {
+      setStatus('error', '⛔ Token sans droits Contents write — crée un token avec "Contents: Read and write"');
+    } else {
+      setStatus('error', 'Erreur : ' + msg);
+    }
   }
 }
 
@@ -687,11 +708,43 @@ function updateCoverPreview(i, url) {
   }
 }
 
-// ── Book data fetcher (Google Books + Open Library fallback) ─────────────
+// ── Wikipedia search helper ───────────────────────────────────────────────
+async function wikiSearch(query, lang = 'fr', maxChars = 600) {
+  try {
+    // 1. Search API to find the right article title
+    const searchRes = await fetch(
+      `https://${lang}.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&srlimit=3&format=json&origin=*`
+    );
+    if (!searchRes.ok) return null;
+    const searchData = await searchRes.json();
+    const pages = searchData.query?.search;
+    if (!pages?.length) return null;
+
+    // 2. Get summary of the best match
+    const pageTitle = pages[0].title;
+    const summaryRes = await fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(pageTitle)}`);
+    if (!summaryRes.ok) return null;
+    const wiki = await summaryRes.json();
+    if (wiki.extract && wiki.type !== 'disambiguation' && wiki.extract.length > 80) {
+      return wiki.extract.trim().slice(0, maxChars);
+    }
+  } catch(_) {}
+  return null;
+}
+
+// ── Book data fetcher (Wikipedia FR prioritaire + Google Books pour la couverture) ──
 async function fetchBookData(title, author) {
   let cover = null, description = null;
 
-  // 1️⃣ Google Books
+  // 1️⃣ Wikipedia FR — résumé de l'œuvre (le meilleur pour les classiques francophones)
+  description = await wikiSearch(`${title} ${author}`.trim(), 'fr', 600);
+
+  // 2️⃣ Wikipedia EN — fallback si FR ne trouve rien
+  if (!description) {
+    description = await wikiSearch(`${title} ${author}`.trim(), 'en', 600);
+  }
+
+  // 3️⃣ Google Books — prioritairement pour la couverture, description en dernier recours
   const gbQueries = [
     `intitle:${title}${author ? ' inauthor:' + author : ''}`,
     `${title} ${author}`.trim(),
@@ -700,21 +753,20 @@ async function fetchBookData(title, author) {
   for (const q of gbQueries) {
     if (cover && description) break;
     try {
-      const res  = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(q)}&maxResults=10`);
+      const res  = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(q)}&maxResults=10&langRestrict=fr`);
       const data = await res.json();
       if (!data.items) continue;
       for (const item of data.items) {
-        const vi    = item.volumeInfo;
-        const score = (vi.imageLinks ? 2 : 0) + (vi.description ? 2 : 0);
-        if (score === 0) continue;
+        const vi = item.volumeInfo;
         if (!cover && vi.imageLinks) {
           const img = vi.imageLinks;
           const url = (img.extraLarge||img.large||img.medium||img.thumbnail||img.smallThumbnail||'')
             .replace('http://','https://')
-            .replace(/zoom=\d/,'zoom=1')   // zoom=1 = thumbnail fiable
-            .replace(/&edge=curl/,'');      // edge=curl bloque AsyncImage iOS
+            .replace(/zoom=\d/,'zoom=1')
+            .replace(/&edge=curl/,'');
           if (url) cover = url;
         }
+        // Google Books description uniquement si Wikipedia n'a rien trouvé
         if (!description && vi.description) {
           description = vi.description.replace(/<[^>]+>/g,'').trim().slice(0, 600);
         }
@@ -723,62 +775,15 @@ async function fetchBookData(title, author) {
     } catch(_) {}
   }
 
-  // 2️⃣ Open Library fallback (excellent pour la littérature française/mondiale)
-  if (!cover || !description) {
+  // 4️⃣ Open Library — couverture seulement (pas first_sentence : souvent en anglais)
+  if (!cover) {
     try {
       const olQuery = encodeURIComponent(`${title}${author ? ' ' + author : ''}`);
-      const res     = await fetch(`https://openlibrary.org/search.json?q=${olQuery}&limit=5&fields=key,title,cover_i,first_sentence`);
+      const res     = await fetch(`https://openlibrary.org/search.json?q=${olQuery}&limit=5&fields=cover_i`);
       const data    = await res.json();
-      if (data.docs?.length) {
-        for (const doc of data.docs) {
-          if (!cover && doc.cover_i) {
-            cover = `https://covers.openlibrary.org/b/id/${doc.cover_i}-L.jpg`;
-          }
-          if (!description && doc.first_sentence?.[0]) {
-            description = doc.first_sentence[0].slice(0, 600);
-          }
-          if (cover && description) break;
-        }
-      }
+      const doc     = data.docs?.find(d => d.cover_i);
+      if (doc) cover = `https://covers.openlibrary.org/b/id/${doc.cover_i}-L.jpg`;
     } catch(_) {}
-  }
-
-  // 3️⃣ Open Library works API pour la description si toujours manquante
-  if (!description) {
-    try {
-      const olQuery = encodeURIComponent(`${title}${author ? ' ' + author : ''}`);
-      const res     = await fetch(`https://openlibrary.org/search.json?q=${olQuery}&limit=3&fields=key,cover_i`);
-      const data    = await res.json();
-      const workKey = data.docs?.[0]?.key;
-      if (workKey) {
-        if (!cover && data.docs[0].cover_i) {
-          cover = `https://covers.openlibrary.org/b/id/${data.docs[0].cover_i}-L.jpg`;
-        }
-        const workRes  = await fetch(`https://openlibrary.org${workKey}.json`);
-        const workData = await workRes.json();
-        if (workData.description) {
-          const desc = typeof workData.description === 'string'
-            ? workData.description
-            : workData.description?.value || '';
-          if (desc) description = desc.replace(/<[^>]+>/g,'').trim().slice(0, 600);
-        }
-      }
-    } catch(_) {}
-  }
-
-  // 4️⃣ Wikipedia FR puis EN — résumé de l'œuvre (excellent pour les classiques)
-  if (!description) {
-    for (const lang of ['fr', 'en']) {
-      try {
-        const res  = await fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`);
-        if (!res.ok) continue;
-        const wiki = await res.json();
-        if (wiki.extract && wiki.type !== 'disambiguation' && wiki.extract.length > 80) {
-          description = wiki.extract.trim().slice(0, 600);
-          break;
-        }
-      } catch(_) {}
-    }
   }
 
   return { cover, description };
@@ -817,20 +822,13 @@ async function autoFill() {
       filled.push('description');
     }
 
-    // ── Wikipedia (bio auteur) — FR puis EN ──
+    // ── Wikipedia (bio auteur) — FR puis EN via search API ──
     if (author) {
       status.textContent = 'Recherche bio auteur…';
-      for (const lang of ['fr', 'en']) {
-        try {
-          const res  = await fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(author)}`);
-          if (!res.ok) continue;
-          const wiki = await res.json();
-          if (wiki.extract && wiki.type !== 'disambiguation') {
-            document.getElementById('new-bio').value = wiki.extract.trim().slice(0, 500);
-            filled.push('bio auteur');
-            break;
-          }
-        } catch(_) {}
+      const bio = await wikiSearch(author, 'fr', 500) || await wikiSearch(author, 'en', 500);
+      if (bio) {
+        document.getElementById('new-bio').value = bio;
+        filled.push('bio auteur');
       }
     }
 
@@ -849,18 +847,9 @@ async function autoFill() {
 }
 
 // ── Wikipedia description only ────────────────────────────────────────────
-async function fetchWikiDescription(title) {
-  for (const lang of ['fr', 'en']) {
-    try {
-      const res  = await fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`);
-      if (!res.ok) continue;
-      const wiki = await res.json();
-      if (wiki.extract && wiki.type !== 'disambiguation' && wiki.extract.length > 80) {
-        return wiki.extract.trim().slice(0, 700);
-      }
-    } catch(_) {}
-  }
-  return null;
+async function fetchWikiDescription(title, author = '') {
+  const query = author ? `${title} ${author}` : title;
+  return await wikiSearch(query, 'fr', 700) || await wikiSearch(query, 'en', 700);
 }
 
 async function resetDescriptions() {
