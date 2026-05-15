@@ -595,7 +595,7 @@ function setFilter(f, el) {
 }
 
 function isComplete(inc) {
-  return !!(inc.cover && inc.description && inc.bio && inc.amazon);
+  return !!(inc.cover && inc.description && inc.bio);
 }
 
 // ── Render ────────────────────────────────────────────────────────────────
@@ -603,7 +603,8 @@ function renderList() {
   const q    = document.getElementById('search-input').value.toLowerCase();
   const list = document.getElementById('list');
 
-  let filtered = incipits.map((inc, i) => ({ ...inc, _i: i }));
+  // Tri par ajout récent (dernier ajouté en premier)
+  let filtered = incipits.map((inc, i) => ({ ...inc, _i: i })).reverse();
 
   if (q) filtered = filtered.filter(inc =>
     inc.text.toLowerCase().includes(q) || inc.author.toLowerCase().includes(q)
