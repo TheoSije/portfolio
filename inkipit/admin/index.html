@@ -328,6 +328,10 @@
       <div class="field-label">👤 Bio auteur</div>
       <textarea id="new-bio" placeholder="Courte biographie de l'auteur…" rows="2"></textarea>
     </div>
+    <div class="field-group">
+      <div class="field-label">🖼️ Photo auteur (URL)</div>
+      <input type="url" id="new-author-pic" placeholder="https://…/portrait.jpg" />
+    </div>
 
     <div class="add-actions">
       <button class="btn btn-gold" onclick="addIncipit()">Ajouter</button>
@@ -494,7 +498,7 @@ function validateSubmission(btn) {
   if (form.style.display !== 'block') {
     form.style.display = 'block';
     // Reset les champs optionnels seulement
-    ['new-cover','new-amazon','new-description','new-bio']
+    ['new-cover','new-amazon','new-description','new-bio','new-author-pic']
       .forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
   }
 
@@ -678,6 +682,10 @@ function renderList() {
           <div class="field-group">
             <div class="field-label">👤 Bio auteur</div>
             <textarea id="edit-bio-${inc._i}" rows="2" placeholder="Courte biographie…">${escHtml(inc.bio||'')}</textarea>
+          </div>
+          <div class="field-group">
+            <div class="field-label">🖼️ Photo auteur (URL)</div>
+            <input type="url" id="edit-author-pic-${inc._i}" value="${escHtml(inc.authorPic||'')}" placeholder="https://…/portrait.jpg" />
           </div>
           <div class="row-edit-actions">
             <button class="btn btn-gold btn-sm" onclick="saveEdit(${inc._i})">Enregistrer</button>
@@ -1031,7 +1039,7 @@ function toggleAddForm() {
   const visible = f.style.display === 'block';
   f.style.display = visible ? 'none' : 'block';
   if (!visible) {
-    ['new-text','new-author','new-cover','new-amazon','new-description','new-bio']
+    ['new-text','new-author','new-cover','new-amazon','new-description','new-bio','new-author-pic']
       .forEach(id => document.getElementById(id).value = '');
     document.getElementById('new-text').focus();
   }
@@ -1044,6 +1052,7 @@ async function addIncipit() {
   const amazon      = document.getElementById('new-amazon').value.trim();
   const description = document.getElementById('new-description').value.trim();
   const bio         = document.getElementById('new-bio').value.trim();
+  const authorPic   = document.getElementById('new-author-pic').value.trim();
 
   if (!text || !author) { alert('Texte et auteur sont requis.'); return; }
 
@@ -1064,10 +1073,11 @@ async function addIncipit() {
   if (description) entry.description = description;
   if (bio)         entry.bio         = bio;
   if (amazon)      entry.amazon      = amazon;
+  if (authorPic)   entry.authorPic   = authorPic;
 
   incipits.push(entry);
   document.getElementById('add-form').style.display = 'none';
-  ['new-text','new-author','new-cover','new-amazon','new-description','new-bio']
+  ['new-text','new-author','new-cover','new-amazon','new-description','new-bio','new-author-pic']
     .forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
   renderList();
   await save(`add: ${text.slice(0, 50)}`);
@@ -1101,6 +1111,7 @@ async function saveEdit(i) {
   const amazon      = document.getElementById(`edit-amazon-${i}`).value.trim();
   const description = document.getElementById(`edit-description-${i}`).value.trim();
   const bio         = document.getElementById(`edit-bio-${i}`).value.trim();
+  const authorPic   = document.getElementById(`edit-author-pic-${i}`).value.trim();
 
   if (!text || !author) { alert('Texte et auteur sont requis.'); return; }
 
@@ -1111,6 +1122,7 @@ async function saveEdit(i) {
   if (description) entry.description = description; else delete entry.description;
   if (bio)         entry.bio         = bio;         else delete entry.bio;
   if (amazon)      entry.amazon      = amazon;      else delete entry.amazon;
+  if (authorPic)   entry.authorPic   = authorPic;   else delete entry.authorPic;
 
   // Garde-fou : vérifier qu'on ne réduit pas le nombre d'inkipits
   if (incipits.length !== incipits.length) { alert('Erreur de cohérence — rechargement.'); reload(); return; }
