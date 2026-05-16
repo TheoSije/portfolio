@@ -344,6 +344,129 @@ h1 em { font-style: italic; color: rgba(255,255,255,0.52); }
 
 @media (max-width: 560px) { .quote-meta { display: none; } }
 
+/* ────────── LIVE DEMO ────────── */
+.live-demo { padding: 0 0 100px; text-align: center; }
+
+.demo-wrap {
+  display: flex; align-items: center; justify-content: center;
+  gap: 32px; margin: 0 auto;
+}
+
+.demo-phone-frame {
+  width: 240px;
+  background: #1a1a2e;
+  border-radius: 44px;
+  padding: 12px;
+  box-shadow:
+    0 0 0 1.5px rgba(255,255,255,0.12),
+    0 40px 100px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(255,255,255,0.05);
+  position: relative;
+  cursor: grab;
+  user-select: none;
+}
+.demo-phone-notch {
+  width: 80px; height: 24px;
+  background: #1a1a2e;
+  border-radius: 0 0 14px 14px;
+  margin: 0 auto 6px;
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+}
+.demo-phone-screen {
+  border-radius: 32px;
+  overflow: hidden;
+  height: 480px;
+  position: relative;
+}
+.demo-card {
+  width: 100%; height: calc(100% - 50px);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 24px 22px 18px;
+  position: relative;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  background: #0e0e1c;
+}
+.demo-card.fade-out { opacity: 0; transform: translateX(-18px); }
+.demo-card.fade-in  { opacity: 0; transform: translateX(18px); }
+
+.demo-logo {
+  position: absolute; top: 16px; left: 18px; opacity: 0.18;
+}
+.demo-logo svg { width: 20px; height: 19px; fill: #fff; }
+
+.demo-qtext {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px; line-height: 1.55;
+  font-weight: 400; margin-bottom: 20px;
+  position: relative; z-index: 1;
+}
+.demo-qtext--md { font-size: 15px; }
+.demo-qtext--lg { font-size: 13px; }
+
+.demo-book {
+  font-family: 'Playfair Display', serif;
+  font-style: italic; font-size: 11px;
+  display: block; margin-bottom: 4px;
+  opacity: 0.65;
+}
+.demo-author-line {
+  font-size: 9px; font-weight: 500;
+  letter-spacing: 1.4px; text-transform: uppercase;
+  opacity: 0.38;
+}
+.demo-dots {
+  position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 5px; align-items: center;
+}
+.demo-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.22); }
+.demo-dot.on { background: rgba(255,255,255,0.7); width: 12px; border-radius: 2px; }
+
+.demo-tabbar {
+  height: 50px;
+  background: rgba(10,8,20,0.97);
+  border-top: 0.5px solid rgba(255,255,255,0.08);
+  display: flex; align-items: center; justify-content: space-around;
+  padding: 0 10px 5px;
+}
+
+.demo-nav {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  border: 0.8px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+.demo-nav:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+.demo-hint {
+  font-size: 11px; color: rgba(255,255,255,0.18);
+  margin-top: 20px; letter-spacing: 0.5px;
+}
+
+.demo-progress {
+  width: 120px; height: 2px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 1px;
+  margin: 14px auto 0;
+  overflow: hidden;
+}
+.demo-progress-fill {
+  height: 100%; border-radius: 1px;
+  transform-origin: left;
+  transition: width 0.1s linear;
+}
+
+@media (max-width: 600px) {
+  .demo-nav { display: none; }
+  .demo-wrap { gap: 0; }
+  .demo-phone-frame { width: 220px; }
+  .demo-phone-screen { height: 440px; }
+  .demo-card { height: calc(100% - 46px); }
+}
+
 /* ────────── BOTTOM CTA ────────── */
 .bottom { padding: 80px 0 100px; text-align: center; border-top: 0.8px solid rgba(255,255,255,0.06); }
 
@@ -546,6 +669,45 @@ footer {
     </div>
   </section>
 
+  <!-- ── LIVE DEMO ── -->
+  <section class="live-demo">
+    <p class="section-label">Essaie par toi-même</p>
+    <h2 class="section-title" style="margin-bottom:40px;">Un incipit,<br><em>à la fois.</em></h2>
+
+    <div class="demo-wrap">
+      <button class="demo-nav" id="demo-prev" aria-label="Précédent">
+        <svg width="10" height="16" viewBox="0 0 10 16" fill="none"><path d="M8 2L2 8L8 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <div class="demo-phone-frame" id="demo-phone">
+        <div class="demo-phone-notch"><div class="notch-cam"></div></div>
+        <div class="demo-phone-screen">
+          <div class="demo-card" id="demo-card">
+            <div class="demo-logo"><svg viewBox="0 0 28 27"><path d="M4 13.5C4 8.253 8.253 4 13.5 4S23 8.253 23 13.5c0 2.9-1.3 5.5-3.35 7.25L21 25l-4.8-2.4A9.55 9.55 0 0 1 13.5 23C8.253 23 4 18.747 4 13.5z"/></svg></div>
+            <p class="demo-qtext" id="demo-qtext"></p>
+            <div>
+              <span class="demo-book" id="demo-book"></span>
+              <span class="demo-author-line" id="demo-author"></span>
+            </div>
+            <div class="demo-dots" id="demo-dots"></div>
+          </div>
+          <div class="demo-tabbar">
+            <div class="tab-item"><span class="tab-icon active">⬡</span><span class="tab-label active">Inkipits</span></div>
+            <div class="tab-item"><span class="tab-icon">🎮</span><span class="tab-label">Jeux</span></div>
+            <div class="tab-item"><span class="tab-icon">⚙</span><span class="tab-label">Réglages</span></div>
+          </div>
+        </div>
+      </div>
+
+      <button class="demo-nav" id="demo-next" aria-label="Suivant">
+        <svg width="10" height="16" viewBox="0 0 10 16" fill="none"><path d="M2 2L8 8L2 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+
+    <div class="demo-progress"><div class="demo-progress-fill" id="demo-progress-fill"></div></div>
+    <p class="demo-hint">← swipe ou clique les flèches →</p>
+  </section>
+
   <!-- ── FEATURES ── -->
   <section class="section" style="padding-top:0;">
     <p class="section-label">Ce qu'il y a dedans</p>
@@ -603,5 +765,133 @@ footer {
 
 </div>
 
+<script>
+(function() {
+  const quotes = [
+    { text: '« Aujourd\'hui, maman est morte. Ou peut-être hier, je ne sais pas. »', book: 'L\'Étranger', author: 'Albert Camus · 1942' },
+    { text: '« Longtemps, je me suis couché de bonne heure. »', book: 'Du côté de chez Swann', author: 'Marcel Proust · 1913' },
+    { text: '« Bien des années plus tard, face au peloton d\'exécution, le colonel Aureliano Buendia allait se rappeler cet après-midi lointain où son père l\'avait emmené découvrir la glace. »', book: 'Cent ans de solitude', author: 'García Márquez · 1967' },
+    { text: '« Puis-je, monsieur, vous proposer mes services, sans risquer d\'être importun ? »', book: 'La Chute', author: 'Albert Camus · 1956' },
+    { text: '« Il était une fois un homme et une femme qui s\'aimaient beaucoup. »', book: 'L\'Amour dure trois ans', author: 'Frédéric Beigbeder · 1997' },
+    { text: '« J\'avais trente-sept ans et j\'étais assis dans un Boeing 747 qui s\'apprêtait à se poser à l\'aéroport de Hambourg. »', book: 'La Ballade de l\'impossible', author: 'Haruki Murakami · 1987' },
+    { text: '« Dans ma jeunesse plus sensible et plus vulnérable, mon père m\'a donné un conseil que je n\'ai cessé de ruminer depuis. »', book: 'Gatsby le Magnifique', author: 'F. Scott Fitzgerald · 1925' },
+    { text: '« Dans un trou vivait un hobbit. »', book: 'Le Hobbit', author: 'J.R.R. Tolkien · 1937' },
+    { text: '« Quand il se réveillait dans la nuit dans le froid et le noir des bois, il tendait la main pour toucher l\'enfant qui dormait à ses côtés. »', book: 'La Route', author: 'Cormac McCarthy · 2006' },
+    { text: '« Je n\'ai pas de souvenirs d\'enfance. »', book: 'W ou le souvenir d\'enfance', author: 'Georges Perec · 1975' },
+    { text: '« Par une chaleur exceptionnelle, au début de juillet, vers le soir, un jeune homme sortit de la soupente où il sous-louait une chambre. »', book: 'Crime et Châtiment', author: 'Dostoïevski · 1866' },
+    { text: '« J\'avais une ferme en Afrique, au pied des monts Ngong. »', book: 'La Ferme africaine', author: 'Karen Blixen · 1937' },
+  ];
+
+  const palette = [
+    { from: '#9b7fe8', to: '#6b4fa0' },
+    { from: '#e8929e', to: '#b52d5c' },
+    { from: '#8aafd4', to: '#4a7ab5' },
+    { from: '#88c98a', to: '#3d8a40' },
+    { from: '#e8c547', to: '#c47d20' },
+    { from: '#c490d1', to: '#8a3d9a' },
+    { from: '#7cbfb9', to: '#3a8a84' },
+    { from: '#e8a080', to: '#c05030' },
+    { from: '#b39dcc', to: '#7060a0' },
+    { from: '#93c464', to: '#5a8a30' },
+    { from: '#72c9f5', to: '#3090c0' },
+    { from: '#e880a8', to: '#b03070' },
+  ];
+
+  const TOTAL = 7;
+  const INTERVAL = 7000;
+  let idx = 0;
+  let timer = null;
+  let progress = null;
+  let progressStart = null;
+
+  const card     = document.getElementById('demo-card');
+  const qtextEl  = document.getElementById('demo-qtext');
+  const bookEl   = document.getElementById('demo-book');
+  const authorEl = document.getElementById('demo-author');
+  const dotsEl   = document.getElementById('demo-dots');
+  const fillEl   = document.getElementById('demo-progress-fill');
+
+  function renderDots() {
+    dotsEl.innerHTML = '';
+    for (let i = 0; i < TOTAL; i++) {
+      const d = document.createElement('div');
+      d.className = 'demo-dot' + (i === idx % TOTAL ? ' on' : '');
+      dotsEl.appendChild(d);
+    }
+  }
+
+  function applyGradient(i) {
+    const c = palette[i % palette.length];
+    const grad = `linear-gradient(135deg, ${c.from} 0%, ${c.to} 100%)`;
+    qtextEl.style.background = grad;
+    qtextEl.style.webkitBackgroundClip = 'text';
+    qtextEl.style.webkitTextFillColor = 'transparent';
+    qtextEl.style.backgroundClip = 'text';
+    bookEl.style.color = c.from;
+    authorEl.style.color = 'rgba(255,255,255,0.38)';
+    fillEl.style.background = grad;
+  }
+
+  function sizeText(len) {
+    qtextEl.className = 'demo-qtext';
+    if (len > 200) qtextEl.classList.add('demo-qtext--lg');
+    else if (len > 120) qtextEl.classList.add('demo-qtext--md');
+  }
+
+  function show(direction) {
+    card.classList.add('fade-out');
+    setTimeout(() => {
+      const q = quotes[idx % quotes.length];
+      qtextEl.textContent = q.text;
+      bookEl.textContent = q.book;
+      authorEl.textContent = q.author;
+      sizeText(q.text.length);
+      applyGradient(idx);
+      renderDots();
+      card.classList.remove('fade-out');
+      card.classList.add('fade-in');
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        card.classList.remove('fade-in');
+      }));
+    }, 280);
+  }
+
+  function startProgress() {
+    if (progress) cancelAnimationFrame(progress);
+    progressStart = performance.now();
+    function tick(now) {
+      const pct = Math.min(100, ((now - progressStart) / INTERVAL) * 100);
+      fillEl.style.width = pct + '%';
+      if (pct < 100) progress = requestAnimationFrame(tick);
+      else advance(1);
+    }
+    progress = requestAnimationFrame(tick);
+  }
+
+  function advance(dir) {
+    idx = (idx + dir + quotes.length) % quotes.length;
+    show(dir);
+    startProgress();
+  }
+
+  document.getElementById('demo-prev').addEventListener('click', () => advance(-1));
+  document.getElementById('demo-next').addEventListener('click', () => advance(1));
+
+  // Swipe
+  let _tx = null;
+  const phone = document.getElementById('demo-phone');
+  phone.addEventListener('touchstart', e => { _tx = e.touches[0].clientX; }, { passive: true });
+  phone.addEventListener('touchend', e => {
+    if (_tx === null) return;
+    const dx = e.changedTouches[0].clientX - _tx;
+    if (Math.abs(dx) > 40) advance(dx < 0 ? 1 : -1);
+    _tx = null;
+  }, { passive: true });
+
+  // Init
+  show(0);
+  startProgress();
+})();
+</script>
 </body>
 </html>
