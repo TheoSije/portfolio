@@ -306,79 +306,88 @@ h1 em { font-style: italic; color: rgba(255,255,255,0.52); }
 .incipit-player { padding: 0 0 100px; }
 
 .player-card {
-  min-height: 440px;
+  height: 500px;
   display: flex; flex-direction: column; justify-content: center;
-  padding: 64px 0 56px;
+  padding: 48px 52px;
   position: relative;
   cursor: pointer;
   user-select: none;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 0.8px solid rgba(255,255,255,0.07);
+  transition: background 0.7s ease, border-color 0.7s ease;
 }
 
 .player-mark {
   font-family: 'Playfair Display', serif;
-  font-size: 72px; font-weight: 900;
+  font-size: 56px; font-weight: 900;
   line-height: 0.8;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   display: block;
+  flex-shrink: 0;
 }
 
 .player-content {
+  flex: 1; display: flex; flex-direction: column; justify-content: center;
+  min-height: 0;
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
-.player-content.out { opacity: 0; transform: translateY(12px); }
+.player-content.out { opacity: 0; transform: translateY(10px); }
 
 .player-text {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(28px, 5.5vw, 72px);
-  font-weight: 800; line-height: 1.1;
-  margin-bottom: 32px;
+  font-weight: 800; line-height: 1.12;
+  margin-bottom: 24px;
 }
 
 .player-book {
   font-family: 'Playfair Display', serif;
-  font-style: italic; font-size: clamp(14px, 1.8vw, 18px);
-  display: block; margin-bottom: 6px;
-  opacity: 0.55;
-  color: #fff;
+  font-style: italic; font-size: 16px;
+  display: block; margin-bottom: 5px;
+  color: rgba(255,255,255,0.5);
 }
 
 .player-author {
-  font-size: 11px; font-weight: 500;
+  font-size: 10px; font-weight: 500;
   letter-spacing: 2.5px; text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.28);
 }
 
 .player-controls {
-  display: flex; align-items: center; gap: 14px;
-  margin-top: 48px;
+  display: flex; align-items: center; gap: 12px;
+  flex-shrink: 0; margin-top: 36px;
 }
 
 .player-btn {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: rgba(255,255,255,0.05);
-  border: 0.8px solid rgba(255,255,255,0.1);
-  color: rgba(255,255,255,0.45);
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  border: 0.8px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.5);
   cursor: pointer; display: flex; align-items: center; justify-content: center;
   transition: background 0.2s, color 0.2s; flex-shrink: 0;
 }
-.player-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.player-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
 
-.player-dots { display: flex; gap: 6px; align-items: center; }
+.player-dots { display: flex; gap: 5px; align-items: center; }
 .player-dot {
   width: 5px; height: 5px; border-radius: 50%;
-  background: rgba(255,255,255,0.18);
-  transition: width 0.3s, border-radius 0.3s, background 0.3s;
+  background: rgba(255,255,255,0.15);
+  transition: width 0.3s, border-radius 0.3s, background 0.4s;
 }
-.player-dot.on { width: 18px; border-radius: 3px; }
+.player-dot.on { width: 16px; border-radius: 3px; }
 
 .player-hint {
-  font-size: 11px; color: rgba(255,255,255,0.15);
+  font-size: 10px; color: rgba(255,255,255,0.15);
   margin-left: auto; letter-spacing: 0.5px;
 }
 
-@media (max-width: 560px) {
-  .player-card { min-height: 340px; padding: 48px 0 44px; }
+@media (max-width: 720px) {
+  .player-card { height: 420px; padding: 36px 32px; }
+}
+@media (max-width: 480px) {
+  .player-card { height: 380px; padding: 28px 24px; border-radius: 18px; }
   .player-hint { display: none; }
+  .player-mark { font-size: 44px; margin-bottom: 12px; }
 }
 
 /* ────────── BOTTOM CTA ────────── */
@@ -548,6 +557,7 @@ footer {
 
   <!-- ── INCIPIT PLAYER ── -->
   <section class="incipit-player">
+    <div class="container">
     <div class="player-card" id="player-card">
       <span class="player-mark" id="player-mark">"</span>
       <div class="player-content" id="player-content">
@@ -565,6 +575,7 @@ footer {
         <div class="player-dots" id="player-dots"></div>
         <span class="player-hint">swipe ou clique</span>
       </div>
+    </div>
     </div>
   </section>
 
@@ -627,7 +638,9 @@ footer {
 
 <script>
 (function() {
-  const quotes = [
+
+  // ── Fallback hardcoded ──────────────────────────────────────────────────
+  const FALLBACK = [
     { text: 'Aujourd\'hui, maman est morte. Ou peut-être hier, je ne sais pas.', book: 'L\'Étranger', author: 'Albert Camus · 1942' },
     { text: 'Longtemps, je me suis couché de bonne heure.', book: 'Du côté de chez Swann', author: 'Marcel Proust · 1913' },
     { text: 'Dans un trou vivait un hobbit.', book: 'Le Hobbit', author: 'J.R.R. Tolkien · 1937' },
@@ -643,25 +656,27 @@ footer {
   ];
 
   const palette = [
-    { from: '#c490d1', to: '#7a40a0' },
-    { from: '#e8929e', to: '#b03060' },
-    { from: '#8aafd4', to: '#3a6aa0' },
-    { from: '#e8c547', to: '#b07020' },
-    { from: '#88c98a', to: '#3a7840' },
-    { from: '#9b7fe8', to: '#5030a0' },
-    { from: '#7cbfb9', to: '#307870' },
-    { from: '#e8a080', to: '#b04030' },
-    { from: '#72c9f5', to: '#2080b0' },
-    { from: '#e880a8', to: '#a02870' },
-    { from: '#fde68a', to: '#c07820' },
-    { from: '#b39dcc', to: '#604890' },
+    { from: '#c490d1', to: '#5a2880' },
+    { from: '#e8929e', to: '#902050' },
+    { from: '#8aafd4', to: '#2a5890' },
+    { from: '#e8c547', to: '#906010' },
+    { from: '#88c98a', to: '#2a6830' },
+    { from: '#9b7fe8', to: '#402090' },
+    { from: '#7cbfb9', to: '#206860' },
+    { from: '#e8a080', to: '#903020' },
+    { from: '#72c9f5', to: '#1070a0' },
+    { from: '#e880a8', to: '#801860' },
+    { from: '#fde68a', to: '#a06010' },
+    { from: '#b39dcc', to: '#503880' },
   ];
 
+  let quotes = FALLBACK;
   const INTERVAL = 8000;
   let idx = 0;
   let raf = null;
   let rafStart = null;
 
+  const cardEl    = document.getElementById('player-card');
   const contentEl = document.getElementById('player-content');
   const markEl    = document.getElementById('player-mark');
   const textEl    = document.getElementById('player-text');
@@ -669,15 +684,38 @@ footer {
   const authorEl  = document.getElementById('player-author');
   const dotsEl    = document.getElementById('player-dots');
 
+  // ── Font auto-fit (basé sur longueur du texte) ──
+  function autoFontSize(len) {
+    if      (len < 50)  return '64px';
+    else if (len < 90)  return '52px';
+    else if (len < 140) return '42px';
+    else if (len < 200) return '34px';
+    else                return '26px';
+  }
+
+  // ── Gradient texte + bg card ──
   function applyGradient(i) {
     const c = palette[i % palette.length];
     const grad = `linear-gradient(135deg, ${c.from} 0%, ${c.to} 100%)`;
+    // Texte gradient
     [textEl, markEl].forEach(el => {
       el.style.background = grad;
       el.style.webkitBackgroundClip = 'text';
       el.style.webkitTextFillColor = 'transparent';
       el.style.backgroundClip = 'text';
     });
+    // Bg card : version sombre du gradient
+    cardEl.style.background = `linear-gradient(135deg, rgba(${hexToRgb(c.from)},0.13) 0%, rgba(${hexToRgb(c.to)},0.07) 100%)`;
+    cardEl.style.borderColor = `rgba(${hexToRgb(c.from)},0.18)`;
+    // Dot actif
+    dotsEl.querySelectorAll('.player-dot.on').forEach(d => d.style.background = grad);
+  }
+
+  function hexToRgb(hex) {
+    const r = parseInt(hex.slice(1,3),16);
+    const g = parseInt(hex.slice(3,5),16);
+    const b = parseInt(hex.slice(5,7),16);
+    return `${r},${g},${b}`;
   }
 
   function renderDots() {
@@ -685,10 +723,6 @@ footer {
     quotes.forEach((_, i) => {
       const d = document.createElement('div');
       d.className = 'player-dot' + (i === idx ? ' on' : '');
-      if (i === idx) {
-        const c = palette[idx % palette.length];
-        d.style.background = `linear-gradient(135deg, ${c.from}, ${c.to})`;
-      }
       dotsEl.appendChild(d);
     });
   }
@@ -698,10 +732,11 @@ footer {
     setTimeout(() => {
       const q = quotes[idx];
       textEl.textContent = q.text;
+      textEl.style.fontSize = autoFontSize(q.text.length);
       bookEl.textContent = q.book;
       authorEl.textContent = q.author;
-      applyGradient(idx);
       renderDots();
+      applyGradient(idx);
       contentEl.classList.remove('out');
     }, 300);
   }
@@ -709,11 +744,10 @@ footer {
   function startTimer() {
     if (raf) cancelAnimationFrame(raf);
     rafStart = performance.now();
-    function tick(now) {
+    (function tick(now) {
       if ((now - rafStart) >= INTERVAL) { advance(1); return; }
       raf = requestAnimationFrame(tick);
-    }
-    raf = requestAnimationFrame(tick);
+    })(performance.now());
   }
 
   function advance(dir) {
@@ -725,19 +759,48 @@ footer {
   document.getElementById('player-prev').addEventListener('click', e => { e.stopPropagation(); advance(-1); });
   document.getElementById('player-next').addEventListener('click', e => { e.stopPropagation(); advance(1); });
 
-  // Swipe
   let _tx = null;
-  const card = document.getElementById('player-card');
-  card.addEventListener('touchstart', e => { _tx = e.touches[0].clientX; }, { passive: true });
-  card.addEventListener('touchend', e => {
+  cardEl.addEventListener('touchstart', e => { _tx = e.touches[0].clientX; }, { passive: true });
+  cardEl.addEventListener('touchend', e => {
     if (_tx === null) return;
     const dx = e.changedTouches[0].clientX - _tx;
     if (Math.abs(dx) > 50) advance(dx < 0 ? 1 : -1);
     _tx = null;
   }, { passive: true });
 
+  // ── Fetch CMS (GitHub Issues publiques) ──
+  async function fetchCMS() {
+    try {
+      const res = await fetch('https://api.github.com/repos/TheoSije/inkipit-content/issues?state=closed&per_page=50', {
+        headers: { 'Accept': 'application/vnd.github+json' }
+      });
+      if (!res.ok) return;
+      const issues = await res.json();
+      const parsed = issues.map(issue => {
+        try {
+          const d = JSON.parse(issue.body);
+          if (!d?.text) return null;
+          return {
+            text: d.text,
+            book: d.book || '',
+            author: [d.author, d.year].filter(Boolean).join(' · ')
+          };
+        } catch { return null; }
+      }).filter(Boolean);
+      if (parsed.length >= 3) {
+        quotes = parsed.sort(() => Math.random() - 0.5);
+        idx = 0;
+        show();
+        startTimer();
+      }
+    } catch {}
+  }
+
+  // Init : démarre avec fallback, puis remplace si CMS dispo
   show();
   startTimer();
+  fetchCMS();
+
 })();
 </script>
 </body>
