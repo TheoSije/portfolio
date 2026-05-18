@@ -686,7 +686,7 @@ function renderList() {
           <div class="field-group">
             <div class="field-label">🖼️ Photo auteur (URL)</div>
             <input type="url" id="edit-author-pic-${inc._i}" value="${escHtml(inc.authorPic||'')}" placeholder="https://…/portrait.jpg" oninput="updateAuthorPicPreview(${inc._i},this.value)" />
-            <img id="author-pic-preview-${inc._i}" src="${inc.authorPic||''}" referrerpolicy="no-referrer" alt="" style="margin-top:8px;width:60px;height:60px;border-radius:50%;object-fit:cover;display:${inc.authorPic?'block':'none'}" onerror="this.style.display='none'">
+            <img id="author-pic-preview-${inc._i}" src="${inc.authorPic||''}" referrerpolicy="no-referrer" alt="" style="margin-top:8px;width:60px;height:86px;border-radius:6px;object-fit:cover;display:${inc.authorPic?'block':'none'}" onerror="this.style.display='none'">
           </div>
           <div class="row-edit-actions">
             <button class="btn btn-gold btn-sm" onclick="saveEdit(${inc._i})">Enregistrer</button>
