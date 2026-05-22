@@ -685,8 +685,11 @@ function renderList() {
           </div>
           <div class="field-group">
             <div class="field-label">🖼️ Photo auteur (URL)</div>
-            <input type="url" id="edit-author-pic-${inc._i}" value="${escHtml(inc.authorPic||'')}" placeholder="https://…/portrait.jpg" oninput="updateAuthorPicPreview(${inc._i},this.value)" />
-            <img id="author-pic-preview-${inc._i}" src="${inc.authorPic||''}" referrerpolicy="no-referrer" alt="" style="margin-top:8px;width:60px;height:86px;border-radius:6px;object-fit:cover;display:${inc.authorPic?'block':'none'}" onerror="this.style.display='none'">
+            <div style="display:flex;gap:6px;align-items:center">
+              <input type="url" id="edit-author-pic-${inc._i}" value="${escHtml(inc.author_pic||inc.authorPic||'')}" placeholder="https://…/portrait.jpg" oninput="updateAuthorPicPreview(${inc._i},this.value)" style="flex:1" />
+              <button class="btn btn-ghost btn-sm" onclick="fetchWikiPhoto(${inc._i})" title="Chercher photo Wikipedia">🔍</button>
+            </div>
+            <img id="author-pic-preview-${inc._i}" src="${inc.author_pic||inc.authorPic||''}" referrerpolicy="no-referrer" alt="" style="margin-top:8px;width:60px;height:86px;border-radius:6px;object-fit:cover;display:${(inc.author_pic||inc.authorPic)?'block':'none'}" onerror="this.style.display='none'">
           </div>
           <div class="row-edit-actions">
             <button class="btn btn-gold btn-sm" onclick="saveEdit(${inc._i})">Enregistrer</button>
@@ -716,6 +719,42 @@ function updateAuthorPicPreview(i, url) {
     img.onerror = () => { img.style.display = 'none'; };
   } else {
     img.style.display = 'none';
+  }
+}
+
+async function fetchWikiPhoto(i) {
+  const btn = document.querySelector(`[onclick="fetchWikiPhoto(${i})"]`);
+  const input = document.getElementById(`edit-author-pic-${i}`);
+  const authorField = document.getElementById(`edit-author-${i}`).value;
+  // Extrait le nom de l'auteur depuis "Titre — Auteur, Année"
+  const authorName = (authorField.includes(' — ')
+    ? authorField.split(' — ')[1].split(',')[0]
+    : authorField.split(',')[0]
+  ).trim();
+
+  if (!authorName) { alert('Remplis le champ auteur d\'abord.'); return; }
+  if (btn) { btn.textContent = '⏳'; btn.disabled = true; }
+
+  const tryWiki = async (lang) => {
+    const url = `https://${lang}.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(authorName)}&prop=pageimages&format=json&pithumbsize=400&origin=*`;
+    try {
+      const res = await fetch(url);
+      const json = await res.json();
+      const pages = json?.query?.pages || {};
+      const page = Object.values(pages)[0];
+      return page?.thumbnail?.source || null;
+    } catch { return null; }
+  };
+
+  let photoUrl = await tryWiki('fr') || await tryWiki('en');
+
+  if (btn) { btn.textContent = '🔍'; btn.disabled = false; }
+
+  if (photoUrl) {
+    input.value = photoUrl;
+    updateAuthorPicPreview(i, photoUrl);
+  } else {
+    alert(`Aucune photo trouvée sur Wikipedia pour "${authorName}"`);
   }
 }
 
@@ -1086,7 +1125,7 @@ async function addIncipit() {
   if (description) entry.description = description;
   if (bio)         entry.bio         = bio;
   if (amazon)      entry.amazon      = amazon;
-  if (authorPic)   entry.authorPic   = authorPic;
+  if (authorPic)   entry.author_pic  = authorPic;
 
   incipits.push(entry);
   document.getElementById('add-form').style.display = 'none';
@@ -1135,7 +1174,8 @@ async function saveEdit(i) {
   if (description) entry.description = description; else delete entry.description;
   if (bio)         entry.bio         = bio;         else delete entry.bio;
   if (amazon)      entry.amazon      = amazon;      else delete entry.amazon;
-  if (authorPic)   entry.authorPic   = authorPic;   else delete entry.authorPic;
+  if (authorPic)   entry.author_pic  = authorPic;   else delete entry.author_pic;
+  delete entry.authorPic; // migration : supprime l'ancienne clé camelCase si présente
 
   // Garde-fou : vérifier qu'on ne réduit pas le nombre d'inkipits
   if (incipits.length !== incipits.length) { alert('Erreur de cohérence — rechargement.'); reload(); return; }
