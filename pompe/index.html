@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pompe! — Trouve une pompe à vélo près de toi</title>
+<meta name="description" content="La carte la plus complète des pompes à vélo en France. Données en temps réel, communauté de cyclistes, mode mainteneur.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0f05;
+  --green: #b8f04a;
+  --green2: #d4f77a;
+  --text: rgba(255,255,255,0.88);
+  --muted: rgba(255,255,255,0.38);
+  --card-bg: rgba(255,255,255,0.04);
+  --card-border: rgba(255,255,255,0.07);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ── Ambient bg ── */
+.ambient {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 50% at 60% -5%, rgba(90,160,20,0.3) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 10% 80%, rgba(60,120,10,0.15) 0%, transparent 55%);
+}
+
+/* ── Nav ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(10,15,5,0.9), transparent);
+  backdrop-filter: blur(0px);
+}
+
+.nav-back {
+  font-size: 12px; font-weight: 500; letter-spacing: 0.05em;
+  color: var(--muted); text-decoration: none;
+  display: flex; align-items: center; gap: 6px;
+  transition: color 0.18s;
+}
+.nav-back:hover { color: var(--green); }
+
+.nav-logo {
+  font-size: 15px; font-weight: 800;
+  color: #fff; letter-spacing: -0.02em;
+}
+
+/* ── Container ── */
+.container { max-width: 1000px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 1; }
+
+/* ── Hero ── */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  min-height: 100vh;
+  padding: 100px 0 60px;
+}
+
+@media (max-width: 720px) {
+  .hero { grid-template-columns: 1fr; padding: 80px 0 40px; gap: 48px; }
+  .hero-visual { order: -1; }
+}
+
+/* Left */
+.hero-left { display: flex; flex-direction: column; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--green); margin-bottom: 28px;
+  width: fit-content;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.app-icon-wrap {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 24px;
+}
+.app-icon {
+  width: 72px; height: 72px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #b8f04a 0%, #f0ffc0 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px;
+  box-shadow: 0 8px 32px rgba(184,240,74,0.3), 0 2px 8px rgba(0,0,0,0.5);
+  flex-shrink: 0;
+}
+.app-name-lg { font-size: 22px; font-weight: 700; color: #fff; }
+.app-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+h1 {
+  font-size: clamp(34px, 4.5vw, 52px);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
+h1 em { font-style: normal; color: var(--green); }
+
+.hero-desc {
+  font-size: 16px; font-weight: 300;
+  color: var(--muted); line-height: 1.7;
+  max-width: 400px; margin-bottom: 36px;
+}
+
+.cta-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+.btn-store {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--green); color: #0a0f05;
+  text-decoration: none; border-radius: 14px;
+  padding: 13px 22px; font-size: 14px; font-weight: 700;
+  transition: transform 0.18s, box-shadow 0.18s;
+  box-shadow: 0 4px 24px rgba(184,240,74,0.35);
+  letter-spacing: -0.01em;
+}
+.btn-store:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(184,240,74,0.5); }
+.btn-store svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+.cta-note { font-size: 12px; color: rgba(255,255,255,0.2); }
+
+/* ── Hero visual — phone mockup ── */
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 520px;
+}
+
+.phone-mockup {
+  width: 220px;
+  background: #111a08;
+  border-radius: 40px;
+  padding: 12px;
+  box-shadow:
+    0 0 0 1.5px rgba(255,255,255,0.1),
+    0 30px 80px rgba(0,0,0,0.7),
+    0 0 60px rgba(184,240,74,0.08),
+    inset 0 0 0 1px rgba(255,255,255,0.04);
+  position: relative;
+  z-index: 2;
+}
+
+.phone-notch {
+  width: 70px; height: 22px;
+  background: #111a08;
+  border-radius: 0 0 14px 14px;
+  margin: 0 auto 6px;
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+}
+.notch-cam { width: 9px; height: 9px; border-radius: 50%; background: #050a02; border: 1.5px solid rgba(255,255,255,0.08); }
+
+.phone-screen {
+  border-radius: 28px;
+  overflow: hidden;
+  height: 420px;
+  position: relative;
+  background: #1a2a0a;
+}
+
+/* Map screen inside phone */
+.map-screen {
+  width: 100%; height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* SVG map background */
+.map-bg {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(135deg, #1a2a0a 0%, #0f1f05 100%);
+}
+
+/* Grid lines simulating map */
+.map-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(184,240,74,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(184,240,74,0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Roads */
+.map-roads {
+  position: absolute; inset: 0;
+}
+.map-roads svg { width: 100%; height: 100%; }
+
+/* Pump pins */
+.pin {
+  position: absolute;
+  display: flex; flex-direction: column; align-items: center;
+  transform: translateX(-50%);
+}
+.pin-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 12px rgba(184,240,74,0.8), 0 0 4px rgba(184,240,74,1);
+  border: 2px solid rgba(255,255,255,0.9);
+  position: relative; z-index: 2;
+}
+.pin-dot.offline {
+  background: rgba(255,100,80,0.9);
+  box-shadow: 0 0 8px rgba(255,100,80,0.5);
+}
+.pin-pulse {
+  position: absolute; top: -4px; left: -4px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: rgba(184,240,74,0.25);
+  animation: pin-pulse 2s ease-out infinite;
+}
+@keyframes pin-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+/* User location */
+.user-pin {
+  position: absolute;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: #4a9eff;
+  box-shadow: 0 0 0 4px rgba(74,158,255,0.25), 0 0 12px rgba(74,158,255,0.6);
+  border: 2px solid #fff;
+  transform: translate(-50%, -50%);
+}
+
+/* Status bar */
+.phone-status {
+  position: absolute; top: 0; left: 0; right: 0;
+  padding: 8px 16px 6px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(26,42,10,0.95), transparent);
+  z-index: 10;
+}
+.status-time { font-size: 11px; font-weight: 600; color: #fff; }
+.status-icons { display: flex; gap: 4px; align-items: center; }
+.status-icon { width: 12px; height: 12px; opacity: 0.8; }
+
+/* Search bar */
+.map-searchbar {
+  position: absolute; bottom: 16px; left: 10px; right: 10px;
+  background: rgba(20,35,10,0.95);
+  border: 1px solid rgba(184,240,74,0.2);
+  border-radius: 14px;
+  padding: 10px 14px;
+  display: flex; align-items: center; gap: 8px;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+}
+.searchbar-icon { font-size: 13px; }
+.searchbar-text { font-size: 11px; color: rgba(255,255,255,0.5); font-family: 'Inter', sans-serif; }
+.searchbar-count {
+  margin-left: auto;
+  font-size: 10px; font-weight: 600;
+  color: var(--green);
+  background: rgba(184,240,74,0.12);
+  padding: 2px 6px; border-radius: 6px;
+}
+
+/* Glow effect */
+.hero-glow {
+  position: absolute;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(184,240,74,0.12) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+/* ── Features ── */
+.features { padding: 80px 0 100px; }
+
+.section-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--green);
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-size: clamp(26px, 3.5vw, 38px);
+  font-weight: 800; color: #fff;
+  line-height: 1.15; margin-bottom: 48px;
+  letter-spacing: -0.03em;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+@media (max-width: 700px) { .features-grid { grid-template-columns: 1fr; } }
+
+.feat {
+  background: var(--card-bg);
+  border: 0.8px solid var(--card-border);
+  border-radius: 20px; padding: 28px 24px;
+  transition: border-color 0.2s, background 0.2s;
+  position: relative; overflow: hidden;
+}
+.feat:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(184,240,74,0.2);
+}
+.feat::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 0%, rgba(184,240,74,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.feat-icon {
+  font-size: 28px; margin-bottom: 16px; display: block;
+  filter: drop-shadow(0 2px 8px rgba(184,240,74,0.3));
+}
+.feat-title {
+  font-size: 15px; font-weight: 700; color: #fff;
+  margin-bottom: 8px; letter-spacing: -0.02em;
+}
+.feat-desc {
+  font-size: 13px; font-weight: 300; color: var(--muted);
+  line-height: 1.65;
+}
+
+/* ── Footer ── */
+footer {
+  padding: 32px 0 48px;
+  border-top: 0.8px solid rgba(255,255,255,0.06);
+}
+.footer-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-brand { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.3); }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.2); }
+</style>
+</head>
+<body>
+
+<div class="ambient"></div>
+
+<nav>
+  <a class="nav-back" href="../" onclick="event.preventDefault();if(window.parent!==window){window.parent.postMessage('close-minisite','*');}else{window.location.href='../';}">
+    ← theo.design
+  </a>
+  <span class="nav-logo">Pompe!</span>
+</nav>
+
+<div class="container">
+  <section class="hero">
+
+    <!-- Left -->
+    <div class="hero-left">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        App iOS · France
+      </div>
+
+      <div class="app-icon-wrap">
+        <div class="app-icon">💨</div>
+        <div>
+          <div class="app-name-lg">Pompe!</div>
+          <div class="app-sub">Trouve une pompe à vélo près de toi</div>
+        </div>
+      </div>
+
+      <h1>La pompe à vélo<br><em>la plus proche.</em></h1>
+
+      <p class="hero-desc">
+        Pompe! agrège les données de dizaines de sources — Decathlon, Intersport, réseaux de transport, associations cyclistes, OpenStreetMap — pour t'offrir la carte la plus complète de France.
+      </p>
+
+      <div class="cta-row">
+        <a class="btn-store" href="#" onclick="return false;">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          Bientôt sur l'App Store
+        </a>
+        <span class="cta-note">Disponible en France</span>
+      </div>
+    </div>
+
+    <!-- Right — phone mockup -->
+    <div class="hero-visual">
+      <div class="hero-glow"></div>
+      <div class="phone-mockup">
+        <div class="phone-notch">
+          <div class="notch-cam"></div>
+        </div>
+        <div class="phone-screen">
+          <div class="map-screen">
+            <div class="map-bg"></div>
+            <div class="map-grid"></div>
+
+            <!-- Roads SVG -->
+            <svg class="map-roads" style="position:absolute;inset:0" viewBox="0 0 220 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="140" x2="220" y2="155" stroke="rgba(184,240,74,0.07)" stroke-width="8"/>
+              <line x1="0" y1="250" x2="220" y2="240" stroke="rgba(184,240,74,0.05)" stroke-width="5"/>
+              <line x1="70" y1="0" x2="85" y2="420" stroke="rgba(184,240,74,0.06)" stroke-width="6"/>
+              <line x1="155" y1="0" x2="145" y2="420" stroke="rgba(184,240,74,0.05)" stroke-width="4"/>
+              <line x1="0" y1="320" x2="220" y2="310" stroke="rgba(184,240,74,0.04)" stroke-width="3"/>
+              <line x1="110" y1="0" x2="120" y2="420" stroke="rgba(184,240,74,0.03)" stroke-width="2"/>
+            </svg>
+
+            <!-- Status bar -->
+            <div class="phone-status">
+              <span class="status-time">11:55</span>
+              <div class="status-icons">
+                <svg class="status-icon" viewBox="0 0 12 12" fill="rgba(255,255,255,0.8)"><rect x="0" y="4" width="2" height="8" rx="0.5"/><rect x="3" y="2.5" width="2" height="9.5" rx="0.5"/><rect x="6" y="1" width="2" height="11" rx="0.5"/><rect x="9" y="0" width="2" height="12" rx="0.5"/></svg>
+                <svg class="status-icon" viewBox="0 0 16 12" fill="rgba(255,255,255,0.8)"><rect x="0.5" y="0.5" width="13" height="11" rx="1.5" stroke="rgba(255,255,255,0.5)" stroke-width="1" fill="none"/><rect x="2" y="2" width="8" height="8" rx="0.5"/><rect x="14" y="3.5" width="1.5" height="5" rx="0.75"/></svg>
+              </div>
+            </div>
+
+            <!-- User location -->
+            <div class="user-pin" style="left:50%;top:52%"></div>
+
+            <!-- Pump pins -->
+            <div class="pin" style="left:35%;top:28%">
+              <div class="pin-pulse"></div>
+              <div class="pin-dot"></div>
+            </div>
+            <div class="pin" style="left:65%;top:38%">
+              <div class="pin-dot"></div>
+            </div>
+            <div class="pin" style="left:22%;top:58%">
+              <div class="pin-dot offline"></div>
+            </div>
+            <div class="pin" style="left:78%;top:62%">
+              <div class="pin-pulse" style="animation-delay:0.8s"></div>
+              <div class="pin-dot"></div>
+            </div>
+            <div class="pin" style="left:55%;top:72%">
+              <div class="pin-dot"></div>
+            </div>
+            <div class="pin" style="left:40%;top:80%">
+              <div class="pin-dot"></div>
+            </div>
+
+            <!-- Search bar -->
+            <div class="map-searchbar">
+              <span class="searchbar-icon">🔍</span>
+              <span class="searchbar-text">Pompes autour de moi</span>
+              <span class="searchbar-count">12 pompes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <p class="section-label">Fonctionnalités</p>
+    <h2 class="section-title">Tout ce dont tu as besoin<br>quand tu en as besoin.</h2>
+
+    <div class="features-grid">
+      <div class="feat">
+        <span class="feat-icon">🗺️</span>
+        <div class="feat-title">Carte complète</div>
+        <p class="feat-desc">Decathlon, Intersport, IDFM, Grand Lyon, Bordeaux, Strasbourg, Rennes, associations cyclistes, OpenStreetMap — toutes les sources en une.</p>
+      </div>
+      <div class="feat">
+        <span class="feat-icon">👥</span>
+        <div class="feat-title">Communauté</div>
+        <p class="feat-desc">Pompe hors service ? Signale-le en un tap. Tous les cyclistes de la ville en bénéficient instantanément.</p>
+      </div>
+      <div class="feat">
+        <span class="feat-icon">🔧</span>
+        <div class="feat-title">Mode mainteneur</div>
+        <p class="feat-desc">Collectivités et enseignes vélo : liste triée par urgence, navigation intégrée, marquage post-intervention.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-brand">Pompe! · by Théo Jégousse</span>
+      <span class="footer-copy">© 2025</span>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
