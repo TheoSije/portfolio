@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Politique de confidentialité — Pompe!</title>
+<meta name="description" content="Politique de confidentialité de l'application Pompe!">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #0a0f05;
+    color: #e8e8e8;
+    line-height: 1.7;
+    padding: 0 20px;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 80px 0 120px;
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    margin-bottom: 56px;
+    transition: color 0.2s;
+  }
+  .back:hover { color: rgba(255,255,255,0.7); }
+  .back svg { width: 14px; height: 14px; }
+
+  .app-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .app-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #b8f04a, #f0ffc0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  .app-name {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: white;
+  }
+
+  .app-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 2px;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+
+  .updated {
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 48px;
+  }
+
+  h2 {
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    margin: 36px 0 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+  }
+
+  p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 16px;
+  }
+
+  ul {
+    list-style: none;
+    margin-bottom: 16px;
+  }
+
+  ul li {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  ul li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: rgba(255,255,255,0.25);
+  }
+
+  a {
+    color: #b8f04a;
+    text-decoration: none;
+  }
+  a:hover { text-decoration: underline; }
+
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    margin: 48px 0;
+  }
+
+  .contact-block {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-top: 48px;
+  }
+
+  .contact-block p { margin: 0; font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <a href="./" class="back">
+    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Pompe!
+  </a>
+
+  <div class="app-header">
+    <div class="app-icon">💨</div>
+    <div>
+      <div class="app-name">Pompe!</div>
+      <div class="app-sub">Application iOS · Théo Jégousse</div>
+    </div>
+  </div>
+
+  <h1>Politique de confidentialité</h1>
+  <p class="updated">Dernière mise à jour : juin 2025</p>
+
+  <p>Cette politique de confidentialité décrit comment l'application Pompe! collecte, utilise et protège vos informations lorsque vous utilisez l'app.</p>
+
+  <h2>Données collectées</h2>
+  <p>Pompe! collecte les données suivantes pour fonctionner et s'améliorer :</p>
+  <ul>
+    <li>Votre <strong style="color:rgba(255,255,255,0.8)">localisation</strong> (uniquement lorsque l'app est active) pour afficher les pompes proches de vous</li>
+    <li>Les signalements que vous effectuez (pompe en panne, pompe opérationnelle)</li>
+    <li>Des données d'utilisation anonymes (interactions, erreurs) via Firebase Analytics</li>
+    <li>Les données techniques (version iOS, modèle d'appareil)</li>
+  </ul>
+
+  <h2>Localisation</h2>
+  <p>Pompe! utilise votre position GPS pour centrer la carte sur votre emplacement et calculer les distances jusqu'aux pompes. Cette donnée n'est <strong style="color:rgba(255,255,255,0.8)">ni stockée, ni partagée</strong> avec des tiers. Elle est utilisée uniquement en temps réel, localement sur votre appareil.</p>
+  <p>Vous pouvez refuser l'accès à la localisation dans les Réglages iOS — l'app restera utilisable en cherchant manuellement une ville ou adresse.</p>
+
+  <h2>Signalements communautaires</h2>
+  <p>Lorsque vous signalez une pompe hors service ou opérationnelle, le signalement est enregistré de façon <strong style="color:rgba(255,255,255,0.8)">anonyme</strong>. Aucun identifiant personnel n'y est associé.</p>
+
+  <h2>Ce que nous ne collectons pas</h2>
+  <ul>
+    <li>Nom, email ou toute information personnelle identifiable</li>
+    <li>Contacts ou données de l'appareil</li>
+    <li>Historique de navigation extérieur à l'app</li>
+    <li>Localisation en arrière-plan</li>
+  </ul>
+
+  <h2>Partage des données</h2>
+  <p>Pompe! ne vend, ne loue et ne partage aucune donnée personnelle avec des tiers à des fins commerciales. Les données analytiques anonymes sont partagées uniquement avec Firebase Analytics (Google) pour améliorer l'app.</p>
+  <p>Les données cartographiques proviennent de sources publiques (OpenStreetMap, données open data des collectivités) et d'enseignes partenaires (Decathlon, Intersport, réseaux de transport).</p>
+
+  <h2>Vos droits (RGPD)</h2>
+  <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez des droits suivants :</p>
+  <ul>
+    <li>Droit d'accès à vos données</li>
+    <li>Droit de suppression</li>
+    <li>Droit d'opposition au traitement</li>
+  </ul>
+  <p>Pour exercer ces droits, contactez-nous à l'adresse ci-dessous.</p>
+
+  <h2>Sécurité</h2>
+  <p>Les données collectées sont transmises via des connexions chiffrées (HTTPS) et stockées sur les serveurs sécurisés de Google Firebase.</p>
+
+  <h2>Modifications</h2>
+  <p>Cette politique peut être mise à jour occasionnellement. Toute modification sera reflétée sur cette page avec une date de mise à jour révisée.</p>
+
+  <hr class="divider">
+
+  <div class="contact-block">
+    <p style="color:white; font-weight:600; margin-bottom:8px;">Une question ?</p>
+    <p>Théo Jégousse · <a href="mailto:theo@jegousse.com">theo@jegousse.com</a><br>
+    <a href="https://jegousse.com">jegousse.com</a></p>
+  </div>
+
+</div>
+</body>
+</html>
