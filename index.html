@@ -1766,6 +1766,19 @@ button:focus-visible, a:focus-visible { border-radius: 4px; }
         </div>
       </div>
     </div>
+    <div class="proj-card" onclick="showProject('pompe')">
+      <div class="proj-card-img proj-img--pompe">
+        <div class="pompe-bg-anim"></div>
+        <div class="pompe-content">
+          <div class="pompe-icon">💨</div>
+          <div class="pompe-title">Pompe!</div>
+        </div>
+      </div>
+      <div class="proj-card-inner">
+        <span class="proj-card-year">2025</span>
+        <h3 class="proj-card-name">Pompe!</h3>
+      </div>
+    </div>
     <!-- Tune My Music masqué — intégré dans la section Deezer -->
   </div>
   </div><!-- /.carousel-wrap -->
@@ -2206,6 +2219,16 @@ const P = {
   tunemymusic: { title:'Tune My Music', type:'Projet Pro', tags:['SaaS','Musique','Streaming'], year:'2024', role:'Product Design · Dev', context:"Un SaaS B2C à des millions d'utilisateurs — une interface qui doit être évidente en 30 secondes. Transfert de playlists entre Spotify, Deezer, Apple Music et 40+ services, en quelques clics. Design et développement complets : UI propre, onboarding en micro-étapes, conversion au cœur de chaque écran. Un produit qui cache une vraie complexité technique derrière une expérience limpide.", problem:"La galère universelle : changer de service de streaming sans perdre ses playlists soigneusement construites.", blocks:[{t:'full',n:'01',c:'<strong>Le produit.</strong> Importation de playlists entre tous les services de streaming — Spotify, Apple Music, Deezer, YouTube Music et plus encore.'},{t:'duo',n:'02',c:'<strong>Le site.</strong> Design et développement complets. UI propre, onboarding ultra-simple, conversions au cœur du parcours.'},{t:'full',n:'03',c:'<strong>Flow optimisé.</strong> En quelques clics, l\'utilisateur transfert des centaines de titres sans friction.'}], solve:"Des millions de playlists transférées. Un produit qui parle à tous les mélomanes nomades."},
   mauboussin: { title:'Mauboussin', type:'Projet Pro', tags:['Luxe','Bijoux','IA Gen'], year:'2025', role:'Product Design · Direction Créative', context:"Une maison de haute joaillerie centenaire face à l'IA générative. L'enjeu : intégrer la génération d'images dans un e-commerce luxe sans diluer l'ADN de la marque. Direction artistique des visuels IA — bijoux portés, mises en scène, ambiances raffinées. Refonte e-commerce avec narration, émotion et conversion subtile. Chaque composant pensé pour honorer un siècle d'histoire tout en embarquant de nouveaux outils de création.", problem:"Repenser le site e-com d'une maison de haute joaillerie en intégrant la génération d'images IA pour sublimer les visuels produit.", blocks:[{t:'devices',n:'01',srcs:['https://theosije.github.io/assets/mauboussin-app-01.mp4'],desktopSrcs:['img/mauboussin-desktop-01.jpg'],noScrollDesktop:true,c:'<strong>App & web, refonte totale.</strong> Refonte e-commerce pensée pour le luxe : narration, émotion, conversion subtile. Chaque composant aligné avec l\'ADN centenaire de la maison.'},{t:'grid4',n:'02',srcs:['img/mauboussin-ring-01.png','img/mauboussin-ring-02.jpg','img/mauboussin-ring-03.jpg','img/mauboussin-ring-04.jpg','img/mauboussin-ring-05.jpg','img/mauboussin-ring-06.jpg'],c:'<strong>Tout part d\'une bague.</strong> Un visuel produit sur fond blanc, généré avec Flow Weavy — et de là, une direction artistique entière se déploie : bijou porté, lumière naturelle, mise en scène raffinée. Autant de déclinaisons que nécessaire, toutes au niveau d\'une maison centenaire.'},{t:'trio',n:'03',srcs:['https://theosije.github.io/assets/mauboussin-box.mp4','img/mauboussin-box-ring.jpg','https://theosije.github.io/assets/mauboussin-box-open.mp4'],c:'<strong>De la bague à l\'écrin.</strong> Rodin IA modélise l\'écrin en 3D. Nano Banana y place n\'importe quelle bague avec une précision chirurgicale. Kling transforme le tout en vidéo — un packaging premium généré entièrement par IA.'}], solve:"Un site à la hauteur d'une maison iconique. L'IA au service du luxe, pas contre lui."},
   gotaxfree: { title:'Gotaxfree', type:'Projet Pro', tags:['FinTech','Retail','Détaxe'], year:'2025', role:'Product Design · UX', context:"Paris, première destination shopping mondiale — et la détaxe encore coincée dans les années 90. L'enjeu design : un parcours financier cross-border lisible pour des touristes en transit, souvent stressés, sur un téléphone en roaming. Du scan du ticket à l'encaissement en moins de 3 minutes. Zéro friction, trust signals à chaque étape, design rassurant pour des transactions sensibles.", problem:"La détaxe à Paris reste un parcours du combattant — formulaires papier, files d'attente, délais. Gotaxfree veut changer ça.", blocks:[{t:'iphones',n:'01',srcSets:[['img/gtf-app-01.jpg','img/gtf-app-02.jpg','img/gtf-app-03.jpg','img/gtf-app-04.jpg','img/gtf-app-05.jpg'],['img/gtf-app-06.jpg','img/gtf-app-07.jpg','img/gtf-app-08.jpg','img/gtf-app-09.jpg','img/gtf-app-11.jpg','img/gtf-app-12.jpg','img/gtf-app-13.jpg']],c:'<strong>L\'app.</strong> Faire son shopping à Paris sans payer la TVA. Détaxe immédiate, 100% digital. Du scan du ticket à l\'encaissement en moins de 3 minutes.'},{t:'naming',n:'02',c:'<strong>Naming.</strong> 70+ noms testés avant de trouver le bon — 4 sessions de tests, 57 clients interrogés, 19 nationalités consultées.'},{t:'logos-scroll',n:'03',src:'img/gtf-logos.png',c:'<strong>Identité visuelle.</strong> Exploration logotype — directions, typographies, symboles.'},{t:'logo-reveal',n:'04',src:'img/gotaxfree-logo.jpg',points:[{title:"Icône d'avion en plein décollage",desc:"Optimise la compréhension visuelle sans lire. Évocation du voyage et du retour."},{title:"Typo bold, MAJ et italique",desc:"Ancrer la marque et établir une notoriété."},{title:"Form factor d'une app",desc:"Asseoir le côté app centric dans l'imaginaire collectif."},{title:"Dégradé du violet au bleu",desc:"Couleurs qui se différencient des autres acteurs du marché."}],verbatims:["I think it's the easiest and people will understand that.","This one is quiet good, it's try to push me to return money and to save money.","I can move here to do tax and so go!","I think this one is more understandable and more subjective than the other one."],c:'<strong>Logo final.</strong> Les choix qui ont guidé la direction retenue.'}], solve:"La détaxe enfin simple. Pour les touristes, enfin."},
+  pompe: { title:'Pompe!', type:'Side Project', tags:['Mobile','Maps','Cyclisme'], year:'2025', role:'Product Design · Dev',
+    context:"Trouver une pompe à vélo en France relève du parcours du combattant — données éparpillées, infos obsolètes, aucune appli digne de ce nom. Pompe! agrège des dizaines de sources (Decathlon, Intersport, réseaux de transport IDFM, Grand Lyon, Bordeaux, Strasbourg, Rennes, Nantes, associations cyclistes, OpenStreetMap) pour offrir la carte la plus complète possible. Et transforme chaque cycliste en gardien de la carte : une pompe hors service ? Signalé en un tap, visible instantanément par tous.",
+    problem:"Les données de pompes à vélo existent — elles sont juste éparpillées sur des dizaines de sources sans jamais avoir été agrégées en un endroit utile.",
+    blocks:[
+      {t:'full',n:'01',c:'<strong>Carte complète.</strong> Decathlon, Intersport, réseaux de transport, associations cyclistes, OpenStreetMap — toutes les sources en une seule carte.'},
+      {t:'duo',n:'02',c:'<strong>Communauté.</strong> Pompe hors service ? Un tap suffit. Tous les cyclistes de la ville en bénéficient instantanément.'},
+      {t:'full',n:'03',c:'<strong>Mode mainteneur.</strong> Les collectivités et enseignes disposent d\'une vue dédiée : liste triée par urgence, navigation intégrée, marquage post-intervention.'},
+    ],
+    solve:"La pompe la plus proche, toujours à jour. Designé et codé de zéro."
+  },
   dsrt: { title:'DSRT', type:'Projet Pro', tags:['Audio','Branding','Logo'], year:'2024', role:'Branding · Direction Artistique', context:"Créer l'identité visuelle d'un logiciel de sound design de zéro — pour une audience de producteurs et sound designers exigeants. Logo conçu à partir des formes sonores : ondes, tension, précision géométrique. Branding system complet — typographie, couleurs, motion — décliné jusqu'à l'interface du logiciel lui-même. Un univers où chaque détail graphique a une raison d'être acoustique.", problem:"Créer l'identité visuelle d'un logiciel de sound design — de zéro. L'outil est puissant, l'image devait l'être aussi.", blocks:[{t:'full',n:'01',c:'<strong>Création du logo.</strong> Identité sonore traduite en forme : ondes, tension, précision.'},{t:'duo',n:'02',c:'<strong>Branding system.</strong> Typographie, couleurs, motion — un univers cohérent pour une audience pro.'},{t:'full',n:'03',c:'<strong>Application produit.</strong> L\'identité déclinée sur l\'interface du logiciel lui-même.'}], solve:"Une marque qui sonne juste — littéralement."},
 };
 const proKeys = Object.keys(P);
@@ -3102,6 +3125,36 @@ function showHome(push) {
 }
 @media (min-width: 900px)  { .incipit-quote { width: 110px; } }
 @media (min-width: 1400px) { .incipit-quote { width: 160px; } }
+
+/* ── POMPE! CARD ── */
+.proj-img--pompe {
+  background: linear-gradient(145deg, #b8f04a 0%, #d4f77a 40%, #f0ffc0 100%);
+  position: relative; overflow: hidden;
+}
+.pompe-bg-anim {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 60%, rgba(80,200,80,.35) 0%, transparent 55%),
+              radial-gradient(ellipse at 75% 30%, rgba(200,255,80,.25) 0%, transparent 50%);
+  animation: pompe-pulse 5s ease-in-out infinite alternate;
+}
+@keyframes pompe-pulse {
+  from { opacity: .7; transform: scale(1); }
+  to   { opacity: 1;  transform: scale(1.1); }
+}
+.pompe-content {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px;
+}
+.pompe-icon {
+  font-size: clamp(48px, 8vw, 72px);
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,.12));
+  line-height: 1;
+}
+.pompe-title {
+  font-size: 22px; font-weight: 800; letter-spacing: .05em;
+  color: #1a2a00; line-height: 1;
+}
 
 /* ── INKIP'HOT CARD ── */
 .proj-img--inkiphot { background: #0d0204; position: relative; overflow: hidden; }
