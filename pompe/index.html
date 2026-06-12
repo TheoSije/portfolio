@@ -145,8 +145,17 @@ h1 em { font-style: normal; color: var(--green); }
 }
 .btn-store:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(184,240,74,0.5); }
 .btn-store svg { width: 18px; height: 18px; flex-shrink: 0; }
+.btn-store .lbl-top { font-size: 10px; font-weight: 400; opacity: 0.6; display: block; line-height: 1; margin-bottom: 2px; }
 
 .cta-note { font-size: 12px; color: rgba(255,255,255,0.2); }
+
+/* ── Stars rating ── */
+.rating {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 28px;
+}
+.stars { color: var(--green); font-size: 13px; letter-spacing: 1px; }
+.rating-text { font-size: 12px; color: var(--muted); }
 
 /* ── Hero visual — phone mockup ── */
 .hero-visual {
@@ -393,7 +402,7 @@ footer {
         <div class="app-icon">💨</div>
         <div>
           <div class="app-name-lg">Pompe!</div>
-          <div class="app-sub">Trouve une pompe à vélo près de toi</div>
+          <div class="app-sub">Cyclisme · Gratuit</div>
         </div>
       </div>
 
@@ -405,10 +414,18 @@ footer {
 
       <div class="cta-row">
         <a class="btn-store" href="https://apps.apple.com/us/app/pompe/id6778182789?l=fr-FR" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          Télécharger sur l'App Store
+          <svg width="20" height="24" viewBox="0 0 20 24" fill="none">
+            <path d="M16.24 12.76c-.02-2.57 2.1-3.8 2.19-3.86-1.19-1.74-3.05-1.98-3.71-2.01-1.58-.16-3.08.93-3.88.93-.8 0-2.03-.91-3.33-.88-1.72.02-3.3 1-4.19 2.54-1.79 3.1-.46 7.7 1.28 10.22.85 1.23 1.86 2.61 3.19 2.56 1.28-.05 1.76-.83 3.31-.83 1.54 0 1.98.83 3.33.8 1.38-.02 2.24-1.25 3.08-2.49.98-1.43 1.38-2.82 1.4-2.89-.03-.01-2.67-1.02-2.7-4.09z" fill="currentColor"/>
+            <path d="M13.8 4.47c.71-.86 1.18-2.05 1.05-3.24-.99.04-2.24.67-2.97 1.51-.64.74-1.21 1.95-1.06 3.1 1.11.08 2.24-.56 2.98-1.37z" fill="currentColor"/>
+          </svg>
+          <span><span class="lbl-top">Télécharger sur</span>App Store</span>
         </a>
-        <span class="cta-note">Disponible en France</span>
+        <span class="cta-note">iPhone · Gratuit</span>
+      </div>
+
+      <div class="rating">
+        <span class="stars">★★★★★</span>
+        <span class="rating-text">Cyclisme · Mobilité</span>
       </div>
     </div>
 
