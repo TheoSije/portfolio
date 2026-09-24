@@ -47,6 +47,8 @@ The site has a theme switcher (`nextMood()`/`setTheme()`) that swaps `<link id="
 
 Some mini-sites have their own admin/CMS under `<slug>/admin/` (e.g. `inkipit/admin/`), self-contained HTML apps with their own login, styling, and data fetching — independent of the main `index.html`.
 
+The Inkipit admin no longer lives here: it moved to the `inkipit-web` repo (`admin/index.html`, served at https://inkipit.app/admin/). `_redirects` sends the old `/inkipit/admin/` URL there.
+
 ## Automation
 
 `.github/workflows/update-tracks.yml` runs monthly (and on pushes to `claude/dreamy-cannon`) to refresh `vinyle/tracks.json` from the iTunes Search API and auto-commits the result.
