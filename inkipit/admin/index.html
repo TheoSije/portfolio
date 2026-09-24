@@ -150,6 +150,15 @@
   .chip-desc    { background: rgba(96,165,250,0.12);  color: var(--blue); }
   .chip-bio     { background: rgba(167,139,250,0.12); color: #a78bfa; }
   .chip-amazon  { background: rgba(251,146,60,0.12);  color: #fb923c; }
+  .chip-source  { background: rgba(74,222,128,0.12);  color: var(--green); }
+  .chip-nosource{ background: rgba(255,255,255,0.06); color: var(--muted); }
+  .chip-flag    { background: rgba(255,107,107,0.12); color: var(--red); }
+  .row-flag { font-size: 11px; color: var(--red); margin: -2px 0 6px; line-height: 1.4; }
+  .meta-grid { display: grid; grid-template-columns: 2fr 1.4fr 0.6fr; gap: 8px; }
+  @media (max-width: 600px) { .meta-grid { grid-template-columns: 1fr; } }
+  .source-box { border: 1px dashed var(--border); border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
+  .source-box .check { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text); cursor: pointer; }
+  #add-form .source-box .check input, .row-edit-form .source-box .check input { width: auto; height: auto; flex: none; margin: 0; padding: 0; accent-color: var(--gold); }
 
   /* ── Edit form ── */
   .row-edit-form { display: none; flex-direction: column; gap: 8px; width: 100%; }
@@ -288,6 +297,8 @@
       <button class="pill active" data-filter="all"     onclick="setFilter('all',this)">Tous</button>
       <button class="pill"        data-filter="complete" onclick="setFilter('complete',this)">✦ Complets</button>
       <button class="pill"        data-filter="missing"  onclick="setFilter('missing',this)">⚠ Incomplets</button>
+      <button class="pill"        data-filter="flagged"  onclick="setFilter('flagged',this)">⚑ À vérifier</button>
+      <button class="pill"        data-filter="unsourced" onclick="setFilter('unsourced',this)">✗ Non sourcés</button>
     </div>
   </div>
 
@@ -299,13 +310,33 @@
       <div class="field-label">Texte *</div>
       <textarea id="new-text" placeholder="Texte de l'incipit…" rows="3"></textarea>
     </div>
-    <div class="field-group">
-      <div class="field-label">Auteur *</div>
-      <div style="display:flex;gap:8px;align-items:center">
-        <input type="text" id="new-author" placeholder="Titre — Auteur, Année  (ex: Germinal — Émile Zola, 1885)" style="flex:1" />
-        <button class="btn btn-ghost btn-sm" id="autofill-btn" onclick="autoFill()" type="button" style="white-space:nowrap;flex-shrink:0">🔍 Auto-remplir</button>
+    <div class="meta-grid">
+      <div class="field-group">
+        <div class="field-label">Titre du livre *</div>
+        <input type="text" id="new-title" placeholder="Germinal" />
       </div>
+      <div class="field-group">
+        <div class="field-label">Auteur *</div>
+        <input type="text" id="new-author-name" placeholder="Émile Zola" />
+      </div>
+      <div class="field-group">
+        <div class="field-label">Année</div>
+        <input type="text" id="new-year" placeholder="1885" inputmode="numeric" />
+      </div>
+    </div>
+    <div>
+      <button class="btn btn-ghost btn-sm" id="autofill-btn" onclick="autoFill()" type="button">🔍 Auto-remplir</button>
       <div id="autofill-status" style="font-size:11px;color:var(--muted);margin-top:4px;display:none"></div>
+    </div>
+    <div class="source-box">
+      <div class="field-label">📚 Source du texte (d'où la phrase a été copiée)</div>
+      <div class="form-grid">
+        <input type="url"  id="new-source-url" placeholder="Lien : Wikisource, Gallica, extrait éditeur…" />
+        <input type="text" id="new-source-edition" placeholder="Édition : Folio, 1972 / GF, 1990…" />
+        <input type="text" id="new-source-isbn" placeholder="ISBN (si livre papier)" />
+        <input type="text" id="new-source-translator" placeholder="Traducteur (si traduction)" />
+      </div>
+      <label class="check"><input type="checkbox" id="new-verified" /> Texte vérifié mot pour mot dans cette source</label>
     </div>
 
     <hr class="form-separator" />
@@ -498,19 +529,17 @@ function validateSubmission(btn) {
   if (form.style.display !== 'block') {
     form.style.display = 'block';
     // Reset les champs optionnels seulement
-    ['new-cover','new-amazon','new-description','new-bio','new-author-pic']
+    ['new-cover','new-amazon','new-description','new-bio','new-author-pic','new-source-url','new-source-edition','new-source-isbn','new-source-translator']
       .forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+    document.getElementById('new-verified').checked = false;
   }
 
   // Pré-remplit texte + auteur depuis la soumission
   document.getElementById('new-text').value = data.text || '';
-  let authorField = '';
-  if (data.book && data.author) {
-    authorField = data.book + ' — ' + data.author + (data.year ? ', ' + data.year : '');
-  } else {
-    authorField = [data.book, data.author, data.year].filter(Boolean).join(', ');
-  }
-  document.getElementById('new-author').value = authorField;
+  document.getElementById('new-title').value       = data.book   || '';
+  document.getElementById('new-author-name').value = data.author || '';
+  document.getElementById('new-year').value        = data.year   || '';
+  const authorField = data.book || data.author;
 
   // Note l'issue à fermer après validation + cache le panel
   window._pendingCloseIssue = issueNumber;
@@ -612,17 +641,21 @@ function renderList() {
   let filtered = incipits.map((inc, i) => ({ ...inc, _i: i })).reverse();
 
   if (q) filtered = filtered.filter(inc =>
-    inc.text.toLowerCase().includes(q) || inc.author.toLowerCase().includes(q)
+    inc.text.toLowerCase().includes(q) || inc.author.toLowerCase().includes(q) ||
+    (inc.flag || '').toLowerCase().includes(q)
   );
-  if (activeFilter === 'complete') filtered = filtered.filter(isComplete);
-  if (activeFilter === 'missing')  filtered = filtered.filter(inc => !isComplete(inc));
+  if (activeFilter === 'complete')  filtered = filtered.filter(isComplete);
+  if (activeFilter === 'missing')   filtered = filtered.filter(inc => !isComplete(inc));
+  if (activeFilter === 'flagged')   filtered = filtered.filter(inc => inc.flag);
+  if (activeFilter === 'unsourced') filtered = filtered.filter(inc => !isSourced(inc));
 
   const total    = incipits.length;
   const complete = incipits.filter(isComplete).length;
+  const sourced  = incipits.filter(isSourced).length;
   document.getElementById('count-badge').textContent =
     q || activeFilter !== 'all'
       ? `${filtered.length} / ${total}`
-      : `${total} · ${complete} complets`;
+      : `${total} · ${complete} complets · ${sourced} sourcés`;
 
   if (!filtered.length) {
     list.innerHTML = '<div class="empty">Aucun résultat.</div>';
@@ -634,7 +667,13 @@ function renderList() {
       inc.description ? '<span class="chip chip-desc">📝 résumé</span>' : '',
       inc.bio         ? '<span class="chip chip-bio">👤 bio</span>'   : '',
       inc.amazon      ? '<span class="chip chip-amazon">🛒</span>'    : '',
+      isSourced(inc)
+        ? `<span class="chip chip-source">${inc.verified ? '✓ vérifié' : '📚 sourcé'}</span>`
+        : '<span class="chip chip-nosource">✗ non sourcé</span>',
+      inc.flag        ? '<span class="chip chip-flag">⚑ à vérifier</span>' : '',
     ].filter(Boolean).join('');
+    const meta = metaOf(inc);
+    const src  = inc.source || {};
 
     const coverHtml = inc.cover
       ? `<div class="row-cover-wrap"><img class="row-cover" src="${inc.cover}" referrerpolicy="no-referrer" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="row-cover-placeholder" style="display:none">📚</div></div>`
@@ -649,7 +688,8 @@ function renderList() {
           ${coverHtml}
           <div class="row-main">
             <div class="row-text">${escHtml(inc.text)}</div>
-            <div class="row-author">${escHtml(inc.author)}</div>
+            <div class="row-author">${escHtml(composeAuthor(meta))}</div>
+            ${inc.flag ? `<div class="row-flag">⚑ ${escHtml(inc.flag)}</div>` : ''}
             ${chips ? `<div class="row-chips">${chips}</div>` : ''}
           </div>
         </div>
@@ -659,9 +699,33 @@ function renderList() {
             <div class="field-label">Texte *</div>
             <textarea id="edit-text-${inc._i}" rows="3">${escHtml(inc.text)}</textarea>
           </div>
-          <div class="field-group">
-            <div class="field-label">Auteur *</div>
-            <input type="text" id="edit-author-${inc._i}" value="${escHtml(inc.author)}" placeholder="Titre — Auteur, Année" />
+          <div class="meta-grid">
+            <div class="field-group">
+              <div class="field-label">Titre du livre *</div>
+              <input type="text" id="edit-title-${inc._i}" value="${escHtml(meta.title)}" />
+            </div>
+            <div class="field-group">
+              <div class="field-label">Auteur *</div>
+              <input type="text" id="edit-author-name-${inc._i}" value="${escHtml(meta.author_name)}" />
+            </div>
+            <div class="field-group">
+              <div class="field-label">Année</div>
+              <input type="text" id="edit-year-${inc._i}" value="${escHtml(meta.year)}" inputmode="numeric" />
+            </div>
+          </div>
+          <div class="source-box">
+            <div class="field-label">📚 Source du texte</div>
+            <div class="form-grid">
+              <input type="url"  id="edit-source-url-${inc._i}" value="${escHtml(src.url||'')}" placeholder="Lien : Wikisource, Gallica, extrait éditeur…" />
+              <input type="text" id="edit-source-edition-${inc._i}" value="${escHtml(src.edition||'')}" placeholder="Édition : Folio, 1972…" />
+              <input type="text" id="edit-source-isbn-${inc._i}" value="${escHtml(src.isbn||'')}" placeholder="ISBN" />
+              <input type="text" id="edit-source-translator-${inc._i}" value="${escHtml(src.translator||'')}" placeholder="Traducteur" />
+            </div>
+            <label class="check"><input type="checkbox" id="edit-verified-${inc._i}" ${inc.verified ? 'checked' : ''} /> Texte vérifié mot pour mot dans cette source</label>
+            <div class="field-group">
+              <div class="field-label">⚑ À vérifier (note — vider une fois réglé)</div>
+              <input type="text" id="edit-flag-${inc._i}" value="${escHtml(inc.flag||'')}" placeholder="" />
+            </div>
           </div>
           <hr class="form-separator" />
           <div class="form-grid">
@@ -725,12 +789,7 @@ function updateAuthorPicPreview(i, url) {
 async function fetchWikiPhoto(i) {
   const btn = document.querySelector(`[onclick="fetchWikiPhoto(${i})"]`);
   const input = document.getElementById(`edit-author-pic-${i}`);
-  const authorField = document.getElementById(`edit-author-${i}`).value;
-  // Extrait le nom de l'auteur depuis "Titre — Auteur, Année"
-  const authorName = (authorField.includes(' — ')
-    ? authorField.split(' — ')[1].split(',')[0]
-    : authorField.split(',')[0]
-  ).trim();
+  const authorName = document.getElementById(`edit-author-name-${i}`).value.trim();
 
   if (!authorName) { alert('Remplis le champ auteur d\'abord.'); return; }
   if (btn) { btn.textContent = '⏳'; btn.disabled = true; }
@@ -869,13 +928,8 @@ async function fetchBookData(title, author) {
 
 // ── Auto-fill (Google Books + Wikipedia) ─────────────────────────────────
 async function autoFill() {
-  const authorField = document.getElementById('new-author').value.trim();
-  if (!authorField) { alert('Remplis d\'abord le champ Auteur (Titre — Auteur, Année).'); return; }
-
-  // Parse "Titre — Auteur, Année"
-  const parts  = authorField.split(' — ');
-  const title  = parts[0].trim();
-  const author = parts[1] ? parts[1].split(',')[0].trim() : '';
+  const { title, author_name: author } = readMeta({ title: 'new-title', author: 'new-author-name', year: 'new-year' });
+  if (!title) { alert('Remplis d\'abord le titre du livre.'); return; }
 
   const btn    = document.getElementById('autofill-btn');
   const status = document.getElementById('autofill-status');
@@ -954,7 +1008,7 @@ async function resetDescriptions() {
   for (let i = 0; i < total; i++) {
     if (enrichStopped) break;
     const inc   = incipits[i];
-    const title = inc.author.split(' — ')[0].trim();
+    const { title } = metaOf(inc);
 
     label.textContent = `(${done + 1}/${total}) ${title}…`;
     prog.style.width  = `${Math.round((done / total) * 100)}%`;
@@ -1010,8 +1064,7 @@ async function enrichAll() {
   for (const { inc, i } of toEnrich) {
     if (enrichStopped) break;
 
-    const title  = inc.author.split(' — ')[0].trim();
-    const author = inc.author.split(' — ')[1]?.split(',')[0].trim() || '';
+    const { title, author_name: author } = metaOf(inc);
 
     label.textContent = `(${done + 1}/${toEnrich.length}) ${title}…`;
     prog.style.width  = `${Math.round((done / toEnrich.length) * 100)}%`;
@@ -1058,6 +1111,49 @@ async function enrichAll() {
   setTimeout(() => { bar.style.display = 'none'; }, 5000);
 }
 
+// ── Champs séparés titre / auteur / année ─────────────────────────────────
+// « author » (« Titre — Auteur, Année ») reste écrit dans le JSON : c'est le
+// seul champ que lisent l'app iOS (Incipit.swift) et le site. Les champs
+// title / author_name / year sont la source de vérité dans l'admin, et
+// « author » est recomposé à chaque enregistrement.
+function splitAuthor(field) {
+  const parts = String(field || '').trim().split(/\s+[—–]\s+/);
+  const title = (parts[0] || '').trim();
+  const rest  = parts.slice(1).join(' — ').trim();
+  const m = rest.match(/^(.*?),\s*(\S.*)$/);
+  if (m && /\d/.test(m[2])) return { title, author_name: m[1].trim(), year: m[2].trim() };
+  return { title, author_name: rest, year: '' };
+}
+function composeAuthor({ title, author_name, year }) {
+  let s = author_name ? `${title} — ${author_name}` : title;
+  return year ? `${s}, ${year}` : s;
+}
+function metaOf(inc) {
+  if (inc.title) return { title: inc.title, author_name: inc.author_name || '', year: inc.year || '' };
+  return splitAuthor(inc.author);
+}
+function readMeta(prefix) {  // prefix : 'new' ou 'edit-…-${i}' géré par l'appelant
+  const v = id => (document.getElementById(id)?.value || '').trim().replace(/\s+/g, ' ');
+  return { title: v(prefix.title), author_name: v(prefix.author), year: v(prefix.year) };
+}
+function applyMeta(entry, meta) {
+  entry.title = meta.title;
+  entry.author_name = meta.author_name;
+  entry.year = meta.year;
+  entry.author = composeAuthor(meta);
+  return entry;
+}
+function readSource(ids) {
+  const v = id => (document.getElementById(id)?.value || '').trim();
+  const src = {};
+  if (v(ids.url))        src.url = v(ids.url);
+  if (v(ids.edition))    src.edition = v(ids.edition);
+  if (v(ids.isbn))       src.isbn = v(ids.isbn);
+  if (v(ids.translator)) src.translator = v(ids.translator);
+  return Object.keys(src).length ? src : null;
+}
+function isSourced(inc) { return !!(inc.source && (inc.source.url || inc.source.edition || inc.source.isbn)); }
+
 // ── Duplicate check ───────────────────────────────────────────────────────
 function normalize(s) {
   return s.toLowerCase()
@@ -1084,15 +1180,22 @@ function similarity(a, b) {
   return 1 - dp[m][n] / Math.max(m, n);
 }
 
-function extractTitle(authorField) {
-  return authorField.split(' — ')[0].trim();
-}
-
-function findDuplicates(newAuthorField) {
-  const newTitle = extractTitle(newAuthorField);
+// Même livre (titre proche ET même auteur) ou même phrase (début identique),
+// quelle que soit l'orthographe : c'est ce qui avait laissé passer
+// « Cent ans de solitude — García Márquez » / « … — Gabriel Garcia Marquez ».
+function findDuplicates(meta, text, skipIndex = -1) {
+  const lastName = s => normalize(s).split(' ').pop() || '';
   return incipits
-    .map((inc, i) => ({ inc, i, sim: similarity(newTitle, extractTitle(inc.author)) }))
-    .filter(x => x.sim >= 0.75)
+    .map((inc, i) => {
+      if (i === skipIndex) return null;
+      const m = metaOf(inc);
+      const titleSim = similarity(meta.title, m.title);
+      const sameAuthor = !meta.author_name || !m.author_name || lastName(meta.author_name) === lastName(m.author_name);
+      const textSim = text ? similarity(text.slice(0, 60), inc.text.slice(0, 60)) : 0;
+      const sim = Math.max(sameAuthor ? titleSim : 0, textSim);
+      return { inc, i, sim };
+    })
+    .filter(x => x && x.sim >= 0.75)
     .sort((a, b) => b.sim - a.sim);
 }
 
@@ -1102,25 +1205,30 @@ function toggleAddForm() {
   const visible = f.style.display === 'block';
   f.style.display = visible ? 'none' : 'block';
   if (!visible) {
-    ['new-text','new-author','new-cover','new-amazon','new-description','new-bio','new-author-pic']
+    ['new-text','new-title','new-author-name','new-year','new-cover','new-amazon','new-description','new-bio','new-author-pic','new-source-url','new-source-edition','new-source-isbn','new-source-translator']
       .forEach(id => document.getElementById(id).value = '');
+    document.getElementById('new-verified').checked = false;
     document.getElementById('new-text').focus();
   }
 }
 
 async function addIncipit() {
   const text        = document.getElementById('new-text').value.trim();
-  const author      = document.getElementById('new-author').value.trim();
+  const meta        = readMeta({ title: 'new-title', author: 'new-author-name', year: 'new-year' });
+  const source      = readSource({ url: 'new-source-url', edition: 'new-source-edition', isbn: 'new-source-isbn', translator: 'new-source-translator' });
+  const verified    = document.getElementById('new-verified').checked;
   const cover       = document.getElementById('new-cover').value.trim();
   const amazon      = document.getElementById('new-amazon').value.trim();
   const description = document.getElementById('new-description').value.trim();
   const bio         = document.getElementById('new-bio').value.trim();
   const authorPic   = document.getElementById('new-author-pic').value.trim();
 
-  if (!text || !author) { alert('Texte et auteur sont requis.'); return; }
+  if (!text || !meta.title || !meta.author_name) { alert('Texte, titre et auteur sont requis.'); return; }
+  if (verified && !source) { alert('« Vérifié » demande une source (lien, édition ou ISBN).'); return; }
+  if (!source && !confirm('Aucune source renseignée : cet incipit sera marqué « non sourcé ».\n\nAjouter quand même ?')) return;
 
   // Duplicate check
-  const dupes = findDuplicates(author);
+  const dupes = findDuplicates(meta, text);
   if (dupes.length) {
     const list = dupes.map(d =>
       `• ${d.inc.author} (${Math.round(d.sim * 100)}% similaire)`
@@ -1131,7 +1239,9 @@ async function addIncipit() {
     if (!proceed) return;
   }
 
-  const entry = { text, author };
+  const entry = applyMeta({ text }, meta);
+  entry.source   = source;
+  entry.verified = verified;
   if (cover)       entry.cover       = cover;
   if (description) entry.description = description;
   if (bio)         entry.bio         = bio;
@@ -1140,8 +1250,9 @@ async function addIncipit() {
 
   incipits.push(entry);
   document.getElementById('add-form').style.display = 'none';
-  ['new-text','new-author','new-cover','new-amazon','new-description','new-bio','new-author-pic']
+  ['new-text','new-title','new-author-name','new-year','new-cover','new-amazon','new-description','new-bio','new-author-pic','new-source-url','new-source-edition','new-source-isbn','new-source-translator']
     .forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
+  document.getElementById('new-verified').checked = false;
   renderList();
   await save(`add: ${text.slice(0, 50)}`);
   // Ferme l'issue GitHub si la soumission venait d'une issue
@@ -1169,17 +1280,28 @@ function cancelEdit(i) {
 }
 async function saveEdit(i) {
   const text        = document.getElementById(`edit-text-${i}`).value.trim();
-  const author      = document.getElementById(`edit-author-${i}`).value.trim();
+  const meta        = readMeta({ title: `edit-title-${i}`, author: `edit-author-name-${i}`, year: `edit-year-${i}` });
+  const source      = readSource({ url: `edit-source-url-${i}`, edition: `edit-source-edition-${i}`, isbn: `edit-source-isbn-${i}`, translator: `edit-source-translator-${i}` });
+  const verified    = document.getElementById(`edit-verified-${i}`).checked;
+  const flag        = document.getElementById(`edit-flag-${i}`).value.trim();
   const cover       = document.getElementById(`edit-cover-${i}`).value.trim();
   const amazon      = document.getElementById(`edit-amazon-${i}`).value.trim();
   const description = document.getElementById(`edit-description-${i}`).value.trim();
   const bio         = document.getElementById(`edit-bio-${i}`).value.trim();
   const authorPic   = document.getElementById(`edit-author-pic-${i}`).value.trim();
 
-  if (!text || !author) { alert('Texte et auteur sont requis.'); return; }
+  if (!text || !meta.title || !meta.author_name) { alert('Texte, titre et auteur sont requis.'); return; }
+  if (verified && !source) { alert('« Vérifié » demande une source (lien, édition ou ISBN).'); return; }
 
   // Merge sur l'existant — on ne perd aucun champ hors-formulaire
-  const entry = { ...incipits[i], text, author };
+  const entry = applyMeta({ ...incipits[i], text }, meta);
+  entry.source   = source;
+  entry.verified = verified;
+  if (flag) entry.flag = flag; else delete entry.flag;
+  // Texte modifié → les fins fausses du jeu « Complète » ne collent plus forcément
+  if (text !== incipits[i].text && entry.complete_wrongs) {
+    entry.flag = [entry.flag, 'texte modifié : revoir complete_wrongs (jeu Complète)'].filter(Boolean).join(' · ');
+  }
   // Champs optionnels : mettre à jour si rempli, supprimer si vidé volontairement
   if (cover)       entry.cover       = cover;       else delete entry.cover;
   if (description) entry.description = description; else delete entry.description;
