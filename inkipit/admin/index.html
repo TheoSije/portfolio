@@ -771,7 +771,7 @@ function updateCoverPreview(i, url) {
 }
 
 // ── Wikipedia search helper ───────────────────────────────────────────────
-async function wikiSearch(query, lang = 'fr', maxChars = 600) {
+async function wikiSearch(query, lang = 'fr', maxChars = 600, mustName = null) {
   try {
     // 1. Search API to find the right article title
     const searchRes = await fetch(
@@ -782,8 +782,19 @@ async function wikiSearch(query, lang = 'fr', maxChars = 600) {
     const pages = searchData.query?.search;
     if (!pages?.length) return null;
 
-    // 2. Get summary of the best match
-    const pageTitle = pages[0].title;
+    // 2. Get summary of the best match. The search API is full-text: for an
+    // author without a Wikipedia page it returns any article that merely
+    // mentions the name (ex. "Marouane Essadek" → "Sara Ahmed (universitaire)").
+    // With mustName, only accept a page whose title contains every word of it.
+    let pageTitle = pages[0].title;
+    if (mustName) {
+      const norm = s => ' ' + s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+        .replace(/\(.*?\)/g, ' ').replace(/[^a-z0-9]+/g, ' ').trim() + ' ';
+      const words = norm(mustName).trim().split(' ');
+      const match = pages.find(p => words.every(w => norm(p.title).includes(' ' + w + ' ')));
+      if (!match) return null;
+      pageTitle = match.title;
+    }
     const summaryRes = await fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(pageTitle)}`);
     if (!summaryRes.ok) return null;
     const wiki = await summaryRes.json();
@@ -896,7 +907,7 @@ async function autoFill() {
     // ── Wikipedia (bio auteur) — FR puis EN via search API ──
     if (author) {
       status.textContent = 'Recherche bio auteur…';
-      const bio = await wikiSearch(author, 'fr', 500) || await wikiSearch(author, 'en', 500);
+      const bio = await wikiSearch(author, 'fr', 500, author) || await wikiSearch(author, 'en', 500, author);
       if (bio) {
         document.getElementById('new-bio').value = bio;
         filled.push('bio auteur');
