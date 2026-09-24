@@ -1519,12 +1519,33 @@ function showCandidates(holder, promise, { onPick, current = '', round = false, 
 let imagesTab = 'cover', imagesShown = 0;
 const imgStaged = new Map(); // 'c:'+text → {cover} ; 'a:'+clé auteur → {author_pic, author_qid}
 function authorKey(inc) { return normalize(metaOf(inc).author_name || ''); }
+// « Cassée » = constaté dans le navigateur (l'image ne charge pas, ou n'est
+// qu'un pixel blanc) — pas deviné d'après l'adresse : les adresses Open Library
+// « par titre » (/b/title/…, non documentées) s'affichent le plus souvent très bien.
+const brokenCovers = new Set(); // URLs vérifiées cassées
+let coverCheck = null;          // Promise de la vérification en cours
+function checkCovers() {
+  if (coverCheck) return coverCheck;
+  const urls = [...new Set(incipits.map(i => i.cover).filter(Boolean))];
+  coverCheck = Promise.all(urls.map(u => new Promise(done => {
+    const img = new Image();
+    img.referrerPolicy = 'no-referrer';
+    const t = setTimeout(() => { brokenCovers.add(u); done(); }, 15000);
+    img.onload = () => { clearTimeout(t); if (img.naturalWidth < 40) brokenCovers.add(u); done(); };
+    img.onerror = () => { clearTimeout(t); brokenCovers.add(u); done(); };
+    img.src = u;
+  }))).then(() => { coverCheck.done = true; });
+  return coverCheck;
+}
+let showFragileCovers = false;
 function coverProblem(inc) {
   const u = inc.cover || '';
   if (!u) return 'pas de couverture';
-  if (/covers\.openlibrary\.org\/b\/title\//.test(u)) return 'adresse Open Library invalide (image blanche)';
-  if (/amazon\./.test(u)) return 'lien direct Amazon (à remplacer si possible)';
-  if (!/^https:\/\/(covers\.openlibrary\.org\/b\/(id|isbn|olid)\/|upload\.wikimedia\.org\/|books\.google(usercontent)?\.com\/)/.test(u)) return 'hébergée sur un site tiers';
+  if (brokenCovers.has(u)) return 'cassée : ne s\'affiche pas';
+  if (!showFragileCovers) return null;
+  if (/covers\.openlibrary\.org\/b\/title\//.test(u)) return 'fragile : Open Library « par titre » (peut être une autre édition)';
+  if (/amazon\./.test(u)) return 'fragile : lien direct Amazon';
+  if (!/^https:\/\/(covers\.openlibrary\.org\/b\/(id|isbn|olid)\/|upload\.wikimedia\.org\/|books\.google(usercontent)?\.com\/)/.test(u)) return 'fragile : hébergée sur un site tiers';
   return null;
 }
 function photoProblem(url) {
@@ -1535,7 +1556,7 @@ function photoProblem(url) {
 }
 function imageQueue() {
   if (imagesTab === 'cover') {
-    const rank = w => w.startsWith('pas de') || w.startsWith('adresse') ? 0 : w.startsWith('hébergée') ? 1 : 2;
+    const rank = w => w.startsWith('pas de') || w.startsWith('cassée') ? 0 : 1;
     return incipits.map(inc => ({ inc, why: coverProblem(inc) })).filter(x => x.why)
       .sort((a, b) => rank(a.why) - rank(b.why));
   }
@@ -1555,7 +1576,7 @@ function toggleImagesPanel() {
   const open = panel.style.display === 'none';
   panel.style.display = open ? 'block' : 'none';
   document.getElementById('gb-key').value = localStorage.getItem('inkipit_gb_key') || '';
-  if (open) renderImages();
+  if (open) { const c = checkCovers(); renderImages(); c.then(() => { if (imagesTab === 'cover') renderImages(); }); }
 }
 function setImagesTab(tab) {
   imagesTab = tab;
@@ -1572,9 +1593,14 @@ function renderImages(more = false) {
   const list = document.getElementById('images-list');
   const queue = imageQueue();
   if (!more) { list.innerHTML = ''; imagesShown = 0; }
-  document.getElementById('images-intro').textContent = imagesTab === 'cover'
-    ? `${queue.length} couvertures à revoir (manquantes ou cassées d'abord). Clique sur la bonne — seuls les résultats au même titre et au même auteur sont proposés.`
-    : `${queue.length} auteurs sans photo fiable. La photo choisie s'applique à tous leurs livres. Vérifie la description sous chaque photo (homonymes).`;
+  const intro = document.getElementById('images-intro');
+  if (imagesTab === 'cover') {
+    const checking = coverCheck && !coverCheck.done;
+    intro.innerHTML = `${checking ? 'Vérification des couvertures actuelles… · ' : ''}<b>${queue.length}</b> couverture${queue.length > 1 ? 's' : ''} ${showFragileCovers ? 'à revoir' : 'manquante(s) ou cassée(s)'}. « Actuelle » = celle affichée aujourd'hui dans l'app et sur le site : si elle est bonne, ne touche à rien. `
+      + `<label style="cursor:pointer;white-space:nowrap"><input type="checkbox" ${showFragileCovers ? 'checked' : ''} onchange="showFragileCovers=this.checked;renderImages()" style="vertical-align:-2px"> inclure celles qui marchent mais sont fragiles (Amazon, Open Library « par titre »)</label>`;
+  } else {
+    intro.textContent = `${queue.length} auteurs sans photo fiable. La photo choisie s'applique à tous leurs livres. Vérifie la description sous chaque photo (homonymes).`;
+  }
   document.getElementById('img-take-ol').style.display = imagesTab === 'cover' ? '' : 'none';
   document.getElementById('img-take-ol').textContent = 'Prendre Open Library pour les livres affichés';
   const redirects = redirectPhotoFiles();
