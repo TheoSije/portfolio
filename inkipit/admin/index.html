@@ -302,6 +302,7 @@
         <button class="pill active" id="img-tab-cover" onclick="setImagesTab('cover')">Couvertures</button>
         <button class="pill" id="img-tab-photo" onclick="setImagesTab('photo')">Photos d'auteur</button>
       </div>
+      <button class="btn btn-ghost btn-sm" id="img-take-ol" onclick="takeOpenLibraryShown()" style="display:none">Prendre Open Library pour les livres affichés</button>
       <button class="btn btn-ghost btn-sm" id="img-convert" onclick="convertRedirectPhotos()" style="display:none"></button>
       <span style="flex:1"></span>
       <input id="gb-key" placeholder="Clé Google Books (facultatif)" title="Sans clé, Google Books limite vite le nombre de recherches" style="width:190px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:7px;padding:5px 8px;color:var(--text);font-size:11px" onchange="localStorage.setItem('inkipit_gb_key', this.value.trim())" />
@@ -1419,6 +1420,14 @@ async function fetchCoverCandidates(meta) {
   ]);
   const out = [], seen = new Set();
   const add = c => { if (c.url && !seen.has(c.url)) { seen.add(c.url); out.push(c); } };
+  // Open Library d'abord : les plus grandes images, c'est celle qu'on choisit
+  // le plus souvent (Google Books = petites vignettes, Wikipédia = classiques).
+  for (const d of ol?.docs || []) {
+    if (!d.cover_i || !bookMatches(meta, d.title, d.author_name)) continue;
+    add({ url: `https://covers.openlibrary.org/b/id/${d.cover_i}-L.jpg?default=false`,
+          thumb: `https://covers.openlibrary.org/b/id/${d.cover_i}-M.jpg?default=false`,
+          source: 'Open Library', label: d.first_publish_year ? String(d.first_publish_year) : '' });
+  }
   for (const p of Object.values(wp?.query?.pages || {}).sort((a, b) => a.index - b.index)) {
     if (p.thumbnail && titleMatches(title, p.title.replace(/\s*\(.*\)\s*$/, '')))
       add({ url: p.thumbnail.source, source: 'Wikipédia', label: p.title });
@@ -1429,12 +1438,6 @@ async function fetchCoverCandidates(meta) {
     if (!img || !bookMatches(meta, v.title, v.authors)) continue;
     add({ url: img.replace('http://', 'https://').replace(/&edge=curl/, ''), source: 'Google Books',
           label: [v.publisher, (v.publishedDate || '').slice(0, 4)].filter(Boolean).join(' · ') });
-  }
-  for (const d of ol?.docs || []) {
-    if (!d.cover_i || !bookMatches(meta, d.title, d.author_name)) continue;
-    add({ url: `https://covers.openlibrary.org/b/id/${d.cover_i}-L.jpg?default=false`,
-          thumb: `https://covers.openlibrary.org/b/id/${d.cover_i}-M.jpg?default=false`,
-          source: 'Open Library', label: d.first_publish_year ? String(d.first_publish_year) : '' });
   }
   return out.slice(0, 9);
 }
@@ -1572,6 +1575,8 @@ function renderImages(more = false) {
   document.getElementById('images-intro').textContent = imagesTab === 'cover'
     ? `${queue.length} couvertures à revoir (manquantes ou cassées d'abord). Clique sur la bonne — seuls les résultats au même titre et au même auteur sont proposés.`
     : `${queue.length} auteurs sans photo fiable. La photo choisie s'applique à tous leurs livres. Vérifie la description sous chaque photo (homonymes).`;
+  document.getElementById('img-take-ol').style.display = imagesTab === 'cover' ? '' : 'none';
+  document.getElementById('img-take-ol').textContent = 'Prendre Open Library pour les livres affichés';
   const redirects = redirectPhotoFiles();
   const conv = document.getElementById('img-convert');
   conv.style.display = imagesTab === 'photo' && redirects.size ? '' : 'none';
@@ -1599,6 +1604,7 @@ function renderImages(more = false) {
         <div class="img-manual"><input placeholder="…ou colle une URL d'image" /><button class="btn btn-ghost btn-sm">OK</button></div>
       </div>`;
     const key = round ? 'a:' + x.key : 'c:' + x.inc.text;
+    item.dataset.key = key;
     const stage = c => {
       imgStaged.set(key, round ? { author_pic: c ? c.url : '', author_qid: c?.qid || null } : { cover: c ? c.url : '' });
       syncImagesSave();
@@ -1617,6 +1623,21 @@ function renderImages(more = false) {
     await Promise.all([run(), run()]);
   })();
 }
+// Présélectionne le 1er candidat Open Library de chaque livre affiché — sauf
+// les lignes où un choix a déjà été fait à la main. Rien n'est enregistré :
+// on corrige les mauvais, puis « Enregistrer ».
+function takeOpenLibraryShown() {
+  let n = 0, pending = 0;
+  document.querySelectorAll('#images-list .img-item').forEach(item => {
+    if (imgStaged.has(item.dataset.key)) return;
+    if (item.querySelector('.cand-msg')?.textContent.startsWith('Recherche')) { pending++; return; }
+    const ol = [...item.querySelectorAll('.cand')].find(b => b.querySelector('.cand-src b')?.textContent === 'Open Library');
+    if (ol) { ol.click(); n++; }
+  });
+  document.getElementById('img-take-ol').textContent =
+    `✓ ${n} présélectionnés${pending ? ` · ${pending} encore en recherche, re-clique dans un instant` : ''} — vérifie puis Enregistrer`;
+}
+
 // en.wikipedia.org/wiki/Special:Redirect/file/X → même image, adresse directe
 // upload.wikimedia.org (la redirection n'envoie pas de CORS : pas de teinte
 // d'ambiance ni d'image de partage sur le site). Pas de choix à faire.
