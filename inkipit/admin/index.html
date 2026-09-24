@@ -1430,7 +1430,7 @@ async function fetchCoverCandidates(meta) {
   }
   for (const p of Object.values(wp?.query?.pages || {}).sort((a, b) => a.index - b.index)) {
     if (p.thumbnail && titleMatches(title, p.title.replace(/\s*\(.*\)\s*$/, '')))
-      add({ url: p.thumbnail.source, source: 'Wikipédia', label: p.title });
+      add({ url: cleanImgUrl(p.thumbnail.source), source: 'Wikipédia', label: p.title });
   }
   for (const it of gb?.items || []) {
     const v = it.volumeInfo || {};
@@ -1442,11 +1442,20 @@ async function fetchCoverCandidates(meta) {
   return out.slice(0, 9);
 }
 
-async function commonsThumb(file, width = 500) {
-  const r = await getJSON(`https://commons.wikimedia.org/w/api.php?action=query&titles=${enc('File:' + file)}&prop=imageinfo&iiprop=url&iiurlwidth=${width}&format=json&origin=*`);
-  const pg = Object.values(r?.query?.pages || {})[0];
-  return pg?.imageinfo?.[0]?.thumburl || null;
+// Vignette directe d'un fichier. Commons d'abord ; sinon le wiki d'où vient le
+// lien (beaucoup de portraits d'auteurs contemporains ne sont pas sur Commons
+// mais hébergés localement sur en.wikipedia — le ⚡ Convertir échouait sur eux).
+async function commonsThumb(file, width = 500, wikis = ['commons.wikimedia.org', 'en.wikipedia.org', 'fr.wikipedia.org']) {
+  for (const host of wikis) {
+    const r = await getJSON(`https://${host}/w/api.php?action=query&titles=${enc('File:' + file)}&prop=imageinfo&iiprop=url&iiurlwidth=${width}&format=json&origin=*`);
+    const pg = Object.values(r?.query?.pages || {})[0];
+    const u = pg?.imageinfo?.[0]?.thumburl || pg?.imageinfo?.[0]?.url;
+    if (u) return cleanImgUrl(u);
+  }
+  return null;
 }
+// Les URLs de l'API Wikimedia portent des ?utm_… inutiles : on les retire.
+function cleanImgUrl(u) { return String(u || '').replace(/\?utm_[^#]*$/, ''); }
 async function fetchPhotoCandidates(name) {
   const ln = lastNameOf(name);
   const out = [], seen = new Set();
@@ -1470,7 +1479,7 @@ async function fetchPhotoCandidates(name) {
     for (const lang of ['fr', 'en']) {
       const r = await getJSON(`https://${lang}.wikipedia.org/w/api.php?action=query&titles=${enc(name)}&redirects=1&prop=pageimages&piprop=thumbnail&pithumbsize=500&format=json&origin=*`);
       const pg = Object.values(r?.query?.pages || {})[0];
-      if (pg?.thumbnail) add({ url: pg.thumbnail.source, source: `Wikipédia ${lang}`, label: pg.title });
+      if (pg?.thumbnail) add({ url: cleanImgUrl(pg.thumbnail.source), source: `Wikipédia ${lang}`, label: pg.title });
     }
   }
   return out.slice(0, 6);
@@ -1545,12 +1554,13 @@ function coverProblem(inc) {
   if (!showFragileCovers) return null;
   if (/covers\.openlibrary\.org\/b\/title\//.test(u)) return 'fragile : Open Library « par titre » (peut être une autre édition)';
   if (/amazon\./.test(u)) return 'fragile : lien direct Amazon';
-  if (!/^https:\/\/(covers\.openlibrary\.org\/b\/(id|isbn|olid)\/|upload\.wikimedia\.org\/|books\.google(usercontent)?\.com\/)/.test(u)) return 'fragile : hébergée sur un site tiers';
+  if (!/^https:\/\/(covers\.openlibrary\.org\/b\/(id|isbn|olid)\/|(upload|thumb)\.wikimedia\.org\/|books\.google(usercontent)?\.com\/)/.test(u)) return 'fragile : hébergée sur un site tiers';
   return null;
 }
 function photoProblem(url) {
   if (!url) return 'pas de photo';
-  if (/^https:\/\/upload\.wikimedia\.org\//.test(url)) return null;
+  // upload.* et thumb.* : Wikimedia sert désormais ses vignettes depuis thumb.wikimedia.org
+  if (/^https:\/\/(upload|thumb)\.wikimedia\.org\//.test(url)) return null;
   if (/wikipedia\.org\/wiki\/Special:/.test(url)) return 'lien Wikipédia indirect (pas de CORS)';
   return 'hébergée sur un site tiers';
 }
