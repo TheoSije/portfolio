@@ -150,6 +150,19 @@
   .chip-desc    { background: rgba(96,165,250,0.12);  color: var(--blue); }
   .chip-bio     { background: rgba(167,139,250,0.12); color: #a78bfa; }
   .chip-amazon  { background: rgba(251,146,60,0.12);  color: #fb923c; }
+  /* ── Wikisource : nouveaux incipits ── */
+  .ws-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--border); font-size: 13px; }
+  .ws-row:first-child { border-top: 0; }
+  .ws-meta { color: var(--muted); font-size: 11.5px; font-weight: 400; }
+  .ws-badge { font-size: 10px; padding: 1px 6px; border-radius: 99px; background: rgba(96,165,250,0.12); color: var(--blue); }
+  .ws-badge.warn { background: rgba(255,107,107,0.12); color: var(--red); }
+  .ws-reader { margin: 10px 0 14px; padding: 14px 16px; border: 1px solid var(--gold); border-radius: 12px; background: rgba(201,168,76,0.04); }
+  .ws-para { font-family: Georgia, serif; font-size: 14px; line-height: 1.6; margin: 0 0 12px; color: rgba(255,255,255,0.75); }
+  .ws-sent { cursor: pointer; border-radius: 3px; }
+  .ws-sent:hover { background: rgba(201,168,76,0.15); }
+  .ws-sent.picked { background: rgba(201,168,76,0.28); color: #fff; }
+  .ws-sub { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+  .ws-preview { font-family: Georgia, serif; font-size: 15px; color: #fff; padding: 10px 12px; border-left: 3px solid var(--gold); background: rgba(255,255,255,0.03); margin: 8px 0; }
   /* ── Images : candidats couverture / photo ── */
   .cand-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-start; margin-top: 8px; }
   .cand { width: 78px; display: flex; flex-direction: column; gap: 3px; cursor: pointer; background: none; border: 0; padding: 0; color: var(--text); text-align: left; }
@@ -277,6 +290,7 @@
     <div class="header-right">
       <button class="btn btn-ghost btn-sm" onclick="reload()">↺ Rafraîchir</button>
       <button class="btn btn-ghost btn-sm" id="submissions-btn" onclick="toggleSubmissions()">📥 Soumissions <span id="submissions-count" style="display:none;background:var(--red);color:#fff;border-radius:99px;padding:1px 7px;font-size:11px;margin-left:4px"></span></button>
+      <button class="btn btn-ghost btn-sm" onclick="toggleWsPanel()">📚 Wikisource</button>
       <button class="btn btn-ghost btn-sm" onclick="toggleImagesPanel()">🖼 Images</button>
       <button class="btn btn-gold btn-sm" onclick="toggleAddForm()">+ Ajouter</button>
       <button class="logout-btn" onclick="logout()">Déconnexion</button>
@@ -292,6 +306,21 @@
     <div id="submissions-list" style="padding:12px 24px 16px;display:flex;flex-direction:column;gap:10px">
       <span style="font-size:13px;color:var(--muted)">Chargement…</span>
     </div>
+  </div>
+
+  <!-- Wikisource panel : nouveaux incipits copiés depuis la source -->
+  <div id="ws-panel" style="display:none;border-bottom:1px solid var(--border);background:rgba(255,255,255,0.02)">
+    <div style="padding:16px 24px 6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <span style="font-size:13px;font-weight:600">📚 Ajouter depuis Wikisource</span>
+      <input id="ws-search" placeholder="Chercher un titre ou un auteur sur Wikisource…" style="flex:1;min-width:220px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:6px 10px;color:var(--text);font-size:12.5px" onkeydown="if(event.key==='Enter')wsSearch()" />
+      <button class="btn btn-ghost btn-sm" onclick="wsSearch()">Chercher</button>
+    </div>
+    <div style="padding:0 24px;font-size:11.5px;color:var(--muted);line-height:1.5">
+      Œuvres du domaine public les plus connues ayant un texte sur Wikisource, absentes du corpus. Ouvre-en une, clique la phrase où l'incipit s'arrête : le texte est <b>copié tel quel</b> depuis Wikisource, avec le lien de la version exacte comme source.
+    </div>
+    <div id="ws-reader-slot" style="padding:0 24px"></div>
+    <div id="ws-list" style="padding:6px 24px 8px"></div>
+    <div style="padding:0 24px 16px"><button class="btn btn-ghost btn-sm" id="ws-more" onclick="wsRenderList(true)" style="display:none">Afficher 20 de plus</button></div>
   </div>
 
   <!-- Images panel : couvertures & photos d'auteur -->
@@ -1522,6 +1551,196 @@ function showCandidates(holder, promise, { onPick, current = '', round = false, 
     row.appendChild(none);
     holder.innerHTML = ''; holder.appendChild(row);
   });
+}
+
+// ── Panneau « 📚 Wikisource » : nouveaux incipits, copiés depuis la source ──
+// Règle du projet : un incipit n'est JAMAIS écrit de mémoire. Ici le texte est
+// extrait du HTML de la page Wikisource (API parse, révision précise) ; l'humain
+// choisit seulement OÙ il s'arrête. La source enregistrée pointe vers cette
+// révision (oldid) : n'importe qui peut revérifier mot pour mot.
+let wsItems = [], wsShown = 0, wsLoaded = false;
+function toggleWsPanel() {
+  const panel = document.getElementById('ws-panel');
+  const open = panel.style.display === 'none';
+  panel.style.display = open ? 'block' : 'none';
+  if (open && !wsLoaded) wsLoadSuggestions();
+}
+function wsInCorpus(title, author) {
+  const t = stripArticle(title || ''), ln = lastNameOf(author || '');
+  return incipits.some(inc => {
+    const m = metaOf(inc);
+    return similarity(stripArticle(m.title), t) >= 0.85 && (!ln || normalize(m.author_name).includes(ln));
+  });
+}
+async function wsLoadSuggestions() {
+  wsLoaded = true;
+  const list = document.getElementById('ws-list');
+  list.innerHTML = '<span class="cand-msg">Chargement des œuvres (Wikidata)…</span>';
+  // Les pages Wikisource sont en général rattachées à l'item « édition » ; on
+  // remonte à l'œuvre (P629) pour sa notoriété (nombre de Wikipédias) et sa date.
+  const sparql = `
+SELECT ?work ?workLabel ?authorLabel (MIN(YEAR(?date)) AS ?year) (SAMPLE(?page) AS ?ws) (MAX(?n) AS ?links) (SAMPLE(?langCode) AS ?lang) WHERE {
+  ?page schema:isPartOf <https://fr.wikisource.org/> ; schema:about ?item .
+  OPTIONAL { ?item wdt:P629 ?w0 }
+  BIND(COALESCE(?w0, ?item) AS ?work)
+  VALUES ?type { wd:Q7725634 wd:Q8261 wd:Q49084 wd:Q25379 wd:Q12106333 wd:Q149537 wd:Q1279564 wd:Q5185279 wd:Q699 }
+  ?work wdt:P31 ?type ; wikibase:sitelinks ?n .
+  FILTER(?n >= 8)
+  OPTIONAL { ?work wdt:P50 ?author }
+  OPTIONAL { ?work wdt:P577 ?date }
+  OPTIONAL { ?work wdt:P407 ?l . ?l wdt:P218 ?langCode }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en". }
+} GROUP BY ?work ?workLabel ?authorLabel ORDER BY DESC(?links) LIMIT 600`;
+  const r = await getJSON(`https://query.wikidata.org/sparql?format=json&query=${enc(sparql)}`, 60000);
+  const rows = r?.results?.bindings || [];
+  const seen = new Set();
+  wsItems = rows.map(b => ({
+    title: b.workLabel?.value || '',
+    author: b.authorLabel?.value || '',
+    year: b.year?.value || '',
+    page: decodeURIComponent((b.ws?.value || '').replace('https://fr.wikisource.org/wiki/', '')).replace(/_/g, ' '),
+    links: +(b.links?.value || 0),
+    lang: b.lang?.value || '',
+  })).filter(x => x.page && x.title && !/^Q\d+$/.test(x.title) && !seen.has(x.work = normalize(x.title + x.author)) && seen.add(x.work))
+    .filter(x => !wsInCorpus(x.title, x.author));
+  if (!wsItems.length) {
+    list.innerHTML = '<span class="cand-msg">Wikidata n\'a pas répondu (ou trop lentement). Utilise la recherche ci-dessus.</span>';
+    return;
+  }
+  wsShown = 0; wsRenderList();
+}
+function wsRenderList(more = false) {
+  const list = document.getElementById('ws-list');
+  if (!more) { list.innerHTML = ''; wsShown = 0; }
+  const slice = wsItems.slice(wsShown, wsShown + 20);
+  wsShown += slice.length;
+  for (const it of slice) {
+    const row = document.createElement('div');
+    row.className = 'ws-row';
+    const tr = it.lang && it.lang !== 'fr';
+    row.innerHTML = `<div style="flex:1;min-width:0"><b>${escHtml(it.title)}</b> <span class="ws-meta">${escHtml([it.author, it.year].filter(Boolean).join(', '))}</span>
+      ${tr ? '<span class="ws-badge warn">traduction</span>' : ''} ${it.links ? `<span class="ws-badge">${it.links} Wikipédias</span>` : ''}</div>`;
+    const b = document.createElement('button');
+    b.className = 'btn btn-ghost btn-sm'; b.textContent = 'Ouvrir';
+    b.onclick = () => wsOpen(it, row);
+    row.appendChild(b);
+    list.appendChild(row);
+  }
+  document.getElementById('ws-more').style.display = wsShown < wsItems.length ? '' : 'none';
+}
+async function wsSearch() {
+  const q = document.getElementById('ws-search').value.trim();
+  if (!q) return;
+  const list = document.getElementById('ws-list');
+  list.innerHTML = '<span class="cand-msg">Recherche…</span>';
+  const r = await getJSON(`https://fr.wikisource.org/w/api.php?action=query&list=search&srsearch=${enc(q)}&srnamespace=0&srlimit=15&format=json&origin=*`);
+  const hits = (r?.query?.search || []).filter(h => !h.title.includes('/'));
+  wsItems = hits.map(h => ({ title: h.title.replace(/\s*\(.*\)\s*$/, ''), author: '', year: '', page: h.title, links: 0, lang: '' }));
+  if (!wsItems.length) { list.innerHTML = '<span class="cand-msg">Rien trouvé sur Wikisource.</span>'; return; }
+  wsRenderList();
+}
+
+async function wsParse(page) {
+  const r = await getJSON(`https://fr.wikisource.org/w/api.php?action=parse&page=${enc(page)}&prop=text&redirects=1&disableeditsection=1&format=json&formatversion=2&origin=*`, 20000);
+  if (!r?.parse) return null;
+  const doc = new DOMParser().parseFromString(r.parse.text, 'text/html');
+  const root = doc.querySelector('.mw-parser-output') || doc.body;
+  // En-tête : auteur, traducteur, édition — lus AVANT de nettoyer
+  const headerText = [...root.querySelectorAll('#headertemplate, .headertemplate, .ws-header, #ws-data, .ws-noexport')].map(e => e.textContent).join(' ').replace(/\s+/g, ' ');
+  const author = root.querySelector('a[href*="/wiki/Auteur:"]')?.textContent.trim() || '';
+  const translator = (headerText.match(/[Tt]radu(?:ction|it)\s+(?:de l'\w+\s+)?(?:par|de)\s+([A-ZÉÈ][^.,;()]{2,60})/) || [])[1]?.trim() || '';
+  const subpages = [...root.querySelectorAll('a[href]')].map(a => decodeURIComponent((a.getAttribute('href') || '').replace(/^\/wiki\//, '')).replace(/_/g, ' '))
+    .filter(t => t.startsWith(r.parse.title + '/') && !t.includes('#'))
+    .filter((t, i, arr) => arr.indexOf(t) === i).slice(0, 12);
+  // Nettoyage : en-têtes, numéros de page, notes, tables des matières
+  root.querySelectorAll('#headertemplate, .headertemplate, .ws-header, .ws-noexport, .noprint, .pagenum, .ws-pagenum, sup, .reference, .references, .mw-references-wrap, table, style, script, .mw-editsection, .ws-summary').forEach(e => e.remove());
+  const skip = /^(chapitre|livre|partie|préface|avant-propos|avertissement|dédicace|notice|introduction|table|note|à\s)/i;
+  const paras = [...root.querySelectorAll('p, .poem')]
+    .map(e => e.textContent.replace(/­/g, '').replace(/\s+/g, ' ').trim())
+    .filter(t => t.length >= 40 && !skip.test(t) && t !== t.toUpperCase())
+    .slice(0, 6);
+  return { title: r.parse.title, revid: r.parse.revid, author, translator, subpages, paras };
+}
+function wsSentences(t) {
+  // Découpe après . ! ? … (et » ” éventuels) suivis d'un espace + majuscule / guillemet / tiret
+  const out = []; let start = 0;
+  const re = /[.!?…]+[»”)\]]*\s+(?=[«"—–A-ZÀ-ÖØ-Þ])/g; let m;
+  while ((m = re.exec(t))) { out.push(t.slice(start, m.index + m[0].length).trim()); start = m.index + m[0].length; }
+  if (start < t.length) out.push(t.slice(start).trim());
+  return out.filter(Boolean);
+}
+async function wsOpen(it, rowEl, page = it.page, depth = 0) {
+  const slot = document.getElementById('ws-reader-slot');
+  document.querySelectorAll('.ws-row').forEach(r => r.style.background = '');
+  if (rowEl) rowEl.style.background = 'rgba(201,168,76,0.06)';
+  slot.innerHTML = `<div class="ws-reader"><span class="cand-msg">Lecture de « ${escHtml(page)} » sur Wikisource…</span></div>`;
+  slot.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  const d = await wsParse(page);
+  if (!d) { slot.innerHTML = `<div class="ws-reader"><span class="cand-msg">Page introuvable ou Wikisource n'a pas répondu.</span></div>`; return; }
+  // Page sommaire sans texte : on descend dans la 1re sous-page (2 niveaux max)
+  if (d.paras.filter(p => p.length >= 80).length === 0 && d.subpages.length && depth < 2) return wsOpen(it, rowEl, d.subpages[0], depth + 1);
+  const reader = document.createElement('div');
+  reader.className = 'ws-reader';
+  const url = `https://fr.wikisource.org/w/index.php?title=${enc(d.title.replace(/ /g, '_'))}&oldid=${d.revid}`;
+  reader.innerHTML = `
+    <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:8px">
+      <div><b>${escHtml(it.title)}</b> <span class="ws-meta">${escHtml([d.author || it.author, it.year].filter(Boolean).join(', '))}</span>
+        ${d.translator ? `<span class="ws-badge">trad. ${escHtml(d.translator)}</span>` : (it.lang && it.lang !== 'fr' ? '<span class="ws-badge warn">traduction : traducteur à renseigner</span>' : '')}</div>
+      <a href="${url}" target="_blank" rel="noopener" style="font-size:11px;color:var(--gold)">${escHtml(d.title)} ↗</a>
+    </div>`;
+  if (d.subpages.length) {
+    const nav = document.createElement('div'); nav.className = 'ws-sub';
+    d.subpages.slice(0, 8).forEach(sp => {
+      const b = document.createElement('button'); b.className = 'btn btn-ghost btn-sm'; b.style.fontSize = '11px';
+      b.textContent = sp.slice(d.title.length + 1) || sp;
+      b.onclick = () => wsOpen(it, rowEl, sp, 9);
+      nav.appendChild(b);
+    });
+    reader.appendChild(nav);
+  }
+  if (!d.paras.length) reader.insertAdjacentHTML('beforeend', '<span class="cand-msg">Pas de texte courant sur cette page — essaie une sous-page ci-dessus.</span>');
+  const preview = document.createElement('div');
+  const use = document.createElement('button');
+  use.className = 'btn btn-gold btn-sm'; use.textContent = 'Utiliser cet incipit →'; use.disabled = true;
+  let picked = '';
+  d.paras.forEach(p => {
+    const para = document.createElement('p'); para.className = 'ws-para';
+    const sents = wsSentences(p);
+    sents.forEach((s, k) => {
+      const span = document.createElement('span'); span.className = 'ws-sent'; span.textContent = s + ' ';
+      span.title = 'L\'incipit s\'arrête ici';
+      span.onclick = () => {
+        reader.querySelectorAll('.ws-sent').forEach(x => x.classList.remove('picked'));
+        [...para.querySelectorAll('.ws-sent')].slice(0, k + 1).forEach(x => x.classList.add('picked'));
+        picked = sents.slice(0, k + 1).join(' ').trim();
+        preview.innerHTML = `<div class="ws-preview">${escHtml(picked)}</div><div class="ws-meta">${picked.length} signes${picked.length > 300 ? ' — un peu long pour une carte' : ''}</div>`;
+        use.disabled = false;
+      };
+      para.appendChild(span);
+    });
+    reader.appendChild(para);
+  });
+  reader.insertAdjacentHTML('beforeend', '<div class="ws-meta" style="margin-bottom:4px">Clique la phrase où l\'incipit s\'arrête (il commence toujours au début du paragraphe).</div>');
+  reader.appendChild(preview);
+  use.onclick = () => wsUse(it, d, url, picked);
+  reader.appendChild(use);
+  slot.innerHTML = ''; slot.appendChild(reader);
+}
+function wsUse(it, d, url, text) {
+  const form = document.getElementById('add-form');
+  if (form.style.display !== 'block') toggleAddForm();
+  document.getElementById('new-text').value = text;
+  document.getElementById('new-title').value = it.title;
+  document.getElementById('new-author-name').value = d.author || it.author;
+  document.getElementById('new-year').value = it.year;
+  document.getElementById('new-source-url').value = url;
+  document.getElementById('new-source-edition').value = 'Wikisource';
+  document.getElementById('new-source-translator').value = d.translator || '';
+  document.getElementById('new-verified').checked = true;
+  if (it.lang && it.lang !== 'fr' && !d.translator)
+    alert('Traduction : renseigne le traducteur (en-tête de la page Wikisource) avant d\'ajouter.');
+  form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  autoFill();
 }
 
 // ── Panneau « 🖼 Images » : file de travail, choix groupés, un seul commit ──
