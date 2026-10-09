@@ -3656,7 +3656,7 @@ document.querySelectorAll('.projects-scroll').forEach(function(scroll) {
           var t = parseFloat(v.dataset.startTime);
           if (t && !v.dataset.started) { v.currentTime = t; v.dataset.started = '1'; }
           // iOS may leave a never-loaded video idle: kick the load explicitly
-          if (v.readyState === 0 && v.networkState !== 2) v.load();
+          if (v.readyState === 0 && !v.dataset.kicked) { v.dataset.kicked = '1'; v.load(); }
           var p = v.play(); if (p) p.catch(function() {});
         }
       }
@@ -3708,7 +3708,10 @@ document.querySelectorAll('.projects-scroll').forEach(function(scroll) {
     }
   });
   window.addEventListener('load', updateActive);
-  window.addEventListener('touchstart', updateActive, { once: true, passive: true });
+  // A finished touch gesture counts as user activation on iOS: retry play() then.
+  ['touchstart', 'touchend'].forEach(function(ev) {
+    scroll.addEventListener(ev, function() { setTimeout(updateActive, 0); }, { passive: true });
+  });
 });
 
 /* ── CAROUSEL NAV BUTTONS + KEYBOARD ── */
