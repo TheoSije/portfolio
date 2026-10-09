@@ -3646,6 +3646,10 @@ document.querySelectorAll('.projects-scroll').forEach(function(scroll) {
       // play/pause any video in this card
       var v = c.querySelector('video');
       if (v) {
+        // Safari iOS: cloneNode doesn't always carry `muted` to the property,
+        // and unmuted videos can't autoplay — force it.
+        v.muted = true; v.defaultMuted = true;
+        v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', '');
         if (inactive) {
           v.pause();
         } else if (v.paused) {
@@ -3692,6 +3696,17 @@ document.querySelectorAll('.projects-scroll').forEach(function(scroll) {
   }, { passive: true });
 
   requestAnimationFrame(updateActive);
+  // iOS ignores preload and may refuse early play() (Low Power Mode, etc.):
+  // retry once media is ready, after full load, and on first touch.
+  all().forEach(function(c) {
+    var v = c.querySelector('video');
+    if (v) {
+      v.addEventListener('loadedmetadata', updateActive);
+      v.addEventListener('canplay', updateActive);
+    }
+  });
+  window.addEventListener('load', updateActive);
+  window.addEventListener('touchstart', updateActive, { once: true, passive: true });
 });
 
 /* ── CAROUSEL NAV BUTTONS + KEYBOARD ── */
