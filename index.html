@@ -1777,6 +1777,19 @@ button:focus-visible, a:focus-visible { border-radius: 4px; }
   <div class="xp-wrap">
   <button class="xp-nav-btn" id="xp-btn-next" aria-label="Suivant">&#8594;</button>
   <div class="xp-scroll">
+    <div class="proj-card proj-card--xp" onclick="window.open('https://fdsp.fr/', '_blank')">
+      <div class="proj-card-img proj-img--fdsp">
+        <div class="fdsp-bg"></div>
+        <div class="fdsp-content">
+          <div class="fdsp-name">FDSP</div>
+          <div class="fdsp-bars"><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="proj-card-inner">
+        <span class="proj-card-name">FDSP</span>
+        <p class="xp-card-desc">Zapping musical live sur des radios indépendantes : on part du son, pas de la station.</p>
+      </div>
+    </div>
     <div class="proj-card proj-card--xp" onclick="window.open('https://thinkerbook.org/', '_blank')">
       <div class="proj-card-img proj-img--thinkerbooks">
         <div class="thinkerbooks-bg"></div>
@@ -3033,6 +3046,30 @@ function showHome(push) {
 .unheard-title  { font-size:22px; font-weight:700; letter-spacing:.18em; color:#fff; line-height:1; text-transform:uppercase; }
 @media (min-width:900px)  { .unheard-emojis{font-size:38px} .unheard-title{font-size:30px} .unheard-content{gap:18px} }
 @media (min-width:1400px) { .unheard-emojis{font-size:46px} .unheard-title{font-size:36px} .unheard-content{gap:22px} }
+/* ── FDSP CARD ── */
+@font-face { font-family: 'VT323'; src: url('fonts/VT323-400.woff2') format('woff2'); font-display: swap; }
+.proj-img--fdsp { background: #000; position: relative; overflow: hidden; }
+.fdsp-bg {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,.04) 3px, rgba(255,255,255,.04) 4px);
+}
+.fdsp-content {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 12px;
+}
+.fdsp-name {
+  font-family: 'VT323', 'JetBrains Mono', monospace;
+  font-size: clamp(44px, 6.5vw, 76px);
+  line-height: .9; letter-spacing: .04em;
+  color: #fff;
+  text-shadow: 2px 0 rgba(255,255,255,.35), -2px 0 rgba(255,255,255,.15);
+}
+.fdsp-bars { display: flex; gap: 6px; }
+.fdsp-bars i { display: block; width: 14px; height: 6px; background: #fff; animation: fdsp-blink 1s step-end infinite; }
+.fdsp-bars i:nth-child(2) { animation-delay: .5s; }
+@keyframes fdsp-blink { 0%,100%{opacity:1} 50%{opacity:.1} }
+
 /* ── THINKERBOOKS CARD ── */
 .proj-img--thinkerbooks {
   background: #05080d;
