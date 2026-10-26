@@ -1818,6 +1818,18 @@ button:focus-visible, a:focus-visible { border-radius: 4px; }
         <p class="xp-card-desc">Générateur d'incipit littéraires avec effet machine à écrire.</p>
       </div>
     </div>
+    <div class="proj-card proj-card--xp" onclick="window.open('https://appybday.com/', '_blank')">
+      <div class="proj-card-img proj-img--appy">
+        <div class="appy-content">
+          <img class="appy-icon" src="img/appybirthday-icon.jpg" alt="" loading="lazy">
+          <div class="appy-title">Appy Birthday</div>
+        </div>
+      </div>
+      <div class="proj-card-inner">
+        <span class="proj-card-name">Appy Birthday</span>
+        <p class="xp-card-desc">App iOS pour ne plus jamais oublier un anniversaire.</p>
+      </div>
+    </div>
     <div class="proj-card proj-card--xp" onclick="openMiniSite('pompe')">
       <div class="proj-card-img proj-img--pompe">
         <div class="pompe-bg-anim"></div>
@@ -3153,6 +3165,27 @@ function showHome(push) {
 }
 @media (min-width: 900px)  { .incipit-quote { width: 110px; } }
 @media (min-width: 1400px) { .incipit-quote { width: 160px; } }
+
+/* ── APPY BIRTHDAY CARD ── */
+.proj-img--appy {
+  background: #0f3d2e;
+  position: relative; overflow: hidden;
+}
+.appy-content {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 10px;
+}
+.appy-icon {
+  width: clamp(72px, 10vw, 104px); aspect-ratio: 1;
+  border-radius: 22%;
+  box-shadow: 0 6px 18px rgba(0,0,0,.18);
+  object-fit: cover;
+}
+.appy-title {
+  font-size: 18px; font-weight: 800; letter-spacing: .02em;
+  color: #fff; line-height: 1;
+}
 
 /* ── POMPE! CARD ── */
 .proj-img--pompe {
